@@ -3,7 +3,7 @@
   <form [formGroup]='formUsuario'>
     <!--Tipo DNI-->
     <div class="form-group row">
-      <label class="col-form-label col-sm-2 col-sm-offset-2" for="tipoDni">Meassure Unit<span
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="tipoDni">Tipo DNI:<span
           class="text-danger">*</span></label>
       <div class="col-sm-6">
         <select [(ngModel)]='usuario.tipoDni' name="tipoDni" class="form-control" formControlName="tipoDni" [ngClass]="{'is-invalid': (formUsuario.controls.tipoDni.touched || submitted)
@@ -127,31 +127,38 @@
       </div>
     </div>
 
-    <!--Piso-->
+    <!--nroCalle-->
     <div class="form-group row">
-      <label class="col-form-label col-sm-2 col-sm-offset-2" for="piso">Piso: <span
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="nroCalle">Nro Calle: <span
           class="text-danger">*</span></label>
       <div class="col-sm-6">
-        <input [(ngModel)]='usuario.piso'  type="text" class="form-control" formControlName="piso" [ngClass]="{'is-invalid': (formUsuario.controls.piso.touched || submitted)
-              && formUsuario.controls.piso.errors}" value={{usuario.piso}} onclick="this.select()"/>
+        <input [(ngModel)]='usuario.nroCalle'  type="text" class="form-control" formControlName="nroCalle" [ngClass]="{'is-invalid': (formUsuario.controls.nroCalle.touched || submitted)
+              && formUsuario.controls.nroCalle.errors}" value={{usuario.nroCalle}} onclick="this.select()"/>
         <span class="text-danger"
-          *ngIf="(formUsuario.controls.piso.touched || submitted) && formUsuario.controls.piso.errors?.required">
+          *ngIf="(formUsuario.controls.nroCalle.touched || submitted) && formUsuario.controls.nroCalle.errors?.required">
           Requiered
         </span>
       </div>
     </div>
 
+
+    <!--Piso-->
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="piso">Piso:</label>
+      <div class="col-sm-6">
+        <input [(ngModel)]='usuario.piso'  type="text" class="form-control" formControlName="piso" [ngClass]="{'is-invalid': (formUsuario.controls.piso.touched || submitted)
+              && formUsuario.controls.piso.errors}" value={{usuario.piso}} onclick="this.select()"/>
+
+      </div>
+    </div>
+
     <!--Dpto-->
     <div class="form-group row">
-      <label class="col-form-label col-sm-2 col-sm-offset-2" for="dpto">Dpto: <span
-          class="text-danger">*</span></label>
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="dpto">Dpto: </label>
       <div class="col-sm-6">
         <input [(ngModel)]='usuario.dpto'  type="text" class="form-control" formControlName="dpto" [ngClass]="{'is-invalid': (formUsuario.controls.dpto.touched || submitted)
               && formUsuario.controls.dpto.errors}" value={{usuario.dpto}} onclick="this.select()"/>
-        <span class="text-danger"
-          *ngIf="(formUsuario.controls.dpto.touched || submitted) && formUsuario.controls.dpto.errors?.required">
-          Requiered
-        </span>
+
       </div>
     </div>
 
@@ -171,15 +178,10 @@
 
     <!--Celular-->
     <div class="form-group row">
-      <label class="col-form-label col-sm-2 col-sm-offset-2" for="celular">Celular: <span
-          class="text-danger">*</span></label>
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="celular">Celular: </label>
       <div class="col-sm-6">
         <input [(ngModel)]='usuario.celular'  type="text" class="form-control" formControlName="celular" [ngClass]="{'is-invalid': (formUsuario.controls.celular.touched || submitted)
               && formUsuario.controls.celular.errors}" value={{usuario.celular}} onclick="this.select()"/>
-        <span class="text-danger"
-          *ngIf="(formUsuario.controls.celular.touched || submitted) && formUsuario.controls.celular.errors?.required">
-          Requiered
-        </span>
       </div>
     </div>
 
@@ -188,7 +190,7 @@
       <label class="col-form-label col-sm-2 col-sm-offset-2" for="email">Email: <span
           class="text-danger">*</span></label>
       <div class="col-sm-6">
-        <input [(ngModel)]='usuario.email'  type="text" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (formUsuario.controls.email.touched || submitted)
+        <input [(ngModel)]='usuario.email'  type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (formUsuario.controls.email.touched || submitted)
               && formUsuario.controls.email.errors}" value={{usuario.email}} onclick="this.select()"/>
         <span class="text-danger"
           *ngIf="(formUsuario.controls.email.touched || submitted) && formUsuario.controls.email.errors?.required">
@@ -197,10 +199,10 @@
       </div>
     </div>
 
-    <div class="row">
-      <a class="btn btn-primary" href="#" role="button">Cancelar</a>
+    <div class="row justify-content-md-center">
+      <a class="btn btn-secondary col-md-4" href="#" role="button">Cancelar</a>
       &nbsp;
-      <a class="btn btn-primary" href="#" role="button">Registrarme</a>
+      <a class="btn btn-primary col-md-4" href="#" role="button">Registrarme</a>
     </div>
 
 

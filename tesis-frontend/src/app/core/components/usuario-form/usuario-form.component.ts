@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../../models/Usuario';
 
 @Component({
@@ -13,7 +13,7 @@ export class UsuarioFormComponent implements OnInit {
   formUsuario: FormGroup;
   submitted: false;
   tipoDni = ['DNI', 'CU', 'CI'];
-  nacionalidades = ['ARGENTINA','PERU', 'COLOMBIA'];
+  nacionalidades = ['ARGENTINA', 'PERU', 'COLOMBIA'];
   provincias = ['Cordoba', 'Buenos Aires'];
   localidades = ['Capital', 'Rio IV'];
   @Input() usuario: Usuario = {
@@ -26,16 +26,33 @@ export class UsuarioFormComponent implements OnInit {
     provincia: '',
     localidad: '',
     calle: '',
-    numeroCalle: 0,
+    nroCalle: 0,
     piso: '',
     dpto: '',
     telefono: 0,
     celular: 0,
     email: '' };
 
-  constructor() { }
+  constructor( private formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
+    this.formUsuario = this.formBuilder.group({
+      dni: [this.usuario.dni, [Validators.required]],
+      tipoDni: [this.usuario.tipoDni, [Validators.required]],
+      apellido: [this.usuario.apellido, [Validators.required]],
+      nombre: [this.usuario.nombre, [Validators.required]],
+      fechaNacimiento: [this.usuario.fechaNacimiento, [Validators.required]],
+      nacionalidad: [this.usuario.nacionalidad, [Validators.required]],
+      provincia: [this.usuario.provincia, [Validators.required]],
+      localidad: [this.usuario.localidad, [Validators.required]],
+      calle: [this.usuario.calle, [Validators.required]],
+      nroCalle: [this.usuario.nroCalle, [Validators.required]],
+      piso: [this.usuario.piso, []],
+      dpto: [this.usuario.dpto, []],
+      telefono: [this.usuario.telefono, [Validators.required]],
+      celular: [this.usuario.celular, []],
+      email: [this.usuario.email, [Validators.required]]
+    });
   }
 
 }

@@ -8,7 +8,7 @@ export interface Usuario {
   provincia: string;
   localidad: string;
   calle: string;
-  numeroCalle: number;
+  nroCalle: number;
   piso: string;
   dpto: string;
   telefono: number;
