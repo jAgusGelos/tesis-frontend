@@ -26,6 +26,16 @@ export class UserRegisterComponent implements OnInit {
     });
   }
 
+
+  /**
+   * Valida que el formulario de registro sea correcto
+   * Valida que las contraseñas sean iguales
+   * Llama al servicio para realizar un post de un nuevo usuario
+   *
+   * @param 'Email, contraseña y contraseña repetida'
+   * @returns 'Avanza a la siguiente página de registro'
+   */
+
   submit(): void {
     this.submitted = true;
     if (this.formRegister.invalid) {
