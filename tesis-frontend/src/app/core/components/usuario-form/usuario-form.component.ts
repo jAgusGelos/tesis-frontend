@@ -33,7 +33,7 @@ export class UsuarioFormComponent implements OnInit {
     celular: 0,
     email: '' };
 
-  constructor( private formBuilder: FormBuilder ) { }
+  constructor( private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.formUsuario = this.formBuilder.group({
@@ -54,5 +54,4 @@ export class UsuarioFormComponent implements OnInit {
       email: [this.usuario.email, [Validators.required]]
     });
   }
-
 }

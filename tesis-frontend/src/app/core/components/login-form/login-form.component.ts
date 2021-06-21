@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Usuario } from '../../models/Usuario';
-import { Router } from '@angular/router';
 import { Login } from '../../models/Login';
-import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -12,17 +9,14 @@ import { LoginService } from '../../services/login.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  titulo = 'Inicio de Sesión';
+  @Input() titulo = 'INICIO DE SESIÓN';
   formLogin: FormGroup;
-  submitted = false;
-
+  submitted = true;
   @Input() login: Login = {
     email: '',
     password: ''};
 
-  constructor(private formBuilder: FormBuilder,
-    private loginService: LoginService,
-    private router: Router) { }
+  constructor( private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.formLogin = this.formBuilder.group({
@@ -30,25 +24,4 @@ export class LoginFormComponent implements OnInit {
       password: [this.login.password, [Validators.required]]
     });
   }
-
-  submit(): void {
-    this.submitted = true;
-    if (this.formLogin.invalid) {
-      alert('Por favor, complete todos los campos.');
-      return;
-    }
-    if (this.formLogin.controls.password.value !==  this.formLogin.controls.repPassword.value){
-      alert('Las contraseñas deben ser iguales');
-      return;
-    }
-    const login: Login = {
-      email: this.formLogin.controls.email.value,
-      password: this.formLogin.controls.password.value
-    };
-    this.loginService.postLogin(login).subscribe((res: any) => {
-      console.log(res);
-      this.router.navigate(['/proxPage']);
-
-    });
-}
 }
