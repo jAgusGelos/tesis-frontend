@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ export class LoginFormComponent implements OnInit {
 
   formLogin: FormGroup;
   submitted = false;
+  @Output() registerEvent = new EventEmitter<any>();
 
 
   constructor( private formBuilder: FormBuilder) { }
@@ -19,5 +20,9 @@ export class LoginFormComponent implements OnInit {
       email: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
+  }
+
+  register(): void {
+    this.registerEvent.emit();
   }
 }

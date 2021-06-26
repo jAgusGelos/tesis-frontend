@@ -8,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   constructor() { }
+  reg = false;
 
   ngOnInit(): void {
+  }
+
+  register(): void {
+    this.reg = !this.reg;
   }
 
 }
