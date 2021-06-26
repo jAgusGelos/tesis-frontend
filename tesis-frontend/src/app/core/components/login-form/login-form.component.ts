@@ -12,16 +12,14 @@ export class LoginFormComponent implements OnInit {
   @Input() titulo = 'INICIO DE SESIÓN';
   formLogin: FormGroup;
   submitted = true;
-  @Input() login: Login = {
-    email: '',
-    password: ''};
+
 
   constructor( private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.formLogin = this.formBuilder.group({
-      email: [this.login.email, [Validators.required]],
-      password: [this.login.password, [Validators.required]]
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 }
