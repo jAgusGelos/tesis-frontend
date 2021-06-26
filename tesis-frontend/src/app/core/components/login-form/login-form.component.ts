@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Login } from '../../models/Login';
 
 @Component({
   selector: 'app-login-form',
@@ -9,9 +8,8 @@ import { Login } from '../../models/Login';
 })
 export class LoginFormComponent implements OnInit {
 
-  @Input() titulo = 'INICIO DE SESIÓN';
   formLogin: FormGroup;
-  submitted = true;
+  submitted = false;
 
 
   constructor( private formBuilder: FormBuilder) { }

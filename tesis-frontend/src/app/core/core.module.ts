@@ -24,7 +24,11 @@ import { UserCompletedDataComponent } from './components/user-completed-data/use
 
 
   ],
-  exports:  [ UserRegisterComponent, UserCompletedDataComponent, UsuarioFormComponent ],
+  exports:  [
+    UserRegisterComponent,
+    UserCompletedDataComponent,
+    UsuarioFormComponent,
+    LoginFormComponent ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]
 })

@@ -1,4 +1,18 @@
+.card {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-form{
+  width:75%;
+}
+
 .form-group{
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-  }
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.card-title{
+  font-weight:300;
+}
+
