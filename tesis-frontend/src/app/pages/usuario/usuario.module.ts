@@ -7,6 +7,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 
 
+
 @NgModule({
   declarations: [UsuarioComponent],
   imports: [
@@ -19,5 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     HttpClientModule
   ]
+
 })
 export class UsuarioModule { }

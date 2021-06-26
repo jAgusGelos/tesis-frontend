@@ -1,4 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+
+import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -6,10 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
 
 
+
 @NgModule({
   declarations: [
     UserRegisterComponent,
-    UserCompletedDataComponent
+    UserCompletedDataComponent,
+    UsuarioFormComponent,
+    LoginFormComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +24,7 @@ import { UserCompletedDataComponent } from './components/user-completed-data/use
 
 
   ],
-  exports:  [ UserRegisterComponent, UserCompletedDataComponent ],
+  exports:  [ UserRegisterComponent, UserCompletedDataComponent, UsuarioFormComponent ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]
 })
