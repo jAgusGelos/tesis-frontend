@@ -1,20 +1,31 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { CommonModule, DatePipe } from '@angular/common';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
+
 
 
 @NgModule({
   declarations: [
+    UserRegisterComponent,
+    UserCompletedDataComponent,
     UsuarioFormComponent,
     LoginFormComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+
+
   ],
+  exports:  [ UserRegisterComponent, UserCompletedDataComponent, UsuarioFormComponent ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [ UsuarioFormComponent ]
+  providers: [DatePipe]
 })
 export class CoreModule { }
