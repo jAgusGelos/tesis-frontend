@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Usuario } from '../../models/Usuario';
+import { IUserComplete } from '../../models/IUserComplete';
 
 @Component({
   selector: 'app-usuario-form',
@@ -16,7 +16,8 @@ export class UsuarioFormComponent implements OnInit {
   nacionalidades = ['ARGENTINA', 'PERU', 'COLOMBIA'];
   provincias = ['Cordoba', 'Buenos Aires'];
   localidades = ['Capital', 'Rio IV'];
-  @Input() usuario: Usuario = {
+  @Input() usuario: IUserComplete = {
+    id: '',
     dni: 0,
     tipoDni: '',
     apellido: '',
@@ -29,7 +30,6 @@ export class UsuarioFormComponent implements OnInit {
     nroCalle: 0,
     piso: '',
     dpto: '',
-    telefono: 0,
     celular: 0,
     email: '' };
 
@@ -49,7 +49,6 @@ export class UsuarioFormComponent implements OnInit {
       nroCalle: [this.usuario.nroCalle, [Validators.required]],
       piso: [this.usuario.piso, []],
       dpto: [this.usuario.dpto, []],
-      telefono: [this.usuario.telefono, [Validators.required]],
       celular: [this.usuario.celular, []],
       email: [this.usuario.email, [Validators.required]]
     });

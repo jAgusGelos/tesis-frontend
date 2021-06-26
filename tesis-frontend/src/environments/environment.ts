@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'URLaLaAPI'
+  apiURL: ' https://reqres.in' //Para probar...
 };
 
 /*
