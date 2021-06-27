@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from '../../models/IUser';
@@ -13,6 +13,7 @@ export class UserRegisterComponent implements OnInit {
 
   formRegister: FormGroup;
   submitted = false;
+  @Output() cancelRegister = new EventEmitter<any>();
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
@@ -52,11 +53,16 @@ export class UserRegisterComponent implements OnInit {
     };
     this.userService.postUser(user).subscribe((res: any) => {
       console.log(res);
-      this.router.navigate(['/proxPage']);
-
+      this.router.navigate(['/usuario']);
     });
-
-
   }
+
+  /**
+   * Dispara el evento Cancelar registro en el componente padre
+   */
+  cancel(): void {
+    this.cancelRegister.emit();
+  }
+
 
 }

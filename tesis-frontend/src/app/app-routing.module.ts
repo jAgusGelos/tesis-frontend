@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './core/services/auth.guard';
 
 const routes: Routes = [
   {
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module')
     .then(m => m.UsuarioModule)
+    // canActivate: [AuthGuard]
   },
   {
     path: 'login',

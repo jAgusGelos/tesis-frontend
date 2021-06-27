@@ -2,5 +2,6 @@
   <div class="text-center">
     <h3>INICIO DE SESIÓN</h3>
   </div>
-  <app-login-form></app-login-form>
+  <app-login-form *ngIf="!reg" (registerEvent)='register()' ></app-login-form>
+  <app-user-register (cancelRegister)="register()" *ngIf="reg"></app-user-register>
 </div>

@@ -81,23 +81,26 @@ export class UserCompletedDataComponent implements OnInit {
         alert('Fecha Inválida, por favor ingrese una fecha correcta');
         return;
       }
-      this.usuario.dni  = this.formUsuario.controls.dni.value;
-      this.usuario.tipoDni  = this.formUsuario.controls.tipoDni.value;
-      this.usuario.apellido  = this.formUsuario.controls.apellido.value;
-      this.usuario.nombre  = this.formUsuario.controls.nombre.value;
-      this.usuario.celular  = this.formUsuario.controls.celular.value;
-      this.usuario.calle  = this.formUsuario.controls.calle.value;
-      this.usuario.nroCalle  = this.formUsuario.controls.nroCalle.value;
-      this.usuario.piso  = this.formUsuario.controls.piso.value;
-      this.usuario.dpto  = this.formUsuario.controls.dpto.value;
-      this.usuario.email  = this.formUsuario.controls.email.value;
-      this.usuario.fechaNacimiento  = this.formUsuario.controls.fechaNacimiento.value;
-      this.usuario.nacionalidad = this.formUsuario.controls.nacionalidad.value;
-      this.usuario.localidad = this.formUsuario.controls.localidad.value;
-      this.usuario.provincia = this.formUsuario.controls.provincia.value;
+      this.usuario = {
+        id: '',
+        dni: this.formUsuario.controls.dni.value,
+        tipoDni: this.formUsuario.controls.tipoDni.value,
+        apellido: this.formUsuario.controls.apellido.value,
+        nombre: this.formUsuario.controls.nombre.value,
+        celular: this.formUsuario.controls.celular.value,
+        calle: this.formUsuario.controls.calle.value,
+        nroCalle: this.formUsuario.controls.nroCalle.value,
+        piso: this.formUsuario.controls.piso.value,
+        dpto: this.formUsuario.controls.dpto.value,
+        email: this.formUsuario.controls.email.value,
+        fechaNacimiento: this.formUsuario.controls.fechaNacimiento.value,
+        nacionalidad: this.formUsuario.controls.nacionalidad.value,
+        localidad: this.formUsuario.controls.localidad.value,
+        provincia: this.formUsuario.controls.provincia.value
+      };
 
       this.userService.postUserComplete(this.usuario).subscribe( (res: any) => {
-      alert('Usuario Creado Correctamente');
+      alert('Datos Cargados Correctamente');
       // Ir a la siguiente página.
       });
 
