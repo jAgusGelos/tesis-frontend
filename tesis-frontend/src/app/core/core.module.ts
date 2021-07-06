@@ -30,7 +30,8 @@ import { UserLoggedComponent } from './components/user-logged/user-logged.compon
     UserRegisterComponent,
     UserCompletedDataComponent,
     UsuarioFormComponent,
-    LoginFormComponent ],
+    LoginFormComponent,
+    UserLoggedComponent ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]
 })
