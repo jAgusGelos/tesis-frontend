@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { IUser } from '../models/IUser';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +14,23 @@ export class AuthService {
   constructor(private http: HttpClient,
               private cookie: CookieService) { }
 
+  private apiURLRegister = environment.apiURL + '/' + 'registrar/';
+  private apiURLLogin = environment.apiURL + '/' + 'login/';
+
   login(email: string, password: string): any {
-    return this.http.post<IUser>('/api/login', { email, password }).subscribe(res => this.setSession(res));
+    return this.http.post<IUser>(this.apiURLLogin, { email, password });
+    // .subscribe(res => this.setSession(res));
   }
 
-  private setSession(authResult): void {
+  register(user: IUser): any {
+
+    return this.http.post<IUser>(this.apiURLRegister, { email: user.email, password: user.password });
+  }
+
+  setSession(authResult): void {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
 
-    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('id_token', authResult.jwt);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 

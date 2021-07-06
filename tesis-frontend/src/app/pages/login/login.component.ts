@@ -9,8 +9,13 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
   reg = false;
+  user = false;
 
   ngOnInit(): void {
+    const idToken = localStorage.getItem('id_token');
+    if (idToken){
+      this.user = true;
+    }
   }
 
   register(): void {

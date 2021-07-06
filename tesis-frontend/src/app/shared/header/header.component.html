@@ -31,6 +31,6 @@
     </ul>
   </div>
   <div class="logged  text-right align-items-right" *ngIf= 'user' >
-    <button type="button" class="btn btn-danger" (click)='logout()'>Cerrar Sesión</button>
+    <button *ngIf="user" type="button" class="btn btn-danger" (click)='logout()'>Cerrar Sesión</button>
   </div>
 </nav>

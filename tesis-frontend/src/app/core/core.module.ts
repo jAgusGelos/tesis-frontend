@@ -7,6 +7,7 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
+import { UserLoggedComponent } from './components/user-logged/user-logged.component';
 
 
 
@@ -15,7 +16,8 @@ import { UserCompletedDataComponent } from './components/user-completed-data/use
     UserRegisterComponent,
     UserCompletedDataComponent,
     UsuarioFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    UserLoggedComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { UserCompletedDataComponent } from './components/user-completed-data/use
     UserRegisterComponent,
     UserCompletedDataComponent,
     UsuarioFormComponent,
-    LoginFormComponent ],
+    LoginFormComponent,
+    UserLoggedComponent ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]
 })
