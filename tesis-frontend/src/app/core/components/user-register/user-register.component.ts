@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from '../../models/IUser';
+import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class UserRegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter<any>();
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService,
+              private userService: AuthService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -51,10 +52,12 @@ export class UserRegisterComponent implements OnInit {
       email: this.formRegister.controls.email.value,
       password: this.formRegister.controls.password.value
     };
-    this.userService.postUser(user).subscribe((res: any) => {
-      console.log(res);
-      this.router.navigate(['/usuario']);
-    });
+    this.userService.register(user);
+    this.router.navigate(['/graciasRegistro']);
+    // this.userService.register(user.email, user.password).then((res: any) => {
+    //   console.log(res);
+    //   this.router.navigate(['/usuario']);
+    // });
   }
 
   /**
