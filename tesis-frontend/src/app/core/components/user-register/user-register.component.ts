@@ -52,8 +52,15 @@ export class UserRegisterComponent implements OnInit {
       email: this.formRegister.controls.email.value,
       password: this.formRegister.controls.password.value
     };
-    this.userService.register(user);
-    this.router.navigate(['/graciasRegistro']);
+    this.userService.register(user).subscribe((res: any) => {
+      if (!res){
+        alert('Ya existe un usuario con ese mail.');
+      }
+      else {
+        this.router.navigate(['/endRegister']);
+      }
+
+    });
     // this.userService.register(user.email, user.password).then((res: any) => {
     //   console.log(res);
     //   this.router.navigate(['/usuario']);
