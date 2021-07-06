@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IUser } from '../models/IUser';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,15 @@ export class AuthService {
   constructor(private http: HttpClient,
               private cookie: CookieService) { }
 
+  apiURLRegister = environment.apiURL + '/' + 'registrar';
+  apiURLLogin = environment.apiURL + '/' + 'login';
+
   login(email: string, password: string): any {
-    return this.http.post<IUser>('/api/login', { email, password }).subscribe(res => this.setSession(res));
+    return this.http.post<IUser>(this.apiURLLogin, { email, password }).subscribe(res => this.setSession(res));
+  }
+
+  register(email: string, password: string): any {
+    return this.http.post<IUser>(this.apiURLRegister, { email, password }).subscribe(res => this.setSession(res));
   }
 
   private setSession(authResult): void {
