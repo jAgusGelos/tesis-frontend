@@ -13,12 +13,8 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  postUser(user: IUser): any {
-    return this.httpClient.post(this.apiURL, user);
-  }
-
   postUserComplete(user: IUserComplete): any {
-    return this.httpClient.put(this.apiURL, user);
+    return this.httpClient.put(this.apiURL, {UsuarioCompleto: user});
   }
 
 }

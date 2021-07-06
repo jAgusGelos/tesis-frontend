@@ -132,7 +132,7 @@
       <label class="col-form-label col-sm-2 col-sm-offset-2" for="nroCalle">Nro Calle: <span
           class="text-danger">*</span></label>
       <div class="col-sm-6">
-        <input [(ngModel)]='usuario.nroCalle'  type="text" class="form-control" formControlName="nroCalle" [ngClass]="{'is-invalid': (formUsuario.controls.nroCalle.touched || submitted)
+        <input [(ngModel)]='usuario.nroCalle'  type="number" class="form-control" formControlName="nroCalle" [ngClass]="{'is-invalid': (formUsuario.controls.nroCalle.touched || submitted)
               && formUsuario.controls.nroCalle.errors}" value={{usuario.nroCalle}} onclick="this.select()"/>
         <span class="text-danger"
           *ngIf="(formUsuario.controls.nroCalle.touched || submitted) && formUsuario.controls.nroCalle.errors?.required">
@@ -144,7 +144,7 @@
 
     <!--Piso-->
     <div class="form-group row">
-      <label class="col-form-label col-sm-2 col-sm-offset-2" for="piso">Piso:</label>
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="number">Piso:</label>
       <div class="col-sm-6">
         <input [(ngModel)]='usuario.piso'  type="text" class="form-control" formControlName="piso" [ngClass]="{'is-invalid': (formUsuario.controls.piso.touched || submitted)
               && formUsuario.controls.piso.errors}" value={{usuario.piso}} onclick="this.select()"/>

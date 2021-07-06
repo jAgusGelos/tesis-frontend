@@ -14,8 +14,8 @@ export class AuthService {
   constructor(private http: HttpClient,
               private cookie: CookieService) { }
 
-  apiURLRegister = environment.apiURL + '/' + 'registrar/';
-  apiURLLogin = environment.apiURL + '/' + 'login/';
+  private apiURLRegister = environment.apiURL + '/' + 'registrar/';
+  private apiURLLogin = environment.apiURL + '/' + 'login/';
 
   login(email: string, password: string): any {
     return this.http.post<IUser>(this.apiURLLogin, { email, password });
