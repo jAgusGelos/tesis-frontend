@@ -1,8 +1,8 @@
 
-export interface Congress{
+export interface ICongress{
   nombre: string;
   sede: string;
-  tematicas: number[];
+  simposios: number[];
   chairPrincipal: string;
   coordLocal: string;
   fechaInCongreso: Date;

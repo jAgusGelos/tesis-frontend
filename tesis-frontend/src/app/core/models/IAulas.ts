@@ -1,4 +1,4 @@
-export interface Aulas {
+export interface IAulas {
   sede: number;
   capacidad: number;
   ubicacion: string;
