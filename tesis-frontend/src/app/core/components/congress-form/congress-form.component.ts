@@ -13,9 +13,10 @@ export class CongressFormComponent implements OnInit {
 
   // Tiene que dar Nombre - Sede - Año - Email CP CL -
   @Input() congress: ICongress = {
+    id: '',
     nombre: '',
     sede: '',
-    año: 2021,
+    ano: 2021,
     chairPrincipal: '',
     coordLocal: ''
   };
@@ -35,4 +36,21 @@ export class CongressFormComponent implements OnInit {
 
   }
 
+  submit(): void {
+    this.submitted = true;
+    if (this.formCongress.invalid) {
+      alert('Por favor complete todos los datos.');
+      return;
+    }
+    this.congress = {
+    id: this.congress.id,
+    nombre: this.formCongress.controls.nombre.value,
+    sede: this.formCongress.controls.sede.value,
+    ano: this.formCongress.controls.ano.value,
+    chairPrincipal: this.formCongress.controls.chairPrincipal.value,
+    coordLocal: this.formCongress.controls.coordLocal.value
+    };
+
+
+  }
 }

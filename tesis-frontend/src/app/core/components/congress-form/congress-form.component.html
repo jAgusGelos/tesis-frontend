@@ -28,6 +28,19 @@
       </div>
     </div>
 
+    <!-- ano -->
+    <div class='form-group row'>
+      <label class='col-form-label col-sm-2 col-sm-offset-2' for='ano'>Año: <span class='text-danger'>*</span></label>
+      <div class='col-sm-6'>
+        <input type='text' class='form-control' formControlName='ano' [ngClass]="{'is-invalid': (formCongress.controls.ano.touched || submitted)
+    && formCongress.controls.ano.errors}" onclick='this.select()' />
+        <span class='text-danger'
+          *ngIf='(formCongress.controls.ano.touched || submitted) && formCongress.controls.ano.errors?.required'>
+          Requerido
+        </span>
+      </div>
+    </div>
+
 
     <!-- ChairPrincipal -->
     <div class='form-group row'>

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ICongress } from '../../models/ICongress';
+import { IAgenda } from '../../models/IAgenda';
+
 
 @Component({
   selector: 'app-agenda',
@@ -9,12 +10,16 @@ import { ICongress } from '../../models/ICongress';
 })
 export class AgendaComponent implements OnInit {
 
-  @Input() congress: ICongress = {
-    nombre: '',
-    sede: '',
-    año: 2020,
-    chairPrincipal: '',
-    coordLocal: ''
+  @Input() agenda: IAgenda = {
+  simposios: [],
+  fechaInCongreso: new Date(),
+  fechaFinCongreso: new Date(),
+  fechaLimPapers: new Date(),
+  fechaProrrogaPapers: new Date(),
+  fechaFinEvaluacion: new Date(),
+  fechaFinReEv: new Date(),
+  aulas: [],
+  modalidad: '',
   };
   formCongress: FormGroup;
   submitted = false;
