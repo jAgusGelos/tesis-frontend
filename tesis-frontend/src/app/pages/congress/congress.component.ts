@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ICongress } from 'src/app/core/models/ICongress';
+import { CongressService } from 'src/app/core/services/congress.service';
 
 @Component({
   selector: 'app-congress',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CongressComponent implements OnInit {
 
-  constructor() { }
+  congressList = [];
+  edit = false;
+  congress = {};
+
+  constructor(private congressService: CongressService) { }
 
   ngOnInit(): void {
+    this.congressService.getCongress().subscribe((res: any) => {
+      this.congressList = res.data;
+    });
+  }
+
+  newCongress(): void {
+    this.edit = !this.edit;
+  }
+
+  editCongress(congress: ICongress): void {
+    this.edit = !this.edit;
+    this.congress = congress;
+
   }
 
 }
