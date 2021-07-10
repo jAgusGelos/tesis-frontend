@@ -30,6 +30,7 @@ export class CongressFormComponent implements OnInit {
     this.formCongress = this.formBuilder.group({
       nombre: [this.congress.nombre, Validators.required],
       sede: [this.congress.sede, Validators.required],
+      ano: [this.congress.ano, Validators.required],
       chairPrincipal: [this.congress.chairPrincipal, Validators.required],
       coordLocal: [this.congress.coordLocal ],
     });

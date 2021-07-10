@@ -1,0 +1,12 @@
+.greyned{
+  color: grey;
+}
+
+i{
+  padding-top: 1.5rem;
+  cursor: pointer;
+}
+
+i:hover{
+  color: blue;
+}

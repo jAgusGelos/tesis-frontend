@@ -10,6 +10,7 @@ import { UserCompletedDataComponent } from './components/user-completed-data/use
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
 import { CongressFormComponent } from './components/congress-form/congress-form.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
+import { CongressListComponent } from './components/congress-list/congress-list.component';
 
 
 
@@ -21,7 +22,8 @@ import { AgendaComponent } from './components/agenda/agenda.component';
     LoginFormComponent,
     UserLoggedComponent,
     CongressFormComponent,
-    AgendaComponent
+    AgendaComponent,
+    CongressListComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { AgendaComponent } from './components/agenda/agenda.component';
     LoginFormComponent,
     UserLoggedComponent,
     CongressFormComponent,
+    CongressListComponent
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
