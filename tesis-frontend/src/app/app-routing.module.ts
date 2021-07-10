@@ -27,7 +27,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/congress/congress.module')
     .then(m => m.CongressModule),
     // descomentar al correr la bd
-    // canActivate: [AuthGuard]
+    // canActivate: [AuthGuard, SuperRolGuard]
   }
 ];
 

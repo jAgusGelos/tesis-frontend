@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICongress } from '../../models/ICongress';
 
+
 @Component({
   selector: 'app-congress-form',
   templateUrl: './congress-form.component.html',
@@ -9,27 +10,18 @@ import { ICongress } from '../../models/ICongress';
 })
 export class CongressFormComponent implements OnInit {
 
+
+  // Tiene que dar Nombre - Sede - Año - Email CP CL -
   @Input() congress: ICongress = {
     nombre: '',
     sede: '',
-    simposios: [],
+    año: 2021,
     chairPrincipal: '',
-    coordLocal: '',
-    fechaInCongreso: new Date(),
-    fechaFinCongreso: new Date(),
-    fechaLimPapers: new Date(),
-    fechaProrrogaPapers: new Date(),
-    fechaFinEvaluacion: new Date(),
-    fechaFinReEv: new Date(),
-    aulas: [],
-    modalidad: ''
+    coordLocal: ''
   };
+
   formCongress: FormGroup;
   submitted = false;
-  // Esto hay que pedirselo al back.
-  simposios = [{id: 0, nombre: 'Tematica 1'}, {id: 1, nombre: 'Tematica 2'}, {id: 3, nombre: 'Tematica 3'}];
-  aulas = [{id: 0, nombre: 'Aula 1', capacidad: 250}, {id: 0, nombre: 'Aula 2', capacidad: 200}];
-
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -37,17 +29,8 @@ export class CongressFormComponent implements OnInit {
     this.formCongress = this.formBuilder.group({
       nombre: [this.congress.nombre, Validators.required],
       sede: [this.congress.sede, Validators.required],
-      simposios: [this.congress.simposios, Validators.required],
       chairPrincipal: [this.congress.chairPrincipal, Validators.required],
-      coordLocal: [this.congress.coordLocal, Validators.required],
-      fechaInCongreso: [this.congress.fechaInCongreso, Validators.required],
-      fechaFinCongreso: [this.congress.fechaFinCongreso, Validators.required],
-      fechaLimPapers: [this.congress.fechaLimPapers, Validators.required],
-      fechaProrrogaPapers: [this.congress.fechaProrrogaPapers, Validators.required],
-      fechaFinEvaluacion: [this.congress.fechaFinEvaluacion, Validators.required],
-      fechaFinReEv: [this.congress.fechaFinReEv, Validators.required],
-      aulas: [this.congress.aulas, Validators.required],
-      modalidad: [this.congress.modalidad, Validators.required]
+      coordLocal: [this.congress.coordLocal ],
     });
 
   }

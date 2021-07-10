@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
 import { CongressFormComponent } from './components/congress-form/congress-form.component';
+import { AgendaComponent } from './components/agenda/agenda.component';
 
 
 
@@ -19,7 +20,8 @@ import { CongressFormComponent } from './components/congress-form/congress-form.
     UsuarioFormComponent,
     LoginFormComponent,
     UserLoggedComponent,
-    CongressFormComponent
+    CongressFormComponent,
+    AgendaComponent
   ],
   imports: [
     CommonModule,
