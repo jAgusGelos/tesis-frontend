@@ -31,4 +31,25 @@ export class CongressComponent implements OnInit {
 
   }
 
+
+  /**
+   *
+   * @param item
+   * Recibe un congreso, chequea que tenga un id.
+   * Si lo tiene hace un PUT al back. Actualiza un congreso creado.
+   * Si no lo tiene crea un nuevo congreso.
+   */
+  toggleCongress(item: ICongress): void {
+    if (item.id === '') {
+      this.congressService.postCongress(item).subscribe((res: any) => {
+        alert('Congreso Creado Correctamente');
+      });
+    }
+    else{
+      this.congressService.putCongress(item).subscribe((res: any) => {
+        alert('Congreso Modificado Correctamente');
+      })
+    }
+  }
+
 }

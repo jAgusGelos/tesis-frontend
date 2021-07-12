@@ -20,8 +20,8 @@ export class CongressService {
     return this.httpClient.get(this.apiURL + '/congreso/todos/');
   }
 
-  putCongress(congress: ICongress, id: string): any {
-    return this.httpClient.put<ICongress>(this.apiURL + '/congreso/modificar/' + id, congress);
+  putCongress(congress: ICongress): any {
+    return this.httpClient.put<ICongress>(this.apiURL + '/congreso/modificar/' + congress.id, congress);
   }
 
 }

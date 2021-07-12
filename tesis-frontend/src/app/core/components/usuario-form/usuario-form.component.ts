@@ -10,12 +10,6 @@ import { Usuario } from '../../models/Usuario';
 export class UsuarioFormComponent implements OnInit {
 
   @Input() titulo = 'Formulario de Registro';
-  formUsuario: FormGroup;
-  submitted: false;
-  tipoDni = ['DNI', 'CU', 'CI'];
-  nacionalidades = ['ARGENTINA', 'PERU', 'COLOMBIA'];
-  provincias = ['Cordoba', 'Buenos Aires'];
-  localidades = ['Capital', 'Rio IV'];
   @Input() usuario: Usuario = {
     dni: 0,
     tipoDni: '',
@@ -31,9 +25,16 @@ export class UsuarioFormComponent implements OnInit {
     dpto: '',
     telefono: 0,
     celular: 0,
-    email: '' };
+    email: ''
+  };
+  formUsuario: FormGroup;
+  submitted: false;
+  tipoDni = ['DNI', 'CU', 'CI'];
+  nacionalidades = ['ARGENTINA', 'PERU', 'COLOMBIA'];
+  provincias = ['Cordoba', 'Buenos Aires'];
+  localidades = ['Capital', 'Rio IV'];
 
-  constructor( private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.formUsuario = this.formBuilder.group({

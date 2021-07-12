@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICongress } from '../../models/ICongress';
 
@@ -20,6 +20,7 @@ export class CongressFormComponent implements OnInit {
     chairPrincipal: '',
     coordLocal: ''
   };
+  @Output() congressEmitter = new EventEmitter<ICongress>();
 
   formCongress: FormGroup;
   submitted = false;
@@ -51,6 +52,8 @@ export class CongressFormComponent implements OnInit {
     chairPrincipal: this.formCongress.controls.chairPrincipal.value,
     coordLocal: this.formCongress.controls.coordLocal.value
     };
+    this.congressEmitter.emit(this.congress);
+
 
 
   }
