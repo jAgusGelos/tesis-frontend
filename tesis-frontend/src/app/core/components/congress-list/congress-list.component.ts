@@ -9,9 +9,12 @@ import { ICongress } from '../../models/ICongress';
 })
 export class CongressListComponent implements OnInit {
 
-  @Input() congressList = [{nombre: 'Probando', sede: 'Tu casa', ano: '2021'}];
+  @Input() congressList = [
+    {id: '123', nombre: 'Probando', sede: 'Tu casa', ano: '2021'},
+    {id: '123', nombre: 'Probando 2', sede: 'Tu casa', ano: '2021'}];
   @Output() editCongressEvent = new EventEmitter();
   @Output() newCongressEvent = new EventEmitter();
+  @Output() deleteCongressEvent = new EventEmitter();
 
   constructor() { }
 
@@ -24,6 +27,13 @@ export class CongressListComponent implements OnInit {
 
   toggleNew(): void {
     this.newCongressEvent.emit();
+  }
+  toggleRemoveHandled(item: any): void {
+    if (confirm('Esta seguro desea eliminar el congreso: ' + item.nombre +
+    '\nToda la configuración creada se perderá')) {
+      this.deleteCongressEvent.emit(item);
+    }
+
   }
 
 }

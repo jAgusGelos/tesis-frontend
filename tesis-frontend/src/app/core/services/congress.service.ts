@@ -24,4 +24,9 @@ export class CongressService {
     return this.httpClient.put<ICongress>(this.apiURL + 'congreso/modificar/' + congress.id, congress);
   }
 
+  deleteCongress(congress: ICongress): any {
+    return this.httpClient.delete<ICongress>(this.apiURL + 'congreso/modificar/' + congress.id);
+  }
+
+
 }

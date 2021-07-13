@@ -12,11 +12,11 @@ import { of } from 'rxjs';
 export class AuthService {
 
   constructor(private http: HttpClient,
-    private cookie: CookieService) { }
+              private cookie: CookieService) { }
 
-  private apiURLRegister = environment.apiURL + '/' + 'registrar/';
-  private apiURLLogin = environment.apiURL + '/' + 'login/';
-  private apiURLLogout = environment.apiURL + '/' + 'logout/';
+  private apiURLRegister = environment.apiURL  + 'registrar/';
+  private apiURLLogin = environment.apiURL  + 'login/';
+  private apiURLLogout = environment.apiURL + 'logout/';
 
   login(email: string, password: string): any {
     return this.http.post<IUser>(this.apiURLLogin, { email, password });

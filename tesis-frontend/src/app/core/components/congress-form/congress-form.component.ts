@@ -21,6 +21,7 @@ export class CongressFormComponent implements OnInit {
     coordLocal: ''
   };
   @Output() congressEmitter = new EventEmitter<ICongress>();
+  @Output() cancelCongress = new EventEmitter();
 
   formCongress: FormGroup;
   submitted = false;
@@ -38,6 +39,10 @@ export class CongressFormComponent implements OnInit {
 
   }
 
+  cancel(): void {
+    this.cancelCongress.emit();
+  }
+
   submit(): void {
     this.submitted = true;
     if (this.formCongress.invalid) {
@@ -53,8 +58,6 @@ export class CongressFormComponent implements OnInit {
     coordLocal: this.formCongress.controls.coordLocal.value
     };
     this.congressEmitter.emit(this.congress);
-
-
 
   }
 }

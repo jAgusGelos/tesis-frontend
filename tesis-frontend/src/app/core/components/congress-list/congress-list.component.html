@@ -16,7 +16,11 @@
           <b>{{item.ano}}</b>
         </div>
         <div class="btn-group col-md-3">
-          <a (click)='toggleEdit(item)'><i class="fas fa-pencil-alt"></i></a>
+          <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
         </div>
       </div>
     </li>
