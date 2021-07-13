@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { ICongress } from '../../models/ICongress';
 
 @Component({
   selector: 'app-congress-list',
