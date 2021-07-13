@@ -13,15 +13,15 @@ export class CongressService {
   constructor(private httpClient: HttpClient) { }
 
   postCongress(congress: ICongress): any {
-    return this.httpClient.post<ICongress>(this.apiURL + '/congreso/crear/', congress);
+    return this.httpClient.post<ICongress>(this.apiURL + 'congreso/crear/', congress);
   }
 
   getCongress(): any {
-    return this.httpClient.get(this.apiURL + '/congreso/todos/');
+    return this.httpClient.get(this.apiURL + 'congreso/todos/');
   }
 
   putCongress(congress: ICongress): any {
-    return this.httpClient.put<ICongress>(this.apiURL + '/congreso/modificar/' + congress.id, congress);
+    return this.httpClient.put<ICongress>(this.apiURL + 'congreso/modificar/' + congress.id, congress);
   }
 
 }

@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
@@ -18,7 +17,6 @@ import { CongressListComponent } from './components/congress-list/congress-list.
   declarations: [
     UserRegisterComponent,
     UserCompletedDataComponent,
-    UsuarioFormComponent,
     LoginFormComponent,
     UserLoggedComponent,
     CongressFormComponent,
@@ -35,7 +33,6 @@ import { CongressListComponent } from './components/congress-list/congress-list.
   exports:  [
     UserRegisterComponent,
     UserCompletedDataComponent,
-    UsuarioFormComponent,
     LoginFormComponent,
     UserLoggedComponent,
     CongressFormComponent,
