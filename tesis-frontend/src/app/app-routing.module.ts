@@ -10,7 +10,7 @@ const routes: Routes = [
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module')
     .then(m => m.UsuarioModule),
-     canActivate: [AuthGuard]
+     // canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -19,8 +19,15 @@ const routes: Routes = [
   },
   {
     path: 'endRegister',
-    loadChildren: () => import('./pages/end-register/end-register-routing.module')
-    .then(m => m.EndRegisterRoutingModule)
+    loadChildren: () => import('./pages/end-register/end-register.module')
+    .then(m => m.EndRegisterModule)
+  },
+  {
+    path: 'congreso',
+    loadChildren: () => import('./pages/congress/congress.module')
+    .then(m => m.CongressModule),
+    // descomentar al correr la bd
+    // canActivate: [AuthGuard, SuperRolGuard]
   }
 ];
 

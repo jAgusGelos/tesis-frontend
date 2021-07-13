@@ -1,3 +1,5 @@
+<h5>Por favor, complete sus datos</h5>
+  <p>Recuerde que el nombre y el apellido serán los que figuren en los certificados</p>
 <div class="container-lg justify-content-center">
   <h3>{{titulo}}</h3>
   <form [formGroup]='formUsuario'>
@@ -71,6 +73,29 @@
         <span class="text-danger"
           *ngIf="(formUsuario.controls.fechaNacimiento.touched || submitted) && formUsuario.controls.fechaNacimiento.errors?.required">
           Requerido.
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="provincia">Datos de la residencia:</label>
+    </div>
+
+    <!-- nacionalidad -->
+    <div class='form-group row'>
+      <label class='col-form-label col-sm-2 col-sm-offset-2' for='nacionalidad'>País: <span
+          class='text-danger'>*</span></label>
+      <div class='col-sm-6'>
+        <select [(ngModel)]='usuario.nacionalidad' name="nacionalidad" class="form-control"
+          formControlName="nacionalidad" [ngClass]="{'is-invalid': (formUsuario.controls.nacionalidad.touched || submitted)
+              && formUsuario.controls.nacionalidad.errors}">
+          <option *ngFor="let opt of nacionalidades">
+            ‌{{ opt }}
+          <option>
+        </select>
+        <span class='text-danger'
+          *ngIf='(formUsuario.controls.nacionalidad.touched || submitted) && formUsuario.controls.nacionalidad.errors?.required'>
+          Requerido
         </span>
       </div>
     </div>
