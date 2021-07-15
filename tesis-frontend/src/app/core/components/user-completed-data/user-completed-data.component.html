@@ -1,7 +1,9 @@
 <div class="card">
   <div class="card-body">
     <div class="contenidos">
+      <hr>
       <h3 class="card-title text-center"><b>Información General</b></h3>
+      <hr>
     </div>
     <h6><b>Por favor, complete sus datos</b></h6>
     <div class="card-text">
@@ -13,7 +15,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-3" for="tipoDni">Tipo DNI:<span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <select [(ngModel)]='usuario.tipoDni' name="tipoDni" class="form-control" formControlName="tipoDni"
+                <select  name="tipoDni" class="form-control" formControlName="tipoDni"
                   [ngClass]="{'is-invalid': (formUsuario.controls.tipoDni.touched || submitted)
               && formUsuario.controls.tipoDni.errors}">
                   <option *ngFor="let opt of tipoDni">
@@ -33,7 +35,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="dni">DNI: <span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <input [(ngModel)]='usuario.dni' type="text" class="form-control" formControlName="dni" [ngClass]="{'is-invalid': (formUsuario.controls.dni.touched || submitted)
+                <input  type="text" class="form-control" formControlName="dni" [ngClass]="{'is-invalid': (formUsuario.controls.dni.touched || submitted)
               && formUsuario.controls.dni.errors}" value={{usuario.dni}} onclick="this.select()" />
                 <span class="text-danger"
                   *ngIf="(formUsuario.controls.dni.touched || submitted) && formUsuario.controls.dni.errors?.required">
@@ -51,7 +53,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="apellido">Apellido: <span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <input [(ngModel)]='usuario.apellido' type="text" class="form-control" formControlName="apellido"
+                <input  type="text" class="form-control" formControlName="apellido"
                   [ngClass]="{'is-invalid': (formUsuario.controls.apellido.touched || submitted)
               && formUsuario.controls.apellido.errors}" value={{usuario.apellido}} onclick="this.select()" />
                 <span class="text-danger"
@@ -68,7 +70,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="nombre">Nombre: <span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <input [(ngModel)]='usuario.nombre' type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (formUsuario.controls.nombre.touched || submitted)
+                <input  type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (formUsuario.controls.nombre.touched || submitted)
               && formUsuario.controls.nombre.errors}" value={{usuario.nombre}} onclick="this.select()" />
                 <span class="text-danger"
                   *ngIf="(formUsuario.controls.nombre.touched || submitted) && formUsuario.controls.nombre.errors?.required">
@@ -88,7 +90,7 @@
               <label class="col-form-label col-sm-3 col-sm-offset-2" for="fechaNacimiento">Fecha Nacimiento:<span
                   class="text-danger">*</span></label>
               <div class="col-sm-5">
-                <input [(ngModel)]='usuario.fechaNacimiento' type="date" class="form-control"
+                <input  type="date" class="form-control"
                   formControlName="fechaNacimiento" [ngClass]="{'is-invalid': (formUsuario.controls.fechaNacimiento.touched || submitted)
               && formUsuario.controls.fechaNacimiento.errors}" value={{usuario.fechaNacimiento}}
                   onclick="this.select()" />
@@ -107,7 +109,7 @@
               <label class='col-form-label col-sm-2 col-sm-offset-2' for='nacionalidad'>País: <span
                   class='text-danger'>*</span></label>
               <div class='col-sm-6'>
-                <select [(ngModel)]='usuario.nacionalidad' name="nacionalidad" class="form-control"
+                <select  name="nacionalidad" class="form-control"
                   formControlName="nacionalidad" [ngClass]="{'is-invalid': (formUsuario.controls.nacionalidad.touched || submitted)
               && formUsuario.controls.nacionalidad.errors}">
                   <option *ngFor="let opt of nacionalidades">
@@ -132,7 +134,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="provincia">Provincia:<span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <select [(ngModel)]='usuario.provincia' name="provincia" class="form-control"
+                <select  name="provincia" class="form-control"
                   formControlName="provincia" [ngClass]="{'is-invalid': (formUsuario.controls.provincia.touched || submitted)
               && formUsuario.controls.provincia.errors}">
                   <option *ngFor="let opt of provincias">
@@ -154,7 +156,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="localidad">Localidad:<span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <select [(ngModel)]='usuario.localidad' name="localidad" class="form-control"
+                <select  name="localidad" class="form-control"
                   formControlName="localidad" [ngClass]="{'is-invalid': (formUsuario.controls.localidad.touched || submitted)
               && formUsuario.controls.localidad.errors}">
                   <option *ngFor="let opt of localidades">
@@ -179,7 +181,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="calle">Calle: <span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <input [(ngModel)]='usuario.calle' type="text" class="form-control" formControlName="calle" [ngClass]="{'is-invalid': (formUsuario.controls.calle.touched || submitted)
+                <input  type="text" class="form-control" formControlName="calle" [ngClass]="{'is-invalid': (formUsuario.controls.calle.touched || submitted)
               && formUsuario.controls.calle.errors}" value={{usuario.calle}} onclick="this.select()" />
                 <span class="text-danger"
                   *ngIf="(formUsuario.controls.calle.touched || submitted) && formUsuario.controls.calle.errors?.required">
@@ -195,7 +197,7 @@
               <label class="col-form-label col-sm-4" for="nroCalle">Nro: <span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <input [(ngModel)]='usuario.nroCalle' type="number" class="form-control" formControlName="nroCalle"
+                <input  type="number" class="form-control" formControlName="nroCalle"
                   [ngClass]="{'is-invalid': (formUsuario.controls.nroCalle.touched || submitted)
               && formUsuario.controls.nroCalle.errors}" value={{usuario.nroCalle}} onclick="this.select()" />
                 <span class="text-danger"
@@ -211,7 +213,7 @@
             <div class="form-group row">
               <label class="col-form-label col-sm-4" for="number">Piso:</label>
               <div class="col-sm-6">
-                <input [(ngModel)]='usuario.piso' type="text" class="form-control" formControlName="piso" [ngClass]="{'is-invalid': (formUsuario.controls.piso.touched || submitted)
+                <input  type="text" class="form-control" formControlName="piso" [ngClass]="{'is-invalid': (formUsuario.controls.piso.touched || submitted)
               && formUsuario.controls.piso.errors}" value={{usuario.piso}} onclick="this.select()" />
 
               </div>
@@ -223,7 +225,7 @@
             <div class="form-group row">
               <label class="col-form-label col-sm-4" for="dpto">Dpto: </label>
               <div class="col-sm-6">
-                <input [(ngModel)]='usuario.dpto' type="text" class="form-control" formControlName="dpto" [ngClass]="{'is-invalid': (formUsuario.controls.dpto.touched || submitted)
+                <input  type="text" class="form-control" formControlName="dpto" [ngClass]="{'is-invalid': (formUsuario.controls.dpto.touched || submitted)
               && formUsuario.controls.dpto.errors}" value={{usuario.dpto}} onclick="this.select()" />
 
               </div>
@@ -239,7 +241,7 @@
             <div class="form-group row">
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="celular">Celular: </label>
               <div class="col-sm-6">
-                <input [(ngModel)]='usuario.celular' type="text" class="form-control" formControlName="celular"
+                <input  type="text" class="form-control" formControlName="celular"
                   [ngClass]="{'is-invalid': (formUsuario.controls.celular.touched || submitted)
               && formUsuario.controls.celular.errors}" value={{usuario.celular}} onclick="this.select()" />
               </div>

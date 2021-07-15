@@ -7,16 +7,17 @@
   background-color: #f8f7f7;
 }
 
-.card-title{
+hr{
   border-top: 1px solid #00609C;
   border-bottom:  1px solid #00609C;
+}
+
+.card-title{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   font-weight:300;
   padding-left: 3rem;
   padding-right: 3rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
   max-width: fit-content;
 }
