@@ -21,6 +21,11 @@ const routes: Routes = [
     path: 'endRegister',
     loadChildren: () => import('./pages/end-register/end-register-routing.module')
     .then(m => m.EndRegisterRoutingModule)
+  },
+  {
+    path: 'room',
+    loadChildren: () => import('./pages/room/room.module')
+    .then(m => m.RoomModule)
   }
 ];
 

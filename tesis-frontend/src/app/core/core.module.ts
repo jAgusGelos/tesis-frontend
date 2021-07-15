@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
+import { RoomComponent } from './components/room/room.component';
+import { RoomFormComponent } from './components/room-form/room-form.component';
 
 
 
@@ -17,7 +19,9 @@ import { UserLoggedComponent } from './components/user-logged/user-logged.compon
     UserCompletedDataComponent,
     UsuarioFormComponent,
     LoginFormComponent,
-    UserLoggedComponent
+    UserLoggedComponent,
+    RoomComponent,
+    RoomFormComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,9 @@ import { UserLoggedComponent } from './components/user-logged/user-logged.compon
     UserCompletedDataComponent,
     UsuarioFormComponent,
     LoginFormComponent,
-    UserLoggedComponent ],
+    UserLoggedComponent,
+    RoomComponent,
+    RoomFormComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]
 })
