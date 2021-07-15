@@ -14,9 +14,9 @@ export class UsuarioComponent implements OnInit {
   usuario: IUserComplete;
 
   ngOnInit(): void {
-    this.userService.getLoggedUser().subscribe((res: any) => {
-      this.usuario = res.data;
-    });
+    // this.userService.getLoggedUser().subscribe((res: any) => {
+    //   this.usuario = res.data;
+    // });
 
   }
 
