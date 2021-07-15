@@ -1,1 +1,26 @@
+.navbar {
+  background-color: #00609C;
+}
+
+a {
+  color: white;
+}
+
+a:hover{
+  color:#8f9092;
+}
+
+.navbar-collapse{
+    justify-content: center;
+}
+
+.navbar-toggler{
+  background-color: #3CAFE0;
+  color: white;
+}
+
+.btn{
+  background-color:#3CAFE0;
+  margin-right: 0rem;
+}
 
