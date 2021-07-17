@@ -4,7 +4,6 @@
       <h3 class="card-title text-center">Registro de Sede y Aulas</h3>
       <div class="card-text">
       <form [formGroup]='formSede'>
-
         <div class="form-group row">
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="sede">Sede: <span
                   class="text-danger">*</span></label>
@@ -20,7 +19,7 @@
         <form [formGroup]='formRooms'>
           <div>
               <h4>Agregar Aula</h4>
-
+                <!-- Nombre Aula -->
               <div class="form-group row">
                   <label class="col-form-label col-sm-2 col-sm-offset-2" for="nameAula">Nombre: <span
                       class="text-danger">*</span></label>
@@ -32,16 +31,16 @@
                   </span>
                   </div>
               </div>
-
-
+              &nbsp;
+                <!-- Descripción -->
               <div class="form-group row">
                   <label class="col-form-label col-sm-2 col-sm-offset-2" for="descAula">Descripción: </label>
                   <div class="col-sm-6">
                   <input type="descAula" class="form-control" formControlName="descAula" onclick="this.select()"/>
                   </div>
               </div>
-
-
+                <!-- Capacidad -->
+              &nbsp;
               <div class="form-group row">
                   <label class="col-form-label col-sm-2 col-sm-offset-2" for="capAula">Capacidad: </label>
                   <div class="col-sm-6">
@@ -49,8 +48,11 @@
                   </div>
               </div>
           </div>
-              <div class="row justify-content-md-center pt-3">
-            <a class="btn btn-primary btn-block col-md-8" role="button" (click)="agregar()">Agregar Aula</a>
+              <div class="row justify-content-md-center pt-3 btn-row">
+                <a class="btn btn-secondary col-md-5" role="button" (click)="cancel()">Cancelar</a>
+                &nbsp;
+                &nbsp;
+                <a class="btn btn-primary col-md-5" role="button" (click)="agregar()">Agregar Aula</a>
           </div>
         </form>
       </div>

@@ -7,6 +7,7 @@ import { IRoom } from '../models/iroom';
   providedIn: 'root'
 })
 export class RoomService {
+  /* Revisar */
   private apiURLRoom = environment.apiURL + '/' + 'aulas/';
   private apiURLRooms = environment.apiURL + '/' + 'aulas/todos/';
   private apiURLRoomDelete = environment.apiURL + '/' + 'eliminarAula/';

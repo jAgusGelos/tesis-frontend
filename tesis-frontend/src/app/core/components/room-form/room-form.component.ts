@@ -21,6 +21,7 @@ export class RoomFormComponent implements OnInit {
   submitted = false;
 
   @Output() roomEmitter = new EventEmitter<IRoom>();
+  @Output() cancelRoom = new EventEmitter();
   
   constructor(private formBuilder: FormBuilder,
               private roomService: RoomService) { }
@@ -48,6 +49,9 @@ export class RoomFormComponent implements OnInit {
       capacity: this.formRooms.controls.capAula.value
     };
     this.roomEmitter.emit(this.room)
+  }
+  cancel():void{
+    this.cancelRoom.emit();
   }
   
 }

@@ -21,7 +21,6 @@ export class RoomComponent implements OnInit {
   @Output() newRoomEvent = new EventEmitter();
   @Output() deleteRoomEvent = new EventEmitter();
   
-
   constructor() { }
                 
   ngOnInit(): void {
