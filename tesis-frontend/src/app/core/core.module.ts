@@ -8,8 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
-
-
+import { AssignSecChairsFormComponent } from './components/assign-sec-chairs-form/assign-sec-chairs-form.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -17,21 +17,23 @@ import { UserLoggedComponent } from './components/user-logged/user-logged.compon
     UserCompletedDataComponent,
     UsuarioFormComponent,
     LoginFormComponent,
-    UserLoggedComponent
+    UserLoggedComponent,
+    AssignSecChairsFormComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-
+    DragDropModule
   ],
   exports:  [
     UserRegisterComponent,
     UserCompletedDataComponent,
     UsuarioFormComponent,
     LoginFormComponent,
-    UserLoggedComponent ],
+    UserLoggedComponent,
+    AssignSecChairsFormComponent
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]
 })

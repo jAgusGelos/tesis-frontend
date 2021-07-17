@@ -162,15 +162,15 @@
       </div>
     </div>
 
-    <!--Telefono-->
+    <!--celular-->
     <div class="form-group row">
-      <label class="col-form-label col-sm-2 col-sm-offset-2" for="telefono">Telefono: <span
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="celular">celular: <span
           class="text-danger">*</span></label>
       <div class="col-sm-6">
-        <input [(ngModel)]='usuario.telefono'  type="text" class="form-control" formControlName="telefono" [ngClass]="{'is-invalid': (formUsuario.controls.telefono.touched || submitted)
-              && formUsuario.controls.telefono.errors}" value={{usuario.telefono}} onclick="this.select()"/>
+        <input [(ngModel)]='usuario.celular'  type="text" class="form-control" formControlName="celular" [ngClass]="{'is-invalid': (formUsuario.controls.celular.touched || submitted)
+              && formUsuario.controls.celular.errors}" value={{usuario.celular}} onclick="this.select()"/>
         <span class="text-danger"
-          *ngIf="(formUsuario.controls.telefono.touched || submitted) && formUsuario.controls.telefono.errors?.required">
+          *ngIf="(formUsuario.controls.celular.touched || submitted) && formUsuario.controls.celular.errors?.required">
           Requiered
         </span>
       </div>
