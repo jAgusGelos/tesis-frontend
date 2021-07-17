@@ -10,6 +10,7 @@ import { UserCompletedDataComponent } from './components/user-completed-data/use
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
 import { AssignSecChairsFormComponent } from './components/assign-sec-chairs-form/assign-sec-chairs-form.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { AgendaComponent } from './components/agenda/agenda.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     LoginFormComponent,
     UserLoggedComponent,
     AssignSecChairsFormComponent,
+    AgendaComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     UsuarioFormComponent,
     LoginFormComponent,
     UserLoggedComponent,
-    AssignSecChairsFormComponent
+    AssignSecChairsFormComponent,
+    AgendaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]

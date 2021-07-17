@@ -23,6 +23,11 @@ const routes: Routes = [
     path: 'chairs',
     loadChildren: () => import('./pages/chairs/chairs-routing.module')
     .then(m => m.ChairsRoutingModule)
+  },
+  {
+    path: 'agenda',
+    loadChildren: () => import('./pages/congress-agenda/congress-agenda-routing.module')
+    .then(m => m.CongressAgendaRoutingModule)
   }
 ];
 

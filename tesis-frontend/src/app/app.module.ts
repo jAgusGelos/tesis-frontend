@@ -11,12 +11,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
 import { ChairsComponent } from './pages/chairs/chairs.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CongressAgendaComponent } from './pages/congress-agenda/congress-agenda.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChairsComponent
+    ChairsComponent,
+    CongressAgendaComponent
   ],
   imports: [
     BrowserModule,
