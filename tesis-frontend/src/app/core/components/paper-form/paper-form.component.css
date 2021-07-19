@@ -1,0 +1,29 @@
+.form-group{
+  padding-top: 0.30rem;
+  padding-bottom: 0.35rem;
+}
+
+.btn-row{
+  padding-top: 1rem;
+}
+
+.autoresSelected{
+  border:  1px solid black;
+  padding: 0.3rem;
+  color: black;
+  text-decoration: none;
+  background-color: #f27289;
+  margin-right: 0.5rem;
+}
+
+.valid{
+  background-color: #bee895;
+}
+
+i{
+  padding-left: 0.3rem;
+}
+
+i:hover{
+  cursor: pointer;
+}

@@ -33,6 +33,13 @@ const routes: Routes = [
     .then(m => m.CongressModule),
     // descomentar al correr la bd
     // canActivate: [AuthGuard, SuperRolGuard]
+  },
+  {
+    path: 'callForPapers',
+    loadChildren: () => import('./pages/call-for-papers/call-for-papers.module')
+    .then(m => m.CallForPapersModule),
+    // descomentar al correr la bd
+    // canActivate: [AuthGuard, AutorRolGuard]
   }
 ];
 
