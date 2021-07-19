@@ -1,9 +1,28 @@
-.navbar-light .navbar-nav .nav-link{
-    color: #F4F4F4;
-    background-color: #00609C;
-   }
-
-.navbar{
-    background-color:#00609C !important;
+.navbar {
+  background-color: #00609C;
 }
+
+a {
+  color: white;
+}
+
+a:hover{
+  color:#8f9092;
+}
+
+.navbar-collapse{
+    justify-content: center;
+}
+
+.navbar-toggler{
+  background-color: #3CAFE0;
+  color: white;
+}
+
+.btn{
+  background-color:#3CAFE0;
+  border: none;
+}
+
+
 

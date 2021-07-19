@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
@@ -10,6 +9,10 @@ import { UserCompletedDataComponent } from './components/user-completed-data/use
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
 import { RoomComponent } from './components/room/room.component';
 import { RoomFormComponent } from './components/room-form/room-form.component';
+import { CongressFormComponent } from './components/congress-form/congress-form.component';
+import { AgendaComponent } from './components/agenda/agenda.component';
+import { CongressListComponent } from './components/congress-list/congress-list.component';
+
 
 
 
@@ -17,11 +20,13 @@ import { RoomFormComponent } from './components/room-form/room-form.component';
   declarations: [
     UserRegisterComponent,
     UserCompletedDataComponent,
-    UsuarioFormComponent,
     LoginFormComponent,
     UserLoggedComponent,
     RoomComponent,
     RoomFormComponent,
+    CongressFormComponent,
+    AgendaComponent,
+    CongressListComponent
   ],
   imports: [
     CommonModule,
@@ -33,11 +38,15 @@ import { RoomFormComponent } from './components/room-form/room-form.component';
   exports:  [
     UserRegisterComponent,
     UserCompletedDataComponent,
-    UsuarioFormComponent,
     LoginFormComponent,
     UserLoggedComponent,
     RoomComponent,
-    RoomFormComponent],
+    RoomFormComponent,
+    CongressFormComponent,
+    CongressListComponent
+
+  ],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]
 })

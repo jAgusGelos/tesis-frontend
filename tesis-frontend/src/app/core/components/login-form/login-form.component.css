@@ -1,7 +1,18 @@
 .card {
   margin-left: auto;
   margin-right: auto;
+  border-radius: 3rem;
 }
+
+@media (min-width: 768px) {
+  .card{
+    max-width: 40%;
+  }
+
+  .card-body{
+    padding: auto;
+  }
+ }
 
 .login-form{
   width:75%;
@@ -12,13 +23,48 @@
   padding-bottom: 0.75rem;
 }
 
-.card-title{
-  font-weight:300;
-}
 
 a{
   cursor: pointer;
 }
+
+.card-title{
+  border-top: 1px solid #00609C;
+  border-bottom:  1px solid #00609C;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight:300;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  max-width: fit-content;
+}
+
+hr{
+  border: 1px #00609C solid;
+}
+
+.btn{
+  background-color:#3CAFE0;
+  border: none;
+}
+
+.spaced{
+  padding-bottom: 8rem;
+}
+
+.col-form-label{
+  font-size: larger;
+}
+
+input{
+  border: none;
+  border-bottom: 1px solid #8d999e ;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
+}
+
 
 
 

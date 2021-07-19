@@ -81,22 +81,24 @@ export class UserCompletedDataComponent implements OnInit {
         alert('Fecha Inválida, por favor ingrese una fecha correcta');
         return;
       }
+      console.log(this.formUsuario);
+
       this.usuario = {
-        id: '',
+        id: this.usuario.id,
         dni: this.formUsuario.controls.dni.value,
         tipoDni: this.formUsuario.controls.tipoDni.value,
         apellido: this.formUsuario.controls.apellido.value,
         nombre: this.formUsuario.controls.nombre.value,
-        celular: this.formUsuario.controls.celular.value,
+        celular: this.formUsuario.controls.celular.value ? this.formUsuario.controls.celular.value : 0 ,
         calle: this.formUsuario.controls.calle.value,
         nroCalle: this.formUsuario.controls.nroCalle.value,
         piso: this.formUsuario.controls.piso.value,
         dpto: this.formUsuario.controls.dpto.value,
-        email: this.formUsuario.controls.email.value,
         fechaNacimiento: this.formUsuario.controls.fechaNacimiento.value,
         nacionalidad: this.formUsuario.controls.nacionalidad.value,
         localidad: this.formUsuario.controls.localidad.value,
-        provincia: this.formUsuario.controls.provincia.value
+        provincia: this.formUsuario.controls.provincia.value,
+        email : this.usuario.email
       };
 
       this.userService.postUserComplete(this.usuario).subscribe( (res: any) => {
