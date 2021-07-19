@@ -1,0 +1,43 @@
+<div class="container-lg justify-content-center">
+        <div class="container-fluid">
+        <h3 class="title text-center">Aulas</h3>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-3">
+                <p class="grayned">Nombre</p>
+              </div>
+              <div class="col-md-3">
+                <p class="grayned">Descripción</p>
+              </div>
+              <div class="col-md-3">
+                <p class="grayned">Capacidad</p>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item" *ngFor='let item of roomList'>
+            <div class="row">
+              <div class="col-md-3">
+                <b>{{item.name}}</b>
+              </div>
+              <div class="col-md-3">
+                <b>{{item.description}}</b>
+              </div>
+              <div class="col-md-3">
+                <b>{{item.capacity}}</b>
+              </div>
+              <div class="btn-group col-md-3">
+                <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <br>
+        <a class="btn btn-primary col-md-4" (click)='toggleNew()' role="button">Nueva Aula</a>
+        </div>
+  </div>
+  

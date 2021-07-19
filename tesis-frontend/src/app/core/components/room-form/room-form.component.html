@@ -1,0 +1,60 @@
+   
+   <div class="card justify-content-center">
+    <div class="card-body">
+      <h3 class="card-title text-center">Registro de Sede y Aulas</h3>
+      <div class="card-text">
+      <form [formGroup]='formSede'>
+        <div class="form-group row">
+              <label class="col-form-label col-sm-2 col-sm-offset-2" for="sede">Sede: <span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-6">
+              <input type="sede" class="form-control" formControlName="sede" [ngClass]="{'is-invalid': (formSede.controls.sede.touched || submitted)
+                      && formSede.controls.sede.errors}"  onclick="this.select()"/>
+              <span class="text-danger" *ngIf="(formSede.controls.sede.touched || submitted) && formSede.controls.sede.errors?.required">
+                  Required
+              </span>
+              </div>
+          </div>
+      </form>
+        <form [formGroup]='formRooms'>
+          <div>
+              <h4>Agregar Aula</h4>
+                <!-- Nombre Aula -->
+              <div class="form-group row">
+                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="nameAula">Nombre: <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-6">
+                  <input type="nameAula" class="form-control" formControlName="nameAula" [ngClass]="{'is-invalid': (formRooms.controls.nameAula.touched || submitted)
+                          && formRooms.controls.nameAula.errors}"  onclick="this.select()"/>
+                  <span class="text-danger" *ngIf="(formRooms.controls.nameAula.touched || submitted) && formRooms.controls.nameAula.errors?.required">
+                      Required
+                  </span>
+                  </div>
+              </div>
+              &nbsp;
+                <!-- Descripción -->
+              <div class="form-group row">
+                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="descAula">Descripción: </label>
+                  <div class="col-sm-6">
+                  <input type="descAula" class="form-control" formControlName="descAula" onclick="this.select()"/>
+                  </div>
+              </div>
+                <!-- Capacidad -->
+              &nbsp;
+              <div class="form-group row">
+                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="capAula">Capacidad: </label>
+                  <div class="col-sm-6">
+                  <input type="capAula" class="form-control" formControlName="capAula" onclick="this.select()"/>
+                  </div>
+              </div>
+          </div>
+              <div class="row justify-content-md-center pt-3 btn-row">
+                <a class="btn btn-secondary col-md-5" role="button" (click)="cancel()">Cancelar</a>
+                &nbsp;
+                &nbsp;
+                <a class="btn btn-primary col-md-5" role="button" (click)="agregar()">Agregar Aula</a>
+          </div>
+        </form>
+      </div>
+     </div>
+  </div>

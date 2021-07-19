@@ -7,9 +7,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
+import { RoomComponent } from './components/room/room.component';
+import { RoomFormComponent } from './components/room-form/room-form.component';
 import { CongressFormComponent } from './components/congress-form/congress-form.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
 import { CongressListComponent } from './components/congress-list/congress-list.component';
+
 
 
 
@@ -19,6 +22,8 @@ import { CongressListComponent } from './components/congress-list/congress-list.
     UserCompletedDataComponent,
     LoginFormComponent,
     UserLoggedComponent,
+    RoomComponent,
+    RoomFormComponent,
     CongressFormComponent,
     AgendaComponent,
     CongressListComponent
@@ -35,10 +40,13 @@ import { CongressListComponent } from './components/congress-list/congress-list.
     UserCompletedDataComponent,
     LoginFormComponent,
     UserLoggedComponent,
+    RoomComponent,
+    RoomFormComponent,
     CongressFormComponent,
     CongressListComponent
 
   ],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DatePipe]
 })
