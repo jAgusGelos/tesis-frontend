@@ -37,18 +37,18 @@
       <label class='col-form-label col-sm-2 col-sm-offset-2' for='autores'>Agregar Autores:</label>
       <div class='col-sm-6'>
         <div class="input-group">
-          <input type='text' class='form-control' onclick='this.select()'>
-            <button class="btn btn-secondary">
+          <input type='email' class='form-control' formControlName='autores' onclick='this.select()'>
+            <button class="btn btn-secondary" (click)='addAutor()'>
               <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
         </div>
 
       </div>
     </div>
-    <div class='form-group row'>
+    <div class='form-group row' *ngIf="autoresList.length !== 0">
       <label class='col-form-label col-sm-2 col-sm-offset-2' for='autores'>Autores Seleccionados:</label>
       <div class='col-sm-6'>
-        <a *ngFor="let item of autoresList" class='autoresSelected' [ngClass]="{'valid': item.status== 'ok'}">{{item.mail}}<i class="fa fa-window-close" aria-hidden="true"></i> &nbsp;</a>
+        <a *ngFor="let item of autoresList" class='autoresSelected' [ngClass]="{'valid': item.status== 'ok'}">{{item.mail}}<i class="fa fa-window-close" aria-hidden="true" (click)='delAutor(item)'></i></a>
 
       </div>
     </div>
