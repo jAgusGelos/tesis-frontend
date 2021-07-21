@@ -2,3 +2,31 @@
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
+
+.card{
+  background-color: #f8f7f7;
+}
+
+hr{
+  border-top: 1px solid #00609C;
+  border-bottom:  1px solid #00609C;
+}
+
+.card-title{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight:300;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  max-width: fit-content;
+}
+
+.btn-primary{
+  background-color: #005F9C;
+}
+
+.btn-secondary{
+  background-color: #C4C4C4;
+  border: #C4C4C4;
+}

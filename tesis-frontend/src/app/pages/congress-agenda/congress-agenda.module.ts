@@ -14,6 +14,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     CongressAgendaRoutingModule,
     CoreModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [CongressAgendaComponent]
 })
 export class CongressAgendaModule { }

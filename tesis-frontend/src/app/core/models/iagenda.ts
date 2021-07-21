@@ -1,12 +1,15 @@
 export interface IAgenda {
-    Id: number,
-    FechaInCongreso: Date;
-    FechaFinCongreso: Date;
-    FechaInInscrip: Date;
-    FechaFinInscrip: Date;
-    FechaFinInscripTardia: Date;
-    FechaLimPapers: Date;
-    FechaProrrogaPapers: Date;
-    FechaFinEvaluacion: Date;
-    FechaFinReEv: Date;
-  }
+  Id: 0,
+  fechaInCongreso: Date;
+  fechaFinCongreso: Date;
+  fechaInInscrip: Date;
+  fechaFinInscrip: Date;
+  fechaFinInscripTardia: Date;
+  fechaLimPapers: Date;
+  fechaProrrogaPapers: Date;
+  fechaFinEvaluacion: Date;
+  fechaFinReEv: Date;
+  simposios: number[];
+  aulas: number[];
+  modalidad: string;
+}

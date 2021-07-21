@@ -14,8 +14,9 @@ export class AuthService {
   constructor(private http: HttpClient,
               private cookie: CookieService) { }
 
-  private apiURLRegister = environment.apiURL + '/' + 'registrar/';
-  private apiURLLogin = environment.apiURL + '/' + 'login/';
+  private apiURLRegister = environment.apiURL  + 'registrar/';
+  private apiURLLogin = environment.apiURL  + 'login/';
+  private apiURLLogout = environment.apiURL + 'logout/';
 
   login(email: string, password: string): any {
     return this.http.post<IUser>(this.apiURLLogin, { email, password });
@@ -35,7 +36,11 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
+    this.http.post(this.apiURLLogout, localStorage.getItem('id_token')).subscribe((res: any) => {
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
+    });
+
+
   }
 }

@@ -7,7 +7,7 @@ const routes: Routes = [
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module')
     .then(m => m.UsuarioModule),
-     canActivate: [AuthGuard]
+     // canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -28,6 +28,18 @@ const routes: Routes = [
     path: 'agenda',
     loadChildren: () => import('./pages/congress-agenda/congress-agenda-routing.module')
     .then(m => m.CongressAgendaRoutingModule)
+  },
+  {
+    path: 'room',
+    loadChildren: () => import('./pages/room/room.module')
+    .then(m => m.RoomModule)
+  },
+  {
+    path: 'congreso',
+    loadChildren: () => import('./pages/congress/congress.module')
+    .then(m => m.CongressModule),
+    // descomentar al correr la bd
+    // canActivate: [AuthGuard, SuperRolGuard]
   }
 ];
 

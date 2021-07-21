@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAgenda } from '../../models/iagenda';
 import { CongressService } from '../../services/congress.service';
 import { DefineAgendaService } from '../../services/define-agenda.service';
+
 
 
 
@@ -14,16 +16,22 @@ import { DefineAgendaService } from '../../services/define-agenda.service';
 export class AgendaComponent implements OnInit {
 
   @Input() agenda: IAgenda = {
+
     Id: 0,
-    FechaInCongreso: new Date(),
-    FechaFinCongreso: new Date(),
-    FechaInInscrip: new Date(),
-    FechaFinInscrip: new Date(),
-    FechaFinInscripTardia: new Date(),
-    FechaLimPapers: new Date(),
-    FechaProrrogaPapers: new Date(),
-    FechaFinEvaluacion: new Date(),
-    FechaFinReEv: new Date()
+    fechaInCongreso: new Date(),
+    fechaFinCongreso: new Date(),
+    fechaInInscrip: new Date(),
+    fechaFinInscrip: new Date(),
+    fechaFinInscripTardia: new Date(),
+    fechaLimPapers: new Date(),
+    fechaProrrogaPapers: new Date(),
+    fechaFinEvaluacion: new Date(),
+    fechaFinReEv: new Date(),
+    simposios: [],
+    aulas: [],
+    modalidad: ''
+
+
   };
 
   congresos = [
@@ -31,7 +39,7 @@ export class AgendaComponent implements OnInit {
     'Congreso 2',
     'Congreso 3',
   ];
-  
+
   formCongress: FormGroup;
   submitted = false;
 
@@ -43,15 +51,15 @@ export class AgendaComponent implements OnInit {
   ngOnInit(): void {
     this.formCongress = this.formBuilder.group({
     congreso: ['', [Validators.required]],
-    FechaInCongreso: [this.agenda.FechaInCongreso, [Validators.required]],
-    FechaFinCongreso: [this.agenda.FechaFinCongreso, [Validators.required]],
-    FechaInInscrip: [this.agenda.FechaInInscrip, [Validators.required]],
-    FechaFinInscrip: [this.agenda.FechaFinInscrip, [Validators.required]],
-    FechaFinInscripTardia: [this.agenda.FechaFinInscripTardia, [Validators.required]],
-    FechaLimPapers: [this.agenda.FechaLimPapers, [Validators.required]],
-    FechaProrrogaPapers: [this.agenda.FechaProrrogaPapers, [Validators.required]],
-    FechaFinEvaluacion: [this.agenda.FechaFinEvaluacion, [Validators.required]],
-    FechaFinReEv: [this.agenda.FechaFinReEv, [Validators.required]]
+    FechaInCongreso: [this.agenda.fechaInCongreso, [Validators.required]],
+    FechaFinCongreso: [this.agenda.fechaFinCongreso, [Validators.required]],
+    FechaInInscrip: [this.agenda.fechaInInscrip, [Validators.required]],
+    FechaFinInscrip: [this.agenda.fechaFinInscrip, [Validators.required]],
+    FechaFinInscripTardia: [this.agenda.fechaFinInscripTardia, [Validators.required]],
+    FechaLimPapers: [this.agenda.fechaLimPapers, [Validators.required]],
+    FechaProrrogaPapers: [this.agenda.fechaProrrogaPapers, [Validators.required]],
+    FechaFinEvaluacion: [this.agenda.fechaFinEvaluacion, [Validators.required]],
+    FechaFinReEv: [this.agenda.fechaFinReEv, [Validators.required]]
     });
 
     this.getCongresos();

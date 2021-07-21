@@ -14,19 +14,15 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CongressAgendaComponent } from './pages/congress-agenda/congress-agenda.component';
 
 
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChairsComponent,
-    CongressAgendaComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    HttpClientModule,
-    NgMultiSelectDropDownModule.forRoot()
+    HttpClientModule
   ],
   providers: [CookieService,
     {

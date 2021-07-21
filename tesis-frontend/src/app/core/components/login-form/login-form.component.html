@@ -1,31 +1,32 @@
-<div class="container-lg justify-content-center">
-
-
-  <div class="card">
+  <div class="container-md card">
     <div class="card-body">
-      <h3 class="card-title text-center">Inicio de Sesión</h3>
+      <div class="contenidos">
+        <h3 class="card-title text-center">Inicio de Sesión</h3>
+      </div>
+
       <div class="card-text">
         <form [formGroup]='formLogin'>
           <!--Email-->
-          <div class="form-group row">
-            <label class="col-form-label col-sm-2 col-sm-offset-2" for="email">Email: <span
+          <div class="form-group row justify-content-center">
+            <label class="col-form-label col-sm-3 col-md-3 col-md-offset-2" for="email">Email: <span
                 class="text-danger">*</span></label>
             <div class="col-sm-6">
               <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (formLogin.controls.email.touched || submitted)
-                    && formLogin.controls.email.errors}"  onclick="this.select()"/>
-              <span class="text-danger" *ngIf="(formLogin.controls.email.touched || submitted) && formLogin.controls.email.errors?.required">
-                Required
+                    && formLogin.controls.email.errors}" onclick="this.select()" />
+              <span class="text-danger"
+                *ngIf="(formLogin.controls.email.touched || submitted) && formLogin.controls.email.errors?.required">
+                Requerido
               </span>
             </div>
           </div>
 
           <!--Contraseña-->
-          <div class="form-group row">
-            <label class="col-form-label col-sm-2 col-sm-offset-2" for="password">Contraseña: <span
+          <div class="form-group row justify-content-center">
+            <label class="col-form-label col-sm-3  col-md-3 col-md-offset-2" for="password">Contraseña: <span
                 class="text-danger">*</span></label>
             <div class="col-sm-6">
-              <input  type="password" class="form-control" formControlName="password" [ngClass]="{'is-invalid': (formLogin.controls.password.touched || submitted)
-                    && formLogin.controls.password.errors}" onclick="this.select()"/>
+              <input type="password" class="form-control" formControlName="password" [ngClass]="{'is-invalid': (formLogin.controls.password.touched || submitted)
+                    && formLogin.controls.password.errors}" onclick="this.select()" />
               <span class="text-danger"
                 *ngIf="(formLogin.controls.password.touched || submitted) && formLogin.controls.password.errors?.required">
                 Required
@@ -36,10 +37,16 @@
           <div class="row justify-content-md-center pt-3">
             <a class="btn btn-primary btn-block col-md-8" role="button" (click)='submit()'>Iniciar Sesión</a>
             <br>
-            <a (click)="register()" class="text-center">No tienes cuenta? Registrate</a>
+            <a class="text-center pb-3">¿Olvidaste tu contraseña?</a>
           </div>
+          <div class="row justify-content-md-center pt-3 spaced">
+            <hr>
+            <a class="btn btn-primary btn-block col-md-8" role="button" (click)="register()">Registrarse</a>
+          </div>
+
         </form>
+
+
       </div>
     </div>
   </div>
-</div>
