@@ -28,7 +28,6 @@ import { CongressListComponent } from './components/congress-list/congress-list.
     RoomComponent,
     RoomFormComponent,
     CongressFormComponent,
-    AgendaComponent,
     CongressListComponent
   ],
   imports: [

@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CongressAgendaRoutingModule } from './congress-agenda-routing.module';
 import { CongressAgendaComponent } from './congress-agenda.component';
 import { CoreModule } from 'src/app/core/core.module';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -12,9 +13,12 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   imports: [
     CommonModule,
     CongressAgendaRoutingModule,
-    CoreModule
+    CoreModule,
+    HttpClientModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [CongressAgendaComponent]
+  providers: [
+    HttpClientModule
+  ]
 })
 export class CongressAgendaModule { }

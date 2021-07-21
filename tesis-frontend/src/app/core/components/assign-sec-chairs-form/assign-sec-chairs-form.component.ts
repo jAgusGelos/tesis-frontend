@@ -34,12 +34,15 @@ export class AssignSecChairsFormComponent implements OnInit {
     selectCongreso: '',
     selectTematica: '',
     selectChair: '',
-    assigned: false};
+    assigned: false
+  };
+
+
 
   constructor( private formBuilder: FormBuilder,
-              private congressService: CongressService,
-              private themesService: ThemesService,
-              private assignService: AssignSecChairThemeService) { }
+               private congressService: CongressService,
+               private themesService: ThemesService,
+               private assignService: AssignSecChairThemeService) { }
 
   ngOnInit() {
     this.formAssignSecChairs = this.formBuilder.group({
@@ -50,7 +53,7 @@ export class AssignSecChairsFormComponent implements OnInit {
     });
 
     this.getCongresos();
-    this.getTematicas(); 
+    this.getTematicas();
   }
 
   getCongresos() {
@@ -66,7 +69,7 @@ export class AssignSecChairsFormComponent implements OnInit {
       return;
     }
 
-    let item = {
+    const item = {
       value: this.formAssignSecChairs.controls.selectChair.value,
       theme: this.formAssignSecChairs.controls.selectTematica.value,
       assigned: true

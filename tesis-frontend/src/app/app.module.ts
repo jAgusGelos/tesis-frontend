@@ -9,9 +9,9 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
-import { ChairsComponent } from './pages/chairs/chairs.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { CongressAgendaComponent } from './pages/congress-agenda/congress-agenda.component';
+
+
+
 
 
 
@@ -22,7 +22,7 @@ import { CongressAgendaComponent } from './pages/congress-agenda/congress-agenda
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [CookieService,
     {

@@ -21,13 +21,13 @@ const routes: Routes = [
   },
   {
     path: 'chairs',
-    loadChildren: () => import('./pages/chairs/chairs-routing.module')
-    .then(m => m.ChairsRoutingModule)
+    loadChildren: () => import('./pages/chairs/chairs.module')
+    .then(m => m.ChairsModule)
   },
   {
     path: 'agenda',
-    loadChildren: () => import('./pages/congress-agenda/congress-agenda-routing.module')
-    .then(m => m.CongressAgendaRoutingModule)
+    loadChildren: () => import('./pages/congress-agenda/congress-agenda.module')
+    .then(m => m.CongressAgendaModule)
   },
   {
     path: 'room',
