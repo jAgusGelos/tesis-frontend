@@ -21,7 +21,7 @@
         <select  name="simposio" class="form-control"
           formControlName="simposio" [ngClass]="{'is-invalid': (formPaper.controls.simposio.touched || submitted)
       && formPaper.controls.simposio.errors}">
-          <option *ngFor="let opt of simposios">
+          <option *ngFor="let opt of simposios; let i = index" [selected]="paper.simposio === opt || i===0">
             ‌{{ opt }}
           <option>
         </select>

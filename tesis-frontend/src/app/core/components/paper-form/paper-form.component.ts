@@ -51,21 +51,45 @@ export class PaperFormComponent implements OnInit {
     this.cancelPaper.emit();
   }
 
-  addAutor(): void {
-    console.log(this.formPaper.controls.autores.errors?.pattern);
 
+/**
+ * Recibe el formControl Autor, revisa que no este vacío y que cumpla con el patron
+ * Revisa que no exista en AutoresList
+ * Si no existe chequea que este asociado a una cuenta válida
+ * Si esta asociado lo agrega al autoresList con estado Ok
+ * Si no esta asociado envía mail de invitación.
+ * @returns Vuelve al formulario si existe un usuario con el mail seleccionado
+ */
+  addAutor(): void {
     if (this.formPaper.controls.autores.value && !this.formPaper.controls.autores.errors?.pattern){
       const autor = this.formPaper.controls.autores.value;
+      const exist = this.autoresList.some((item: any) => {
+        if (item.mail === autor) {
+          return true;
+        }
+      });
+      if (exist) {
+        alert('Ya existe un usuario con ese Email ingresado');
+        return null;
+      }
       // this.paperService.checkAutor(autor).subscribe((res: any) => {
       //   if (res.data === 'ok'){
       //     this.paper.autores.push(autor)
       //     this.autoresList.push({mail: autor, status: 'ok'})
       //   }
       // else{
-      //   this.autoresList.push({mail: autor, status: 'not ok'})
+      //   if (confirm('El autor ' + autor + 'no existe.' +
+      //   '\n¿Desea enviar un mail de invitación?')) {
+      //     this.paperService.sendEmail(autor).subscribe((res: any) => {
+      //       alert('El Email ha sido enviado.'+
+      //       '\nRecuerde que no podrá subir un paper hasta que todos los autores estén confirmados.');
+      //       this.autoresList.push({mail: autor, status: 'not ok'});
+      //     });
+      //     }
+
       // }
       // })
-      this.autoresList.push({mail: autor, status: 'ok'})
+      this.autoresList.push({mail: autor, status: 'ok'});
       this.formPaper.controls.autores.reset();
     }
     else{
@@ -85,19 +109,25 @@ export class PaperFormComponent implements OnInit {
   delAutor(autor: any): void {
     this.autoresList = this.autoresList.filter((x: any) => {
       if (x.mail !== autor.mail){
-        return x
+        return x;
       }
       return null;
     });
     this.paper.autores = this.autoresList.map((x: any) => {
-        return x.mail
+        return x.mail;
     });
+    console.log(this.paper.autores);
+
     // this.paperService.putPaper(this.paper).subscribe((res: any) => {
     //   this.paper = res.data;
     //   alert('Autor Eliminado')
     // })
 
   }
+
+  /**
+   * Guarda provisoriamente los datos del congreso en la BD.
+   */
 
   save(): void {
 
@@ -109,11 +139,11 @@ export class PaperFormComponent implements OnInit {
       alert('Por favor complete todos los datos.');
       return;
     }
+    console.log(this.formPaper.controls.archivo);
+
     // this.paper = {
     // };
-
     this.paperEmitter.emit(this.paper);
-
   }
 
 }

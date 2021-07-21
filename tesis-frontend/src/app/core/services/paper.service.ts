@@ -31,4 +31,8 @@ export class PaperService {
   checkAutor(mail: string): any {
     return this.httpClient.post<IPaper>(this.apiURL + 'autor/check/', mail);
   }
+
+  sendEmail(mail: string): any {
+    return this.httpClient.post(this.apiURL + '/sendInvit', mail);
+  }
 }
