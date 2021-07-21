@@ -7,14 +7,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
+
+import { AssignSecChairsFormComponent } from './components/assign-sec-chairs-form/assign-sec-chairs-form.component';
+
+
 import { RoomComponent } from './components/room/room.component';
 import { RoomFormComponent } from './components/room-form/room-form.component';
 import { CongressFormComponent } from './components/congress-form/congress-form.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
 import { CongressListComponent } from './components/congress-list/congress-list.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -22,18 +23,17 @@ import { CongressListComponent } from './components/congress-list/congress-list.
     UserCompletedDataComponent,
     LoginFormComponent,
     UserLoggedComponent,
+    AssignSecChairsFormComponent,
+    AgendaComponent,
     RoomComponent,
     RoomFormComponent,
     CongressFormComponent,
-    AgendaComponent,
     CongressListComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-
   ],
   exports:  [
     UserRegisterComponent,
@@ -43,8 +43,9 @@ import { CongressListComponent } from './components/congress-list/congress-list.
     RoomComponent,
     RoomFormComponent,
     CongressFormComponent,
-    CongressListComponent
-
+    CongressListComponent,
+    AssignSecChairsFormComponent,
+    AgendaComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

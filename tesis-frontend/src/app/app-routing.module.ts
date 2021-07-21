@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { UsuarioComponent } from './pages/usuario/usuario.component';
-import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './core/services/auth.guard';
 
 const routes: Routes = [
@@ -21,6 +18,16 @@ const routes: Routes = [
     path: 'endRegister',
     loadChildren: () => import('./pages/end-register/end-register-routing.module')
     .then(m => m.EndRegisterRoutingModule)
+  },
+  {
+    path: 'chairs',
+    loadChildren: () => import('./pages/chairs/chairs.module')
+    .then(m => m.ChairsModule)
+  },
+  {
+    path: 'agenda',
+    loadChildren: () => import('./pages/congress-agenda/congress-agenda.module')
+    .then(m => m.CongressAgendaModule)
   },
   {
     path: 'room',

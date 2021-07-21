@@ -12,17 +12,17 @@ import { AuthInterceptor } from './core/services/auth.interceptor';
 
 
 
+
+
+
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
     HttpClientModule,
-
   ],
   providers: [CookieService,
     {

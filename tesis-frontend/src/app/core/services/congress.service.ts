@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ICongress } from '../models/ICongress';
+
+import { ICongress } from '../models/icongress';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +29,4 @@ export class CongressService {
   deleteCongress(congress: ICongress): any {
     return this.httpClient.delete<ICongress>(this.apiURL + 'congreso/modificar/' + congress.id);
   }
-
-
 }

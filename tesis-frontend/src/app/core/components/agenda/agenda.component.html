@@ -1,163 +1,106 @@
 <div class="container">
   <form [formGroup]='formCongress'>
-    <!-- Simposios -->
-    <div class="form-group row">
-      <label class="col-form-label col-sm-2 col-sm-offset-2" for="simposios">Simposios:<span
-          class="text-danger">*</span></label>
-      <div class="col-sm-6">
-        <select name="simposios" class="form-control" formControlName="simposios" [ngClass]="{'is-invalid': (formCongress.controls.simposios.touched || submitted)
-              && formCongress.controls.simposios.errors}" >
-          <option *ngFor="let opt of simposios" [value]="opt.id">
-            ‌{{ opt.nombre }}
-          <option>
+    <!--Seleciconar Congreso-->
+    <div class="row">
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="congreso">Seleccione un congreso: </label>
+      <div class="col-4">
+        <select name="congreso" class="form-control" formControlName="congreso"
+          [ngClass]="{'is-invalid': (formCongress.controls.congreso.touched || submitted) && formCongress.controls.congreso.errors}">
+          <option hidden selected>Seleccione un congreso</option>
+          <option *ngFor="let opt of congresos"> {{ opt }}</option>
         </select>
-        <span class="text-danger"
-          *ngIf="(formCongress.controls.simposios.touched || submitted) && formCongress.controls.simposios.errors?.required">
-          Requerido
-        </span>
+        <br>
       </div>
     </div>
-
-    <!-- Aca van los simposios seleccionados  -->
-
-    <!-- Coord local -->
+    <!-- Fecha Inicio Congreso -->
     <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='coordLocal'>Email Coord Local: <span
-          class='text-danger'>*</span></label>
-      <div class='col-sm-6'>
-        <input type='email' class='form-control' formControlName='coordLocal' [ngClass]="{'is-invalid': (formCongress.controls.coordLocal.touched || submitted)
-    && formCongress.controls.coordLocal.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.coordLocal.touched || submitted) && formCongress.controls.coordLocal.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
-
-    <!-- Fecha Inicio -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='fechaInCongreso'>Fecha Inicio: <span
+      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaInCongreso'>Inicio de congreso: <span
           class='text-danger'>*</span></label>
       <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='fechaInCongreso' [ngClass]="{'is-invalid': (formCongress.controls.fechaInCongreso.touched || submitted)
-  && formCongress.controls.fechaInCongreso.errors}" onclick='this.select()' />
+        <input type='date' class='form-control' formControlName='FechaInCongreso' [ngClass]="{'is-invalid': (formCongress.controls.FechaInCongreso.touched || submitted)
+    && formCongress.controls.FechaInCongreso.errors}" onclick='this.select()' />
         <span class='text-danger'
-          *ngIf='(formCongress.controls.fechaInCongreso.touched || submitted) && formCongress.controls.fechaInCongreso.errors?.required'>
+          *ngIf='(formCongress.controls.FechaInCongreso.touched || submitted) && formCongress.controls.FechaInCongreso.errors?.required'>
           Requerido
         </span>
       </div>
     </div>
-
-    <!-- Fecha Fin -->
+    <br>
+    <!-- Fecha Fin Congreso-->
     <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='fechaFinCongreso'>Fecha Fin: <span
+      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaFinCongreso'>Fin de congreso: <span
           class='text-danger'>*</span></label>
       <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='fechaFinCongreso' [ngClass]="{'is-invalid': (formCongress.controls.fechaFinCongreso.touched || submitted)
-     && formCongress.controls.fechaFinCongreso.errors}" onclick='this.select()' />
+        <input type='date' class='form-control' formControlName='FechaFinCongreso' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinCongreso.touched || submitted)
+       && formCongress.controls.FechaFinCongreso.errors}" onclick='this.select()' />
         <span class='text-danger'
-          *ngIf='(formCongress.controls.fechaFinCongreso.touched || submitted) && formCongress.controls.fechaFinCongreso.errors?.required'>
+          *ngIf='(formCongress.controls.FechaFinCongreso.touched || submitted) && formCongress.controls.FechaFinCongreso.errors?.required'>
           Requerido
         </span>
       </div>
     </div>
-
+    <br>
     <!-- Fecha Limite Papers -->
     <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='fechaLimPapers'>Fecha Limite Presentación de Papers: <span
-          class='text-danger'>*</span></label>
+      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaLimPapers'>Fecha Limite entrega de artículos:
+        <span class='text-danger'>*</span></label>
       <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='fechaLimPapers' [ngClass]="{'is-invalid': (formCongress.controls.fechaLimPapers.touched || submitted)
-  && formCongress.controls.fechaLimPapers.errors}" onclick='this.select()' />
+        <input type='date' class='form-control' formControlName='FechaLimPapers' [ngClass]="{'is-invalid': (formCongress.controls.FechaLimPapers.touched || submitted)
+    && formCongress.controls.FechaLimPapers.errors}" onclick='this.select()' />
         <span class='text-danger'
-          *ngIf='(formCongress.controls.fechaLimPapers.touched || submitted) && formCongress.controls.fechaLimPapers.errors?.required'>
+          *ngIf='(formCongress.controls.FechaLimPapers.touched || submitted) && formCongress.controls.FechaLimPapers.errors?.required'>
           Requerido
         </span>
       </div>
     </div>
-
-    <!-- fecha prorroga Papers -->
+    <br>
+    <!-- Fecha prorroga Papers -->
     <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='fechaProrrogaPapers'>Fecha Prorroga de Entrega de Papers: <span
-          class='text-danger'>*</span></label>
+      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaProrrogaPapers'>Fecha prorroga de entrega de
+        artículos: <span class='text-danger'>*</span></label>
       <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='fechaProrrogaPapers' [ngClass]="{'is-invalid': (formCongress.controls.fechaProrrogaPapers.touched || submitted)
-  && formCongress.controls.fechaProrrogaPapers.errors}" onclick='this.select()' />
+        <input type='date' class='form-control' formControlName='FechaProrrogaPapers' [ngClass]="{'is-invalid': (formCongress.controls.FechaProrrogaPapers.touched || submitted)
+    && formCongress.controls.FechaProrrogaPapers.errors}" onclick='this.select()' />
         <span class='text-danger'
-          *ngIf='(formCongress.controls.fechaProrrogaPapers.touched || submitted) && formCongress.controls.fechaProrrogaPapers.errors?.required'>
+          *ngIf='(formCongress.controls.FechaProrrogaPapers.touched || submitted) && formCongress.controls.FechaProrrogaPapers.errors?.required'>
           Requerido
         </span>
       </div>
     </div>
-
+    <br>
     <!-- fehca Fin evaluacion -->
     <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='fechaFinEvaluacion'>Fecha Fin de Evaluacion de Papers: <span
-          class='text-danger'>*</span></label>
+      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaFinEvaluacion'>Fecha fin de evaluacion de
+        artículos: <span class='text-danger'>*</span></label>
       <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='fechaFinEvaluacion' [ngClass]="{'is-invalid': (formCongress.controls.fechaFinEvaluacion.touched || submitted)
-  && formCongress.controls.fechaFinEvaluacion.errors}" onclick='this.select()' />
+        <input type='date' class='form-control' formControlName='FechaFinEvaluacion' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinEvaluacion.touched || submitted)
+    && formCongress.controls.FechaFinEvaluacion.errors}" onclick='this.select()' />
         <span class='text-danger'
-          *ngIf='(formCongress.controls.fechaFinEvaluacion.touched || submitted) && formCongress.controls.fechaFinEvaluacion.errors?.required'>
+          *ngIf='(formCongress.controls.FechaFinEvaluacion.touched || submitted) && formCongress.controls.FechaFinEvaluacion.errors?.required'>
           Requerido
         </span>
       </div>
     </div>
-
-    <!-- fecha fin Reevaluacion -->
+    <br>
+    <!-- Fecha fin Reevaluacion -->
     <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='fechaFinReEv'>Fecha Fin Reevaluacion de Papers: <span
-          class='text-danger'>*</span></label>
+      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaFinReEv'>Fecha fin de reevaluación de artículos:
+        <span class='text-danger'>*</span></label>
       <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='fechaFinReEv' [ngClass]="{'is-invalid': (formCongress.controls.fechaFinReEv.touched || submitted)
-  && formCongress.controls.fechaFinReEv.errors}" onclick='this.select()' />
+        <input type='date' class='form-control' formControlName='FechaFinReEv' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinReEv.touched || submitted)
+    && formCongress.controls.FechaFinReEv.errors}" onclick='this.select()' />
         <span class='text-danger'
-          *ngIf='(formCongress.controls.fechaFinReEv.touched || submitted) && formCongress.controls.fechaFinReEv.errors?.required'>
+          *ngIf='(formCongress.controls.FechaFinReEv.touched || submitted) && formCongress.controls.FechaFinReEv.errors?.required'>
           Requerido
         </span>
       </div>
     </div>
-
-    <!-- Aulas -->
-    <div class="form-group row">
-      <label class="col-form-label col-sm-2 col-sm-offset-2" for="aulas">Aulas:<span
-          class="text-danger">*</span></label>
-      <div class="col-sm-6">
-        <select name="aulas" class="form-control" formControlName="aulas" [ngClass]="{'is-invalid': (formCongress.controls.aulas.touched || submitted)
-              && formCongress.controls.aulas.errors}" >
-          <option *ngFor="let opt of aulas" [value]="opt.id">
-            ‌{{ opt.nombre }}
-          <option>
-        </select>
-        <span class="text-danger"
-          *ngIf="(formCongress.controls.aulas.touched || submitted) && formCongress.controls.aulas.errors?.required">
-          Requerido
-        </span>
-      </div>
-    </div>
-
-
-    <!-- Modalidad  -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='modalidad'>Modalidad: <span
-          class='text-danger'>*</span></label>
-      <div class='col-sm-6'>
-        <input type='text' class='form-control' formControlName='modalidad' [ngClass]="{'is-invalid': (formCongress.controls.modalidad.touched || submitted)
-  && formCongress.controls.modalidad.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.modalidad.touched || submitted) && formCongress.controls.modalidad.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
-
+    <br>
     <div class="row justify-content-md-center btn-row">
       <a class="btn btn-secondary col-md-4" href="#" role="button">Cancelar</a>
       &nbsp;
-      <a class="btn btn-primary col-md-4" href="#" role="button">Guardar Cambios</a>
+      <a class="btn btn-primary col-md-4" href="#" role="button" (click)="guardar()">Guardar Cambios</a>
     </div>
-
   </form>
 
 </div>
-
