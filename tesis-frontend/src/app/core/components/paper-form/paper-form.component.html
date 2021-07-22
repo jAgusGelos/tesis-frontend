@@ -19,14 +19,15 @@
           class="text-danger">*</span></label>
       <div class="col-sm-6">
         <select  name="simposio" class="form-control"
-          formControlName="simposio" [ngClass]="{'is-invalid': (formPaper.controls.simposio.touched || submitted)
+          formControlName="simposio" [ngClass]="{'is-invalid': (formPaper.controls.simposio.touched || submitted || formPaper.controls.simposio.value === '')
       && formPaper.controls.simposio.errors}">
-          <option *ngFor="let opt of simposios; let i = index" [selected]="paper.simposio === opt || i===0">
+        <option value=""> </option>
+          <option *ngFor="let opt of simposios" >
             ‌{{ opt }}
           <option>
         </select>
         <span class="text-danger"
-          *ngIf="(formPaper.controls.simposio.touched || submitted) && formPaper.controls.simposio.errors?.required">
+          *ngIf="(formPaper.controls.simposio.touched || submitted || formPaper.controls.simposio.value === '') && formPaper.controls.simposio.errors?.required ">
           Requerido.
         </span>
       </div>
@@ -57,7 +58,8 @@
       <label class='col-form-label col-sm-2 col-sm-offset-2' for='archivo'>Archivo: <span
         class='text-danger'>*</span></label>
         <div class='col-sm-6'>
-          <input type='file' accept=".pdf" class='form-control' formControlName='archivo'
+          <input type='file' accept=".pdf" (change)="handleFileInput($event.target.files)"
+          class='form-control' formControlName='archivo'
           [ngClass]="{'is-invalid': (formPaper.controls.archivo.touched || submitted)
             && formPaper.controls.archivo.errors}" onclick='this.select()'/>
           <span class='text-danger'

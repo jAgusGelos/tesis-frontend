@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IPaper } from '../../models/IPaper';
+import { AuthService } from '../../services/auth.service';
 import { PaperService } from '../../services/paper.service';
 
 @Component({
@@ -14,21 +15,23 @@ export class PaperFormComponent implements OnInit {
   @Input() paper: IPaper = {
     id: '',
     autores: ['Autor 1', 'Autor 2'],
-    responsable: 0,
+    responsable: '',
     nombre: '',
     simposio: '',
     archivo: '',
   };
-  @Output() paperEmitter = new EventEmitter<IPaper>();
+  @Output() paperEmitter = new EventEmitter<any>();
   @Output() cancelPaper = new EventEmitter();
   formPaper: FormGroup;
   simposios = ['Simposio 1', 'Simposio 2'];
   submitted = false;
   autoresList = [{mail: 'autor1@gmail.com', status: 'ok'}, {mail: 'autor2@gmail.com', status: 'not ok'}];
+  fileToUpload: File | null = null;
 
 
   constructor(private formBuilder: FormBuilder,
-              private paperService: PaperService) { }
+              private paperService: PaperService,
+              private auth: AuthService) { }
 
   ngOnInit(): void {
     this.formPaper = this.formBuilder.group({
@@ -116,7 +119,6 @@ export class PaperFormComponent implements OnInit {
     this.paper.autores = this.autoresList.map((x: any) => {
         return x.mail;
     });
-    console.log(this.paper.autores);
 
     // this.paperService.putPaper(this.paper).subscribe((res: any) => {
     //   this.paper = res.data;
@@ -133,17 +135,32 @@ export class PaperFormComponent implements OnInit {
 
   }
 
+  handleFileInput(files: FileList): void {
+    this.fileToUpload = files.item(0);
+    console.log(this.fileToUpload);
+
+}
+
   submit(): void {
     this.submitted = true;
-    if (this.formPaper.invalid) {
+    if (this.formPaper.invalid || this.fileToUpload === null || this.formPaper.controls.simposio.value.trim() === '' ) {
       alert('Por favor complete todos los datos.');
       return;
     }
-    console.log(this.formPaper.controls.archivo);
+    const oldPath = this.paper.archivo;
+    const userId = this.auth.getUserId();
+    this.paper = {
+      archivo: '',
+      autores: this.autoresList.map((item: any) => {
+        return item.mail;
+      }),
+      id: '',
+      nombre: this.formPaper.controls.nombre.value,
+      responsable: userId,
+      simposio: this.formPaper.controls.simposio.value,
+    };
 
-    // this.paper = {
-    // };
-    this.paperEmitter.emit(this.paper);
+    this.paperEmitter.emit([this.paper, this.fileToUpload, oldPath]);
   }
 
 }

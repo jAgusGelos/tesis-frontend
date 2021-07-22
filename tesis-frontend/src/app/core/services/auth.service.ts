@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { of } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class AuthService {
   constructor(private http: HttpClient,
               private cookie: CookieService) { }
 
-  private apiURLRegister = environment.apiURL  + 'registrar/';
-  private apiURLLogin = environment.apiURL  + 'login/';
+  private apiURLRegister = environment.apiURL + 'registrar/';
+  private apiURLLogin = environment.apiURL + 'login/';
   private apiURLLogout = environment.apiURL + 'logout/';
 
   login(email: string, password: string): any {
@@ -40,7 +41,15 @@ export class AuthService {
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
     });
-
-
   }
+
+  getUserId(): string {
+    const idToken = localStorage.getItem('id_token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(idToken);
+    return decodedToken.id;
+  }
+
+
 }
+
