@@ -1,0 +1,4 @@
+<div class="container-fluid">
+  <app-symposium-list *ngIf="!edit" (newSymposiumEvent)='newSymposium()'
+  (editSymposiumEvent)='editSymposium($event)' (deleteSymposiumEvent)='deleteSymposium($event)'></app-symposium-list>
+</div>

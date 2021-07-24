@@ -16,8 +16,8 @@ const routes: Routes = [
   },
   {
     path: 'endRegister',
-    loadChildren: () => import('./pages/end-register/end-register-routing.module')
-    .then(m => m.EndRegisterRoutingModule)
+    loadChildren: () => import('./pages/end-register/end-register.module')
+    .then(m => m.EndRegisterModule)
   },
   {
     path: 'chairs',
@@ -40,7 +40,13 @@ const routes: Routes = [
     .then(m => m.CongressModule),
     // descomentar al correr la bd
     // canActivate: [AuthGuard, SuperRolGuard]
-  }
+  },
+  {
+    path: 'simposios',
+    loadChildren: () => import('./pages/symposium/symposium.module')
+    .then(m => m.SymposiumModule),
+    // canActivate: [AuthGuard, SuperRolGuard]
+  },
 ];
 
 @NgModule({
