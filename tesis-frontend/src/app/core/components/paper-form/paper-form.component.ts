@@ -18,7 +18,7 @@ export class PaperFormComponent implements OnInit {
     responsable: '',
     nombre: '',
     simposio: '',
-    archivo: '',
+    archivo: null,
   };
   @Output() paperEmitter = new EventEmitter<any>();
   @Output() cancelPaper = new EventEmitter();
@@ -147,10 +147,9 @@ export class PaperFormComponent implements OnInit {
       alert('Por favor complete todos los datos.');
       return;
     }
-    const oldPath = this.paper.archivo;
     const userId = this.auth.getUserId();
     this.paper = {
-      archivo: '',
+      archivo: this.fileToUpload,
       autores: this.autoresList.map((item: any) => {
         return item.mail;
       }),
@@ -160,7 +159,7 @@ export class PaperFormComponent implements OnInit {
       simposio: this.formPaper.controls.simposio.value,
     };
 
-    this.paperEmitter.emit([this.paper, this.fileToUpload, oldPath]);
+    this.paperEmitter.emit([this.paper]);
   }
 
 }

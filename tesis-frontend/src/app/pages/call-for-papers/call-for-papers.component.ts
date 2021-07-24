@@ -45,30 +45,20 @@ export class CallForPapersComponent implements OnInit {
 
   /**
    *
-   * @param x Objeto compuesto de [IPaper, Archivo a subir, vieja dirección en caso que exista el archivo]
+   * @param x Objeto compuesto de IPaper
    * Recibe un paper, chequea que tenga un id.
    * Si lo tiene hace un PUT al back. Actualiza un paper creado.
    * Si no lo tiene crea un nuevo paper.
-   * Guarda el archivo en el servidor.
    */
-   toggleCreatePaper(x: any): void {
-    const [item, fileToUpload, oldPath] = x;
-    if (oldPath !== '') {
-      // borrar el archivo existente
-    }
-
-
+   toggleCreatePaper(item: any): void {
     if (item.id === undefined) {
       this.paperService.postPaper(item).subscribe((res: any) => {
         alert('Paper Creado Correctamente');
-        const newName = 'A_' + 'nroCongreso_' + res.data.idArticulo + '.pdf';
-        // guardar en la carpeta del congreso
       });
     }
     else{
       this.paperService.putPaper(item).subscribe((res: any) => {
         alert('Paper Modificado Correctamente');
-        const newName = 'A_' + 'nroCongreso_' + item.id + '.pdf';
       });
     }
     this.getPaper();

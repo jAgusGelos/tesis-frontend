@@ -4,5 +4,5 @@ export interface IPaper {
   autores: string[];
   responsable: string;
   simposio: string;
-  archivo: string;
+  archivo: File;
 }
