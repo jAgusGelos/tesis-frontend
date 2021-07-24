@@ -1,43 +1,47 @@
-<div class="container-lg justify-content-center">
-        <div class="container-fluid">
-        <h3 class="title text-center">Aulas</h3>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-3">
-                <p class="grayned">Nombre</p>
-              </div>
-              <div class="col-md-3">
-                <p class="grayned">Descripción</p>
-              </div>
-              <div class="col-md-3">
-                <p class="grayned">Capacidad</p>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngFor='let item of roomList'>
-            <div class="row">
-              <div class="col-md-3">
-                <b>{{item.name}}</b>
-              </div>
-              <div class="col-md-3">
-                <b>{{item.description}}</b>
-              </div>
-              <div class="col-md-3">
-                <b>{{item.capacity}}</b>
-              </div>
-              <div class="btn-group col-md-3">
-                <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <br>
-        <a class="btn btn-primary col-md-4" (click)='toggleNew()' role="button">Nueva Aula</a>
-        </div>
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Definición de aulas</h3>
+    <hr>
   </div>
-  
+
+  <div class="row">
+    <h3 class='greyned'>Sede: </h3>
+    <h5>{{sede}}</h5>
+    <p>A continuación se lista el conjunto de aulas disponibles para la sede.</p>
+    <p>Por favor mantenga esta lista actualizada ya que sirve para la planificaicón y control del congreso.</p>
+  </div>
+
+  <table class="table text-center table-hover table-bordered">
+    <thead class='thead'>
+      <tr>
+        <th class="col-md-4">Nombre</th>
+        <th class="col-md-4">Descripción</th>
+        <th class="col-md-2">Capacidad</th>
+        <th class="col-md-2">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class='align-items-center'*ngFor='let item of roomList'>
+        <td>{{item.name}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.capacity}}</td>
+        <td>
+          <div class="btn-group col-md-3">
+          <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+        </div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <div class="row justify-content-md-end">
+    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nueva Aula</a>
+  </div>
+</div>
+
+
