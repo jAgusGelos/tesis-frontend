@@ -15,6 +15,11 @@
   color: grey;
 }
 
+.btn-primary{
+  background-color: #3CAFE0 ;
+  border: none;
+}
+
 i{
   padding-top: 1.5rem;
   cursor: pointer;
