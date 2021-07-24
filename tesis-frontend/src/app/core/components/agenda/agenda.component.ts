@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IAgenda } from '../../models/Iagenda';
+import { ISchedule } from '../../models/ISchedule';
 import { CongressService } from '../../services/congress.service';
 import { DefineAgendaService } from '../../services/define-agenda.service';
 
@@ -15,7 +15,7 @@ import { DefineAgendaService } from '../../services/define-agenda.service';
 })
 export class AgendaComponent implements OnInit {
 
-  @Input() agenda: IAgenda = {
+  @Input() agenda: ISchedule = {
 
     Id: 0,
     fechaInCongreso: new Date(),
