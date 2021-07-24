@@ -11,6 +11,12 @@
   background-color: #C8E5F1;
 }
 
+
+.btn-primary{
+  background-color: #3CAFE0 ;
+  border: none;
+}
+
 .greyned{
   color: grey;
 }
