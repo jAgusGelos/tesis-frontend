@@ -37,8 +37,8 @@
       </ul>
     </div>
     <div class="logged  text-right align-items-right d-none d-lg-block">
-      <button *ngIf='!user' type="button" class="btn btn-danger" href="/login">Iniciar Sesión</button>
-      <button *ngIf='user' type="button" class="btn btn-danger" href="/usuario">Mi Perfil</button>
+      <a *ngIf='!user' type="button" class="btn btn-primary" href="/login">Iniciar Sesión</a>
+      <a *ngIf='user' type="button" class="btn btn-primary" href="/usuario">Mi Perfil</a>
     </div>
   </div>
 </nav>
