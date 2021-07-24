@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ISymposium } from '../../models/ISymposium';
 
 @Component({
   selector: 'app-symposium-form',
@@ -7,9 +9,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SymposiumFormComponent implements OnInit {
 
-  constructor() { }
+  @Input() symposium: ISymposium = {
+    id: '',
+    nombre: '',
+    desc: ''
+  };
+  @Output() symposiumEmitter = new EventEmitter<ISymposium>();
+  @Output() cancelSymposium = new EventEmitter();
+
+  formSymposium: FormGroup;
+  submitted = false;
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.formSymposium = this.formBuilder.group({
+      nombre: [this.symposium.nombre, Validators.required],
+      desc: [this.symposium.desc, Validators.required]
+    });
+
+  }
+
+  cancel(): void {
+    this.cancelSymposium.emit();
+  }
+
+  submit(): void {
+    this.submitted = true;
+    if (this.formSymposium.invalid) {
+      alert('Por favor complete todos los datos.');
+      return;
+    }
+    this.symposium = {
+    id: this.symposium.id,
+    nombre: this.formSymposium.controls.nombre.value,
+    desc: this.formSymposium.controls.desc.value,
+    };
+    this.symposiumEmitter.emit(this.symposium);
+
   }
 
 }

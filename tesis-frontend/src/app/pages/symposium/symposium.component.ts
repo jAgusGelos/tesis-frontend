@@ -41,4 +41,26 @@ export class SymposiumComponent implements OnInit {
     });
   }
 
+ /**
+   *
+   * @param item
+   * Recibe un simposio, chequea que tenga un id.
+   * Si lo tiene hace un PUT al back. Actualiza un simposio creado.
+   * Si no lo tiene crea un nuevo simposio.
+   */
+   toggleCreateSymposium(item: ISymposium): void {
+    if (item.id === undefined) {
+      this.symposiumService.postSymposium(item).subscribe((res: any) => {
+        alert('Simposio Creado Correctamente');
+      });
+    }
+    else{
+      this.symposiumService.putSymposium(item).subscribe((res: any) => {
+        alert('Simposio Modificado Correctamente');
+      });
+    }
+    this.getSymposium();
+  }
+
+
 }
