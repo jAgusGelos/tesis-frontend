@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IAgenda } from '../../models/iagenda';
+import { IAgenda } from '../../models/Iagenda';
 import { CongressService } from '../../services/congress.service';
 import { DefineAgendaService } from '../../services/define-agenda.service';
 
