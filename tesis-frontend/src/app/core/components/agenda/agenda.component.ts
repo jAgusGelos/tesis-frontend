@@ -45,8 +45,8 @@ export class AgendaComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-    private congressService: CongressService,
-    private agendaService: DefineAgendaService) { }
+              private congressService: CongressService,
+              private agendaService: DefineAgendaService) { }
 
   ngOnInit(): void {
     this.formCongress = this.formBuilder.group({

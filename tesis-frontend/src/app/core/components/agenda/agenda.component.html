@@ -1,106 +1,138 @@
-<div class="container">
-  <form [formGroup]='formCongress'>
-    <!--Seleciconar Congreso-->
-    <div class="row">
-      <label class="col-form-label col-sm-2 col-sm-offset-2" for="congreso">Seleccione un congreso: </label>
-      <div class="col-4">
-        <select name="congreso" class="form-control" formControlName="congreso"
-          [ngClass]="{'is-invalid': (formCongress.controls.congreso.touched || submitted) && formCongress.controls.congreso.errors}">
-          <option hidden selected>Seleccione un congreso</option>
-          <option *ngFor="let opt of congresos"> {{ opt }}</option>
-        </select>
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center"><b>Definición de Agenda</b></h3>
+      <hr>
+    </div>
+    <div class="card-text text-center">
+      <form [formGroup]='formCongress'>
+        <div class="row justify-content-md-center">
+          <!--Seleciconar Congreso-->
+          <div class="row">
+            <label class="col-form-label col-sm-3" for="congreso">Congreso: </label>
+            <div class="col-sm-6">
+              <select name="congreso" class="form-control" formControlName="congreso"
+                [ngClass]="{'is-invalid': (formCongress.controls.congreso.touched || submitted) && formCongress.controls.congreso.errors}">
+                <option hidden selected>Seleccione un congreso</option>
+                <option *ngFor="let opt of congresos"> {{ opt }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Fecha Inicio Congreso -->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6' for='FechaInCongreso'>Inicio de congreso: <span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaInCongreso' [ngClass]="{'is-invalid': (formCongress.controls.FechaInCongreso.touched || submitted)
+        && formCongress.controls.FechaInCongreso.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaInCongreso.touched || submitted) && formCongress.controls.FechaInCongreso.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+          <br>
+          <!-- Fecha Fin Congreso-->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6' for='FechaFinCongreso'>Fin de congreso: <span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaFinCongreso' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinCongreso.touched || submitted)
+           && formCongress.controls.FechaFinCongreso.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaFinCongreso.touched || submitted) && formCongress.controls.FechaFinCongreso.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+        <h4 class="card-title text-center"><b>Entrega de artículos</b></h4>
+
+        <div class="row">
+          <!-- Fecha Limite Papers -->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6' for='FechaLimPapers'>Fecha Limite entrega:
+              <span class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaLimPapers' [ngClass]="{'is-invalid': (formCongress.controls.FechaLimPapers.touched || submitted)
+        && formCongress.controls.FechaLimPapers.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaLimPapers.touched || submitted) && formCongress.controls.FechaLimPapers.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+          <br>
+          <!-- Fecha prorroga Papers -->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6' for='FechaProrrogaPapers'>Fecha prorroga de entrega:<span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaProrrogaPapers' [ngClass]="{'is-invalid': (formCongress.controls.FechaProrrogaPapers.touched || submitted)
+        && formCongress.controls.FechaProrrogaPapers.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaProrrogaPapers.touched || submitted) && formCongress.controls.FechaProrrogaPapers.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+        <h4 class="card-title text-center"><b>Evaluación de artículos</b></h4>
+        <div class="row justify-content-md-center">
+          <!-- fehca Fin evaluacion -->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6' for='FechaFinEvaluacion'>Fecha fin de evaluacion:<span class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaFinEvaluacion' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinEvaluacion.touched || submitted)
+        && formCongress.controls.FechaFinEvaluacion.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaFinEvaluacion.touched || submitted) && formCongress.controls.FechaFinEvaluacion.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+          <br>
+        </div>
+        <!-- Fecha fin Reevaluacion -->
+        <div class="row justify-content-md-center">
+          <div class='form-group row col-md-6 text-center'>
+            <label class='col-form-label col-sm-6 col-sm-offset-4' for='FechaFinReEv'>Fecha fin de reevaluación:<span class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaFinReEv' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinReEv.touched || submitted)
+         && formCongress.controls.FechaFinReEv.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaFinReEv.touched || submitted) && formCongress.controls.FechaFinReEv.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
         <br>
-      </div>
+        <div class="row justify-content-md-center btn-row">
+          <a class="btn btn-secondary col-md-4" href="#" role="button">Cancelar</a>
+          &nbsp;
+          <a class="btn btn-primary col-md-4" href="#" role="button" (click)="guardar()">Guardar Cambios</a>
+        </div>
+      </form>
     </div>
-    <!-- Fecha Inicio Congreso -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaInCongreso'>Inicio de congreso: <span
-          class='text-danger'>*</span></label>
-      <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='FechaInCongreso' [ngClass]="{'is-invalid': (formCongress.controls.FechaInCongreso.touched || submitted)
-    && formCongress.controls.FechaInCongreso.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.FechaInCongreso.touched || submitted) && formCongress.controls.FechaInCongreso.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
-    <br>
-    <!-- Fecha Fin Congreso-->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaFinCongreso'>Fin de congreso: <span
-          class='text-danger'>*</span></label>
-      <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='FechaFinCongreso' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinCongreso.touched || submitted)
-       && formCongress.controls.FechaFinCongreso.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.FechaFinCongreso.touched || submitted) && formCongress.controls.FechaFinCongreso.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
-    <br>
-    <!-- Fecha Limite Papers -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaLimPapers'>Fecha Limite entrega de artículos:
-        <span class='text-danger'>*</span></label>
-      <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='FechaLimPapers' [ngClass]="{'is-invalid': (formCongress.controls.FechaLimPapers.touched || submitted)
-    && formCongress.controls.FechaLimPapers.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.FechaLimPapers.touched || submitted) && formCongress.controls.FechaLimPapers.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
-    <br>
-    <!-- Fecha prorroga Papers -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaProrrogaPapers'>Fecha prorroga de entrega de
-        artículos: <span class='text-danger'>*</span></label>
-      <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='FechaProrrogaPapers' [ngClass]="{'is-invalid': (formCongress.controls.FechaProrrogaPapers.touched || submitted)
-    && formCongress.controls.FechaProrrogaPapers.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.FechaProrrogaPapers.touched || submitted) && formCongress.controls.FechaProrrogaPapers.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
-    <br>
-    <!-- fehca Fin evaluacion -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaFinEvaluacion'>Fecha fin de evaluacion de
-        artículos: <span class='text-danger'>*</span></label>
-      <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='FechaFinEvaluacion' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinEvaluacion.touched || submitted)
-    && formCongress.controls.FechaFinEvaluacion.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.FechaFinEvaluacion.touched || submitted) && formCongress.controls.FechaFinEvaluacion.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
-    <br>
-    <!-- Fecha fin Reevaluacion -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='FechaFinReEv'>Fecha fin de reevaluación de artículos:
-        <span class='text-danger'>*</span></label>
-      <div class='col-sm-3'>
-        <input type='date' class='form-control' formControlName='FechaFinReEv' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinReEv.touched || submitted)
-    && formCongress.controls.FechaFinReEv.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.FechaFinReEv.touched || submitted) && formCongress.controls.FechaFinReEv.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
-    <br>
-    <div class="row justify-content-md-center btn-row">
-      <a class="btn btn-secondary col-md-4" href="#" role="button">Cancelar</a>
-      &nbsp;
-      <a class="btn btn-primary col-md-4" href="#" role="button" (click)="guardar()">Guardar Cambios</a>
-    </div>
-  </form>
+  </div>
+</div>
+
+
+<div class="container">
+
 
 </div>
