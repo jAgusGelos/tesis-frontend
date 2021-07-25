@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ISchedule } from '../../models/ISchedule';
@@ -15,6 +15,7 @@ import { DefineAgendaService } from '../../services/define-agenda.service';
 })
 export class AgendaComponent implements OnInit {
 
+  @Output() cancelAgenda = new EventEmitter();
   @Input() agenda: ISchedule = {
 
     Id: 0,
@@ -73,5 +74,9 @@ export class AgendaComponent implements OnInit {
     this.agendaService.postAgenda(this.agenda).subscribe((res: any) => {this.agenda = res.data});
 
   };
+
+  cancel(): void {
+    this.cancelAgenda.emit();
+  }
 
 }

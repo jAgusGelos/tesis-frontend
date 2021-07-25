@@ -19,6 +19,10 @@ export class CongressAgendaComponent implements OnInit {
   base: ISymposium[] =  [
     {id: '1', nombre: 'Probando', desc: 'TRial'}];
 
+  list = true;
+  sympo = false;
+  dates = false;
+
 
   constructor(private sympoService: SymposiumService,
               private router: Router) { }
@@ -70,8 +74,16 @@ export class CongressAgendaComponent implements OnInit {
       '\nPor favor intente de nuevo más tarde' +
       '\nEs posible que algunos simposios no se hayan cargado');
     }
+  }
 
+  editDates(item: any): void {
+    this.dates = !this.dates;
+    this.list = !this.list;
+  }
 
+  editSympo(item: any): void {
+    this.sympo = !this.sympo;
+    this.list = !this.list;
   }
 
 }
