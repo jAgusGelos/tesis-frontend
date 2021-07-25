@@ -25,7 +25,7 @@ export class SymposiumFormComponent implements OnInit {
   ngOnInit(): void {
     this.formSymposium = this.formBuilder.group({
       nombre: [this.symposium.nombre, Validators.required],
-      descripcion: [this.symposium.descripcion, Validators.required]
+      desc: [this.symposium.descripcion, Validators.required]
     });
 
   }

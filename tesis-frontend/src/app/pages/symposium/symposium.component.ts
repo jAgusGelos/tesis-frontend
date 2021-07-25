@@ -9,8 +9,9 @@ import { SymposiumService } from 'src/app/core/services/symposium.service';
 })
 export class SymposiumComponent implements OnInit {
 
-  symposiumList: ISymposium[] = [{ id: '0', nombre: 'Probando', descripcion: 'Esto es una prueba' }];
+  symposiumList: ISymposium[];
   edit = false;
+  ok = false;
   symposium = {};
 
   constructor(private symposiumService: SymposiumService) { }
@@ -21,7 +22,9 @@ export class SymposiumComponent implements OnInit {
 
   getSymposium(): void {
     this.symposiumService.getSymposium().subscribe((res: any) => {
-      this.symposiumList = res.data;
+      this.symposiumList = res.data[0];
+      this.ok = true;
+
     });
   }
 
@@ -43,12 +46,11 @@ export class SymposiumComponent implements OnInit {
   }
 
  /**
-   *
-   * @param item
-   * Recibe un simposio, chequea que tenga un id.
-   * Si lo tiene hace un PUT al back. Actualiza un simposio creado.
-   * Si no lo tiene crea un nuevo simposio.
-   */
+  * @param item
+  * Recibe un simposio, chequea que tenga un id.
+  * Si lo tiene hace un PUT al back. Actualiza un simposio creado.
+  * Si no lo tiene crea un nuevo simposio.
+  */
    toggleCreateSymposium(item: ISymposium): void {
     if (item.id === undefined) {
       this.symposiumService.postSymposium(item).subscribe((res: any) => {

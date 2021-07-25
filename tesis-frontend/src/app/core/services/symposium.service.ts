@@ -16,7 +16,7 @@ export class SymposiumService {
               private auth: AuthService) { }
 
   postSymposium(symposium: ISymposium): any {
-    return this.httpClient.post<ISymposium>(this.apiURL + 'simposio/crear/', symposium);
+    return this.httpClient.post<ISymposium>(this.apiURL + 'congresos/crear-simposio/', symposium);
   }
 
   getSymposium(): any {
@@ -29,7 +29,7 @@ export class SymposiumService {
   }
 
   putSymposium(symposium: ISymposium): any {
-    return this.httpClient.put<ISymposium>(this.apiURL + 'simposio/modificar/' + symposium.id, symposium);
+    return this.httpClient.put<ISymposium>(this.apiURL + '/congresos/editar-simposio/', symposium);
   }
 
   deleteSymposium(symposium: ISymposium): any {
@@ -37,6 +37,6 @@ export class SymposiumService {
   }
 
   postSymposiumCongress(item: any): any {
-    return this.httpClient.post(this.apiURL + 'congresos/crear-simposio/', item);
+    return this.httpClient.post(this.apiURL + 'ADEFINIR', item);
   }
 }
