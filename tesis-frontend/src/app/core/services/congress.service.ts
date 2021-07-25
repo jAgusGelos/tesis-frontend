@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ICongress } from '../models/icongress';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,8 @@ export class CongressService {
 
   private apiURL = environment.apiURL;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              ) { }
 
   postCongress(congress: ICongress): any {
     return this.httpClient.post<ICongress>(this.apiURL + 'congreso/crear/', congress);

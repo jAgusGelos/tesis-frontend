@@ -47,6 +47,7 @@ const routes: Routes = [
     .then(m => m.SymposiumModule),
     // canActivate: [AuthGuard, SuperRolGuard]
   },
+
 ];
 
 @NgModule({
