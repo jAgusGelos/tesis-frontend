@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ICongress } from '../../models/ICongress';
 
 @Component({
   selector: 'app-congress-active',
@@ -7,8 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CongressActiveComponent implements OnInit {
 
-  @Input() congressList = [
-    {id: '123', nombre: 'Probando', sede: 'Tu casa', ano: '2021'}];
+  @Input() congressList: ICongress;
   @Output() editDatesEvent = new EventEmitter();
   @Output() editSympoEvent = new EventEmitter();
 

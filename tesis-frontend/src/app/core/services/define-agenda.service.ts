@@ -12,12 +12,12 @@ export class DefineAgendaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAgenda(): any {
-    return this.httpClient.get(this.apiURL + 'devolver-agenda/id');
+  getAgenda(id: string): any {
+    return this.httpClient.get(this.apiURL + 'congreso/devolver-agenda/' + id);
   }
 
   postAgenda(agenda: ISchedule): any {
-    return this.httpClient.post<ISchedule>(this.apiURL + 'definir-agenda', agenda);
+    return this.httpClient.post<ISchedule>(this.apiURL + 'congreso/definir-agenda/', agenda);
   }
 
   putAgenda(agenda: ISchedule): any {

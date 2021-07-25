@@ -12,7 +12,7 @@ export class SymposiumFormComponent implements OnInit {
   @Input() symposium: ISymposium = {
     id: '',
     nombre: '',
-    desc: ''
+    descripcion: ''
   };
   @Output() symposiumEmitter = new EventEmitter<ISymposium>();
   @Output() cancelSymposium = new EventEmitter();
@@ -25,7 +25,7 @@ export class SymposiumFormComponent implements OnInit {
   ngOnInit(): void {
     this.formSymposium = this.formBuilder.group({
       nombre: [this.symposium.nombre, Validators.required],
-      desc: [this.symposium.desc, Validators.required]
+      descripcion: [this.symposium.descripcion, Validators.required]
     });
 
   }
@@ -43,7 +43,7 @@ export class SymposiumFormComponent implements OnInit {
     this.symposium = {
     id: this.symposium.id,
     nombre: this.formSymposium.controls.nombre.value,
-    desc: this.formSymposium.controls.desc.value,
+    descripcion: this.formSymposium.controls.desc.value,
     };
     this.symposiumEmitter.emit(this.symposium);
 

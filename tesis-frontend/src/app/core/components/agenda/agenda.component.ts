@@ -16,24 +16,7 @@ import { DefineAgendaService } from '../../services/define-agenda.service';
 export class AgendaComponent implements OnInit {
 
   @Output() cancelAgenda = new EventEmitter();
-  @Input() agenda: ISchedule = {
-
-    Id: 0,
-    fechaInCongreso: new Date(),
-    fechaFinCongreso: new Date(),
-    fechaInInscrip: new Date(),
-    fechaFinInscrip: new Date(),
-    fechaFinInscripTardia: new Date(),
-    fechaLimPapers: new Date(),
-    fechaProrrogaPapers: new Date(),
-    fechaFinEvaluacion: new Date(),
-    fechaFinReEv: new Date(),
-    simposios: [],
-    aulas: [],
-    modalidad: ''
-
-
-  };
+  @Input() schedule: ISchedule;
 
   congresos = [
     'Congreso 1',
@@ -47,33 +30,33 @@ export class AgendaComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private congressService: CongressService,
-              private agendaService: DefineAgendaService) { }
+              private scheduleService: DefineAgendaService) { }
 
   ngOnInit(): void {
     this.formCongress = this.formBuilder.group({
     congreso: ['', [Validators.required]],
-    FechaInCongreso: [this.agenda.fechaInCongreso, [Validators.required]],
-    FechaFinCongreso: [this.agenda.fechaFinCongreso, [Validators.required]],
-    FechaInInscrip: [this.agenda.fechaInInscrip, [Validators.required]],
-    FechaFinInscrip: [this.agenda.fechaFinInscrip, [Validators.required]],
-    FechaFinInscripTardia: [this.agenda.fechaFinInscripTardia, [Validators.required]],
-    FechaLimPapers: [this.agenda.fechaLimPapers, [Validators.required]],
-    FechaProrrogaPapers: [this.agenda.fechaProrrogaPapers, [Validators.required]],
-    FechaFinEvaluacion: [this.agenda.fechaFinEvaluacion, [Validators.required]],
-    FechaFinReEv: [this.agenda.fechaFinReEv, [Validators.required]]
+    FechaInCongreso: [this.schedule.fechaInCongreso, [Validators.required]],
+    FechaFinCongreso: [this.schedule.fechaFinCongreso, [Validators.required]],
+    FechaInInscrip: [this.schedule.fechaInInscrip, [Validators.required]],
+    FechaFinInscrip: [this.schedule.fechaFinInscrip, [Validators.required]],
+    FechaFinInscripTardia: [this.schedule.fechaFinInscripTardia, [Validators.required]],
+    FechaLimPapers: [this.schedule.fechaLimPapers, [Validators.required]],
+    FechaProrrogaPapers: [this.schedule.fechaProrrogaPapers, [Validators.required]],
+    FechaFinEvaluacion: [this.schedule.fechaFinEvaluacion, [Validators.required]],
+    FechaFinReEv: [this.schedule.fechaFinReEv, [Validators.required]]
     });
 
     this.getCongresos();
   }
 
-  getCongresos() {
-    this.congressService.getCongress().subscribe((res: any) => {this.congresos = res.data});
-  };
+  getCongresos(): void {
+    this.congressService.getCongress().subscribe((res: any) => {this.congresos = res.data; });
+  }
 
-  guardar() {
-    this.agendaService.postAgenda(this.agenda).subscribe((res: any) => {this.agenda = res.data});
+  guardar(): void {
+    this.scheduleService.postAgenda(this.schedule).subscribe((res: any) => {this.schedule = res.data; });
 
-  };
+  }
 
   cancel(): void {
     this.cancelAgenda.emit();

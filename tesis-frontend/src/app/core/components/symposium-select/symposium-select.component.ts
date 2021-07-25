@@ -39,7 +39,7 @@ export class SymposiumSelectComponent implements OnInit {
       alert('Ya existe el simposio ingresado');
       return;
     }
-    this.simposiosList.push({id, nombre, desc});
+    this.simposiosList.push({id, nombre, descripcion: desc});
   }
 
   cancel(): void {

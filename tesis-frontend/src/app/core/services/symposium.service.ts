@@ -20,7 +20,7 @@ export class SymposiumService {
   }
 
   getSymposium(): any {
-    return this.httpClient.get(this.apiURL + 'simposio/todos/');
+    return this.httpClient.get(this.apiURL + 'congresos/lista-simposios/');
   }
 
   getSymposiumCongress(): any {
@@ -37,6 +37,6 @@ export class SymposiumService {
   }
 
   postSymposiumCongress(item: any): any {
-    return this.httpClient.post(this.apiURL + 'ADEFINIR', item);
+    return this.httpClient.post(this.apiURL + 'congresos/crear-simposio/', item);
   }
 }

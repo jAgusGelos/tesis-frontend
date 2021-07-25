@@ -9,7 +9,7 @@ import { SymposiumService } from 'src/app/core/services/symposium.service';
 })
 export class SymposiumComponent implements OnInit {
 
-  symposiumList = [];
+  symposiumList: ISymposium[] = [{ id: '0', nombre: 'Probando', descripcion: 'Esto es una prueba' }];
   edit = false;
   symposium = {};
 
@@ -18,6 +18,7 @@ export class SymposiumComponent implements OnInit {
   ngOnInit(): void {
     this.getSymposium();
   }
+
   getSymposium(): void {
     this.symposiumService.getSymposium().subscribe((res: any) => {
       this.symposiumList = res.data;

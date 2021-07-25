@@ -8,7 +8,7 @@ import { ISymposium } from '../../models/ISymposium';
 })
 export class SymposiumListComponent implements OnInit {
 
-  @Input() symposiumList: ISymposium[] =  [{ id: '0', nombre: 'Probando', desc: 'Esto es una prueba' }];
+  @Input() symposiumList: ISymposium[];
   @Output() editSymposiumEvent = new EventEmitter();
   @Output() newSymposiumEvent = new EventEmitter();
   @Output() deleteSymposiumEvent = new EventEmitter();
