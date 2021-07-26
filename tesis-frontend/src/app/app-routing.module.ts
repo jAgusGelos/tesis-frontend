@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/services/auth.guard';
+import { ChairRolGuard } from './core/services/guards/chair-rol.guard';
 
 const routes: Routes = [
   {
@@ -16,23 +17,30 @@ const routes: Routes = [
   },
   {
     path: 'endRegister',
-    loadChildren: () => import('./pages/end-register/end-register-routing.module')
-    .then(m => m.EndRegisterRoutingModule)
+    loadChildren: () => import('./pages/end-register/end-register.module')
+    .then(m => m.EndRegisterModule),
+    // canActivate: [AuthGuard]
   },
   {
     path: 'chairs',
     loadChildren: () => import('./pages/chairs/chairs.module')
     .then(m => m.ChairsModule)
+    // Can activate CP CL
+    // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
     path: 'agenda',
     loadChildren: () => import('./pages/congress-agenda/congress-agenda.module')
-    .then(m => m.CongressAgendaModule)
+    .then(m => m.CongressAgendaModule),
+    // Can activate CP CL
+    // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
     path: 'room',
     loadChildren: () => import('./pages/room/room.module')
     .then(m => m.RoomModule)
+    // Can activate CP CL
+    // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
     path: 'congreso',
@@ -40,7 +48,14 @@ const routes: Routes = [
     .then(m => m.CongressModule),
     // descomentar al correr la bd
     // canActivate: [AuthGuard, SuperRolGuard]
-  }
+  },
+  {
+    path: 'simposios',
+    loadChildren: () => import('./pages/symposium/symposium.module')
+    .then(m => m.SymposiumModule),
+    // canActivate: [AuthGuard, SuperRolGuard]
+  },
+
 ];
 
 @NgModule({

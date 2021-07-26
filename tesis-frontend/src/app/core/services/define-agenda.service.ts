@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IAgenda } from '../models/Iagenda';
+import { ISchedule } from '../models/ISchedule';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +12,19 @@ export class DefineAgendaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAgenda(): any {
-    return this.httpClient.get(this.apiURL + 'devolver-agenda/id');
+  getAgenda(id: string): any {
+    return this.httpClient.get(this.apiURL + 'congreso/devolver-agenda/' + id);
   }
 
-  postAgenda(agenda: IAgenda): any {
-    return this.httpClient.post<IAgenda>(this.apiURL + 'definir-agenda', agenda);
+  postAgenda(agenda: ISchedule): any {
+    return this.httpClient.post<ISchedule>(this.apiURL + 'congreso/definir-agenda/', agenda);
   }
 
-  putAgenda(agenda: IAgenda): any {
-    return this.httpClient.put<IAgenda>(this.apiURL + 'definir-agenda' + agenda, agenda);
+  putAgenda(agenda: ISchedule): any {
+    return this.httpClient.put<ISchedule>(this.apiURL + 'definir-agenda' + agenda, agenda);
   }
 
-  deleteAgenda(agenda: IAgenda): any {
-    return this.httpClient.delete<IAgenda>(this.apiURL + 'definir-agenda' + agenda.Id);
+  deleteAgenda(agenda: ISchedule): any {
+    return this.httpClient.delete<ISchedule>(this.apiURL + 'definir-agenda' + agenda.Id);
   }
 }

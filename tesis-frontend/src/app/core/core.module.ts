@@ -16,6 +16,11 @@ import { RoomFormComponent } from './components/room-form/room-form.component';
 import { CongressFormComponent } from './components/congress-form/congress-form.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
 import { CongressListComponent } from './components/congress-list/congress-list.component';
+import { SymposiumFormComponent } from './components/symposium-form/symposium-form.component';
+import { SymposiumListComponent } from './components/symposium-list/symposium-list.component';
+import { SymposiumSelectComponent } from './components/symposium-select/symposium-select.component';
+import { CongressActiveComponent } from './components/congress-active/congress-active.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { CongressListComponent } from './components/congress-list/congress-list.
     RoomComponent,
     RoomFormComponent,
     CongressFormComponent,
-    CongressListComponent
+    CongressListComponent,
+    SymposiumFormComponent,
+    SymposiumListComponent,
+    SymposiumSelectComponent,
+    CongressActiveComponent
+
   ],
   imports: [
     CommonModule,
@@ -45,7 +55,11 @@ import { CongressListComponent } from './components/congress-list/congress-list.
     CongressFormComponent,
     CongressListComponent,
     AssignSecChairsFormComponent,
-    AgendaComponent
+    AgendaComponent,
+    SymposiumFormComponent,
+    SymposiumListComponent,
+    SymposiumSelectComponent,
+    CongressActiveComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

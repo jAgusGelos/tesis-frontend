@@ -12,19 +12,20 @@ import { RoomService } from '../../services/room.service';
 })
 export class RoomComponent implements OnInit {
 
-  @Input() roomList : IRoom[] = [
-    {id:'as', name: 'A',  description: '-', capacity: 250},
-    {id:'bs', name: 'B',  description: '-', capacity: 200},
-    {id:'cs', name: 'C',  description: '-', capacity: 150},
+  @Input() roomList: IRoom[] = [
+    {id: 'as', name: 'A',  description: '-', capacity: 250},
+    {id: 'bs', name: 'B',  description: '-', capacity: 200},
+    {id: 'cs', name: 'C',  description: '-', capacity: 150},
   ];
+  @Input() sede = 'Sede de prueba';
   @Output() editRoomEvent = new EventEmitter();
   @Output() newRoomEvent = new EventEmitter();
   @Output() deleteRoomEvent = new EventEmitter();
-  
+
   constructor() { }
-                
+
   ngOnInit(): void {
-    
+
   }
 
   toggleEdit(room: any): void {
@@ -39,5 +40,5 @@ export class RoomComponent implements OnInit {
       this.deleteRoomEvent.emit(item);
     }
   }
-  
+
 }

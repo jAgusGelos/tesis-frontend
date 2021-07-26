@@ -44,9 +44,35 @@
 
 }
 
+.thead{
+  background-color: #C8E5F1;
+}
+
 
 a{
   cursor: pointer;
+
+}
+
+.simposiosSelected{
+  padding: 0.3rem;
+  color: black;
+  text-decoration: none;
+  padding-top: 1rem;
+}
+
+i{
+  padding-top: 1.5rem;
+  cursor: pointer;
+}
+
+i:hover{
+  color: blue;
+}
+
+.fas{
+  font-size: 1.25rem;
+  color: #00609C;
 }
 
 .card-title{
@@ -63,11 +89,7 @@ a{
 
 hr {
   border:#00609C solid 1px;
-
 }
-
-
-
 
 input{
   border: none;
