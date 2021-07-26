@@ -55,6 +55,12 @@ const routes: Routes = [
     .then(m => m.SymposiumModule),
     // canActivate: [AuthGuard, SuperRolGuard]
   },
+  {
+    path: 'cancelarAutoría',
+    loadChildren: () => import('./pages/cancel-author/cancel-author.module')
+    .then(m => m.CancelAuthorModule),
+  },
+
 
 ];
 
