@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <app-congress-active *ngIf='list' [congressList]='congressList' (editDatesEvent)='editDates($event)' (editSympoEvent)='editSympo($event)'>
+
+  </app-congress-active>
+
+
+  <app-agenda *ngIf='dates' [schedule]='schedule' (cancelAgenda)='editDates($event)'></app-agenda>
+
+  <app-symposium-select *ngIf='sympo' [simposios]='simposios' [simposiosList]='simposiosList'
+  (cancelSymposium)='editSympo($event)' (symposiumEmitter)='addSymposium($event)'></app-symposium-select>
+</div>
+

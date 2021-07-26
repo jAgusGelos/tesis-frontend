@@ -3,7 +3,8 @@
     <a class="navbar-brand" href="#">
       LOGO
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span><i class="fas fa-plus"></i></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -35,9 +36,9 @@
         </li>
       </ul>
     </div>
-    <div class="logged  text-right align-items-right d-none d-lg-block"  >
-      <button *ngIf='!user' type="button" class="btn btn-danger"  href="/login" >Iniciar Sesión</button>
-      <button *ngIf='user' type="button" class="btn btn-danger"  href="/usuario">Mi Perfil</button>
+    <div class="logged  text-right align-items-right d-none d-lg-block">
+      <a *ngIf='!user' type="button" class="btn btn-primary" href="/login">Iniciar Sesión</a>
+      <a *ngIf='user' type="button" class="btn btn-primary" href="/usuario">Mi Perfil</a>
     </div>
   </div>
 </nav>

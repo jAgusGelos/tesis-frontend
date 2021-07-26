@@ -1,77 +1,88 @@
-<div class="container">
-  <form [formGroup]='formCongress'>
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center">Nuevo Congreso</h3>
+      <hr>
+    </div>
 
-    <!-- Nombre -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='nombre'>Nombre: <span
-          class='text-danger'>*</span></label>
-      <div class='col-sm-6'>
-        <input type='text' class='form-control' formControlName='nombre' [ngClass]="{'is-invalid': (formCongress.controls.nombre.touched || submitted)
+    <div class="card-text text-center">
+      <form [formGroup]='formCongress'>
+        <!-- Nombre -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='nombre'>Nombre: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='nombre' [ngClass]="{'is-invalid': (formCongress.controls.nombre.touched || submitted)
     && formCongress.controls.nombre.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.nombre.touched || submitted) && formCongress.controls.nombre.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
+            <span class='text-danger'
+              *ngIf='(formCongress.controls.nombre.touched || submitted) && formCongress.controls.nombre.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
 
-    <!-- Sede -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='sede'>Sede: <span class='text-danger'>*</span></label>
-      <div class='col-sm-6'>
-        <input type='text' class='form-control' formControlName='sede' [ngClass]="{'is-invalid': (formCongress.controls.sede.touched || submitted)
+        <!-- Sede -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='sede'>Sede: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='sede' [ngClass]="{'is-invalid': (formCongress.controls.sede.touched || submitted)
     && formCongress.controls.sede.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.sede.touched || submitted) && formCongress.controls.sede.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
+            <span class='text-danger'
+              *ngIf='(formCongress.controls.sede.touched || submitted) && formCongress.controls.sede.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
 
-    <!-- ano -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='ano'>Año: <span class='text-danger'>*</span></label>
-      <div class='col-sm-6'>
-        <input type='text' class='form-control' formControlName='ano' [ngClass]="{'is-invalid': (formCongress.controls.ano.touched || submitted)
+        <!-- ano -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='ano'>Año: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='ano' [ngClass]="{'is-invalid': (formCongress.controls.ano.touched || submitted)
     && formCongress.controls.ano.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.ano.touched || submitted) && formCongress.controls.ano.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
+            <span class='text-danger'
+              *ngIf='(formCongress.controls.ano.touched || submitted) && formCongress.controls.ano.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
 
 
-    <!-- ChairPrincipal -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='chairPrincipal'>Email Chair Principal: <span
-          class='text-danger'>*</span></label>
-      <div class='col-sm-6'>
-        <input type='email' class='form-control' formControlName='chairPrincipal' [ngClass]="{'is-invalid': (formCongress.controls.chairPrincipal.touched || submitted)
+        <!-- ChairPrincipal -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='chairPrincipal'>Email Chair Principal: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='email' class='form-control' formControlName='chairPrincipal' [ngClass]="{'is-invalid': (formCongress.controls.chairPrincipal.touched || submitted)
     && formCongress.controls.chairPrincipal.errors}" onclick='this.select()' />
-        <span class='text-danger'
-          *ngIf='(formCongress.controls.chairPrincipal.touched || submitted) && formCongress.controls.chairPrincipal.errors?.required'>
-          Requerido
-        </span>
-      </div>
-    </div>
+            <span class='text-danger'
+              *ngIf='(formCongress.controls.chairPrincipal.touched || submitted) && formCongress.controls.chairPrincipal.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
 
-    <!-- Coord local -->
-    <div class='form-group row'>
-      <label class='col-form-label col-sm-2 col-sm-offset-2' for='coordLocal'>Email Coord Local: <span
-          class='text-danger'>*</span></label>
-      <div class='col-sm-6'>
-        <input type='email' class='form-control' formControlName='coordLocal' [ngClass]="{'is-invalid': (formCongress.controls.coordLocal.touched || submitted)
+        <!-- Coord local -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='coordLocal'>Email Coord Local: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='email' class='form-control' formControlName='coordLocal' [ngClass]="{'is-invalid': (formCongress.controls.coordLocal.touched || submitted)
     && formCongress.controls.coordLocal.errors}" onclick='this.select()' />
-      </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-md-center pt-3 btn-row">
+          <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
+          &nbsp;
+          <a class="btn btn-primary col-md-4" (click)='submit()'
+            role="button">{{congress.id === undefined ? 'Crear Congreso' : 'Guardar Cambios'}}</a>
+        </div>
+
+      </form>
     </div>
-
-    <div class="row justify-content-md-center btn-row">
-      <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
-      &nbsp;
-      <a class="btn btn-primary col-md-4" (click)='submit()' role="button">{{congress.id === undefined ? 'Crear Congreso' : 'Guardar Cambios'}}</a>
-    </div>
-
-  </form>
-
+  </div>
 </div>

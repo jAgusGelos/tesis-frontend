@@ -15,9 +15,11 @@ export class AuthService {
   constructor(private http: HttpClient,
               private cookie: CookieService) { }
 
-  private apiURLRegister = environment.apiURL + 'registrar/';
-  private apiURLLogin = environment.apiURL + 'login/';
-  private apiURLLogout = environment.apiURL + 'logout/';
+
+  private apiURLRegister = environment.apiURL  + 'api/registrar/';
+  private apiURLLogin = environment.apiURL  + 'api/login/';
+  private apiURLLogout = environment.apiURL + 'api/logout/';
+
 
   login(email: string, password: string): any {
     return this.http.post<IUser>(this.apiURLLogin, { email, password });
@@ -28,6 +30,7 @@ export class AuthService {
 
     return this.http.post<IUser>(this.apiURLRegister, { email: user.email, password: user.password });
   }
+
 
   setSession(authResult): void {
     const expiresAt = moment().add(authResult.expiresIn, 'second');

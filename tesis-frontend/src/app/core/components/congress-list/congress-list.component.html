@@ -1,31 +1,41 @@
 <div class="container-fluid">
-  <h1>Congresos Activos:</h1>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor='let item of congressList'>
-      <div class="row">
-        <div class="col-md-3">
-          <p class="greyned">Sede</p>
-          <b>{{item.sede}}</b>
-        </div>
-        <div class="col-md-3">
-          <p class="greyned">Nombre</p>
-          <b>{{item.nombre}}</b>
-        </div>
-        <div class="col-md-3">
-          <p class="greyned">Año</p>
-          <b>{{item.ano}}</b>
-        </div>
-        <div class="btn-group col-md-3">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Congresos Activos</h3>
+    <hr>
+  </div>
+  <table class="table text-center table-hover table-bordered">
+    <thead class='thead'>
+      <tr>
+        <th class="col-md-4">Sede</th>
+        <th class="col-md-4">Nombre</th>
+        <th class="col-md-2">Año</th>
+        <th class="col-md-2">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class='align-items-center'*ngFor='let item of congressList'>
+        <td>{{item.nombre}}</td>
+        <td>{{item.sede}}</td>
+        <td>{{item.ano}}</td>
+        <td>
+          <div class="btn-group col-md-3">
           <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
           &nbsp;
           &nbsp;
           &nbsp;
           <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
         </div>
-      </div>
-    </li>
-  </ul>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+
   <br>
-  <a class="btn btn-primary col-md-4" (click)='toggleNew()' role="button">Nuevo Congreso</a>
+  <div class="row justify-content-md-end">
+    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo Congreso</a>
+  </div>
+
 
 </div>

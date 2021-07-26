@@ -19,11 +19,7 @@ export class UserService {
   }
 
   getLoggedUser(): any {
-    const idToken = localStorage.getItem('id_token');
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(idToken);
-    // Cambiar cuando el back lo renombre
-    return this.httpClient.get(this.apiURL + 'lista-usuario/');
+    return this.httpClient.get(this.apiURL + 'api/usuario/');
   }
 
 }

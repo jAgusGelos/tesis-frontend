@@ -13,17 +13,17 @@ import { CallForPapersComponent } from './pages/call-for-papers/call-for-papers.
 
 
 
+
+
+
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
     HttpClientModule,
-
   ],
   providers: [CookieService,
     {
