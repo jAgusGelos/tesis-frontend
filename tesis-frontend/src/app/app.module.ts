@@ -17,7 +17,7 @@ import { CancelAuthorComponent } from './pages/cancel-author/cancel-author.compo
 
 
 @NgModule({
-  declarations: [AppComponent, CancelAuthorComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
