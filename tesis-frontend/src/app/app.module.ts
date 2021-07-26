@@ -9,7 +9,6 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
-import { CallForPapersComponent } from './pages/call-for-papers/call-for-papers.component';
 
 
 
