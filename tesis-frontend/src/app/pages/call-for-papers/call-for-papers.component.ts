@@ -39,6 +39,7 @@ export class CallForPapersComponent implements OnInit {
   deletePaper(item: IPaper): void {
     this.paperService.deletePaper(item).subscribe((res: any) => {
       alert('El paper ha sido eliminado correctamente');
+      this.getPaper();
     });
   }
 

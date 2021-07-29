@@ -34,7 +34,9 @@ export class AuthService {
 
   setSession(authResult): void {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
+    const date = new Date();
 
+    this.cookie.set('jwt', authResult.jwt, date.getTime() + (60 * 1000), '', '', true);
     localStorage.setItem('id_token', authResult.jwt);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }

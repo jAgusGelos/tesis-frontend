@@ -158,7 +158,6 @@ export class PaperFormComponent implements OnInit {
       responsable: userId,
       simposio: this.formPaper.controls.simposio.value,
     };
-
     this.paperEmitter.emit([this.paper]);
   }
 
