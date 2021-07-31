@@ -22,11 +22,12 @@ export class RoomFormComponent implements OnInit {
 
   @Output() roomEmitter = new EventEmitter<IRoom>();
   @Output() cancelRoom = new EventEmitter();
-  
+
   constructor(private formBuilder: FormBuilder,
               private roomService: RoomService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.formSede = this.formBuilder.group({
       sede: ['', [Validators.required]]
     })
@@ -53,5 +54,5 @@ export class RoomFormComponent implements OnInit {
   cancel():void{
     this.cancelRoom.emit();
   }
-  
+
 }

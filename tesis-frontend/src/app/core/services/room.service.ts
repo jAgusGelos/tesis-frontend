@@ -8,24 +8,24 @@ import { IRoom } from '../models/iroom';
 })
 export class RoomService {
   /* Revisar */
-  private apiURLRoom = environment.apiURL + '/' + 'aulas/';
-  private apiURLRooms = environment.apiURL + '/' + 'aulas/todos/';
-  private apiURLRoomDelete = environment.apiURL + '/' + 'eliminarAula/';
+  private apiURLRoom = environment.apiURL + 'aulas/';
+  private apiURLRooms = environment.apiURL  + 'aulas/todos/';
+  private apiURLRoomDelete = environment.apiURL + 'eliminarAula/';
 
   constructor(private httpClient: HttpClient) { }
 
   registerRoom(room: IRoom): any{
-    return this.httpClient.post<IRoom>(this.apiURLRoom,{Room: room});
+    return this.httpClient.post<IRoom>(this.apiURLRoom, {Room: room});
   }
-  putRoom(room: IRoom):any{
-    return this.httpClient.put<IRoom>(this.apiURLRoom, room)
-  }
-
-  getRooms(): any{
-    return this.httpClient.get(this.apiURLRooms)
+  putRoom(room: IRoom): any{
+    return this.httpClient.put<IRoom>(this.apiURLRoom, room);
   }
 
-  deteleRoom(room : IRoom): any{
+  getRooms(id: any): any{
+    return this.httpClient.get(this.apiURLRooms + id);
+  }
+
+  deteleRoom(room: IRoom): any{
     return this.httpClient.delete<IRoom>(this.apiURLRoomDelete);
   }
 

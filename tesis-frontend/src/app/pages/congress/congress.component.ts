@@ -16,6 +16,7 @@ export class CongressComponent implements OnInit {
   constructor(private congressService: CongressService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.getCongress();
   }
 

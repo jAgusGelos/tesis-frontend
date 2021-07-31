@@ -4,6 +4,10 @@
     <h3 class='text-center'>Congresos Activos</h3>
     <hr>
   </div>
+  <div class="row">
+    <p>A continuación se lista el conjunto de congresos disponibles.</p>
+    <p>Usted puede editar la agenda y los simposios con las Acciones.</p>
+  </div>
   <table class="table text-center table-hover table-bordered">
     <thead class='thead'>
       <tr>
@@ -25,6 +29,9 @@
           &nbsp;
           &nbsp;
           <a (click)='toggleEditSympo(item)' title='Simposios'><i class="fas fa-paint-brush"></i></a>
+          &nbsp;
+          &nbsp;
+          <a (click)='toggleEditRooms(item)' title='Aulas'><i class="fas fa-archway"></i></a>
         </div>
       </td>
       </tr>

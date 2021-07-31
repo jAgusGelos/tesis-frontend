@@ -2,8 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/services/auth.guard';
 import { ChairRolGuard } from './core/services/guards/chair-rol.guard';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module')
@@ -29,14 +34,14 @@ const routes: Routes = [
     // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
-    path: 'agenda',
+    path: 'misCongresos',
     loadChildren: () => import('./pages/congress-agenda/congress-agenda.module')
     .then(m => m.CongressAgendaModule),
     // Can activate CP CL
     // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
-    path: 'room',
+    path: 'room/:id',
     loadChildren: () => import('./pages/room/room.module')
     .then(m => m.RoomModule)
     // Can activate CP CL
@@ -48,6 +53,13 @@ const routes: Routes = [
     .then(m => m.CongressModule),
     // descomentar al correr la bd
     // canActivate: [AuthGuard, SuperRolGuard]
+  },
+  {
+    path: 'callForPapers',
+    loadChildren: () => import('./pages/call-for-papers/call-for-papers.module')
+    .then(m => m.CallForPapersModule),
+    // descomentar al correr la bd
+    // canActivate: [AuthGuard, AutorRolGuard]
   },
   {
     path: 'simposios',

@@ -17,6 +17,7 @@ export class SymposiumComponent implements OnInit {
   constructor(private symposiumService: SymposiumService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.getSymposium();
   }
 

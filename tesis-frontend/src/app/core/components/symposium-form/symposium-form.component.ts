@@ -23,6 +23,7 @@ export class SymposiumFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.formSymposium = this.formBuilder.group({
       nombre: [this.symposium.nombre, Validators.required],
       desc: [this.symposium.descripcion, Validators.required]

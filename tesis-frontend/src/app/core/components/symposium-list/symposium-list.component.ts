@@ -17,6 +17,7 @@ export class SymposiumListComponent implements OnInit {
 
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
   }
 
   toggleEdit(item: any): void {

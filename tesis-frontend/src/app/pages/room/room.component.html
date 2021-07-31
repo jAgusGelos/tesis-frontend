@@ -1,2 +1,5 @@
-<app-room *ngIf="!edit" (newRoomEvent)='newRoom()' (editRoomEvent)='editRoom($event)' (deleteRoomEvent)='deleteRoom($event)'></app-room>
+<app-room *ngIf="!edit"
+(newRoomEvent)='newRoom()' (editRoomEvent)='editRoom($event)'
+(deleteRoomEvent)='deleteRoom($event)' (goBackEvent) = 'goBack()'
+></app-room>
 <app-room-form *ngIf='edit' [room]='room' (roomEmitter)= 'toggleCreateRoom($event)' (cancelRoom)='newRoom($event)'></app-room-form>

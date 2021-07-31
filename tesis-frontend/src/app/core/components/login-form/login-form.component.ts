@@ -20,6 +20,7 @@ export class LoginFormComponent implements OnInit {
                private router: Router) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.formLogin = this.formBuilder.group({
       email: ['juanagustingelos1@gmail.com', [Validators.required]],
       password: ['', [Validators.required]]

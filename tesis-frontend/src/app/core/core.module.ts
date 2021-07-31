@@ -1,5 +1,4 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
@@ -16,10 +15,14 @@ import { RoomFormComponent } from './components/room-form/room-form.component';
 import { CongressFormComponent } from './components/congress-form/congress-form.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
 import { CongressListComponent } from './components/congress-list/congress-list.component';
+
+import { PaperListComponent } from './components/paper-list/paper-list.component';
+import { PaperFormComponent } from './components/paper-form/paper-form.component';
 import { SymposiumFormComponent } from './components/symposium-form/symposium-form.component';
 import { SymposiumListComponent } from './components/symposium-list/symposium-list.component';
 import { SymposiumSelectComponent } from './components/symposium-select/symposium-select.component';
 import { CongressActiveComponent } from './components/congress-active/congress-active.component';
+
 
 
 @NgModule({
@@ -33,11 +36,17 @@ import { CongressActiveComponent } from './components/congress-active/congress-a
     RoomComponent,
     RoomFormComponent,
     CongressFormComponent,
+
+    AgendaComponent,
+    CongressListComponent,
+    PaperListComponent,
+    PaperFormComponent,
     CongressListComponent,
     SymposiumFormComponent,
     SymposiumListComponent,
     SymposiumSelectComponent,
     CongressActiveComponent
+
 
   ],
   imports: [
@@ -54,6 +63,8 @@ import { CongressActiveComponent } from './components/congress-active/congress-a
     RoomFormComponent,
     CongressFormComponent,
     CongressListComponent,
+    PaperListComponent,
+    PaperFormComponent,
     AssignSecChairsFormComponent,
     AgendaComponent,
     SymposiumFormComponent,

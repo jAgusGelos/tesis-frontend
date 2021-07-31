@@ -33,6 +33,7 @@ export class AgendaComponent implements OnInit {
               private scheduleService: DefineAgendaService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.formCongress = this.formBuilder.group({
     congreso: ['', [Validators.required]],
     FechaInCongreso: [this.schedule.fechaInCongreso, [Validators.required]],

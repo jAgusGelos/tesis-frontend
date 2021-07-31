@@ -45,6 +45,7 @@ export class UserCompletedDataComponent implements OnInit {
                  private userService: UserService ) { }
 
     ngOnInit(): void {
+      window.scrollTo(0, 0);
       this.formUsuario = this.formBuilder.group({
         dni: [this.usuario.dni, [Validators.required]],
         tipoDni: [this.usuario.tipoDni, [Validators.required]],

@@ -1,0 +1,102 @@
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center">Nuevo Paper</h3>
+      <hr>
+    </div>
+
+    <div class="card-text text-right">
+      <form [formGroup]='formPaper'>
+        <!-- Nombre -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='nombre'>Nombre: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='nombre' [ngClass]="{'is-invalid': (formPaper.controls.nombre.touched || submitted)
+                && formPaper.controls.nombre.errors}" onclick='this.select()' />
+            <span class='text-danger'
+              *ngIf='(formPaper.controls.nombre.touched || submitted) && formPaper.controls.nombre.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+        <!-- Simposio -->
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3 col-sm-offset-2" for="simposio">Simposio:<span
+              class="text-danger">*</span></label>
+          <div class="col-sm-6">
+            <select  class='col-sm-4' name="simposio" class="form-control" formControlName="simposio" [ngClass]="{'is-invalid': (formPaper.controls.simposio.touched || submitted || formPaper.controls.simposio.value === '')
+          && formPaper.controls.simposio.errors}">
+              <option value=""> </option>
+              <option  *ngFor="let opt of simposios">
+                ‌{{ opt }}
+              <option>
+            </select>
+            <span class="text-danger"
+              *ngIf="(formPaper.controls.simposio.touched || submitted || formPaper.controls.simposio.value === '') && formPaper.controls.simposio.errors?.required ">
+              Requerido.
+            </span>
+          </div>
+        </div>
+
+        <!-- autores -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='autores'>Agregar Autores:</label>
+          <div class='col-sm-6'>
+            <div class="input-group">
+              <input type='email' class='form-control' formControlName='autores' onclick='this.select()'>
+              <button class="btn btn-secondary" (click)='addAutor()'>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+        <div class='form-group row' *ngIf="autoresList.length !== 0">
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='autores'>Autores Seleccionados:</label>
+          <div class='col-sm-6'>
+            <ul *ngFor="let item of autoresList" class='autoresSelected'
+              [ngClass]="{'valid': item.status== 'ok'}">{{item.mail}}<i class="fa fa-window-close" aria-hidden="true"
+                (click)='delAutor(item)'></i></ul>
+
+
+          </div>
+        </div>
+        <!-- archivo -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='archivo'>Archivo: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='file' accept=".pdf" (change)="handleFileInput($event.target.files)" class='form-control'
+              formControlName='archivo' [ngClass]="{'is-invalid': (formPaper.controls.archivo.touched || submitted)
+                && formPaper.controls.archivo.errors}" onclick='this.select()' />
+            <span class='text-danger'
+              *ngIf='(submitted) && formPaper.controls.archivo.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
+
+        <div class="row justify-content-md-center btn-row">
+          <a class="btn btn-secondary col-md-3" (click)='cancel()' role="button">Cancelar</a>
+          &nbsp;
+          <a class="btn btn-primary col-md-3" (click)='save()' role="button">Guardar Cambios</a>
+        </div>
+        <br>
+        <div class="row justify-content-md-center btn-row">
+          <a class="btn btn-danger col-md-7" (click)='submit()' role="button">Subir Paper</a>
+        </div>
+
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+
+</div>

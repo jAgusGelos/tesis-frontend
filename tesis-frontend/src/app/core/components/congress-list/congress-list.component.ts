@@ -18,6 +18,7 @@ export class CongressListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
   }
 
   toggleEdit(item: any): void {

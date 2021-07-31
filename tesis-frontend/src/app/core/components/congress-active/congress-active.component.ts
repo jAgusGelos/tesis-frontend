@@ -11,10 +11,12 @@ export class CongressActiveComponent implements OnInit {
   @Input() congressList: ICongress;
   @Output() editDatesEvent = new EventEmitter();
   @Output() editSympoEvent = new EventEmitter();
+  @Output() editRoomsEvent = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
   }
 
   toggleEditDate(item: any): void {
@@ -23,6 +25,10 @@ export class CongressActiveComponent implements OnInit {
 
   toggleEditSympo(item: any): void {
     this.editSympoEvent.emit(item);
+  }
+
+  toggleEditRooms(item: any): void {
+    this.editRoomsEvent.emit(item);
   }
 
 }

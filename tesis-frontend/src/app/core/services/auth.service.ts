@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { of } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,11 @@ export class AuthService {
   constructor(private http: HttpClient,
               private cookie: CookieService) { }
 
+
   private apiURLRegister = environment.apiURL  + 'api/registrar/';
   private apiURLLogin = environment.apiURL  + 'api/login/';
   private apiURLLogout = environment.apiURL + 'api/logout/';
+
 
   login(email: string, password: string): any {
     return this.http.post<IUser>(this.apiURLLogin, { email, password });
@@ -31,7 +34,9 @@ export class AuthService {
 
   setSession(authResult): void {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
+    const date = new Date();
 
+    this.cookie.set('jwt', authResult.jwt, date.getTime() + (60 * 1000), '', '', true);
     localStorage.setItem('id_token', authResult.jwt);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
@@ -41,7 +46,15 @@ export class AuthService {
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
     });
-
-
   }
+
+  getUserId(): string {
+    const idToken = localStorage.getItem('id_token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(idToken);
+    return decodedToken.id;
+  }
+
+
 }
+
