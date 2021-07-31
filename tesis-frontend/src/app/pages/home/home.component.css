@@ -1,0 +1,54 @@
+
+.card-title{
+  font-weight:300;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 3rem;
+  padding-bottom: 2rem;  margin-bottom: 1rem;
+  margin-top: 1rem;
+  background-color: #F4F4F4;
+}
+
+.thead{
+  background-color: #C8E5F1;
+}
+
+.card-title{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight:300;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  max-width: fit-content;
+}
+
+hr {
+  border:#00609C solid 1px;
+}
+
+
+@media (min-width: 768px) {
+  .card{
+    max-width: 99%;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+
+  .card-body{
+    padding: auto;
+  }
+
+  hr{
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+
+ }
+
+
+
