@@ -45,6 +45,7 @@ export class AssignSecChairsFormComponent implements OnInit {
                private assignService: AssignSecChairThemeService) { }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.formAssignSecChairs = this.formBuilder.group({
       selectCongreso: [this.asignacion.selectCongreso, [Validators.required]],
       selectChair: [this.asignacion.selectChair, [Validators.required]],

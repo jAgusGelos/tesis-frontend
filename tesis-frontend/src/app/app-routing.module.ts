@@ -29,14 +29,14 @@ const routes: Routes = [
     // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
-    path: 'agenda',
+    path: 'misCongresos',
     loadChildren: () => import('./pages/congress-agenda/congress-agenda.module')
     .then(m => m.CongressAgendaModule),
     // Can activate CP CL
     // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
-    path: 'room',
+    path: 'room/:id',
     loadChildren: () => import('./pages/room/room.module')
     .then(m => m.RoomModule)
     // Can activate CP CL

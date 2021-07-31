@@ -19,6 +19,7 @@ export class SymposiumSelectComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.formSymposium = this.formBuilder.group({
       nombre: ['']
     });

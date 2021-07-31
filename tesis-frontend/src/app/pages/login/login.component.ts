@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   user = false;
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     const idToken = localStorage.getItem('id_token');
     if (idToken){
       this.user = true;

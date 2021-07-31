@@ -34,6 +34,7 @@ export class PaperFormComponent implements OnInit {
               private auth: AuthService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.formPaper = this.formBuilder.group({
       nombre: [this.paper.nombre, [Validators.required]],
       simposio: [this.paper.simposio, [Validators.required]],

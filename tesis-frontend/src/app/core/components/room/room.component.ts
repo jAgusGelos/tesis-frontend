@@ -21,10 +21,12 @@ export class RoomComponent implements OnInit {
   @Output() editRoomEvent = new EventEmitter();
   @Output() newRoomEvent = new EventEmitter();
   @Output() deleteRoomEvent = new EventEmitter();
+  @Output() goBackEvent = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
 
   }
 
@@ -39,6 +41,10 @@ export class RoomComponent implements OnInit {
     if (confirm('Está seguro desea eliminar el aula ' + item.name)) {
       this.deleteRoomEvent.emit(item);
     }
+  }
+
+  toggleBack(): void  {
+    this.goBackEvent.emit();
   }
 
 }

@@ -16,6 +16,7 @@ export class CallForPapersComponent implements OnInit {
   constructor(private paperService: PaperService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.getPaper();
   }
 

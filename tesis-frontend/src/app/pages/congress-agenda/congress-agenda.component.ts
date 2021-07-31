@@ -44,8 +44,6 @@ export class CongressAgendaComponent implements OnInit {
     simposios: [],
     aulas: [],
     modalidad: ''
-
-
   };;
 
 
@@ -54,6 +52,7 @@ export class CongressAgendaComponent implements OnInit {
               private scheduleService: DefineAgendaService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     // this.getSimposios()
 
   }
@@ -119,6 +118,10 @@ export class CongressAgendaComponent implements OnInit {
   editSympo(item: any): void {
     this.sympo = !this.sympo;
     this.list = !this.list;
+  }
+
+  editRooms(item: any): void {
+    this.router.navigate(['/room/' + item.id]);
   }
 
 

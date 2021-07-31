@@ -21,6 +21,7 @@ export class UserRegisterComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.formRegister = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
