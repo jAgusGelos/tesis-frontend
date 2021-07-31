@@ -19,7 +19,7 @@
         <td>{{item.estado}}</td>
 
         <td>
-          <div class="btn-group col-md-3">
+          <div class="btn-group col-md-3" *ngIf='item.estado != "Subido"'>
             <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
             &nbsp;
             &nbsp;
