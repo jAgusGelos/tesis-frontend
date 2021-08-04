@@ -18,7 +18,7 @@ export class EvaluationFormComponent implements OnInit {
   @Output() evaluationEmitter = new EventEmitter();
   @Output() cancelEvaluation = new EventEmitter();
   // @Input() simposios: ISymposium[];
-  simposios = ['Simposio 1', 'Simposio 2'];
+  simposios = ['Simposio 1', 'Simposio 2', 'Todos'];
   formEvaluation: FormGroup;
   submitted = false;
 
