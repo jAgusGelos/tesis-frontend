@@ -77,6 +77,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/evaluation/evaluation.module')
     .then(m => m.EvaluationModule),
   },
+  {
+    path: 'evaluador',
+    loadChildren: () => import('./pages/evaluator/evaluator.module')
+    .then(m => m.EvaluatorModule),
+  },
 
 ];
 
