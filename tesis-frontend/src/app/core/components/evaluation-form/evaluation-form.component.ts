@@ -16,7 +16,7 @@ export class EvaluationFormComponent implements OnInit {
     simposio: '',
   };
   @Output() evaluationEmitter = new EventEmitter();
-  @Output() cancelCongress = new EventEmitter();
+  @Output() cancelEvaluation = new EventEmitter();
   // @Input() simposios: ISymposium[];
   simposios = ['Simposio 1', 'Simposio 2'];
   formEvaluation: FormGroup;
@@ -34,7 +34,7 @@ export class EvaluationFormComponent implements OnInit {
   }
 
   cancel(): void {
-    this.cancelCongress.emit();
+    this.cancelEvaluation.emit();
   }
 
   submit(): void {
