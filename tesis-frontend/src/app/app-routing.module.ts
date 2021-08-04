@@ -72,7 +72,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cancel-author/cancel-author.module')
     .then(m => m.CancelAuthorModule),
   },
-
+  {
+    path: 'evaluacion',
+    loadChildren: () => import('./pages/evaluation/evaluation.module')
+    .then(m => m.EvaluationModule),
+  },
 
 ];
 

@@ -23,6 +23,7 @@ export class PaperFormComponent implements OnInit {
   @Output() paperEmitter = new EventEmitter<any>();
   @Output() cancelPaper = new EventEmitter();
   formPaper: FormGroup;
+  // @Input() simposios: ISymposium[];
   simposios = ['Simposio 1', 'Simposio 2'];
   submitted = false;
   autoresList = [{mail: 'autor1@gmail.com', status: 'ok'}, {mail: 'autor2@gmail.com', status: 'not ok'}];
