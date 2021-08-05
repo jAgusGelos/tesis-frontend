@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IRoom } from '../../models/iroom';
+import { IRoom } from '../../models/IRoom';
 import { RoomService } from '../../services/room.service';
 
 @Component({

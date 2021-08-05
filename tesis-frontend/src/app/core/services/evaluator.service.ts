@@ -13,8 +13,8 @@ export class EvaluatorService {
   constructor(private httpClient: HttpClient,
               ) { }
 
-  postEvaluator(evaluator: IEvaluator): any {
-    return this.httpClient.post<IEvaluator>(this.apiURL + 'evaluador/crear-evaluador/', evaluator);
+  postEvaluator(evaluator: string): any {
+    return this.httpClient.post(this.apiURL + 'evaluador/crear-evaluador/', evaluator);
   }
 
   getEvaluator(): any {

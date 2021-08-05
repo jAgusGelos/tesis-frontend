@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EvaluatorRoutingModule } from './evaluator-routing.module';
 import { EvaluatorComponent } from './evaluator.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import { CoreModule } from 'src/app/core/core.module';
   imports: [
     CommonModule,
     EvaluatorRoutingModule,
-    CoreModule
+    ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
