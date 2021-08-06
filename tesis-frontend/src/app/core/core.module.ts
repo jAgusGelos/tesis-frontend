@@ -20,6 +20,7 @@ import { SymposiumFormComponent } from './components/symposium-form/symposium-fo
 import { SymposiumListComponent } from './components/symposium-list/symposium-list.component';
 import { SymposiumSelectComponent } from './components/symposium-select/symposium-select.component';
 import { CongressActiveComponent } from './components/congress-active/congress-active.component';
+import { DeactivateAccountFormComponent } from './components/deactivate-account-form/deactivate-account-form.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { CongressActiveComponent } from './components/congress-active/congress-a
     SymposiumFormComponent,
     SymposiumListComponent,
     SymposiumSelectComponent,
-    CongressActiveComponent
+    CongressActiveComponent,
+    DeactivateAccountFormComponent
 
   ],
   imports: [
@@ -59,7 +61,8 @@ import { CongressActiveComponent } from './components/congress-active/congress-a
     SymposiumFormComponent,
     SymposiumListComponent,
     SymposiumSelectComponent,
-    CongressActiveComponent
+    CongressActiveComponent,
+    DeactivateAccountFormComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

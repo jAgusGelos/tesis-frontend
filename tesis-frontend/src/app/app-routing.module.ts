@@ -60,7 +60,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cancel-author/cancel-author.module')
     .then(m => m.CancelAuthorModule),
   },
-
+  {
+    path: 'deactivateAccount',
+    loadChildren: () => import('./pages/deactivate-account/deactivate-account.module')
+    .then(m => m.DeactivateAccountModule),
+  },
 
 ];
 
