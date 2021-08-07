@@ -17,7 +17,7 @@ export class EvaluatorService {
     return this.httpClient.post(this.apiURL + 'evaluador/crear-evaluador/', evaluator);
   }
 
-  getEvaluator(): any {
+  getEvaluators(): any {
     return this.httpClient.get(this.apiURL + 'evaluador/lista-evaluador/');
   }
 
