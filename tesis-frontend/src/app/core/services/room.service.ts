@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IRoom } from '../models/iroom';
+import { IRoom } from '../models/IRoom';
 
 @Injectable({
   providedIn: 'root'
