@@ -24,6 +24,10 @@ export class CongressService {
     return this.httpClient.get(this.apiURL + 'congresos/lista-congresos/');
   }
 
+  getCongressById(congress: ICongress) {
+    return this.httpClient.get(this.apiURL + 'congresos/consultaCongreso/' + congress.id);
+  };
+
   putCongress(congress: ICongress): any {
     return this.httpClient.put<ICongress>(this.apiURL + 'congresos/modificar/' + congress.id, congress);
   }

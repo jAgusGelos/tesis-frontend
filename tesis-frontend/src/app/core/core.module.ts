@@ -20,6 +20,7 @@ import { SymposiumFormComponent } from './components/symposium-form/symposium-fo
 import { SymposiumListComponent } from './components/symposium-list/symposium-list.component';
 import { SymposiumSelectComponent } from './components/symposium-select/symposium-select.component';
 import { CongressActiveComponent } from './components/congress-active/congress-active.component';
+import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 
 
 @NgModule({
@@ -37,8 +38,9 @@ import { CongressActiveComponent } from './components/congress-active/congress-a
     SymposiumFormComponent,
     SymposiumListComponent,
     SymposiumSelectComponent,
-    CongressActiveComponent
-
+    CongressActiveComponent,
+    AsignarPaperEvaluadorListComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { CongressActiveComponent } from './components/congress-active/congress-a
     SymposiumFormComponent,
     SymposiumListComponent,
     SymposiumSelectComponent,
-    CongressActiveComponent
+    CongressActiveComponent,
+    AsignarPaperEvaluadorListComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

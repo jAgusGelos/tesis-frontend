@@ -60,8 +60,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cancel-author/cancel-author.module')
     .then(m => m.CancelAuthorModule),
   },
-
-
+  {
+    path: 'asignarPaperEvaluador',
+    loadChildren: () => import('./pages/asignar-paper-evaluador/asignar-paper-evaluador.module')
+    .then(m => m.AsignarPaperEvaluadorModule),
+  }
 ];
 
 @NgModule({
