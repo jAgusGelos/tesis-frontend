@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <app-congress-list *ngIf="!edit" (newCongressEvent)='newCongress()'
-  (editCongressEvent)='editCongress($event)' (deleteCongressEvent)='deleteCongress($event)'>
+  (editCongressEvent)='editCongress($event)' (deleteCongressEvent)='deleteCongress($event)' (assignPapersEvent)='assignPapers($event)'>
   </app-congress-list>
   <app-congress-form *ngIf="edit" [congress]='congress' (congressEmitter)='toggleCreateCongress($event)'
   (cancelCongress)='newCongress()'></app-congress-form>

@@ -42,8 +42,9 @@ export class CongressComponent implements OnInit {
     });
   }
 
-  assignPaperEvaluators() {
+  assignPapers(congress: ICongress) {
     this.assignPaper = !this.assignPaper;
+    this.congress = congress;
   }
 
 
