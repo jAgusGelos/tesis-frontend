@@ -5,6 +5,7 @@ import { IPaper } from '../../models/IPaper';
 import { ISymposium } from '../../models/ISymposium';
 import { ArticulosService } from '../../services/articulos.service';
 import { SymposiumService } from '../../services/symposium.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-papers-by-symposium',
