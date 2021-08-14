@@ -11,6 +11,7 @@ export class CongressComponent implements OnInit {
 
   congressList = [];
   edit = false;
+  assignPaper = false;
   congress = {};
 
   papersBySymp = false;
@@ -36,13 +37,17 @@ export class CongressComponent implements OnInit {
   editCongress(congress: ICongress): void {
     this.edit = !this.edit;
     this.congress = congress;
-
   }
 
   deleteCongress(item: ICongress): void {
     this.congressService.deleteCongress(item).subscribe((res: any) => {
       alert('El congreso ha sido eliminado correctamente');
     });
+  }
+
+  assignPapers(congress: ICongress) {
+    this.assignPaper = !this.assignPaper;
+    this.congress = congress;
   }
 
 

@@ -81,8 +81,7 @@ const routes: Routes = [
     path: 'evaluador',
     loadChildren: () => import('./pages/evaluator/evaluator.module')
     .then(m => m.EvaluatorModule),
-  },
-
+  }
 ];
 
 @NgModule({

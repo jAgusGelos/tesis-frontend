@@ -4,7 +4,9 @@
   </app-congress-list>
   <app-congress-form *ngIf="edit" [congress]='congress' (congressEmitter)='toggleCreateCongress($event)'
   (cancelCongress)='newCongress()'></app-congress-form>
+  <app-congress-form *ngIf="edit" [congress]='congress' (congressEmitter)='toggleCreateCongress($event)'
+  (cancelCongress)='newCongress()'></app-congress-form>
   <app-papers-by-symposium *ngIf='papersBySymp' [congress]='congress' (cancelPapersBySymposium)="PapersBySymposium($event)"></app-papers-by-symposium>
-
+  <app-asignar-paper-evaluador-list *ngIf="assignPaper" [congress]='congress'></app-asignar-paper-evaluador-list>
 </div>
 

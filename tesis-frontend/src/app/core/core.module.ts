@@ -21,7 +21,7 @@ import { CongressActiveComponent } from './components/congress-active/congress-a
 import { EvaluationListComponent } from './components/evaluation-list/evaluation-list.component';
 import { EvaluationFormComponent } from './components/evaluation-form/evaluation-form.component';
 import { PapersBySymposiumComponent } from './components/papers-by-symposium/papers-by-symposium.component';
-
+import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 
 
 @NgModule({
@@ -46,9 +46,9 @@ import { PapersBySymposiumComponent } from './components/papers-by-symposium/pap
     CongressActiveComponent,
     EvaluationListComponent,
     EvaluationFormComponent,
-    PapersBySymposiumComponent
-
-
+    PapersBySymposiumComponent,
+    AsignarPaperEvaluadorListComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -74,7 +74,8 @@ import { PapersBySymposiumComponent } from './components/papers-by-symposium/pap
     CongressActiveComponent,
     EvaluationListComponent,
     EvaluationFormComponent,
-    PapersBySymposiumComponent
+    PapersBySymposiumComponent,
+    AsignarPaperEvaluadorListComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

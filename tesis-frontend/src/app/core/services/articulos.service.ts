@@ -8,13 +8,13 @@ import { ISymposium } from '../models/ISymposium';
   providedIn: 'root'
 })
 export class ArticulosService {
-
+ 
   private apiURL = environment.apiURL;
 
   constructor(private httpClient: HttpClient) { }
 
   getEvaluatorsByPaper(paper: IPaper) {
-    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadoresXArticulo/' + paper.id);
+    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadores/' + paper.id);
   }
 
   getPapersBySymposium(symposium: ISymposium) {
@@ -25,6 +25,7 @@ export class ArticulosService {
     return this.httpClient.post(this.apiURL + 'asignarArticuloEvaluador/', asignation);
   }
 
+  //Soliciar esta funcion al backend
   delete(asignation: any) {
     return this.httpClient.delete(this.apiURL + 'articulos/eliminarEvaluadorDeArticulo/', asignation);
   }
