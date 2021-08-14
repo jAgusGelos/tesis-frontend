@@ -91,6 +91,11 @@ const routes: Routes = [
     path: 'papersBySymposium',
     loadChildren: () => import('./pages/papers-by-symposium/papers-by-symposium.module')
     .then(m => m.PapersBySymposiumModule),
+  },
+  {
+    path: 'deactivateAccount',
+    loadChildren: () => import('./pages/deactivate-account/deactivate-account.module')
+    .then(m => m.DeactivateAccountModule),
   }
 ];
 
