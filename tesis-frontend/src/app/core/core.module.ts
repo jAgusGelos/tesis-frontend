@@ -20,6 +20,7 @@ import { SymposiumSelectComponent } from './components/symposium-select/symposiu
 import { CongressActiveComponent } from './components/congress-active/congress-active.component';
 import { EvaluationListComponent } from './components/evaluation-list/evaluation-list.component';
 import { EvaluationFormComponent } from './components/evaluation-form/evaluation-form.component';
+import { PapersBySymposiumComponent } from './components/papers-by-symposium/papers-by-symposium.component';
 
 
 
@@ -44,7 +45,8 @@ import { EvaluationFormComponent } from './components/evaluation-form/evaluation
     SymposiumSelectComponent,
     CongressActiveComponent,
     EvaluationListComponent,
-    EvaluationFormComponent
+    EvaluationFormComponent,
+    PapersBySymposiumComponent
 
 
   ],
@@ -71,7 +73,8 @@ import { EvaluationFormComponent } from './components/evaluation-form/evaluation
     SymposiumSelectComponent,
     CongressActiveComponent,
     EvaluationListComponent,
-    EvaluationFormComponent
+    EvaluationFormComponent,
+    PapersBySymposiumComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

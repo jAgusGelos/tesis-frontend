@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="contenidos">
+      <hr>
+      <h3 class='text-center'>Ver artículos por simposio</h3>
+      <hr>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <label class="col-sm-3 col-md-3" for="simposio">Simposio: </label>
+            <select name="simposio" id="simposio">
+                <option selected>--Seleccione un Simposio--</option>
+                <option *ngFor="let s of symposiumsList" onchange="">{{s.nombre}}</option>
+            </select>
+            <br>
+            <label class="col-sm-3 col-md-3" for="estado">Estado: </label>
+            <select name="simposio" id="simposio">
+                <option selected>--Seleccione un Estado--</option>
+                <option *ngFor="let e of paperStatesList" onchange="">{{e.nombre}}</option>
+            </select>
+        </div>
+    </div>
+    <table class="table text-center table-hover table-bordered">
+      <thead class='thead'>
+        <tr>
+          <th class="col-md-5">Nombre</th>
+          <th class="col-md-5">Estado</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr class='align-items-center' *ngFor='let item of paperList'>
+          <td>{{item.nombre | titlecase}}</td>
+          <td>{{item.estado}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
