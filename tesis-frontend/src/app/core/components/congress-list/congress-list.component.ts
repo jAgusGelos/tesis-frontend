@@ -14,9 +14,7 @@ export class CongressListComponent implements OnInit {
   @Output() editCongressEvent = new EventEmitter();
   @Output() newCongressEvent = new EventEmitter();
   @Output() deleteCongressEvent = new EventEmitter();
-  @Output() papersBySymposiumEvent = new EventEmitter();
-  @Output() assignPapersEvent = new EventEmitter();
-
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -36,12 +34,5 @@ export class CongressListComponent implements OnInit {
       this.deleteCongressEvent.emit(item);
     }
 
-  }
-
-  toggleAssignPapers(item: any) {
-    this.assignPapersEvent.emit(item);
-  }
-  togglePapersBySymposium(item: any) {
-    this.papersBySymposiumEvent.emit();
   }
 }

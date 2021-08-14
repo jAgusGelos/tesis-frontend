@@ -24,13 +24,6 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   symposium: ISymposium;
 
-  @Input() assignedPaper: {
-    articulo: IPaper;
-    evaUno: IEvaluator;
-    evaDos: IEvaluator;
-    evaTres: IEvaluator;
-  }
-
   papersList: IPaper[];
   evaluatorsList: IEvaluator[];
 
@@ -48,12 +41,6 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
                 private symposiumService: SymposiumService) { }
 
   ngOnInit(): void {
-    this.formPapersEvaluators = this.formBuilder.group({
-      articulo: [this.assignedPaper.articulo.id],
-      evaUno: [this.assignedPaper.evaUno.id, [Validators.required]],
-      evaDos: [this.assignedPaper.evaDos.id, [Validators.required]],
-      evaTres: [this.assignedPaper.evaTres.id, [Validators.required]]
-    })
     this.getSymposiumsByChair();
     this.getPapersBySymposium();   
     this.fillAssignedPapersList();

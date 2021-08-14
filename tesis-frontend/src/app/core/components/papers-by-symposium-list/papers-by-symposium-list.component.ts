@@ -1,26 +1,22 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { ICongress } from '../../models/ICongress';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IPaper } from '../../models/IPaper';
 import { ISymposium } from '../../models/ISymposium';
 import { ArticulosService } from '../../services/articulos.service';
 import { SymposiumService } from '../../services/symposium.service';
-import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-papers-by-symposium',
-  templateUrl: './papers-by-symposium.component.html',
-  styleUrls: ['./papers-by-symposium.component.css']
+  selector: 'app-papers-by-symposium-list',
+  templateUrl: './papers-by-symposium-list.component.html',
+  styleUrls: ['./papers-by-symposium-list.component.css']
 })
-export class PapersBySymposiumComponent implements OnInit {
-  
-  @Input() congress: ICongress;
+export class PapersBySymposiumListComponent implements OnInit {
+
   selectedSymposium: ISymposium;
   selectedState: String;
 
   @Output() cancelPapersBySymposium = new EventEmitter();
   
-  paperStatesList: String[] = ['sin subir', 'subido', 'pendiente de reentrega', 'aprobado', 'no aprobado', 'cancelado'];
+  paperStatesList: String[] = ['Sin Subir', 'Subido', 'Pendiente de Reentrega', 'Aprobado', 'No Aprobado', 'Cancelado'];
   symposiumsList: ISymposium[];
   papersList: IPaper[];
 
@@ -65,4 +61,5 @@ export class PapersBySymposiumComponent implements OnInit {
   cancel(): void {
     this.cancelPapersBySymposium.emit();
   }
+
 }

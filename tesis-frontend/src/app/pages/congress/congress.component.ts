@@ -11,10 +11,8 @@ export class CongressComponent implements OnInit {
 
   congressList = [];
   edit = false;
-  assignPaper = false;
   congress = {};
 
-  papersBySymp = false;
 
   constructor(private congressService: CongressService) { }
 
@@ -45,12 +43,6 @@ export class CongressComponent implements OnInit {
     });
   }
 
-  assignPapers(congress: ICongress) {
-    this.assignPaper = !this.assignPaper;
-    this.congress = congress;
-  }
-
-
   /**
    *
    * @param item
@@ -71,10 +63,4 @@ export class CongressComponent implements OnInit {
     }
     this.getCongress();
   }
-
-  PapersBySymposium(congress: ICongress) {
-    this.papersBySymp = !this.papersBySymp;
-    this.congress = congress;
-  }
-
 }

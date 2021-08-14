@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
@@ -20,8 +20,8 @@ import { SymposiumSelectComponent } from './components/symposium-select/symposiu
 import { CongressActiveComponent } from './components/congress-active/congress-active.component';
 import { EvaluationListComponent } from './components/evaluation-list/evaluation-list.component';
 import { EvaluationFormComponent } from './components/evaluation-form/evaluation-form.component';
-import { PapersBySymposiumComponent } from './components/papers-by-symposium/papers-by-symposium.component';
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
+import { PapersBySymposiumListComponent } from './components/papers-by-symposium-list/papers-by-symposium-list.component';
 
 
 @NgModule({
@@ -46,14 +46,15 @@ import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-e
     CongressActiveComponent,
     EvaluationListComponent,
     EvaluationFormComponent,
-    PapersBySymposiumComponent,
     AsignarPaperEvaluadorListComponent,
+    PapersBySymposiumListComponent
     
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule
   ],
   exports:  [
     UserRegisterComponent,
@@ -74,8 +75,8 @@ import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-e
     CongressActiveComponent,
     EvaluationListComponent,
     EvaluationFormComponent,
-    PapersBySymposiumComponent,
-    AsignarPaperEvaluadorListComponent
+    AsignarPaperEvaluadorListComponent,
+    PapersBySymposiumListComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
