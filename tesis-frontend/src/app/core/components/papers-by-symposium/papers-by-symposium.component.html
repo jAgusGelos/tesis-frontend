@@ -7,17 +7,20 @@
     <div class="card-body">
         <div class="card-text">
             <label class="col-sm-3 col-md-3" for="simposio">Simposio: </label>
-            <select name="simposio" id="simposio">
+            <select name="simposio" id="simposio" [(ngModel)]="selectedSymposium">
                 <option selected>--Seleccione un Simposio--</option>
-                <option *ngFor="let s of symposiumsList" onchange="">{{s.nombre}}</option>
+                <option *ngFor="let s of symposiumsList" value="{{s}}" onchange="getPapers()">{{s.nombre}}</option>
             </select>
             <br>
             <label class="col-sm-3 col-md-3" for="estado">Estado: </label>
-            <select name="simposio" id="simposio">
+            <select name="simposio" id="simposio" [(ngModel)]="selectedState">
                 <option selected>--Seleccione un Estado--</option>
-                <option *ngFor="let e of paperStatesList" onchange="">{{e.nombre}}</option>
+                <option *ngFor="let e of paperStatesList" value="{{e}}" onchange="getPapers()">{{e.nombre}}</option>
             </select>
         </div>
+    </div>
+    <div class="row justify-content-md-begin">
+      <a class="btn btn-primary col-sm-2" (click)='cancel()' role="button">Volver atrás</a>
     </div>
     <table class="table text-center table-hover table-bordered">
       <thead class='thead'>

@@ -13,6 +13,8 @@ export class CongressComponent implements OnInit {
   edit = false;
   congress = {};
 
+  papersBySymp = false;
+
   constructor(private congressService: CongressService) { }
 
   ngOnInit(): void {
@@ -63,6 +65,11 @@ export class CongressComponent implements OnInit {
       });
     }
     this.getCongress();
+  }
+
+  PapersBySymposium(congress: ICongress) {
+    this.papersBySymp = !this.papersBySymp;
+    this.congress = congress;
   }
 
 }

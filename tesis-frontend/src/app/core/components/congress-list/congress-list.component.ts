@@ -14,6 +14,7 @@ export class CongressListComponent implements OnInit {
   @Output() editCongressEvent = new EventEmitter();
   @Output() newCongressEvent = new EventEmitter();
   @Output() deleteCongressEvent = new EventEmitter();
+  @Output() papersBySymposiumEvent = new EventEmitter();
 
   constructor() { }
 
@@ -34,6 +35,10 @@ export class CongressListComponent implements OnInit {
       this.deleteCongressEvent.emit(item);
     }
 
+  }
+
+  togglePapersBySymposium(item: any) {
+    this.papersBySymposiumEvent.emit();
   }
 
 }
