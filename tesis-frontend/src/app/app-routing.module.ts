@@ -78,6 +78,16 @@ const routes: Routes = [
     .then(m => m.EvaluationModule),
   },
   {
+    path: 'cancelacionChairSecundario',
+    loadChildren: () => import('./pages/cancel-sec-chair/cancel-sec-chair.module')
+    .then(m => m.CancelSecChairModule),
+  },
+  {
+    path: 'cancelacionEvaluador',
+    loadChildren: () => import('./pages/cancel-evaluator/cancel-evaluator.module')
+    .then(m => m.CancelEvaluatorModule),
+  },
+  {
     path: 'evaluador',
     loadChildren: () => import('./pages/evaluator/evaluator.module')
     .then(m => m.EvaluatorModule),
