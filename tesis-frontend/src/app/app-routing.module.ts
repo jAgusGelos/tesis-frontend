@@ -68,7 +68,7 @@ const routes: Routes = [
     // canActivate: [AuthGuard, SuperRolGuard]
   },
   {
-    path: 'cancelar',
+    path: 'cancelarAutoria',
     loadChildren: () => import('./pages/cancel-author/cancel-author.module')
     .then(m => m.CancelAuthorModule),
   },
