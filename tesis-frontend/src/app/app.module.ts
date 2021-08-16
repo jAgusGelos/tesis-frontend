@@ -9,6 +9,9 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
+import { CancelAuthorComponent } from './pages/cancel-author/cancel-author.component';
+import { AsignarPaperEvaluadorComponent } from './pages/asignar-paper-evaluador/asignar-paper-evaluador.component';
+import { PapersBySymposiumComponent } from './pages/papers-by-symposium/papers-by-symposium.component';
 
 
 
@@ -16,7 +19,7 @@ import { AuthInterceptor } from './core/services/auth.interceptor';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AsignarPaperEvaluadorComponent, PapersBySymposiumComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

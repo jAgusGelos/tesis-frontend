@@ -13,6 +13,7 @@ export class CongressComponent implements OnInit {
   edit = false;
   congress = {};
 
+
   constructor(private congressService: CongressService) { }
 
   ngOnInit(): void {
@@ -34,7 +35,6 @@ export class CongressComponent implements OnInit {
   editCongress(congress: ICongress): void {
     this.edit = !this.edit;
     this.congress = congress;
-
   }
 
   deleteCongress(item: ICongress): void {
@@ -42,7 +42,6 @@ export class CongressComponent implements OnInit {
       alert('El congreso ha sido eliminado correctamente');
     });
   }
-
 
   /**
    *
@@ -64,5 +63,4 @@ export class CongressComponent implements OnInit {
     }
     this.getCongress();
   }
-
 }

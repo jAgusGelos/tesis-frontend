@@ -14,7 +14,7 @@ export class CongressListComponent implements OnInit {
   @Output() editCongressEvent = new EventEmitter();
   @Output() newCongressEvent = new EventEmitter();
   @Output() deleteCongressEvent = new EventEmitter();
-
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -35,5 +35,4 @@ export class CongressListComponent implements OnInit {
     }
 
   }
-
 }

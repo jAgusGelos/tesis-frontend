@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-body">
+        <hr>
+        <h3 class="card-title text-center">Desactivar cuenta</h3>
+        <hr>
+        <div class="card-text text-center" *ngIf="!deactivated">
+            <p>Se finalizará la sesión y tu cuenta quedará desactivada.</p>
+            <br>
+            <b>¿Estás seguro de que deseas desactivar tu cuenta?</b>
+            
+            <div class="row justify-content-md-center pt-3 btn-row">
+                <a class="btn btn-outline-secondary col-md-2" (click)="cancel()" role="button">Cancelar</a>
+                &nbsp;
+                <a class="btn btn-outline-primary col-md-2" (click)="desactivar()" role="button">Desactivar cuenta</a>
+            </div>     
+        </div>
+        <div class="card-text text-center" *ngIf="deactivated">
+            <h4>Tu cuenta ha sido desactivada.</h4>
+        </div>
+        
+    </div>
+</div>
