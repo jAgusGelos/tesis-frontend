@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr />
+    <h3 class="text-center">Evaluadores Activos</h3>
+    <hr />
+  </div>
+  <div class="row justify-content-md-end">
+    <a class="btn btn-primary col-sm-4" (click)="toggleNew()" role="button"
+      >Agregar Evaluador</a
+    >
+  </div>
+  <br />
+  <div class="contenidos" *ngIf="adding">
+    <form [formGroup]="formEvaluator">
+      <!-- evaluador -->
+      <div class="form-group row">
+        <label class="col-form-label col-sm-3 col-sm-offset-2" for="evaluador"
+          >Agregar evaluador:</label
+        >
+        <div class="col-sm-6">
+          <div class="input-group">
+            <input
+              type="email"
+              class="form-control"
+              formControlName="evaluador"
+              onclick="this.select()"
+            />
+            <a class="btn btn-secondary" (click)="addEvaluator()">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <table class="table text-center table-hover table-bordered">
+    <thead class="thead">
+      <tr>
+        <th class="col-md-4">Evaluador</th>
+        <th class="col-md-2">Puntuación</th>
+        <th class="col-md-2">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class="align-items-center" *ngFor="let item of evaluatorList">
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.puntuacion }}</td>
+        <td>
+          <div class="btn-group col-md-3 text-center">
+            <a (click)="toggleRemoveHandled(item)" title="Eliminar"
+              ><i class="fas fa-trash"></i
+            ></a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+</div>

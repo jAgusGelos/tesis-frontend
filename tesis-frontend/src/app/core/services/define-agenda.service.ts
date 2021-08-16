@@ -21,10 +21,10 @@ export class DefineAgendaService {
   }
 
   putAgenda(agenda: ISchedule): any {
-    return this.httpClient.put<ISchedule>(this.apiURL + 'definir-agenda' + agenda, agenda);
+    return this.httpClient.put<ISchedule>(this.apiURL + 'congreso/definir-agenda/' + agenda, agenda);
   }
 
   deleteAgenda(agenda: ISchedule): any {
-    return this.httpClient.delete<ISchedule>(this.apiURL + 'definir-agenda' + agenda.Id);
+    return this.httpClient.delete<ISchedule>(this.apiURL + 'congreso/definir-agenda/' + agenda.Id);
   }
 }

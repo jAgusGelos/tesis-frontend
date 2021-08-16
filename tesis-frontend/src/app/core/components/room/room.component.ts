@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-import { IRoom } from '../../models/iroom';
+import { IRoom } from '../../models/IRoom';
 import { AuthService } from '../../services/auth.service';
 import { RoomService } from '../../services/room.service';
 

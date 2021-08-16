@@ -8,22 +8,11 @@
     <div class="card-text text-center">
       <form [formGroup]='formCongress'>
         <div class="row justify-content-md-center">
-          <!--Seleciconar Congreso-->
-          <div class="row">
-            <label class="col-form-label col-sm-3" for="congreso">Congreso: </label>
-            <div class="col-sm-6">
-              <select name="congreso" class="form-control" formControlName="congreso"
-                [ngClass]="{'is-invalid': (formCongress.controls.congreso.touched || submitted) && formCongress.controls.congreso.errors}">
-                <option hidden selected>Seleccione un congreso</option>
-                <option *ngFor="let opt of congresos"> {{ opt }}</option>
-              </select>
-            </div>
-          </div>
         </div>
         <div class="row">
           <!-- Fecha Inicio Congreso -->
           <div class='form-group row col-md-6'>
-            <label class='col-form-label col-sm-6' for='FechaInCongreso'>Inicio de congreso: <span
+            <label class='col-form-label col-sm-6' for='FechaInCongreso'>Inicio del congreso: <span
                 class='text-danger'>*</span></label>
             <div class='col-sm-6'>
               <input type='date' class='form-control' formControlName='FechaInCongreso' [ngClass]="{'is-invalid': (formCongress.controls.FechaInCongreso.touched || submitted)
@@ -37,7 +26,7 @@
           <br>
           <!-- Fecha Fin Congreso-->
           <div class='form-group row col-md-6'>
-            <label class='col-form-label col-sm-6' for='FechaFinCongreso'>Fin de congreso: <span
+            <label class='col-form-label col-sm-6' for='FechaFinCongreso'>Fin del congreso: <span
                 class='text-danger'>*</span></label>
             <div class='col-sm-6'>
               <input type='date' class='form-control' formControlName='FechaFinCongreso' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinCongreso.touched || submitted)
@@ -49,14 +38,58 @@
             </div>
           </div>
         </div>
-
+        <hr>
+        <h4 class="card-title text-center"><b>Inscripción</b></h4>
+        <div class="row">
+          <!-- Fecha Inicio Inscripción-->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6' for='FechaInInscrip'>Inicio de inscripción:
+              <span class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaInInscrip' [ngClass]="{'is-invalid': (formCongress.controls.FechaInInscrip.touched || submitted)
+        && formCongress.controls.FechaInInscrip.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaInInscrip.touched || submitted) && formCongress.controls.FechaInInscrip.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+          <br>
+          <!-- Fecha Fin Inscripción Temprana -->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6' for='FechaFinInscripTemprana'>Fin de inscripción:<span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaFinInscripTemprana' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinInscripTemprana.touched || submitted)
+        && formCongress.controls.FechaFinInscripTemprana.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaFinInscripTemprana.touched || submitted) && formCongress.controls.FechaFinInscripTemprana.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+          <div class='form-group row col-md-6'></div>
+          <!-- Fecha Fin Inscripción Tardía -->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6 ' for='FechaFinInscripTardia'>Fin de inscripción tardía:<span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaFinInscripTardia' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinInscripTardia.touched || submitted)
+        && formCongress.controls.FechaFinInscripTardia.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaFinInscripTardia.touched || submitted) && formCongress.controls.FechaFinInscripTardia.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+        </div>
         <hr>
         <h4 class="card-title text-center"><b>Entrega de artículos</b></h4>
 
         <div class="row">
-          <!-- Fecha Limite Papers -->
+          <!-- Fecha Límite Papers -->
           <div class='form-group row col-md-6'>
-            <label class='col-form-label col-sm-6' for='FechaLimPapers'>Fecha Limite entrega:
+            <label class='col-form-label col-sm-6' for='FechaLimPapers'>Límite de entrega:
               <span class='text-danger'>*</span></label>
             <div class='col-sm-6'>
               <input type='date' class='form-control' formControlName='FechaLimPapers' [ngClass]="{'is-invalid': (formCongress.controls.FechaLimPapers.touched || submitted)
@@ -68,9 +101,9 @@
             </div>
           </div>
           <br>
-          <!-- Fecha prorroga Papers -->
+          <!-- Fecha Prórroga Papers -->
           <div class='form-group row col-md-6'>
-            <label class='col-form-label col-sm-6' for='FechaProrrogaPapers'>Fecha prorroga de entrega:<span
+            <label class='col-form-label col-sm-6' for='FechaProrrogaPapers'>Prórroga de entrega:<span
                 class='text-danger'>*</span></label>
             <div class='col-sm-6'>
               <input type='date' class='form-control' formControlName='FechaProrrogaPapers' [ngClass]="{'is-invalid': (formCongress.controls.FechaProrrogaPapers.touched || submitted)
@@ -86,9 +119,9 @@
         <hr>
         <h4 class="card-title text-center"><b>Evaluación de artículos</b></h4>
         <div class="row justify-content-md-center">
-          <!-- fehca Fin evaluacion -->
+          <!-- Fecha Fin Evaluación -->
           <div class='form-group row col-md-6'>
-            <label class='col-form-label col-sm-6' for='FechaFinEvaluacion'>Fecha fin de evaluacion:<span class='text-danger'>*</span></label>
+            <label class='col-form-label col-sm-6' for='FechaFinEvaluacion'>Fin de evaluación:<span class='text-danger'>*</span></label>
             <div class='col-sm-6'>
               <input type='date' class='form-control' formControlName='FechaFinEvaluacion' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinEvaluacion.touched || submitted)
         && formCongress.controls.FechaFinEvaluacion.errors}" onclick='this.select()' />
@@ -100,10 +133,10 @@
           </div>
           <br>
         </div>
-        <!-- Fecha fin Reevaluacion -->
+        <!-- Fecha Fin Reevaluación -->
         <div class="row justify-content-md-center">
           <div class='form-group row col-md-6 text-center'>
-            <label class='col-form-label col-sm-6 col-sm-offset-4' for='FechaFinReEv'>Fecha fin de reevaluación:<span class='text-danger'>*</span></label>
+            <label class='col-form-label col-sm-6 col-sm-offset-4' for='FechaFinReEv'>Fin de reevaluación:<span class='text-danger'>*</span></label>
             <div class='col-sm-6'>
               <input type='date' class='form-control' formControlName='FechaFinReEv' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinReEv.touched || submitted)
          && formCongress.controls.FechaFinReEv.errors}" onclick='this.select()' />

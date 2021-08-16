@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IRoom } from 'src/app/core/models/iroom';
+import { IRoom } from 'src/app/core/models/IRoom';
 import { RoomService } from 'src/app/core/services/room.service';
 
 @Component({

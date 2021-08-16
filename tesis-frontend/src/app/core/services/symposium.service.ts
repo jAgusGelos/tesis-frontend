@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ISymposium } from '../models/ISymposium';
+import { IUserComplete } from '../models/IUserComplete';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -38,5 +39,10 @@ export class SymposiumService {
 
   postSymposiumCongress(item: any): any {
     return this.httpClient.post(this.apiURL + 'ADEFINIR', item);
+  }
+
+  //Solicitar esta función al back
+  getSymposiumByChair(chair: IUserComplete): any {
+    return this.httpClient.get(this.apiURL + 'congresos/simposio-por-chair/' + chair.id)
   }
 }

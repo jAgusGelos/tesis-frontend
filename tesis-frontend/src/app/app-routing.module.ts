@@ -86,8 +86,27 @@ const routes: Routes = [
     path: 'cancelacionEvaluador',
     loadChildren: () => import('./pages/cancel-evaluator/cancel-evaluator.module')
     .then(m => m.CancelEvaluatorModule),
+  },
+  {
+    path: 'evaluador',
+    loadChildren: () => import('./pages/evaluator/evaluator.module')
+    .then(m => m.EvaluatorModule),
+  },
+  {
+    path: 'assignPaperEvaluator',
+    loadChildren: () => import('./pages/asignar-paper-evaluador/asignar-paper-evaluador.module')
+    .then(m => m.AsignarPaperEvaluadorModule),
+  },
+  {
+    path: 'papersBySymposium',
+    loadChildren: () => import('./pages/papers-by-symposium/papers-by-symposium.module')
+    .then(m => m.PapersBySymposiumModule),
+  },
+  {
+    path: 'deactivateAccount',
+    loadChildren: () => import('./pages/deactivate-account/deactivate-account.module')
+    .then(m => m.DeactivateAccountModule),
   }
-
 ];
 
 @NgModule({

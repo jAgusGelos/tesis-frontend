@@ -22,4 +22,8 @@ export class UserService {
     return this.httpClient.get(this.apiURL + 'api/usuario/');
   }
 
+  deactivate(user: IUser): any {
+    return this.httpClient.put<IUser>(this.apiURL + 'api/eliminar/', user);
+  };
+
 }

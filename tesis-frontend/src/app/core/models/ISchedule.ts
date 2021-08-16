@@ -3,7 +3,7 @@ export interface ISchedule {
   fechaInCongreso: Date;
   fechaFinCongreso: Date;
   fechaInInscrip: Date;
-  fechaFinInscrip: Date;
+  fechaFinInscripTemprana: Date;
   fechaFinInscripTardia: Date;
   fechaLimPapers: Date;
   fechaProrrogaPapers: Date;

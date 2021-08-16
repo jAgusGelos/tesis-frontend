@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="contenidos">
+      <hr>
+      <h3 class='text-center'>Ver artículos por simposio</h3>
+      <hr>
+    </div>
+    <div class="card-body">
+        <div class="col-sm-2 col-md-2 card-text">
+            <label class="col-sm-2 col-md-2" for="simposio">Simposio:<span
+              class='text-danger'>*</span></label>
+            <select class="form-control" name="simposio" id="simposio" [(ngModel)]="selectedSymposium">
+                <option *ngFor="let s of symposiumsList" value="{{s}}" onchange="getPapers()">{{s.nombre}}</option>
+            </select>
+            <br>
+            <label class="col-sm-2 col-md-2" for="estado">Estado:</label>
+            <select class="form-control" name="estado" id="estado" [(ngModel)]="selectedState">
+                <option *ngFor="let e of paperStatesList" value="{{e}}" onchange="getPapers()">{{e}}</option>
+            </select>
+        </div>
+    </div>
+    <table class="table text-center table-hover table-bordered">
+      <thead class='thead'>
+        <tr>
+          <th class="col-md-5">Nombre</th>
+          <th class="col-md-5">Estado</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr class='align-items-center' *ngFor='let item of papersList'>
+          <td>{{item.nombre | titlecase}}</td>
+          <td>{{item.estado}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

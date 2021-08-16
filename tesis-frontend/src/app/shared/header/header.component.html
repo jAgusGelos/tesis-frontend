@@ -28,6 +28,16 @@
           <a class="nav-link" href="/simposios">Simposios</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/evaluador">Evaluadores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/evaluacion">Planilla</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Contacto</a>
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link" href="#">Contacto</a>
         </li>
         <li class="nav-item  d-lg-none">
@@ -39,6 +49,10 @@
     <div class="logged  text-right align-items-right d-none d-lg-block">
       <a *ngIf='!user' type="button" class="btn btn-primary" href="/login">Iniciar Sesión</a>
       <a *ngIf='user' type="button" class="btn btn-primary" href="/usuario">Mi Perfil</a>
+      &nbsp;
+      <button *ngIf='user' type="button" class="btn btn-primary" (click)="logout()">Cerrar Sesión</button>
+      &nbsp;
+      <a *ngIf='user' type="button" class="btn btn-outline-primary" href="/deactivateAccount">Desactivar cuenta</a>
     </div>
   </div>
 </nav>
