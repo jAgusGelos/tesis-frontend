@@ -80,7 +80,7 @@ export class CongressAgendaComponent implements OnInit {
       return;
     });
     let todoOk = true;
-    newSymps.forEach((item: any) => {
+    newSymps.forEach((item: ISymposium) => {
       this.sympoService.postSymposiumCongress(item).subscribe((res: any) => {
         if (res.err) {
           todoOk = false;

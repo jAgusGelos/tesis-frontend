@@ -1,7 +1,7 @@
 export interface IRoom {
-    id: string; 
+    id?: string;
     name: string;
     description: string;
-    capacity: number
+    capacity: number;
 }
 

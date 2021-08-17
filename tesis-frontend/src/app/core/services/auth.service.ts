@@ -48,12 +48,27 @@ export class AuthService {
     });
   }
 
-  getUserId(): string {
+  getUserId(): number {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
     return decodedToken.id;
   }
+
+  getCongressId(): number {
+    const idToken = localStorage.getItem('id_token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(idToken);
+    return decodedToken.idCongress;
+  }
+
+  getSedeId(): number {
+    const idToken = localStorage.getItem('id_token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(idToken);
+    return decodedToken.sede;
+  }
+
 
 
 }

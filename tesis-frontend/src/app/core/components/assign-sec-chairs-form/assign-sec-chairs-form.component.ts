@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IassignSecChairTheme } from '../../models/iassign-sec-chair-theme';
 import { AssignSecChairThemeService } from '../../services/assign-sec-chair-theme.service';
 import { CongressService } from '../../services/congress.service';
-import { ThemesService } from '../../services/themes.service';
+import { SymposiumService } from '../../services/symposium.service';
 
 @Component({
   selector: 'app-assign-sec-chairs-form',
@@ -41,7 +41,7 @@ export class AssignSecChairsFormComponent implements OnInit {
 
   constructor( private formBuilder: FormBuilder,
                private congressService: CongressService,
-               private themesService: ThemesService,
+               private themesService: SymposiumService,
                private assignService: AssignSecChairThemeService) { }
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class AssignSecChairsFormComponent implements OnInit {
     this.congressService.getCongress().subscribe((res: any) => {this.congresos = res.data});
   };
   getTematicas() {
-    this.themesService.getThemes().subscribe((res: any) => {this.tematicas = res.data});
+    this.themesService.getSymposium().subscribe((res: any) => {this.tematicas = res.data});
   };
 
   asignarChair() {

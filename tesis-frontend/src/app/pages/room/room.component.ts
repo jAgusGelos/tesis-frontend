@@ -48,7 +48,7 @@ export class RoomComponent implements OnInit {
 
   toggleCreateRoom(item: IRoom): void{
     if (item.id === undefined) {
-      this.roomService.registerRoom(item).subscribe((res: any) => {
+      this.roomService.postRoom(item).subscribe((res: any) => {
         alert('Aula Creada');
       });
     }

@@ -8,7 +8,7 @@ import { ISchedule } from '../models/ISchedule';
 })
 export class DefineAgendaService {
 
-  apiURL = environment.apiURL + '/';
+  apiURL = environment.apiURL;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,7 +17,17 @@ export class DefineAgendaService {
   }
 
   postAgenda(agenda: ISchedule): any {
-    return this.httpClient.post<ISchedule>(this.apiURL + 'congreso/definir-agenda/', agenda);
+    const postAgenda = {
+      fechaInCongreso: agenda.fechaInCongreso,
+      fechaFinCongreso: agenda.fechaFinCongreso,
+      fechaLimPapers: agenda.fechaLimPapers,
+      fechaProrrogaPapers: agenda.fechaProrrogaPapers,
+      fechaFinEvaluacion: agenda.fechaFinEvaluacion,
+      fechaFinReEv: agenda.fechaFinReEv,
+      fechaFinInscripTemprana: agenda.fechaFinInscripTemprana,
+      fechaFinInscripTardia: agenda.fechaFinInscripTardia,
+    };
+    return this.httpClient.post<ISchedule>(this.apiURL + 'congreso/definir-agenda/', postAgenda);
   }
 
   putAgenda(agenda: ISchedule): any {
