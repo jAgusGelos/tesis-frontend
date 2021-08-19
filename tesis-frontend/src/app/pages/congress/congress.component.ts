@@ -24,6 +24,15 @@ export class CongressComponent implements OnInit {
   getCongress(): void {
     this.congressService.getCongress().subscribe((res: any) => {
       this.congressList = res.data;
+      this.congressList = this.congressList.map((x: any) => {
+        return {
+          sede: x.sede,
+          ano: x.año,
+          nombre: x.nombre,
+          chairPrincipal: x.chairPrincipal,
+          coordLocal: x.coordLocal
+        };
+      });
     });
   }
 
@@ -34,6 +43,8 @@ export class CongressComponent implements OnInit {
 
   editCongress(congress: ICongress): void {
     this.edit = !this.edit;
+    console.log(congress);
+
     this.congress = congress;
   }
 
@@ -51,16 +62,20 @@ export class CongressComponent implements OnInit {
    * Si no lo tiene crea un nuevo congreso.
    */
    toggleCreateCongress(item: ICongress): void {
-    if (item.id === undefined) {
-      this.congressService.postCongress(item).subscribe((res: any) => {
-        alert('Congreso Creado Correctamente');
-      });
-    }
-    else{
-      this.congressService.putCongress(item).subscribe((res: any) => {
-        alert('Congreso Modificado Correctamente');
-      });
-    }
+    this.congressService.postCongress(item).subscribe((res: any) => {
+      alert('Congreso Creado Correctamente');
+      this.edit = !this.edit;
+    });
+    this.congressList = [];
     this.getCongress();
+  }
+
+  toggleEditCongress(item: ICongress): void {
+    this.congressService.putCongress(item).subscribe((res: any) => {
+      alert('Congreso Modificado Correctamente');
+      this.edit = !this.edit;
+    });
+    this.getCongress();
+
   }
 }
