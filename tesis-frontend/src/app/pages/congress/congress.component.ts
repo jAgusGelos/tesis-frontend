@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICongress } from 'src/app/core/models/ICongress';
 import { CongressService } from 'src/app/core/services/congress.service';
 
@@ -14,10 +15,12 @@ export class CongressComponent implements OnInit {
   congress = {};
 
 
-  constructor(private congressService: CongressService) { }
+  constructor(private congressService: CongressService,
+              private router: Router) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.congressList = [];
     this.getCongress();
   }
 
@@ -43,8 +46,6 @@ export class CongressComponent implements OnInit {
 
   editCongress(congress: ICongress): void {
     this.edit = !this.edit;
-    console.log(congress);
-
     this.congress = congress;
   }
 
@@ -64,18 +65,14 @@ export class CongressComponent implements OnInit {
    toggleCreateCongress(item: ICongress): void {
     this.congressService.postCongress(item).subscribe((res: any) => {
       alert('Congreso Creado Correctamente');
-      this.edit = !this.edit;
     });
-    this.congressList = [];
-    this.getCongress();
+    window.location.reload();
   }
 
   toggleEditCongress(item: ICongress): void {
     this.congressService.putCongress(item).subscribe((res: any) => {
       alert('Congreso Modificado Correctamente');
-      this.edit = !this.edit;
     });
-    this.getCongress();
-
+    window.location.reload();
   }
 }
