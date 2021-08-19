@@ -27,7 +27,6 @@ export class AuthService {
   }
 
   register(user: IUser): any {
-
     return this.http.post<IUser>(this.apiURLRegister, { email: user.email, password: user.password });
   }
 

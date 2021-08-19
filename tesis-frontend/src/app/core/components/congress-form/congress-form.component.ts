@@ -22,6 +22,7 @@ export class CongressFormComponent implements OnInit {
   };
   @Output() congressEmitter = new EventEmitter<ICongress>();
   @Output() cancelCongress = new EventEmitter();
+  @Output() editCongress = new EventEmitter();
 
   formCongress: FormGroup;
   submitted = false;
@@ -42,6 +43,24 @@ export class CongressFormComponent implements OnInit {
 
   cancel(): void {
     this.cancelCongress.emit();
+  }
+
+  edit(): void {
+    this.submitted = true;
+    if (this.formCongress.invalid) {
+      alert('Por favor complete todos los datos.');
+      return;
+    }
+    this.congress = {
+    id: this.congress.id,
+    nombre: this.formCongress.controls.nombre.value,
+    sede: this.formCongress.controls.sede.value,
+    ano: this.formCongress.controls.ano.value,
+    chairPrincipal: this.formCongress.controls.chairPrincipal.value,
+    coordLocal: this.formCongress.controls.coordLocal.value
+    };
+    this.editCongress.emit(this.congress);
+
   }
 
   submit(): void {

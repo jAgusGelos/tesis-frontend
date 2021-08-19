@@ -17,7 +17,14 @@ export class CongressService {
               ) { }
 
   postCongress(congress: ICongress): any {
-    return this.httpClient.post<ICongress>(this.apiURL + 'congresos/crear-congreso/', congress);
+    const postCongress = {
+      sede: congress.sede,
+      año: congress.ano,
+      nombre: congress.nombre,
+      chairPrincipal: congress.chairPrincipal,
+      coordLocal: congress.coordLocal
+    }
+    return this.httpClient.post<ICongress>(this.apiURL + 'congresos/crear-congreso/', postCongress);
   }
 
   getCongress(): any {

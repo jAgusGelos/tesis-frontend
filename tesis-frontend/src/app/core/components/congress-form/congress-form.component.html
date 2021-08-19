@@ -79,7 +79,9 @@
           <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
           &nbsp;
           <a class="btn btn-primary col-md-4" (click)='submit()'
-            role="button">{{congress.id === undefined ? 'Crear Congreso' : 'Guardar Cambios'}}</a>
+            role="button" *ngIf="congress.sede === undefined">Crear Congreso</a>
+            <a class="btn btn-primary col-md-4" (click)='edit()'
+            role="button" *ngIf="congress.sede !== undefined">Guardar Cambios</a>
         </div>
 
       </form>
