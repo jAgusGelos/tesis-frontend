@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CongressListComponent implements OnInit {
 
-  @Input() congressList = [ ];
+  @Input() congressList = [];
   @Output() editCongressEvent = new EventEmitter();
   @Output() newCongressEvent = new EventEmitter();
   @Output() deleteCongressEvent = new EventEmitter();

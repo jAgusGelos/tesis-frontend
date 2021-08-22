@@ -13,6 +13,7 @@ export class CongressComponent implements OnInit {
   congressList = [];
   edit = false;
   congress = {};
+  sedes = [];
 
 
   constructor(private congressService: CongressService,
@@ -20,8 +21,14 @@ export class CongressComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    this.congressList = [];
     this.getCongress();
+    this.getSedes();
+  }
+
+  getSedes(): void {
+    this.congressService.getSedes().subscribe((res: any) => {
+      this.sedes = res;
+    });
   }
 
   getCongress(): void {
@@ -29,6 +36,7 @@ export class CongressComponent implements OnInit {
       this.congressList = res.data;
       this.congressList = this.congressList.map((x: any) => {
         return {
+          id: x.id,
           sede: x.sede,
           ano: x.año,
           nombre: x.nombre,
@@ -50,6 +58,8 @@ export class CongressComponent implements OnInit {
   }
 
   deleteCongress(item: ICongress): void {
+    console.log(item);
+
     this.congressService.deleteCongress(item).subscribe((res: any) => {
       alert('El congreso ha sido eliminado correctamente');
     });
@@ -65,14 +75,15 @@ export class CongressComponent implements OnInit {
    toggleCreateCongress(item: ICongress): void {
     this.congressService.postCongress(item).subscribe((res: any) => {
       alert('Congreso Creado Correctamente');
+      window.location.reload();
     });
-    window.location.reload();
+
   }
 
   toggleEditCongress(item: ICongress): void {
     this.congressService.putCongress(item).subscribe((res: any) => {
       alert('Congreso Modificado Correctamente');
+      window.location.reload();
     });
-    window.location.reload();
   }
 }

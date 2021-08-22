@@ -21,8 +21,8 @@ export class AuthService {
   private apiURLLogout = environment.apiURL + 'api/logout/';
 
 
-  login(email: string, password: string): any {
-    return this.http.post<IUser>(this.apiURLLogin, { email, password });
+  login(item: any): any {
+    return this.http.post<IUser>(this.apiURLLogin, item);
     // .subscribe(res => this.setSession(res));
   }
 
@@ -45,6 +45,8 @@ export class AuthService {
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
     });
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expires_at');
   }
 
   getUserId(): number {

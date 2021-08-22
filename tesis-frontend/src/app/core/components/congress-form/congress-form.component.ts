@@ -26,11 +26,13 @@ export class CongressFormComponent implements OnInit {
 
   formCongress: FormGroup;
   submitted = false;
+  @Input() sedes = [];
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    console.log(this.sedes);
     this.formCongress = this.formBuilder.group({
       nombre: [this.congress.nombre, Validators.required],
       sede: [this.congress.sede, Validators.required],
@@ -38,8 +40,8 @@ export class CongressFormComponent implements OnInit {
       chairPrincipal: [this.congress.chairPrincipal, Validators.required],
       coordLocal: [this.congress.coordLocal ],
     });
-
   }
+
 
   cancel(): void {
     this.cancelCongress.emit();

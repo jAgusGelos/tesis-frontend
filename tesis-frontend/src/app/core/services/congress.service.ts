@@ -23,7 +23,7 @@ export class CongressService {
       nombre: congress.nombre,
       chairPrincipal: congress.chairPrincipal,
       coordLocal: congress.coordLocal
-    }
+    };
     return this.httpClient.post<ICongress>(this.apiURL + 'congresos/crear-congreso/', postCongress);
   }
 
@@ -31,9 +31,17 @@ export class CongressService {
     return this.httpClient.get(this.apiURL + 'congresos/lista-congresos/');
   }
 
+  getCongressActivo(): any {
+    return this.httpClient.get(this.apiURL + 'congresos/listaCongresosActivos/');
+  }
+
   getCongressById(congress: ICongress): any {
     return this.httpClient.get(this.apiURL + 'congresos/consultaCongreso/' + congress.id);
-  };
+  }
+
+  getSedes(): any {
+    return this.httpClient.get(this.apiURL + 'congresos/lista-sedes/');
+  }
 
   putCongress(congress: ICongress): any {
     const putCongress = {
@@ -47,8 +55,8 @@ export class CongressService {
   }
 
   deleteCongress(congress: ICongress): any {
-    return this.httpClient.delete<ICongress>(this.apiURL + 'congresos/eliminar-congreso/' + congress.id);
+    return this.httpClient.delete<ICongress>(this.apiURL + 'congresos/eliminar-congreso/?id=' + congress.id);
     // return this.httpClient.request('delete', this.apiURL + 'congresos/eliminar-congreso/',
-    // {body: {sede: congress.sede, año: congress.ano}});
+    // {body: {id: congress.id}});
   }
 }
