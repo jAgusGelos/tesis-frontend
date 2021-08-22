@@ -56,11 +56,13 @@ export class SymposiumComponent implements OnInit {
     if (item.id === undefined) {
       this.symposiumService.postSymposium(item).subscribe((res: any) => {
         alert('Simposio Creado Correctamente');
+        window.location.reload();
       });
     }
     else{
       this.symposiumService.putSymposium(item).subscribe((res: any) => {
         alert('Simposio Modificado Correctamente');
+        window.location.reload();
       });
     }
     this.getSymposium();

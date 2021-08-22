@@ -38,7 +38,9 @@ export class SymposiumService {
   }
 
   deleteSymposium(symposium: ISymposium): any {
-    return this.httpClient.delete<ISymposium>(this.apiURL + 'simposio/eliminar-simposio/' + symposium.id);
+    // return this.httpClient.delete<ISymposium>(this.apiURL + 'simposio/eliminar-simposio/' + symposium.id);
+    return this.httpClient.request('delete', this.apiURL + 'simposio/eliminar-simposio/',
+    {body: {idSimposio: symposium .id}});
   }
 
   postSymposiumCongress(symposium: ISymposium): any {
