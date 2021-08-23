@@ -14,7 +14,7 @@ export class PaperService {
 
   constructor(private httpClient: HttpClient,
               private auth: AuthService) {
-                this.idCongress = auth.getCongressId();
+              this.idCongress = auth.getCongressId();
                }
 
   postPaper(paper: IPaper): any {

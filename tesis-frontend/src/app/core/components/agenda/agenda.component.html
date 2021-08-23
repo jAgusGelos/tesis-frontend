@@ -41,23 +41,9 @@
         <hr>
         <h4 class="card-title text-center"><b>Inscripción</b></h4>
         <div class="row">
-          <!-- Fecha Inicio Inscripción-->
-          <div class='form-group row col-md-6'>
-            <label class='col-form-label col-sm-6' for='FechaInInscrip'>Inicio de inscripción:
-              <span class='text-danger'>*</span></label>
-            <div class='col-sm-6'>
-              <input type='date' class='form-control' formControlName='FechaInInscrip' [ngClass]="{'is-invalid': (formCongress.controls.FechaInInscrip.touched || submitted)
-        && formCongress.controls.FechaInInscrip.errors}" onclick='this.select()' />
-              <span class='text-danger'
-                *ngIf='(formCongress.controls.FechaInInscrip.touched || submitted) && formCongress.controls.FechaInInscrip.errors?.required'>
-                Requerido
-              </span>
-            </div>
-          </div>
-          <br>
           <!-- Fecha Fin Inscripción Temprana -->
           <div class='form-group row col-md-6'>
-            <label class='col-form-label col-sm-6' for='FechaFinInscripTemprana'>Fin de inscripción:<span
+            <label class='col-form-label col-sm-6' for='FechaFinInscripTemprana'>Fin de inscripción temprana:<span
                 class='text-danger'>*</span></label>
             <div class='col-sm-6'>
               <input type='date' class='form-control' formControlName='FechaFinInscripTemprana' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinInscripTemprana.touched || submitted)
@@ -147,17 +133,11 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-
         <br>
         <div class="row justify-content-md-center btn-row">
           <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
           &nbsp;
-          <a class="btn btn-primary col-md-4" href="#" role="button" (click)="guardar()">Guardar Cambios</a>
+          <a class="btn btn-primary col-md-4" role="button" (click)="guardar()">Guardar Cambios</a>
         </div>
       </form>
     </div>

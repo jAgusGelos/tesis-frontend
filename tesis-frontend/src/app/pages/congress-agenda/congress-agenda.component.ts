@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import { ICongress } from 'src/app/core/models/ICongress';
 import { ISchedule } from 'src/app/core/models/ISchedule';
 import { ISymposium } from 'src/app/core/models/ISymposium';
+import { CongressService } from 'src/app/core/services/congress.service';
 import { DefineAgendaService } from 'src/app/core/services/define-agenda.service';
 import { SymposiumService } from 'src/app/core/services/symposium.service';
 
@@ -49,12 +50,38 @@ export class CongressAgendaComponent implements OnInit {
 
   constructor(private sympoService: SymposiumService,
               private router: Router,
-              private scheduleService: DefineAgendaService) { }
+              private scheduleService: DefineAgendaService,
+              private congressService: CongressService) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    // this.getSimposios()
+    // this.getSimposios();
+    this.getCongresos();
 
+  }
+
+  getCongresos(): void {
+    this.congressService.getCongress().subscribe((res: any) => {
+      this.congressList = res.data.map((x: any) => {
+        return {
+          id: x.id,
+          sede: x.sede,
+          ano: x.año,
+          nombre: x.nombre,
+          chairPrincipal: x.chairPrincipal,
+          coordLocal: x.coordLocal,
+          fechaInCongreso: x.fechaInCongreso,
+          fechaFinCongreso: x.fechaFinCongreso ,
+          fechaLimPapers: x.fechaLimPapers,
+          fechaProrrogaPapers: x.fechaProrrogaPapers,
+          fechaFinEvaluacion: x.fechaFinEvaluacion,
+          fechaFinReEv: x.fechaFinReEv,
+          fechaFinInscripTemprana: x.fechaFinInsTemprana,
+          fechaFinInscripTardia: x.fechaFinInsTardia,
+          modalidad: x.modalidad
+        };
+      });
+    });
   }
 
   getSimposios(): void {
@@ -95,6 +122,7 @@ export class CongressAgendaComponent implements OnInit {
       '\nPor favor intente de nuevo más tarde' +
       '\nEs posible que algunos simposios no se hayan cargado');
     }
+    window.location.reload();
   }
 
   cancelEditDates(): void{
@@ -105,9 +133,7 @@ export class CongressAgendaComponent implements OnInit {
   editDates(item: any): void {
     this.dates = !this.dates;
     this.list = !this.list;
-    this.scheduleService.getAgenda(item.id).subscribe((res: any) => {
-      this.schedule = res.data;
-    });
+    this.schedule = item;
   }
 
   cancelEditSympo(): void {

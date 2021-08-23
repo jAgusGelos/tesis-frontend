@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ISchedule } from '../models/ISchedule';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,29 +10,23 @@ import { ISchedule } from '../models/ISchedule';
 export class DefineAgendaService {
 
   apiURL = environment.apiURL;
+  idCongress;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private auth: AuthService) {
+    this.idCongress = auth.getCongressId();
+   }
 
   getAgenda(id: string): any {
     return this.httpClient.get(this.apiURL + 'congreso/devolver-agenda/' + id);
   }
 
-  postAgenda(agenda: ISchedule): any {
+  postAgenda(agenda: any): any {
     const postAgenda = {
-      fechaInCongreso: agenda.fechaInCongreso,
-      fechaFinCongreso: agenda.fechaFinCongreso,
-      fechaLimPapers: agenda.fechaLimPapers,
-      fechaProrrogaPapers: agenda.fechaProrrogaPapers,
-      fechaFinEvaluacion: agenda.fechaFinEvaluacion,
-      fechaFinReEv: agenda.fechaFinReEv,
-      fechaFinInscripTemprana: agenda.fechaFinInscripTemprana,
-      fechaFinInscripTardia: agenda.fechaFinInscripTardia,
+      ...agenda,
+      idCongreso: this.idCongress
     };
     return this.httpClient.post<ISchedule>(this.apiURL + 'congreso/definir-agenda/', postAgenda);
-  }
-
-  putAgenda(agenda: ISchedule): any {
-    return this.httpClient.put<ISchedule>(this.apiURL + 'congreso/definir-agenda/' + agenda, agenda);
   }
 
   deleteAgenda(agenda: ISchedule): any {
