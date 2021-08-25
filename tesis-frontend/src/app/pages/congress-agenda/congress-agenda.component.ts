@@ -17,22 +17,16 @@ import { SymposiumService } from 'src/app/core/services/symposium.service';
 export class CongressAgendaComponent implements OnInit {
 
 
-  congressList: ICongress[] = [
-    {id: '123', nombre: 'Probando', sede: 'Tu casa', ano: 2021, chairPrincipal: '', coordLocal: ''}];
+  congressList: ICongress[] = [];
 
-  simposios: ISymposium[] = [
-    {id: '1', nombre: 'Probando', descripcion: 'TRial'},
-    {id: '2', nombre: 'Probando 2', descripcion: 'TRial 2'}];
-  simposiosList: ISymposium[] =  [
-    {id: '1', nombre: 'Probando', descripcion: 'TRial'}];
-  base: ISymposium[] =  [
-    {id: '1', nombre: 'Probando', descripcion: 'TRial'}];
+  simposios: ISymposium[] = [];
+  simposiosList: ISymposium[] =  [];
+  base: ISymposium[] =  [];
 
   list = true;
   sympo = false;
   dates = false;
   schedule: ISchedule = {
-
     Id: 0,
     fechaInCongreso: new Date(),
     fechaFinCongreso: new Date(),
@@ -51,7 +45,6 @@ export class CongressAgendaComponent implements OnInit {
 
   constructor(private sympoService: SymposiumService,
               private router: Router,
-              private scheduleService: DefineAgendaService,
               private congressService: CongressService,
               private paperService: PaperService) { }
 
@@ -95,38 +88,6 @@ export class CongressAgendaComponent implements OnInit {
       this.simposiosList = res.data;
       this.base = res.data;
     });
-  }
-
-
-  addSymposium(items: ISymposium[]): void {
-    const newSymps = items.filter((item: ISymposium) => {
-      const exist = this.base.some((x: any) => {
-        if (x.id === item.id) {
-          return true;
-        }
-      });
-      if (!exist) {
-        return item.id;
-      }
-      return;
-    });
-    let todoOk = true;
-    newSymps.forEach((item: ISymposium) => {
-      this.sympoService.postSymposiumCongress(item).subscribe((res: any) => {
-        if (res.err) {
-          todoOk = false;
-        }
-      });
-    });
-    if (todoOk) {
-      alert('Simposios Cargados Correctamente');
-    }
-    else{
-      alert('Ha ocurrido un problema.' +
-      '\nPor favor intente de nuevo más tarde' +
-      '\nEs posible que algunos simposios no se hayan cargado');
-    }
-    window.location.reload();
   }
 
   cancelEditDates(): void{

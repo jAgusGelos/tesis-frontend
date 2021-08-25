@@ -52,6 +52,16 @@ export class SymposiumService {
     return this.httpClient.post(this.apiURL + 'congresos/asignar-simposioxcongreso/', postSymp);
   }
 
+  deleteSymposiumCongress(symposium: ISymposium): any {
+    const postSymp = {
+      idSimposio: symposium.id,
+      idCongreso: this.idCongress,
+      idChair: this.idUser
+    };
+    return this.httpClient.request('delete', this.apiURL + 'simposio/eliminar-simposioxcongreso/',
+    {body: {Simposio: this.postSymposium}});
+  }
+
   //Solicitar esta función al back
   getSymposiumByChair(chair: IUserComplete): any {
     return this.httpClient.get(this.apiURL + 'congresos/simposio-por-chair/' + chair.id)
