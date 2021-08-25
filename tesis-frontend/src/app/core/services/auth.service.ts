@@ -60,7 +60,7 @@ export class AuthService {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.idCongress;
+    return decodedToken.idCongreso;
   }
 
   getSedeId(): number {

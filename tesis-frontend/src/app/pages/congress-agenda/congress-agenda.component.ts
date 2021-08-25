@@ -6,6 +6,7 @@ import { ISchedule } from 'src/app/core/models/ISchedule';
 import { ISymposium } from 'src/app/core/models/ISymposium';
 import { CongressService } from 'src/app/core/services/congress.service';
 import { DefineAgendaService } from 'src/app/core/services/define-agenda.service';
+import { PaperService } from 'src/app/core/services/paper.service';
 import { SymposiumService } from 'src/app/core/services/symposium.service';
 
 @Component({
@@ -51,11 +52,12 @@ export class CongressAgendaComponent implements OnInit {
   constructor(private sympoService: SymposiumService,
               private router: Router,
               private scheduleService: DefineAgendaService,
-              private congressService: CongressService) { }
+              private congressService: CongressService,
+              private paperService: PaperService) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    // this.getSimposios();
+    this.getSimposios();
     this.getCongresos();
 
   }
@@ -68,6 +70,7 @@ export class CongressAgendaComponent implements OnInit {
           sede: x.sede,
           ano: x.año,
           nombre: x.nombre,
+          nombre_sede: x.nombre_sede,
           chairPrincipal: x.chairPrincipal,
           coordLocal: x.coordLocal,
           fechaInCongreso: x.fechaInCongreso,
@@ -88,11 +91,12 @@ export class CongressAgendaComponent implements OnInit {
     this.sympoService.getSymposium().subscribe((res: any) => {
       this.simposios = res.data;
     });
-    this.sympoService.getSymposiumCongress().subscribe((res: any) => {
+    this.paperService.getSimposiosActivos().subscribe((res: any) => {
       this.simposiosList = res.data;
       this.base = res.data;
     });
   }
+
 
   addSymposium(items: ISymposium[]): void {
     const newSymps = items.filter((item: ISymposium) => {

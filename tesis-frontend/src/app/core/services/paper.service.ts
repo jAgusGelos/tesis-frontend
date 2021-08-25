@@ -55,4 +55,9 @@ export class PaperService {
   sendEmail(mail: string): any {
     return this.httpClient.post(this.apiURL + '/sendInvit', mail);
   }
+
+  getSimposiosActivos(): any {
+    const url = 'congresos/lista-simposiosxcongreso/?idCongreso=';
+    return this.httpClient.get(this.apiURL + url + this.idCongress);
+  }
 }

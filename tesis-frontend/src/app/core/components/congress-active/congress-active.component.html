@@ -20,18 +20,18 @@
 
     <tbody>
       <tr class='align-items-center'*ngFor='let item of congressList'>
+        <td>{{item.nombre_sede}}</td>
         <td>{{item.nombre}}</td>
-        <td>{{item.sede}}</td>
         <td>{{item.ano}}</td>
         <td>
           <div class="btn-group col-md-3">
-          <a (click)='toggleEditDate(item)' title='Agenda'>Fecha<i class="fas fa-calendar-alt"></i></a>
+          <a (click)='toggleEditDate(item)' title='Agenda'><i class="fas fa-calendar-alt"></i></a>
           &nbsp;
           &nbsp;
-          <a (click)='toggleEditSympo(item)' title='Simposios'>Simpo<i class="fas fa-paint-brush"></i></a>
+          <a (click)='toggleEditSympo(item)' title='Simposios'><i class="fas fa-paint-brush"></i></a>
           &nbsp;
           &nbsp;
-          <a (click)='toggleEditRooms(item)' title='Aulas'>Room<i class="fas fa-archway"></i></a>
+          <a (click)='toggleEditRooms(item)' title='Aulas'><i class="fas fa-archway"></i></a>
         </div>
       </td>
       </tr>

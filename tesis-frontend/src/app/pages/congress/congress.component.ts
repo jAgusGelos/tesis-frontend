@@ -38,6 +38,7 @@ export class CongressComponent implements OnInit {
         return {
           id: x.id,
           sede: x.sede,
+          nombre_sede: x.nombre_sede,
           ano: x.año,
           nombre: x.nombre,
           chairPrincipal: x.chairPrincipal,
