@@ -56,6 +56,13 @@ export class AuthService {
     return decodedToken.id;
   }
 
+  getUserRoles(): number[] {
+    const idToken = localStorage.getItem('id_token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(idToken);
+    return decodedToken.rol;
+  }
+
   getCongressId(): number {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();

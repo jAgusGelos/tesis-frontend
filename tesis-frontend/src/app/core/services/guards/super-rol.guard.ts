@@ -17,7 +17,7 @@ export class SuperRolGuard implements CanActivate {
     else{
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(idToken);
-      if (decodedToken.rol === '1' ) {
+      if (decodedToken.rol.includes(0) ) {
         return true;
       }
       return false;
