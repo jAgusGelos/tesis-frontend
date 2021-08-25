@@ -20,12 +20,11 @@ export class RoomComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.getRooms(this.id);
+    this.getRooms();
   }
 
-  getRooms(id: string): void{
-    this.roomService.getRooms(id).subscribe((res: any) => {
+  getRooms(): void{
+    this.roomService.getRooms().subscribe((res: any) => {
        this.roomList = res.data;
       });
   }
@@ -57,7 +56,7 @@ export class RoomComponent implements OnInit {
         alert('Aula Modificada');
       });
     }
-    this.getRooms(this.id);
+    this.getRooms();
   }
 
   goBack(): void {

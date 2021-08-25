@@ -36,8 +36,8 @@ export class RoomService {
     return this.httpClient.put(this.apiURL + 'congresos/editar-aula/', postRoom);
   }
 
-  getRooms(id: any): any{
-    return this.httpClient.get(this.apiURL + 'congresos/lista-aulas/');
+  getRooms(): any{
+    return this.httpClient.get(this.apiURL + 'congresos/lista-aulas/' + this.sede);
   }
 
   deteleRoom(room: IRoom): any{
