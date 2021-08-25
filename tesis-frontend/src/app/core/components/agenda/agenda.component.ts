@@ -43,13 +43,13 @@ export class AgendaComponent implements OnInit {
   convertDateFormat(date: string): any {
     const info = date.split('-').reverse().join('/');
     return info;
-}
+  }
 
-invertConvertDateFormat(date: string): any {
-  date = date.split(' ')[0];
-  const info = date.split('/').reverse().join('-');
-  return info;
-}
+  invertConvertDateFormat(date: string): any {
+    date = date.split(' ')[0];
+    const info = date.split('/').reverse().join('-');
+    return info;
+  }
 
   guardar(): void {
     const agenda = {

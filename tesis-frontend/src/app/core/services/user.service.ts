@@ -15,7 +15,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   postUserComplete(user: IUserComplete): any {
-    return this.httpClient.put(this.apiURL + 'editar/', {UsuarioCompleto: user});
+    return this.httpClient.post(this.apiURL + 'api/editar/', user);
   }
 
   getLoggedUser(): any {
@@ -24,6 +24,18 @@ export class UserService {
 
   deactivate(user: IUser): any {
     return this.httpClient.put<IUser>(this.apiURL + 'api/eliminar/', user);
-  };
+  }
+
+  getLocalidades(): any {
+    return this.httpClient.get(this.apiURL + 'api/localidades/');
+  }
+
+  getProvincias(): any {
+    return this.httpClient.get(this.apiURL + 'api/provincias/');
+  }
+
+  getNacionalidad(): any {
+    return this.httpClient.get(this.apiURL + 'api/nacionalidades/');
+  }
 
 }
