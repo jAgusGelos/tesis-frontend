@@ -14,15 +14,17 @@ export class EvaluatorService {
               ) { }
 
   postEvaluator(evaluator: string): any {
-    return this.httpClient.post(this.apiURL + 'evaluador/crear-evaluador/', evaluator);
+    return this.httpClient.post(this.apiURL + 'articulos/crear-evaluador/', evaluator);
   }
 
   getEvaluators(): any {
-    return this.httpClient.get(this.apiURL + 'evaluador/lista-evaluador/');
+    // return this.httpClient.request('get', this.apiURL + 'articulos/lista-evaluadores/',
+    // {body: {is_active: true}});
+    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
   }
 
   putEvaluator(evaluator: IEvaluator): any {
-    return this.httpClient.put<IEvaluator>(this.apiURL + 'evaluador/modificar/' + evaluator.id, evaluator);
+    return this.httpClient.put<IEvaluator>(this.apiURL + 'articulos/modificar/' + evaluator.id, evaluator);
   }
 
   deleteEvaluator(evaluator: IEvaluator): any {

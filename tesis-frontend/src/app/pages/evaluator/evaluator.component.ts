@@ -9,10 +9,10 @@ import { EvaluatorService } from 'src/app/core/services/evaluator.service';
   styleUrls: ['./evaluator.component.css'],
 })
 export class EvaluatorComponent implements OnInit {
-  evaluatorList = [
-    { id: '123', nombre: 'Evaluador Nº1', puntuacion: '4.3' },
-    { id: '124', nombre: 'Evaluador Nº 2', puntuacion: '7.5' },
-  ];
+  evaluatorList = [];
+  evaluatorSelectedList =  [
+    { id: '123', nombre: 'Evaluador Nº1', calificacion: '10' },
+    { id: '124', nombre: 'Evaluador Nº 2', calificacion: '10' }]
   adding = false;
   formEvaluator: FormGroup;
 
@@ -23,7 +23,7 @@ export class EvaluatorComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    // getEvaluators();
+    this.getEvaluators();
   }
 
   getEvaluators(): void {
@@ -32,24 +32,21 @@ export class EvaluatorComponent implements OnInit {
     });
   }
 
+  toggleAddHandled(item: any): void {
+
+  }
+
   toggleNew(): void {
-    this.adding = true;
-    this.formEvaluator = this.formBuilder.group({
-      evaluador: ['', [Validators.email]],
-    });
+    this.adding = !this.adding;
   }
 
   addEvaluator(): void {
-    if (this.formEvaluator.controls.evaluador.errors?.email) {
-      alert('Mail Inválido');
-      return;
-    }
     // const mail = this.formEvaluator.controls.evaluador.value;
     // this.evaluatorService.postEvaluator(mail).subscribe((res: any) => {
     //   const autor = res.data;
     //   this.evaluatorList.push(autor)
     // });
-    const autor = { id: '00', nombre: 'Prueba', puntuacion: '10' };
+    const autor = { id: '00', nombre: 'Prueba',  calificacion: '10' };
     this.evaluatorList.push(autor);
   }
 
@@ -67,7 +64,7 @@ export class EvaluatorComponent implements OnInit {
       //       return item;
       //     }
       //   });
-      this.evaluatorList = this.evaluatorList.filter((x: IEvaluator) => {
+      this.evaluatorList = this.evaluatorList.filter((x: any) => {
         if (x.id !== item.id) {
           return item;
         }
