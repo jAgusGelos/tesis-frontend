@@ -23,9 +23,8 @@ export class SymposiumComponent implements OnInit {
 
   getSymposium(): void {
     this.symposiumService.getSymposium().subscribe((res: any) => {
-      this.symposiumList = res.data[0];
+      this.symposiumList = res.data;
       this.ok = true;
-
     });
   }
 
@@ -43,6 +42,7 @@ export class SymposiumComponent implements OnInit {
   deleteSymposium(item: ISymposium): void {
     this.symposiumService.deleteSymposium(item).subscribe((res: any) => {
       alert('El Simposio ha sido eliminado correctamente');
+      window.location.reload();
     });
   }
 
@@ -53,6 +53,7 @@ export class SymposiumComponent implements OnInit {
   * Si no lo tiene crea un nuevo simposio.
   */
    toggleCreateSymposium(item: ISymposium): void {
+    console.log(item.id);
     if (item.id === undefined) {
       this.symposiumService.postSymposium(item).subscribe((res: any) => {
         alert('Simposio Creado Correctamente');

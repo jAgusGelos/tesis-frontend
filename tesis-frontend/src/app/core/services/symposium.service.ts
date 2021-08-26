@@ -34,12 +34,17 @@ export class SymposiumService {
   }
 
   putSymposium(symposium: ISymposium): any {
-    return this.httpClient.put<ISymposium>(this.apiURL + '/congresos/editar-simposio/', symposium);
+    const puttSymp = {
+      idSimposio: symposium.id,
+      nombre: symposium.nombre,
+      descripcion: symposium.descripcion
+    };
+    return this.httpClient.put<ISymposium>(this.apiURL + 'congresos/editar-simposio/', puttSymp);
   }
 
   deleteSymposium(symposium: ISymposium): any {
     // return this.httpClient.delete<ISymposium>(this.apiURL + 'simposio/eliminar-simposio/' + symposium.id);
-    return this.httpClient.request('delete', this.apiURL + 'simposio/eliminar-simposio/',
+    return this.httpClient.request('delete', this.apiURL + 'congresos/eliminar-simposio/',
     {body: {idSimposio: symposium .id}});
   }
 
