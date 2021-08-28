@@ -1,0 +1,50 @@
+<div class="container-card">
+  <div class="contenidos">
+  <hr>
+  <h3 class='text-center'>Detalle de Evaluación</h3>
+  <hr>
+  </div>
+ <!--  <div class="d-flex justify-content-end">
+    <a href="#"><i class="fas fa-angle-left" title="Anterior"></i></a>
+    <a href="#"><i class="fas fa-angle-right col-md-2" title="Siguiente"></i></a>
+  </div> -->
+  
+<!-- Nombre del Articulo -->
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <p id="nombreArticulo" class="col-md-3"><b>Nombre: </b>{{paper.nombre}}</p>
+      </div>
+    </div>
+<!-- Calificacion Final -->
+<div class="form-group row">
+  <div class="col-sm-6">
+    <p id="calificacion"><b>Estado: </b>{{paper.estado}}</p>
+  </div>
+</div>
+
+    <table class="table text-center table-hover table-bordered">
+      <thead class='thead'>
+        <tr>
+          <th class="col-md-3">Pregunta</th>
+          <th class="col-md-3">{{evaluator1.nombre}}</th>
+          <th class="col-md-3">{{evaluator2.nombre}}</th>
+          <th class="col-md-3">{{evaluator3.nombre}}</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr class='align-items-center'*ngFor='let item of evDetailRow'>
+          <td>{{item.pregunta}}</td>
+          <td>{{item.res1}}</td>
+          <td>{{item.res2}}</td>
+          <td>{{item.res3}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="d-flex justify-content-end">
+    <a class="btn btn-secondary" (click)='goBack()' role="button">Volver</a>
+  </div>
+  </div>
+  
+  

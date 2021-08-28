@@ -108,6 +108,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/end-register/end-register.module')
     .then(m => m.EndRegisterModule),
     // canActivate: [AuthGuard]
+  },
+  {
+    path: 'detalleEvaluacion',
+    loadChildren: () => import('./pages/evaluation-detail/evaluation-detail.module')
+    .then(m => m.EvaluationDetailModule),
   }
 ];
 

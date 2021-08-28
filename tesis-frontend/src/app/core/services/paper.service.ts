@@ -35,4 +35,17 @@ export class PaperService {
   sendEmail(mail: string): any {
     return this.httpClient.post(this.apiURL + '/sendInvit', mail);
   }
+
+
+  getEvaluationDetails(id: any): any{
+    return this.httpClient.get(this.apiURL + '/articulos/consultaDetalleEvaluacion/' + id);
+  }
+
+  /* Revisar... */
+  getQuestions(id: any): any{
+    return this.httpClient.get(this.apiURL + '/articulos/' + id);
+  }
+
+  
 }
+
