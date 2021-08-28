@@ -4,24 +4,38 @@
       <h3 class='text-center'>Puntuar evaluadores</h3>
       <hr>
     </div>
-    <table class="table text-center table-hover table-bordered">
+    <table class="table text-center table-hover table-bordered table-responsive">
       <thead class='thead'>
         <tr>
-          <th class="col-md-4">Evaluador</th>
+          <th class="col-md-3">Evaluador</th>
           <th class="col-md-2">Puntaje</th>
+          <th class="col-md-1">Acción</th>
         </tr>
       </thead>
   
       <tbody>
-        <tr class='align-items-center' *ngFor='let e of evaluatorsList'>
-          <td>{{e.evaluator.nombre}}</td>
+        <tr class='align-items-center' *ngFor='let e of evaluatorsList; let i=index'>
+          <td>{{e.nombre}}</td>
           <td>
-              <div>
-                  <select name="form-control score" id="score">
-                      <option *ngIf="selectFlag == false" selected>--Seleccione un puntaje--</option>
-                      <option *ngFor="let s of scoreList" onchange="score(s)">{{s}}</option>
-                  </select>
-              </div>
+            <div *ngIf="e.score !== null">
+              <b>{{e.score}}</b>
+            </div>
+            <div *ngIf="e.score == null">
+              Sin puntuar
+            </div>
+          </td>
+          <td>
+            <div *ngIf="e.edit == false">
+              <a (click)="editScore(i)"><i class="fas fa-pencil-alt" title="Editar"></i></a>
+            </div>
+            <div *ngIf="e.edit == true">
+              <select name="form-select" onchange="score()">
+                <option selected>--Seleccione un puntaje--</option>
+                <option *ngFor="let s of scoreList" [value]="s">{{s}}</option>
+            </select>
+            &nbsp;
+            <button class="btn btn-primary" id="boton" disabled>Guardar</button>
+            </div>
           </td>
         </tr>
       </tbody>

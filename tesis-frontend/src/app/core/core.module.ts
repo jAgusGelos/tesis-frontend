@@ -81,7 +81,8 @@ import { ScoreEvaluatorsComponent } from './components/score-evaluators/score-ev
     EvaluationFormComponent,
     AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
-    DeactivateAccountFormComponent
+    DeactivateAccountFormComponent,
+    ScoreEvaluatorsComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

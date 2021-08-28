@@ -10,13 +10,10 @@ import { EvaluatorService } from '../../services/evaluator.service';
 })
 export class ScoreEvaluatorsComponent implements OnInit {
 
-  selectFlag = false;
 
-  evaluatorsList: [{
-    evaluator: IEvaluator;
-    score: Number;
-  }]
-  scoreList: Number[] = [1, 2, 3, 4, 5, 6, 7 ,8 ,9 ,10]
+  evaluatorsList: any[] = [{nombre: String, score: Number, edit: Boolean}];
+
+  scoreList: Number[] = [1, 2, 3, 4, 5, 6, 7 ,8 ,9 ,10];
 
 
   constructor( private evaluatorService: EvaluatorService) { }
@@ -25,19 +22,26 @@ export class ScoreEvaluatorsComponent implements OnInit {
     this.fillEvaluatorsList();
   }
 
-  score() {
-    this.selectFlag = true;
+  score(s: Number, index) {
+    (document.getElementById('boton') as HTMLButtonElement).disabled = false;
+    this.evaluatorsList[index].score = s;
+    this.evaluatorsList[index].edit = false;
   }
 
-  fillEvaluatorsList() {
-    let evaluators: IEvaluator[];
-    let score: Number;
-    this.evaluatorService.getEvaluators().subscribe((res: any) => {
-        evaluators = res.data;
-    });
-    for (let index = 0; index < evaluators.length; index++) {
-      this.evaluatorsList.push({evaluator: evaluators[index], score: 1})
-    }
+  editScore(index) {
+    this.evaluatorsList[index].edit = !this.evaluatorsList[index].edit;
   }
+  
+  fillEvaluatorsList() {
+    this.evaluatorsList = [
+      {nombre: 'Evaluador 1', score: 5, edit: false},
+      {nombre: 'Evaluador 2', score: null, edit: true},
+      {nombre: 'Evaluador 3', score: 10, edit: false},
+      {nombre: 'Evaluador 4', score: null, edit: true},
+      {nombre: 'Evaluador 5', score: 1, edit: false},
+      {nombre: 'Evaluador 6', score: null, edit: true},
+      {nombre: 'Evaluador 7', score: 3, edit: false},]
+  }
+  
 
 }

@@ -22,7 +22,7 @@
         <td>
           <div class="btn-group col-md-3">
           <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
-          &nbsp;
+          &nbsp;  
           &nbsp;
           &nbsp;
           <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
@@ -30,6 +30,8 @@
           <a href='/assignPaperEvaluator' title='Asignar artículos a evaluadores'><i class="fa fa-address-card"></i></a>
           &nbsp;
           <a href='/papersBySymposium' title='Artículos por simposio'><i class="fas fa-list"></i></a>
+          &nbsp;
+          <a (click)='toggleScoreEvaluators()' title='Puntuar evaluadores'><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
         </div>
       </td>
       </tr>
