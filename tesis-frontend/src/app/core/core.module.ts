@@ -23,6 +23,7 @@ import { EvaluationFormComponent } from './components/evaluation-form/evaluation
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { PapersBySymposiumListComponent } from './components/papers-by-symposium-list/papers-by-symposium-list.component';
 import { DeactivateAccountFormComponent } from './components/deactivate-account-form/deactivate-account-form.component';
+import { EvaluatePapersChairSecCardComponent } from './components/evaluate-papers-chair-sec-card/evaluate-papers-chair-sec-card.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { DeactivateAccountFormComponent } from './components/deactivate-account-
     EvaluationFormComponent,
     AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
-    DeactivateAccountFormComponent
+    DeactivateAccountFormComponent,
+    EvaluatePapersChairSecCardComponent
 
   ],
   imports: [
@@ -79,7 +81,8 @@ import { DeactivateAccountFormComponent } from './components/deactivate-account-
     EvaluationFormComponent,
     AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
-    DeactivateAccountFormComponent
+    DeactivateAccountFormComponent,
+    EvaluatePapersChairSecCardComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

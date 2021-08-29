@@ -81,7 +81,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/papers-by-symposium/papers-by-symposium.module')
     .then(m => m.PapersBySymposiumModule),
   },
-
+  {
+    path: 'evaluatePapersChairSec',
+    loadChildren: () => import('./pages/evaluate-papers-chair-sec/evaluate-papers-chair-sec.module')
+    .then(m => m.EvaluatePapersChairSecModule),
+  },
   // Notification routes
   {
     path: 'deactivateAccount',
