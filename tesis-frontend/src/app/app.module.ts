@@ -15,8 +15,6 @@ import { PapersBySymposiumComponent } from './pages/papers-by-symposium/papers-b
 
 
 
-
-
 @NgModule({
   declarations: [AppComponent, AsignarPaperEvaluadorComponent, PapersBySymposiumComponent],
   imports: [

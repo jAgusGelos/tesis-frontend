@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <app-evaluate-list *ngIf="!evaluating" 
+    [paperList]='paperList'
+    (evaluationEvent)='evaluationEvent($event)'
+    (deleteEvaluationEvent)='deleteEvaluation($event)'
+    ></app-evaluate-list>
+    <app-evaluate-form *ngIf="evaluating"
+    [selectedPaper]='selectedPaper'
+    [evaluation]='evaluation' (evaluationEmitter)='toggleCreateEvaluation($event)'
+    (cancelEvaluation)='cancelEvaluation()'
+    ></app-evaluate-form>
+  </div>
+  

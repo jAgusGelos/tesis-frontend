@@ -72,6 +72,13 @@ const routes: Routes = [
     .then(m => m.EvaluatorModule),
   },
   {
+
+    path: 'evaluar',
+    loadChildren: () => import('./pages/evaluate/evaluate.module')
+    .then(m => m.EvaluateModule),
+     // canActivate: [AuthGuard], [EvaluatorGuard]
+  },
+  {
     path: 'assignPaperEvaluator',
     loadChildren: () => import('./pages/asignar-paper-evaluador/asignar-paper-evaluador.module')
     .then(m => m.AsignarPaperEvaluadorModule),
