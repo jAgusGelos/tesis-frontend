@@ -82,6 +82,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/evaluator/evaluator.module')
     .then(m => m.EvaluatorModule),
   },
+  {
+    path: 'evaluar',
+    loadChildren: () => import('./pages/evaluate/evaluate.module')
+    .then(m => m.EvaluateModule),
+     // canActivate: [AuthGuard], [EvaluatorGuard]
+  },
 
 ];
 

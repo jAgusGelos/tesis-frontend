@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
 import { UserLoggedComponent } from './components/user-logged/user-logged.component';
@@ -20,6 +20,8 @@ import { SymposiumSelectComponent } from './components/symposium-select/symposiu
 import { CongressActiveComponent } from './components/congress-active/congress-active.component';
 import { EvaluationListComponent } from './components/evaluation-list/evaluation-list.component';
 import { EvaluationFormComponent } from './components/evaluation-form/evaluation-form.component';
+import { EvaluateFormComponent } from './components/evaluate-form/evaluate-form.component';
+import { EvaluateListComponent } from './components/evaluate-list/evaluate-list.component';
 
 
 
@@ -44,7 +46,9 @@ import { EvaluationFormComponent } from './components/evaluation-form/evaluation
     SymposiumSelectComponent,
     CongressActiveComponent,
     EvaluationListComponent,
-    EvaluationFormComponent
+    EvaluationFormComponent,
+    EvaluateFormComponent,
+    EvaluateListComponent
 
 
   ],
@@ -52,6 +56,7 @@ import { EvaluationFormComponent } from './components/evaluation-form/evaluation
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule
   ],
   exports:  [
     UserRegisterComponent,
@@ -71,7 +76,9 @@ import { EvaluationFormComponent } from './components/evaluation-form/evaluation
     SymposiumSelectComponent,
     CongressActiveComponent,
     EvaluationListComponent,
-    EvaluationFormComponent
+    EvaluationFormComponent,
+    EvaluateFormComponent,
+    EvaluateListComponent,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
