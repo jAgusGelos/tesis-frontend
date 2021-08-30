@@ -11,11 +11,13 @@ import { PaperService } from '../../services/paper.service';
   styleUrls: ['./evaluation-detail-form.component.css']
 })
 export class EvaluationDetailFormComponent implements OnInit {
-  @Input() paper: IPaper;
-  @Input() evaluator1: IEvaluator;
-  @Input() evaluator2: IEvaluator;
-  @Input() evaluator3: IEvaluator;
-            
+  @Input() paperSeleccionado: {articulo: IPaper, evUno: IEvaluator, evDos: IEvaluator, evTres:IEvaluator};
+ 
+          
+  evaluator1: IEvaluator;
+  evaluator2: IEvaluator;
+  evaluator3: IEvaluator;
+  paper: IPaper = {id: '1', nombre:'Paper1', autores:['A',],responsable:'A', simposio:'Simposio', archivo: null, estado:'Evaluado', };
  
   evaluationsArray= [
     ['3', ['id1', 'puntuacion Ev 3 item 1'], ['id2','puntuacion Ev 3 item 2'],['id3','puntuacion Ev 3 item 3']],
@@ -39,20 +41,19 @@ export class EvaluationDetailFormComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.evaluator1 = this.paperSeleccionado.evUno;
+    this.evaluator2 = this.paperSeleccionado.evDos;
+    this.evaluator3 = this.paperSeleccionado.evTres;
+    this.paper = this.paperSeleccionado.articulo;
     this.getEvaluationDetails(this.paper)
     this.getPreguntas(this.paper)
   }
 
   
-  /* goBack(): void {
-    this.goBackEvent.emit();
-  } */
-
-
-  /* CAMBIAR */
   goBack(): void {
-    this.router.navigate(['/']);
+    this.goBackEvent.emit();
   }
+
 
   getEvaluationDetails(paper: IPaper) {
     this.paperService.getEvaluationDetails(paper.id).subscribe((res: any) => {

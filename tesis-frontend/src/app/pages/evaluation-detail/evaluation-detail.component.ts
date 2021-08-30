@@ -11,12 +11,8 @@ import { IPaper } from 'src/app/core/models/IPaper';
 export class EvaluationDetailComponent implements OnInit {
 
   constructor(private router: Router) { }
-
-  evaluator1: IEvaluator = {id: '1', nombre:'A', puntuacion:'1'};
-  evaluator2: IEvaluator = {id: '2', nombre:'B', puntuacion:'1'};
-  evaluator3: IEvaluator = {id: '3', nombre:'C', puntuacion:'1'};
-  
-  paper: IPaper = {id: '1', nombre:'Paper1', autores:['A',],responsable:'A', simposio:'Simposio', archivo: null, estado:'Evaluado', };
+  paperSeleccionado
+ 
 
   ngOnInit(): void {
   }
