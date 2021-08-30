@@ -1,29 +1,34 @@
 <div class="card col-md-6 offset-3">
     <div class="card-header" >
-        <div id="nombreArticulo"><h5>{{articulo.nombre}}</h5></div><div id="badge"><h5><span id="estado-badge" class="badge bg-primary justify-content-end">{{articulo.estado}}</span></h5></div>
+        <div id="nombreArticulo">
+          <h5>{{articulo.nombre}}</h5>
+        </div>
+        <div id="badge">
+          <h5><span id="estado-badge" class="badge bg-primary">{{estadoEvaluacion}}</span></h5>
+        </div>
     </div>
     <div class="card-body">
       <p><b>{{articulo.responsable}}</b></p>
       <p><b id="evaluadores">Evaluadores:</b> <br>
-        &nbsp;&nbsp;&nbsp;&nbsp; <b>Evaluador 1:</b> &nbsp;&nbsp;&nbsp;&nbsp;Aprobar fuertemente<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; <b>Evaluador 2:</b> &nbsp;&nbsp;&nbsp;&nbsp;Necesita reentrega<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; <b>Evaluador 3:</b> &nbsp;&nbsp;&nbsp;&nbsp;Rechazar débilmente</p>
-      <a class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i> Descargar</a> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <b>{{evUno.nombre}}:</b> &nbsp;&nbsp;&nbsp;&nbsp;Aprobar fuertemente<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <b>{{evDos.nombre}}:</b> &nbsp;&nbsp;&nbsp;&nbsp;Necesita reentrega<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <b>{{evTres.nombre}}:</b> &nbsp;&nbsp;&nbsp;&nbsp;Rechazar débilmente</p>
+      <a class="btn btn-primary" (click)="downloadPaper()"><i class="fa fa-download"></i> Descargar</a> 
       &nbsp; 
-      <a class="btn btn-primary"><i class="fa fa-search-plus" aria-hidden="true"></i> Ver detalle</a>
-      <a *ngIf="!edit" class="btn btn-primary" id="editar" (click)="toggleEdit()"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+      <a class="btn btn-primary"><i class="fa fa-search-plus"></i> Ver detalle</a>
+      <a *ngIf="!edit" class="btn btn-primary" id="editar" (click)="toggleEdit()"><i class="fa fa-pencil"></i> Editar</a>
       <div id="evaluation-select" *ngIf="edit">
         &nbsp;
-        <a class="btn btn-outline-secondary" (click)="toggleEdit()" title="Cancelar"><i class="fa fa-times fa-lg" aria-hidden="true"></i></a> 
+        <a class="btn btn-outline-secondary" title="Cancelar" (click)="toggleEdit()"><i class="fa fa-times fa-lg"></i></a> 
         &nbsp;
-        <a class="btn btn-outline-success" title="Guardar"><i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i></a>
+        <a class="btn btn-outline-success" title="Guardar" (click)="save()"><i class="fa fa-floppy-o fa-lg"></i></a>
       </div>
       <div id="evaluation-select" *ngIf="edit">
-          <select class="form-select" id="select">
-              <option selected></option>
-              <option>Aprobar</option>
-              <option>Rechazar</option>
-              <option>Para reentregar</option>
+          <select class="form-select" id="selectState">
+              <option disabled selected value=""></option>
+              <option value="aprobar">Aprobar</option>
+              <option value="rechazar">Rechazar</option>
+              <option value="reentrega">Para reentregar</option>
           </select>
       </div>
       

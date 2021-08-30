@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IEvaluator } from 'src/app/core/models/ievaluator';
+import { IPaper } from 'src/app/core/models/IPaper';
 
 @Component({
   selector: 'app-evaluate-papers-chair-sec',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./evaluate-papers-chair-sec.component.css']
 })
 export class EvaluatePapersChairSecComponent implements OnInit {
+
+  detailed: Boolean = false;
 
   constructor() { }
 
@@ -16,7 +20,22 @@ export class EvaluatePapersChairSecComponent implements OnInit {
                       {id: '5', nombre: 'Artículo 5', estado: 'Aprobado'},
                       {id: '6', nombre: 'Artículo 6', estado: 'Sin evaluar'}];
 
+  evaluadores: IEvaluator[] = [{id: '1', nombre: 'Juan', puntuacion: '1'},
+                               {id: '2', nombre: 'Aye', puntuacion: '1'},
+                               {id: '3', nombre: 'Agus', puntuacion: '1'},]
+
+  articuloSeleccionado: {
+    articulo: IPaper,
+    evUno: IEvaluator,
+    evDos: IEvaluator,
+    evTres: IEvaluator
+  }
+
   ngOnInit(): void {
   }
 
+  verDetalle(art: any) {
+    this.articuloSeleccionado = art;
+    this.detailed = !this.detailed;
+  }
 }
