@@ -12,11 +12,12 @@ import { AuthInterceptor } from './core/services/auth.interceptor';
 import { CancelAuthorComponent } from './pages/cancel-author/cancel-author.component';
 import { AsignarPaperEvaluadorComponent } from './pages/asignar-paper-evaluador/asignar-paper-evaluador.component';
 import { PapersBySymposiumComponent } from './pages/papers-by-symposium/papers-by-symposium.component';
+import { EvaluatePapersChairSecComponent } from './pages/evaluate-papers-chair-sec/evaluate-papers-chair-sec.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, AsignarPaperEvaluadorComponent, PapersBySymposiumComponent],
+  declarations: [AppComponent, AsignarPaperEvaluadorComponent, PapersBySymposiumComponent, EvaluatePapersChairSecComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
