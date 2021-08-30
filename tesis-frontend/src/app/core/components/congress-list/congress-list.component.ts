@@ -14,6 +14,7 @@ export class CongressListComponent implements OnInit {
   @Output() editCongressEvent = new EventEmitter();
   @Output() newCongressEvent = new EventEmitter();
   @Output() deleteCongressEvent = new EventEmitter();
+  @Output() scoreEvaluatorsEvent = new EventEmitter();
   
   constructor() { }
 
@@ -33,6 +34,9 @@ export class CongressListComponent implements OnInit {
     '\nToda la configuración creada se perderá')) {
       this.deleteCongressEvent.emit(item);
     }
+  }
 
+  toggleScoreEvaluators() {
+    this.scoreEvaluatorsEvent.emit();
   }
 }
