@@ -21,12 +21,6 @@ const routes: Routes = [
     .then(m => m.LoginModule)
   },
   {
-    path: 'endRegister',
-    loadChildren: () => import('./pages/end-register/end-register.module')
-    .then(m => m.EndRegisterModule),
-    // canActivate: [AuthGuard]
-  },
-  {
     path: 'chairs',
     loadChildren: () => import('./pages/chairs/chairs.module')
     .then(m => m.ChairsModule)
@@ -68,11 +62,6 @@ const routes: Routes = [
     // canActivate: [AuthGuard, SuperRolGuard]
   },
   {
-    path: 'cancelar',
-    loadChildren: () => import('./pages/cancel-author/cancel-author.module')
-    .then(m => m.CancelAuthorModule),
-  },
-  {
     path: 'evaluacion',
     loadChildren: () => import('./pages/evaluation/evaluation.module')
     .then(m => m.EvaluationModule),
@@ -83,12 +72,50 @@ const routes: Routes = [
     .then(m => m.EvaluatorModule),
   },
   {
+
     path: 'evaluar',
     loadChildren: () => import('./pages/evaluate/evaluate.module')
     .then(m => m.EvaluateModule),
      // canActivate: [AuthGuard], [EvaluatorGuard]
   },
+  {
+    path: 'assignPaperEvaluator',
+    loadChildren: () => import('./pages/asignar-paper-evaluador/asignar-paper-evaluador.module')
+    .then(m => m.AsignarPaperEvaluadorModule),
+  },
+  {
+    path: 'papersBySymposium',
+    loadChildren: () => import('./pages/papers-by-symposium/papers-by-symposium.module')
+    .then(m => m.PapersBySymposiumModule),
+  },
 
+  // Notification routes
+  {
+    path: 'deactivateAccount',
+    loadChildren: () => import('./pages/deactivate-account/deactivate-account.module')
+    .then(m => m.DeactivateAccountModule),
+  },
+  {
+    path: 'cancelacionChairSecundario',
+    loadChildren: () => import('./pages/cancel-sec-chair/cancel-sec-chair.module')
+    .then(m => m.CancelSecChairModule),
+  },
+  {
+    path: 'cancelacionEvaluador',
+    loadChildren: () => import('./pages/cancel-evaluator/cancel-evaluator.module')
+    .then(m => m.CancelEvaluatorModule),
+  },
+  {
+    path: 'cancelarAutoria',
+    loadChildren: () => import('./pages/cancel-author/cancel-author.module')
+    .then(m => m.CancelAuthorModule),
+  },
+  {
+    path: 'endRegister',
+    loadChildren: () => import('./pages/end-register/end-register.module')
+    .then(m => m.EndRegisterModule),
+    // canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

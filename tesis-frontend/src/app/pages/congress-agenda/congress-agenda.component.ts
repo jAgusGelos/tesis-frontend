@@ -35,7 +35,7 @@ export class CongressAgendaComponent implements OnInit {
     fechaInCongreso: new Date(),
     fechaFinCongreso: new Date(),
     fechaInInscrip: new Date(),
-    fechaFinInscrip: new Date(),
+    fechaFinInscripTemprana: new Date(),
     fechaFinInscripTardia: new Date(),
     fechaLimPapers: new Date(),
     fechaProrrogaPapers: new Date(),

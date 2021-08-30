@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IEvaluator } from 'src/app/core/models/IEvaluator';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 
 @Component({
@@ -18,10 +19,17 @@ export class EvaluatorComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private evaluatorService: EvaluatorService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    // getEvaluators();
+  }
+
+  getEvaluators(): void {
+    this.evaluatorService.getEvaluators().subscribe((res: any) => {
+      this.evaluatorList = res.data;
+    });
   }
 
   toggleNew(): void {
@@ -36,11 +44,11 @@ export class EvaluatorComponent implements OnInit {
       alert('Mail Inválido');
       return;
     }
-    const mail = this.formEvaluator.controls.evaluador.value;
-    /* this.evaluatorService.postEvaluator(mail).subscribe((res: any) => {
-      const autor = res.data;
-      this.evaluatorList.push(autor)
-    }); */
+    // const mail = this.formEvaluator.controls.evaluador.value;
+    // this.evaluatorService.postEvaluator(mail).subscribe((res: any) => {
+    //   const autor = res.data;
+    //   this.evaluatorList.push(autor)
+    // });
     const autor = { id: '00', nombre: 'Prueba', puntuacion: '10' };
     this.evaluatorList.push(autor);
   }
@@ -49,10 +57,22 @@ export class EvaluatorComponent implements OnInit {
     if (
       confirm(
         'Esta seguro desea eliminar el Evaluador: ' +
-          item.nombre +
-          '\nToda la configuración creada se perderá'
+        item.nombre +
+        '\nToda la configuración creada se perderá'
       )
     ) {
+      // this.evaluatorService.deleteEvaluator(item).subscribe((res: any) => {
+      //   this.evaluatorList = this.evaluatorList.filter((x: IEvaluator) => {
+      //     if (x.id !== item.id) {
+      //       return item;
+      //     }
+      //   });
+      this.evaluatorList = this.evaluatorList.filter((x: IEvaluator) => {
+        if (x.id !== item.id) {
+          return item;
+        }
+      });
+
     }
   }
 }

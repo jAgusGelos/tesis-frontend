@@ -11,12 +11,12 @@ import { PaperService } from '../../services/paper.service';
 })
 export class PaperFormComponent implements OnInit {
 
-
   @Input() paper: IPaper = {
     id: '',
     autores: ['Autor 1', 'Autor 2'],
     responsable: '',
     nombre: '',
+    estado: 'sin subir',
     simposio: '',
     archivo: null,
   };
@@ -156,6 +156,7 @@ export class PaperFormComponent implements OnInit {
         return item.mail;
       }),
       id: '',
+      estado: 'sin subir',
       nombre: this.formPaper.controls.nombre.value,
       responsable: userId,
       simposio: this.formPaper.controls.simposio.value,
