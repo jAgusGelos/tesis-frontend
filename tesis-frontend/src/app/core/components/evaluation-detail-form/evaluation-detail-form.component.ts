@@ -1,6 +1,4 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { IEvaluator } from '../../models/ievaluator';
 import { IPaper } from '../../models/IPaper';
 import { PaperService } from '../../services/paper.service';
@@ -11,19 +9,18 @@ import { PaperService } from '../../services/paper.service';
   styleUrls: ['./evaluation-detail-form.component.css']
 })
 export class EvaluationDetailFormComponent implements OnInit {
+
   @Input() paperSeleccionado: {articulo: IPaper, evUno: IEvaluator, evDos: IEvaluator, evTres:IEvaluator};
- 
-          
+
+  paper: IPaper = {id: '1', nombre:'Paper1', autores:['A',], responsable:'A', simposio:'Simposio', archivo: null, estado:'Evaluado'};
   evaluator1: IEvaluator;
   evaluator2: IEvaluator;
   evaluator3: IEvaluator;
-  paper: IPaper = {id: '1', nombre:'Paper1', autores:['A',],responsable:'A', simposio:'Simposio', archivo: null, estado:'Evaluado', };
- 
-  evaluationsArray= [
+  
+  evaluationsArray = [
     ['3', ['id1', 'puntuacion Ev 3 item 1'], ['id2','puntuacion Ev 3 item 2'],['id3','puntuacion Ev 3 item 3']],
     ['1', ['id1', 'puntuacion Ev 1 item 1'], ['id2','puntuacion Ev 1 item 2'],['id3','puntuacion Ev 1 item 3']],
-    ['2', ['id2', 'puntuacion Ev 2 item 1'], ['id1','puntuacion Ev 2 item 2'],['id3','puntuacion Ev 2 item 3']],
-    ];
+    ['2', ['id2', 'puntuacion Ev 2 item 1'], ['id1','puntuacion Ev 2 item 2'],['id3','puntuacion Ev 2 item 3']]];
 
   evDetailRow = [
     {pregunta: 'Pregunta 1', res1: 'Respuesta 1', res2: 'Respuesta 2', res3: 'Respuesta 3',},
@@ -37,23 +34,20 @@ export class EvaluationDetailFormComponent implements OnInit {
 
   @Output() goBackEvent = new EventEmitter();
 
-  constructor(private paperService: PaperService,
-              private router: Router) { }
+  constructor(private paperService: PaperService) { }
 
   ngOnInit(): void {
+    this.paper = this.paperSeleccionado.articulo;
+    this.getPreguntas(this.paper);
     this.evaluator1 = this.paperSeleccionado.evUno;
     this.evaluator2 = this.paperSeleccionado.evDos;
     this.evaluator3 = this.paperSeleccionado.evTres;
-    this.paper = this.paperSeleccionado.articulo;
-    this.getEvaluationDetails(this.paper)
-    this.getPreguntas(this.paper)
+    this.getEvaluationDetails(this.paper);
   }
 
-  
   goBack(): void {
     this.goBackEvent.emit();
   }
-
 
   getEvaluationDetails(paper: IPaper) {
     this.paperService.getEvaluationDetails(paper.id).subscribe((res: any) => {
@@ -64,7 +58,7 @@ export class EvaluationDetailFormComponent implements OnInit {
   }
 
   getPreguntas(paper: IPaper){
-    this.paperService.getEvaluationDetails(paper.id).subscribe((res: any) => {
+    this.paperService.getQuestions(paper.id).subscribe((res: any) => {
       this.preguntas = res.data;
     });
   }
@@ -85,7 +79,4 @@ export class EvaluationDetailFormComponent implements OnInit {
     this.evDetailRow.push({pregunta: this.preguntas[index-1].pregunta, res1: element1, res2: element2, res3: element3})
     }
   }
-
- 
-
 }

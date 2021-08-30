@@ -41,9 +41,8 @@ export class PaperService {
     return this.httpClient.get(this.apiURL + '/articulos/consultaDetalleEvaluacion/' + id);
   }
 
-  /* Revisar... */
   getQuestions(id: any): any{
-    return this.httpClient.get(this.apiURL + '/articulos/' + id);
+    return this.httpClient.get(this.apiURL + 'getItemEvaluacion/' + id);
   }
 
   
