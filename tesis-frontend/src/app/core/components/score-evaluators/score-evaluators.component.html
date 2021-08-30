@@ -14,27 +14,27 @@
       </thead>
   
       <tbody>
-        <tr class='align-items-center' *ngFor='let e of evaluatorsList; let i=index'>
-          <td>{{e.nombre}}</td>
+        <tr class='align-items-center' *ngFor='let row of rows; let i=index'>
+          <td>{{row.evaluator.nombre}}</td>
           <td>
-            <div *ngIf="e.score !== null">
-              <b>{{e.score}}</b>
+            <div *ngIf="row.evaluator.puntuacion !== null">
+              <b>{{row.evaluator.puntuacion}}</b>
             </div>
-            <div *ngIf="e.score == null">
+            <div *ngIf="row.evaluator.puntuacion == null">
               Sin puntuar
             </div>
           </td>
           <td>
-            <div *ngIf="e.edit == false">
-              <a (click)="editScore(i)"><i class="fas fa-pencil-alt" title="Editar"></i></a>
+            <div *ngIf="row.edit == false">
+              <a (click)="toggleEdit(i)"><i class="fas fa-pencil-alt" title="Editar"></i></a>
             </div>
-            <div *ngIf="e.edit == true">
-              <select name="form-select" onchange="score()">
-                <option selected>--Seleccione un puntaje--</option>
+            <div *ngIf="row.edit == true">
+              <select class="form-select" id="selectScore">
+                <option disabled selected>--Seleccione un puntaje--</option>
                 <option *ngFor="let s of scoreList" [value]="s">{{s}}</option>
             </select>
             &nbsp;
-            <button class="btn btn-primary" id="boton" disabled>Guardar</button>
+            <a class="btn btn-primary" (click)="score(i)">Guardar</a>
             </div>
           </td>
         </tr>

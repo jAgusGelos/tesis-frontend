@@ -28,4 +28,8 @@ export class EvaluatorService {
   deleteEvaluator(evaluator: IEvaluator): any {
     return this.httpClient.delete<IEvaluator>(this.apiURL + 'evaluador/eliminar-evaluador/' + evaluator.id);
   }
+
+  calificarEvaluador(evCalification: any) {
+    return this.httpClient.put(this.apiURL + 'evaluador/calificarEvaluador/', evCalification);
+  }
 }

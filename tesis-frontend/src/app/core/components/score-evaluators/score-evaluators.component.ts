@@ -11,37 +11,58 @@ import { EvaluatorService } from '../../services/evaluator.service';
 export class ScoreEvaluatorsComponent implements OnInit {
 
 
-  evaluatorsList: any[] = [{nombre: String, score: Number, edit: Boolean}];
+  evaluatorsList: IEvaluator[];
+
+  rows: [{
+    evaluator: IEvaluator,
+    edit: Boolean
+  }]
 
   scoreList: Number[] = [1, 2, 3, 4, 5, 6, 7 ,8 ,9 ,10];
-
 
   constructor( private evaluatorService: EvaluatorService) { }
 
   ngOnInit(): void {
     this.fillEvaluatorsList();
+    this.fillRows();
   }
 
-  score(s: Number, index) {
-    (document.getElementById('boton') as HTMLButtonElement).disabled = false;
-    this.evaluatorsList[index].score = s;
-    this.evaluatorsList[index].edit = false;
-  }
+  score(index) {
+    let select = <HTMLSelectElement>document.getElementById("selectScore");
+    let score = select.options[select.selectedIndex].value;
 
-  editScore(index) {
-    this.evaluatorsList[index].edit = !this.evaluatorsList[index].edit;
+    if (score == null) {
+      alert('Seleccione un puntaje para el evaluador');
+      return
+    }
+    score.toString();
+    let evCalification = {
+      evaluator: this.rows[index].evaluator,
+      score: score
+    }
+    this.evaluatorService.calificarEvaluador(evCalification).subscribe((res: any) => {
+      alert(res.data);
+      this.rows[index].evaluator.puntuacion = score;
+      this.rows[index].edit = false;
+    })
   }
   
+  fillRows() {
+    let evaluator: IEvaluator;
+    let edit = false;
+    for (let index = 0; index < this.evaluatorsList.length; index++) {
+      evaluator = this.evaluatorsList[index];
+      this.rows.push({evaluator, edit});
+    }
+  }
+
   fillEvaluatorsList() {
-    this.evaluatorsList = [
-      {nombre: 'Evaluador 1', score: 5, edit: false},
-      {nombre: 'Evaluador 2', score: null, edit: true},
-      {nombre: 'Evaluador 3', score: 10, edit: false},
-      {nombre: 'Evaluador 4', score: null, edit: true},
-      {nombre: 'Evaluador 5', score: 1, edit: false},
-      {nombre: 'Evaluador 6', score: null, edit: true},
-      {nombre: 'Evaluador 7', score: 3, edit: false},]
+    this.evaluatorService.getEvaluators().subscribe((res: any) => {
+      this.evaluatorsList = res.data;
+    });
   }
-  
 
+  toggleEdit(index) {
+    this.rows[index].edit = !this.rows[index].edit;
+  }
 }
