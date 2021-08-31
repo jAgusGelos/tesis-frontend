@@ -15,6 +15,8 @@ export class CongressComponent implements OnInit {
   congress = {};
   sedes = [];
 
+  showComponent: String = 'list'
+
 
   constructor(private congressService: CongressService,
               private router: Router) { }
@@ -49,12 +51,12 @@ export class CongressComponent implements OnInit {
   }
 
   newCongress(): void {
-    this.edit = !this.edit;
+    this.showComponent = 'edit';
     this.congress = {};
   }
 
   editCongress(congress: ICongress): void {
-    this.edit = !this.edit;
+    this.showComponent = 'edit';
     this.congress = congress;
   }
 
@@ -86,5 +88,9 @@ export class CongressComponent implements OnInit {
       alert('Congreso Modificado Correctamente');
       window.location.reload();
     });
+  }
+
+  scoreEvaluators() {
+    this.showComponent = 'scoreEvaluators';
   }
 }

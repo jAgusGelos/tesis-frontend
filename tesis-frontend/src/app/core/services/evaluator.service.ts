@@ -23,11 +23,19 @@ export class EvaluatorService {
     return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
   }
 
+  getEvaluatorById(id: String): any {
+    return this.httpClient.get(this.apiURL + 'evaluador/consultarEvaluador/' + id);
+  }
+
   putEvaluator(evaluator: IEvaluator): any {
     return this.httpClient.put<IEvaluator>(this.apiURL + 'articulos/modificar/' + evaluator.id, evaluator);
   }
 
   deleteEvaluator(evaluator: IEvaluator): any {
     return this.httpClient.delete<IEvaluator>(this.apiURL + 'evaluador/eliminar-evaluador/' + evaluator.id);
+  }
+
+  calificarEvaluador(evCalification: any) {
+    return this.httpClient.put(this.apiURL + 'evaluador/calificarEvaluador/', evCalification);
   }
 }

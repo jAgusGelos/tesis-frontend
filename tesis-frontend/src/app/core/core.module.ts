@@ -20,11 +20,16 @@ import { SymposiumSelectComponent } from './components/symposium-select/symposiu
 import { CongressActiveComponent } from './components/congress-active/congress-active.component';
 import { EvaluationListComponent } from './components/evaluation-list/evaluation-list.component';
 import { EvaluationFormComponent } from './components/evaluation-form/evaluation-form.component';
+import { EvaluateFormComponent } from './components/evaluate-form/evaluate-form.component';
+import { EvaluateListComponent } from './components/evaluate-list/evaluate-list.component';
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { PapersBySymposiumListComponent } from './components/papers-by-symposium-list/papers-by-symposium-list.component';
 import { DeactivateAccountFormComponent } from './components/deactivate-account-form/deactivate-account-form.component';
 import { EvaluatePaperListComponent } from './components/evaluate-paper-list/evaluate-paper-list.component';
 import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/evaluate-paper-form.component';
+import { EvaluationDetailFormComponent } from './components/evaluation-detail-form/evaluation-detail-form.component';
+import { ScoreEvaluatorsComponent } from './components/score-evaluators/score-evaluators.component';
+import { EvaluatePapersChairSecCardComponent } from './components/evaluate-papers-chair-sec-card/evaluate-papers-chair-sec-card.component';
 
 
 @NgModule({
@@ -49,12 +54,16 @@ import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/eva
     CongressActiveComponent,
     EvaluationListComponent,
     EvaluationFormComponent,
+    EvaluateFormComponent,
+    EvaluateListComponent,
     AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
     DeactivateAccountFormComponent,
     EvaluatePaperListComponent,
-    EvaluatePaperFormComponent
-
+    EvaluatePaperFormComponent,
+    EvaluationDetailFormComponent,
+    ScoreEvaluatorsComponent,
+    EvaluatePapersChairSecCardComponent
   ],
   imports: [
     CommonModule,
@@ -81,11 +90,16 @@ import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/eva
     CongressActiveComponent,
     EvaluationListComponent,
     EvaluationFormComponent,
+    EvaluateFormComponent,
+    EvaluateListComponent,
     AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
     DeactivateAccountFormComponent,
     EvaluatePaperListComponent,
-    EvaluatePaperFormComponent
+    EvaluatePaperFormComponent,
+    EvaluationDetailFormComponent,
+    ScoreEvaluatorsComponent,
+    EvaluatePapersChairSecCardComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

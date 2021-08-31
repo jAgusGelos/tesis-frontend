@@ -21,6 +21,10 @@ export class ArticulosService {
     return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosXSimposio/' + symposium.id);
   }
 
+  calificarArticulo(paperCalification: any) {
+    return this.httpClient.put(this.apiURL + 'calificarArticulo/', paperCalification);
+  }
+
   post(asignation: any) {
     return this.httpClient.post(this.apiURL + 'asignarArticuloEvaluador/', asignation);
   }

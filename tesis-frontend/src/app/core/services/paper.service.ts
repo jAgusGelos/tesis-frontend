@@ -32,6 +32,10 @@ export class PaperService {
     return this.httpClient.get(this.apiURL + 'articulos/consultaArticuloXAutor/');
   }
 
+  getPaperFile(paper: IPaper): any {
+    return this.httpClient.get(this.apiURL + 'consulta-archivo/' + paper.id)
+  }
+
   putPaper(paper: IPaper): any {
     const paperPost = {
       idArticulo: paper.id,
@@ -56,8 +60,19 @@ export class PaperService {
     return this.httpClient.post(this.apiURL + '/sendInvit', mail);
   }
 
+
   getSimposiosActivos(): any {
     const url = 'congresos/lista-simposiosxcongreso/?idCongreso=';
     return this.httpClient.get(this.apiURL + url + this.idCongress);
   }
+
+
+  getEvaluationDetails(id: any): any{
+    return this.httpClient.get(this.apiURL + '/articulos/consultaDetalleEvaluacion/' + id);
+  }
+
+  getQuestions(id: any): any{
+    return this.httpClient.get(this.apiURL + 'getItemEvaluacion/' + id);
+  }
 }
+

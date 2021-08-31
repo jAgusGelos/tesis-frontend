@@ -72,7 +72,13 @@ const routes: Routes = [
     .then(m => m.EvaluatorModule),
   },
   {
-    path: 'asignarPaper',
+    path: 'evaluar',
+    loadChildren: () => import('./pages/evaluate/evaluate.module')
+    .then(m => m.EvaluateModule),
+     // canActivate: [AuthGuard], [EvaluatorGuard]
+  },
+  {
+    path: 'assignPaperEvaluator',
     loadChildren: () => import('./pages/asignar-paper-evaluador/asignar-paper-evaluador.module')
     .then(m => m.AsignarPaperEvaluadorModule),
   },
@@ -82,11 +88,16 @@ const routes: Routes = [
     .then(m => m.PapersBySymposiumModule),
   },
   {
+
     path: 'verEvaluaciones',
     loadChildren: () => import('./pages/evaluate-article/evaluate-article.module')
     .then(m => m.EvaluateArticleModule),
   },
-
+  {
+    path: 'evaluatePapersChairSec',
+    loadChildren: () => import('./pages/evaluate-papers-chair-sec/evaluate-papers-chair-sec.module')
+    .then(m => m.EvaluatePapersChairSecModule),
+  },
   // Notification routes
   {
     path: 'deactivateAccount',
