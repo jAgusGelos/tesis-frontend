@@ -2,18 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IassignSecChairTheme } from '../models/iassign-sec-chair-theme';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssignSecChairThemeService {
 
-  private apiURL = environment.apiURL;
+  apiURL = environment.apiURL;
+  idCongress: number;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private auth: AuthService) {
+                this.idCongress = auth.getCongressId();
+              }
 
   //Acordar dirección luego...
-  postAssignSecChairTheme(asignacion: IassignSecChairTheme[]): any {
+  postAssignSecChairTheme(asignacion: any): any {
     return this.httpClient.post<IassignSecChairTheme>(this.apiURL + 'chairportematica/crear/', asignacion);
   }
 
