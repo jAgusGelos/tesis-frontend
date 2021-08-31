@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IEvaluator } from 'src/app/core/models/ievaluator';
-import { IPaper } from 'src/app/core/models/IPaper';
+import { IntPaper } from 'src/app/core/models/IntPaper';
 
 @Component({
   selector: 'app-evaluate-papers-chair-sec',
@@ -25,7 +25,7 @@ export class EvaluatePapersChairSecComponent implements OnInit {
                                {id: '3', nombre: 'Agus', puntuacion: '1'},]
 
   articuloSeleccionado: {
-    articulo: IPaper,
+    articulo: IntPaper,
     evUno: IEvaluator,
     evDos: IEvaluator,
     evTres: IEvaluator

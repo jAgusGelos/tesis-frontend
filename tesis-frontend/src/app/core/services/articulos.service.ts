@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IPaper } from '../models/IPaper';
+import { IntPaper } from '../models/IntPaper';
 import { ISymposium } from '../models/ISymposium';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticulosService {
- 
+
   private apiURL = environment.apiURL;
 
   constructor(private httpClient: HttpClient) { }
 
-  getEvaluatorsByPaper(paper: IPaper) {
+  getEvaluatorsByPaper(paper: IntPaper) {
     return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadores/' + paper.id);
   }
 

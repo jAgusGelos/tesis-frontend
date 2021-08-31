@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ICongress } from '../../models/ICongress';
 import { IEvaluator } from '../../models/ievaluator';
-import { IPaper } from '../../models/ipaper';
+import { IntPaper } from '../../models/IntPaper';
 import { ISymposium } from '../../models/ISymposium';
 import { IUserComplete } from '../../models/IUserComplete';
 import { ArticulosService } from '../../services/articulos.service';
@@ -24,11 +24,11 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   symposium: ISymposium;
 
-  papersList: IPaper[];
+  papersList: IntPaper[];
   evaluatorsList: IEvaluator[];
 
   assignedPapersList: [{
-    articulo: IPaper;
+    articulo: IntPaper;
     evaUno: IEvaluator;
     evaDos: IEvaluator;
     evaTres: IEvaluator;
@@ -42,12 +42,12 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSymposiumsByChair();
-    this.getPapersBySymposium();   
+    this.getPapersBySymposium();
     this.fillAssignedPapersList();
     this.getEvaluators();
   }
 
-  post(row: any, evNum: Number, paper: IPaper, evaluator: IEvaluator) {
+  post(row: any, evNum: Number, paper: IntPaper, evaluator: IEvaluator) {
     let asignation = {
       congress: this.congress,
       paper,
@@ -61,7 +61,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
     });
   }
 
-  delete(row: any, paper: IPaper, evaluator: IEvaluator) {
+  delete(row: any, paper: IntPaper, evaluator: IEvaluator) {
     let asignation = {
       congress: this.congress,
       paper,
@@ -117,7 +117,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   fillAssignedPapersList() {
     let row: {
-      articulo: IPaper,
+      articulo: IntPaper,
       evaUno: IEvaluator,
       evaDos: IEvaluator,
       evaTres: IEvaluator
@@ -139,7 +139,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
         } else {
           row.evaDos = null;
         }
-        
+
       } else {
         row.evaUno = null;
       }
@@ -151,7 +151,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
     row.evaTres = null;
   }
 
-  getEvaluatorsByPaper(paper: IPaper): IEvaluator[] {
+  getEvaluatorsByPaper(paper: IntPaper): IEvaluator[] {
     if (paper !== null) {
       let evaluators: IEvaluator[];
       this.articulosService.getEvaluatorsByPaper(paper).subscribe((res: any) => {

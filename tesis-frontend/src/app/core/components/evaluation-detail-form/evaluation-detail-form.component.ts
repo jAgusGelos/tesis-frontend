@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IEvaluator } from '../../models/ievaluator';
-import { IPaper } from '../../models/IPaper';
+import { IntPaper } from '../../models/IntPaper';
 import { PaperService } from '../../services/paper.service';
 
 @Component({
@@ -10,13 +10,13 @@ import { PaperService } from '../../services/paper.service';
 })
 export class EvaluationDetailFormComponent implements OnInit {
 
-  @Input() paperSeleccionado: {articulo: IPaper, evUno: IEvaluator, evDos: IEvaluator, evTres:IEvaluator};
+  @Input() paperSeleccionado: {articulo: IntPaper, evUno: IEvaluator, evDos: IEvaluator, evTres:IEvaluator};
 
-  paper: IPaper = {id: '1', nombre:'Paper1', autores:['A',], responsable:'A', simposio:'Simposio', archivo: null, estado:'Evaluado'};
+  paper: IntPaper = {id: '1', nombre:'Paper1', autores:['A',], responsable:'A', simposio:'Simposio', archivo: null, estado:'Evaluado'};
   evaluator1: IEvaluator;
   evaluator2: IEvaluator;
   evaluator3: IEvaluator;
-  
+
   evaluationsArray = [
     ['3', ['id1', 'puntuacion Ev 3 item 1'], ['id2','puntuacion Ev 3 item 2'],['id3','puntuacion Ev 3 item 3']],
     ['1', ['id1', 'puntuacion Ev 1 item 1'], ['id2','puntuacion Ev 1 item 2'],['id3','puntuacion Ev 1 item 3']],
@@ -26,7 +26,7 @@ export class EvaluationDetailFormComponent implements OnInit {
     {pregunta: 'Pregunta 1', res1: 'Respuesta 1', res2: 'Respuesta 2', res3: 'Respuesta 3',},
     {pregunta: 'Pregunta 2', res1: 'Respuesta 1', res2: 'Respuesta 2', res3: 'Respuesta 3',}];
 
-    
+
   evaux1;
   evaux2;
   evaux3;
@@ -49,7 +49,7 @@ export class EvaluationDetailFormComponent implements OnInit {
     this.goBackEvent.emit();
   }
 
-  getEvaluationDetails(paper: IPaper) {
+  getEvaluationDetails(paper: IntPaper) {
     this.paperService.getEvaluationDetails(paper.id).subscribe((res: any) => {
       this.evaluationsArray = res.data;
     }
@@ -57,7 +57,7 @@ export class EvaluationDetailFormComponent implements OnInit {
     this.aux();
   }
 
-  getPreguntas(paper: IPaper){
+  getPreguntas(paper: IntPaper){
     this.paperService.getQuestions(paper.id).subscribe((res: any) => {
       this.preguntas = res.data;
     });
@@ -75,7 +75,7 @@ export class EvaluationDetailFormComponent implements OnInit {
     const element1 = this.evaux1[index][1];
     const element2 = this.evaux2[index][1];
     const element3 = this.evaux3[index][1];
-    
+
     this.evDetailRow.push({pregunta: this.preguntas[index-1].pregunta, res1: element1, res2: element2, res3: element3})
     }
   }

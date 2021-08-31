@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { IPaper } from '../../models/IPaper';
+import { IntPaper } from '../../models/IntPaper';
 import { ISymposium } from '../../models/ISymposium';
 import { ArticulosService } from '../../services/articulos.service';
 import { SymposiumService } from '../../services/symposium.service';
@@ -18,7 +18,7 @@ export class PapersBySymposiumListComponent implements OnInit {
 
   paperStatesList: string[] = ['Sin Subir', 'Subido', 'Pendiente de Reentrega', 'Aprobado', 'No Aprobado', 'Cancelado'];
   symposiumsList: ISymposium[];
-  papersList: IPaper[];
+  papersList: IntPaper[];
 
   constructor( private articulosService: ArticulosService,
                private symposiumService: SymposiumService) { }
@@ -37,7 +37,7 @@ export class PapersBySymposiumListComponent implements OnInit {
   }
 
   getPapersByState(state: string) {
-    let auxList: IPaper[];
+    let auxList: IntPaper[];
     for (let index = 0; index < this.papersList.length; index++) {
       if (this.papersList[index].estado.toLowerCase() === state.toLowerCase()) {
         auxList.push(this.papersList[index]);

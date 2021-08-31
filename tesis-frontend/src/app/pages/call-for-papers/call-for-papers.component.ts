@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IPaper } from 'src/app/core/models/IPaper';
+import { IntPaper } from 'src/app/core/models/IntPaper';
 import { PaperService } from 'src/app/core/services/paper.service';
 
 @Component({
@@ -31,13 +31,13 @@ export class CallForPapersComponent implements OnInit {
     this.paper = {};
   }
 
-  editPaper(paper: IPaper): void {
+  editPaper(paper: IntPaper): void {
     this.edit = !this.edit;
     this.paper = paper;
 
   }
 
-  deletePaper(item: IPaper): void {
+  deletePaper(item: IntPaper): void {
     this.paperService.deletePaper(item).subscribe((res: any) => {
       alert('El paper ha sido eliminado correctamente');
       this.getPaper();
@@ -47,7 +47,7 @@ export class CallForPapersComponent implements OnInit {
 
   /**
    *
-   * @param x Objeto compuesto de IPaper
+   * @param x Objeto compuesto de IntPaper
    * Recibe un paper, chequea que tenga un id.
    * Si lo tiene hace un PUT al back. Actualiza un paper creado.
    * Si no lo tiene crea un nuevo paper.
