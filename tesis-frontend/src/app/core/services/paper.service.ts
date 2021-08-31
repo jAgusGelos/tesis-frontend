@@ -20,6 +20,10 @@ export class PaperService {
     return this.httpClient.get(this.apiURL + 'paper/todos/');
   }
 
+  getPaperFile(paper: IPaper): any {
+    return this.httpClient.get(this.apiURL + 'consulta-archivo/' + paper.id)
+  }
+
   putPaper(paper: IPaper): any {
     return this.httpClient.put<IPaper>(this.apiURL + 'paper/modificar/' + paper.id, paper);
   }
