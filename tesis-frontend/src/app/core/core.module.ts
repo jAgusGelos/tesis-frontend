@@ -26,11 +26,9 @@ import { EvaluateListComponent } from './components/evaluate-list/evaluate-list.
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { PapersBySymposiumListComponent } from './components/papers-by-symposium-list/papers-by-symposium-list.component';
 import { DeactivateAccountFormComponent } from './components/deactivate-account-form/deactivate-account-form.component';
+import { EvaluationDetailFormComponent } from './components/evaluation-detail-form/evaluation-detail-form.component';
 import { ScoreEvaluatorsComponent } from './components/score-evaluators/score-evaluators.component';
 import { EvaluatePapersChairSecCardComponent } from './components/evaluate-papers-chair-sec-card/evaluate-papers-chair-sec-card.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -59,6 +57,7 @@ import { EvaluatePapersChairSecCardComponent } from './components/evaluate-paper
     AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
     DeactivateAccountFormComponent,
+    EvaluationDetailFormComponent,
     ScoreEvaluatorsComponent,
     EvaluatePapersChairSecCardComponent
   ],
@@ -92,6 +91,7 @@ import { EvaluatePapersChairSecCardComponent } from './components/evaluate-paper
     AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
     DeactivateAccountFormComponent,
+    EvaluationDetailFormComponent,
     ScoreEvaluatorsComponent,
     EvaluatePapersChairSecCardComponent
   ],
