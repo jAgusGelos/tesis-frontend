@@ -11,7 +11,7 @@ import { PaperService } from '../../services/paper.service';
 })
 export class PaperFormComponent implements OnInit {
 
-  @Input() paper: IPaper = {
+  @Input() paper: any = {
     id: '',
     autores: ['Autor 1', 'Autor 2'],
     responsable: '',

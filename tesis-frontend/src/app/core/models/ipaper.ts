@@ -5,5 +5,5 @@ export interface IPaper {
   responsable: string;
   simposio: string;
   archivo: File;
-  estado: String;
+  estado: string;
 }
