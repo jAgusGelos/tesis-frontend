@@ -1,75 +1,72 @@
-<div class="container-lg justify-content-center">
-    <div class="card">
-      <div class="container">
-        <h3>Asignar chairs secundarios por temática</h3>
-          <form [formGroup]='formAssignSecChairs'>
-            <div class="row">
-                <label class="col-form-label col-sm-2 col-sm-offset-2" for="selectCongreso">Seleccione un congreso: </label>
-                <div class="col-4">
-                  <select name="congreso" class="form-control" formControlName="selectCongreso" [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectCongreso.touched || submitted) && formAssignSecChairs.controls.selectCongreso.errors}">
-                    <option hidden selected>Seleccione un congreso</option>
-                    <option *ngFor="let opt of congresos"> {{ opt }}</option>
-                  </select>
-                  <br>
-                </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Asignar chair a temática</h5>
-                  <label for="selectChair">Chair: </label>
-                  <div class="col-sm-6">
-                  <select name="chair" class="form-control" formControlName="selectChair" [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectChair.touched || submitted) && formAssignSecChairs.controls.selectChair.errors}">
+
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Asignar Chairs Secundarios</h3>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form [formGroup]='formAssignSecChairs'>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Asignar chair a temática</h5>
+                <label for="selectChair">Chair: </label>
+                <div class="col-sm-6">
+                  <select name="chair" class="form-control" formControlName="selectChair"
+                    [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectChair.touched || submitted) && formAssignSecChairs.controls.selectChair.errors}">
                     <option hidden selected>Seleccione un chair a asignar</option>
                     <option *ngFor="let chair of chairsNotAssigned">{{ chair.value }}</option>
                   </select>
                 </div>
-                  <br>
-                  <label for="selectTematica">Temática: </label>
-                  <div class="col-sm-6">
-                  <select name="chair" class="form-control" formControlName="selectTematica" [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectTematica.touched || submitted) && formAssignSecChairs.controls.selectTematica.errors}">
-                    <option hidden selected>Seleccione una temática</option>
-                    <option *ngFor="let theme of tematicas">{{ theme }}</option>
-                  </select>
-                  </div>
-                  <br>
-                  <div class="col-sm-4">
-                    <button type="button" class="btn btn-primary" (click)="asignarChair() ">
-                      <span class="fas fa-plus">
-                        Asignar
-                      </span> 
-                    </button>
-                </div>
-                </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <table class="table">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th class="text-center">Chair secundario</th>
-                      <th class="text-center">Temática</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let chair of chairsAssigned">
-                      <td>{{chair.value}}</td>
-                      <td>{{chair.theme}}</td>
-                    </tr>
-                  </tbody>
-                </table>
                 <br>
+                <label for="selectTematica">Simposio: </label>
+                <div class="col-sm-6">
+                  <select name="chair" class="form-control" formControlName="selectTematica"
+                    [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectTematica.touched || submitted) && formAssignSecChairs.controls.selectTematica.errors}">
+                    <option hidden selected>Seleccione una simposio</option>
+                    <option *ngFor="let theme of tematicas">{{ theme.descripcion }}</option>
+                  </select>
+                </div>
+                <br>
+                <div class="row justify-content-md-end">
+                  <button type="button" class="btn btn-primary col-sm-4" (click)="asignarChair() ">
+                    <span class="fas fa-plus">
+                      Asignar
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
-          </form>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5>Chais Asignados</h5>
+          <table class="table text-center table-hover table-bordered">
+            <thead class='thead'>
+              <tr>
+                <th class="col-md-4">Chair</th>
+                <th class="col-md-4">Simposio</th>
+                <th class="col-md-2">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class='align-items-center' *ngFor='let chair of chairsAssigned'>
+                <td>{{chair.value}}</td>
+                <td>{{chair.theme}}</td>
+                <td>
+                  <div class="btn-group col-md-3">
+                    <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="col-sm-4">
-      <button type="button" class="btn btn-warning" (click)="confirmar()">
-        <span class="fas fa-pen">
-          Confirmar
-        </span> 
-      </button>
     </div>
-    </div>
+  </div>
 </div>

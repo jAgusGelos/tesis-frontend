@@ -1,5 +1,5 @@
 export interface ISymposium  {
-  id: string;
+  id?: string;
   nombre: string;
   descripcion: string;
 }

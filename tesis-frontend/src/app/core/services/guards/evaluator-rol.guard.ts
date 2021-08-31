@@ -17,7 +17,7 @@ export class EvaluatorRolGuard implements CanActivate {
     else{
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(idToken);
-      if (decodedToken.rol === '5' ) {
+      if (decodedToken.rol.includes(3) ) {
         return true;
       }
       return false;

@@ -39,7 +39,7 @@
           <label class="col-form-label col-sm-3 col-md-3 col-md-offset-2" for="repPassword">Repetir Contraseña: <span
               class="text-danger">*</span></label>
           <div class="col-sm-8">
-            <input type="repPassword" class="form-control" formControlName="repPassword" [ngClass]="{'is-invalid': (formRegister.controls.repPassword.touched || submitted)
+            <input type="password" class="form-control" formControlName="repPassword" [ngClass]="{'is-invalid': (formRegister.controls.repPassword.touched || submitted)
                   && formRegister.controls.repPassword.errors}" onclick="this.select()" />
             <span class="text-danger"
               *ngIf="(formRegister.controls.repPassword.touched || submitted) && formRegister.controls.repPassword.errors?.required">

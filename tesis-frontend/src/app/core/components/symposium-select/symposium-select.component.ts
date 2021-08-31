@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ISymposium } from '../../models/ISymposium';
+import { SymposiumService } from '../../services/symposium.service';
 
 @Component({
   selector: 'app-symposium-select',
@@ -16,7 +17,8 @@ export class SymposiumSelectComponent implements OnInit {
   submitted = false;
   @Input() simposiosList: ISymposium[];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private sympoService: SymposiumService) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -32,7 +34,7 @@ export class SymposiumSelectComponent implements OnInit {
       return;
     }
     const exist = this.simposiosList.some((x: any) => {
-      if (x.id === id) {
+      if (+x.id === +id) {
         return true;
       }
     });
@@ -40,7 +42,14 @@ export class SymposiumSelectComponent implements OnInit {
       alert('Ya existe el simposio ingresado');
       return;
     }
-    this.simposiosList.push({id, nombre, descripcion: desc});
+    this.sympoService.postSymposiumCongress({id, nombre, descripcion: desc}).subscribe((res: any) => {
+      if (res.error) {
+        alert('Ha ocurrido un error');
+        return;
+      }
+      this.simposiosList.push({id, nombre, descripcion: desc});
+    });
+
   }
 
   cancel(): void {
@@ -48,16 +57,24 @@ export class SymposiumSelectComponent implements OnInit {
   }
 
   delSimposio(item: any): void {
-    this.simposiosList = this.simposiosList.filter((x: any) => {
-      if (x.id !== item.id){
-        return x;
+    this.sympoService.deleteSymposiumCongress(item).subscribe((res: any) => {
+      if (res.error) {
+        alert('Ha ocurrido un error');
+        return;
       }
-      return null;
+      this.simposiosList = this.simposiosList.filter((x: any) => {
+        if (x.id !== item.id){
+          return x;
+        }
+        return null;
+      });
     });
+
   }
 
   submit(): void {
-    this.symposiumEmitter.emit(this.simposiosList);
+    console.log('Datos Guardados');
+    window.location.reload();
   }
 
 }

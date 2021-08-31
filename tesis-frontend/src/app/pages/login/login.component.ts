@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
   register(): void {
     this.reg = !this.reg;
   }

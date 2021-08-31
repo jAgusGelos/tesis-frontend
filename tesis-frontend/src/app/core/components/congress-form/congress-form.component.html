@@ -27,8 +27,13 @@
           <label class='col-form-label col-sm-3 col-sm-offset-2' for='sede'>Sede: <span
               class='text-danger'>*</span></label>
           <div class='col-sm-6'>
-            <input type='text' class='form-control' formControlName='sede' [ngClass]="{'is-invalid': (formCongress.controls.sede.touched || submitted)
-    && formCongress.controls.sede.errors}" onclick='this.select()' />
+            <select  class='col-sm-4' name="simposio" class="form-control" formControlName="sede" [ngClass]="{'is-invalid': (formCongress.controls.sede.touched || submitted || formCongress.controls.sede.value === '')
+          && formCongress.controls.sede.errors}">
+              <option value=""> </option>
+              <option  *ngFor="let opt of sedes" value={{opt.id}}>
+                ‌{{ opt.nombre }}
+              <option>
+            </select>
             <span class='text-danger'
               *ngIf='(formCongress.controls.sede.touched || submitted) && formCongress.controls.sede.errors?.required'>
               Requerido
@@ -79,7 +84,9 @@
           <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
           &nbsp;
           <a class="btn btn-primary col-md-4" (click)='submit()'
-            role="button">{{congress.id === undefined ? 'Crear Congreso' : 'Guardar Cambios'}}</a>
+            role="button" *ngIf="congress.sede === undefined">Crear Congreso</a>
+            <a class="btn btn-primary col-md-4" (click)='edit()'
+            role="button" *ngIf="congress.sede !== undefined">Guardar Cambios</a>
         </div>
 
       </form>

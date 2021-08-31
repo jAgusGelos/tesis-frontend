@@ -12,11 +12,11 @@ import { SymposiumService } from '../../services/symposium.service';
 export class PapersBySymposiumListComponent implements OnInit {
 
   selectedSymposium: ISymposium;
-  selectedState: String;
+  selectedState: string;
 
   @Output() cancelPapersBySymposium = new EventEmitter();
-  
-  paperStatesList: String[] = ['Sin Subir', 'Subido', 'Pendiente de Reentrega', 'Aprobado', 'No Aprobado', 'Cancelado'];
+
+  paperStatesList: string[] = ['Sin Subir', 'Subido', 'Pendiente de Reentrega', 'Aprobado', 'No Aprobado', 'Cancelado'];
   symposiumsList: ISymposium[];
   papersList: IPaper[];
 
@@ -27,7 +27,7 @@ export class PapersBySymposiumListComponent implements OnInit {
     this.getSymposiums();
   }
 
-  getPapers() {
+  getPapers(): void {
     if (this.selectedSymposium !== null) {
       this.getPapersBySymposium(this.selectedSymposium);
       if (this.selectedState !== null) {
@@ -36,7 +36,7 @@ export class PapersBySymposiumListComponent implements OnInit {
     }
   }
 
-  getPapersByState(state: String) {
+  getPapersByState(state: string) {
     let auxList: IPaper[];
     for (let index = 0; index < this.papersList.length; index++) {
       if (this.papersList[index].estado.toLowerCase() === state.toLowerCase()) {
@@ -46,13 +46,13 @@ export class PapersBySymposiumListComponent implements OnInit {
     this.papersList = auxList;
   }
 
-  getPapersBySymposium(symposium: ISymposium) {
+  getPapersBySymposium(symposium: ISymposium): void {
     this.articulosService.getPapersBySymposium(symposium).subscribe((res: any) => {
       this.papersList = res.data;
     });
   }
 
-  getSymposiums() {
+  getSymposiums(): void {
     this.symposiumService.getSymposium().subscribe((res: any) => {
       this.symposiumsList = res.data;
     });

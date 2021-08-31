@@ -15,9 +15,9 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    // this.userService.getLoggedUser().subscribe((res: any) => {
-    //   this.usuario = res.data;
-    // });
+    this.userService.getLoggedUser().subscribe((res: any) => {
+      this.usuario = res.data;
+    });
 
   }
 

@@ -34,6 +34,26 @@
             </div>
           </div>
 
+          <!-- Congreso -->
+        <div class='form-group row justify-content-center'>
+          <label class='col-form-label col-sm-3 col-md-3 col-sm-offset-2' for='idCongress'>Congreso: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <select  class='col-sm-4' name="simposio" class="form-control" formControlName="idCongress"
+            [ngClass]="{'is-invalid': ((formLogin.controls.idCongress.touched || submitted) && (formLogin.controls.idCongress.value === '' ))
+          && formLogin.controls.idCongress.errors}">
+              <option value=""></option>
+              <option  *ngFor="let opt of congressList" value={{opt.id}}>
+                ‌{{ opt.nombre }}
+              <option>
+            </select>
+            <span class='text-danger'
+              *ngIf='(formLogin.controls.idCongress.touched || submitted) && formLogin.controls.idCongress.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
           <div class="row justify-content-md-center pt-3">
             <a class="btn btn-primary btn-block col-md-8" role="button" (click)='submit()'>Iniciar Sesión</a>
             <br>
