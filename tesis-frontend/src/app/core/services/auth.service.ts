@@ -52,28 +52,31 @@ export class AuthService {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.id;
+    return decodedToken.id || null;
   }
 
   getUserRoles(): number[] {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.rol;
+    return decodedToken.rol || null;
   }
 
   getCongressId(): number {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.idCongreso;
+    if (decodedToken){
+      return decodedToken.idCongreso;
+    }
+    return null;
   }
 
   getSedeId(): number {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.sede;
+    return decodedToken.sede || null;
   }
 
   getUserObs(): any {
