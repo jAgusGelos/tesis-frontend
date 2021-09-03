@@ -16,8 +16,8 @@
 
     <tbody>
       <tr class='align-items-center'*ngFor='let item of congressList'>
+        <td>{{item.nombre_sede}}</td>
         <td>{{item.nombre}}</td>
-        <td>{{item.sede}}</td>
         <td>{{item.ano}}</td>
         <td>
           <div class="btn-group col-md-3">
@@ -27,9 +27,11 @@
           &nbsp;
           <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
           &nbsp;
-          <a href='/assignPaperEvaluator' title='Asignar artículos a evaluadores'><i class="fa fa-address-card"></i></a>
+          <a href='/asignarPaperEvaluador' title='Asignar artículos a evaluadores'><i class="fa fa-address-card"></i></a>
           &nbsp;
           <a href='/papersBySymposium' title='Artículos por simposio'><i class="fas fa-list"></i></a>
+          &nbsp;
+          <a (click)='toggleScoreEvaluators()' title='Puntuar evaluadores'><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
         </div>
       </td>
       </tr>

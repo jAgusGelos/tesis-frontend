@@ -22,14 +22,17 @@ export class CongressFormComponent implements OnInit {
   };
   @Output() congressEmitter = new EventEmitter<ICongress>();
   @Output() cancelCongress = new EventEmitter();
+  @Output() editCongress = new EventEmitter();
 
   formCongress: FormGroup;
   submitted = false;
+  @Input() sedes = [];
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    console.log(this.sedes);
     this.formCongress = this.formBuilder.group({
       nombre: [this.congress.nombre, Validators.required],
       sede: [this.congress.sede, Validators.required],
@@ -37,11 +40,29 @@ export class CongressFormComponent implements OnInit {
       chairPrincipal: [this.congress.chairPrincipal, Validators.required],
       coordLocal: [this.congress.coordLocal ],
     });
-
   }
+
 
   cancel(): void {
     this.cancelCongress.emit();
+  }
+
+  edit(): void {
+    this.submitted = true;
+    if (this.formCongress.invalid) {
+      alert('Por favor complete todos los datos.');
+      return;
+    }
+    this.congress = {
+    id: this.congress.id,
+    nombre: this.formCongress.controls.nombre.value,
+    sede: this.formCongress.controls.sede.value,
+    ano: this.formCongress.controls.ano.value,
+    chairPrincipal: this.formCongress.controls.chairPrincipal.value,
+    coordLocal: this.formCongress.controls.coordLocal.value
+    };
+    this.editCongress.emit(this.congress);
+
   }
 
   submit(): void {

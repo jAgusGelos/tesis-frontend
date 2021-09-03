@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { IPaper } from '../../models/IPaper';
+import { IntPaper } from '../../models/IntPaper';
 import { ISymposium } from '../../models/ISymposium';
 import { ArticulosService } from '../../services/articulos.service';
 import { SymposiumService } from '../../services/symposium.service';
@@ -12,13 +12,13 @@ import { SymposiumService } from '../../services/symposium.service';
 export class PapersBySymposiumListComponent implements OnInit {
 
   selectedSymposium: ISymposium;
-  selectedState: String;
+  selectedState: string;
 
   @Output() cancelPapersBySymposium = new EventEmitter();
-  
-  paperStatesList: String[] = ['Sin Subir', 'Subido', 'Pendiente de Reentrega', 'Aprobado', 'No Aprobado', 'Cancelado'];
+
+  paperStatesList: string[] = ['Sin Subir', 'Subido', 'Pendiente de Reentrega', 'Aprobado', 'No Aprobado', 'Cancelado'];
   symposiumsList: ISymposium[];
-  papersList: IPaper[];
+  papersList: IntPaper[];
 
   constructor( private articulosService: ArticulosService,
                private symposiumService: SymposiumService) { }
@@ -27,7 +27,7 @@ export class PapersBySymposiumListComponent implements OnInit {
     this.getSymposiums();
   }
 
-  getPapers() {
+  getPapers(): void {
     if (this.selectedSymposium !== null) {
       this.getPapersBySymposium(this.selectedSymposium);
       if (this.selectedState !== null) {
@@ -36,8 +36,8 @@ export class PapersBySymposiumListComponent implements OnInit {
     }
   }
 
-  getPapersByState(state: String) {
-    let auxList: IPaper[];
+  getPapersByState(state: string) {
+    let auxList: IntPaper[];
     for (let index = 0; index < this.papersList.length; index++) {
       if (this.papersList[index].estado.toLowerCase() === state.toLowerCase()) {
         auxList.push(this.papersList[index]);
@@ -46,13 +46,13 @@ export class PapersBySymposiumListComponent implements OnInit {
     this.papersList = auxList;
   }
 
-  getPapersBySymposium(symposium: ISymposium) {
+  getPapersBySymposium(symposium: ISymposium): void {
     this.articulosService.getPapersBySymposium(symposium).subscribe((res: any) => {
       this.papersList = res.data;
     });
   }
 
-  getSymposiums() {
+  getSymposiums(): void {
     this.symposiumService.getSymposium().subscribe((res: any) => {
       this.symposiumsList = res.data;
     });

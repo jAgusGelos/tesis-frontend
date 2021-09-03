@@ -72,14 +72,26 @@ const routes: Routes = [
     .then(m => m.EvaluatorModule),
   },
   {
-    path: 'assignPaperEvaluator',
+    path: 'evaluar',
+    loadChildren: () => import('./pages/evaluate/evaluate.module')
+    .then(m => m.EvaluateModule),
+     // canActivate: [AuthGuard], [EvaluatorGuard]
+  },
+  {
+    path: 'asignarPaperEvaluador',
     loadChildren: () => import('./pages/asignar-paper-evaluador/asignar-paper-evaluador.module')
     .then(m => m.AsignarPaperEvaluadorModule),
   },
   {
-    path: 'papersBySymposium',
+    path: 'paperXSimposio',
     loadChildren: () => import('./pages/papers-by-symposium/papers-by-symposium.module')
     .then(m => m.PapersBySymposiumModule),
+  },
+  {
+
+    path: 'verEvaluaciones',
+    loadChildren: () => import('./pages/evaluate-article/evaluate-article.module')
+    .then(m => m.EvaluateArticleModule),
   },
   {
     path: 'evaluatePapersChairSec',

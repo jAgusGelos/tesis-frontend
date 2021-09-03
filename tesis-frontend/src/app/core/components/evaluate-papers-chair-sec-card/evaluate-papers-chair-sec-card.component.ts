@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { IEvaluator } from '../../models/ievaluator';
-import { IPaper } from '../../models/IPaper';
+import { IntPaper } from '../../models/IntPaper';
 import { ArticulosService } from '../../services/articulos.service';
 import { PaperService } from '../../services/paper.service';
 
@@ -11,10 +11,10 @@ import { PaperService } from '../../services/paper.service';
 })
 export class EvaluatePapersChairSecCardComponent implements OnInit {
 
-  @Input() articulo: IPaper;
+  @Input() articulo: IntPaper;
 
   @Output() verDetalleEmitter = new EventEmitter();
-  
+
   evaluadores: IEvaluator[];
   evUno: IEvaluator;
   evDos: IEvaluator;
@@ -25,10 +25,10 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
 
   constructor(private articulosService: ArticulosService,
               private papersService: PaperService) { }
-  
+
   ngOnInit(): void {
       this.getEvaluators();
-      this.setBadge(this.articulo.estado);  
+      this.setBadge(this.articulo.estado);
   }
 
   //REVISAR ESTE METODO
@@ -113,7 +113,7 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
     }
     this.verDetalleEmitter.emit(art);
   }
-  
+
   toggleEdit() {
     this.edit = !this.edit;
   }

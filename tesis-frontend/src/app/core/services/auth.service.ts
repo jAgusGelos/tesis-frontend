@@ -21,13 +21,12 @@ export class AuthService {
   private apiURLLogout = environment.apiURL + 'api/logout/';
 
 
-  login(email: string, password: string): any {
-    return this.http.post<IUser>(this.apiURLLogin, { email, password });
+  login(item: any): any {
+    return this.http.post<IUser>(this.apiURLLogin, item);
     // .subscribe(res => this.setSession(res));
   }
 
   register(user: IUser): any {
-
     return this.http.post<IUser>(this.apiURLRegister, { email: user.email, password: user.password });
   }
 
@@ -46,14 +45,38 @@ export class AuthService {
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
     });
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expires_at');
   }
 
-  getUserId(): string {
+  getUserId(): number {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
     return decodedToken.id;
   }
+
+  getUserRoles(): number[] {
+    const idToken = localStorage.getItem('id_token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(idToken);
+    return decodedToken.rol;
+  }
+
+  getCongressId(): number {
+    const idToken = localStorage.getItem('id_token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(idToken);
+    return decodedToken.idCongreso;
+  }
+
+  getSedeId(): number {
+    const idToken = localStorage.getItem('id_token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(idToken);
+    return decodedToken.sede;
+  }
+
 
 
 }

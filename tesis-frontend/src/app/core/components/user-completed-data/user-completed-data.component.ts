@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IUserComplete } from '../../models/IUserComplete';
 import { UserService } from '../../services/user.service';
 
@@ -14,10 +15,10 @@ export class UserCompletedDataComponent implements OnInit {
   @Input() titulo = 'Formulario de Registro';
   formUsuario: FormGroup;
   submitted = false;
-  tipoDni = ['DNI', 'CU', 'CI'];
-  nacionalidades = ['ARGENTINA', 'PERU', 'COLOMBIA'];
-  provincias = ['Cordoba', 'Buenos Aires'];
-  localidades = ['Capital', 'Rio IV'];
+  tipoDni = [{id: 1, nombre: 'DNI'}];
+  nacionalidades = [{id: 1, nombre: 'Argentina'}];
+  provincias = [{id: 1, nombre: 'Cordoba'}];
+  localidades = [{id: 1, nombre: 'Capital'}];
   /**
    * Usuario que se recibe o no cuando se inicia el componente.
    * Si no se recibe es un nuevo usuario
@@ -29,23 +30,25 @@ export class UserCompletedDataComponent implements OnInit {
     tipoDni: '',
     apellido: '',
     nombre: '',
-    fechaNacimiento: new Date(),
+    fechaNacimiento: '',
     nacionalidad: '',
     provincia: '',
     localidad: '',
     calle: '',
     nroCalle: null,
-    piso: '',
-    dpto: '',
+    piso: '0',
+    dpto: '0',
     celular: null,
-    email: '' };
+    email: 'juanagustingelos1@gmail.com' };
 
     constructor( private formBuilder: FormBuilder,
                  private datePipe: DatePipe,
-                 private userService: UserService ) { }
+                 private userService: UserService,
+                 private router: Router ) { }
 
     ngOnInit(): void {
       window.scrollTo(0, 0);
+      this.getAllData();
       this.formUsuario = this.formBuilder.group({
         dni: [this.usuario.dni, [Validators.required]],
         tipoDni: [this.usuario.tipoDni, [Validators.required]],
@@ -63,6 +66,24 @@ export class UserCompletedDataComponent implements OnInit {
       });
     }
 
+    getAllData(): void {
+      this.userService.getLocalidades().subscribe((res: any) => {
+        this.localidades = res.data;
+      });
+      this.userService.getNacionalidad().subscribe((res: any) => {
+        this.nacionalidades = res.data;
+      });
+      this.userService.getProvincias().subscribe((res: any) => {
+        this.provincias = res.data;
+      });
+    }
+
+    convertDateFormat(date: string): any {
+      const info = date.split('-').reverse().join('/');
+      return info;
+    }
+
+
 
     /**
      * Valida que el formulario de registro sea correcto.
@@ -77,7 +98,7 @@ export class UserCompletedDataComponent implements OnInit {
         alert('Por Favor complete todos los campos');
         return;
       }
-      const today = this.datePipe.transform(new Date(), 'yyy-MM-dd');
+      const today = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
       if (this.formUsuario.controls.fechaNacimiento.value > today) {
         alert('Fecha Inválida, por favor ingrese una fecha correcta');
         return;
@@ -102,9 +123,16 @@ export class UserCompletedDataComponent implements OnInit {
         email : this.usuario.email
       };
 
+      console.log(this.usuario);
+
+
       this.userService.postUserComplete(this.usuario).subscribe( (res: any) => {
-      alert('Datos Cargados Correctamente');
-      // Ir a la siguiente página.
+        if (res.error) {
+          alert('Ha ocurrido un error. Intente más tarde');
+          return;
+        }
+        alert('Datos Cargados Correctamente');
+        this.router.navigate(['/']);
       });
 
 
@@ -114,6 +142,7 @@ export class UserCompletedDataComponent implements OnInit {
      * Regresa a la pagina anterior. Cancela la modificación de los datos de usuario.
      */
     cancel(): void {
+      this.router.navigate(['/']);
       // Volver a la página anterior
     }
 }

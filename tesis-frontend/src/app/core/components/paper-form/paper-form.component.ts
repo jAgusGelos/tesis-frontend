@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IPaper } from '../../models/IPaper';
+import { IntPaper } from '../../models/IntPaper';
 import { AuthService } from '../../services/auth.service';
 import { PaperService } from '../../services/paper.service';
 
@@ -11,7 +11,7 @@ import { PaperService } from '../../services/paper.service';
 })
 export class PaperFormComponent implements OnInit {
 
-  @Input() paper: IPaper = {
+  @Input() paper: any = {
     id: '',
     autores: ['Autor 1', 'Autor 2'],
     responsable: '',

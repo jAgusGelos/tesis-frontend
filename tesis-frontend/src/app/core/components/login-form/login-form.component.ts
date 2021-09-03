@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { CongressService } from '../../services/congress.service';
 
 @Component({
   selector: 'app-login-form',
@@ -12,18 +13,30 @@ export class LoginFormComponent implements OnInit {
 
   formLogin: FormGroup;
   submitted = false;
+  congressList = [];
   @Output() registerEvent = new EventEmitter<any>();
 
 
   constructor( private formBuilder: FormBuilder,
                private loginService: AuthService,
+               private congressService: CongressService,
                private router: Router) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.formLogin = this.formBuilder.group({
       email: ['juanagustingelos1@gmail.com', [Validators.required]],
-      password: ['', [Validators.required]]
+      password: ['asdasd', [Validators.required]],
+      idCongress: ['', [Validators.required]]
+    });
+    this.getCongress();
+  }
+
+  getCongress(): void {
+    this.congressService.getCongressActivo().subscribe((res: any) => {
+      this.congressList = res.data;
+      console.log(res.data);
+
     });
   }
 
@@ -33,12 +46,19 @@ export class LoginFormComponent implements OnInit {
 
   submit(): void {
     this.submitted = true;
-    if (this.formLogin.invalid) {
+    console.log(this.formLogin.controls.idCongress.value);
+
+    if (this.formLogin.invalid ) {
       alert('Por favor complete todos los datos.');
       return;
     }
+    const login = {
+      email: this.formLogin.controls.email.value,
+      password: this.formLogin.controls.password.value,
+      idCongreso: +this.formLogin.controls.idCongress.value
+    };
     this.loginService
-    .login(this.formLogin.controls.email.value, this.formLogin.controls.password.value)
+    .login(login)
     .subscribe((res: any) => {
       console.log(res);
       this.loginService.setSession(res);

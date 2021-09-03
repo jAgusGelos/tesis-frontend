@@ -2,31 +2,48 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IRoom } from '../models/IRoom';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
-  /* Revisar */
-  private apiURLRoom = environment.apiURL + 'aulas/';
-  private apiURLRooms = environment.apiURL  + 'aulas/todos/';
-  private apiURLRoomDelete = environment.apiURL + 'eliminarAula/';
 
-  constructor(private httpClient: HttpClient) { }
+  private apiURL = environment.apiURL;
+  sede: number;
+  constructor(private httpClient: HttpClient,
+              private auth: AuthService) {
+                this.sede = this.auth.getSedeId();
+               }
 
-  registerRoom(room: IRoom): any{
-    return this.httpClient.post<IRoom>(this.apiURLRoom, {Room: room});
+  postRoom(room: IRoom): any{
+    const postRoom = {
+      nombre: room.name,
+      descripcion: room.description,
+      capacidad: room.capacity,
+      sede: this.sede
+    };
+    return this.httpClient.post(this.apiURL + 'congresos/crear-aula/', postRoom);
   }
   putRoom(room: IRoom): any{
-    return this.httpClient.put<IRoom>(this.apiURLRoom, room);
+    const postRoom = {
+      id: room.id,
+      nombre: room.name,
+      descripcion: room.description,
+      capacidad: room.capacity,
+      sede: this.sede
+    };
+    return this.httpClient.put(this.apiURL + 'congresos/editar-aula/', postRoom);
   }
 
-  getRooms(id: any): any{
-    return this.httpClient.get(this.apiURLRooms + id);
+  getRooms(): any{
+    return this.httpClient.get(this.apiURL + 'congresos/lista-aulas/' + this.sede);
   }
 
   deteleRoom(room: IRoom): any{
-    return this.httpClient.delete<IRoom>(this.apiURLRoomDelete);
+    // return this.httpClient.delete<IRoom>(this.apiURL);
+    return this.httpClient.request('delete', this.apiURL + 'congresos/eliminar-aula/',
+    {body: {id: room.id, sede: this.sede}});
   }
 
 }

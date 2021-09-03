@@ -4,7 +4,7 @@ export interface IUserComplete {
   tipoDni: string;
   apellido: string;
   nombre: string;
-  fechaNacimiento: Date;
+  fechaNacimiento: string;
   nacionalidad: string;
   provincia: string;
   localidad: string;

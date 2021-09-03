@@ -8,12 +8,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CongressListComponent implements OnInit {
 
-  @Input() congressList = [
-    {id: '123', nombre: 'Probando', sede: 'Tu casa', ano: '2021'},
-    {id: '123', nombre: 'Probando 2', sede: 'Tu casa', ano: '2021'}];
+  @Input() congressList = [];
   @Output() editCongressEvent = new EventEmitter();
   @Output() newCongressEvent = new EventEmitter();
   @Output() deleteCongressEvent = new EventEmitter();
+  @Output() scoreEvaluatorsEvent = new EventEmitter();
   
   constructor() { }
 
@@ -33,6 +32,9 @@ export class CongressListComponent implements OnInit {
     '\nToda la configuración creada se perderá')) {
       this.deleteCongressEvent.emit(item);
     }
+  }
 
+  toggleScoreEvaluators() {
+    this.scoreEvaluatorsEvent.emit();
   }
 }

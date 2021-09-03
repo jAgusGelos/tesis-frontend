@@ -62,10 +62,7 @@ export class UserRegisterComponent implements OnInit {
       }
 
     });
-    // this.userService.register(user.email, user.password).then((res: any) => {
-    //   console.log(res);
-    //   this.router.navigate(['/usuario']);
-    // });
+
   }
 
   /**

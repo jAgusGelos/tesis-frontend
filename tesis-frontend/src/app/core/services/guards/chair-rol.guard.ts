@@ -17,7 +17,7 @@ export class ChairRolGuard implements CanActivate {
     else{
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(idToken);
-      if (decodedToken.rol === '2' || decodedToken.rol === '3') {
+      if (decodedToken.rol.includes(1)) {
         return true;
       }
       return false;

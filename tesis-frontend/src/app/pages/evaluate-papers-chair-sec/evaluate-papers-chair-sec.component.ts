@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { IEvaluator } from 'src/app/core/models/ievaluator';
-import { IPaper } from 'src/app/core/models/IPaper';
 import { ISymposium } from 'src/app/core/models/ISymposium';
 import { ArticulosService } from 'src/app/core/services/articulos.service';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 import { SymposiumService } from 'src/app/core/services/symposium.service';
+import { IntPaper } from 'src/app/core/models/IntPaper';
 
 @Component({
   selector: 'app-evaluate-papers-chair-sec',
@@ -27,7 +27,7 @@ export class EvaluatePapersChairSecComponent implements OnInit {
               private articulosService: ArticulosService) { }
 
   articuloSeleccionado: {
-    articulo: IPaper,
+    articulo: IntPaper,
     evUno: IEvaluator,
     evDos: IEvaluator,
     evTres: IEvaluator

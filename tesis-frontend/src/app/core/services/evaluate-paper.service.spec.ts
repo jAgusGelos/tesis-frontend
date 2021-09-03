@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ThemesService } from './themes.service';
+import { EvaluatePaperService } from './evaluate-paper.service';
 
-describe('ThemesService', () => {
-  let service: ThemesService;
+describe('EvaluatePaperService', () => {
+  let service: EvaluatePaperService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ThemesService);
+    service = TestBed.inject(EvaluatePaperService);
   });
 
   it('should be created', () => {

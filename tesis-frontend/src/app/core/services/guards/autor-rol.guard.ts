@@ -17,7 +17,7 @@ export class AutorRolGuard implements CanActivate {
     else{
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(idToken);
-      if (decodedToken.rol === '6' ) {
+      if (decodedToken.rol.includes(6) ) {
         return true;
       }
       return false;
