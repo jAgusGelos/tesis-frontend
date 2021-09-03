@@ -1,21 +1,15 @@
+
+.card-title{
+  font-weight:300;
+}
+
 .card {
   margin-left: auto;
   margin-right: auto;
-  border-radius: 3rem;
-  padding-bottom: 2rem;}
-
-@media (min-width: 768px) {
-  .card{
-    max-width: 50%;
-  }
-
-  .card-body{
-    padding: auto;
-  }
- }
+}
 
 .login-form{
-  width:75%;
+	width:75%;
 }
 
 .form-group{
@@ -24,47 +18,75 @@
 }
 
 
+.btn-primary{
+  background-color: #3CAFE0 ;
+  border: none;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 3rem;
+  padding-bottom: 2rem;  margin-bottom: 1rem;
+  margin-top: 1rem;
+  background-color: #F4F4F4;
+
+}
+
+
+.login-form{
+  width:100%;
+}
+
+.form-group{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+
+}
+
+
 a{
   cursor: pointer;
 }
 
 .card-title{
-  border-top: 1px solid #00609C;
-  border-bottom:  1px solid #00609C;
+
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   font-weight:300;
-  padding-left: 3rem;
-  padding-right: 3rem;
+
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   max-width: fit-content;
 }
 
-hr{
-  border: 1px #00609C solid;
-}
+hr {
+  border:#00609C solid 1px;
 
-.btn{
-  background-color:#3CAFE0;
-  border: none;
-}
-
-.spaced{
-  padding-bottom: 8rem;
-}
-
-.col-form-label{
-  font-size: larger;
 }
 
 input{
   border: none;
-  border-bottom: 1px solid #8d999e ;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
+  border-bottom: 1px solid #f4f4f4 ;
 }
 
+@media (min-width: 768px) {
+  .card{
+    max-width: 60%;
+  }
+
+
+  .card-body{
+    padding: auto;
+  }
+
+  hr{
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+
+ }
 
 
 
