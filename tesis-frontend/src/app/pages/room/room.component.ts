@@ -36,7 +36,7 @@ export class RoomComponent implements OnInit {
   }
 
   deleteRoom(item: IRoom): void{
-    this.roomService.deteleRoom(item).subscribe( (res: any) => {alert('El aula ha sido eliminada'); });
+    this.roomService.deteleRoom(item).subscribe((res: any) => {alert('El aula ha sido eliminada'); });
   }
 
   editRoom(room: IRoom): void {

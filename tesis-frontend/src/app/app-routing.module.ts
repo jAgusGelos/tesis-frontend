@@ -35,7 +35,7 @@ const routes: Routes = [
     // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
-    path: 'room/:id',
+    path: 'room',
     loadChildren: () => import('./pages/room/room.module')
     .then(m => m.RoomModule)
     // Can activate CP CL
