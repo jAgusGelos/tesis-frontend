@@ -51,20 +51,19 @@ export class CongressComponent implements OnInit {
   }
 
   newCongress(): void {
-    this.showComponent = 'edit';
+    this.edit = !this.edit;
     this.congress = {};
   }
 
   editCongress(congress: ICongress): void {
-    this.showComponent = 'edit';
+    this.edit = !this.edit;
     this.congress = congress;
   }
 
   deleteCongress(item: ICongress): void {
-    console.log(item);
-
     this.congressService.deleteCongress(item).subscribe((res: any) => {
       alert('El congreso ha sido eliminado correctamente');
+      window.location.reload();
     });
   }
 
@@ -90,7 +89,4 @@ export class CongressComponent implements OnInit {
     });
   }
 
-  scoreEvaluators() {
-    this.showComponent = 'scoreEvaluators';
-  }
 }

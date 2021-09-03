@@ -20,9 +20,7 @@ export class AssignSecChairsFormComponent implements OnInit {
   chairsAssigned = [
     {value: 'chair asignado 1', theme: 'Sistemas'}
   ];
-  chairsNotAssigned = [
-    {value: 'Chair secundario 1', assigned: false}
-  ];
+  chairsNotAssigned = [];
 
   @Input() asignacion = {
     selectCongreso: '',
@@ -30,6 +28,7 @@ export class AssignSecChairsFormComponent implements OnInit {
     selectChair: '',
     assigned: false
   };
+
 
 
 
@@ -46,12 +45,18 @@ export class AssignSecChairsFormComponent implements OnInit {
       selectTematica: ['', [Validators.required]]
     });
     this.getTematicas();
+    this.getUsuarios();
+  }
+
+  getUsuarios(): void {
+    this.assignService.getUsuarios().subscribe((res: any) => {
+      this.chairsNotAssigned = res;
+    });
+
   }
 
   getTematicas(): void {
     this.paperService.getSimposiosActivos().subscribe((res: any) => {
-      console.log(res.data);
-
       this.tematicas = res.data;
    });
   }

@@ -11,12 +11,12 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Asignar chair a temática</h5>
-                <label for="selectChair">Chair: </label>
+                <label for="selectChair">Usuarios: </label>
                 <div class="col-sm-6">
                   <select name="chair" class="form-control" formControlName="selectChair"
                     [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectChair.touched || submitted) && formAssignSecChairs.controls.selectChair.errors}">
                     <option hidden selected>Seleccione un chair a asignar</option>
-                    <option *ngFor="let chair of chairsNotAssigned">{{ chair.value }}</option>
+                    <option *ngFor="let chair of chairsNotAssigned">{{ chair.nombre }} {{chair.apellido}} - {{ chair.email }}</option>
                   </select>
                 </div>
                 <br>

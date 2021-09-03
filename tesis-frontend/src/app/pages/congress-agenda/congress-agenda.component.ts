@@ -56,7 +56,7 @@ export class CongressAgendaComponent implements OnInit {
   }
 
   getCongresos(): void {
-    this.congressService.getCongress().subscribe((res: any) => {
+    this.congressService.getCongressById().subscribe((res: any) => {
       this.congressList = res.data.map((x: any) => {
         return {
           id: x.id,
@@ -112,7 +112,7 @@ export class CongressAgendaComponent implements OnInit {
   }
 
   editRooms(item: any): void {
-    this.router.navigate(['/room/' + item.id]);
+    this.router.navigate(['/room']);
   }
 
 

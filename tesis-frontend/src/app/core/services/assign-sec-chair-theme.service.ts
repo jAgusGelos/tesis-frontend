@@ -26,6 +26,10 @@ export class AssignSecChairThemeService {
     return this.httpClient.get(this.apiURL + 'congreso/todos/');
   }
 
+  getUsuarios(): any {
+    return this.httpClient.get(this.apiURL + 'api/lista-usuarios/');
+  }
+
   putAssignSecChairTheme(asignacion: IassignSecChairTheme): any {
     return this.httpClient.put<IassignSecChairTheme>(this.apiURL + 'chairportematica/modificar/' + asignacion.idCongress, asignacion);
   }
