@@ -10,14 +10,22 @@ import { PaperService } from 'src/app/core/services/paper.service';
 export class CallForPapersComponent implements OnInit {
 
   paperList = [];
-  edit = true;
+  edit = false;
   paper = {};
+  simposios = [];
 
   constructor(private paperService: PaperService) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.getPaper();
+    this.getSimposios();
+  }
+
+  getSimposios(): void {
+    this.paperService.getSimposiosActivos().subscribe((res: any) => {
+      this.simposios = res.data;
+    });
   }
 
   getPaper(): void {
@@ -28,7 +36,15 @@ export class CallForPapersComponent implements OnInit {
 
   newPaper(): void {
     this.edit = !this.edit;
-    this.paper = {};
+    this.paper = {
+      id: '',
+      autores: [],
+      responsable: '',
+      nombre: '',
+      estado: 'Sin subir',
+      simposio: '',
+      archivo: null,
+    };
   }
 
   editPaper(paper: IntPaper): void {
@@ -53,7 +69,9 @@ export class CallForPapersComponent implements OnInit {
    * Si no lo tiene crea un nuevo paper.
    */
    toggleCreatePaper(item: any): void {
-    if (item.id === undefined) {
+    console.log(item);
+
+    if (item.id === '') {
       this.paperService.postPaper(item).subscribe((res: any) => {
         alert('Paper Creado Correctamente');
       });
