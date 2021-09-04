@@ -7,9 +7,10 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
+import { PuntuarEvaluadoresComponent } from './pages/puntuar-evaluadores/puntuar-evaluadores.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PuntuarEvaluadoresComponent],
 
   imports: [
     BrowserModule,
