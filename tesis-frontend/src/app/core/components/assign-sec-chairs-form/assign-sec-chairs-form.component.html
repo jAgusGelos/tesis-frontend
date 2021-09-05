@@ -16,7 +16,7 @@
                   <select name="chair" class="form-control" formControlName="selectChair"
                     [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectChair.touched || submitted) && formAssignSecChairs.controls.selectChair.errors}">
                     <option hidden selected>Seleccione un chair a asignar</option>
-                    <option *ngFor="let chair of chairsNotAssigned">{{ chair.nombre }} {{chair.apellido}} - {{ chair.email }}</option>
+                    <option *ngFor="let chair of chairsNotAssigned" value={{chair.id}}>{{ chair.nombre }} {{chair.apellido}} - {{ chair.email }}</option>
                   </select>
                 </div>
                 <br>
@@ -25,7 +25,7 @@
                   <select name="chair" class="form-control" formControlName="selectTematica"
                     [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectTematica.touched || submitted) && formAssignSecChairs.controls.selectTematica.errors}">
                     <option hidden selected>Seleccione una simposio</option>
-                    <option *ngFor="let theme of tematicas">{{ theme.descripcion }}</option>
+                    <option *ngFor="let theme of tematicas" value={{theme.id}}>{{ theme.descripcion }}</option>
                   </select>
                 </div>
                 <br>

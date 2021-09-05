@@ -15,26 +15,21 @@ export class AssignSecChairsFormComponent implements OnInit {
 
   formAssignSecChairs: FormGroup;
   submitted = false;
-  tematicas = ['Sistemas', 'Inteligencia Artificial', 'Software'];
+  tematicas: any [];
   emptyAssign: IassignSecChairTheme[] = [];
   chairsAssigned = [
     {value: 'chair asignado 1', theme: 'Sistemas'}
   ];
   chairsNotAssigned = [];
 
-  @Input() asignacion = {
+  asignacion = {
     selectCongreso: '',
     selectTematica: '',
     selectChair: '',
     assigned: false
   };
 
-
-
-
   constructor( private formBuilder: FormBuilder,
-               private congressService: CongressService,
-               private themesService: SymposiumService,
                private assignService: AssignSecChairThemeService,
                private paperService: PaperService) { }
 
@@ -66,10 +61,13 @@ export class AssignSecChairsFormComponent implements OnInit {
       alert('Por Favor seleccione un chair y una tematica');
       return;
     }
+
     const item = {
       value: this.formAssignSecChairs.controls.selectChair.value,
       theme: this.formAssignSecChairs.controls.selectTematica.value,
     };
+    console.log(item);
+    return;
     this.assignService.postAssignSecChairTheme(item).subscribe((res: any) => {
       this.chairsAssigned.push(res.data);
     });
