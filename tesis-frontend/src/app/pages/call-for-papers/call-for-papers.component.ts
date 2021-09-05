@@ -18,8 +18,8 @@ export class CallForPapersComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    this.getPaper();
     this.getSimposios();
+    this.getPaper();
   }
 
   getSimposios(): void {
@@ -31,6 +31,9 @@ export class CallForPapersComponent implements OnInit {
   getPaper(): void {
     this.paperService.getPaper().subscribe((res: any) => {
       this.paperList = res.data;
+      console.log(this.paperList);
+
+
     });
   }
 
@@ -47,7 +50,7 @@ export class CallForPapersComponent implements OnInit {
     };
   }
 
-  editPaper(paper: IntPaper): void {
+  editPaper(paper: any): void {
     this.edit = !this.edit;
     this.paper = paper;
 
@@ -74,11 +77,13 @@ export class CallForPapersComponent implements OnInit {
     if (item.id === '') {
       this.paperService.postPaper(item).subscribe((res: any) => {
         alert('Paper Creado Correctamente');
+        // window.location.reload();
       });
     }
     else{
       this.paperService.putPaper(item).subscribe((res: any) => {
         alert('Paper Modificado Correctamente');
+        // window.location.reload();
       });
     }
     this.getPaper();

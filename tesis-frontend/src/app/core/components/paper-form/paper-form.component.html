@@ -6,7 +6,7 @@
       <hr>
     </div>
 
-    <div class="card-text text-right">
+    <div class="card-text text-right" >
       <form [formGroup]='formPaper'>
         <!-- Nombre -->
         <div class='form-group row'>
@@ -56,7 +56,7 @@
           <label class='col-form-label col-sm-3 col-sm-offset-2' for='autores'>Autores Seleccionados:</label>
           <div class='col-sm-6'>
             <ul *ngFor="let item of autoresList" class='autoresSelected'
-              [ngClass]="{'valid': item.status== true}">{{item.mail}}<i class="fa fa-window-close" aria-hidden="true"
+              [ngClass]="{'valid': item.status === true}">{{item.mail}}<i class="fa fa-window-close" aria-hidden="true"
                 (click)='delAutor(item)'></i></ul>
 
 
@@ -76,6 +76,13 @@
             </span>
           </div>
         </div>
+
+        <div class="form-group row" *ngIf="paper.nombre">
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='archivo'>Archivo ya subido:</label>
+          <label class='col-form-label col-sm-3' for='archivo'>{{paper.nombre | titlecase}}.pdf</label>
+        </div>
+
+
 
 
         <div class="row justify-content-md-center btn-row">

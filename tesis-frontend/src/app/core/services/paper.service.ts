@@ -24,6 +24,7 @@ export class PaperService {
     formData.append('autores', paper.autores.toString());
     formData.append('responsable', paper.responsable);
     formData.append('simposio', paper.simposio);
+    formData.append('nombre', paper.nombre);
     return this.httpClient.post<any>(this.apiURL + 'articulos/realizarEntrega/', formData);
   }
 

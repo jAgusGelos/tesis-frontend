@@ -4,7 +4,7 @@
     <h3 class='text-center'>Gestión de Papers</h3>
     <hr>
   </div>
-  <table class="table text-center table-hover table-bordered">
+  <table class="table text-center table-hover table-bordered" *ngIf="paperList.length > 0">
     <thead class='thead'>
       <tr>
         <th class="col-md-5">Nombre</th>
@@ -16,7 +16,7 @@
     <tbody>
       <tr class='align-items-center' *ngFor='let item of paperList'>
         <td>{{item.nombre | titlecase}}</td>
-        <td>{{item.estado}}</td>
+        <td>{{item.nombre_estado}}</td>
 
         <td>
           <div class="btn-group col-md-3" *ngIf='item.estado != "Subido"'>

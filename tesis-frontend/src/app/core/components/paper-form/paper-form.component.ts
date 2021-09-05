@@ -13,7 +13,6 @@ import { PaperService } from '../../services/paper.service';
 export class PaperFormComponent implements OnInit {
 
   @Input() paper: any;
-
   @Input() simposios: any[];
   @Output() paperEmitter = new EventEmitter<any>();
   @Output() cancelPaper = new EventEmitter();
@@ -29,26 +28,38 @@ export class PaperFormComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+
+    console.log(this.paper);
+
     this.formPaper = this.formBuilder.group({
       nombre: [this.paper.nombre, [Validators.required]],
-      simposio: [this.paper.simposio, [Validators.required]],
-      archivo: [this.paper.archivo, [Validators.required]],
+      simposio: [this.paper.idSimposio, [Validators.required]],
+      archivo: [null, [Validators.required]],
       autores: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     });
-    if (this.paper.autores !== []) {
-      this.autoresList = this.paper.autores.map((item: string) => {
-        this.paperService.checkAutor(item).subscribe((res: any) => {
-          if (res.data) {
-            return {mail: item, status: true};
-          }
-          return {mail: item, status: false};
+    if (this.paper) {
+      if (this.paper.autores_registrados){
+        const autoresOK = this.paper.autores_registrados.map((x: any) => {
+          return {mail: x, status: true};
         });
-      });
+        this.autoresList =  this.autoresList.concat(autoresOK);
+      }
+      if (this.paper.autores_no_registrados) {
+        const autoresNoOK = this.paper.autores_no_registrados.map((x: any) => {
+          return {mail: x, status: false};
+        });
+        this.autoresList =  this.autoresList.concat(autoresNoOK);
+      }
     }
+    console.log(this.autoresList);
   }
 
   cancel(): void {
     this.cancelPaper.emit();
+  }
+
+  nuevoArchivo(): void {
+    this.paper.archivo = '';
   }
 
 
