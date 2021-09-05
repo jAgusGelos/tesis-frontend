@@ -77,16 +77,15 @@ export class CallForPapersComponent implements OnInit {
     if (item.id === '') {
       this.paperService.postPaper(item).subscribe((res: any) => {
         alert('Paper Creado Correctamente');
-        // window.location.reload();
+        window.location.reload();
       });
     }
     else{
       this.paperService.putPaper(item).subscribe((res: any) => {
         alert('Paper Modificado Correctamente');
-        // window.location.reload();
+        window.location.reload();
       });
     }
-    this.getPaper();
   }
 
 }

@@ -19,7 +19,7 @@ export class UserService {
   }
 
   getLoggedUser(): any {
-    return this.httpClient.get(this.apiURL + 'api/usuario/');
+    return this.httpClient.get(this.apiURL + 'api/devolverUsuarioLogueado/');
   }
 
   deactivate(user: IUser): any {
