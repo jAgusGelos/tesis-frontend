@@ -9,13 +9,7 @@ import { RoomService } from '../../services/room.service';
   styleUrls: ['./room-form.component.css']
 })
 export class RoomFormComponent implements OnInit {
-  @Input() room: IRoom = {
-    id: '',
-    name: '',
-    description: '',
-    capacity: null,
-  };
-
+  @Input() room: any;
   formRooms: FormGroup;
   formSede: FormGroup;
   submitted = false;
@@ -23,19 +17,15 @@ export class RoomFormComponent implements OnInit {
   @Output() roomEmitter = new EventEmitter<IRoom>();
   @Output() cancelRoom = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder,
-              private roomService: RoomService) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    this.formSede = this.formBuilder.group({
-      sede: ['', [Validators.required]]
-    })
     this.formRooms = this.formBuilder.group({
-      nameAula: [this.room.name, Validators.required],
-      descAula: [this.room.description],
-      capAula: [this.room.capacity]
-    })
+      nameAula: [this.room.nombre, Validators.required],
+      descAula: [this.room.descripcion],
+      capAula: [this.room.capacidad]
+    });
   }
   agregar(): void {
     this.submitted = true;
@@ -44,14 +34,14 @@ export class RoomFormComponent implements OnInit {
       return;
     }
     this.room = {
-      id: Math.random().toString(),
-      name: this.formRooms.controls.nameAula.value,
-      description: this.formRooms.controls.descAula.value,
-      capacity: this.formRooms.controls.capAula.value
+      id: this.room.id ||  null,
+      nombre: this.formRooms.controls.nameAula.value,
+      descripcion: this.formRooms.controls.descAula.value,
+      capacidad: this.formRooms.controls.capAula.value
     };
-    this.roomEmitter.emit(this.room)
+    this.roomEmitter.emit(this.room);
   }
-  cancel():void{
+  cancel(): void {
     this.cancelRoom.emit();
   }
 

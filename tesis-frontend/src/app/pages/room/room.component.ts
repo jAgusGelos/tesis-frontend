@@ -11,7 +11,6 @@ import { RoomService } from 'src/app/core/services/room.service';
 export class RoomComponent implements OnInit {
 
   constructor(private roomService: RoomService,
-              private route: ActivatedRoute,
               private router: Router) { }
   roomList = [];
   edit = false;
@@ -25,7 +24,7 @@ export class RoomComponent implements OnInit {
 
   getRooms(): void{
     this.roomService.getRooms().subscribe((res: any) => {
-       this.roomList = res.data;
+       this.roomList = res.data[0];
       });
   }
 
@@ -36,24 +35,28 @@ export class RoomComponent implements OnInit {
   }
 
   deleteRoom(item: IRoom): void{
-    this.roomService.deteleRoom(item).subscribe((res: any) => {alert('El aula ha sido eliminada'); });
+    this.roomService.deteleRoom(item).subscribe((res: any) => {
+      alert('El aula ha sido eliminada');
+      window.location.reload();
+    });
   }
 
-  editRoom(room: IRoom): void {
+  editRoom(room: any): void {
     this.edit = !this.edit;
     this.room = room;
-
   }
 
   toggleCreateRoom(item: IRoom): void{
-    if (item.id === undefined) {
+    if (item.id === null) {
       this.roomService.postRoom(item).subscribe((res: any) => {
         alert('Aula Creada');
+        window.location.reload();
       });
     }
     else{
       this.roomService.putRoom(item).subscribe((res: any) => {
         alert('Aula Modificada');
+        window.location.reload();
       });
     }
     this.getRooms();
