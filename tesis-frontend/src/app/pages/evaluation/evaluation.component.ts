@@ -17,7 +17,7 @@ export class EvaluationComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    // this.getEvaluation();
+    this.getEvaluation();
   }
 
   getEvaluation(): void {
@@ -27,7 +27,6 @@ export class EvaluationComponent implements OnInit {
   }
 
   newEvaluation(): void {
-    console.log('Paso' );
     this.edit = !this.edit;
     this.evaluation = {};
   }
@@ -44,7 +43,6 @@ export class EvaluationComponent implements OnInit {
     });
   }
 
-
   /**
    *
    * @param item
@@ -56,14 +54,14 @@ export class EvaluationComponent implements OnInit {
     if (item.id === (undefined || '')) {
       this.evaluationService.postEvaluation(item).subscribe((res: any) => {
         alert('Evaluación Creada Correctamente');
+        window.location.reload();
       });
     }
     else {
       this.evaluationService.putEvaluation(item).subscribe((res: any) => {
         alert('Evaluación Modificada Correctamente');
+        window.location.reload();
       });
     }
-    this.getEvaluation();
   }
-
 }

@@ -12,15 +12,15 @@
     <thead class='thead'>
       <tr>
         <th class="col-md-6">Pregunta</th>
-        <th class="col-md-4">Simposio</th>
+        <!-- <th class="col-md-4">Simposio</th> -->
         <th class="col-md-2">Acciones</th>
       </tr>
     </thead>
 
     <tbody>
       <tr class='align-items-center'*ngFor='let item of evaluationList'>
-        <td>{{item.pregunta}}</td>
-        <td>{{item.simposio}}</td>
+        <td>{{item.nombre}}</td>
+        <!-- <td>{{item.simposio}}</td> -->
         <td>
           <div class="btn-group col-md-3">
           <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>

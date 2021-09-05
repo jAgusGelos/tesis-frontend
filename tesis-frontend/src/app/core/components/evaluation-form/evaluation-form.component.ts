@@ -10,15 +10,11 @@ import { ISymposium } from '../../models/ISymposium';
 })
 export class EvaluationFormComponent implements OnInit {
 
-  @Input() evaluation: IEvaluation = {
-    id: '',
-    pregunta: '',
-    simposio: '',
-  };
+  @Input() evaluation: any;
   @Output() evaluationEmitter = new EventEmitter();
   @Output() cancelEvaluation = new EventEmitter();
   // @Input() simposios: ISymposium[];
-  simposios = ['Simposio 1', 'Simposio 2', 'Todos'];
+  // simposios = ['Simposio 1', 'Simposio 2', 'Todos'];
   formEvaluation: FormGroup;
   submitted = false;
 
@@ -27,8 +23,8 @@ export class EvaluationFormComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.formEvaluation = this.formBuilder.group({
-      pregunta: [this.evaluation.pregunta, Validators.required],
-      simposio: [this.evaluation.simposio, Validators.required],
+      pregunta: [this.evaluation.nombre, Validators.required],
+      // simposio: [this.evaluation.simposio, Validators.required],
     });
 
   }
@@ -44,9 +40,9 @@ export class EvaluationFormComponent implements OnInit {
       return;
     }
     this.evaluation = {
-    id: this.evaluation.id,
+    id: this.evaluation.id || '',
     pregunta: this.formEvaluation.controls.pregunta.value,
-    simposio: this.formEvaluation.controls.simposio.value,
+    // simposio: this.formEvaluation.controls.simposio.value,
     };
     this.evaluationEmitter.emit(this.evaluation);
 

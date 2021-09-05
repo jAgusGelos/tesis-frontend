@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IEvaluation } from '../models/IEvaluation';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,23 +10,36 @@ import { IEvaluation } from '../models/IEvaluation';
 export class EvaluationService {
 
   private apiURL = environment.apiURL;
+  idCongreso: number;
 
   constructor(private httpClient: HttpClient,
-              ) { }
+              private auth: AuthService
+              ) {
+                this.idCongreso = this.auth.getCongressId();
+               }
 
-  postEvaluation(evaluation: IEvaluation): any {
-    return this.httpClient.post<IEvaluation>(this.apiURL + 'evaluacion/crear-evaluacion/', evaluation);
+  postEvaluation(evaluation: any): any {
+    const postItem = {
+      idCongreso: this.idCongreso,
+      nombre: evaluation.pregunta
+    };
+    return this.httpClient.post<IEvaluation>(this.apiURL + 'articulos/altaItemEvaluacion/', postItem);
   }
 
   getEvaluation(): any {
-    return this.httpClient.get(this.apiURL + 'evaluacion/lista-evaluacion/');
+    return this.httpClient.get(this.apiURL + 'articulos/getItemsEvaluacion/');
   }
 
-  putEvaluation(evaluation: IEvaluation): any {
-    return this.httpClient.put<IEvaluation>(this.apiURL + 'evaluacion/modificar/' + evaluation.id, evaluation);
+  putEvaluation(evaluation: any): any {
+    const postItem = {
+      id: evaluation.id,
+      idCongreso: this.idCongreso,
+      nombre: evaluation.pregunta
+    };
+    return this.httpClient.put<IEvaluation>(this.apiURL + 'articulos/editarItemEvaluacion/', postItem);
   }
 
   deleteEvaluation(evaluation: IEvaluation): any {
-    return this.httpClient.delete<IEvaluation>(this.apiURL + 'evaluacion/eliminar-evaluacion/' + evaluation.id);
+    return this.httpClient.delete<IEvaluation>(this.apiURL + 'articulos/eliminar-articulos/' + evaluation.id);
   }
 }
