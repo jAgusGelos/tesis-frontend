@@ -1,8 +1,9 @@
 <div class="container-fluid">
-  <app-paper-list *ngIf="!edit" (newPaperEvent)='newPaper()'
+  <app-paper-list *ngIf="!edit" (newPaperEvent)='newPaper()' [paperList]='paperList'
   (editPaperEvent)='editPaper($event)' (deletePaperEvent)='deletePaper($event)'></app-paper-list>
   <app-paper-form  *ngIf="edit"
-  [paper]='paper' (PaperEmitter)='toggleCreatePaper($event)'
+  [simposios] = "simposios"
+  [paper]='paper' (paperEmitter)='toggleCreatePaper($event)'
   (cancelPaper)='newPaper()'></app-paper-form>
 
 </div>

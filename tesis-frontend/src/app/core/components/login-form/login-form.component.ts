@@ -35,8 +35,6 @@ export class LoginFormComponent implements OnInit {
   getCongress(): void {
     this.congressService.getCongressActivo().subscribe((res: any) => {
       this.congressList = res.data;
-      console.log(res.data);
-
     });
   }
 
@@ -60,9 +58,10 @@ export class LoginFormComponent implements OnInit {
     this.loginService
     .login(login)
     .subscribe((res: any) => {
-      console.log(res);
       this.loginService.setSession(res);
-      this.router.navigate(['']);
+      this.router.navigate(['']).then(() => {
+        window.location.reload();
+      });
     });
   }
 

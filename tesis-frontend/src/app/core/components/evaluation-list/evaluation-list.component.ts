@@ -7,9 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class EvaluationListComponent implements OnInit {
 
-  @Input() evaluationList = [
-    {id: '123', pregunta: 'Probando Esto es una pregunta', simposio: 'Este es un simp'},
-    {id: '123', pregunta: 'Probando Esto es una pregunta 2', simposio: 'Este es un simp 2'}];
+  @Input() evaluationList: any[];
   @Output() editEvaluationEvent = new EventEmitter();
   @Output() newEvaluationEvent = new EventEmitter();
   @Output() deleteEvaluationEvent = new EventEmitter();

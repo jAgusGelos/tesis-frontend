@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 import { ICongress } from '../models/ICongress';
+import { AuthService } from './auth.service';
 
 
 
@@ -12,9 +13,12 @@ import { ICongress } from '../models/ICongress';
 export class CongressService {
 
   private apiURL = environment.apiURL;
-
+  idCongreso: number;
   constructor(private httpClient: HttpClient,
-              ) { }
+              private auth: AuthService
+              ) {
+                this.idCongreso = auth.getCongressId();
+              }
 
   postCongress(congress: ICongress): any {
     const postCongress = {
@@ -35,8 +39,8 @@ export class CongressService {
     return this.httpClient.get(this.apiURL + 'congresos/listaCongresosActivos/');
   }
 
-  getCongressById(congress: ICongress): any {
-    return this.httpClient.get(this.apiURL + 'congresos/consultaCongreso/' + congress.id);
+  getCongressById(): any {
+    return this.httpClient.get(this.apiURL + 'congresos/consultaCongreso/?id=' + this.idCongreso);
   }
 
   getSedes(): any {

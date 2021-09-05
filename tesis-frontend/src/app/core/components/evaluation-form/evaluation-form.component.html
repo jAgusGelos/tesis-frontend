@@ -25,7 +25,7 @@
        </div>
 
         <!-- Simposio -->
-        <div class="form-group row">
+        <!-- <div class="form-group row">
           <label class="col-form-label col-sm-3 col-sm-offset-2" for="simposio">Simposio:<span
               class="text-danger">*</span></label>
           <div class="col-sm-8">
@@ -41,13 +41,13 @@
               Requerido.
             </span>
           </div>
-        </div>
+        </div> -->
 
         <div class="row justify-content-md-center pt-3 btn-row">
           <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
           &nbsp;
           <a class="btn btn-primary col-md-4" (click)='submit()'
-            role="button">{{evaluation.id === (undefined || "" ) ? 'Crear Pregunta' : 'Guardar Cambios'}}</a>
+            role="button">{{evaluation.id === undefined || ""  ? 'Crear Pregunta' : 'Guardar Cambios'}}</a>
         </div>
 
       </form>

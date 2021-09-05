@@ -12,11 +12,10 @@ import { UserService } from '../../services/user.service';
 })
 export class UserCompletedDataComponent implements OnInit {
 
-  @Input() titulo = 'Formulario de Registro';
+  titulo = 'Formulario de Registro';
   formUsuario: FormGroup;
   submitted = false;
   tipoDni = [{id: 1, nombre: 'DNI'}];
-  nacionalidades = [{id: 1, nombre: 'Argentina'}];
   provincias = [{id: 1, nombre: 'Cordoba'}];
   localidades = [{id: 1, nombre: 'Capital'}];
   /**
@@ -24,22 +23,7 @@ export class UserCompletedDataComponent implements OnInit {
    * Si no se recibe es un nuevo usuario
    * Si se recibe es un usuario existente que quiere cambiar sus datos
    */
-  @Input() usuario: IUserComplete = {
-    id: '',
-    dni: null,
-    tipoDni: '',
-    apellido: '',
-    nombre: '',
-    fechaNacimiento: '',
-    nacionalidad: '',
-    provincia: '',
-    localidad: '',
-    calle: '',
-    nroCalle: null,
-    piso: '0',
-    dpto: '0',
-    celular: null,
-    email: 'juanagustingelos1@gmail.com' };
+  @Input() usuario: any;
 
     constructor( private formBuilder: FormBuilder,
                  private datePipe: DatePipe,
@@ -48,18 +32,19 @@ export class UserCompletedDataComponent implements OnInit {
 
     ngOnInit(): void {
       window.scrollTo(0, 0);
+      console.log(this.usuario);
       this.getAllData();
+
       this.formUsuario = this.formBuilder.group({
         dni: [this.usuario.dni, [Validators.required]],
         tipoDni: [this.usuario.tipoDni, [Validators.required]],
         apellido: [this.usuario.apellido, [Validators.required]],
         nombre: [this.usuario.nombre, [Validators.required]],
-        fechaNacimiento: [this.usuario.fechaNacimiento, [Validators.required]],
-        nacionalidad: [this.usuario.nacionalidad, [Validators.required]],
+        fechaNacimiento: [this.invertConvertDateFormat(this.usuario.fechaNacimiento.split(' ')[0]), [Validators.required]],
         provincia: [this.usuario.provincia, [Validators.required]],
         localidad: [this.usuario.localidad, [Validators.required]],
         calle: [this.usuario.calle, [Validators.required]],
-        nroCalle: [this.usuario.nroCalle, [Validators.required]],
+        nroCalle: [this.usuario.numeroCalle, [Validators.required]],
         piso: [this.usuario.piso, []],
         dpto: [this.usuario.dpto, []],
         celular: [this.usuario.celular, []]
@@ -68,13 +53,13 @@ export class UserCompletedDataComponent implements OnInit {
 
     getAllData(): void {
       this.userService.getLocalidades().subscribe((res: any) => {
-        this.localidades = res.data;
+        this.localidades = res;
       });
-      this.userService.getNacionalidad().subscribe((res: any) => {
-        this.nacionalidades = res.data;
+      this.userService.getDni().subscribe((res: any) => {
+        this.tipoDni = res;
       });
       this.userService.getProvincias().subscribe((res: any) => {
-        this.provincias = res.data;
+        this.provincias = res;
       });
     }
 
@@ -83,7 +68,11 @@ export class UserCompletedDataComponent implements OnInit {
       return info;
     }
 
-
+    invertConvertDateFormat(date: string): any {
+      date = date.split(' ')[0];
+      const info = date.split('/').reverse().join('-');
+      return info;
+    }
 
     /**
      * Valida que el formulario de registro sea correcto.
@@ -103,7 +92,6 @@ export class UserCompletedDataComponent implements OnInit {
         alert('Fecha Inválida, por favor ingrese una fecha correcta');
         return;
       }
-      console.log(this.formUsuario);
 
       this.usuario = {
         id: this.usuario.id,
@@ -113,18 +101,14 @@ export class UserCompletedDataComponent implements OnInit {
         nombre: this.formUsuario.controls.nombre.value,
         celular: this.formUsuario.controls.celular.value ? this.formUsuario.controls.celular.value : 0 ,
         calle: this.formUsuario.controls.calle.value,
-        nroCalle: this.formUsuario.controls.nroCalle.value,
+        numeroCalle: this.formUsuario.controls.nroCalle.value,
         piso: this.formUsuario.controls.piso.value,
         dpto: this.formUsuario.controls.dpto.value,
-        fechaNacimiento: this.formUsuario.controls.fechaNacimiento.value,
-        nacionalidad: this.formUsuario.controls.nacionalidad.value,
+        fechaNacimiento:  this.convertDateFormat(this.formUsuario.controls.fechaNacimiento.value) + ' 00:00:00',
         localidad: this.formUsuario.controls.localidad.value,
         provincia: this.formUsuario.controls.provincia.value,
         email : this.usuario.email
       };
-
-      console.log(this.usuario);
-
 
       this.userService.postUserComplete(this.usuario).subscribe( (res: any) => {
         if (res.error) {

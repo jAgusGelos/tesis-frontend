@@ -11,12 +11,12 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Asignar chair a temática</h5>
-                <label for="selectChair">Chair: </label>
+                <label for="selectChair">Usuarios: </label>
                 <div class="col-sm-6">
                   <select name="chair" class="form-control" formControlName="selectChair"
                     [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectChair.touched || submitted) && formAssignSecChairs.controls.selectChair.errors}">
                     <option hidden selected>Seleccione un chair a asignar</option>
-                    <option *ngFor="let chair of chairsNotAssigned">{{ chair.value }}</option>
+                    <option *ngFor="let chair of chairsNotAssigned" value={{chair.id}}>{{ chair.nombre }} {{chair.apellido}} - {{ chair.email }}</option>
                   </select>
                 </div>
                 <br>
@@ -25,7 +25,7 @@
                   <select name="chair" class="form-control" formControlName="selectTematica"
                     [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectTematica.touched || submitted) && formAssignSecChairs.controls.selectTematica.errors}">
                     <option hidden selected>Seleccione una simposio</option>
-                    <option *ngFor="let theme of tematicas">{{ theme.descripcion }}</option>
+                    <option *ngFor="let theme of tematicas" value={{theme.id}}>{{ theme.descripcion }}</option>
                   </select>
                 </div>
                 <br>
@@ -55,11 +55,11 @@
 
             <tbody>
               <tr class='align-items-center' *ngFor='let chair of chairsAssigned'>
-                <td>{{chair.value}}</td>
-                <td>{{chair.theme}}</td>
+                <td>{{chair.nombreChair}} {{chair.apellidoChair}}</td>
+                <td>{{chair.nombreSimposio}}</td>
                 <td>
                   <div class="btn-group col-md-3">
-                    <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+                    <a (click)='toggleRemoveHandled(chair)' title='Eliminar'><i class="fas fa-trash"></i></a>
                   </div>
                 </td>
               </tr>

@@ -1,5 +1,6 @@
 <div class="container-fluid">
-  <app-evaluation-list *ngIf="!edit" (newEvaluationEvent)='newEvaluation()'
+  <app-evaluation-list *ngIf="!edit" [evaluationList]='evaluationList'
+  (newEvaluationEvent)='newEvaluation()'
   (editEvaluationEvent)='editEvaluation($event)' (deleteEvaluationEvent)='deleteEvaluation($event)'>
   </app-evaluation-list>
   <app-evaluation-form *ngIf="edit" [evaluation]='evaluation' (evaluationEmitter)='toggleCreateEvaluation($event)'

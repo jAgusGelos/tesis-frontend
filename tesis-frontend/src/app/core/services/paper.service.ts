@@ -17,43 +17,43 @@ export class PaperService {
               this.idCongress = auth.getCongressId();
                }
 
-  postPaper(paper: IntPaper): any {
-    const paperPost = {
-      idCongreso: this.idCongress,
-      archivo: paper.archivo,
-      autores: paper.autores,
-      responsable: paper.responsable,
-      simposio: paper.simposio
-    };
-    return this.httpClient.post<IntPaper>(this.apiURL + '/articulos/realizarEntrega/', paperPost);
+  postPaper(paper: any): any {
+    const formData = new FormData();
+    formData.append('articulo', paper.archivo);
+    formData.append('idCongreso', this.idCongress.toString());
+    formData.append('autores', paper.autores.toString());
+    formData.append('responsable', paper.responsable);
+    formData.append('simposio', paper.simposio);
+    formData.append('nombre', paper.nombre);
+    return this.httpClient.post<any>(this.apiURL + 'articulos/realizarEntrega/', formData);
   }
 
   getPaper(): any {
-    return this.httpClient.get(this.apiURL + 'articulos/consultaArticuloXAutor/');
+    return this.httpClient.get(this.apiURL + 'articulos/consultaArticuloXResponsable/');
   }
 
   getPaperFile(paper: IntPaper): any {
-    return this.httpClient.get(this.apiURL + 'consulta-archivo/' + paper.id)
+    return this.httpClient.get(this.apiURL + 'consulta-archivo/' + paper.id);
   }
 
   putPaper(paper: IntPaper): any {
-    const paperPost = {
-      idArticulo: paper.id,
-      idCongreso: this.idCongress,
-      archivo: paper.archivo,
-      autores: paper.autores,
-      responsable: paper.responsable,
-      simposio: paper.simposio
-    };
-    return this.httpClient.put<IntPaper>(this.apiURL + 'paper/modificar/' + paper.id, paper);
+    const formData = new FormData();
+    formData.append('idArticulo', paper.id);
+    formData.append('articulo', paper.archivo);
+    formData.append('idCongreso', this.idCongress.toString());
+    formData.append('autores', paper.autores.toString());
+    formData.append('responsable', paper.responsable);
+    formData.append('simposio', paper.simposio);
+    formData.append('nombre', paper.nombre);
+    return this.httpClient.put<IntPaper>(this.apiURL + 'paper/editarEntrega/', formData);
   }
 
   deletePaper(paper: IntPaper): any {
-    return this.httpClient.delete<IntPaper>(this.apiURL + 'paper/delete/' + paper.id);
+    return this.httpClient.delete<IntPaper>(this.apiURL + 'articulos/deleteEntregaArticulo/?idArticulo=' + paper.id);
   }
 
   checkAutor(mail: string): any {
-    return this.httpClient.post<IntPaper>(this.apiURL + 'autor/check/', mail);
+    return this.httpClient.get(this.apiURL + 'api/verificarUsuario/?email=' + mail);
   }
 
   sendEmail(mail: string): any {

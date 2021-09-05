@@ -11,6 +11,7 @@ import { UserService } from 'src/app/core/services/user.service';
 export class HeaderComponent implements OnInit {
 
   user = false;
+  rol: number[] = [];
   constructor(private authService: AuthService,
               private userService: UserService,
               private router: Router) { }
@@ -20,11 +21,19 @@ export class HeaderComponent implements OnInit {
     if (idToken){
       this.user = true;
     }
+    if (this.user) {
+      this.rol = [6];
+      // this.rol = this.authService.getUserRoles();
+    }
   }
 
   logout(): void {
     this.user = !this.user;
     this.authService.logout();
-    this.router.navigate(['']);
+    window.location.reload();
+    this.router.navigate(['']).then(() => {
+      window.location.reload();
+    });
+
   }
 }

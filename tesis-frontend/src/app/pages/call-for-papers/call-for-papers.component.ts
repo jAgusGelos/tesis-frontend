@@ -10,28 +10,47 @@ import { PaperService } from 'src/app/core/services/paper.service';
 export class CallForPapersComponent implements OnInit {
 
   paperList = [];
-  edit = true;
+  edit = false;
   paper = {};
+  simposios = [];
 
   constructor(private paperService: PaperService) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.getSimposios();
     this.getPaper();
+  }
+
+  getSimposios(): void {
+    this.paperService.getSimposiosActivos().subscribe((res: any) => {
+      this.simposios = res.data;
+    });
   }
 
   getPaper(): void {
     this.paperService.getPaper().subscribe((res: any) => {
       this.paperList = res.data;
+      console.log(this.paperList);
+
+
     });
   }
 
   newPaper(): void {
     this.edit = !this.edit;
-    this.paper = {};
+    this.paper = {
+      id: '',
+      autores: [],
+      responsable: '',
+      nombre: '',
+      estado: 'Sin subir',
+      simposio: '',
+      archivo: null,
+    };
   }
 
-  editPaper(paper: IntPaper): void {
+  editPaper(paper: any): void {
     this.edit = !this.edit;
     this.paper = paper;
 
@@ -53,17 +72,20 @@ export class CallForPapersComponent implements OnInit {
    * Si no lo tiene crea un nuevo paper.
    */
    toggleCreatePaper(item: any): void {
-    if (item.id === undefined) {
+    console.log(item);
+
+    if (item.id === '') {
       this.paperService.postPaper(item).subscribe((res: any) => {
         alert('Paper Creado Correctamente');
+        window.location.reload();
       });
     }
     else{
       this.paperService.putPaper(item).subscribe((res: any) => {
         alert('Paper Modificado Correctamente');
+        window.location.reload();
       });
     }
-    this.getPaper();
   }
 
 }
