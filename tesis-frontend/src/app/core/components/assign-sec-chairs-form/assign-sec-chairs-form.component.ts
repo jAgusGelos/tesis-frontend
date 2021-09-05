@@ -17,17 +17,8 @@ export class AssignSecChairsFormComponent implements OnInit {
   submitted = false;
   tematicas: any [];
   emptyAssign: IassignSecChairTheme[] = [];
-  chairsAssigned = [
-    {value: 'chair asignado 1', theme: 'Sistemas'}
-  ];
+  chairsAssigned = [];
   chairsNotAssigned = [];
-
-  asignacion = {
-    selectCongreso: '',
-    selectTematica: '',
-    selectChair: '',
-    assigned: false
-  };
 
   constructor( private formBuilder: FormBuilder,
                private assignService: AssignSecChairThemeService,
@@ -41,6 +32,13 @@ export class AssignSecChairsFormComponent implements OnInit {
     });
     this.getTematicas();
     this.getUsuarios();
+    this.getChairsAsignados();
+  }
+
+  getChairsAsignados(): void {
+    this.assignService.getAssignSecChairTheme().subscribe((res: any) => {
+      this.chairsAssigned = res.data;
+    });
   }
 
   getUsuarios(): void {
@@ -63,14 +61,21 @@ export class AssignSecChairsFormComponent implements OnInit {
     }
 
     const item = {
-      value: this.formAssignSecChairs.controls.selectChair.value,
-      theme: this.formAssignSecChairs.controls.selectTematica.value,
+      idChair: +this.formAssignSecChairs.controls.selectChair.value,
+      idSimposio: +this.formAssignSecChairs.controls.selectTematica.value,
     };
-    console.log(item);
-    return;
     this.assignService.postAssignSecChairTheme(item).subscribe((res: any) => {
       this.chairsAssigned.push(res.data);
     });
+  }
+
+  toggleRemoveHandled(item: any): void {
+    if (confirm('Esta seguro que desea eliminar el chair: ' + item.nombreChair + ' ' + item.apellidoChair)){
+      this.assignService.deleteAssignSecChairTheme(item).subscribe((res: any) => {
+        const indice = this.chairsAssigned.indexOf(item);
+        this.chairsAssigned.splice(indice, 1);
+      });
+    }
   }
 
 }

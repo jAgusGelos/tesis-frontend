@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
       this.user = true;
     }
     if (this.user) {
-      this.rol = [1];
+      this.rol = [6];
       // this.rol = this.authService.getUserRoles();
     }
   }

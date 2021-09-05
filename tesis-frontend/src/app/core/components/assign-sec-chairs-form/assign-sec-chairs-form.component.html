@@ -55,11 +55,11 @@
 
             <tbody>
               <tr class='align-items-center' *ngFor='let chair of chairsAssigned'>
-                <td>{{chair.value}}</td>
-                <td>{{chair.theme}}</td>
+                <td>{{chair.nombreChair}} {{chair.apellidoChair}}</td>
+                <td>{{chair.nombreSimposio}}</td>
                 <td>
                   <div class="btn-group col-md-3">
-                    <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+                    <a (click)='toggleRemoveHandled(chair)' title='Eliminar'><i class="fas fa-trash"></i></a>
                   </div>
                 </td>
               </tr>
