@@ -46,10 +46,16 @@
           <a class="nav-link" href="/asignarPaperEvaluador" *ngIf="rol.includes(2)  && user">Asignar Papers</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/missing" *ngIf="rol.includes(2)  && user">Evaluar Papers</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/missing" *ngIf="rol.includes(2)  && user">Puntar Evaluadores</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/verEvaluaciones" *ngIf="rol.includes(3)  && user">Evaluar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/missing" *ngIf="rol.includes(3)  && user">Seleccionar Simposios</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/callForPapers" *ngIf="user && (!rol.includes(0) && !rol.includes(1) && !rol.includes(2)) && !rol.includes(3)">Call for Papers</a>
