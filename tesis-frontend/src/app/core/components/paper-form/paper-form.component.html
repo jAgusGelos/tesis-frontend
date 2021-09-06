@@ -26,11 +26,11 @@
           <label class="col-form-label col-sm-3 col-sm-offset-2" for="simposio">Simposio:<span
               class="text-danger">*</span></label>
           <div class="col-sm-6">
-            <select  class='col-sm-4' name="simposio" class="form-control" formControlName="simposio" [ngClass]="{'is-invalid': ((formPaper.controls.simposio.touched || submitted) && formPaper.controls.simposio.value === '')
+            <select  class='col-sm-4 form-select' name="simposio" formControlName="simposio" [ngClass]="{'is-invalid': ((formPaper.controls.simposio.touched || submitted) && formPaper.controls.simposio.value === '')
           && formPaper.controls.simposio.errors}">
               <option  *ngFor="let opt of simposios" value={{opt.id}}>
                 ‌{{ opt.descripcion }}
-              <option>
+              </option>
             </select>
             <span class="text-danger"
               *ngIf="((formPaper.controls.simposio.touched || submitted) && formPaper.controls.simposio.value === '') && formPaper.controls.simposio.errors?.required ">

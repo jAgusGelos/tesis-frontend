@@ -20,11 +20,6 @@
   border: none;
 }
 
-i{
-  padding-top: 1.5rem;
-  cursor: pointer;
-}
-
 i:hover{
   color: blue;
 }

@@ -15,7 +15,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-3" for="tipoDni">Tipo DNI:<span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <select name="tipoDni" class="form-control" formControlName="tipoDni" [ngClass]="{'is-invalid': (formUsuario.controls.tipoDni.touched || submitted)
+                <select name="tipoDni" class="form-select" formControlName="tipoDni" [ngClass]="{'is-invalid': (formUsuario.controls.tipoDni.touched || submitted)
               && formUsuario.controls.tipoDni.errors}">
                   <option *ngFor="let opt of tipoDni" value={{opt.id}}>
                     ‌{{ opt.nombre }}
@@ -109,7 +109,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="provincia">Provincia:<span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <select name="provincia" class="form-control" formControlName="provincia" [ngClass]="{'is-invalid': (formUsuario.controls.provincia.touched || submitted)
+                <select name="provincia" class="form-select" formControlName="provincia" [ngClass]="{'is-invalid': (formUsuario.controls.provincia.touched || submitted)
               && formUsuario.controls.provincia.errors}">
                   <option *ngFor="let opt of provincias" value={{opt.id}}>
                     ‌{{ opt.nombre }}
@@ -130,7 +130,7 @@
               <label class="col-form-label col-sm-2 col-sm-offset-2" for="localidad">Localidad:<span
                   class="text-danger">*</span></label>
               <div class="col-sm-6">
-                <select name="localidad" class="form-control" formControlName="localidad" [ngClass]="{'is-invalid': (formUsuario.controls.localidad.touched || submitted)
+                <select name="localidad" class="form-select" formControlName="localidad" [ngClass]="{'is-invalid': (formUsuario.controls.localidad.touched || submitted)
               && formUsuario.controls.localidad.errors}">
                   <option *ngFor="let opt of localidades" value={{opt.id}}>
                     ‌{{ opt.nombre }}
