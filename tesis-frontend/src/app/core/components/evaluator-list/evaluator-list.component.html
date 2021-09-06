@@ -1,0 +1,84 @@
+<div class="container-fluid">
+    <div class="contenidos">
+      <hr>
+      <h3 class='text-center'>Evaluadores Activos</h3>
+      <hr>
+    </div>
+    <div *ngIf="!new" class="row justify-content-md-end">
+      <a class="btn btn-primary col-sm-2" role="button" (click)="toggleNew()">Nuevo Evaluador</a>
+    </div>
+    <div *ngIf="new" class="row justify-content-md-end">
+      <form [formGroup]='formEvaluator' class="card col-md-4">
+            <div class="card-body">
+              <h5 class="card-title">Agregar Evaluador</h5>
+              <p class="card-text">Se enviará un correo de invitación al usuario para que sea evaluador.</p>
+                <input class="form-control" type="email" formControlName="correo" placeholder="name@example.com"
+                    [ngClass]="{'is-invalid': submitted && formEvaluator.controls.correo.errors}">
+                <br>
+                <a class="btn btn-secondary" role="button" (click)="toggleNew()">Cancelar</a>
+                &nbsp;
+                <a class="btn btn-primary" role="button" (click)="addEvaluator()" data-bs-toggle="modal" data-bs-target="#modal-correo">
+                  Enviar correo &nbsp; <i class="fas fa-envelope"></i></a> <!--Agregar-->
+            </div>
+          </form>
+      </div>
+    <br>
+    <div class="row">
+        <table class="table text-center table-hover table-bordered">
+          <thead class='thead'>
+            <tr>
+              <th class="col-md-4">Nombre</th>
+              <th class="col-md-4">E-mail</th>
+              <th class="col-md-2">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class='align-items-center'*ngFor='let r of rows; let i = index'>
+              <td>{{r.nombre}}</td>
+              <td>{{r.email}}</td>
+              <td>
+                <a title='Eliminar' role="button" (click)="setDeleteEvaluator(i)" data-bs-toggle="modal" data-bs-target="#modal-eliminar">
+                  <i class="fas fa-trash fa-lg"></i></a>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  <div>
+
+<!-- Modal Enviar correo -->
+<div *ngIf="modalCorreo" class="modal fade" id="modal-correo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{message}}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Eliminar Evaluador -->
+<div class="modal fade" id="modal-eliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar Evaluador</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Seguro que desea eliminar a {{deleteEvName}}?</p>
+      </div>
+      <div class="modal-footer">
+        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+        <a type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteEvaluator()">Aceptar</a>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+  
+  

@@ -98,6 +98,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/evaluate-papers-chair-sec/evaluate-papers-chair-sec.module')
     .then(m => m.EvaluatePapersChairSecModule),
   },
+  {
+    path: 'evaluators',
+    loadChildren: () => import('./pages/evaluators/evaluators.module')
+    .then(m => m.EvaluatorsModule),
+  },
   // Notification routes
   {
     path: 'deactivateAccount',

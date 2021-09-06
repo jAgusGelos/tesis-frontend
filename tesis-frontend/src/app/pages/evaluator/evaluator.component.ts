@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IEvaluator } from 'src/app/core/models/IEvaluator';
+import { IEvaluator } from 'src/app/core/models/iEvaluator';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 
 @Component({

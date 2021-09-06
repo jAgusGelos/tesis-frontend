@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ICongress } from '../../models/ICongress';
-import { IEvaluator } from '../../models/ievaluator';
+import { IEvaluator } from '../../models/iEvaluator';
 import { IntPaper } from '../../models/IntPaper';
 import { ISymposium } from '../../models/ISymposium';
 import { IUserComplete } from '../../models/IUserComplete';
@@ -155,7 +155,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
     if (paper !== null) {
       let evaluators: IEvaluator[];
       this.articulosService.getEvaluatorsByPaper(paper).subscribe((res: any) => {
-        evaluators = res.data;
+        evaluators = <IEvaluator[]>res.data;
       });
       return evaluators;
     }
