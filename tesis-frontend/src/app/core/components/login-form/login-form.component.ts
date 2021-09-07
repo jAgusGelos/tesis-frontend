@@ -25,8 +25,8 @@ export class LoginFormComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.formLogin = this.formBuilder.group({
-      email: ['juanagustingelos1@gmail.com', [Validators.required]],
-      password: ['asdasd', [Validators.required]],
+      email: ['charly2.monastyrski@gmail.com', [Validators.required]],
+      password: ['123456', [Validators.required]],
       idCongress: ['', [Validators.required]]
     });
     this.getCongress();
@@ -35,8 +35,6 @@ export class LoginFormComponent implements OnInit {
   getCongress(): void {
     this.congressService.getCongressActivo().subscribe((res: any) => {
       this.congressList = res.data;
-      console.log(res.data);
-
     });
   }
 
@@ -60,9 +58,10 @@ export class LoginFormComponent implements OnInit {
     this.loginService
     .login(login)
     .subscribe((res: any) => {
-      console.log(res);
       this.loginService.setSession(res);
-      this.router.navigate(['']);
+      this.router.navigate(['']).then(() => {
+        window.location.reload();
+      });
     });
   }
 

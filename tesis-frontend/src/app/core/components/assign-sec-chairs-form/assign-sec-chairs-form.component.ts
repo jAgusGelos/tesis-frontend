@@ -15,27 +15,12 @@ export class AssignSecChairsFormComponent implements OnInit {
 
   formAssignSecChairs: FormGroup;
   submitted = false;
-  tematicas = ['Sistemas', 'Inteligencia Artificial', 'Software'];
+  tematicas: any [];
   emptyAssign: IassignSecChairTheme[] = [];
-  chairsAssigned = [
-    {value: 'chair asignado 1', theme: 'Sistemas'}
-  ];
-  chairsNotAssigned = [
-    {value: 'Chair secundario 1', assigned: false}
-  ];
-
-  @Input() asignacion = {
-    selectCongreso: '',
-    selectTematica: '',
-    selectChair: '',
-    assigned: false
-  };
-
-
+  chairsAssigned = [];
+  chairsNotAssigned = [];
 
   constructor( private formBuilder: FormBuilder,
-               private congressService: CongressService,
-               private themesService: SymposiumService,
                private assignService: AssignSecChairThemeService,
                private paperService: PaperService) { }
 
@@ -46,12 +31,25 @@ export class AssignSecChairsFormComponent implements OnInit {
       selectTematica: ['', [Validators.required]]
     });
     this.getTematicas();
+    this.getUsuarios();
+    this.getChairsAsignados();
+  }
+
+  getChairsAsignados(): void {
+    this.assignService.getAssignSecChairTheme().subscribe((res: any) => {
+      this.chairsAssigned = res.data;
+    });
+  }
+
+  getUsuarios(): void {
+    this.assignService.getUsuarios().subscribe((res: any) => {
+      this.chairsNotAssigned = res;
+    });
+
   }
 
   getTematicas(): void {
     this.paperService.getSimposiosActivos().subscribe((res: any) => {
-      console.log(res.data);
-
       this.tematicas = res.data;
    });
   }
@@ -61,13 +59,23 @@ export class AssignSecChairsFormComponent implements OnInit {
       alert('Por Favor seleccione un chair y una tematica');
       return;
     }
+
     const item = {
-      value: this.formAssignSecChairs.controls.selectChair.value,
-      theme: this.formAssignSecChairs.controls.selectTematica.value,
+      idChair: +this.formAssignSecChairs.controls.selectChair.value,
+      idSimposio: +this.formAssignSecChairs.controls.selectTematica.value,
     };
     this.assignService.postAssignSecChairTheme(item).subscribe((res: any) => {
       this.chairsAssigned.push(res.data);
     });
+  }
+
+  toggleRemoveHandled(item: any): void {
+    if (confirm('Esta seguro que desea eliminar el chair: ' + item.nombreChair + ' ' + item.apellidoChair)){
+      this.assignService.deleteAssignSecChairTheme(item).subscribe((res: any) => {
+        const indice = this.chairsAssigned.indexOf(item);
+        this.chairsAssigned.splice(indice, 1);
+      });
+    }
   }
 
 }

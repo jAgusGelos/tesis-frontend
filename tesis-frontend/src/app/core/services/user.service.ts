@@ -23,7 +23,7 @@ export class UserService {
   }
 
   getLoggedUser(): any {
-    return this.httpClient.get(this.apiURL + 'api/usuarios/devolverUsuarioLogueado/');
+    return this.httpClient.get(this.apiURL + 'api/devolverUsuarioLogueado/');
   }
 
   deactivate(user: IUser): any {
@@ -31,15 +31,15 @@ export class UserService {
   }
 
   getLocalidades(): any {
-    return this.httpClient.get(this.apiURL + 'api/localidades/');
+    return this.httpClient.get(this.apiURL + 'congresos/lista-localidades/');
   }
 
   getProvincias(): any {
-    return this.httpClient.get(this.apiURL + 'api/provincias/');
+    return this.httpClient.get(this.apiURL + 'congresos/lista-provincia/');
   }
 
-  getNacionalidad(): any {
-    return this.httpClient.get(this.apiURL + 'api/nacionalidades/');
+  getDni(): any {
+    return this.httpClient.get(this.apiURL + 'api/lista-tiposDni/');
   }
 
 }

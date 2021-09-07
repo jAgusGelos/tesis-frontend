@@ -27,12 +27,11 @@
           <label class='col-form-label col-sm-3 col-sm-offset-2' for='sede'>Sede: <span
               class='text-danger'>*</span></label>
           <div class='col-sm-6'>
-            <select  class='col-sm-4' name="simposio" class="form-control" formControlName="sede" [ngClass]="{'is-invalid': (formCongress.controls.sede.touched || submitted || formCongress.controls.sede.value === '')
+            <select  class='form-select col-sm-4' name="simposio" formControlName="sede" [ngClass]="{'is-invalid': (formCongress.controls.sede.touched || submitted || formCongress.controls.sede.value === '')
           && formCongress.controls.sede.errors}">
-              <option value=""> </option>
               <option  *ngFor="let opt of sedes" value={{opt.id}}>
                 ‌{{ opt.nombre }}
-              <option>
+              </option>
             </select>
             <span class='text-danger'
               *ngIf='(formCongress.controls.sede.touched || submitted) && formCongress.controls.sede.errors?.required'>

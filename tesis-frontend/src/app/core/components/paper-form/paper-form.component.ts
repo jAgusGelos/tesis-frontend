@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IntPaper } from '../../models/IntPaper';
+import { ISymposium } from '../../models/ISymposium';
 import { AuthService } from '../../services/auth.service';
 import { PaperService } from '../../services/paper.service';
 
@@ -11,22 +12,13 @@ import { PaperService } from '../../services/paper.service';
 })
 export class PaperFormComponent implements OnInit {
 
-  @Input() paper: any = {
-    id: '',
-    autores: ['Autor 1', 'Autor 2'],
-    responsable: '',
-    nombre: '',
-    estado: 'sin subir',
-    simposio: '',
-    archivo: null,
-  };
+  @Input() paper: any;
+  @Input() simposios: any[];
   @Output() paperEmitter = new EventEmitter<any>();
   @Output() cancelPaper = new EventEmitter();
   formPaper: FormGroup;
-  // @Input() simposios: ISymposium[];
-  simposios = ['Simposio 1', 'Simposio 2'];
   submitted = false;
-  autoresList = [{mail: 'autor1@gmail.com', status: 'ok'}, {mail: 'autor2@gmail.com', status: 'not ok'}];
+  autoresList = [];
   fileToUpload: File | null = null;
 
 
@@ -36,24 +28,38 @@ export class PaperFormComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+
+    console.log(this.paper);
+
     this.formPaper = this.formBuilder.group({
       nombre: [this.paper.nombre, [Validators.required]],
-      simposio: [this.paper.simposio, [Validators.required]],
-      archivo: [this.paper.archivo, [Validators.required]],
+      simposio: [this.paper.idSimposio, [Validators.required]],
+      archivo: [null, [Validators.required]],
       autores: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     });
-    // this.autoresList = this.paper.autores.map((item: string) => {
-    //   this.paperService.checkAutor(item).subscribe((res: any) => {
-    //     if (res.data === 'ok') {
-    //       return {mail: item, status: 'ok'};
-    //     }
-    //     return {mail: item, status: 'Not ok'};
-    //   });
-    // });
+    if (this.paper) {
+      if (this.paper.autores_registrados){
+        const autoresOK = this.paper.autores_registrados.map((x: any) => {
+          return {mail: x, status: true};
+        });
+        this.autoresList =  this.autoresList.concat(autoresOK);
+      }
+      if (this.paper.autores_no_registrados) {
+        const autoresNoOK = this.paper.autores_no_registrados.map((x: any) => {
+          return {mail: x, status: false};
+        });
+        this.autoresList =  this.autoresList.concat(autoresNoOK);
+      }
+    }
+    console.log(this.autoresList);
   }
 
   cancel(): void {
     this.cancelPaper.emit();
+  }
+
+  nuevoArchivo(): void {
+    this.paper.archivo = '';
   }
 
 
@@ -77,24 +83,20 @@ export class PaperFormComponent implements OnInit {
         alert('Ya existe un usuario con ese Email ingresado');
         return null;
       }
-      // this.paperService.checkAutor(autor).subscribe((res: any) => {
-      //   if (res.data === 'ok'){
-      //     this.paper.autores.push(autor)
-      //     this.autoresList.push({mail: autor, status: 'ok'})
-      //   }
-      // else{
-      //   if (confirm('El autor ' + autor + 'no existe.' +
-      //   '\n¿Desea enviar un mail de invitación?')) {
-      //     this.paperService.sendEmail(autor).subscribe((res: any) => {
-      //       alert('El Email ha sido enviado.'+
-      //       '\nRecuerde que no podrá subir un paper hasta que todos los autores estén confirmados.');
-      //       this.autoresList.push({mail: autor, status: 'not ok'});
-      //     });
-      //     }
+      this.paperService.checkAutor(autor).subscribe((res: any) => {
+        if (res.data){
+          this.paper.autores.push(autor);
+          this.autoresList.push({mail: autor, status: true});
 
-      // }
-      // })
-      this.autoresList.push({mail: autor, status: 'ok'});
+        }
+      else{
+        alert('El autor ingresado no está registrado en el sistema. \n' +
+        'Recuerde que todos los autores deben estar registrados para poder enviar a corrección \n' +
+        'Descuida, puedes guardar tus cambios hasta que este usuario cree su perfil\n' +
+        'No te preocupes, nosotros le enviaremos un mail a este nuevo autor');
+        this.autoresList.push({mail: autor, status: false});
+      }
+      });
       this.formPaper.controls.autores.reset();
     }
     else{
@@ -121,27 +123,30 @@ export class PaperFormComponent implements OnInit {
     this.paper.autores = this.autoresList.map((x: any) => {
         return x.mail;
     });
-
-    // this.paperService.putPaper(this.paper).subscribe((res: any) => {
-    //   this.paper = res.data;
-    //   alert('Autor Eliminado')
-    // })
-
   }
 
   /**
    * Guarda provisoriamente los datos del congreso en la BD.
    */
-
   save(): void {
-
+    const userId = this.auth.getUserId();
+    this.paper = {
+      archivo: this.fileToUpload,
+      autores: this.autoresList.map((item: any) => {
+        return item.mail;
+      }),
+      id: '',
+      estado: 'sin subir',
+      nombre: this.formPaper.controls.nombre.value,
+      responsable: userId,
+      simposio: this.formPaper.controls.simposio.value,
+    };
+    this.paperEmitter.emit(this.paper);
   }
 
   handleFileInput(files: FileList): void {
     this.fileToUpload = files.item(0);
-    console.log(this.fileToUpload);
-
-}
+  }
 
   submit(): void {
     this.submitted = true;

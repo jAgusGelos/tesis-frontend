@@ -19,19 +19,28 @@ export class AssignSecChairThemeService {
 
   //Acordar dirección luego...
   postAssignSecChairTheme(asignacion: any): any {
-    return this.httpClient.post<IassignSecChairTheme>(this.apiURL + 'chairportematica/crear/', asignacion);
+    const postItem = {
+      idCongreso: this.idCongress,
+      ...asignacion
+    };
+    return this.httpClient.post<IassignSecChairTheme>(this.apiURL + 'congresos/asignarChairASimposio/', postItem);
   }
 
   getAssignSecChairTheme(): any {
-    return this.httpClient.get(this.apiURL + 'congreso/todos/');
+    return this.httpClient.get(this.apiURL + 'congresos/devolverChairsSimposios/?idCongreso=' + this.idCongress);
+  }
+
+  getUsuarios(): any {
+    return this.httpClient.get(this.apiURL + 'api/lista-usuarios/');
   }
 
   putAssignSecChairTheme(asignacion: IassignSecChairTheme): any {
     return this.httpClient.put<IassignSecChairTheme>(this.apiURL + 'chairportematica/modificar/' + asignacion.idCongress, asignacion);
   }
 
-  deleteAssignSecChairTheme(asignacion: IassignSecChairTheme): any {
-    return this.httpClient.delete<IassignSecChairTheme>(this.apiURL + 'chairportematica/modificar/' + asignacion.idCongress);
+  deleteAssignSecChairTheme(item: any): any {
+    return this.httpClient.request('delete', this.apiURL + 'congresos/eliminarChairSecundario/',
+    {body: {idChair: item.idChair, idSimposio: item.idSimposio }});
   }
 
 }

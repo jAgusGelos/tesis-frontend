@@ -11,14 +11,15 @@ export class UsuarioComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
-  usuario: IUserComplete;
+  usuario: any;
+  paso = false;
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.userService.getLoggedUser().subscribe((res: any) => {
-      this.usuario = res.data;
+      this.usuario = res;
+      this.paso = true;
     });
-
   }
 
 }

@@ -7,9 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PaperListComponent implements OnInit {
 
-  @Input() paperList = [
-    {id: '123', nombre: 'Probando un paper', estado: 'Subido'},
-    {id: '123', nombre: 'probando otro paper', estado: 'Pendiente'}];
+  @Input() paperList = [];
   @Output() editPaperEvent = new EventEmitter();
   @Output() deletePaperEvent = new EventEmitter();
   @Output() newPaperEvent = new EventEmitter();

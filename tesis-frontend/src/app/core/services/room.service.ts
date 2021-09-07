@@ -16,28 +16,30 @@ export class RoomService {
                 this.sede = this.auth.getSedeId();
                }
 
-  postRoom(room: IRoom): any{
+  postRoom(room: any): any{
     const postRoom = {
-      nombre: room.name,
-      descripcion: room.description,
-      capacidad: room.capacity,
+      nombre: room.nombre,
+      descripcion: room.descripcion,
+      capacidad: room.capacidad,
       sede: this.sede
     };
     return this.httpClient.post(this.apiURL + 'congresos/crear-aula/', postRoom);
   }
-  putRoom(room: IRoom): any{
+  putRoom(room: any): any{
+    console.log(room);
+
     const postRoom = {
       id: room.id,
-      nombre: room.name,
-      descripcion: room.description,
-      capacidad: room.capacity,
+      nombre: room.nombre,
+      descripcion: room.descripcion,
+      capacidad: room.capacidad,
       sede: this.sede
     };
     return this.httpClient.put(this.apiURL + 'congresos/editar-aula/', postRoom);
   }
 
   getRooms(): any{
-    return this.httpClient.get(this.apiURL + 'congresos/lista-aulas/' + this.sede);
+    return this.httpClient.get(this.apiURL + 'congresos/lista-aulas/?idSede=' + this.sede);
   }
 
   deteleRoom(room: IRoom): any{
