@@ -13,19 +13,19 @@ export class ArticulosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getEvaluatorsByPaper(paper: IntPaper) {
+  getEvaluatorsByPaper(paper: IntPaper): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadores/' + paper.id);
   }
 
-  getPapersBySymposium(symposium: ISymposium) {
+  getPapersBySymposium(symposium: ISymposium): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosXSimposio/' + symposium.id);
   }
 
-  calificarArticulo(paperCalification: any) {
+  calificarArticulo(paperCalification: any): any {
     return this.httpClient.put(this.apiURL + 'calificarArticulo/', paperCalification);
   }
 
-  post(asignation: any) {
+  post(asignation: any): any {
     return this.httpClient.post(this.apiURL + 'asignarArticuloEvaluador/', asignation);
   }
 

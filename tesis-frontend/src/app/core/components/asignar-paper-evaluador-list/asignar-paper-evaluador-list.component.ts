@@ -18,164 +18,31 @@ import { UserService } from '../../services/user.service';
 })
 export class AsignarPaperEvaluadorListComponent implements OnInit {
 
-  formPapersEvaluators: FormGroup;
+  paperList: any[];
+  evaluatorList: any[];
 
-  @Input() congress: ICongress;
+  assignedPapersList: [];
 
-  symposium: ISymposium;
-
-  papersList: IntPaper[];
-  evaluatorsList: IEvaluator[];
-
-  assignedPapersList: [{
-    articulo: IntPaper;
-    evaUno: IEvaluator;
-    evaDos: IEvaluator;
-    evaTres: IEvaluator;
-  }];
-
-  constructor(  private formBuilder: FormBuilder,
-                private evaluatorService: EvaluatorService,
+  constructor(  private evaluatorService: EvaluatorService,
                 private articulosService: ArticulosService,
-                private userService: UserService,
-                private symposiumService: SymposiumService) { }
+                ) { }
 
   ngOnInit(): void {
-    this.getSymposiumsByChair();
-    this.getPapersBySymposium();
-    this.fillAssignedPapersList();
-    this.getEvaluators();
+    this.getPaperList();
+    this.getEvaluatorList();
   }
 
-  post(row: any, evNum: number, paper: IntPaper, evaluator: IEvaluator): void {
-    const asignation = {
-      congress: this.congress,
-      paper,
-      evaluator
-    };
-    this.articulosService.post(asignation).subscribe((res: any) => {
-      alert('Evaluador asignado con éxito.');
-      const index = this.assignedPapersList.indexOf(row);
-      row = this.addToRow(row, evNum, evaluator);
-      this.assignedPapersList.splice(index, 1, row);
-    });
+  getPaperList(): void {
+    // devuelve la lista de papers asignados
   }
 
-  delete(row: any, paper: IntPaper, evaluator: IEvaluator): void {
-    const asignation = {
-      congress: this.congress,
-      paper,
-      evaluator
-    };
-    this.articulosService.delete(asignation).subscribe((res: any) => {
-      alert('El evaluador ya no está asignado al artículo.');
-      const index = this.assignedPapersList.indexOf(row);
-      row = this.eliminateFromRow(row, evaluator);
-      this.assignedPapersList.splice(index, 1, row);
-    });
-  }
-
-  addToRow(row: any, evNum: number, evaluator: IEvaluator): any {
-    if (evNum === 1) {
-      row.evaUno = evaluator;
-      return row;
-    } else if (evNum === 2) {
-      row.evaDos = evaluator;
-      return row;
-    } else if (evNum === 3) {
-      row.evaTres = evaluator;
-      return row;
-    }
+  getEvaluatorList(): void  {
+    // devuelve la lista de evaluadores
 
   }
 
-  eliminateFromRow(row: any, evaluator: IEvaluator): void {
-    if (row.evaUno === evaluator) {
-      row.evaUno = null;
-      return row;
-    } else if (row.evaDos === evaluator) {
-      row.evaDos = null;
-      return row;
-    } else if (row.evaTres === evaluator) {
-      row.evaTres = null;
-      return row;
-    }
-  }
-
-  isAssigned(evaluator: IEvaluator): boolean {
-    if (evaluator !== null) {
-      return true;
-    }
-    return false;
-  }
 
   getEvaluators(): void {
-    this.evaluatorService.getEvaluators().subscribe((res: any) => {
-        this.evaluatorsList = res.data;
-    });
   }
 
-  fillAssignedPapersList(): void {
-    let row: {
-      articulo: IntPaper,
-      evaUno: IEvaluator,
-      evaDos: IEvaluator,
-      evaTres: IEvaluator
-    };
-    let evaluators: IEvaluator[];
-    for (let index = 0; index < this.papersList.length; index++) {
-      row.articulo = this.papersList[index];
-      evaluators = this.getEvaluatorsByPaper(row.articulo);
-      if (evaluators.length >= 0) {
-        row.evaUno = evaluators[0];
-        if (evaluators.length >= 1) {
-          row.evaDos = evaluators[1];
-          if (evaluators.length >= 2) {
-            row.evaTres = evaluators[2];
-          }
-          else {
-            row.evaTres = null;
-          }
-        } else {
-          row.evaDos = null;
-        }
-
-      } else {
-        row.evaUno = null;
-      }
-    }
-    this.assignedPapersList.push(row);
-    row.articulo = null;
-    row.evaUno = null;
-    row.evaDos = null;
-    row.evaTres = null;
-  }
-
-  getEvaluatorsByPaper(paper: IntPaper): IEvaluator[] {
-    if (paper !== null) {
-      let evaluators: IEvaluator[];
-      this.articulosService.getEvaluatorsByPaper(paper).subscribe((res: any) => {
-        evaluators = res.data;
-      });
-      return evaluators;
-    }
-  }
-
-  getPapersBySymposium(): void {
-    if (this.symposium !== null) {
-      this.articulosService.getPapersBySymposium(this.symposium).subscribe((res: any) => {
-        this.papersList = res.data;
-      });
-    }
-  }
-
-  getSymposiumsByChair(): void {
-    let loggedChair: IUserComplete;
-    this.userService.getLoggedUser().subscribe((res: any) => {
-      loggedChair = res.data;
-    });
-    this.symposiumService.getSymposiumByChair(loggedChair).subscribe((res: any) => {
-      this.symposium = res.data;
-    });
-  }
 }
