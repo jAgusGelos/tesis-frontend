@@ -18,8 +18,12 @@ export class UserService {
     return this.httpClient.post(this.apiURL + 'api/editar/', user);
   }
 
+  getAllUsers(): any {
+    return this.httpClient.get(this.apiURL + 'api/lista-usuarios/');
+  }
+
   getLoggedUser(): any {
-    return this.httpClient.get(this.apiURL + 'api/usuario/');
+    return this.httpClient.get(this.apiURL + 'api/usuarios/devolverUsuarioLogueado/');
   }
 
   deactivate(user: IUser): any {
