@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IEvaluator } from '../models/IEvaluator';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,13 @@ import { IEvaluator } from '../models/IEvaluator';
 export class EvaluatorService {
 
   private apiURL = environment.apiURL;
+  private idUser: number;
 
   constructor(private httpClient: HttpClient,
-              ) { }
+              private auth: AuthService
+              ) {
+                this.idUser = auth.getUserId();
+               }
 
   postEvaluator(evaluator: string): any {
     return this.httpClient.post(this.apiURL + 'articulos/crear-evaluador/', evaluator);
@@ -23,7 +28,11 @@ export class EvaluatorService {
     return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
   }
 
-  getEvaluatorById(id: String): any {
+  getEvaluatorsGroup(): any {
+    return this.httpClient.get(this.apiURL + 'articulos/getEvaluadoresBySimposio/?idChair=' + this.idUser);
+  }
+
+  getEvaluatorById(id: string): any {
     return this.httpClient.get(this.apiURL + 'evaluador/consultarEvaluador/' + id);
   }
 

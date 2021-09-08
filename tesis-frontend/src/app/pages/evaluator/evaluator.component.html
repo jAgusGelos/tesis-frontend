@@ -10,16 +10,17 @@
       <table class="table text-center table-hover table-bordered">
         <thead class="thead">
           <tr>
-            <th class="col-md-4">Mis Evaluadores</th>
-            <th class="col-md-2">Puntuación</th>
+            <th class="col-md-4">Evaluadores Disponibles</th>
+            <th class="col-md-2">Simposio</th>
             <th class="col-md-2">Acciones</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr class="align-items-center" *ngFor="let item of evaluatorSelectedList">
+          <tr class="align-items-center" *ngFor="let item of evaluatorList">
             <td>{{ item.nombre }}</td>
-            <td>{{ item.calificacion }}</td>
+            <td>{{ item.simposio }}</td>
+
             <td>
               <div class="btn-group col-md-3 text-center">
                 <a (click)="toggleRemoveHandled(item)" title="Eliminar"
@@ -35,16 +36,16 @@
       <table class="table text-center table-hover table-bordered">
         <thead class="thead">
           <tr>
-            <th class="col-md-4">Evaluadores disponibles</th>
-            <th class="col-md-2">Puntuación</th>
+            <th class="col-md-4">Evaluadores Seleccionados</th>
+            <th class="col-md-2">Simposio</th>
             <th class="col-md-2">Acciones</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr class="align-items-center" *ngFor="let item of evaluatorList">
+          <tr class="align-items-center" *ngFor="let item of evaluatorSelectedList">
             <td>{{ item.nombre }}</td>
-            <td>{{ item.calificacion }}</td>
+            <td>{{ item.simposio }}</td>
             <td>
               <div class="btn-group col-md-3 text-center">
                 <a (click)="addEvaluator(item)" title="Agregar"
