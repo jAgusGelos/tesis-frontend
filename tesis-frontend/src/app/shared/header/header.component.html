@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="../../assets/imgs/congre2.png" alt="Logo">
+      <img src="../../assets/imgs/logo_navbar.png" alt="Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,13 +46,19 @@
           <a class="nav-link" href="/asignarPaperEvaluador" *ngIf="rol.includes(2)  && user">Asignar Papers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/missing" *ngIf="rol.includes(2)  && user">Puntar Evaluadores</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="/verEvaluaciones" *ngIf="rol.includes(3)  && user">Evaluar</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/callForPapers" *ngIf="user && (!rol.includes(0) && !rol.includes(1) && !rol.includes(2)) && !rol.includes(3)">Call for Papers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/puntuarEvaluadores" *ngIf="rol.includes(2)  && user">Puntuar Evaluadores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/paperXSimposio" *ngIf="rol.includes(2)  && user">Artículos por Simposio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/paperXSimposio" *ngIf="rol.includes(2)  && user">Artículos por Simposio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/">Contacto</a>
