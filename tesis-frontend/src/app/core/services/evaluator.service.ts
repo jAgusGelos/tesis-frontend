@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IEvaluator } from '../models/iEvaluator';
+import { IEvaluator } from '../models/IEvaluator';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,14 @@ export class EvaluatorService {
   constructor(private httpClient: HttpClient,
               ) { }
 
-  postEvaluator(idUsuarios: string[]): any {
-    return this.httpClient.post(this.apiURL + '/articulos/asignarRolEvaluador/', idUsuarios);
+  postEvaluator(idUsuarios): any {
+    return this.httpClient.post(this.apiURL + 'articulos/asignarRolEvaluador/', idUsuarios);
   }
 
   getEvaluators(): any {
     // return this.httpClient.request('get', this.apiURL + 'articulos/lista-evaluadores/',
     // {body: {is_active: true}});
-    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
+    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadores/?is_active=True');
   }
 
   getEvaluatorById(id: String): any {

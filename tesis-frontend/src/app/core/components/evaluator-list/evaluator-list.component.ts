@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IEvaluator } from '../../models/iEvaluator';
+import { IEvaluator } from '../../models/IEvaluator';
 import { IUserComplete } from '../../models/IUserComplete';
 import { EvaluatorService } from '../../services/evaluator.service';
 import { UserService } from '../../services/user.service';
@@ -17,48 +17,43 @@ export class EvaluatorListComponent implements OnInit {
   new = false;
   index: number;
   deleteEvName: String;
-  modalCorreo = false;
-  message: String;
+  messageHeader: string;
+  messageBody: string;
 
-  rows = [{idUsuario: '1', nombre: 'Juan', email: 'juan@example.com'},
-        {idUsuario: '2', nombre: 'Agus', email: 'agus@example.com'},
-        {idUsuario: '3', nombre: 'Aye', email: 'aye@example.com'},]
-
-  evaluatorsList: [{
-    idUsuario: string,
-    nombre: string
-  }];
-
-  usersList = [];
+  evaluatorsList = [];
+  usersList: IUserComplete[];
 
   constructor( private evaluatorService: EvaluatorService,
                private userService: UserService,
                private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.getUsers();
-    console.log(this.usersList);
-    /* this.fillEvaluatorsList();
     this.formEvaluator = this.formBuilder.group({
-      correo: ['', [Validators.required]]}); */
+      correo: ['', [Validators.required]]});
+    this.fillEvaluatorsList();
+    this.getUsers();
+    
   }
 
-  addEvaluator() {
+  sendMail() {
     this.submitted = true;
     if (this.formEvaluator.valid) {
       let correo = this.formEvaluator.controls.correo.value;
       let user = this.searchByEmail(correo);
+      if (user == null) {
+        this.showMessage('Error', 'El correo ingresado no pertenece a un usuario registrado.');
+        return;
+      }
       let idUsuarios = [];
       idUsuarios.push(user.id);
       this.evaluatorService.postEvaluator(idUsuarios).subscribe((res: any) => {
         if (res.data != null) {
-          this.message = res.data;
+          this.showMessage('¡Correo enviado!', res.data);
           this.submitted = false;
           this.toggleNew();
-          this.modalCorreo = true;
         } else {
-          this.message = res.error;
-        this.modalCorreo = true;}
+          this.showMessage('Error', res.error);
+        }
       });  
     }
   }
@@ -69,8 +64,11 @@ export class EvaluatorListComponent implements OnInit {
     });
   }
 
-  fillRows() {
-
+  showMessage(header: string, body: string) {
+    this.messageHeader = header;
+    this.messageBody = body;
+    let btn = document.getElementById('modalCorreo');
+    btn.click();
   }
 
   searchByEmail(email: string) {
@@ -79,6 +77,7 @@ export class EvaluatorListComponent implements OnInit {
         return this.usersList[index];
       }
     }
+    return null;
   }
 
   getUsers(){
@@ -88,12 +87,12 @@ export class EvaluatorListComponent implements OnInit {
   }
 
   deleteEvaluator() {
-    this.rows.splice(this.index, 1);
+    this.evaluatorsList.splice(this.index, 1);
   }
 
   setDeleteEvaluator(i: number) {
     this.index = i;
-    this.deleteEvName = this.rows[i].nombre;
+    this.deleteEvName = this.evaluatorsList[i].nombre;
   }
 
   toggleNew() {
