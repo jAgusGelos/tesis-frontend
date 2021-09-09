@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IEvaluator } from 'src/app/core/models/ievaluator';
+import { ISymposium } from 'src/app/core/models/ISymposium';
+import { ArticulosService } from 'src/app/core/services/articulos.service';
+import { EvaluatorService } from 'src/app/core/services/evaluator.service';
+import { SymposiumService } from 'src/app/core/services/symposium.service';
 import { IntPaper } from 'src/app/core/models/IntPaper';
 
 @Component({
@@ -9,9 +13,8 @@ import { IntPaper } from 'src/app/core/models/IntPaper';
 })
 export class EvaluatePapersChairSecComponent implements OnInit {
 
+  symposium: ISymposium;
   detailed: Boolean = false;
-
-  constructor() { }
 
   articulos: any[] = [{id: '1', nombre: 'Artículo 1', estado: 'Aprobado'},
                       {id: '2', nombre: 'Artículo 2', estado: 'Rechazado'},
@@ -20,9 +23,8 @@ export class EvaluatePapersChairSecComponent implements OnInit {
                       {id: '5', nombre: 'Artículo 5', estado: 'Aprobado'},
                       {id: '6', nombre: 'Artículo 6', estado: 'Sin evaluar'}];
 
-  evaluadores: IEvaluator[] = [{id: '1', nombre: 'Juan', puntuacion: '1'},
-                               {id: '2', nombre: 'Aye', puntuacion: '1'},
-                               {id: '3', nombre: 'Agus', puntuacion: '1'},]
+  constructor(private symposiumService: SymposiumService,
+              private articulosService: ArticulosService) { }
 
   articuloSeleccionado: {
     articulo: IntPaper,
@@ -32,10 +34,28 @@ export class EvaluatePapersChairSecComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getSymposium();
+  }
+
+  getArticulos(){
+    this.articulosService.getPapersBySymposium(this.symposium).subscribe((res: any) => {
+      this.articulos = res.data;
+    })
+  }
+
+  getSymposium() {
+    this.symposiumService.getSymposium().subscribe((res: any) => {
+      this.symposium = res.data
+    })
+  }
+
+  verLista() {
+    this.getArticulos();
+    this.detailed = false;
   }
 
   verDetalle(art: any) {
     this.articuloSeleccionado = art;
-    this.detailed = !this.detailed;
+    this.detailed = true;
   }
 }
