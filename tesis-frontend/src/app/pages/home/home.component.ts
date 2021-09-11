@@ -11,39 +11,30 @@ import { CongressService } from 'src/app/core/services/congress.service';
 })
 export class HomeComponent implements OnInit {
 
-   constructor(private authService: AuthService,
-               private congressService:CongressService) { }
+   constructor(private congressService:CongressService) { }
 
   ngOnInit(): void {
-    this.getCongress();
-    /* this.getSedes() */;
+    this.getCongressData();
   }
 
-  congresos: ICongress[];
-  agendas: ISchedule[];
-  sedes=[];
-  
-  getCongress(): void {
-    this.congressService.getCongress().subscribe((res: any) => {
-        this.congresos = res.data;
-        this.congresos = this.congresos.map((x: any) => {
+  congressList = [];
+
+    getCongressData(): void {
+      this.congressService.getCongressPublic().subscribe((res: any) => {
+        this.congressList = res.data;
+        console.log(res);
+        this.congressList = this.congressList.map((x: any) => {
           return {
             id: x.id,
-            sede: x.sede,
-            nombre_sede: x.nombre_sede,
-            ano: x.año,
             nombre: x.nombre,
-            chairPrincipal: x.chairPrincipal,
-            coordLocal: x.coordLocal
+            sede: x.sede,
+            ano: x.año,
+            fechaFinInsTemprana: x.fechaFinInsTemprana,
+            fechaFinInsTardia: x.fechaFinInsTardia,
+            nombre_sede: x.nombre_sede,
           };
         });
       });
-     }
-
-  getSedes(): void {
-    this.congressService.getSedes().subscribe((res: any) => {
-        this.sedes = res;
-      });
     }
-
 }
+

@@ -10,36 +10,20 @@ import { DefineAgendaService } from '../../services/define-agenda.service';
 })
 export class CongressCardComponent implements OnInit {
 
-  @Input() congress: ICongress;
-  agenda = [];
-  @Input() sedes=[];
-  sede;
-  constructor(/* private agendaService: DefineAgendaService */) { }
+  nombre: string;
+  nombre_sede: string;
+  fechaUno: string;
+  fechaDos: string;
+  @Input() congress: {id: string, nombre:string, sede: string, año: string, fechaFinInsTemprana: string, fechaFinInsTardia: string, nombre_sede: string};
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.getDates();
-    /* this.getAgenda(); */
-    console.log(this.congress)
+    this.nombre=this.congress.nombre;
+    this.nombre_sede = this.congress.nombre_sede;
+    this.fechaUno = this.congress.fechaFinInsTemprana.split(" ")[0];
+    this.fechaDos = this.congress.fechaFinInsTardia.split(" ")[0];
+    
   }
-
   
-  fechaFinInscripTemprana: Date = new Date("September 5 2021 12:30");
-  fechaFinInscripTardia: Date = new Date("October 5 2021 12:30");
-  fechaTemprana: string;
-  fechaTardia: string;
-
-  getDates():void{
-    this.fechaTemprana = this.fechaFinInscripTemprana.getDate() + '/' 
-                      + this.fechaFinInscripTemprana.getMonth() + '/'
-                      + this.fechaFinInscripTemprana.getFullYear();
-    this.fechaTardia = this.fechaFinInscripTardia.getDate() + '/' 
-                      + this.fechaFinInscripTardia.getMonth() + '/'
-                      + this.fechaFinInscripTardia.getFullYear();
-  }
-
-  /* getAgenda():void{
-    this.agendaService.getAgenda(this.congress.id).subscribe((res: any) => {
-          this.agenda = res.data;
-        });
-  } */
 }

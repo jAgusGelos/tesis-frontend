@@ -126,6 +126,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/end-register/end-register.module')
     .then(m => m.EndRegisterModule),
     // canActivate: [AuthGuard]
+  },
+  {
+    path: 'contacto',
+    loadChildren: () => import('./pages/contact/contact.module')
+    .then(m => m.ContactModule),
   }
 ];
 

@@ -3,22 +3,21 @@
     <div class="col-md-4 img">
       <img src="../../../assets/imgs/Typing-pana.png" class="img-fluid" id="home">
     </div>
-    <div class="card-text ">
-    <div class="col-md-8 titulo">
-      <div class="card-body">
+    <div class="col-md-8">
+    <div class="card-body">
         <h2 class="card-title"><b>¡Bienvenido a Congressity!</b></h2>
         <hr>
         <p class="card-text text-center">La nueva forma de organizar y participar en congresos</p>
-      </div>
     </div>
   </div>
-  <div id="activos">
-    <hr id="hr">
-    <h3 class="text-center">Congresos Activos</h3>
-    <br>
-    <div class="row row-cols-1 row-cols-md-3 g-4 grid"> 
-      <app-congress-card *ngFor="let congress of congresos; index as i" [congress]="congress" [sedes]="sedes"></app-congress-card>
-    </div>
+</div>
+<div id="activos">
+  <hr id="hr">
+  <h3 class="text-center">Congresos Activos</h3>
+  <br>
+  <div class="row row-cols-1 row-cols-md-3 g-4 grid"> 
+    <app-congress-card *ngFor="let congress of congressList" [congress]="congress"></app-congress-card>
   </div>
+</div>
 </div>
 

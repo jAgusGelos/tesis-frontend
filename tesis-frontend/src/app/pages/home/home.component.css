@@ -1,7 +1,7 @@
 
 .card-title{
   font-weight:normal;
-  font-size: 70px;
+  font-size: 60px;
 }
 .card-text{
   font-size: 25px;
@@ -22,13 +22,14 @@
 }
 
 .card-title{
-  width: 100%;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
   font-weight:300;
-  /* padding-top: 0.5rem; */
-/*   padding-bottom: 0.5rem; */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   max-width: fit-content;
+  margin-top: 15%;
 
 }
 
@@ -57,7 +58,7 @@ hr {
  }
 
 #home{
-  max-width: 125%;
+  max-width: auto;
   height: auto;
   margin: auto;
   background-color: #f2f2f2;
@@ -72,12 +73,10 @@ hr {
 }
 .home{
   background-image: url("../../../assets/imgs/5424122.jpg");
-  background-size:100%;
+  background-size:cover;
   background-color: #f2f2f2;
-  background-position: center top;
+  background-position: center center;
   background-repeat: no-repeat;
-
-
 }
 
 #activos{
