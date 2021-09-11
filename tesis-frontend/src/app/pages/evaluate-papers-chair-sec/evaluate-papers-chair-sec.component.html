@@ -1,12 +1,14 @@
-<div *ngIf="!detailed" class="evaluation-cards">
-    <div>
-        <hr>
-        <h3 class="card-title text-center">Evaluación de Artículos</h3>
-        <hr>
-      </div>
-    <app-evaluate-papers-chair-sec-card *ngFor="let art of articulos" [articulo]="art" [verDetalleEmitter]="verDetalle($event)"></app-evaluate-papers-chair-sec-card>
-</div>
-<div *ngIf="detailed">
-    <app-evaluation-detail-form [art]="articuloSeleccionado" [goBackEvent]="verLista($event)"></app-evaluation-detail-form>    
+<div class="container-fluid">
+    <div *ngIf="!detailed" class="evaluation-cards">
+        <div>
+            <hr>
+            <h3 class="card-title text-center">Evaluación de Artículos</h3>
+            <hr>
+        </div>
+        <app-evaluate-papers-chair-sec-card *ngFor="let art of articulos" [articulo]="art" [verDetalleEmitter]="verDetalle($event)"></app-evaluate-papers-chair-sec-card>
+    </div>
+    <div *ngIf="detailed">
+        <app-evaluation-detail-form [art]="articuloSeleccionado" [goBackEvent]="verLista($event)"></app-evaluation-detail-form>    
+    </div>
 </div>
 

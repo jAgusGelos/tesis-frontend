@@ -27,7 +27,7 @@ export class EvaluatorComponent implements OnInit {
   }
 
   getEvaluators(): void {
-    this.evaluatorService.getEvaluators().subscribe((res: any) => {
+    this.evaluatorService.getEvaluators(1).subscribe((res: any) => {
       this.evaluatorList = res.data;
     });
   }

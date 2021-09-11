@@ -17,10 +17,12 @@ export class EvaluatorService {
     return this.httpClient.post(this.apiURL + 'articulos/crear-evaluador/', evaluator);
   }
 
-  getEvaluators(): any {
+  getEvaluators(activos: number): any {
     // return this.httpClient.request('get', this.apiURL + 'articulos/lista-evaluadores/',
     // {body: {is_active: true}});
-    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
+    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?activos=' + activos);
+    // 0 todos
+    // 1 solo activos
   }
 
   getEvaluatorById(id: String): any {

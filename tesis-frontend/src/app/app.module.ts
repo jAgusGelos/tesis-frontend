@@ -8,9 +8,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
 import { PuntuarEvaluadoresComponent } from './pages/puntuar-evaluadores/puntuar-evaluadores.component';
+import { EvaluatePapersChairSecComponent } from './pages/evaluate-papers-chair-sec/evaluate-papers-chair-sec.component';
 
 @NgModule({
-  declarations: [AppComponent, PuntuarEvaluadoresComponent],
+  declarations: [AppComponent, PuntuarEvaluadoresComponent, EvaluatePapersChairSecComponent],
 
   imports: [
     BrowserModule,

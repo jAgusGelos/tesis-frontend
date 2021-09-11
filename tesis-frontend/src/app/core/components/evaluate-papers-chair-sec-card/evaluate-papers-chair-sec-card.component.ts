@@ -15,6 +15,7 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
 
   @Output() verDetalleEmitter = new EventEmitter();
 
+  message = '';
   evaluadores: IEvaluator[];
   evUno: IEvaluator;
   evDos: IEvaluator;
@@ -46,7 +47,7 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
     let select = <HTMLSelectElement>document.getElementById('selectState');
     let opt = select.options[select.selectedIndex].value;
     if (opt == '') {
-      alert('Seleccione una evaluación para este artículo');
+      document.getElementById("evaluation-select").className = "evaluation-select is-invalid"
       return;
     }
     let paperCalification = {

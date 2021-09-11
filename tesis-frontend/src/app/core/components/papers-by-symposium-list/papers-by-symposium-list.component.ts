@@ -47,7 +47,7 @@ export class PapersBySymposiumListComponent implements OnInit {
   }
 
   getPapersBySymposium(symposium: ISymposium): void {
-    this.articulosService.getPapersBySymposium(symposium).subscribe((res: any) => {
+    this.articulosService.getPapersBySymposium(symposium.id, null).subscribe((res: any) => {
       this.papersList = res.data;
     });
   }

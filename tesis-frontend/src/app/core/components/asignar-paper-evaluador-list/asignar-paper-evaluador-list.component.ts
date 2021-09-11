@@ -41,7 +41,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
                 private symposiumService: SymposiumService) { }
 
   ngOnInit(): void {
-    this.getSymposiumsByChair();
+    /* this.getSymposiumsByChair(); */
     this.getPapersBySymposium();
     this.fillAssignedPapersList();
     this.getEvaluators();
@@ -110,7 +110,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   }
 
   getEvaluators() {
-    this.evaluatorService.getEvaluators().subscribe((res: any) => {
+    this.evaluatorService.getEvaluators(1).subscribe((res: any) => {
         this.evaluatorsList = res.data;
     });
   }
@@ -163,13 +163,13 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   getPapersBySymposium() {
     if (this.symposium !== null) {
-      this.articulosService.getPapersBySymposium(this.symposium).subscribe((res: any) => {
+      this.articulosService.getPapersBySymposium(this.symposium.id, null).subscribe((res: any) => {
         this.papersList = res.data;
       });
     }
   }
 
-  getSymposiumsByChair(){
+  /* getSymposiumsByChair(){
     let loggedChair: IUserComplete;
     this.userService.getLoggedUser().subscribe((res: any) => {
       loggedChair = res.data;
@@ -177,5 +177,5 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
     this.symposiumService.getSymposiumByChair(loggedChair).subscribe((res: any) => {
       this.symposium = res.data;
     });
-  }
+  } */
 }

@@ -12,9 +12,7 @@
         <li class="nav-item">
           <a class="nav-link active" href="#">Inicio</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/usuario" *ngIf="(!rol.includes(0) && !rol.includes(1) && !rol.includes(2)) && !rol.includes(3) && user">Inscripcion</a>
-        </li>
+        <!-- SUPERUSUARIO -->
         <li class="nav-item">
           <a class="nav-link" href="/congreso" *ngIf="rol.includes(0)  && user">Congreso</a>
         </li>
@@ -27,6 +25,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/" *ngIf="rol.includes(0)  && user">Tarifas</a>
         </li>
+        <!-- CHAIR PRINCIPAL -->
         <li class="nav-item">
           <a class="nav-link" href="/misCongresos" *ngIf="rol.includes(1)  && user">Mi Congreso</a>
         </li>
@@ -39,38 +38,35 @@
         <li class="nav-item">
           <a class="nav-link" href="/evaluacion" *ngIf="rol.includes(1)  && user">Planilla</a>
         </li>
+        <!-- CHAIR SECUNDARIO -->
         <li class="nav-item">
           <a class="nav-link" href="/evaluador" *ngIf="rol.includes(2)  && user">Evaluadores</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/asignarPaperEvaluador" *ngIf="rol.includes(2)  && user">Asignar Papers</a>
+          <a class="nav-link" href="/asignarPaperEvaluador" *ngIf="rol.includes(2)  && user">Asignar Artículos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/verEvaluaciones" *ngIf="rol.includes(3)  && user">Evaluar</a>
+          <a class="nav-link" href="/evaluatePapersChairSec" *ngIf="rol.includes(2)  && user">Evaluar Artículos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/callForPapers" *ngIf="user && (!rol.includes(0) && !rol.includes(1) && !rol.includes(2)) && !rol.includes(3)">Call for Papers</a>
+          <a class="nav-link" href="/paperXSimposio" *ngIf="rol.includes(2)  && user">Artículos por Simposio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/puntuarEvaluadores" *ngIf="rol.includes(2)  && user">Puntuar Evaluadores</a>
         </li>
+        <!-- EVALUADOR -->
         <li class="nav-item">
-          <a class="nav-link" href="/paperXSimposio" *ngIf="rol.includes(2)  && user">Artículos por Simposio</a>
+          <a class="nav-link" href="/verEvaluaciones" *ngIf="rol.includes(3)  && user">Evaluar</a>
+        </li>
+        <!-- AUTOR -->
+        <li class="nav-item">
+          <a class="nav-link" href="/usuario" *ngIf="rol.includes(4) && user">Inscripcion</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/paperXSimposio" *ngIf="rol.includes(2)  && user">Artículos por Simposio</a>
+          <a class="nav-link" href="/callForPapers" *ngIf="rol.includes(4) && user">Call for Papers</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/">Contacto</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/asignarPaperEvaluador">Asignar Artículos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/puntuarEvaluadores">Puntuar Evaluadores</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/paperXSimposio">Ver Artículos por Simposio</a>
         </li>
         <li class="nav-item  d-lg-none">
           <a *ngIf='!user' class="nav-link" href="/login">Iniciar Sesion</a>
