@@ -28,8 +28,20 @@ export class EvaluatorService {
     return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
   }
 
+  getEvaluatorsSimposio(): any {
+    return this.httpClient.get(this.apiURL + 'articulos/getEvaluadoresSimposio/');
+  }
+
   getEvaluatorsGroup(): any {
-    return this.httpClient.get(this.apiURL + 'articulos/getEvaluadoresBySimposio/?idChair=' + this.idUser);
+    return this.httpClient.get(this.apiURL + 'articulos/getPoolEvaluadores/');
+  }
+
+  postEvaluatorGroup(id: number): any {
+    return this.httpClient.post(this.apiURL + 'articulos/asignarPoolEvaluadores/', {evaluadores: [+id]});
+  }
+
+  deleteEvaluatorGroup(id: number): any {
+    return this.httpClient.delete(this.apiURL + 'articulos/eliminarEvaluadorPoolEvaluadores/?idEvaluador=' + id);
   }
 
   getEvaluatorById(id: string): any {

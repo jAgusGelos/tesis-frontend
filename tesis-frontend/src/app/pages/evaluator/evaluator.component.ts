@@ -13,6 +13,7 @@ export class EvaluatorComponent implements OnInit {
   evaluatorSelectedList =  [];
   adding = false;
   formEvaluator: FormGroup;
+  evaluatorSelectedId = [];
 
   constructor(
     private evaluatorService: EvaluatorService
@@ -20,55 +21,55 @@ export class EvaluatorComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.getEvaluatorSelected();
     this.getEvaluators();
   }
 
   getEvaluators(): void {
-    this.evaluatorService.getEvaluators().subscribe((res: any) => {
-      this.evaluatorList = res.data;
+    this.evaluatorService.getEvaluatorsSimposio().subscribe((res: any) => {
+      this.evaluatorList = res.data.filter((x: any) => {
+        if (!this.evaluatorSelectedId.includes(x.idEvaluador)) {
+          return x;
+        }
+      });
     });
   }
 
-  getevaluatorSelected(): void {
+  getEvaluatorSelected(): void {
     this.evaluatorService.getEvaluatorsGroup().subscribe((res: any) => {
       this.evaluatorSelectedList = res.data;
+      this.evaluatorSelectedId = res.data.map((x: any) => x.idEvaluador);
     });
+
   }
 
-
-
-  toggleNew(): void {
-    this.adding = !this.adding;
-  }
-
-  addEvaluator(item): void {
-
-    this.evaluatorService.postEvaluator(item).subscribe((res: any) => {
-      this.evaluatorList.push(item);
+  addEvaluator(item: any): void {
+    this.evaluatorService.postEvaluatorGroup(item.idEvaluador).subscribe((res: any) => {
+      this.evaluatorList = this.evaluatorList.filter((x: any) => {
+        if (!(x.idEvaluador === item.idEvaluador)) {
+          return x;
+        }
+      });
+      this.evaluatorSelectedList.push(item);
     });
-    const autor = { id: '00', nombre: 'Prueba',  calificacion: '10' };
-    this.evaluatorList.push(autor);
   }
 
   toggleRemoveHandled(item: any): void {
     if (
       confirm(
         'Esta seguro desea eliminar el Evaluador: ' +
-        item.nombre +
+        item.nombreEv + ' ' + item.apellidoEv +
         '\nToda la configuración creada se perderá'
       )
     ) {
-      // this.evaluatorService.deleteEvaluator(item).subscribe((res: any) => {
-      //   this.evaluatorList = this.evaluatorList.filter((x: IEvaluator) => {
-      //     if (x.id !== item.id) {
-      //       return item;
-      //     }
-      //   });
-      this.evaluatorList = this.evaluatorList.filter((x: any) => {
-        if (x.id !== item.id) {
-          return item;
-        }
-      });
+      this.evaluatorService.deleteEvaluatorGroup(item.idEvaluador).subscribe((res: any) => {
+        this.evaluatorList.push(item);
+        this.evaluatorSelectedList = this.evaluatorSelectedList.filter((x: any) => {
+          if (x.idEvaluador !== item.idEvaluador) {
+            return item;
+          }
+        });
+    });
 
     }
   }
