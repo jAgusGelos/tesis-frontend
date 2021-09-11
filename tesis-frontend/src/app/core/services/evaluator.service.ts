@@ -11,11 +11,13 @@ export class EvaluatorService {
 
   private apiURL = environment.apiURL;
   private idUser: number;
+  private idCongress: number;
 
   constructor(private httpClient: HttpClient,
               private auth: AuthService
               ) {
                 this.idUser = auth.getUserId();
+                this.idCongress = auth.getCongressId();
                }
 
   postEvaluator(evaluator: string): any {
@@ -60,7 +62,19 @@ export class EvaluatorService {
     return this.httpClient.delete<IEvaluator>(this.apiURL + 'evaluador/eliminar-evaluador/' + evaluator.id);
   }
 
-  calificarEvaluador(evCalification: any) {
+  calificarEvaluador(evCalification: any): any {
     return this.httpClient.put(this.apiURL + 'evaluador/calificarEvaluador/', evCalification);
+  }
+
+  postEvaluatorMassive(item: any): any {
+    const postItem = item.map((x: any) => {
+      return {
+        idEvaluadores: [x.idEval1, x.idEval2, x.idEval3],
+        articulo: x.idArticulo,
+        idCongreso: this.idCongress
+      };
+    });
+    return this.httpClient.post(this.apiURL + 'articulos/asignarArticuloEvaluadorMasivo/', postItem);
+
   }
 }

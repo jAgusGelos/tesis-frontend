@@ -29,8 +29,11 @@ export class ArticulosService {
     return this.httpClient.post(this.apiURL + 'asignarArticuloEvaluador/', asignation);
   }
 
-  //Soliciar esta funcion al backend
-  delete(asignation: any) {
+  delete(asignation: any): any {
     return this.httpClient.delete(this.apiURL + 'articulos/eliminarEvaluadorDeArticulo/', asignation);
+  }
+
+  getPaperEvaluators(): any {
+    return this.httpClient.get(this.apiURL + 'articulos/getArticulosEvaluadoresCompleto/');
   }
 }
