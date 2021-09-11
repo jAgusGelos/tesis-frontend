@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="contenidos">
     <hr />
-    <h3 class="text-center">{{!adding ? 'Evaluadores Activos': 'Evaluadores Disponibles'}}</h3>
+    <h3 class="text-center">Evaluadores Activos</h3>
     <hr />
   </div>
   <br />
@@ -23,14 +23,17 @@
 
             <td>
               <div class="btn-group col-md-3 text-center">
-                <a (click)="addEvaluator(item)" title="Agregar"
-                  ><i class="fas fa-plus"></i
-                ></a>
+                <a (click)="addEvaluator(item)" title="Agregar"><i class="fas fa-plus"></i></a>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+
+
+        <a class="btn btn-primary btn-block col-md-12 alerta " role="button" (click)='loadAll()'>¡Necesito más Evaluadores!</a>
+
+
     </div>
     <div class="col-md-6">
       <table class="table text-center table-hover table-bordered">
@@ -48,9 +51,7 @@
             <!-- <td>{{ item.simposio }}</td> -->
             <td>
               <div class="btn-group col-md-3 text-center">
-                <a (click)="toggleRemoveHandled(item)" title="Eliminar"
-                  ><i class="fas fa-trash"></i
-                ></a>
+                <a (click)="toggleRemoveHandled(item)" title="Eliminar"><i class="fas fa-trash"></i></a>
               </div>
             </td>
           </tr>

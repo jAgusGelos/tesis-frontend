@@ -28,6 +28,10 @@ export class EvaluatorService {
     return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
   }
 
+  getEvaluatorsAll(): any {
+    return this.httpClient.get(this.apiURL + 'articulos/getEvaluadoresFueraSimposio/');
+  }
+
   getEvaluatorsSimposio(): any {
     return this.httpClient.get(this.apiURL + 'articulos/getEvaluadoresSimposio/');
   }

@@ -19,8 +19,6 @@ import { UserService } from '../../services/user.service';
 export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   paperList: any[];
-  evaluatorList: any[];
-
   assignedPapersList: [];
 
   constructor(  private evaluatorService: EvaluatorService,
@@ -29,20 +27,27 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPaperList();
-    this.getEvaluatorList();
   }
 
   getPaperList(): void {
-    // devuelve la lista de papers asignados
+    // devuelve la lista de papers asignados.  getArticulosEvaluadoresCompleto
   }
-
-  getEvaluatorList(): void  {
-    // devuelve la lista de evaluadores
-
-  }
-
 
   getEvaluators(): void {
+    // get Pool de evaluadores. Solicitar los evaluadores a distribuir
+  }
+
+  distributeEvaluators(): void {
+    // Distribuye aleatoriamente los evaluadores a los papers cargados.
+  }
+
+  massivePost(): void {
+    // Carga masiva de Evaluadores. Post confirmación. asignarArticuloEvaluadorMasivo
+    /* {
+      idEvaluadores: [1,2,3],
+      articulo: 1,
+      idCongreso: 1
+    } */
   }
 
 }

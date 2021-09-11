@@ -27,6 +27,10 @@ export class EvaluatorComponent implements OnInit {
 
   getEvaluators(): void {
     this.evaluatorService.getEvaluatorsSimposio().subscribe((res: any) => {
+      if (res.data.length === 0) {
+        alert('Lo sentimos, actualmente no disponemos de más evaluadores.');
+        return;
+      }
       this.evaluatorList = res.data.filter((x: any) => {
         if (!this.evaluatorSelectedId.includes(x.idEvaluador)) {
           return x;
@@ -52,6 +56,19 @@ export class EvaluatorComponent implements OnInit {
       });
       this.evaluatorSelectedList.push(item);
     });
+  }
+
+  loadAll(): void {
+    if (confirm('Atención, los evaluadores que está por cagar no pertenecen a su simposio. ¿Desea hacerlo de todas formas?')) {
+      this.evaluatorService.getEvaluatorsAll().subscribe((res: any) => {
+        this.evaluatorList = res.data.filter((x: any) => {
+          if (!this.evaluatorSelectedId.includes(x.idEvaluador)) {
+            return x;
+          }
+        });
+      });
+    }
+
   }
 
   toggleRemoveHandled(item: any): void {
