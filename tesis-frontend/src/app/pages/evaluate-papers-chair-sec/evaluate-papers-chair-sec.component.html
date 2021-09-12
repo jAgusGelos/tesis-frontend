@@ -7,8 +7,8 @@
         </div>
         <app-evaluate-papers-chair-sec-card *ngFor="let art of articulos" [articulo]="art" [verDetalleEmitter]="verDetalle($event)"></app-evaluate-papers-chair-sec-card>
     </div>
-    <div *ngIf="detailed">
+    <!-- <div *ngIf="detailed">
         <app-evaluation-detail-form [art]="articuloSeleccionado" [goBackEvent]="verLista($event)"></app-evaluation-detail-form>    
-    </div>
+    </div> -->
 </div>
 

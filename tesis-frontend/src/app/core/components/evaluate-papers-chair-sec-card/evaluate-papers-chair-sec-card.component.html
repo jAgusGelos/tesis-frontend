@@ -10,12 +10,10 @@
     <div class="card-body">
       <p><b>{{articulo.responsable}}</b></p>
       <p><b id="evaluadores">Evaluadores:</b> <br>
-        &nbsp;&nbsp;&nbsp;&nbsp; <b>{{evUno.nombre}}:</b> &nbsp;&nbsp;&nbsp;&nbsp;Aprobar fuertemente<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; <b>{{evDos.nombre}}:</b> &nbsp;&nbsp;&nbsp;&nbsp;Necesita reentrega<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; <b>{{evTres.nombre}}:</b> &nbsp;&nbsp;&nbsp;&nbsp;Rechazar débilmente</p>
+        &nbsp;&nbsp;&nbsp;&nbsp; <b *ngFor="let ev of evaluadores">{{ev.nombre}}:</b> &nbsp;&nbsp;&nbsp;&nbsp;Aprobar fuertemente<br>
       <a class="btn btn-primary" (click)="downloadPaper()"><i class="fa fa-download"></i> Descargar</a> 
       &nbsp; 
-      <a class="btn btn-primary"><i class="fa fa-search-plus"></i> Ver detalle</a>
+      <a class="btn btn-primary" (click)="verDetalle()"><i class="fa fa-search-plus"></i> Ver detalle</a>
       <a *ngIf="!edit" class="btn btn-primary" id="editar" (click)="toggleEdit()"><i class="fa fa-pencil"></i> Editar</a>
       <div id="evaluation-select" *ngIf="edit">
         &nbsp;

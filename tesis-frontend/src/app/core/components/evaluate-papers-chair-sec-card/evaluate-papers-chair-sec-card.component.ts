@@ -16,10 +16,7 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
   @Output() verDetalleEmitter = new EventEmitter();
 
   message = '';
-  evaluadores: IEvaluator[];
-  evUno: IEvaluator;
-  evDos: IEvaluator;
-  evTres: IEvaluator;
+  evaluadores: IEvaluator[] = [];
   estadoEvaluacion: String;
 
   edit: Boolean = false;
@@ -35,7 +32,7 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
   //REVISAR ESTE METODO
   downloadPaper() {
     this.papersService.getPaperFile(this.articulo).subscribe((res: any) => {
-      this.articulo.archivo = res.data;
+      let archivo: File = res.data;
     });
     let a = document.createElement("a");
     a.setAttribute("download", this.articulo.archivo.name);
@@ -100,17 +97,12 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
     this.articulosService.getEvaluatorsByPaper(this.articulo).subscribe((res: any) => {
       this.evaluadores = res.data;
     });
-    this.evUno = this.evaluadores[0];
-    this.evDos = this.evaluadores[1];
-    this.evTres = this.evaluadores[2];
   }
 
   verDetalle() {
     let art = {
       articulo: this.articulo,
-      evUno: this.evUno,
-      evDos: this.evDos,
-      evTres: this.evTres
+      evalaudores: this.evaluadores
     }
     this.verDetalleEmitter.emit(art);
   }

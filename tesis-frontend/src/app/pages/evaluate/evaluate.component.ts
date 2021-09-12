@@ -17,7 +17,7 @@ export class EvaluateComponent implements OnInit {
   
   ngOnInit(): void 
   {
-
+    
   }
 
   getEvaluation(): void {
