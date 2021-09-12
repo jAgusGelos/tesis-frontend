@@ -34,13 +34,17 @@
             <tr>
               <th class="col-md-4">Nombre</th>
               <th class="col-md-4">E-mail</th>
+              <th class="col-md-2">Estado</th>
               <th class="col-md-2">Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr class='align-items-center'*ngFor='let ev of evaluatorsList; let i = index'>
               <td>{{ev.nombre}}</td>
-              <td>{{ev.correo}}</td>
+              <td>{{ev.email}}</td>
+              <td>
+                <p *ngIf="ev.estado">Activo</p><p *ngIf="!ev.estado">Inactivo</p>
+              </td>
               <td>
                 <a title='Eliminar' role="button" (click)="setDeleteEvaluator(i)" data-bs-toggle="modal" data-bs-target="#modal-eliminar">
                   <i class="fas fa-trash fa-lg"></i></a>

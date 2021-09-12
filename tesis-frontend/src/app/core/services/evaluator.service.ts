@@ -17,10 +17,10 @@ export class EvaluatorService {
     return this.httpClient.post(this.apiURL + 'articulos/asignarRolEvaluador/', idUsuarios);
   }
 
-  getEvaluators(): any {
+  getEvaluators(activos): any {
     // return this.httpClient.request('get', this.apiURL + 'articulos/lista-evaluadores/',
     // {body: {is_active: true}});
-    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadores/?is_active=True');
+    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadores/?activos=' + activos);
   }
 
   getEvaluatorById(id: String): any {

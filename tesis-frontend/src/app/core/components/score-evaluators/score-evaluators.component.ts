@@ -57,7 +57,7 @@ export class ScoreEvaluatorsComponent implements OnInit {
   }
 
   fillEvaluatorsList() {
-    this.evaluatorService.getEvaluators().subscribe((res: any) => {
+    this.evaluatorService.getEvaluators(0).subscribe((res: any) => {
       this.evaluatorsList = res.data;
     });
   }

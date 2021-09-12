@@ -110,7 +110,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   }
 
   getEvaluators() {
-    this.evaluatorService.getEvaluators().subscribe((res: any) => {
+    this.evaluatorService.getEvaluators(0).subscribe((res: any) => {
         this.evaluatorsList = res.data;
     });
   }
