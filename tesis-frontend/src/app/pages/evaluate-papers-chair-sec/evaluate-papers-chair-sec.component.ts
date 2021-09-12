@@ -12,7 +12,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class EvaluatePapersChairSecComponent implements OnInit {
 
-  detailed: Boolean;
+  detailed = false;
   articulos = [];
   idSimposio = '';
 
@@ -27,7 +27,6 @@ export class EvaluatePapersChairSecComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-    this.detailed = false;
   }
 
   getData() {
