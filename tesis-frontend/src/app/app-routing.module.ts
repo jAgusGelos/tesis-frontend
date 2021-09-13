@@ -7,7 +7,9 @@ import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    loadChildren: () => import('./pages/home/home.module')
+    .then(m => m.HomeModule),
   },
   {
     path: 'usuario',
@@ -124,6 +126,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/end-register/end-register.module')
     .then(m => m.EndRegisterModule),
     // canActivate: [AuthGuard]
+  },
+  {
+    path: 'contacto',
+    loadChildren: () => import('./pages/contact/contact.module')
+    .then(m => m.ContactModule),
   }
 ];
 
