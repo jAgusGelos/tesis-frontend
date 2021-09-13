@@ -31,6 +31,8 @@ import { EvaluationDetailFormComponent } from './components/evaluation-detail-fo
 import { ScoreEvaluatorsComponent } from './components/score-evaluators/score-evaluators.component';
 import { EvaluatePapersChairSecCardComponent } from './components/evaluate-papers-chair-sec-card/evaluate-papers-chair-sec-card.component';
 import { EvaluatorListComponent } from './components/evaluator-list/evaluator-list.component';
+import { CongressCardComponent } from './components/congress-card/congress-card.component';
+
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import { EvaluatorListComponent } from './components/evaluator-list/evaluator-li
     EvaluationDetailFormComponent,
     ScoreEvaluatorsComponent,
     EvaluatePapersChairSecCardComponent,
-    EvaluatorListComponent
+    EvaluatorListComponent,
+    CongressCardComponent
   ],
   imports: [
     CommonModule,
@@ -102,7 +105,8 @@ import { EvaluatorListComponent } from './components/evaluator-list/evaluator-li
     EvaluationDetailFormComponent,
     ScoreEvaluatorsComponent,
     EvaluatePapersChairSecCardComponent,
-    EvaluatorListComponent
+    EvaluatorListComponent,
+    CongressCardComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

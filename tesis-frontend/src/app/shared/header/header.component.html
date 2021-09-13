@@ -18,6 +18,18 @@
         <li class="nav-item">
           <a class="nav-link" href="/congreso" *ngIf="rol.includes(0)  && user">Congreso</a>
         </li>
+        <li class="nav-item dropdown" id="nav-item-dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Congreso
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/congreso">Congresos Activos</a></li>
+            <li><a class="dropdown-item" href="#">Ejes Temáticos</a></li>
+            <li><a class="dropdown-item" href="#">Comité Organizador</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="/simposios" *ngIf="rol.includes(0)  && user">Simposios</a>
         </li>
@@ -61,7 +73,7 @@
           <a class="nav-link" href="/callForPapers" *ngIf="user && (!rol.includes(0) && !rol.includes(1) && !rol.includes(2)) && !rol.includes(3)">Call for Papers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/">Contacto</a>
+          <a class="nav-link" href="/contacto">Contacto</a>
         </li>
         <li class="nav-item  d-lg-none">
           <a *ngIf='!user' class="nav-link" href="/login">Iniciar Sesion</a>
