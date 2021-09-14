@@ -11,18 +11,17 @@ import { CongressService } from 'src/app/core/services/congress.service';
 })
 export class HomeComponent implements OnInit {
 
-   constructor(private congressService:CongressService) { }
+  constructor(private congressService: CongressService) { }
+  congressList = [];
 
   ngOnInit(): void {
     this.getCongressData();
   }
 
-  congressList = [];
 
     getCongressData(): void {
       this.congressService.getCongressPublic().subscribe((res: any) => {
         this.congressList = res.data;
-        console.log(res);
         this.congressList = this.congressList.map((x: any) => {
           return {
             id: x.id,
