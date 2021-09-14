@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,27 +10,44 @@ import { ActivatedRoute } from '@angular/router';
 export class InscriptionsComponent implements OnInit {
 
   idCongress = '';
+  congress = {
+      id: 1,
+      nombre: 'Prueba',
+      sede: 'FRC',
+      fechaInicio: '21/08/2022',
+      fechaFin: '25/08/2022',
+    };
   tarifas = [
-  {
-    id: 1,
-    nombre: 'Autores',
-    precio: 200
-  },
-  {
-    id: 2,
-    nombre: 'Alumnos',
-    precio: 150
-  },
-  {
-    id: 3,
-    nombre: 'General',
-    precio: 250
-  }
-];
-  constructor(private route: ActivatedRoute) { }
+    {
+      id: 1,
+      nombre: 'Autores',
+      precio: 200
+    },
+    {
+      id: 2,
+      nombre: 'Alumnos',
+      precio: 150
+    },
+    {
+      id: 3,
+      nombre: 'General',
+      precio: 250
+    }
+  ];
+  formUsuario: FormGroup;
+  submitted = false;
+  isLinear = false;
+  constructor(private route: ActivatedRoute,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     // El usuario si o si tiene que estar logueado. Datos mínimos.
+    this.formUsuario = this.formBuilder.group({
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required]],
+    });
     this.idCongress = this.route.snapshot.paramMap.get('id');
     this.getCongresos();
     this.getTarifas();
@@ -48,7 +66,7 @@ export class InscriptionsComponent implements OnInit {
     // Valida si un código de descuento es correcto o no.
   }
 
-  pagar(): void {
+  pagar(tarifa: any): void {
     // Comunica con MP para realizar el pago.
     // post
   }

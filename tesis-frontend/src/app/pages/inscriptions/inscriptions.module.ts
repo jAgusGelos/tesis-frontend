@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { InscriptionsRoutingModule } from './inscriptions-routing.module';
 import { InscriptionsComponent } from './inscriptions.component';
+import { CoreModule } from 'src/app/core/core.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +13,11 @@ import { InscriptionsComponent } from './inscriptions.component';
   ],
   imports: [
     CommonModule,
-    InscriptionsRoutingModule
+    InscriptionsRoutingModule,
+    CoreModule,
+    ReactiveFormsModule,
+    FormsModule,
+
   ]
 })
 export class InscriptionsModule { }

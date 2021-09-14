@@ -1,1 +1,146 @@
-<p>inscriptions works!</p>
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Inscripciones</h3>
+    <hr>
+  </div>
+  <div class="section">
+    <h6>Usted está a punto de inscribirse al congreso: {{congress.nombre}}
+      a desarrollarse en {{congress.sede}}. Los días {{congress.fechaInicio}} a {{congress.fechaFin}}.
+    </h6>
+    <h6>
+      Por favor, seleccione su entrada:
+    </h6>
+  </div>
+
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+          Selecciona tu entrada
+        </button>
+      </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body row">
+          <div class="col-sm-4 text-center" *ngFor="let item of tarifas">
+            <div class="card text-left">
+              <div class="card-body">
+                <h4 class="card-title">{{item.nombre}}</h4>
+                <p class="card-text">$ {{item.precio}}</p>
+                <button type="button" (click)='pagar(item)' class="btn btn-primary btn-lg btn-block">
+                  Inscribirme
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+          Datos de Contacto.
+        </button>
+      </h2>
+      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <form [formGroup]='formUsuario'>
+            <div class="row pt-3">
+              <!-- Apellido y nombre -->
+              <div class="col-md-6">
+                <!--Apellido-->
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="apellido">Apellido: <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="apellido" [ngClass]="{'is-invalid': (formUsuario.controls.apellido.touched || submitted)
+                  && formUsuario.controls.apellido.errors}" onclick="this.select()" />
+                    <span class="text-danger"
+                      *ngIf="(formUsuario.controls.apellido.touched || submitted) && formUsuario.controls.apellido.errors?.required">
+                      Requerido.
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-6">
+                <!--Nombre-->
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="nombre">Nombre: <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (formUsuario.controls.nombre.touched || submitted)
+                  && formUsuario.controls.nombre.errors}" onclick="this.select()" />
+                    <span class="text-danger"
+                      *ngIf="(formUsuario.controls.nombre.touched || submitted) && formUsuario.controls.nombre.errors?.required">
+                      Requerido.
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Email y nombre -->
+              <div class="col-md-6">
+                <!--Email-->
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="apellido">Email: <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-6">
+                    <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (formUsuario.controls.email.touched || submitted)
+                  && formUsuario.controls.email.errors}" onclick="this.select()" />
+                    <span class="text-danger"
+                      *ngIf="(formUsuario.controls.email.touched || submitted) && formUsuario.controls.email.errors?.required">
+                      Requerido.
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-6">
+                <!--Teléfono-->
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="nombre">Teléfono: <span
+                      class="text-danger">*</span></label>
+                  <div class="col-sm-6">
+                    <input type="number" class="form-control" formControlName="telefono" [ngClass]="{'is-invalid': (formUsuario.controls.telefono.touched || submitted)
+                  && formUsuario.controls.telefono.errors}" onclick="this.select()" />
+                    <span class="text-danger"
+                      *ngIf="(formUsuario.controls.telefono.touched || submitted) && formUsuario.controls.telefono.errors?.required">
+                      Requerido.
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <div class="row justify-content-md-center">
+              <a class="btn btn-secondary col-md-4" href="#" role="button">Cancelar</a>
+              &nbsp;
+              <a class="btn btn-primary col-md-4" role="button">Guardar Cambios</a>
+            </div>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingThree">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+          Accordion Item #3
+        </button>
+      </h2>
+      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
