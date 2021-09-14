@@ -30,18 +30,14 @@
   border: none;
 }
 
-i{
-  padding-top: 1.5rem;
-  cursor: pointer;
+
+.fa-plus{
+  color: white;
 }
 
-i:hover{
-  color: blue;
-}
-
-.fas{
-  font-size: 1.25rem;
+.fa-trash{
   color: #00609C;
+  cursor: pointer;
 }
 
 hr{

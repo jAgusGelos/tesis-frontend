@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IEvaluator } from '../../models/ievaluator';
+import { IEvaluator } from '../../models/iEvaluator';
 import { IntPaper } from '../../models/IntPaper';
 import { PaperService } from '../../services/paper.service';
 

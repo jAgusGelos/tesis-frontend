@@ -14,7 +14,7 @@ export class ArticulosService {
   constructor(private httpClient: HttpClient) { }
 
   getEvaluatorsByPaper(paper: IntPaper) {
-    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadores/' + paper.id);
+    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadoresArticulo/?idArticulo=' + paper.id);
   }
 
   getPapersBySymposium(symposium: ISymposium) {

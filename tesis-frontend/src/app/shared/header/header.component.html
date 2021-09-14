@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="../../assets/imgs/congre2.png" alt="Logo">
+      <img id="logo-img" src="../../assets/imgs/logo_home.png" width="200" height="50" alt="Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,12 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/" *ngIf="rol.includes(0)  && user">Tarifas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/evaluador">Mis Evaluadores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/evaluators">Evaluadores</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/misCongresos" *ngIf="rol.includes(1)  && user">Mi Congreso</a>

@@ -1,0 +1,55 @@
+.container-fluid{
+    background-color: #F4F4F4;
+  
+  }
+  
+  .contenidos{
+    padding-bottom: 3rem;
+  }
+  
+  .thead{
+    background-color: #C8E5F1;
+  }
+
+  .btn{
+    border: none;
+  }
+  
+  .btn-primary{
+    background-color: #3CAFE0 ;
+  }
+
+  .btn-primary:hover{
+    background-color: #3994bb ;
+  }
+  
+  .fa-envelope{
+    color: white;
+  }
+
+  .fa-trash{
+    color: #3CAFE0;
+  }
+  .fa-trash:hover{
+    color: #3994bb;
+    cursor: pointer;
+  }
+  
+  hr{
+    border:#00609C solid 1px;
+  }
+  
+  @media (min-width: 768px) {
+    hr{
+      margin-left: 25%;
+      margin-right: 25%;
+  
+    }
+  
+    .container-fluid{
+      padding: 5rem;
+    }
+
+   }
+  
+  
