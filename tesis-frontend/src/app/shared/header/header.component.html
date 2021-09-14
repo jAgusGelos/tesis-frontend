@@ -40,12 +40,6 @@
           <a class="nav-link" href="/" *ngIf="rol.includes(0)  && user">Tarifas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/evaluador">Mis Evaluadores</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/evaluators">Evaluadores</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="/misCongresos" *ngIf="rol.includes(1)  && user">Mi Congreso</a>
         </li>
         <li class="nav-item">
@@ -58,16 +52,13 @@
           <a class="nav-link" href="/evaluacion" *ngIf="rol.includes(1)  && user">Planilla</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/evaluador" *ngIf="rol.includes(2)  && user">Evaluadores</a>
+          <a class="nav-link" href="/evaluador" *ngIf="rol.includes(2)  && user">Mis Evaluadores</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/asignarPaperEvaluador" *ngIf="rol.includes(2)  && user">Asignar Papers</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/missing" *ngIf="rol.includes(2)  && user">Evaluar Papers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/missing" *ngIf="rol.includes(2)  && user">Puntar Evaluadores</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/verEvaluaciones" *ngIf="rol.includes(3)  && user">Evaluar</a>

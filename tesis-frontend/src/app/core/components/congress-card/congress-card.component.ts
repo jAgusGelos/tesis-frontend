@@ -11,19 +11,26 @@ import { DefineAgendaService } from '../../services/define-agenda.service';
 export class CongressCardComponent implements OnInit {
 
   nombre: string;
-  nombre_sede: string;
+  nombreSede: string;
   fechaUno: string;
   fechaDos: string;
-  @Input() congress: {id: string, nombre:string, sede: string, año: string, fechaFinInsTemprana: string, fechaFinInsTardia: string, nombre_sede: string};
+  @Input() congress: {
+    id: string,
+    nombre: string,
+    sede: string,
+    año: string,
+    fechaFinInsTemprana: string,
+    fechaFinInsTardia: string,
+    nombreSede: string};
 
   constructor() { }
 
   ngOnInit(): void {
-    this.nombre=this.congress.nombre;
-    this.nombre_sede = this.congress.nombre_sede;
-    this.fechaUno = this.congress.fechaFinInsTemprana.split(" ")[0];
-    this.fechaDos = this.congress.fechaFinInsTardia.split(" ")[0];
-    
+    this.nombre = this.congress.nombre;
+    this.nombreSede = this.congress.nombreSede;
+    this.fechaUno = this.congress.fechaFinInsTemprana;
+    this.fechaDos = this.congress.fechaFinInsTardia;
+
   }
-  
+
 }
