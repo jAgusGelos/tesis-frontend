@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IEvaluator } from 'src/app/core/models/IEvaluator';
+import { IEvaluator } from 'src/app/core/models/iEvaluator';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 
 @Component({
@@ -26,6 +26,7 @@ export class EvaluatorComponent implements OnInit {
   }
 
   getEvaluators(): void {
+
     this.evaluatorService.getEvaluatorsSimposio().subscribe((res: any) => {
       if (res.data.length === 0) {
         alert('Lo sentimos, actualmente no disponemos de más evaluadores.');

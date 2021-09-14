@@ -34,7 +34,9 @@ export class CongressService {
   getCongress(): any {
     return this.httpClient.get(this.apiURL + 'congresos/listaCongresosActivos/');
   }
-
+  getCongressPublic(): any {
+    return this.httpClient.get(this.apiURL + 'congresos/lista-congresos-publico/');
+  }
   getCongressActivo(): any {
     return this.httpClient.get(this.apiURL + 'congresos/listaCongresosActivos/');
   }

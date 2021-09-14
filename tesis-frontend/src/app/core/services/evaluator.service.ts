@@ -20,14 +20,14 @@ export class EvaluatorService {
                 this.idCongress = auth.getCongressId();
                }
 
-  postEvaluator(evaluator: string): any {
-    return this.httpClient.post(this.apiURL + 'articulos/crear-evaluador/', evaluator);
+  postEvaluator(idUsuarios): any {
+    return this.httpClient.post(this.apiURL + 'articulos/asignarRolEvaluador/', idUsuarios);
   }
 
-  getEvaluators(): any {
+  getEvaluators(activos): any {
     // return this.httpClient.request('get', this.apiURL + 'articulos/lista-evaluadores/',
     // {body: {is_active: true}});
-    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
+    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadores/?activos=' + activos);
   }
 
   getEvaluatorsAll(): any {

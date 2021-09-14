@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IEvaluator } from 'src/app/core/models/ievaluator';
+import { IEvaluator } from 'src/app/core/models/iEvaluator';
 import { IntPaper } from 'src/app/core/models/IntPaper';
 
 @Component({

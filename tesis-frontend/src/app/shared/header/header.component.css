@@ -23,6 +23,15 @@ a:hover{
   background-color:#3CAFE0;
   border: none;
 }
+.dropdownmenu{
+  background-color: #3CAFE0;
+  border: none;
+}
+#nav-item-dropdown{
+  color:white;
+}
 
-
+.dropdown-menu{
+  background-color: #00609C;
+}
 

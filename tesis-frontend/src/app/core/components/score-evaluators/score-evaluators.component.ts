@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IEvaluation } from '../../models/IEvaluation';
-import { IEvaluator } from '../../models/IEvaluator';
+import { IEvaluator } from '../../models/iEvaluator';
 import { EvaluatorService } from '../../services/evaluator.service';
 
 @Component({
@@ -57,7 +57,7 @@ export class ScoreEvaluatorsComponent implements OnInit {
   }
 
   fillEvaluatorsList() {
-    this.evaluatorService.getEvaluators().subscribe((res: any) => {
+    this.evaluatorService.getEvaluators(0).subscribe((res: any) => {
       this.evaluatorsList = res.data;
     });
   }

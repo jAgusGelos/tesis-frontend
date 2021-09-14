@@ -18,7 +18,7 @@ export class DefineAgendaService {
    }
 
   getAgenda(id: string): any {
-    return this.httpClient.get(this.apiURL + 'congreso/devolver-agenda/' + id);
+    return this.httpClient.get(this.apiURL + 'congresos/devolver-agenda/' + id);
   }
 
   postAgenda(agenda: any): any {
