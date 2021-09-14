@@ -68,8 +68,8 @@ export class SymposiumService {
   }
 
   //Solicitar esta función al back
-  getSymposiumByChair(chair: IUserComplete): any {
-    return this.httpClient.get(this.apiURL + 'congresos/simposio-por-chair/' + chair.id)
+  getSymposiumByChair(chair: any): any {
+    return this.httpClient.get(this.apiURL + 'congresos/simposio-por-chair/' + chair.id);
   }
 
   getSymposiumCongress(): any {

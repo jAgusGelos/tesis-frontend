@@ -5,7 +5,11 @@
       <hr>
     </div>
     <br>
-    <form [formGroup]="formPapersEvaluators">
+    <div class="row p-2 justify-content-end">
+      <a class="btn btn-primary btn-block col-md-4" role="button" (click)='distributeEvaluators()'>Asignación Masiva</a>
+      &nbsp;
+      <a class="btn btn-primary btn-block col-md-4" role="button" (click)='post()'>Finalizar Asignación</a>
+    </div>
     <table class="table text-center table-hover table-bordered">
       <thead class='thead'>
         <tr>
@@ -15,53 +19,37 @@
           <th class="col-md-2">Evaluador 3</th>
         </tr>
       </thead>
-  
+
       <tbody>
-        <tr class='align-items-center' *ngFor='let row of assignedPapersList'>
-          <!-- Articulo -->
-          <td>{{row.articulo.nombre}}</td>
-          <!-- Evaluador 1 -->
+        <tr class='align-items-center' *ngFor='let item of assignedPaperList'>
+          <td>{{item.nombreArticulo}}</td>
           <td>
-            <div *ngIf="row.evaUno == null">
-            <select name="evaUno" id="evaUno">
-            <option selected>--Seleccione un Evaluador--</option>
-            <option *ngFor="let e of evaluatorsList" onchange="post(row, 1, row.articulo, e)">{{e.nombre}}</option>
-          </select>
-        </div>
-        <div *ngIf="row.evaUno !== null"><span>{{row.evaUno.nombre}}</span>
-          &nbsp;
-          <button class="fas fa-trash" onclick="delete(row, row.articulo, row.evaUno)"></button>
-        </div>
-        </td>
-        <!-- Evaluador 2 -->
-        <td>
-          <div *ngIf="row.evaDos == null">
-          <select name="evaDos" id="evaDos">
-          <option selected>--Seleccione un Evaluador--</option>
-          <option *ngFor="let e of evaluatorsList" onchange="post(row, 2, row.articulo, e)">{{e.nombre}}</option>
-        </select>
-      </div>
-      <div *ngIf="row.evaDos !== null"><span>{{row.evaDos.nombre}}</span>
-        &nbsp;
-        <button class="fas fa-trash" onclick="delete(row, row.articulo, row.evaDos)"></button>
-      </div>
-      </td>
-      <!-- Evaluador 3 -->
-      <td>
-        <div *ngIf="row.evaTres == null">
-        <select name="evaTres" id="evaTres">
-        <option selected>--Seleccione un Evaluador--</option>
-        <option *ngFor="let e of evaluatorsList" onchange="post(row, 3, row.articulo, e)">{{e.nombre}}</option>
-      </select>
-    </div>
-    <div *ngIf="row.evaTres !== null"><span>{{row.evaTres.nombre}}</span>
-      &nbsp;
-      <button class="fas fa-trash" onclick="delete(row, row.articulo, row.evaTres)"></button>
-    </div>
-    </td>
+            <div class="col-sm-12">
+              <select name="eval" class="form-control"  (change)="selectOption1($event.target.value, item)">
+                <option hidden [selected]='item.idEval1===null'>Evaluador 1</option>
+                <option *ngFor="let eval of evaluatorList" value='{{eval.idEvaluador}}' [selected]='item.idEval1===eval.idEvaluador'>{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="col-sm-12">
+              <select name="eval" class="form-control"  (change)="selectOption2($event.target.value, item)" >
+                <option hidden [selected]='item.idEval2===null'>Evaluador 2</option>
+                <option *ngFor="let eval of evaluatorList" value='{{eval.idEvaluador}}' [selected]='item.idEval2===eval.idEvaluador'>{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="col-sm-12">
+              <select name="eval" class="form-control"  (change)="selectOption3($event.target.value, item)">
+                <option hidden  [selected]='item.idEval3===null'>Evaluador 3</option>
+                <option *ngFor="let eval of evaluatorList" [value]='eval.idEvaluador' [selected]='item.idEval3===eval.idEvaluador' >{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
+              </select>
+            </div>
+          </td>
         </tr>
+
       </tbody>
     </table>
-    </form>
   </div>
-  
+
