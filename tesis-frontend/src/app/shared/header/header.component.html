@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Inicio</a>
+          <a class="nav-link active" href="/">Inicio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/usuario" *ngIf="(!rol.includes(0) && !rol.includes(1) && !rol.includes(2)) && !rol.includes(3) && user">Inscripcion</a>
@@ -26,18 +26,16 @@
             <li><a class="dropdown-item" href="/congreso">Congresos Activos</a></li>
             <li><a class="dropdown-item" href="#">Ejes Temáticos</a></li>
             <li><a class="dropdown-item" href="#">Comité Organizador</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/simposios" *ngIf="rol.includes(0)  && user">Simposios</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/" *ngIf="rol.includes(0)  && user">Evaluadores</a>
+          <a class="nav-link" href="/evaluators" *ngIf="rol.includes(0)  && user">Evaluadores</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/" *ngIf="rol.includes(0)  && user">Tarifas</a>
+          <a class="nav-link" href="/missing" *ngIf="rol.includes(0)  && user">Tarifas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/misCongresos" *ngIf="rol.includes(1)  && user">Mi Congreso</a>
