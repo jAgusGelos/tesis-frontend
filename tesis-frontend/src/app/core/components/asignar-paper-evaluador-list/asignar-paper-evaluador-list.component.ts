@@ -80,14 +80,6 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
       });
   }
 
-
-
-  getEvaluators() {
-    this.evaluatorService.getEvaluators(0).subscribe((res: any) => {
-        this.evaluatorsList = res.data;
-    });
-  }
-
   distributeEvaluators(): void {
     // Distribuye aleatoriamente los evaluadores a los papers cargados.
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
