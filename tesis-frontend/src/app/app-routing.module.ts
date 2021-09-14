@@ -136,6 +136,11 @@ const routes: Routes = [
     path: 'contacto',
     loadChildren: () => import('./pages/contact/contact.module')
     .then(m => m.ContactModule),
+  },
+  {
+    path: 'inscribirme/:id',
+    loadChildren: () => import('./pages/inscriptions/inscriptions.module')
+    .then(m => m.InscriptionsModule),
   }
 ];
 
