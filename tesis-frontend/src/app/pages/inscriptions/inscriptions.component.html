@@ -9,27 +9,47 @@
       a desarrollarse en {{congress.sede}}. Los días {{congress.fechaInicio}} a {{congress.fechaFin}}.
     </h6>
     <h6>
-      Por favor, seleccione su entrada:
+      Por favor, complete todos los campos:
     </h6>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-8 offset-md-2">
+      <div class="wrapper-progressBar ">
+        <ul class="progressBar">
+          <li [ngClass]='tarifaSelected ? "active" : "" '>
+            Selecciona tu entrada
+          </li>
+          <li [ngClass]='datosCompletos ? "active" : "" '>
+            Completa tus datos
+          </li>
+          <li class="">Realiza el pago</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingOne">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+          aria-expanded="true" aria-controls="flush-collapseOne">
           Selecciona tu entrada
         </button>
       </h2>
-      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+        data-bs-parent="#accordionFlushExample">
         <div class="accordion-body row">
           <div class="col-sm-4 text-center" *ngFor="let item of tarifas">
-            <div class="card text-left">
+            <div class="card text-left" [ngClass]='tarifaSelected.id === item.id ? "marked" : "" '>
               <div class="card-body">
                 <h4 class="card-title">{{item.nombre}}</h4>
-                <p class="card-text">$ {{item.precio}}</p>
-                <button type="button" (click)='pagar(item)' class="btn btn-primary btn-lg btn-block">
+                <h6 class="card-text">$ {{item.precio}}</h6>
+                <button type="button" (click)='inscribirme(item)' class="btn btn-primary btn-lg btn-block"
+                  data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                  aria-controls="flush-collapseTwo">
                   Inscribirme
                 </button>
+
               </div>
             </div>
           </div>
@@ -38,11 +58,13 @@
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
           Datos de Contacto.
         </button>
       </h2>
-      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+        data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
           <form [formGroup]='formUsuario'>
             <div class="row pt-3">
@@ -77,7 +99,6 @@
                     </span>
                   </div>
                 </div>
-
               </div>
             </div>
 
@@ -120,25 +141,59 @@
 
 
             <div class="row justify-content-md-center">
-              <a class="btn btn-secondary col-md-4" href="#" role="button">Cancelar</a>
-              &nbsp;
-              <a class="btn btn-primary col-md-4" role="button">Guardar Cambios</a>
+              <button class="btn btn-primary col-md-4" type="submit" [disabled]="formUsuario.invalid" (click)='datos()'
+                data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
+                aria-controls="flush-collapseThree">
+                Guardar datos
+              </button>
             </div>
-
-
           </form>
-
         </div>
       </div>
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header" id="flush-headingThree">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-          Accordion Item #3
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+          Realizar el Pago
         </button>
       </h2>
-      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+        data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body" *ngIf="tarifaSelected">
+          <div class="row justify-content-center">
+            <div class="col-sm-6 ">
+              <div class="card">
+                <div class="card-body text-center">
+                  <h5 class="card-title">Estas a un paso de completar tu compra!</h5>
+                  <p class="card-text">¿Estas seguro que deseas la entrada "<b>{{tarifaSelected.nombre}}</b>"?</p>
+                  <p class="card-text">El precio de la entrada es de $<b>{{tarifaSelected.precio}}</b></p>
+                  <div class="row justify-items-end">
+                    <button type="button" (click)='pagar()' class="btn btn-primary btn-lg btn-block aling-itmems-end">
+                      Continuar al pago
+                    </button>
+                  </div>
+                  <a class="btn btn-pimary cho-container"></a>
+                  <script src="https://sdk.mercadopago.com/js/v2"></script>
+                  <script>
+                    // Agrega credenciales de SDK
+                    const mp = new MercadoPago('TEST-985eb82b-78a3-43bb-9093-26129ef6d001', {
+                      locale: 'es-AR'
+                    });
+                    // Inicializa el checkout
+                    mp.checkout({
+                      preference: {
+                        id: '{{PREFERENCE_ID}}'
+                      },
+                      autoOpen: true,
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

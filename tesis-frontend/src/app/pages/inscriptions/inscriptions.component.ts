@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { InscriptionsService } from 'src/app/core/services/inscriptions.service';
 
 @Component({
   selector: 'app-inscriptions',
@@ -34,11 +35,15 @@ export class InscriptionsComponent implements OnInit {
       precio: 250
     }
   ];
+  tarifaSelected = false;
+  datosCompletos = false;
+  PREFERENCE_ID = '348600704-f97b89fa-16a3-4d02-b4e3-b665c2ec4ced';
   formUsuario: FormGroup;
   submitted = false;
   isLinear = false;
   constructor(private route: ActivatedRoute,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private inscriptionService: InscriptionsService) { }
 
   ngOnInit(): void {
     // El usuario si o si tiene que estar logueado. Datos mínimos.
@@ -66,9 +71,25 @@ export class InscriptionsComponent implements OnInit {
     // Valida si un código de descuento es correcto o no.
   }
 
-  pagar(tarifa: any): void {
-    // Comunica con MP para realizar el pago.
+  pagar(): void {
+    // Tirar el post a la BD para conseguir el preference id.
     // post
+    this.inscriptionService.post(this.tarifaSelected).subscribe((res: any) => {
+      this.PREFERENCE_ID = res.data
+    });
+  }
+
+  inscribirme(item: any): void {
+    this.tarifaSelected= item;
+  }
+
+  datos(): void {
+    this.datosCompletos = false;
+    if(this.formUsuario.invalid) {
+      alert('Por favor complete los datos');
+      return;
+    }
+    this.datosCompletos = true;
   }
 
 }
