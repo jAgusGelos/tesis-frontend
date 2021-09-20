@@ -8,6 +8,10 @@
   margin-right: auto;
 }
 
+.row {
+  margin-bottom: 10px;
+}
+
 .login-form{
 	width:75%;
 }

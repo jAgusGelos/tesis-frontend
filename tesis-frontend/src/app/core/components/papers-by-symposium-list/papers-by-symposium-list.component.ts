@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IntPaper } from '../../models/IntPaper';
 import { ISymposium } from '../../models/ISymposium';
-import { ArticulosService } from '../../services/articulos.service';
+import { PaperService } from '../../services/paper.service';
 import { SymposiumService } from '../../services/symposium.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class PapersBySymposiumListComponent implements OnInit {
   symposiumsList: ISymposium[];
   papersList: IntPaper[];
 
-  constructor( private articulosService: ArticulosService,
+  constructor( private paperService: PaperService,
                private symposiumService: SymposiumService) { }
 
   ngOnInit(): void {
@@ -47,7 +47,7 @@ export class PapersBySymposiumListComponent implements OnInit {
   }
 
   getPapersBySymposium(symposium: ISymposium): void {
-    this.articulosService.getPapersBySymposium(symposium.id, null).subscribe((res: any) => {
+    this.paperService.getPapersXSimposio(symposium.id, null).subscribe((res: any) => {
       this.papersList = res.data;
     });
   }

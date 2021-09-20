@@ -1,9 +1,6 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { IEvaluator } from 'src/app/core/models/ievaluator';
-import { ArticulosService } from 'src/app/core/services/articulos.service';
-import { SymposiumService } from 'src/app/core/services/symposium.service';
-import { IntPaper } from 'src/app/core/models/IntPaper';
-import { UserService } from 'src/app/core/services/user.service';
+import { PaperService } from 'src/app/core/services/paper.service';
+import { EvaluationService } from 'src/app/core/services/evaluation.service';
 
 @Component({
   selector: 'app-evaluate-papers-chair-sec',
@@ -12,37 +9,217 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class EvaluatePapersChairSecComponent implements OnInit {
 
-  detailed = false;
+  edit = false;
   articulos = [];
-  idSimposio = '';
 
-  constructor(private articulosService: ArticulosService) { }
+  //Detalles
+  index = 0;
+  criterios = [];
+  detalles = [{criterio: '', res1: '', res2: '', res3:''}];
+  detNombreArticulo = '';
+  detResponsable = '';
+  detIdEstado = 0;
+  detEstado = '';
+  detEvUno = {id: 0, nombre: 'Evaluador 1'};
+  detEvDos = {id: 0, nombre: 'Evaluador 2'};
+  detEvTres = {id: 0, nombre: 'Evaluador 3'};
+  messageHeader = '';
+  messageBody = '';
 
-  articuloSeleccionado: {
-    articulo: IntPaper,
-    evUno: IEvaluator,
-    evDos: IEvaluator,
-    evTres: IEvaluator
-  }
+  evaluationsArray = [
+    ['3', ['id1', 'puntuacion Ev 3 item 1'], ['id2','puntuacion Ev 3 item 2'],['id3','puntuacion Ev 3 item 3']],
+    ['1', ['id1', 'puntuacion Ev 1 item 1'], ['id2','puntuacion Ev 1 item 2'],['id3','puntuacion Ev 1 item 3']],
+    ['2', ['id2', 'puntuacion Ev 2 item 1'], ['id1','puntuacion Ev 2 item 2'],['id3','puntuacion Ev 2 item 3']]];
+
+  constructor(private paperService: PaperService,
+              private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
-    this.getData();
+    this.getArticulos();
   }
 
-  getData() {
-    this.articulos = [];
-    this.articulosService.getPapersByChair().subscribe((res: any) => {
-      let data = res.data;
-      this.articulos = data[0].articulos
+  evaluarDetalle(index) {
+    var select = <HTMLSelectElement>document.getElementById('selectStateDetalle');
+    var value = select.options[select.selectedIndex].value;
+    if (value == '') {
+      document.getElementById("selectStateDetalle").classList.add('is-invalid');
+      return;
+    } else {
+      this.evaluar(index, value);
+    }
+  };
+
+  evaluar(index, opt) {
+    let estado = this.articulos[index].idEstado;
+    let bandera = false;
+    if (estado >= 5) {
+      bandera = true;
+    }
+    if (opt == 1 && bandera) { //Aprobar Reentrega
+      estado = 8;
+    } else if (opt == 2 && bandera) { //Rechazar Reentrega
+      estado = 9;
+    } else if (opt == 1) { //Aprobar
+      estado = 6;
+    } else if (opt == 2) { //Rechazar
+      estado = 7;
+    } else if (opt == 3) { //Reentregar
+      estado = 5;
+    }
+
+    let idArticulo = this.articulos[index].id;
+    let calificacion = estado;
+    this.paperService.calificarPaper(idArticulo, calificacion).subscribe((res: any) => {
+      this.cambiarEstado(index, opt)
+      this.toggleEdit(index);
     });
   }
 
-  verLista() {
-    this.detailed = false;
+  cambiarEstado(index, opt) { 
+    let bandera = false;
+    if (this.articulos[index].idEstado >= 5) {
+      bandera = true;
+    }
+    if (opt == 1 && bandera) {
+      this.articulos[index].idEstado = 8 //Aprobado Reentrega
+      this.articulos[index].estado = 'Aprobado Reentrega';
+      this.detIdEstado = 8;
+      this.detEstado = 'Aprobado Reentrega';
+      return;
+    }
+    if (opt == 2 && bandera) {
+      this.articulos[index].idEstado = 9 //Rechazado Reentrega
+      this.articulos[index].estado = 'Rechazado Reentrega';
+      this.detIdEstado = 9;
+      this.detEstado = 'Rechazado Reentrega';
+      return;
+    }
+    if (opt == 1) {
+      this.articulos[index].idEstado = 6 //Aprobado
+      this.articulos[index].estado = 'Aprobado';
+      this.detIdEstado = 6;
+      this.detEstado = 'Aprobado';
+      return;
+    }
+    if (opt == 2) {
+      this.articulos[index].idEstado = 7 //Rechazado
+      this.articulos[index].estado = 'Rechazado';
+      this.detIdEstado = 7;
+      this.detEstado = 'Rechazado';
+      return;
+    }
+    if (opt == 3) {
+      this.articulos[index].idEstado = 5 //Reentrega
+      this.articulos[index].estado = 'Para Reentregar';
+      this.detIdEstado = 5;
+      this.detEstado = 'Para Reentregar';
+      return;
+    }
   }
 
-  verDetalle(art: any) {
-    this.articuloSeleccionado = art;
-    this.detailed = true;
+  getArticulos() {
+    this.articulos = [];
+    this.paperService.getPapersXChair().subscribe((res: any) => {
+      let data = res.data[0].articulos;
+      this.articulos = data;
+      this.articulos = this.articulos.map((x: any) => {
+        return {
+          estado: x.estado,
+          evaluaciones: x.evaluaciones,
+          id: x.id,
+          idCongreso: x.idCongreso,
+          idEstado: x.idEstado,
+          idSimposio: x.idSimposio,
+          nombre: x.nombre,
+          responsable: x.responsable,
+          url: x.url,
+          edit: false
+        }
+      });
+    });
+  }
+
+  verDetalle(index) {
+    this.index = index;
+    this.detEvUno.nombre = 'Evaluador 1';
+    this.detEvDos.nombre = 'Evaluador 2';
+    this.detEvTres.nombre = 'Evaluador 3';
+    let art = this.articulos[index];
+    let ev = art.evaluaciones;
+    this.detNombreArticulo = art.nombre;
+    this.detResponsable = art.responsable;
+    this.detIdEstado = art.idEstado;
+    this.detEstado = art.estado;
+    if (ev.length >= 1) {
+      this.detEvUno.id = ev[0].idEvaluador;
+      this.detEvUno.nombre = ev[0].evaluador;
+    }
+    if (ev.length >= 2) {
+      this.detEvDos.id = ev[1].idEvaluador;
+      this.detEvDos.nombre = ev[1].evaluador;
+    }
+    if (ev.length >= 3) {
+      this.detEvTres.id = ev[2].idEvaluador;
+      this.detEvTres.nombre = ev[2].evaluador;
+    }
+    this.evaluationService.getItemsEvaluacion().subscribe((res: any) => {
+      let items = res.data;
+      this.paperService.getEvaluationDetails(art.id).subscribe((res: any) => {
+        let evaluaciones = res.data;
+        let ev1, ev2, ev3;
+        evaluaciones.forEach(e => {
+          if (e.idEvaluador == this.detEvUno.id) {ev1 = e}
+          else if (e.idEvaluador == this.detEvDos.id) {ev2 = e}
+          else {ev3 = e}
+        });
+        let calif1 = null, calif2 = null, calif3 = null;
+        for (let i = 0; i < items.length; i++) {
+          if (ev1.itemsEvaluados[i].calificacion !== undefined) { calif1 = ev1.itemsEvaluados[i].calificacion; }
+          if (ev2.itemsEvaluados[i].calificacion !== undefined) { calif2 = ev2.itemsEvaluados[i].calificacion; }
+          if (ev3.itemsEvaluados[i].calificacion !== undefined) { calif3 = ev3.itemsEvaluados[i].calificacion; } 
+          this.detalles.push({criterio: items[i].nombre, 
+                              res1: calif1,
+                              res2: calif2,
+                              res3: calif3,});
+          calif1 = null, calif2 = null, calif3 = null;
+        }
+        this.detalles.shift();
+        this.detalles.push({criterio: 'Recomendación', 
+          res1: this.articulos[index].evaluaciones[0].recomendacion,
+          res2: this.articulos[index].evaluaciones[1].recomendacion,
+          res3: this.articulos[index].evaluaciones[2].recomendacion,});
+      });
+    });
+    
+    let btnDetalle = document.getElementById("activar-modal");
+    btnDetalle.click();
+  }
+
+  getArchivo(index) {
+    let id = this.articulos[index].id;
+    let fileName = this.articulos[index].url;
+    this.paperService.getPaperFile(id).subscribe((res: any) => {
+      let archivo: ArrayBuffer = res;
+      let blob = new Blob([archivo], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      if (link.download !== undefined) {
+        link.setAttribute('href', url);
+        link.setAttribute('target', '_blank');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  }
+
+  modalOnClose(index) {
+    this.detalles = [];
+    this.articulos[index].edit = false;
+  }
+
+  toggleEdit(index) {
+    this.articulos[index].edit = !this.articulos[index].edit
   }
 }

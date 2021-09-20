@@ -1,14 +1,142 @@
 <div class="container-fluid">
-    <div *ngIf="detailed == false" class="evaluation-cards">
-        <div>
-            <hr>
-            <h3 class="card-title text-center">Evaluación de Artículos</h3>
-            <hr>
+  <div class="evaluation-cards">
+          <hr>
+          <h3 class="card-title text-center">Evaluación de Artículos</h3>
+          <hr>
+  </div>
+  <!-- Evaluation Cards List -->
+  <div *ngFor="let art of articulos; index as i">
+      <div *ngIf="art.idEstado > 3" class="card col-md-6 offset-3">
+          <div class="card-body">
+            <div class="row ">
+              <div class="col-auto me-auto">
+                <h5 class="card-title">{{art.nombre}}</h5>
+              </div>
+              <div class="col-auto">
+                <h5 class="card-title"><span class="badge bg-primary"
+                  [class.bg-warning]="art.idEstado === 5"
+                  [class.text-dark]="art.idEstado === 5"
+                  [class.bg-success]="art.idEstado === 6 || art.idEstado === 8"
+                  [class.bg-danger]="art.idEstado === 7 || art.idEstado === 9">{{art.estado}}</span></h5>
+              </div>
+            </div>
+            <div class="row">
+              <h6 class="card-text"><span class="card-subtitle mb-2 text-muted">Subido por </span>{{art.responsable}}</h6>
+            </div>
+            <br>
+            <div class="row">
+              <h6 class="card-text" id="evaluadores">Evaluadores:</h6>
+            </div>
+              <div *ngFor="let ev of art.evaluaciones" class="row ev-reco">
+                <div class="col-auto">
+                  <p id="nombreEvaluador">&nbsp;&nbsp;&nbsp;&nbsp;{{ev.evaluador}}:</p>
+                </div>
+                <div class="col-auto">
+                  <p class="card-text">{{ev.recomendacion}}</p>
+                </div>
+              </div>
+          </div>     
+          <div class="card-footer">
+            <a class="btn btn-outline-primary" (click)="getArchivo(i)"><i class="fas fa-file-pdf"></i> Ver artículo</a> 
+            &nbsp; 
+            <a class="btn btn-outline-primary" (click)="verDetalle(i)"><i class="fa fa-search-plus"></i> Ver detalle</a>
+            <a *ngIf="!art.edit" class="btn btn-outline-primary" id="editar" (click)="toggleEdit(i)"><i class="fa fa-pencil"></i> Editar</a>
+            <div id="evaluation-select" *ngIf="art.edit">
+              <a class="btn btn-outline-success" *ngIf="art.idEstado !== 6 && art.idEstado !== 8" (click)="evaluar(i, 1)">Aprobar</a> 
+              &nbsp;
+              <a class="btn btn-outline-danger" *ngIf="art.idEstado !== 7 && art.idEstado !== 9" (click)="evaluar(i, 2)">Rechazar</a>
+              &nbsp;
+              <a class="btn btn-outline-warning" *ngIf="art.idEstado !== 5" (click)="evaluar(i, 3)">Reentrega</a>
+              &nbsp;
+              <a class="btn btn-outline-secondary" title="Cancelar" (click)="toggleEdit(i)"><i class="fas fa-times fa-lg"></i></a> 
+            </div>
+          </div>
         </div>
-        <app-evaluate-papers-chair-sec-card *ngFor="let art of articulos" [articulo]="art" [verDetalleEmitter]="verDetalle($event)"></app-evaluate-papers-chair-sec-card>
-    </div>
-    <!-- <div *ngIf="detailed">
-        <app-evaluation-detail-form [art]="articuloSeleccionado" [goBackEvent]="verLista($event)"></app-evaluation-detail-form>    
-    </div> -->
+  </div>
 </div>
-
+<!-- Evaluation Detail Modal -->
+<button hidden id="activar-modal" data-bs-toggle="modal" data-bs-target="#detallesModal"></button>
+<!-- Modal Detalles -->
+<div class="modal fade" id="detallesModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="detallesModalLabel">{{detNombreArticulo}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalOnClose(index)"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row row-detalle">
+            <h6><span class="card-subtitle mb-2 text-muted">Subido por </span>{{detResponsable}}</h6>
+          </div>
+          <div class="row row-detalle">
+            <h6>Estado:&nbsp;&nbsp;<span class="badge bg-primary" [class.bg-warning]="detIdEstado === 5"
+                                                                  [class.text-dark]="detIdEstado === 5"
+                                                                  [class.bg-success]="detIdEstado === 6 || detIdEstado === 8"
+                                                                  [class.bg-danger]="detIdEstado === 7 || detIdEstado === 9">{{detEstado}}</span></h6>
+          </div>
+            <div class="row row-detalle align-items-center">
+              <div class="col-auto">
+                <label for="selectStateDetalle" class="col-form-label"><span id="spanEvaluacion">Evaluación:</span></label>
+              </div>
+              <div class="col-auto">
+                <select class="form-select" id="selectStateDetalle">
+                  <option disabled selected value=""></option>
+                  <option value="1" *ngIf="detIdEstado !== 6 && detIdEstado !== 8">Aprobar</option>
+                  <option value="2" *ngIf="detIdEstado !== 7 && detIdEstado !== 9">Rechazar</option>
+                  <option value="3" *ngIf="detIdEstado !== 5">Para reentregar</option>
+              </select>
+              </div>
+              <div class="col-auto">
+                <a class="btn btn-outline-success" id="btnGuardar" (click)="evaluarDetalle(index)">Guardar <i class="fa fa-save fa-lg"></i></a>
+              </div>
+            </div>
+            <table class="table table-bordered">
+              <thead class="text-center">
+                <tr>
+                  <th>Criterio</th>
+                  <th>{{detEvUno.nombre}}</th>
+                  <th>{{detEvDos.nombre}}</th>
+                  <th>{{detEvTres.nombre}}</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr *ngFor="let det of detalles" >
+                  <td>{{det.criterio}}</td> <!-- criterio -->
+                  <td>{{det.res1}}</td> <!-- ev1 -->
+                  <td>{{det.res2}}</td> <!-- ev2 -->
+                  <td>{{det.res3}}</td> <!-- ev3 -->
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="col-auto me-auto">
+          <a class="btn btn-primary btn-border" (click)="getArchivo(index)"><i class="fas fa-file-pdf"></i> Ver artículo</a>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-secondary btn-border" data-bs-dismiss="modal" (click)="modalOnClose(index)">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+<button hidden id="modal-mensaje" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+<!-- Modal Mensaje -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{messageHeader}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{messageBody}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

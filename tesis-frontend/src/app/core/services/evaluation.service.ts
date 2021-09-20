@@ -26,8 +26,8 @@ export class EvaluationService {
     return this.httpClient.post<IEvaluation>(this.apiURL + 'articulos/altaItemEvaluacion/', postItem);
   }
 
-  getEvaluation(): any {
-    return this.httpClient.get(this.apiURL + 'articulos/getItemsEvaluacion/');
+  getEvaluation(activos): any {
+    return this.httpClient.get(this.apiURL + 'articulos/getItemsEvaluacion/?activos=' + activos);
   }
 
   putEvaluation(evaluation: any): any {
@@ -40,6 +40,10 @@ export class EvaluationService {
   }
 
   deleteEvaluation(evaluation: IEvaluation): any {
-    return this.httpClient.delete<IEvaluation>(this.apiURL + 'articulos/eliminar-articulos/' + evaluation.id);
+    return this.httpClient.delete<IEvaluation>(this.apiURL + 'articulos/eliminarItemEvaluacion/?idItem=' + evaluation.id);
+  }
+
+  getItemsEvaluacion() {
+    return this.httpClient.get(this.apiURL + 'articulos/getItemsEvaluacion/');
   }
 }
