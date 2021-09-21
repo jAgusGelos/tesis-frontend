@@ -1,0 +1,8 @@
+<div class="container-fluid">
+    <div *ngIf="!edit">
+        <app-tarifa-list></app-tarifa-list>
+    </div>
+    <div *ngIf="edit">
+    <app-tarifa-form></app-tarifa-form>
+    </div>
+</div>
