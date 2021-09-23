@@ -173,21 +173,6 @@
                       Continuar al pago
                     </button>
                   </div>
-                  <a class="btn btn-pimary cho-container"></a>
-                  <script src="https://sdk.mercadopago.com/js/v2"></script>
-                  <script>
-                    // Agrega credenciales de SDK
-                    const mp = new MercadoPago('TEST-985eb82b-78a3-43bb-9093-26129ef6d001', {
-                      locale: 'es-AR'
-                    });
-                    // Inicializa el checkout
-                    mp.checkout({
-                      preference: {
-                        id: '{{PREFERENCE_ID}}'
-                      },
-                      autoOpen: true,
-                    });
-                  </script>
                 </div>
               </div>
             </div>

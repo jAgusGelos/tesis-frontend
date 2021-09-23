@@ -10,7 +10,12 @@ export class InscriptionsService {
   private apiURL = environment.apiURL;
   constructor(private httpClient: HttpClient) { }
 
-  post(item: any): any {
-    this.httpClient.post(this.apiURL + 'mercadoPago', item);
+
+
+  generatePreference(item: any): any {
+    const postItem = {
+      idInscripcion: 1
+    };
+    return this.httpClient.post(this.apiURL + 'inscripciones/create-preference/', postItem );
   }
 }
