@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ITarifa } from '../../models/itarifa';
 
 @Component({
   selector: 'app-tarifa-form',
@@ -7,9 +9,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TarifaFormComponent implements OnInit {
 
-  constructor() { }
+  @Input() tarifa: ITarifa = {
+    id: '0',
+    idCongreso: '0',
+    nombre: '',
+    precio: 0,
+    fechaDesde: new Date(),
+    fechaHasta: new Date()
+  };
+  @Output() cancelEvent = new EventEmitter();
+  @Output() newTarifaEvent = new EventEmitter();
+  @Output() editTarifaEvent = new EventEmitter();
+  @Input() new = false;
+  formTarifa: FormGroup;
+  submitted = false;
+  datesValid = true;
+
+  constructor( private formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
+    this.formTarifa = this.formBuilder.group({
+      nombre: [this.tarifa.nombre, Validators.required],
+      precio: [this.tarifa.precio, [Validators.required, Validators.min(0), Validators.max(999999999)]],
+      fechaDesde: [this.tarifa.fechaDesde, Validators.required],
+      fechaHasta: [this.tarifa.fechaHasta, Validators.required]
+    });
   }
 
+  submit() {
+    this.submitted = true;
+    if (this.formTarifa.controls.fechaDesde.value > this.formTarifa.controls.fechaHasta.value) {
+      this.datesValid = false;
+      return;
+    }
+    if (this.formTarifa.valid) {
+      this.tarifa = {
+        id: this.tarifa.id,
+        idCongreso: this.tarifa.idCongreso,
+        nombre: this.formTarifa.controls.nombre.value,
+        precio: this.formTarifa.controls.precio.value,
+        fechaDesde: this.formTarifa.controls.fechaDesde.value,
+        fechaHasta: this.formTarifa.controls.fechaHasta.value
+        };
+      if (this.new) {
+        this.newTarifaEvent.emit(this.tarifa);
+      } else {
+        this.editTarifaEvent.emit(this.tarifa);
+      }
+    } else {
+      return;
+    }
+  }
+
+  cancel() {
+    this.cancelEvent.emit();
+  }
 }

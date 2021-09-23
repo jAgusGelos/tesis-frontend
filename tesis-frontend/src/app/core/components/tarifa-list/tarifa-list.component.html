@@ -1,1 +1,57 @@
-<p>tarifa-list works!</p>
+<div class="container-fluid">
+    <div class="contenidos">
+      <hr>
+      <h3 class='text-center'>Tarifas</h3>
+      <hr>
+    </div>
+    <div class="row justify-content-md-end">
+      <a class="btn btn-primary col-sm-2" role="button" (click)="toggleNew()">Nueva Tarifa</a>
+    </div>
+    <br>
+    <div class="row">
+        <table class="table text-center table-hover table-bordered">
+          <thead class='thead'>
+            <tr>
+              <th class="col-md-3">Nombre</th>
+              <th class="col-md-2">Precio</th>
+              <th class="col-md-3">Desde</th>
+              <th class="col-md-3">Hasta</th>
+              <th class="col-md-2">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class='align-items-center'*ngFor='let item of tarifaList; let i = index'>
+              <td>{{item.nombre}}</td>
+              <td>{{ item.precio | currency}}</td>
+              <td>{{ item.fechaDesde | date:'dd/LL/YYYY'}}</td>
+              <td>{{ item.fechaHasta | date:'dd/LL/YYYY'}}</td>
+              <td>
+                <a title='Editar' role="button" (click)="toggleEdit(item)"><i class="fas fa-pencil-alt fa-lg"></i></a>
+                &nbsp;&nbsp;&nbsp;
+                <a title='Eliminar' role="button" (click)="modalDelete(item)"><i class="fas fa-trash fa-lg"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  <div>
+<!-- Button trigger modal -->
+<button hidden type="button" id="modal-delete-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal"></button>
+<!-- Modal Eliminar -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">{{message.header}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            {{message.body}}
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+            <a type="button" class="btn btn-primary" (click)="toggleRemoveHandled(selectedItem)">Aceptar</a>
+        </div>
+        </div>
+    </div>
+</div>

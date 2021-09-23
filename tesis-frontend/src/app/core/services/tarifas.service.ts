@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { ITarifa } from '../models/itarifa';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +20,15 @@ export class TarifasService {
     return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas-activas/');
   }
 
-  postTarifa() {
-    return this.httpClient.get(this.apiURL + 'inscripciones/crear-tarifa/');
+  postTarifa(tarifa: ITarifa) {
+    return this.httpClient.post(this.apiURL + 'inscripciones/crear-tarifa/', tarifa);
   }
 
-  putTarifa() {
-    return this.httpClient.get(this.apiURL + 'inscripciones/editar-tarifa/');
+  putTarifa(tarifa: ITarifa) {
+    return this.httpClient.put(this.apiURL + 'inscripciones/editar-tarifa/', tarifa);
   }
 
-  deleteTarifa() {
-    return this.httpClient.get(this.apiURL + 'inscripciones/eliminar-tarifa/');
+  deleteTarifa(idTarifa) {
+    return this.httpClient.delete(this.apiURL + 'inscripciones/eliminar-tarifa/?idTarifa=' + idTarifa);
   }
 }
