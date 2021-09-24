@@ -105,6 +105,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/evaluators/evaluators.module')
     .then(m => m.EvaluatorsModule),
   },
+  {
+    path: 'cupones',
+    loadChildren: () => import('./pages/cupon/cupon.module')
+    .then(m => m.CuponModule)
+  },
   // Notification routes
   {
     path: 'deactivateAccount',

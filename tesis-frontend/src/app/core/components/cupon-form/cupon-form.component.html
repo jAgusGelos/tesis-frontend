@@ -1,0 +1,67 @@
+<div class="card">
+    <div class="card-body">
+      <div class="contenidos">
+        <hr>
+        <h3 class="card-title text-center">{{new ? 'Crear Cupón' : 'Editar Cupón' }}</h3>
+        <hr>
+      </div>
+      <form class="container" [formGroup]='formCupon'>
+        <!-- Código -->
+        <div class="row justify-content-md-center">
+            <div class="col col-md-6">
+                <label for="codigo" class="form-label">Código <span id="code-valid" class="form-text"></span></label>
+                <input type="text" id="code" class="form-control" formControlName="codigo"
+                [ngClass]="{'is-invalid': submitted && formCupon.controls.codigo.errors}">
+                <div class="form-text">Solo letras y números sin espacios.</div>
+                <div><a class="btn btn-primary" (click)='verificarCupon(cupon)' role="button">Verificar código</a></div>
+            </div>
+        </div>
+        <!-- Tarifa -->
+        <div class="row justify-content-md-center">
+            <div class="col col-md-6">
+                <label for="tarifa" class="form-label">Tarifa<span class='text-danger'>*</span></label>
+                <select class="form-select" formControlName="tarifa" (change)="setPrices($event.target.value)"
+                [ngClass]="{'is-invalid': submitted && formCupon.controls.tarifa.errors}">
+                    <option *ngFor="let tar of tarifaList" value="tar">{{tar.nombre}} {{tar.precio | currency}}</option>
+                </select>
+            </div>
+        </div>
+        <div *ngIf="selectedTarifa !== undefined" class="row justify-content-md-center">
+            <!-- Precio -->
+            <div class="col col-md-3">
+                <label for="precioTarifa" class="form-label">Precio</label>
+                <input type="number" class="form-control" formControlName="precioTarifa" id="precio">
+            </div>
+            <!-- Precio con descuento -->
+            <div class="col col-md-3">
+                <label for="precioDescontado" class="form-label">Precio con descuento</label>
+                <input type="number" class="form-control" formControlName="precioDescontado">
+            </div>
+        </div>
+        <!-- Porcentaje descuento -->
+        <div class="row justify-content-md-center">
+            <div class="col col-md-6">
+                <label for="porcentajeDescuento" class="form-label">Porcentaje de descuento</label>
+                <div class="input-group">
+                    <div class="input-group-text">%</div>
+                    <input type="number" min="0" max="100" class="form-control" formControlName="porcentajeDescuento">
+                </div>
+            </div>
+        </div>
+        <!-- Usos restantes -->
+        <div class="row justify-content-md-center">
+            <div class="col col-md-6">
+                <label for="usosRestantes" class="form-label">Usos restantes</label>
+                <input type="number" min="0" class="form-control" formControlName="usosRestantes">
+            </div>
+        </div>
+        <div class="row justify-content-md-center pt-3 btn-row">
+        <a class="col-md-3 btn btn-secondary" (click)='cancel()' role="button">Cancelar</a>
+        &nbsp;
+        <a class="col-md-3 btn btn-primary" (click)='submit()'
+            role="button">{{new ? 'Crear Cupón' : 'Guardar Cambios'}}</a>
+        </div>
+      </form>
+    </div>
+</div>
+  

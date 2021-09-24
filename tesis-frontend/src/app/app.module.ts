@@ -8,9 +8,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
 import { EvaluatorsComponent } from './pages/evaluators/evaluators.component';
+import { CuponComponent } from './pages/cupon/cupon.component';
 
 @NgModule({
-  declarations: [AppComponent, EvaluatorsComponent],
+  declarations: [AppComponent, EvaluatorsComponent, CuponComponent],
 
   imports: [
     BrowserModule,

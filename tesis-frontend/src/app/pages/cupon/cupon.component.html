@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div *ngIf="!edit">
+        <app-cupon-list [cuponList]="cuponList"
+        (crearCuponEvent)="newCupon($event)" 
+        (editarCuponEvent)="editCupon($event)" 
+        (eliminarCuponEvent)="deleteCupon($event)">
+        </app-cupon-list>
+    </div>
+    <div *ngIf="edit">
+        <app-cupon-form [new]="new"
+                        [cupon]="cupon"
+                        [codeIsValid]="codeIsValid"
+                        [tarifaList]="tarifaList"
+                        (newCuponEvent)="postCupon($event)" 
+                        (editCuponEvent)="putCupon($event)"
+                        (verificarCuponEvent)="verificarCupon($event)" 
+                        (cancelEvent)="toggleEdit($event)">
+        </app-cupon-form>
+    </div>
+</div>
+<!-- Button trigger modal -->
+<button hidden type="button" id="modal-message" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal"></button>
+<!-- Modal Message -->
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="messageModalLabel">{{message.header}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            {{message.body}}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>
