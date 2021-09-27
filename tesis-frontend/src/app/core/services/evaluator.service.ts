@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IEvaluator } from '../models/IEvaluator';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,18 @@ import { IEvaluator } from '../models/IEvaluator';
 export class EvaluatorService {
 
   private apiURL = environment.apiURL;
+  private idUser: number;
+  private idCongress: number;
 
   constructor(private httpClient: HttpClient,
-              ) { }
+              private auth: AuthService
+              ) {
+                this.idUser = auth.getUserId();
+                this.idCongress = auth.getCongressId();
+               }
 
-  postEvaluator(evaluator: string): any {
-    return this.httpClient.post(this.apiURL + 'articulos/crear-evaluador/', evaluator);
+  postEvaluator(idUsuarios): any {
+    return this.httpClient.post(this.apiURL + 'articulos/asignarRolEvaluador/', idUsuarios);
   }
 
   getEvaluators(activos: number): any {
@@ -25,7 +32,27 @@ export class EvaluatorService {
     // 1 solo activos
   }
 
-  getEvaluatorById(id: String): any {
+  getEvaluatorsAll(): any {
+    return this.httpClient.get(this.apiURL + 'articulos/getEvaluadoresFueraSimposio/');
+  }
+
+  getEvaluatorsSimposio(): any {
+    return this.httpClient.get(this.apiURL + 'articulos/getEvaluadoresSimposio/');
+  }
+
+  getEvaluatorsGroup(): any {
+    return this.httpClient.get(this.apiURL + 'articulos/getPoolEvaluadores/');
+  }
+
+  postEvaluatorGroup(id: number): any {
+    return this.httpClient.post(this.apiURL + 'articulos/asignarPoolEvaluadores/', {evaluadores: [+id]});
+  }
+
+  deleteEvaluatorGroup(id: number): any {
+    return this.httpClient.delete(this.apiURL + 'articulos/eliminarEvaluadorPoolEvaluadores/?idEvaluador=' + id);
+  }
+
+  getEvaluatorById(id: string): any {
     return this.httpClient.get(this.apiURL + 'evaluador/consultarEvaluador/' + id);
   }
 
@@ -37,7 +64,19 @@ export class EvaluatorService {
     return this.httpClient.delete<IEvaluator>(this.apiURL + 'evaluador/eliminar-evaluador/' + evaluator.id);
   }
 
-  calificarEvaluador(evCalification: any) {
+  calificarEvaluador(evCalification: any): any {
     return this.httpClient.put(this.apiURL + 'evaluador/calificarEvaluador/', evCalification);
+  }
+
+  postEvaluatorMassive(item: any): any {
+    const postItem = item.map((x: any) => {
+      return {
+        idEvaluadores: [x.idEval1, x.idEval2, x.idEval3],
+        articulo: x.idArticulo,
+        idCongreso: this.idCongress
+      };
+    });
+    return this.httpClient.post(this.apiURL + 'articulos/asignarArticuloEvaluadorMasivo/', postItem);
+
   }
 }

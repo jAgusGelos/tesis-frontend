@@ -26,6 +26,9 @@ import { PapersBySymposiumListComponent } from './components/papers-by-symposium
 import { DeactivateAccountFormComponent } from './components/deactivate-account-form/deactivate-account-form.component';
 import { EvaluatePaperListComponent } from './components/evaluate-paper-list/evaluate-paper-list.component';
 import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/evaluate-paper-form.component';
+import { EvaluatorListComponent } from './components/evaluator-list/evaluator-list.component';
+import { CongressCardComponent } from './components/congress-card/congress-card.component';
+
 
 
 @NgModule({
@@ -56,6 +59,8 @@ import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/eva
     DeactivateAccountFormComponent,
     EvaluatePaperListComponent,
     EvaluatePaperFormComponent,
+    EvaluatorListComponent,
+    CongressCardComponent
   ],
   imports: [
     CommonModule,
@@ -88,6 +93,8 @@ import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/eva
     DeactivateAccountFormComponent,
     EvaluatePaperListComponent,
     EvaluatePaperFormComponent,
+    EvaluatorListComponent,
+    CongressCardComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

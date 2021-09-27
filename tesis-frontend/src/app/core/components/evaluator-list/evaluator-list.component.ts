@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IEvaluator } from '../../models/IEvaluator';
 import { IUserComplete } from '../../models/IUserComplete';
 import { EvaluatorService } from '../../services/evaluator.service';
 import { UserService } from '../../services/user.service';
@@ -58,7 +57,7 @@ export class EvaluatorListComponent implements OnInit {
   }
 
   fillEvaluatorsList() {
-    this.evaluatorService.getEvaluators().subscribe((res: any) => {
+    this.evaluatorService.getEvaluators(0).subscribe((res: any) => {
       this.evaluatorsList = res.data;
     });
   }

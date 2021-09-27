@@ -7,10 +7,9 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
-import { EvaluatePapersChairSecComponent } from './pages/evaluate-papers-chair-sec/evaluate-papers-chair-sec.component';
 
 @NgModule({
-  declarations: [AppComponent, EvaluatePapersChairSecComponent],
+  declarations: [AppComponent],
 
   imports: [
     BrowserModule,
