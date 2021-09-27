@@ -9,13 +9,13 @@ import { ITarifa } from '../../models/itarifa';
 })
 export class TarifaFormComponent implements OnInit {
 
-  @Input() tarifa: ITarifa = {
+  @Input() tarifa = {
     id: '0',
     idCongreso: '0',
     nombre: '',
     precio: 0,
-    fechaDesde: new Date(),
-    fechaHasta: new Date()
+    fechaDesde: new Date,
+    fechaHasta: new Date
   };
   @Output() cancelEvent = new EventEmitter();
   @Output() newTarifaEvent = new EventEmitter();
@@ -31,8 +31,8 @@ export class TarifaFormComponent implements OnInit {
     this.formTarifa = this.formBuilder.group({
       nombre: [this.tarifa.nombre, Validators.required],
       precio: [this.tarifa.precio, [Validators.required, Validators.min(0), Validators.max(999999999)]],
-      fechaDesde: [this.tarifa.fechaDesde, Validators.required],
-      fechaHasta: [this.tarifa.fechaHasta, Validators.required]
+      fechaDesde: [this.invertConvertDateFormat(this.tarifa.fechaDesde.toString()), Validators.required],
+      fechaHasta: [this.invertConvertDateFormat(this.tarifa.fechaHasta.toString()), Validators.required]
     });
   }
 
@@ -42,14 +42,15 @@ export class TarifaFormComponent implements OnInit {
       this.datesValid = false;
       return;
     }
+
     if (this.formTarifa.valid) {
       this.tarifa = {
         id: this.tarifa.id,
         idCongreso: this.tarifa.idCongreso,
         nombre: this.formTarifa.controls.nombre.value,
         precio: this.formTarifa.controls.precio.value,
-        fechaDesde: this.formTarifa.controls.fechaDesde.value,
-        fechaHasta: this.formTarifa.controls.fechaHasta.value
+        fechaDesde: this.convertDateFormat(this.formTarifa.controls.fechaDesde.value),
+        fechaHasta: this.convertDateFormat(this.formTarifa.controls.fechaHasta.value)
         };
       if (this.new) {
         this.newTarifaEvent.emit(this.tarifa);
@@ -59,6 +60,17 @@ export class TarifaFormComponent implements OnInit {
     } else {
       return;
     }
+  }
+
+  convertDateFormat(date: string): any {
+    const info = date.split('-').reverse().join('/') + ' 00:00:00';
+    return info;
+  }
+
+  invertConvertDateFormat(date: string): any {
+    date = date.split(' ')[0];
+    const info = date.split('/').reverse().join('-');
+    return info;
   }
 
   cancel() {

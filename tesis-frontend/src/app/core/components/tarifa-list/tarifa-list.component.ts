@@ -29,7 +29,7 @@ export class TarifaListComponent implements OnInit {
   }
 
   toggleRemoveHandled(item: any): void {
-    this.eliminarTarifaEvent.emit(item);
+    this.eliminarTarifaEvent.emit(item.id);
   }
 
   modalDelete(item) {

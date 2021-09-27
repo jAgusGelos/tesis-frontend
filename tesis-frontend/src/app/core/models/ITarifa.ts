@@ -1,8 +1,8 @@
 export interface ITarifa {
-    id?: string;
+    id: string;
     idCongreso?: string;
     nombre: string;
     precio: number;
-    fechaDesde: Date;
-    fechaHasta: Date;
+    fechaDesde: string;
+    fechaHasta: string;
 }

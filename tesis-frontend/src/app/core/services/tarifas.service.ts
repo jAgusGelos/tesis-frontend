@@ -2,22 +2,26 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ITarifa } from '../models/itarifa';
+import { CongressService } from './congress.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TarifasService {
 
+  idCongreso: number;
   private apiURL = environment.apiURL;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private congressService: CongressService) {
+    this.idCongreso = this.congressService.idCongreso;
+  }
 
   getTarifas() {
-    return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas/');
+    return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas/?idCongreso= ' + this.idCongreso.toString());
   }
 
   getTarifasActivas() {
-    return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas-activas/');
+    return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas-activas/?idCongreso= ' + this.idCongreso.toString());
   }
 
   postTarifa(tarifa: ITarifa) {
@@ -25,10 +29,10 @@ export class TarifasService {
   }
 
   putTarifa(tarifa: ITarifa) {
-    return this.httpClient.put(this.apiURL + 'inscripciones/editar-tarifa/', tarifa);
+    return this.httpClient.put(this.apiURL + 'inscripciones/editar-tarifa/?id=' + tarifa.id, tarifa);
   }
 
-  deleteTarifa(idTarifa) {
-    return this.httpClient.delete(this.apiURL + 'inscripciones/eliminar-tarifa/?idTarifa=' + idTarifa);
+  deleteTarifa(id) {
+    return this.httpClient.delete(this.apiURL + 'inscripciones/eliminar-tarifa/?id=' + id);
   }
 }

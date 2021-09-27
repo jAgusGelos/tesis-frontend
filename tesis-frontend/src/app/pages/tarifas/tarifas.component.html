@@ -6,22 +6,3 @@
     <app-tarifa-form [tarifa]="tarifa" [new]="new" (newTarifaEvent)="postTarifa($event)" (editTarifaEvent)="putTarifa($event)" (cancelEvent)="toggleEdit($event)"></app-tarifa-form>
     </div>
 </div>
-<!-- Button trigger modal -->
-<button hidden type="button" id="modal-message" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#messageModal"></button>
-<!-- Modal Message -->
-<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="messageModalLabel">{{message.header}}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            {{message.body}}
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-        </div>
-    </div>
-</div>

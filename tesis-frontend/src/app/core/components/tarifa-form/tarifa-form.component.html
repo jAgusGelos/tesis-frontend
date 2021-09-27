@@ -11,7 +11,7 @@
             <div class="col col-md-6">
                 <label for="nombre" class="form-label">Nombre<span class='text-danger'>*</span></label>
                 <input type="text" class="form-control" formControlName="nombre"
-                [ngClass]="{'is-invalid': submitted && formTarifa.controls.nombre.errors}">
+                [ngClass]="{'is-invalid': submitted && formTarifa.controls.nombre.errors}" onClick="this.select();">
             </div>
         </div>
         <!-- Precio -->
@@ -19,7 +19,7 @@
             <div class="col col-md-6">
                 <label for="precio" class="form-label">Precio<span class='text-danger'>*</span></label>
                 <input type="number" class="form-control" min="0" formControlName="precio"
-                [ngClass]="{'is-invalid': submitted && formTarifa.controls.precio.errors}">
+                [ngClass]="{'is-invalid': submitted && formTarifa.controls.precio.errors}" onClick="this.select();">
             </div>
         </div>
         <div class="row justify-content-md-center">
