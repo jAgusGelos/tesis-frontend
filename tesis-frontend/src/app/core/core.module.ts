@@ -32,6 +32,8 @@ import { ScoreEvaluatorsComponent } from './components/score-evaluators/score-ev
 import { EvaluatePapersChairSecCardComponent } from './components/evaluate-papers-chair-sec-card/evaluate-papers-chair-sec-card.component';
 import { EvaluatorListComponent } from './components/evaluator-list/evaluator-list.component';
 import { CongressCardComponent } from './components/congress-card/congress-card.component';
+import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
+import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
 
 
 
@@ -68,7 +70,9 @@ import { CongressCardComponent } from './components/congress-card/congress-card.
     ScoreEvaluatorsComponent,
     EvaluatePapersChairSecCardComponent,
     EvaluatorListComponent,
-    CongressCardComponent
+    CongressCardComponent,
+    ChangePasswordFormComponent,
+    RecoverPasswordFormComponent
   ],
   imports: [
     CommonModule,
@@ -106,7 +110,9 @@ import { CongressCardComponent } from './components/congress-card/congress-card.
     ScoreEvaluatorsComponent,
     EvaluatePapersChairSecCardComponent,
     EvaluatorListComponent,
-    CongressCardComponent
+    CongressCardComponent,
+    ChangePasswordFormComponent,
+    RecoverPasswordFormComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -77,4 +77,11 @@ export class EvaluatorService {
     return this.httpClient.post(this.apiURL + 'articulos/asignarArticuloEvaluadorMasivo/', postItem);
 
   }
+/* Ver si está el método... */
+  cancelarEvaluationPaper(item:any): any{
+    return this.httpClient.delete(this.apiURL + 'articulos/rechazar-evaluacion',item);
+  }
+  acceptEvaluationPaper(item:any): any{
+    return this.httpClient.put(this.apiURL + 'articulos/aceptar-evaluacion',item);
+  }
 }

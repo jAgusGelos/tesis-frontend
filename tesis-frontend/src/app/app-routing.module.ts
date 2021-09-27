@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/services/auth.guard';
 import { ChairRolGuard } from './core/services/guards/chair-rol.guard';
 import { HomeComponent } from './pages/home/home.component';
+import { RecoverPasswordComponent } from './pages/recover-password/recover-password.component';
 
 const routes: Routes = [
   {
@@ -136,6 +137,41 @@ const routes: Routes = [
     path: 'contacto',
     loadChildren: () => import('./pages/contact/contact.module')
     .then(m => m.ContactModule),
+  },
+  {
+    path: 'recuperarContraseña',
+    loadChildren: () => import('./pages/recover-password/recover-password.module')
+    .then(m => m.RecoverPasswordModule),
+  },
+  {
+    path: 'cambiarContraseña',
+    loadChildren: () => import('./pages/change-password/change-password.module')
+    .then(m => m.ChangePasswordModule),
+  },
+  {
+    path: 'cuentaConfirmada/:token',
+    loadChildren: () => import('./pages/emails/confirmed-account/confirmed-account.module')
+    .then(m => m.ConfirmedAccountModule),
+  },
+  {
+    path: 'reestablecerContraseña/?token=:token',
+    loadChildren: () => import('./pages/emails/restore-password/restore-password-routing.module')
+    .then(m => m.RestorePasswordRoutingModule),
+  },
+  {
+    path: 'aceptacionEvaluacionPaper/?token=:token',
+    loadChildren: () => import('./pages/emails/accept-evaluate-paper/accept-evaluate-paper-routing.module')
+    .then(m => m.AcceptEvaluatePaperRoutingModule),
+  },
+  {
+    path: 'aceptacionRolEvaluador/:token',
+    loadChildren: () => import('./pages/emails/accept-evaluator/accept-evaluator-routing.module')
+    .then(m => m.AcceptEvaluatorRoutingModule),
+  },
+  {
+    path: 'cancelacionEvaluacionPaper/:token',
+    loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper-routing.module')
+    .then(m => m.CancelEvaluatePaperRoutingModule),
   }
 ];
 
