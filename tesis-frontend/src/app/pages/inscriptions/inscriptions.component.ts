@@ -37,7 +37,6 @@ export class InscriptionsComponent implements OnInit {
   ];
   tarifaSelected = false;
   datosCompletos = false;
-  PREFERENCE_ID = '348600704-f97b89fa-16a3-4d02-b4e3-b665c2ec4ced';
   formUsuario: FormGroup;
   submitted = false;
   isLinear = false;

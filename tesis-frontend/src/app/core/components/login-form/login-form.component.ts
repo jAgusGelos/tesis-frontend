@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CongressService } from '../../services/congress.service';
 
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -43,16 +44,23 @@ export class LoginFormComponent implements OnInit {
   }
 
   submit(): void {
-    this.submitted = true;
-    console.log(this.formLogin.controls.idCongress.value);
+    const password = this.formLogin.controls.password.value;
 
+    const encode = window.btoa(password);
+    // console.log('---ENCODED-----', encode);
+
+    // const decode = window.atob(encode)
+    // console.log('---DECODED-----', decode)
+
+
+    // return;
     if (this.formLogin.invalid ) {
       alert('Por favor complete todos los datos.');
       return;
     }
     const login = {
       email: this.formLogin.controls.email.value,
-      password: this.formLogin.controls.password.value,
+      password: encode,
       idCongreso: +this.formLogin.controls.idCongress.value
     };
     this.loginService
