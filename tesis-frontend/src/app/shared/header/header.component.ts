@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
       this.user = true;
     }
     if (this.user) {
-      this.rol = [0];
+      this.rol = [2];
       // this.rol = this.authService.getUserRoles();
 
     }
@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.user = !this.user;
     this.authService.logout();
-    window.location.reload();
     this.router.navigate(['']).then(() => {
       window.location.reload();
     });

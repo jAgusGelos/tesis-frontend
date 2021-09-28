@@ -9,7 +9,7 @@ import { IntPaper } from 'src/app/core/models/IntPaper';
 })
 export class EvaluatePapersChairSecComponent implements OnInit {
 
-  detailed: Boolean = false;
+  detailed = false;
 
   constructor() { }
 
@@ -22,19 +22,19 @@ export class EvaluatePapersChairSecComponent implements OnInit {
 
   evaluadores: IEvaluator[] = [{id: '1', nombre: 'Juan', puntuacion: '1'},
                                {id: '2', nombre: 'Aye', puntuacion: '1'},
-                               {id: '3', nombre: 'Agus', puntuacion: '1'},]
+                               {id: '3', nombre: 'Agus', puntuacion: '1'}, ];
 
   articuloSeleccionado: {
     articulo: IntPaper,
     evUno: IEvaluator,
     evDos: IEvaluator,
     evTres: IEvaluator
-  }
+  };
 
   ngOnInit(): void {
   }
 
-  verDetalle(art: any) {
+  verDetalle(art: any): void {
     this.articuloSeleccionado = art;
     this.detailed = !this.detailed;
   }

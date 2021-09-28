@@ -26,7 +26,6 @@ export class DefineAgendaService {
       ...agenda,
       id: this.idCongress
     };
-    console.log(postAgenda);
 
     return this.httpClient.post<ISchedule>(this.apiURL + 'congresos/definir-agenda/', postAgenda);
   }

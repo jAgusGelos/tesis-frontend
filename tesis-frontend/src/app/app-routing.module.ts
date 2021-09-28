@@ -144,6 +144,11 @@ const routes: Routes = [
     .then(m => m.ContactModule),
   },
   {
+    path: 'inscribirme/:id',
+    loadChildren: () => import('./pages/inscriptions/inscriptions.module')
+    .then(m => m.InscriptionsModule)
+  },
+  {
     path: 'recuperarContraseña',
     loadChildren: () => import('./pages/recover-password/recover-password.module')
     .then(m => m.RecoverPasswordModule),
@@ -176,12 +181,12 @@ const routes: Routes = [
   {
     path: 'cancelacionEvaluacionPaper/:token',
     loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper-routing.module')
-    .then(m => m.CancelEvaluatePaperRoutingModule),
+    .then(m => m.CancelEvaluatePaperRoutingModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
