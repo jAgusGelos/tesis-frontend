@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EvaluateService } from 'src/app/core/services/evaluate.service';
 
 @Component({
@@ -12,11 +13,15 @@ export class EvaluateComponent implements OnInit {
   selectedPaper = {};
   evaluation = {};
   paperList = [];
-  
-  constructor(private evaluationService: EvaluateService) {};
-  
-  ngOnInit(): void 
-  {
+
+  constructor(private evaluationService: EvaluateService,
+              private router: Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => {
+        return false;
+      };
+  }
+
+  ngOnInit(): void {
 
   }
 
@@ -29,28 +34,28 @@ export class EvaluateComponent implements OnInit {
   getPapers(): void {
     this.evaluationService.getPaper().subscribe((res: any) => {
       this.evaluation = res.data;
-    })
+    });
   }
 
   evaluationEvent(item: any): void {
     this.evaluating = !this.evaluating;
     this.selectedPaper = item;
-    
+
   }
 
   deleteEvaluation(item: any): void {
-    this.evaluationService.deleteEvaluation(item).subscribe((res: any) =>{
+    this.evaluationService.deleteEvaluation(item).subscribe((res: any) => {
       alert('La evaluación ha sido rechazada');
-      window.location.reload()
-    })
+      this.router.navigateByUrl('/evaluar');
+    });
 
   }
-  
+
   toggleCreateEvaluation(item: any): void {
     this.evaluationService.postEvaluation(item).subscribe((res: any) => {
       alert('Evaluación correctamente cargada');
-      window.location.reload();
-    })
+      this.router.navigateByUrl('/evaluar');
+    });
 
   }
 

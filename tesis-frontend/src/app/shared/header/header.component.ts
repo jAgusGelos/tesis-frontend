@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.user = !this.user;
     this.authService.logout();
-    window.location.reload();
     this.router.navigate(['']).then(() => {
       window.location.reload();
     });

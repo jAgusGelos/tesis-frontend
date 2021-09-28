@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ISymposium } from 'src/app/core/models/ISymposium';
 import { SymposiumService } from 'src/app/core/services/symposium.service';
 
@@ -14,7 +15,13 @@ export class SymposiumComponent implements OnInit {
   ok = false;
   symposium = {};
 
-  constructor(private symposiumService: SymposiumService) { }
+  constructor(private symposiumService: SymposiumService,
+              private router: Router) {
+
+                this.router.routeReuseStrategy.shouldReuseRoute = () => {
+                  return false;
+            };
+          }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -42,7 +49,7 @@ export class SymposiumComponent implements OnInit {
   deleteSymposium(item: ISymposium): void {
     this.symposiumService.deleteSymposium(item).subscribe((res: any) => {
       alert('El Simposio ha sido eliminado correctamente');
-      window.location.reload();
+      this.router.navigateByUrl('/simposios');
     });
   }
 
@@ -57,13 +64,13 @@ export class SymposiumComponent implements OnInit {
     if (item.id === undefined) {
       this.symposiumService.postSymposium(item).subscribe((res: any) => {
         alert('Simposio Creado Correctamente');
-        window.location.reload();
+        this.router.navigateByUrl('/simposios');
       });
     }
     else{
       this.symposiumService.putSymposium(item).subscribe((res: any) => {
         alert('Simposio Modificado Correctamente');
-        window.location.reload();
+        this.router.navigateByUrl('/simposios');
       });
     }
     this.getSymposium();

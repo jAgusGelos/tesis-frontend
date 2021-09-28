@@ -15,11 +15,15 @@ export class CongressComponent implements OnInit {
   congress = {};
   sedes = [];
 
-  showComponent: String = 'list'
+  showComponent = 'list';
 
 
   constructor(private congressService: CongressService,
-              private router: Router) { }
+              private router: Router) {
+                this.router.routeReuseStrategy.shouldReuseRoute = () => {
+                  return false;
+                };
+               }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -63,7 +67,7 @@ export class CongressComponent implements OnInit {
   deleteCongress(item: ICongress): void {
     this.congressService.deleteCongress(item).subscribe((res: any) => {
       alert('El congreso ha sido eliminado correctamente');
-      window.location.reload();
+      this.router.navigateByUrl('/congreso');
     });
   }
 
@@ -77,7 +81,7 @@ export class CongressComponent implements OnInit {
    toggleCreateCongress(item: ICongress): void {
     this.congressService.postCongress(item).subscribe((res: any) => {
       alert('Congreso Creado Correctamente');
-      window.location.reload();
+      this.router.navigateByUrl('/congreso');
     });
 
   }
@@ -85,7 +89,7 @@ export class CongressComponent implements OnInit {
   toggleEditCongress(item: ICongress): void {
     this.congressService.putCongress(item).subscribe((res: any) => {
       alert('Congreso Modificado Correctamente');
-      window.location.reload();
+      this.router.navigateByUrl('/congreso');
     });
   }
 

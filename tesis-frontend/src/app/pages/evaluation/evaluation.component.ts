@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IEvaluation } from 'src/app/core/models/IEvaluation';
 import { EvaluationService } from 'src/app/core/services/evaluation.service';
 
@@ -13,7 +14,11 @@ export class EvaluationComponent implements OnInit {
   edit = false;
   evaluation = {};
 
-  constructor(private evaluationService: EvaluationService) { }
+  constructor(private evaluationService: EvaluationService,
+              private router: Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => {
+        return false;
+      }; }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -54,13 +59,13 @@ export class EvaluationComponent implements OnInit {
     if (item.id === (undefined || '')) {
       this.evaluationService.postEvaluation(item).subscribe((res: any) => {
         alert('Evaluación Creada Correctamente');
-        window.location.reload();
+        this.router.navigateByUrl('/evaluacion');
       });
     }
     else {
       this.evaluationService.putEvaluation(item).subscribe((res: any) => {
         alert('Evaluación Modificada Correctamente');
-        window.location.reload();
+        this.router.navigateByUrl('/evaluacion');
       });
     }
   }
