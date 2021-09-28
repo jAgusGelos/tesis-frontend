@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EvaluatePaperService } from 'src/app/core/services/evaluate-paper.service';
+import { EvaluationService } from 'src/app/core/services/evaluation.service';
+import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 
 @Component({
   selector: 'app-evaluate-article',
@@ -21,7 +23,8 @@ export class EvaluateArticleComponent implements OnInit {
   flagEvaluate = false;
 
 
-  constructor(private paperEvalService: EvaluatePaperService) { }
+  constructor(private paperEvalService: EvaluatePaperService,
+              private evaluationService: EvaluatorService) { }
 
   ngOnInit(): void {
     // this.getPapers();
@@ -45,4 +48,18 @@ export class EvaluateArticleComponent implements OnInit {
     this.flagEvaluate = !this.flagEvaluate;
   }
 
+  acceptEvaluate(paper):void{
+    this.paper = paper;
+    this.evaluationService.acceptEvaluationPaper(this.paper).subscribe(
+      (res:any) => {alert('La evaluación ha sido aceptada.')}
+    )
+  }
+  cancelEvaluate(paper):void{
+    this.paper = paper;
+    this.evaluationService.cancelarEvaluationPaper(this.paper).subscribe(
+      (res: any) =>{alert('La evaluación ha sido rechazada.');
+    })
+  }
+
+  
 }
