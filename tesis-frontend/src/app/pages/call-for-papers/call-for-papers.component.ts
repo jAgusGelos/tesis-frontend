@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IntPaper } from 'src/app/core/models/IntPaper';
 import { PaperService } from 'src/app/core/services/paper.service';
 
@@ -14,7 +15,11 @@ export class CallForPapersComponent implements OnInit {
   paper = {};
   simposios = [];
 
-  constructor(private paperService: PaperService) { }
+  constructor(private paperService: PaperService,
+              private router: Router) {
+                this.router.routeReuseStrategy.shouldReuseRoute = () => {
+                  return false;
+                }; }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -77,13 +82,13 @@ export class CallForPapersComponent implements OnInit {
     if (item.id === '') {
       this.paperService.postPaper(item).subscribe((res: any) => {
         alert('Paper Creado Correctamente');
-        window.location.reload();
+        this.router.navigateByUrl('/callForPapers');
       });
     }
     else{
       this.paperService.putPaper(item).subscribe((res: any) => {
         alert('Paper Modificado Correctamente');
-        window.location.reload();
+        this.router.navigateByUrl('/callForPapers');
       });
     }
   }

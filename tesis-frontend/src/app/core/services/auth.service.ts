@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { of } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,9 @@ export class AuthService {
   private apiURLRegister = environment.apiURL  + 'api/registrar/';
   private apiURLLogin = environment.apiURL  + 'api/login/';
   private apiURLLogout = environment.apiURL + 'api/logout/';
+  private apiURLChangePass = environment.apiURL + 'api/cambiarContrasenia/';
+  private apiURLRecoverPass = environment.apiURL + 'api/enviarMailRestablecerContrasenia/';
+
 
 
   login(item: any): any {
@@ -86,7 +89,19 @@ export class AuthService {
     return decodedToken.id.asObservable();
   }
 
+  changePassword(item : any ):any{
+    return this.http.post<IUser>(this.apiURLChangePass, item);
+  }
 
+  recoverPassword(item : any ):any{
+    return this.http.post<IUser>(this.apiURLRecoverPass, {email: item});
+  }
+  verifyEmail(item : string):any{
+    return this.http.get(environment.apiURL + 'api/email-verify/' + item);
+  }
+ 
 
+  
 }
+
 

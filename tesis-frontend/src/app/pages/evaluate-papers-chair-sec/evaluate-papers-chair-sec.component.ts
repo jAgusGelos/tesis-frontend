@@ -9,8 +9,10 @@ import { EvaluationService } from 'src/app/core/services/evaluation.service';
 })
 export class EvaluatePapersChairSecComponent implements OnInit {
 
+
   edit = false;
   articulos = [];
+  detailed = false;
 
   //Detalles
   index = 0;
@@ -31,12 +33,25 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     ['1', ['id1', 'puntuacion Ev 1 item 1'], ['id2','puntuacion Ev 1 item 2'],['id3','puntuacion Ev 1 item 3']],
     ['2', ['id2', 'puntuacion Ev 2 item 1'], ['id1','puntuacion Ev 2 item 2'],['id3','puntuacion Ev 2 item 3']]];
 
+
   constructor(private paperService: PaperService,
               private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.getArticulos();
   }
+
+  evaluadores: IEvaluator[] = [{id: '1', nombre: 'Juan', puntuacion: '1'},
+                               {id: '2', nombre: 'Aye', puntuacion: '1'},
+                               {id: '3', nombre: 'Agus', puntuacion: '1'}, ];
+
+  articuloSeleccionado: {
+    articulo: IntPaper,
+    evUno: IEvaluator,
+    evDos: IEvaluator,
+    evTres: IEvaluator
+  };
+
 
   evaluarDetalle(index) {
     var select = <HTMLSelectElement>document.getElementById('selectStateDetalle');
@@ -219,7 +234,13 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     this.articulos[index].edit = false;
   }
 
+
   toggleEdit(index) {
     this.articulos[index].edit = !this.articulos[index].edit
+  }
+
+  verDetalle(art: any): void {
+    this.articuloSeleccionado = art;
+    this.detailed = !this.detailed;
   }
 }

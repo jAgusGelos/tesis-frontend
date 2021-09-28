@@ -20,7 +20,20 @@
         <td>{{i + 1}}</td>
         <td>{{item.nombreArticulo}}</td>
         <td>{{item.estado}}</td>
-        <td><a (click)='toggleEvaluate(item)' title='Evaluar' *ngIf="item.estado !== 'Evaluado'"><i class="fas fa-pencil-alt"></i></a></td>
+        <td>
+          <div class="btn-group col-md-3">
+          <a (click)='toggleEvaluate(item)' title='Evaluar' *ngIf="item.estado !== 'Evaluado'"><i class="fas fa-pencil-alt"></i></a>
+          &nbsp;
+          &nbsp;
+            <a data-bs-toggle="dropdown" title="Más Opciones" *ngIf="item.estado == 'Pdte Evaluacion'"><i class="fas fa-ellipsis-h"></i></a>
+            <ul class="dropdown-menu">
+              <li><a (click)='toggleCancel(item)'class="dropdown-item" href="#">Rechazar Evaluación</a></li>
+            </ul>
+          
+          
+        </div>
+      </td>
+
       </tr>
     </tbody>
   </table>

@@ -1,8 +1,6 @@
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ISchedule } from '../../models/ISchedule';
+import { Router } from '@angular/router';
 import { CongressService } from '../../services/congress.service';
 import { DefineAgendaService } from '../../services/define-agenda.service';
 
@@ -23,20 +21,37 @@ export class AgendaComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private congressService: CongressService,
-              private scheduleService: DefineAgendaService) { }
+              private scheduleService: DefineAgendaService,
+              private router: Router) {
+                this.router.routeReuseStrategy.shouldReuseRoute = () => {
+                  return false;
+                };
+              }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.formCongress = this.formBuilder.group({
       congreso: ['', [Validators.required]],
-      FechaInCongreso: [this.invertConvertDateFormat(this.schedule.fechaInCongreso), [Validators.required]],
-      FechaFinCongreso: [this.invertConvertDateFormat(this.schedule.fechaFinCongreso), [Validators.required]],
-      FechaFinInscripTemprana: [this.invertConvertDateFormat(this.schedule.fechaFinInscripTemprana), [Validators.required]],
-      FechaFinInscripTardia: [this.invertConvertDateFormat(this.schedule.fechaFinInscripTardia), [Validators.required]],
-      FechaLimPapers: [this.invertConvertDateFormat(this.schedule.fechaLimPapers), [Validators.required]],
-      FechaProrrogaPapers: [this.invertConvertDateFormat(this.schedule.fechaProrrogaPapers), [Validators.required]],
-      FechaFinEvaluacion: [this.invertConvertDateFormat(this.schedule.fechaFinEvaluacion), [Validators.required]],
-      FechaFinReEv: [this.invertConvertDateFormat(this.schedule.fechaFinReEv), [Validators.required]]
+      FechaInCongreso: [this.schedule.fechaInCongreso ? this.invertConvertDateFormat(this.schedule.fechaInCongreso) : null,
+         [Validators.required]],
+      FechaFinCongreso: [this.schedule.fechaFinCongreso ? this.invertConvertDateFormat(this.schedule.fechaFinCongreso) : null,
+         [Validators.required]],
+      FechaFinInscripTemprana: [this.schedule.fechaFinInscripTemprana ?
+            this.invertConvertDateFormat(this.schedule.fechaFinInscripTemprana) :
+            null,
+         [Validators.required]],
+      FechaFinInscripTardia: [this.schedule.fechaFinInscripTardia ?
+            this.invertConvertDateFormat(this.schedule.fechaFinInscripTardia) :
+            null,
+         [Validators.required]],
+      FechaLimPapers: [this.schedule.fechaLimPapers ? this.invertConvertDateFormat(this.schedule.fechaLimPapers) : null,
+         [Validators.required]],
+      FechaProrrogaPapers: [this.schedule.fechaProrrogaPapers ? this.invertConvertDateFormat(this.schedule.fechaProrrogaPapers) : null,
+         [Validators.required]],
+      FechaFinEvaluacion: [this.schedule.fechaFinEvaluacion ? this.invertConvertDateFormat(this.schedule.fechaFinEvaluacion) : null,
+         [Validators.required]],
+      FechaFinReEv: [this.schedule.fechaFinReEv ? this.invertConvertDateFormat(this.schedule.fechaFinReEv) : null,
+         [Validators.required]]
     });
   }
 
@@ -97,7 +112,7 @@ export class AgendaComponent implements OnInit {
     }
     this.scheduleService.postAgenda(agenda).subscribe((res: any) => {
       alert('Fechas Modificadas correctamente');
-      window.location.reload();
+      this.router.navigateByUrl('/misCongresos');
      });
   }
 

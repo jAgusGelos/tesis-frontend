@@ -49,9 +49,12 @@ export class UserRegisterComponent implements OnInit {
       alert('Las contraseñas deben ser iguales');
       return;
     }
+    const password = this.formRegister.controls.password.value;
+
+    const encode = window.btoa(password);
     const user: IUser = {
       email: this.formRegister.controls.email.value,
-      password: this.formRegister.controls.password.value
+      password: encode
     };
     this.userService.register(user).subscribe((res: any) => {
       if (!res){

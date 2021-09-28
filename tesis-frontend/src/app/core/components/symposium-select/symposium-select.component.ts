@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ISymposium } from '../../models/ISymposium';
 import { SymposiumService } from '../../services/symposium.service';
 
@@ -18,7 +19,12 @@ export class SymposiumSelectComponent implements OnInit {
   @Input() simposiosList: ISymposium[];
 
   constructor(private formBuilder: FormBuilder,
-              private sympoService: SymposiumService) { }
+              private sympoService: SymposiumService,
+              private router: Router) {
+                this.router.routeReuseStrategy.shouldReuseRoute = () => {
+                  return false;
+                }
+                ; }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -73,8 +79,8 @@ export class SymposiumSelectComponent implements OnInit {
   }
 
   submit(): void {
-    console.log('Datos Guardados');
-    window.location.reload();
+    alert('Datos Guardados');
+    this.router.navigateByUrl('/misCongresos');
   }
 
 }

@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-body">
+      <div class="contenidos">
+        <hr>
+        <h3 class="card-title text-center">{{new ? 'Crear Tarifa' : 'Editar Tarifa'}}</h3>
+        <hr>
+      </div>
+      <form class="container" [formGroup]='formTarifa'>
+        <!-- Nombre -->
+        <div class="row justify-content-md-center">
+            <div class="col col-md-6">
+                <label for="nombre" class="form-label">Nombre<span class='text-danger'>*</span></label>
+                <input type="text" class="form-control" formControlName="nombre"
+                [ngClass]="{'is-invalid': submitted && formTarifa.controls.nombre.errors}" onClick="this.select();">
+            </div>
+        </div>
+        <!-- Precio -->
+        <div class="row justify-content-md-center">
+            <div class="col col-md-6">
+                <label for="precio" class="form-label">Precio<span class='text-danger'>*</span></label>
+                <input type="number" class="form-control" min="0" formControlName="precio"
+                [ngClass]="{'is-invalid': submitted && formTarifa.controls.precio.errors}" onClick="this.select();">
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <!-- Fecha Desde -->
+            <div class="col col-md-3">
+                <label for="fechaDesde" class="form-label">Desde<span class='text-danger'>*</span></label>
+                <input type="date" class="form-control" formControlName="fechaDesde"
+                [ngClass]="{'is-invalid': submitted && formTarifa.controls.fechaDesde.errors}">
+            </div>
+            <!-- Fecha Hasta -->
+            <div class="col col-md-3">
+                <label for="fechaHasta" class="form-label">Hasta<span class='text-danger'>*</span></label>
+                <input type="date" class="form-control" formControlName="fechaHasta"
+                [ngClass]="{'is-invalid': submitted && formTarifa.controls.fechaHasta.errors}">
+            </div>
+        </div>
+        <div *ngIf="!datesValid" class="row justify-content-md-center text-danger">La fecha de inicio debe ser menor o igual a la fecha de fin.</div>
+        <div class="row justify-content-md-center pt-3 btn-row">
+        <a class="col-md-3 btn btn-secondary" (click)='cancel()' role="button">Cancelar</a>
+        &nbsp;
+        <a class="col-md-3 btn btn-primary" (click)='submit()'
+            role="button">{{new ? 'Crear Tarifa' : 'Guardar Cambios'}}</a>
+        </div>
+      </form>
+    </div>
+</div>
+  

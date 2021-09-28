@@ -16,6 +16,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   constructor(  private evaluatorService: EvaluatorService,
                 private articulosService: ArticulosService,
+
                 ) { }
 
   ngOnInit(): void {
@@ -29,9 +30,9 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
       this.paperList = res.data.filter((x: any) => x.estadoArticuloNombre === 'Enviado');
       this.assignedPaperList = this.paperList.map((x: any) => {
         return {
-          idEval1: x.evaluadores[0].ideval,
-          idEval2: x.evaluadores[1].ideval,
-          idEval3: x.evaluadores[2].ideval,
+          idEval1: x.evaluadores[0].id,
+          idEval2: x.evaluadores[1].id,
+          idEval3: x.evaluadores[2].id,
           idArticulo: x.idArticulo,
           nombreArticulo : x.nombreArticulo
         };
@@ -40,7 +41,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   }
 
   getEvaluators(): void {
-    this.evaluatorService.getEvaluatorsSimposio().subscribe((res: any) => {
+    this.evaluatorService.getEvaluatorsGroup().subscribe((res: any) => {
       this.evaluatorList = res.data;
     });
   }
@@ -73,22 +74,24 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   distributeEvaluators(): void {
     // Distribuye aleatoriamente los evaluadores a los papers cargados.
+    console.log('Paso');
+
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
-      if (x.idEval1 === null) {
+      if (x.idEval1 === undefined) {
         let eval1 = this.evaluatorList[Math.floor(Math.random() * this.evaluatorList.length)].idEvaluador;
         while (eval1 === x.idEval2 || eval1 === x.idEval3) {
           eval1 = this.evaluatorList[Math.floor(Math.random() * this.evaluatorList.length)].idEvaluador;
         }
         x.idEval1 = eval1;
       }
-      if (x.idEval2 === null) {
+      if (x.idEval2 === undefined) {
        let eval2 = this.evaluatorList[Math.floor(Math.random() * this.evaluatorList.length)].idEvaluador;
        while (eval2 === x.idEval1 || eval2 === x.idEval3) {
         eval2 = this.evaluatorList[Math.floor(Math.random() * this.evaluatorList.length)].idEvaluador;
        }
        x.idEval2 = eval2;
       }
-      if (x.idEval3 === null) {
+      if (x.idEval3 === undefined) {
         let eval3 = this.evaluatorList[Math.floor(Math.random() * this.evaluatorList.length)].idEvaluador;
         while (eval3 === x.idEval1 || eval3 === x.idEval2) {
           eval3 = this.evaluatorList[Math.floor(Math.random() * this.evaluatorList.length)].idEvaluador;
