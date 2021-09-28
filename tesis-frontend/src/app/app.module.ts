@@ -7,11 +7,9 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
-import { EvaluatorsComponent } from './pages/evaluators/evaluators.component';
-import { TarifasComponent } from './pages/tarifas/tarifas.component';
 
 @NgModule({
-  declarations: [AppComponent, EvaluatorsComponent, TarifasComponent],
+  declarations: [AppComponent ],
 
   imports: [
     BrowserModule,
