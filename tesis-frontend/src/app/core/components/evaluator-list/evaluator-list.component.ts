@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IEvaluator } from '../../models/IEvaluator';
 import { IUserComplete } from '../../models/IUserComplete';
 import { EvaluatorService } from '../../services/evaluator.service';
 import { UserService } from '../../services/user.service';
@@ -16,7 +15,7 @@ export class EvaluatorListComponent implements OnInit {
   submitted = false;
   new = false;
   index: number;
-  deleteEvName: String;
+  deleteEvName: string;
   messageHeader: string;
   messageBody: string;
 
@@ -32,19 +31,18 @@ export class EvaluatorListComponent implements OnInit {
       correo: ['', [Validators.required]]});
     this.fillEvaluatorsList();
     this.getUsers();
-    
   }
 
-  sendMail() {
+  sendMail(): void {
     this.submitted = true;
     if (this.formEvaluator.valid) {
-      let correo = this.formEvaluator.controls.correo.value;
-      let user = this.searchByEmail(correo);
+      const correo = this.formEvaluator.controls.correo.value;
+      const user = this.searchByEmail(correo);
       if (user == null) {
         this.showMessage('Error', 'El correo ingresado no pertenece a un usuario registrado.');
         return;
       }
-      let idUsuarios = [user.id.toString()];
+      const idUsuarios = [user.id.toString()];
       this.evaluatorService.postEvaluator(idUsuarios).subscribe((res: any) => {
         if (res.data != null) {
           this.showMessage('¡Correo enviado!', res.data);
@@ -53,26 +51,27 @@ export class EvaluatorListComponent implements OnInit {
         } else {
           this.showMessage('Error', res.error);
         }
-      });  
+      });
     }
   }
 
-  fillEvaluatorsList() {
+  fillEvaluatorsList(): void {
     this.evaluatorService.getEvaluators(0).subscribe((res: any) => {
       this.evaluatorsList = res.data;
     });
   }
 
-  showMessage(header: string, body: string) {
+  showMessage(header: string, body: string): void {
     this.messageHeader = header;
     this.messageBody = body;
-    let btn = document.getElementById('modalCorreo');
+    const btn = document.getElementById('modalCorreo');
     btn.click();
   }
 
-  searchByEmail(email: string) {
+  searchByEmail(email: string): IUserComplete {
+    // tslint:disable-next-line: prefer-for-of
     for (let index = 0; index < this.usersList.length; index++) {
-      if (email == this.usersList[index].email) {
+      if (email === this.usersList[index].email) {
         return this.usersList[index];
       }
     }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ITarifa } from 'src/app/core/models/itarifa';
 import { TarifasService } from 'src/app/core/services/tarifas.service';
-import { CongressService } from 'src/app/core/services/congress.service';
 
 
 @Component({
@@ -22,21 +21,21 @@ export class TarifasComponent implements OnInit {
     this.getTarifas();
   }
 
-  getTarifas() {
+  getTarifas() : void{
     this.tarifaList = [];
     this.tarifaService.getTarifas().subscribe((res: any) => {
       this.tarifaList = res.data[0];
     });
   }
 
-  getTarifasActivas() {
+  getTarifasActivas() : void{
     this.tarifaList = [];
     this.tarifaService.getTarifasActivas().subscribe((res: any) => {
       this.tarifaList = res.data;
     });
-  } 
+  }
 
-  postTarifa(item) {
+  postTarifa(item): void {
     this.tarifaService.postTarifa(item).subscribe((res: any) => {
       this.getTarifas();
       this.toggleEdit();
@@ -44,17 +43,16 @@ export class TarifasComponent implements OnInit {
     (err: any) => console.log(err));
   }
 
-  putTarifa(item) {
+  putTarifa(item): void {
     this.tarifaService.putTarifa(item).subscribe((res: any) => {
       this.getTarifas();
       this.toggleEdit();
     });
   }
 
-  deleteTarifa(id) {
+  deleteTarifa(id): void {
     this.tarifaService.deleteTarifa(id).subscribe((res: any) => {
       this.getTarifas();
-      
     });
   }
 
@@ -76,7 +74,7 @@ export class TarifasComponent implements OnInit {
     this.toggleEdit();
   }
 
-  toggleEdit() {
+  toggleEdit(): void {
     this.edit = !this.edit;
   }
 }
