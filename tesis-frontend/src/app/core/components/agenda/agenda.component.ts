@@ -1,8 +1,6 @@
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ISchedule } from '../../models/ISchedule';
+import { Router } from '@angular/router';
 import { CongressService } from '../../services/congress.service';
 import { DefineAgendaService } from '../../services/define-agenda.service';
 
@@ -23,7 +21,12 @@ export class AgendaComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private congressService: CongressService,
-              private scheduleService: DefineAgendaService) { }
+              private scheduleService: DefineAgendaService,
+              private router: Router) {
+                this.router.routeReuseStrategy.shouldReuseRoute = () => {
+                  return false;
+                };
+              }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -109,7 +112,7 @@ export class AgendaComponent implements OnInit {
     }
     this.scheduleService.postAgenda(agenda).subscribe((res: any) => {
       alert('Fechas Modificadas correctamente');
-      window.location.reload();
+      this.router.navigateByUrl('/misCongresos');
      });
   }
 

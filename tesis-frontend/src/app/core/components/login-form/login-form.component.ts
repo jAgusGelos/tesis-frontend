@@ -46,7 +46,8 @@ export class LoginFormComponent implements OnInit {
   submit(): void {
     const password = this.formLogin.controls.password.value;
 
-    const encode = window.btoa(password);
+    // const encode = window.btoa(password);
+
     // console.log('---ENCODED-----', encode);
 
     // const decode = window.atob(encode)
@@ -60,7 +61,8 @@ export class LoginFormComponent implements OnInit {
     }
     const login = {
       email: this.formLogin.controls.email.value,
-      password: encode,
+      // password: encode,
+      password,
       idCongreso: +this.formLogin.controls.idCongress.value
     };
     this.loginService
