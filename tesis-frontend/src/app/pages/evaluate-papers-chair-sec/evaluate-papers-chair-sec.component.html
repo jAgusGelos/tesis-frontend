@@ -1,7 +1,8 @@
 <div *ngIf="!detailed" class="evaluation-cards">
-    <app-evaluate-papers-chair-sec-card *ngFor="let art of articulos" [articulo]="art" [verDetalleEmitter]="verDetalle($event)"></app-evaluate-papers-chair-sec-card>
+    <app-evaluate-papers-chair-sec-card  *ngFor="let art of articulos" [articulo]="art" [verDetalleEmitter]="verDetalle($event)"></app-evaluate-papers-chair-sec-card>
 </div>
+
 <div *ngIf="detailed">
-    <appDetalle [art]="articuloSeleccionado"></appDetalle>    
+    <appDetalle [art]="articuloSeleccionado"></appDetalle>
 </div>
 
