@@ -32,8 +32,11 @@ import { ScoreEvaluatorsComponent } from './components/score-evaluators/score-ev
 import { EvaluatePapersChairSecCardComponent } from './components/evaluate-papers-chair-sec-card/evaluate-papers-chair-sec-card.component';
 import { EvaluatorListComponent } from './components/evaluator-list/evaluator-list.component';
 import { CongressCardComponent } from './components/congress-card/congress-card.component';
+import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
+import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
 import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
+
 
 
 
@@ -71,6 +74,8 @@ import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.compon
     EvaluatePapersChairSecCardComponent,
     EvaluatorListComponent,
     CongressCardComponent,
+    ChangePasswordFormComponent,
+    RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent
   ],
@@ -111,6 +116,8 @@ import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.compon
     EvaluatePapersChairSecCardComponent,
     EvaluatorListComponent,
     CongressCardComponent,
+    ChangePasswordFormComponent,
+    RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent
   ],
