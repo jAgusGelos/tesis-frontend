@@ -34,6 +34,9 @@ import { EvaluatorListComponent } from './components/evaluator-list/evaluator-li
 import { CongressCardComponent } from './components/congress-card/congress-card.component';
 import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
 import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
+import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
+import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
+
 
 
 
@@ -72,7 +75,9 @@ import { RecoverPasswordFormComponent } from './components/recover-password-form
     EvaluatorListComponent,
     CongressCardComponent,
     ChangePasswordFormComponent,
-    RecoverPasswordFormComponent
+    RecoverPasswordFormComponent,
+    TarifaListComponent,
+    TarifaFormComponent
   ],
   imports: [
     CommonModule,
@@ -112,7 +117,9 @@ import { RecoverPasswordFormComponent } from './components/recover-password-form
     EvaluatorListComponent,
     CongressCardComponent,
     ChangePasswordFormComponent,
-    RecoverPasswordFormComponent
+    RecoverPasswordFormComponent,
+    TarifaListComponent,
+    TarifaFormComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

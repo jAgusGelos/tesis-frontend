@@ -106,6 +106,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/evaluators/evaluators.module')
     .then(m => m.EvaluatorsModule),
   },
+  {
+    path: 'tarifas',
+    loadChildren: () => import('./pages/tarifas/tarifas.module')
+    .then(m => m.TarifasModule),
+  },
   // Notification routes
   {
     path: 'deactivateAccount',
