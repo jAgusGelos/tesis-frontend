@@ -36,6 +36,7 @@ import { ChangePasswordFormComponent } from './components/change-password-form/c
 import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
 import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
+import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
 
 
 
@@ -77,7 +78,8 @@ import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.compon
     ChangePasswordFormComponent,
     RecoverPasswordFormComponent,
     TarifaListComponent,
-    TarifaFormComponent
+    TarifaFormComponent,
+    CustomToastComponent
   ],
   imports: [
     CommonModule,
@@ -119,7 +121,8 @@ import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.compon
     ChangePasswordFormComponent,
     RecoverPasswordFormComponent,
     TarifaListComponent,
-    TarifaFormComponent
+    TarifaFormComponent,
+    CustomToastComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
