@@ -19,9 +19,9 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
   evUno: IEvaluator;
   evDos: IEvaluator;
   evTres: IEvaluator;
-  estadoEvaluacion: String;
+  estadoEvaluacion: string;
 
-  edit: Boolean = false;
+  edit: boolean = false;
 
   constructor(private articulosService: ArticulosService,
               private papersService: PaperService) { }
@@ -31,25 +31,25 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
       this.setBadge(this.articulo.estado);
   }
 
-  //REVISAR ESTE METODO
+  // REVISAR ESTE METODO
   downloadPaper() {
     this.papersService.getPaperFile(this.articulo).subscribe((res: any) => {
       this.articulo.archivo = res.data;
     });
-    let a = document.createElement("a");
-    a.setAttribute("download", this.articulo.archivo.name);
+    const a = document.createElement('a');
+    a.setAttribute('download', this.articulo.archivo.name);
     a.click();
     document.removeChild(a);
   }
 
   save() {
-    let select = <HTMLSelectElement>document.getElementById('selectState');
-    let opt = select.options[select.selectedIndex].value;
-    if (opt == '') {
+    const select =  document.getElementById('selectState') as HTMLSelectElement;
+    const opt = select.options[select.selectedIndex].value;
+    if (opt === '') {
       alert('Seleccione una evaluación para este artículo');
       return;
     }
-    let paperCalification = {
+    const paperCalification = {
       paper: this.articulo,
       calificacion: opt
     };
@@ -74,23 +74,23 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
 
   setBadge(state: String) {
     if (state == 'Aprobado' || state == 'AprobadoReentrega') {
-      document.getElementById("estado-badge").className = "badge bg-success";
+      document.getElementById('estado-badge').className = 'badge bg-success';
       this.estadoEvaluacion = 'Aprobado';
     }
     if (state == 'Rechazado' || state == 'RechazadoReentrega') {
-      document.getElementById("estado-badge").className = "badge bg-danger";
+      document.getElementById('estado-badge').className = 'badge bg-danger';
       this.estadoEvaluacion = 'Rechazado';
     }
     if (state == 'ParaReentregar') {
-      document.getElementById("estado-badge").className = "badge bg-warning text-dark";
+      document.getElementById('estado-badge').className = 'badge bg-warning text-dark';
       this.estadoEvaluacion = 'Para reentrega';
     }
     if (state == 'Asignado') {
-      document.getElementById("estado-badge").className = "badge bg-secondary";
+      document.getElementById('estado-badge').className = 'badge bg-secondary';
       this.estadoEvaluacion = 'Faltan evaluaciones';
     }
     if (state == 'Corregido') {
-      document.getElementById("estado-badge").className = "badge bg-primary";
+      document.getElementById('estado-badge').className = 'badge bg-primary';
       this.estadoEvaluacion = 'Listo para evaluar';
     }
   }
@@ -105,12 +105,12 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
   }
 
   verDetalle() {
-    let art = {
+    const art = {
       articulo: this.articulo,
       evUno: this.evUno,
       evDos: this.evDos,
       evTres: this.evTres
-    }
+    };
     this.verDetalleEmitter.emit(art);
   }
 

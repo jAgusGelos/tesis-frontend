@@ -1,6 +1,8 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { PaperService } from 'src/app/core/services/paper.service';
 import { EvaluationService } from 'src/app/core/services/evaluation.service';
+import { IEvaluator } from 'src/app/core/models/IEvaluator';
+import { IntPaper } from 'src/app/core/models/IntPaper';
 
 @Component({
   selector: 'app-evaluate-papers-chair-sec',
@@ -17,33 +19,34 @@ export class EvaluatePapersChairSecComponent implements OnInit {
   //Detalles
   index = 0;
   criterios = [];
-  detalles = [{criterio: '', res1: '', res2: '', res3:''}];
+  detalles = [{ criterio: '', res1: '', res2: '', res3: '' }];
   detNombreArticulo = '';
   detResponsable = '';
   detIdEstado = 0;
   detEstado = '';
-  detEvUno = {id: 0, nombre: 'Evaluador 1'};
-  detEvDos = {id: 0, nombre: 'Evaluador 2'};
-  detEvTres = {id: 0, nombre: 'Evaluador 3'};
+  detEvUno = { id: 0, nombre: 'Evaluador 1' };
+  detEvDos = { id: 0, nombre: 'Evaluador 2' };
+  detEvTres = { id: 0, nombre: 'Evaluador 3' };
   messageHeader = '';
   messageBody = '';
 
   evaluationsArray = [
-    ['3', ['id1', 'puntuacion Ev 3 item 1'], ['id2','puntuacion Ev 3 item 2'],['id3','puntuacion Ev 3 item 3']],
-    ['1', ['id1', 'puntuacion Ev 1 item 1'], ['id2','puntuacion Ev 1 item 2'],['id3','puntuacion Ev 1 item 3']],
-    ['2', ['id2', 'puntuacion Ev 2 item 1'], ['id1','puntuacion Ev 2 item 2'],['id3','puntuacion Ev 2 item 3']]];
+    ['3', ['id1', 'puntuacion Ev 3 item 1'], ['id2', 'puntuacion Ev 3 item 2'], ['id3', 'puntuacion Ev 3 item 3']],
+    ['1', ['id1', 'puntuacion Ev 1 item 1'], ['id2', 'puntuacion Ev 1 item 2'], ['id3', 'puntuacion Ev 1 item 3']],
+    ['2', ['id2', 'puntuacion Ev 2 item 1'], ['id1', 'puntuacion Ev 2 item 2'], ['id3', 'puntuacion Ev 2 item 3']]];
 
 
   constructor(private paperService: PaperService,
-              private evaluationService: EvaluationService) { }
+    private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.getArticulos();
   }
 
-  evaluadores: IEvaluator[] = [{id: '1', nombre: 'Juan', puntuacion: '1'},
-                               {id: '2', nombre: 'Aye', puntuacion: '1'},
-                               {id: '3', nombre: 'Agus', puntuacion: '1'}, ];
+  evaluadores: IEvaluator[] = [
+    { id: '1', nombre: 'Juan', puntuacion: '1' },
+    { id: '2', nombre: 'Aye', puntuacion: '1' },
+    { id: '3', nombre: 'Agus', puntuacion: '1' },];
 
   articuloSeleccionado: {
     articulo: IntPaper,
@@ -70,27 +73,27 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     if (estado >= 5) {
       bandera = true;
     }
-    if (opt == 1 && bandera) { //Aprobar Reentrega
+    if (opt === 1 && bandera) { //Aprobar Reentrega
       estado = 8;
-    } else if (opt == 2 && bandera) { //Rechazar Reentrega
+    } else if (opt === 2 && bandera) { //Rechazar Reentrega
       estado = 9;
-    } else if (opt == 1) { //Aprobar
+    } else if (opt === 1) { //Aprobar
       estado = 6;
-    } else if (opt == 2) { //Rechazar
+    } else if (opt === 2) { //Rechazar
       estado = 7;
-    } else if (opt == 3) { //Reentregar
+    } else if (opt === 3) { //Reentregar
       estado = 5;
     }
 
-    let idArticulo = this.articulos[index].id;
-    let calificacion = estado;
+    const idArticulo = this.articulos[index].id;
+    const calificacion = estado;
     this.paperService.calificarPaper(idArticulo, calificacion).subscribe((res: any) => {
-      this.cambiarEstado(index, opt)
+      this.cambiarEstado(index, opt);
       this.toggleEdit(index);
     });
   }
 
-  cambiarEstado(index, opt) { 
+  cambiarEstado(index, opt) {
     let bandera = false;
     if (this.articulos[index].idEstado >= 5) {
       bandera = true;
@@ -159,8 +162,8 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     this.detEvUno.nombre = 'Evaluador 1';
     this.detEvDos.nombre = 'Evaluador 2';
     this.detEvTres.nombre = 'Evaluador 3';
-    let art = this.articulos[index];
-    let ev = art.evaluaciones;
+    const art = this.articulos[index];
+    const ev = art.evaluaciones;
     this.detNombreArticulo = art.nombre;
     this.detResponsable = art.responsable;
     this.detIdEstado = art.idEstado;
@@ -183,29 +186,33 @@ export class EvaluatePapersChairSecComponent implements OnInit {
         let evaluaciones = res.data;
         let ev1, ev2, ev3;
         evaluaciones.forEach(e => {
-          if (e.idEvaluador == this.detEvUno.id) {ev1 = e}
-          else if (e.idEvaluador == this.detEvDos.id) {ev2 = e}
-          else {ev3 = e}
+          if (e.idEvaluador == this.detEvUno.id) { ev1 = e }
+          else if (e.idEvaluador == this.detEvDos.id) { ev2 = e }
+          else { ev3 = e }
         });
         let calif1 = null, calif2 = null, calif3 = null;
         for (let i = 0; i < items.length; i++) {
           if (ev1.itemsEvaluados[i].calificacion !== undefined) { calif1 = ev1.itemsEvaluados[i].calificacion; }
           if (ev2.itemsEvaluados[i].calificacion !== undefined) { calif2 = ev2.itemsEvaluados[i].calificacion; }
-          if (ev3.itemsEvaluados[i].calificacion !== undefined) { calif3 = ev3.itemsEvaluados[i].calificacion; } 
-          this.detalles.push({criterio: items[i].nombre, 
-                              res1: calif1,
-                              res2: calif2,
-                              res3: calif3,});
+          if (ev3.itemsEvaluados[i].calificacion !== undefined) { calif3 = ev3.itemsEvaluados[i].calificacion; }
+          this.detalles.push({
+            criterio: items[i].nombre,
+            res1: calif1,
+            res2: calif2,
+            res3: calif3,
+          });
           calif1 = null, calif2 = null, calif3 = null;
         }
         this.detalles.shift();
-        this.detalles.push({criterio: 'Recomendación', 
+        this.detalles.push({
+          criterio: 'Recomendación',
           res1: this.articulos[index].evaluaciones[0].recomendacion,
           res2: this.articulos[index].evaluaciones[1].recomendacion,
-          res3: this.articulos[index].evaluaciones[2].recomendacion,});
+          res3: this.articulos[index].evaluaciones[2].recomendacion,
+        });
       });
     });
-    
+
     let btnDetalle = document.getElementById("activar-modal");
     btnDetalle.click();
   }
@@ -239,7 +246,7 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     this.articulos[index].edit = !this.articulos[index].edit
   }
 
-  verDetalle(art: any): void {
+  verDetalleArt(art: any): void {
     this.articuloSeleccionado = art;
     this.detailed = !this.detailed;
   }
