@@ -6,9 +6,7 @@ import { EvaluatorsComponent } from './evaluators.component';
 
 
 @NgModule({
-  declarations: [
-    EvaluatorsComponent
-  ],
+  declarations: [EvaluatorsComponent],
   imports: [
     CommonModule,
     EvaluatorsRoutingModule,
