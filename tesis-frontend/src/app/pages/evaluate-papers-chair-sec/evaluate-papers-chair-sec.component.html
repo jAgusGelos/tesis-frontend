@@ -7,7 +7,7 @@
   </div>
   <!-- Evaluation Cards List -->
   <div *ngFor="let art of articulos; index as i">
-      <div *ngIf="art.idEstado > 3" class="card col-md-6 offset-3">
+      <div class="card col-md-6 offset-3">
           <div class="card-body">
             <div class="row ">
               <div class="col-auto me-auto">
@@ -21,9 +21,6 @@
                   [class.bg-danger]="art.idEstado === 7 || art.idEstado === 9">{{art.estado}}</span></h5>
               </div>
             </div>
-            <div class="row">
-              <h6 class="card-text"><span class="card-subtitle mb-2 text-muted">Subido por </span>{{art.responsable}}</h6>
-            </div>
             <br>
             <div class="row">
               <h6 class="card-text" id="evaluadores">Evaluadores:</h6>
@@ -36,20 +33,20 @@
                   <p class="card-text">{{ev.recomendacion}}</p>
                 </div>
               </div>
-          </div>     
+          </div>
           <div class="card-footer">
-            <a class="btn btn-outline-primary" (click)="getArchivo(i)"><i class="fas fa-file-pdf"></i> Ver artículo</a> 
-            &nbsp; 
+            <a class="btn btn-outline-primary" (click)="getArchivo(i)"><i class="fas fa-file-pdf"></i> Ver artículo</a>
+            &nbsp;
             <a class="btn btn-outline-primary" (click)="verDetalle(i)"><i class="fa fa-search-plus"></i> Ver detalle</a>
             <a *ngIf="!art.edit" class="btn btn-outline-primary" id="editar" (click)="toggleEdit(i)"><i class="fa fa-pencil"></i> Editar</a>
             <div id="evaluation-select" *ngIf="art.edit">
-              <a class="btn btn-outline-success" *ngIf="art.idEstado !== 6 && art.idEstado !== 8" (click)="evaluar(i, 1)">Aprobar</a> 
+              <a class="btn btn-outline-success" *ngIf="art.idEstado !== 6 && art.idEstado !== 8" (click)="evaluar(i, 1)">Aprobar</a>
               &nbsp;
               <a class="btn btn-outline-danger" *ngIf="art.idEstado !== 7 && art.idEstado !== 9" (click)="evaluar(i, 2)">Rechazar</a>
               &nbsp;
               <a class="btn btn-outline-warning" *ngIf="art.idEstado !== 5" (click)="evaluar(i, 3)">Reentrega</a>
               &nbsp;
-              <a class="btn btn-outline-secondary" title="Cancelar" (click)="toggleEdit(i)"><i class="fas fa-times fa-lg"></i></a> 
+              <a class="btn btn-outline-secondary" title="Cancelar" (click)="toggleEdit(i)"><i class="fas fa-times fa-lg"></i></a>
             </div>
           </div>
         </div>
