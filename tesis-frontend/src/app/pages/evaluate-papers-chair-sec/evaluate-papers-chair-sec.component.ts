@@ -1,6 +1,7 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { PaperService } from 'src/app/core/services/paper.service';
 import { EvaluationService } from 'src/app/core/services/evaluation.service';
+import { IntPaper } from 'src/app/core/models/IntPaper';
 
 @Component({
   selector: 'app-evaluate-papers-chair-sec',
@@ -41,16 +42,11 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     this.getArticulos();
   }
 
-  evaluadores: IEvaluator[] = [{id: '1', nombre: 'Juan', puntuacion: '1'},
-                               {id: '2', nombre: 'Aye', puntuacion: '1'},
-                               {id: '3', nombre: 'Agus', puntuacion: '1'}, ];
+  evaluadores = [{id: '1', nombre: 'Juan', puntuacion: '1'},
+                 {id: '2', nombre: 'Aye', puntuacion: '1'},
+                 {id: '3', nombre: 'Agus', puntuacion: '1'}];
 
-  articuloSeleccionado: {
-    articulo: IntPaper,
-    evUno: IEvaluator,
-    evDos: IEvaluator,
-    evTres: IEvaluator
-  };
+  articuloSeleccionado: {articulo: IntPaper, evUno, evDos, evTres};
 
 
   evaluarDetalle(index) {
@@ -234,13 +230,7 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     this.articulos[index].edit = false;
   }
 
-
   toggleEdit(index) {
     this.articulos[index].edit = !this.articulos[index].edit
-  }
-
-  verDetalle(art: any): void {
-    this.articuloSeleccionado = art;
-    this.detailed = !this.detailed;
   }
 }

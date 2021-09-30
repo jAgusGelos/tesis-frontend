@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { IEvaluator } from '../../models/IEvaluator';
 import { IntPaper } from '../../models/IntPaper';
 import { ArticulosService } from '../../services/articulos.service';
 import { PaperService } from '../../services/paper.service';
@@ -15,10 +14,10 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
 
   @Output() verDetalleEmitter = new EventEmitter();
 
-  evaluadores: IEvaluator[];
-  evUno: IEvaluator;
-  evDos: IEvaluator;
-  evTres: IEvaluator;
+  evaluadores;
+  evUno;
+  evDos;
+  evTres;
   estadoEvaluacion: String;
 
   edit: Boolean = false;

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IEvaluator } from '../models/IEvaluator';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -56,12 +55,12 @@ export class EvaluatorService {
     return this.httpClient.get(this.apiURL + 'evaluador/consultarEvaluador/' + id);
   }
 
-  putEvaluator(evaluator: IEvaluator): any {
-    return this.httpClient.put<IEvaluator>(this.apiURL + 'articulos/modificar/' + evaluator.id, evaluator);
+  putEvaluator(evaluator): any {
+    return this.httpClient.put(this.apiURL + 'articulos/modificar/' + evaluator.id, evaluator);
   }
 
-  deleteEvaluator(evaluator: IEvaluator): any {
-    return this.httpClient.delete<IEvaluator>(this.apiURL + 'evaluador/eliminar-evaluador/' + evaluator.id);
+  deleteEvaluator(evaluator): any {
+    return this.httpClient.delete(this.apiURL + 'evaluador/eliminar-evaluador/' + evaluator.id);
   }
 
   calificarEvaluador(evCalification: any): any {
