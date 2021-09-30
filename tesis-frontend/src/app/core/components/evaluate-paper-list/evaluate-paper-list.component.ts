@@ -11,7 +11,7 @@ export class EvaluatePaperListComponent implements OnInit {
   @Output() EvaluationEvent = new EventEmitter();
   @Output() EvaluationAcceptEvent = new EventEmitter();
   @Output() EvaluationCancelEvent = new EventEmitter();
-  
+
 
   constructor() { }
 

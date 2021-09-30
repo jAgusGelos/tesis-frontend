@@ -1,9 +1,9 @@
-
 <div class="container-fluid">
-
   <app-evaluate-paper-list *ngIf="!flagEvaluate"
    (EvaluationEvent)='evaluate($event)' (EvaluationAcceptEvent)='evaluate($event)' (EvaluationCancelEvent)='evaluate($event)' [paperList]='paperList'>
 </app-evaluate-paper-list>
-<app-evaluate-paper-form *ngIf="flagEvaluate" [paper]='paper'></app-evaluate-paper-form>
+<app-evaluate-paper-form *ngIf="flagEvaluate" 
+[paper]='paper' [items]="items" (postEvaluation)="postEvaluation($event)" (GetItemsEvent)="getItems($event)" (GetFileEvent)="getFile($event)" (CancelEvent)="toggleFlagEvaluate($event)">
+</app-evaluate-paper-form>
 </div>
 

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IEvaluation } from '../../models/IEvaluation';
 
 @Component({
   selector: 'app-evaluate-form',

@@ -32,8 +32,12 @@ export class PaperService {
     return this.httpClient.get(this.apiURL + 'articulos/consultaArticuloXResponsable/');
   }
 
-  getPaperFile(paper: IntPaper): any {
-    return this.httpClient.get(this.apiURL + 'consulta-archivo/' + paper.id);
+  getPaperById(id) {
+    return this.httpClient.get(this.apiURL + 'articulos/consultaArticuloXId/?idArticulo=' + id);
+  }
+
+  getPaperFile(id): any {
+    return this.httpClient.get(this.apiURL + 'articulos/consulta-archivo/?idArticulo=' + id, {responseType: 'arraybuffer'});
   }
 
   putPaper(paper: IntPaper): any {
@@ -60,19 +64,49 @@ export class PaperService {
     return this.httpClient.post(this.apiURL + '/sendInvit', mail);
   }
 
-
   getSimposiosActivos(): any {
     const url = 'congresos/lista-simposiosxcongreso/?idCongreso=';
     return this.httpClient.get(this.apiURL + url + this.idCongress);
   }
 
-
   getEvaluationDetails(id: any): any{
-    return this.httpClient.get(this.apiURL + '/articulos/consultaDetalleEvaluacion/' + id);
+    return this.httpClient.get(this.apiURL + 'articulos/consultaDetalleEvaluacion/?idArticulo=' + id);
   }
 
-  getQuestions(id: any): any{
-    return this.httpClient.get(this.apiURL + 'getItemEvaluacion/' + id);
+  getItemsEv(): any{
+    return this.httpClient.get(this.apiURL + 'articulos/getItemsEvaluacion/');
+  }
+
+  getEvaluadoresXPaper(id) {
+    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadoresArticulo/?idArticulo=' + id);
+  }
+
+  getPapersXSimposio(idSimposio, idEstado) {
+    return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosXSimposio/?idSimposio=' + idSimposio + '&idEstado=' + idEstado);
+    /*
+    0 No filtrar por estado
+    1 Creado
+    2 Enviado
+    3 Asignado
+    4 Corregido
+    5 ParaReentregar
+    6 Aprobado
+    7 Rechazado
+    8 AprobadoReentrega
+    9 RechazadoReentrega
+    */
+  }
+
+  getPapersXChair() {
+    return this.httpClient.get(this.apiURL + 'articulos/consulta-articulosXChair/')
+  }
+
+  calificarPaper(idArticulo, calificacion) {
+    let paperCalification = {
+      idArticulo: idArticulo,
+      calificacion: calificacion
+    }
+    return this.httpClient.put(this.apiURL + 'articulos/calificarArticulo/', paperCalification);
   }
 }
 

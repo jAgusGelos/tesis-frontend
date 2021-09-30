@@ -1,15 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ICongress } from '../../models/ICongress';
-import { IEvaluator } from '../../models/iEvaluator';
-import { IntPaper } from '../../models/IntPaper';
-import { ISymposium } from '../../models/ISymposium';
-import { IUserComplete } from '../../models/IUserComplete';
 import { ArticulosService } from '../../services/articulos.service';
 import { EvaluatorService } from '../../services/evaluator.service';
-import { SymposiumService } from '../../services/symposium.service';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-asignar-paper-evaluador-list',

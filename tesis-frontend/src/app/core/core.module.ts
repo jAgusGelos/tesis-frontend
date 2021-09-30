@@ -22,14 +22,10 @@ import { EvaluationListComponent } from './components/evaluation-list/evaluation
 import { EvaluationFormComponent } from './components/evaluation-form/evaluation-form.component';
 import { EvaluateFormComponent } from './components/evaluate-form/evaluate-form.component';
 import { EvaluateListComponent } from './components/evaluate-list/evaluate-list.component';
-import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { PapersBySymposiumListComponent } from './components/papers-by-symposium-list/papers-by-symposium-list.component';
 import { DeactivateAccountFormComponent } from './components/deactivate-account-form/deactivate-account-form.component';
 import { EvaluatePaperListComponent } from './components/evaluate-paper-list/evaluate-paper-list.component';
 import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/evaluate-paper-form.component';
-import { EvaluationDetailFormComponent } from './components/evaluation-detail-form/evaluation-detail-form.component';
-import { ScoreEvaluatorsComponent } from './components/score-evaluators/score-evaluators.component';
-import { EvaluatePapersChairSecCardComponent } from './components/evaluate-papers-chair-sec-card/evaluate-papers-chair-sec-card.component';
 import { EvaluatorListComponent } from './components/evaluator-list/evaluator-list.component';
 import { CongressCardComponent } from './components/congress-card/congress-card.component';
 import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
@@ -64,14 +60,10 @@ import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.compon
     EvaluationFormComponent,
     EvaluateFormComponent,
     EvaluateListComponent,
-    AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
     DeactivateAccountFormComponent,
     EvaluatePaperListComponent,
     EvaluatePaperFormComponent,
-    EvaluationDetailFormComponent,
-    ScoreEvaluatorsComponent,
-    EvaluatePapersChairSecCardComponent,
     EvaluatorListComponent,
     CongressCardComponent,
     ChangePasswordFormComponent,
@@ -106,14 +98,10 @@ import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.compon
     EvaluationFormComponent,
     EvaluateFormComponent,
     EvaluateListComponent,
-    AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
     DeactivateAccountFormComponent,
     EvaluatePaperListComponent,
     EvaluatePaperFormComponent,
-    EvaluationDetailFormComponent,
-    ScoreEvaluatorsComponent,
-    EvaluatePapersChairSecCardComponent,
     EvaluatorListComponent,
     CongressCardComponent,
     ChangePasswordFormComponent,
