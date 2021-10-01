@@ -1,0 +1,39 @@
+.navbar {
+  background-color: #00609C;
+}
+
+a {
+  color: white;
+}
+
+a:hover{
+  color:#c7c7c7;
+}
+
+.navbar-collapse{
+    justify-content: center;
+}
+
+.navbar-toggler{
+  background-color: #3CAFE0;
+  color: white;
+}
+
+.btn{
+  background-color:#3CAFE0;
+  border: none;
+}
+
+.dropdown-toggle{
+  color: white;
+}
+
+.dropdown-item:hover{
+  background-color:white;
+  color: black;
+}
+
+.dropdown-menu{
+  background-color: #00609C;
+}
+

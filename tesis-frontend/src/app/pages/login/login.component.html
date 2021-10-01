@@ -1,0 +1,6 @@
+<div class="container-fluid justify-content-center back">
+
+  <app-login-form *ngIf="!reg && !user" [congressList]='congressList' (registerEvent)='register()' ></app-login-form>
+  <app-user-register *ngIf="reg && !user" (cancelRegister)="register()" ></app-user-register>
+  <app-user-logged *ngIf='user'></app-user-logged>
+</div>

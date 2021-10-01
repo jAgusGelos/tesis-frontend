@@ -1,0 +1,72 @@
+
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center">Inicio de Sesión</h3>
+      <hr>
+    </div>
+    <div class="card-text text-center">
+      <form [formGroup]='formLogin'>
+        <!--Email-->
+        <div class="form-group row justify-content-center">
+          <label class="col-form-label col-sm-3 col-md-3 col-md-offset-2" for="email">Email: <span
+              class="text-danger">*</span></label>
+          <div class="col-sm-6">
+            <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': submitted
+                  && formLogin.controls.email.errors}" onclick="this.select()" />
+            <span class="text-danger"
+              *ngIf="submitted && formLogin.controls.email.errors?.required">
+              Requerido
+            </span>
+          </div>
+        </div>
+
+        <!--Contraseña-->
+        <div class="form-group row justify-content-center">
+          <label class="col-form-label col-sm-3  col-md-3 col-md-offset-2" for="password">Contraseña: <span
+              class="text-danger">*</span></label>
+          <div class="col-sm-6">
+            <input type="password" class="form-control" formControlName="password" [ngClass]="{'is-invalid': submitted
+                  && formLogin.controls.password.errors}" onclick="this.select()" />
+            <span class="text-danger"
+              *ngIf="submitted && formLogin.controls.password.errors?.required">
+              Required
+            </span>
+          </div>
+        </div>
+
+        <!-- Congreso -->
+        <div class='form-group row justify-content-center'>
+          <label class='col-form-label col-md-3 col-md-3 col-sm-offset-2' for='idCongress'>Congreso: <span
+              class='text-danger'>*</span></label>
+          <div class='col-md-6  col-sm-12'>
+            <select class='form-select col-sm-4' name="simposio" formControlName="idCongress" [ngClass]="{'is-invalid': submitted && formLogin.controls.idCongress.value === ''
+        && formLogin.controls.idCongress.errors}">
+              <option selected disabled></option>
+              <option *ngFor="let opt of congressList" value={{opt.id}}>
+                ‌{{ opt.nombre }}
+              </option>
+            </select>
+            <span class='text-danger'
+              *ngIf='submitted && formLogin.controls.idCongress.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
+        <div class="row justify-content-md-center pt-3">
+          <a class="btn btn-primary btn-block col-md-8" role="button" (click)='submit()'>Iniciar Sesión</a>
+          <br>
+          <a class="text-center pb-3">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="row justify-content-md-center pt-3 spaced">
+          <hr>
+          <a class="btn btn-primary btn-block col-md-8" role="button" (click)="register()">Registrarse</a>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

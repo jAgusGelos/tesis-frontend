@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center">Nueva Aula</h3>
+      <hr>
+    </div>
+    <div class="card-text text-center">
+      <form [formGroup]='formRooms'>
+
+          <!-- Nombre Aula -->
+          <div class="form-group row">
+            <label class="col-form-label col-sm-2 col-sm-offset-2" for="nameAula">Nombre: <span
+                class="text-danger">*</span></label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" formControlName="nameAula" [ngClass]="{'is-invalid': (formRooms.controls.nameAula.touched || submitted)
+                          && formRooms.controls.nameAula.errors}" onclick="this.select()" />
+              <span class="text-danger"
+                *ngIf="(formRooms.controls.nameAula.touched || submitted) && formRooms.controls.nameAula.errors?.required">
+                Requerido
+              </span>
+            </div>
+          </div>
+          &nbsp;
+          <!-- Descripción -->
+          <div class="form-group row">
+            <label class="col-form-label col-sm-2 col-sm-offset-2" for="descAula">Descripción: </label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" formControlName="descAula" onclick="this.select()" />
+            </div>
+          </div>
+          <!-- Capacidad -->
+          &nbsp;
+          <div class="form-group row">
+            <label class="col-form-label col-sm-2 col-sm-offset-2" for="capAula">Capacidad: </label>
+            <div class="col-sm-6">
+              <input type="number" class="form-control" formControlName="capAula" onclick="this.select()" />
+            </div>
+          </div>
+
+        <div class="row justify-content-md-center pt-3 btn-row">
+          <a class="btn btn-secondary col-md-5" role="button" (click)="cancel()">Cancelar</a>
+          &nbsp;
+          &nbsp;
+          <a class="btn btn-primary col-md-5" role="button" (click)="agregar()">Agregar Aula</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr />
+    <h3 class="text-center">Evaluadores Activos</h3>
+    <hr />
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table text-center table-hover table-bordered">
+        <thead class="thead">
+          <tr>
+            <th class="col-md-4">Evaluadores Disponibles</th>
+            <!-- <th class="col-md-2">Simposio</th> -->
+            <th class="col-md-2">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="align-items-center" *ngFor="let item of evaluatorList">
+            <td>{{ item.nombreEv }} {{item.apellidoEv}}</td>
+            <!-- <td>{{ item.simposio }}</td> -->
+
+            <td>
+              <div class="btn-group col-md-3 text-center">
+                <a (click)="addEvaluator(item)" title="Agregar"><i class="fas fa-plus"></i></a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+        <a class="btn btn-primary btn-block col-md-12 alerta " role="button" (click)='loadAll()'>¡Necesito más Evaluadores!</a>
+
+
+    </div>
+    <div class="col-md-6">
+      <table class="table text-center table-hover table-bordered">
+        <thead class="thead">
+          <tr>
+            <th class="col-md-4">Evaluadores Seleccionados</th>
+            <!-- <th class="col-md-2">Simposio</th> -->
+            <th class="col-md-2">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="align-items-center" *ngFor="let item of evaluatorSelectedList">
+            <td>{{ item.nombreEv }} {{item.apellidoEv}}</td>
+            <!-- <td>{{ item.simposio }}</td> -->
+            <td>
+              <div class="btn-group col-md-3 text-center">
+                <a (click)="toggleRemoveHandled(item)" title="Eliminar"><i class="fas fa-trash"></i></a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+  <br />
+</div>

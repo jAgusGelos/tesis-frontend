@@ -1,0 +1,8 @@
+<div class="container-fluid">
+    <div *ngIf="!edit">
+        <app-tarifa-list [tarifaList]="tarifaList" (crearTarifaEvent)="newTarifa($event)" (editarTarifaEvent)="editTarifa($event)" (eliminarTarifaEvent)="deleteTarifa($event)"></app-tarifa-list>
+    </div>
+    <div *ngIf="edit">
+    <app-tarifa-form [tarifa]="tarifa" [new]="new" (newTarifaEvent)="postTarifa($event)" (editTarifaEvent)="putTarifa($event)" (cancelEvent)="toggleEdit($event)"></app-tarifa-form>
+    </div>
+</div>

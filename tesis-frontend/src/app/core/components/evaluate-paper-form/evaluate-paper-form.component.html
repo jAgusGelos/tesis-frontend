@@ -1,0 +1,94 @@
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center">Evaluando: <b>{{paper.nombreArticulo}}</b> </h3>
+      <hr>
+    </div>
+    <div class="card-text">
+      <div class="row justify-content-md-center">
+        <div class="col col-md-6">La calificación de cada criterio abarca valores entre 1 y 10.</div>
+      </div>
+        <div class="row justify-content-md-center">
+          <div class="col col-md-3"><h6>Criterio</h6></div>
+          <div class="col col-md-3"><h6>Calificación</h6></div>
+        </div>
+        <div *ngFor="let item of items" class="row justify-content-md-center">
+          <label class="col col-md-3" for="{{item.idItemEvaluacion}}">{{item.itemEvaluacion}}</label>
+          <input class="col col-md-4" type="number" min="1" max="10" id="{{item.idItemEvaluacion}}" value="{{item.calificacion}}">
+        </div>
+        <!-- RECOMENDACION -->
+        <div class="row justify-content-md-center">
+          <div class="col col-md-3">
+            <label for="recomendaciones"><b>Recomendaciones</b></label>
+          </div>
+          <div class="col col-md-2">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="recomendaciones" id="fuertementeAprobar" value="6">
+              <label class="form-check-label" for="fuertementeAprobar">
+                Fuertemente Aprobar
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="recomendaciones" id="aprobar" value="5">
+              <label class="form-check-label" for="aprobar">
+                Aprobar
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="recomendaciones" id="debilmenteAprobar" value="4">
+              <label class="form-check-label" for="debilmenteAprobar">
+                Débilmente Aprobar
+              </label>
+            </div>
+          </div>
+          <div class="col col-md-2">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="recomendaciones" id="debilmenteRechazar" value="3">
+              <label class="form-check-label" for="debilmenteRechazar">
+                Débilmente Rechazar
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="recomendaciones" id="rechazar" value="2">
+              <label class="form-check-label" for="rechazar">
+                Rechazar
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="recomendaciones" id="fuertementeRechazar" value="1">
+              <label class="form-check-label" for="fuertementeRechazar">
+                Fuertemente Rechazar
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="recomendaciones" id="necesitaReentrega" value="7">
+              <label class="form-check-label" for="necesitaReentrega">
+                Necesita reentrega
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- OBSERVACION -->
+        <div class="row justify-content-md-center">
+          <div class="col col-md-3">
+            <label for="observaciones"><b>Observaciones</b></label>
+          </div>
+          <div class="col col-md-4">
+            <textarea class="form-control" id="observaciones">{{paper.observaciones}}</textarea>
+          </div>
+        </div>
+        <!-- BOTONES -->
+        <div class="row justify-content-md-center pt-3">
+          <a class="btn btn-warning col-md-2" (click)='getFile(paper.idArticulo)' role="button">Ver artículo</a>
+          &nbsp;
+          <a class="btn btn-secondary col-md-2" (click)='cancel()' role="button">Cancelar</a>
+          <div class="row justify-content-md-center pt-3">
+            <a class="btn btn-primary col-md-3" (click)='submit()'
+            role="button">Guardar Cambios</a>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Congresos Activos</h3>
+    <hr>
+  </div>
+  <div class="row">
+    <p>A continuación se lista el conjunto de congresos disponibles.</p>
+    <p>Usted puede editar la agenda y los simposios con las Acciones.</p>
+  </div>
+  <table class="table text-center table-hover table-bordered">
+    <thead class='thead'>
+      <tr>
+        <th class="col-md-4">Sede</th>
+        <th class="col-md-4">Nombre</th>
+        <th class="col-md-2">Año</th>
+        <th class="col-md-2">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class='align-items-center'*ngFor='let item of congressList'>
+        <td>{{item.nombre_sede}}</td>
+        <td>{{item.nombre}}</td>
+        <td>{{item.ano}}</td>
+        <td>
+          <div>
+          <a (click)='toggleEditDate(item)' title='Agenda'><i class="fas fa-calendar-alt"></i></a>
+          &nbsp;
+          &nbsp;
+          <a (click)='toggleEditSympo(item)' title='Simposios'><i class="fas fa-paint-brush"></i></a>
+          &nbsp;
+          &nbsp;
+          <a (click)='toggleEditRooms(item)' title='Aulas'><i class="fas fa-archway"></i></a>
+        </div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

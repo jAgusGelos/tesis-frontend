@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center">Nuevo Criterio</h3>
+      <hr>
+    </div>
+
+    <div class="card-text text-center">
+      <form [formGroup]='formEvaluation'>
+       <!-- pregunta -->
+       <div class='form-group row'>
+         <label class='col-form-label col-sm-3 col-sm-offset-2' for='pregunta'>Criterio: <span
+           class='text-danger'>*</span></label>
+           <div class='col-sm-8'>
+             <textarea type='textarea' class='form-control' formControlName='pregunta'
+             [ngClass]="{'is-invalid': (formEvaluation.controls.pregunta.touched || submitted)
+               && formEvaluation.controls.pregunta.errors}" onclick='this.select()'></textarea>
+
+             <span class='text-danger'
+             *ngIf='(formEvaluation.controls.pregunta.touched || submitted) && formEvaluation.controls.pregunta.errors?.required'>
+               Requerido
+             </span>
+           </div>
+       </div>
+
+        <!-- Simposio -->
+        <!-- <div class="form-group row">
+          <label class="col-form-label col-sm-3 col-sm-offset-2" for="simposio">Simposio:<span
+              class="text-danger">*</span></label>
+          <div class="col-sm-8">
+            <select  class='col-sm-4' name="simposio" class="form-control" formControlName="simposio" [ngClass]="{'is-invalid': (formEvaluation.controls.simposio.touched || submitted || formEvaluation.controls.simposio.value === '')
+          && formEvaluation.controls.simposio.errors}">
+              <option value=""> </option>
+              <option  *ngFor="let opt of simposios">
+                ‌{{ opt }}
+              <option>
+            </select>
+            <span class="text-danger"
+              *ngIf="(formEvaluation.controls.simposio.touched || submitted || formEvaluation.controls.simposio.value === '') && formEvaluation.controls.simposio.errors?.required ">
+              Requerido.
+            </span>
+          </div>
+        </div> -->
+
+        <div class="row justify-content-md-center pt-3 btn-row">
+          <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
+          &nbsp;
+          <a class="btn btn-primary col-md-4" (click)='submit()'
+            role="button">{{evaluation.id === undefined || ""  ? 'Crear Criterio' : 'Guardar Cambios'}}</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center">Simposios:</h3>
+      <hr>
+    </div>
+
+    <div class="card-text ">
+      <form [formGroup]='formSymposium'>
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='simposios'>Agregar Simposio:</label>
+          <div class="col-sm-6">
+            <select name="simposio" class="form-control" (ngModelChange)="onChange($event)"
+            formControlName="nombre" [ngClass]="{'is-invalid': (formSymposium.controls.nombre.touched || submitted)
+          && formSymposium.controls.nombre.errors}">
+          <option value=""></option>
+              <option *ngFor="let opt of simposios" value="{{opt.id}}/{{opt.nombre}}/{{opt.descripcion}}">
+                ‌{{opt.nombre}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class='form-group row' *ngIf="simposiosList.length !== 0">
+          <label class='col-form-label col-sm-3 col-sm-offset-2' for='autores'>Simposios Seleccionados:</label>
+          <table class="table text-center table-hover table-bordered">
+            <thead class='thead'>
+              <tr>
+                <th class="col-md-4">Nombre</th>
+                <th class="col-md-2">Descripción</th>
+                <th class="col-md-2">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class='align-items-center'*ngFor='let item of simposiosList'>
+                <td>{{item.nombre}}</td>
+                <td>{{item.descripcion}}</td>
+                <td>
+                  <div class="btn-group col-md-3 text-center">
+                  <a (click)='delSimposio(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+                </div>
+              </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+          <div class="row justify-content-md-center pt-3 btn-row">
+            <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
+            &nbsp;
+            <a class="btn btn-primary col-md-4" (click)='submit()'
+              role="button">Guardar Cambios</a>
+          </div>
+
+      </form>
+    </div>
+  </div>
+</div>

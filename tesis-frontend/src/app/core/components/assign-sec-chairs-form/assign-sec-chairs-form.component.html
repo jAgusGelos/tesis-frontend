@@ -1,0 +1,69 @@
+
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Asignar Chairs Secundarios</h3>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="col-md-4 offset-md-1">
+      <form [formGroup]='formAssignSecChairs'>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Asignar chair a simposio</h5>
+                <br>
+                <label for="selectChair">Usuario: </label>
+                <div>
+                  <select name="chair" class="form-select" formControlName="selectChair"
+                    [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectChair.touched || submitted) && formAssignSecChairs.controls.selectChair.errors}">
+                    <option hidden selected>Seleccione un chair a asignar</option>
+                    <option *ngFor="let chair of chairsNotAssigned" value={{chair.id}}>{{ chair.nombre }} {{chair.apellido}} - {{ chair.email }}</option>
+                  </select>
+                </div>
+                <br>
+                <label for="selectTematica">Simposio: </label>
+                <div>
+                  <select name="chair" class="form-select" formControlName="selectTematica"
+                    [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectTematica.touched || submitted) && formAssignSecChairs.controls.selectTematica.errors}">
+                    <option hidden selected>Seleccione una simposio</option>
+                    <option *ngFor="let theme of tematicas" value={{theme.id}}>{{ theme.descripcion }}</option>
+                  </select>
+                </div>
+                <br>
+                <div class="row justify-content-md-end">
+                  <a type="button" class="btn btn-primary col-sm-3" (click)="asignarChair() ">Asignar <i class="fas fa-plus"></i></a>
+                </div>
+              </div>
+            </div>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5>Chairs asignados</h5>
+          <table class="table text-center table-hover table-bordered">
+            <thead class='thead'>
+              <tr>
+                <th class="col-md-4">Chair</th>
+                <th class="col-md-4">Simposio</th>
+                <th class="col-md-2">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class='align-items-center' *ngFor='let chair of chairsAssigned'>
+                <td>{{chair.nombreChair}} {{chair.apellidoChair}}</td>
+                <td>{{chair.nombreSimposio}}</td>
+                <td>
+                  <div class="btn-group col-md-3">
+                    <a (click)='toggleRemoveHandled(chair)' title='Eliminar'><i class="fas fa-trash"></i></a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

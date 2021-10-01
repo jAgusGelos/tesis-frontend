@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-body">
+      <div class="contenidos">
+        <hr>
+        <h3 class="card-title text-center">Evaluar</h3>
+        <hr>
+      </div>
+
+      <table class="table text-center table-hover table-bordered">
+        <thead class='thead'>
+          <tr>
+            <th class="col-md-6">Pregunta</th>
+            <th class="col-md-4">Puntua</th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          <tr class='align-items-center'*ngFor='let item of evaluation'>
+            <td>{{item.pregunta}}</td>
+            <td>
+              <div class="row justify-content-md-center">
+                <div class="col-md-6">
+                  <select  class='form-control col-md-4' name='puntua' [(ngModel)]="item.puntaje">
+                  <option  value="-1" disabled selected>---Seleccione--</option>
+                    <option  [ngValue]="0" >Muy Malo</option>
+                    <option  [ngValue]="1" >Malo</option>
+                    <option  [ngValue]="2" >Regular</option>
+                    <option  [ngValue]="3" >Bueno</option>
+                    <option  [ngValue]="4" >Muy Bueno</option>
+                  </select>          
+                </div>
+            </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div class="card-text text-center">      
+          <div class="row justify-content-md-center pt-3 btn-row">
+            <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
+            &nbsp;
+            <a class="btn btn-primary col-md-4" (click)='submit()'
+              role="button">Finalizar Evaluación</a>
+          </div>
+      </div>
+    </div>
+  </div>
+  

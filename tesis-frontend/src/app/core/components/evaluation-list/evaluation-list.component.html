@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Plantilla de Evaluación</h3>
+    <hr>
+  </div>
+  <div class="row justify-content-md-end">
+    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo Criterio</a>
+  </div>
+  <br>
+  <table class="table text-center table-hover table-bordered">
+    <thead class='thead'>
+      <tr>
+        <th class="col-md-6">Criterio</th>
+        <!-- <th class="col-md-4">Simposio</th> -->
+        <th class="col-md-2">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class='align-items-center'*ngFor='let item of evaluationList'>
+        <td>{{item.nombre}}</td>
+        <!-- <td>{{item.simposio}}</td> -->
+        <td>
+          <div class="btn-group col-md-3">
+          <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+        </div>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+</div>
+

@@ -1,0 +1,17 @@
+<div class="container-fluid">
+<!-- Congresos Activos -->
+  <app-congress-active *ngIf='list' [congressList]='congressList'
+  (editDatesEvent)='editDates($event)' (editSympoEvent)='editSympo($event)'
+  (editRoomsEvent)='editRooms($event)'>
+  </app-congress-active>
+
+  <!-- Agenda -->
+  <app-agenda *ngIf='dates' [schedule]='schedule' (cancelAgenda)='editDates($event)'></app-agenda>
+
+  <!-- Seleccion de Simposios -->
+  <app-symposium-select *ngIf='sympo' [simposios]='simposios' [simposiosList]='simposiosList'
+  (cancelSymposium)='editSympo($event)' (symposiumEmitter)='addSymposium($event)'></app-symposium-select>
+
+
+</div>
+
