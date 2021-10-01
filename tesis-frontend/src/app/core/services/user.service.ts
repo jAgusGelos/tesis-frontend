@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { IUser } from '../models/IUser';
 import { IUserComplete } from '../models/IUserComplete';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,20 @@ export class UserService {
   getDni(): any {
     return this.httpClient.get(this.apiURL + 'api/lista-tiposDni/');
   }
-
+  postNewPassword(password):any{
+    return this.httpClient.post(this.apiURL + 'api/cambiar-contraseña/',password );
+  }
+  restorePassword(item : string):any{
+    return this.httpClient.get(environment.apiURL + 'api/restablecer-contrasenia/' + item);
+  }
+  acceptEvaluatePaper(item : string):any{
+    return this.httpClient.get(this.apiURL + 'articulos/aceptar-evaluacion/' + item);
+  }
+  cancelEvaluatePaper(item : string):any{
+    return this.httpClient.get(this.apiURL + 'articulos/rechazar-evaluacion/' + item);
+  }
+  acceptEvaluator(item : string):any{
+    return this.httpClient.get(this.apiURL + 'articulos/aceptar-evaluador/' + item);
+  }
+ 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IEvaluation } from 'src/app/core/models/IEvaluation';
 import { EvaluationService } from 'src/app/core/services/evaluation.service';
 
@@ -13,7 +14,11 @@ export class EvaluationComponent implements OnInit {
   edit = false;
   evaluation = {};
 
-  constructor(private evaluationService: EvaluationService) { }
+  constructor(private evaluationService: EvaluationService,
+              private router: Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => {
+        return false;
+      }; }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -21,7 +26,7 @@ export class EvaluationComponent implements OnInit {
   }
 
   getEvaluation(): void {
-    this.evaluationService.getEvaluation().subscribe((res: any) => {
+    this.evaluationService.getEvaluation(1).subscribe((res: any) => {
       this.evaluationList = res.data;
     });
   }
@@ -39,7 +44,8 @@ export class EvaluationComponent implements OnInit {
 
   deleteEvaluation(item: IEvaluation): void {
     this.evaluationService.deleteEvaluation(item).subscribe((res: any) => {
-      alert('La evaluacion ha sido eliminado correctamente');
+      alert('La evaluacion ha sido eliminada correctamente');
+      window.location.reload();
     });
   }
 
@@ -54,13 +60,13 @@ export class EvaluationComponent implements OnInit {
     if (item.id === (undefined || '')) {
       this.evaluationService.postEvaluation(item).subscribe((res: any) => {
         alert('Evaluación Creada Correctamente');
-        window.location.reload();
+        this.router.navigateByUrl('/evaluacion');
       });
     }
     else {
       this.evaluationService.putEvaluation(item).subscribe((res: any) => {
         alert('Evaluación Modificada Correctamente');
-        window.location.reload();
+        this.router.navigateByUrl('/evaluacion');
       });
     }
   }

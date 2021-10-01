@@ -4,9 +4,9 @@
     <div class="card-body">
       <h5 class="card-title text-center">{{nombre}}</h5>
       <p class="card-text">Sede: {{nombreSede}}</p>
-      <p class="card-text"><u>Fecha de Límite de Inscripción Temprana</u>: {{fechaUno | date}}</p>
-      <p class="card-text"><u>Fecha de Límite de Inscripción Tardía</u>: {{fechaDos | date}}</p>
-      <a href="#" class="btn btn-primary">Inscribirme</a>
+      <p class="card-text"><u>Fecha de Límite de Inscripción Temprana</u>: {{fechaUno.split(' ')[0]}}</p>
+      <p class="card-text"><u>Fecha de Límite de Inscripción Tardía</u>: {{fechaDos.split(' ')[0]}}</p>
+      <a href="/inscribirme/{{congress.id}}" class="btn btn-primary">Inscribirme</a>
     </div>
   </div>
 </div>

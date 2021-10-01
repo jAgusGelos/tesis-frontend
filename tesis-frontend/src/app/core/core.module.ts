@@ -22,16 +22,17 @@ import { EvaluationListComponent } from './components/evaluation-list/evaluation
 import { EvaluationFormComponent } from './components/evaluation-form/evaluation-form.component';
 import { EvaluateFormComponent } from './components/evaluate-form/evaluate-form.component';
 import { EvaluateListComponent } from './components/evaluate-list/evaluate-list.component';
-import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { PapersBySymposiumListComponent } from './components/papers-by-symposium-list/papers-by-symposium-list.component';
 import { DeactivateAccountFormComponent } from './components/deactivate-account-form/deactivate-account-form.component';
 import { EvaluatePaperListComponent } from './components/evaluate-paper-list/evaluate-paper-list.component';
 import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/evaluate-paper-form.component';
-import { EvaluationDetailFormComponent } from './components/evaluation-detail-form/evaluation-detail-form.component';
-import { ScoreEvaluatorsComponent } from './components/score-evaluators/score-evaluators.component';
-import { EvaluatePapersChairSecCardComponent } from './components/evaluate-papers-chair-sec-card/evaluate-papers-chair-sec-card.component';
 import { EvaluatorListComponent } from './components/evaluator-list/evaluator-list.component';
 import { CongressCardComponent } from './components/congress-card/congress-card.component';
+import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
+import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
+import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
+import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
+
 
 
 
@@ -59,16 +60,16 @@ import { CongressCardComponent } from './components/congress-card/congress-card.
     EvaluationFormComponent,
     EvaluateFormComponent,
     EvaluateListComponent,
-    AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
     DeactivateAccountFormComponent,
     EvaluatePaperListComponent,
     EvaluatePaperFormComponent,
-    EvaluationDetailFormComponent,
-    ScoreEvaluatorsComponent,
-    EvaluatePapersChairSecCardComponent,
     EvaluatorListComponent,
-    CongressCardComponent
+    CongressCardComponent,
+    ChangePasswordFormComponent,
+    RecoverPasswordFormComponent,
+    TarifaListComponent,
+    TarifaFormComponent
   ],
   imports: [
     CommonModule,
@@ -97,16 +98,16 @@ import { CongressCardComponent } from './components/congress-card/congress-card.
     EvaluationFormComponent,
     EvaluateFormComponent,
     EvaluateListComponent,
-    AsignarPaperEvaluadorListComponent,
     PapersBySymposiumListComponent,
     DeactivateAccountFormComponent,
     EvaluatePaperListComponent,
     EvaluatePaperFormComponent,
-    EvaluationDetailFormComponent,
-    ScoreEvaluatorsComponent,
-    EvaluatePapersChairSecCardComponent,
     EvaluatorListComponent,
-    CongressCardComponent
+    CongressCardComponent,
+    ChangePasswordFormComponent,
+    RecoverPasswordFormComponent,
+    TarifaListComponent,
+    TarifaFormComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

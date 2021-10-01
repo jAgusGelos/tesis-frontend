@@ -9,6 +9,9 @@ export class EvaluatePaperListComponent implements OnInit {
 
   @Input() paperList = [];
   @Output() EvaluationEvent = new EventEmitter();
+  @Output() EvaluationAcceptEvent = new EventEmitter();
+  @Output() EvaluationCancelEvent = new EventEmitter();
+
 
   constructor() { }
 
@@ -18,6 +21,12 @@ export class EvaluatePaperListComponent implements OnInit {
 
   toggleEvaluate(item: any): void {
     this.EvaluationEvent.emit(item);
+  }
+  toggleAccept(item: any): void {
+    this.EvaluationAcceptEvent.emit(item);
+  }
+  toggleCancel(item: any): void {
+    this.EvaluationCancelEvent.emit(item);
   }
 }
 

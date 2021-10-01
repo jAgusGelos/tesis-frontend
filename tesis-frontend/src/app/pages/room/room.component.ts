@@ -11,7 +11,11 @@ import { RoomService } from 'src/app/core/services/room.service';
 export class RoomComponent implements OnInit {
 
   constructor(private roomService: RoomService,
-              private router: Router) { }
+              private router: Router) {
+                this.router.routeReuseStrategy.shouldReuseRoute = () => {
+                  return false;
+                };
+              }
   roomList = [];
   edit = false;
   room = {};
@@ -37,7 +41,7 @@ export class RoomComponent implements OnInit {
   deleteRoom(item: IRoom): void{
     this.roomService.deteleRoom(item).subscribe((res: any) => {
       alert('El aula ha sido eliminada');
-      window.location.reload();
+      this.router.navigateByUrl('/room');
     });
   }
 
@@ -50,13 +54,13 @@ export class RoomComponent implements OnInit {
     if (item.id === null) {
       this.roomService.postRoom(item).subscribe((res: any) => {
         alert('Aula Creada');
-        window.location.reload();
+        this.router.navigateByUrl('/room');
       });
     }
     else{
       this.roomService.putRoom(item).subscribe((res: any) => {
         alert('Aula Modificada');
-        window.location.reload();
+        this.router.navigateByUrl('/room');
       });
     }
     this.getRooms();
