@@ -93,7 +93,6 @@ const routes: Routes = [
     .then(m => m.PapersBySymposiumModule),
   },
   {
-    // No esta en uso
     path: 'verEvaluaciones',
     loadChildren: () => import('./pages/evaluate-article/evaluate-article.module')
     .then(m => m.EvaluateArticleModule),
