@@ -13,6 +13,8 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   evaluatorList = [];
   idEval = 0;
   assignedPaperList = [];
+  showAssignedPaperList = [];
+  nombreArticulo = 'nombreArticulo';
 
   constructor(  private evaluatorService: EvaluatorService,
                 private articulosService: ArticulosService,
@@ -37,6 +39,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
           nombreArticulo : x.nombreArticulo
         };
       });
+      this.showAssignedPaperList = this.assignedPaperList.slice();
     });
   }
 
@@ -73,9 +76,6 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   }
 
   distributeEvaluators(): void {
-    // Distribuye aleatoriamente los evaluadores a los papers cargados.
-    console.log('Paso');
-
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
       if (x.idEval1 === undefined) {
         let eval1 = this.evaluatorList[Math.floor(Math.random() * this.evaluatorList.length)].idEvaluador;
@@ -105,16 +105,15 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   post(): void {
     console.log(this.assignedPaperList);
     // Carga masiva de Evaluadores. Post confirmación. asignarArticuloEvaluadorMasivo
-    /* {
-      idEvaluadores: [1,2,3],
-      articulo: 1,
-      idCongreso: 1
-    } */
     if (confirm('¿Está seguro que desea asignar las evaluaciones?')) {
       this.evaluatorService.postEvaluatorMassive(this.assignedPaperList).subscribe((res: any) => {
         alert('Los Evaluadores han sido cargado con éxito. Les llegará un mail de notificación');
       });
     }
+  }
+
+  search(filterList): void {
+    this.showAssignedPaperList = filterList;
   }
 
 }

@@ -13,7 +13,7 @@ export class CongressListComponent implements OnInit {
   @Output() newCongressEvent = new EventEmitter();
   @Output() deleteCongressEvent = new EventEmitter();
   @Output() scoreEvaluatorsEvent = new EventEmitter();
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class CongressListComponent implements OnInit {
     }
   }
 
-  toggleScoreEvaluators() {
+  toggleScoreEvaluators(): void {
     this.scoreEvaluatorsEvent.emit();
   }
 }

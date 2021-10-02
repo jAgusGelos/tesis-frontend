@@ -5,10 +5,19 @@
       <hr>
     </div>
     <br>
+
     <div class="row p-2 justify-content-end">
-      <a class="btn btn-primary btn-block col-md-4" role="button" (click)='distributeEvaluators()'>Asignación Masiva</a>
+      <a class="btn btn-primary btn-block col-md-2" role="button" (click)='distributeEvaluators()'>Asignación Masiva</a>
       &nbsp;
-      <a class="btn btn-primary btn-block col-md-4" role="button" (click)='post()'>Finalizar Asignación</a>
+      <a class="btn btn-primary btn-block col-md-2" role="button" (click)='post()'>Finalizar Asignación</a>
+    </div>
+    <div class="row">
+      <app-search
+        class="col-md-5"
+        [fullList]='assignedPaperList'
+        [attribFilter]='nombreArticulo'
+        (listEvent)='search($event)'
+      ></app-search>
     </div>
     <table class="table text-center table-hover table-bordered">
       <thead class='thead'>
@@ -21,7 +30,7 @@
       </thead>
 
       <tbody>
-        <tr class='align-items-center' *ngFor='let item of assignedPaperList'>
+        <tr class='align-items-center' *ngFor='let item of showAssignedPaperList'>
           <td>{{item.nombreArticulo}}</td>
           <td>
             <div class="col-sm-12">

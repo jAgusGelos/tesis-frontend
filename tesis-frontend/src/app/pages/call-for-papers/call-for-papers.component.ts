@@ -14,6 +14,7 @@ export class CallForPapersComponent implements OnInit {
   edit = false;
   paper = {};
   simposios = [];
+  okey = false;
 
   constructor(private paperService: PaperService,
               private router: Router) {
@@ -36,8 +37,7 @@ export class CallForPapersComponent implements OnInit {
   getPaper(): void {
     this.paperService.getPaper().subscribe((res: any) => {
       this.paperList = res.data;
-      console.log(this.paperList);
-
+      this.okey = true;
 
     });
   }
