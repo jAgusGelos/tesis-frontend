@@ -12,18 +12,18 @@ export class EvaluateComponent implements OnInit {
   evaluating = false;
   selectedPaper = {};
   evaluation = {};
-  paperList = []; 
+  paperList = [];
 
   constructor(private evaluationService: EvaluateService,
               private router: Router) {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => {
-        return false;
-      };
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
   }
 
   ngOnInit(): void {
-
-
+    this. getEvaluation();
+    this.getPapers();
   }
 
   getEvaluation(): void {
