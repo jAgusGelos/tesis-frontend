@@ -12,12 +12,14 @@ export class SymposiumListComponent implements OnInit {
   @Output() editSymposiumEvent = new EventEmitter();
   @Output() newSymposiumEvent = new EventEmitter();
   @Output() deleteSymposiumEvent = new EventEmitter();
+  showList = [];
 
   constructor() { }
 
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.showList = this.symposiumList.slice();
   }
 
   toggleEdit(item: any): void {
@@ -32,6 +34,9 @@ export class SymposiumListComponent implements OnInit {
     '\nToda la configuración creada se perderá')) {
       this.deleteSymposiumEvent.emit(item);
     }
+  }
 
+  search(filterList): void {
+    this.showList = filterList;
   }
 }
