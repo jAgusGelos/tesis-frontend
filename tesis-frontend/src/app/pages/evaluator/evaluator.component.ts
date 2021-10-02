@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { CustomToastComponent } from 'src/app/core/components/custom-toast/custom-toast.component';
 import { IEvaluator } from 'src/app/core/models/iEvaluator';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 
@@ -16,7 +18,9 @@ export class EvaluatorComponent implements OnInit {
   evaluatorSelectedId = [];
 
   constructor(
-    private evaluatorService: EvaluatorService
+    private evaluatorService: EvaluatorService,
+    private toastr: ToastrService,
+
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +33,7 @@ export class EvaluatorComponent implements OnInit {
 
     this.evaluatorService.getEvaluatorsSimposio().subscribe((res: any) => {
       if (res.data.length === 0) {
-        alert('Lo sentimos, actualmente no disponemos de más evaluadores.');
+        this.toastr.show('Lo sentimos, actualmente no disponemos de más evaluadores.');
         return;
       }
       this.evaluatorList = res.data.filter((x: any) => {
@@ -60,35 +64,45 @@ export class EvaluatorComponent implements OnInit {
   }
 
   loadAll(): void {
-    if (confirm('Atención, los evaluadores que está por cagar no pertenecen a su simposio. ¿Desea hacerlo de todas formas?')) {
-      this.evaluatorService.getEvaluatorsAll().subscribe((res: any) => {
-        this.evaluatorList = res.data.filter((x: any) => {
-          if (!this.evaluatorSelectedId.includes(x.idEvaluador)) {
-            return x;
-          }
+    this.toastr
+      .show( 'Atención, los evaluadores que está por cagar no pertenecen a su simposio.', '¿Desea hacerlo de todas formas?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        console.log('Camino feliz');
+        this.evaluatorService.getEvaluatorsAll().subscribe((res: any) => {
+          this.evaluatorList = res.data.filter((x: any) => {
+            if (!this.evaluatorSelectedId.includes(x.idEvaluador)) {
+              return x;
+            }
+          });
         });
       });
-    }
-
   }
 
   toggleRemoveHandled(item: any): void {
-    if (
-      confirm(
-        'Esta seguro desea eliminar el Evaluador: ' +
-        item.nombreEv + ' ' + item.apellidoEv +
-        '\nToda la configuración creada se perderá'
-      )
-    ) {
-      this.evaluatorService.deleteEvaluatorGroup(item.idEvaluador).subscribe((res: any) => {
-        this.evaluatorList.push(item);
-        this.evaluatorSelectedList = this.evaluatorSelectedList.filter((x: any) => {
-          if (x.idEvaluador !== item.idEvaluador) {
-            return item;
-          }
-        });
-    });
-
-    }
+    this.toastr
+      .show( 'Esta seguro que desea eliminar el evaluador ' + 
+      item.nombreEv + ' ' + item.apellidoEv + '\nToda la configuración creada se perderá', 'Confirmar eliminación?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.evaluatorService.deleteEvaluatorGroup(item.idEvaluador).subscribe((res: any) => {
+          this.evaluatorList.push(item);
+          this.evaluatorSelectedList = this.evaluatorSelectedList.filter((x: any) => {
+            if (x.idEvaluador !== item.idEvaluador) {
+              return item;
+            }
+          });
+      });
+      });
   }
 }

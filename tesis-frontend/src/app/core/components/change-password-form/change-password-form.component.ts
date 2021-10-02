@@ -1,6 +1,7 @@
 import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';import { AuthService } from '../../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 ;
 
@@ -16,7 +17,9 @@ export class ChangePasswordFormComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-              private userService: AuthService) { }
+              private userService: AuthService,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit(): void {
     window.scrollTo(0,0);
@@ -32,20 +35,20 @@ export class ChangePasswordFormComponent implements OnInit {
   submit():void{
     this.submitted = true;
     if(this.form.invalid){
-      alert('Por favor complete todos los campos.');
+      this.toastr.warning('Por favor complete todos los campos.')
       return;
     }
     if (this.form.controls.new.value !== this.form.controls.repPass.value){
-      alert('Las contraseñas deben ser iguales.');
+      this.toastr.warning('Las contraseñas deben ser iguales')
       return;
     }
     const change = {pass_antigua: window.btoa(this.form.controls.actual.value),
                     pass_nueva: window.btoa(this.form.controls.new.value)}; 
     const passwords = {passwords:change};
     this.userService.changePassword(passwords).subscribe(
-      (res: any) => alert('Se cambió la contraseña...'),
-      (err: any) => {if (err.status == 400) alert('La contraseña antigua no es correcta. ' + err.error.error)
-                      else alert('Error del Servidor')}
+      (res: any) => this.toastr.success('Contraseña actualizada'),
+      (err: any) => {if (err.status == 400) this.toastr.error('La contraseña antigua no es correcta.')
+                     else this.toastr.error('Error del servidor.')}
   );
   }
 

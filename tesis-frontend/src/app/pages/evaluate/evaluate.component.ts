@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { EvaluateService } from 'src/app/core/services/evaluate.service';
 
 @Component({
@@ -15,7 +16,9 @@ export class EvaluateComponent implements OnInit {
   paperList = [];
 
   constructor(private evaluationService: EvaluateService,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService,
+              ) {
       this.router.routeReuseStrategy.shouldReuseRoute = () => {
         return false;
       };
@@ -45,7 +48,7 @@ export class EvaluateComponent implements OnInit {
 
   deleteEvaluation(item: any): void {
     this.evaluationService.deleteEvaluation(item).subscribe((res: any) => {
-      alert('La evaluación ha sido rechazada');
+      this.toastr.success('La evaluación ha sido rechazada');
       this.router.navigateByUrl('/evaluar');
     });
 
@@ -53,7 +56,7 @@ export class EvaluateComponent implements OnInit {
 
   toggleCreateEvaluation(item: any): void {
     this.evaluationService.postEvaluation(item).subscribe((res: any) => {
-      alert('Evaluación correctamente cargada');
+      this.toastr.success('Evaluación correctamente cargada');
       this.router.navigateByUrl('/evaluar');
     });
 

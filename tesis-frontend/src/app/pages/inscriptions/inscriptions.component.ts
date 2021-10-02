@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { InscriptionsService } from 'src/app/core/services/inscriptions.service';
 
 @Component({
@@ -43,7 +44,9 @@ export class InscriptionsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private inscriptionService: InscriptionsService,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit(): void {
     // El usuario si o si tiene que estar logueado. Datos mínimos.
@@ -87,7 +90,7 @@ export class InscriptionsComponent implements OnInit {
   datos(): void {
     this.datosCompletos = false;
     if (this.formUsuario.invalid) {
-      alert('Por favor complete los datos');
+      this.toastr.warning('Por favor complete los datos');
       return;
     }
     this.datosCompletos = true;

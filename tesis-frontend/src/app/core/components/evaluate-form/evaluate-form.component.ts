@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IEvaluation } from '../../models/IEvaluation';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-evaluate-form',
@@ -30,18 +32,26 @@ export class EvaluateFormComponent implements OnInit {
   formEvaluation: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private toastr: ToastrService,
+    ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
   }
 
   cancel(): void {
-    if (confirm('¿Esta seguro desea cancelar la evaluación del paper? ' +
-    '\nToda los cambios no guardados se perderán.')) {
-      this.cancelEvaluation.emit();
-    }
-    
+    this.toastr
+      .show( 'Esta seguro que desea cancelar la evaluación del paper?' + '\nToda los cambios no guardados se perderán.', 'Cancelar evaluación', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.cancelEvaluation.emit();
+      });   
   }
 
   submit(): void {

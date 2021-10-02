@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ISymposium } from '../../models/ISymposium';
 import { SymposiumService } from '../../services/symposium.service';
 
@@ -20,7 +21,9 @@ export class SymposiumSelectComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private sympoService: SymposiumService,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService,
+              ) {
                 this.router.routeReuseStrategy.shouldReuseRoute = () => {
                   return false;
                 }
@@ -45,12 +48,12 @@ export class SymposiumSelectComponent implements OnInit {
       }
     });
     if (exist) {
-      alert('Ya existe el simposio ingresado');
+      this.toastr.show('Ya existe el simposio ingresado');
       return;
     }
     this.sympoService.postSymposiumCongress({id, nombre, descripcion: desc}).subscribe((res: any) => {
       if (res.error) {
-        alert('Ha ocurrido un error');
+        this.toastr.error('Ha ocurrido un error');
         return;
       }
       this.simposiosList.push({id, nombre, descripcion: desc});
@@ -65,7 +68,7 @@ export class SymposiumSelectComponent implements OnInit {
   delSimposio(item: any): void {
     this.sympoService.deleteSymposiumCongress(item).subscribe((res: any) => {
       if (res.error) {
-        alert('Ha ocurrido un error');
+        this.toastr.error('Ha ocurrido un error');
         return;
       }
       this.simposiosList = this.simposiosList.filter((x: any) => {
@@ -79,7 +82,7 @@ export class SymposiumSelectComponent implements OnInit {
   }
 
   submit(): void {
-    alert('Datos Guardados');
+    this.toastr.success('Datos Guardados');
     this.router.navigateByUrl('/misCongresos');
   }
 

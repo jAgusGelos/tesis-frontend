@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
       // this.rol = this.authService.getUserRoles();
 
     }
+    
   }
 
   toast(): void {

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ISymposium } from '../../models/ISymposium';
 
 @Component({
@@ -20,7 +21,9 @@ export class SymposiumFormComponent implements OnInit {
   formSymposium: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private toastr: ToastrService,
+    ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -38,7 +41,7 @@ export class SymposiumFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formSymposium.invalid) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.show('Por favor complete todos los datos.')
       return;
     }
     this.symposium = {

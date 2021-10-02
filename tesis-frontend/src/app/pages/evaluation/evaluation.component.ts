@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IEvaluation } from 'src/app/core/models/IEvaluation';
 import { EvaluationService } from 'src/app/core/services/evaluation.service';
 
@@ -15,7 +16,9 @@ export class EvaluationComponent implements OnInit {
   evaluation = {};
 
   constructor(private evaluationService: EvaluationService,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService,
+              ) {
       this.router.routeReuseStrategy.shouldReuseRoute = () => {
         return false;
       }; }
@@ -44,7 +47,7 @@ export class EvaluationComponent implements OnInit {
 
   deleteEvaluation(item: IEvaluation): void {
     this.evaluationService.deleteEvaluation(item).subscribe((res: any) => {
-      alert('La evaluacion ha sido eliminado correctamente');
+      this.toastr.success('La evaluacion ha sido eliminado correctamente');
     });
   }
 
@@ -58,13 +61,13 @@ export class EvaluationComponent implements OnInit {
   toggleCreateEvaluation(item: IEvaluation): void {
     if (item.id === (undefined || '')) {
       this.evaluationService.postEvaluation(item).subscribe((res: any) => {
-        alert('Evaluación Creada Correctamente');
+        this.toastr.success('Evaluación Creada Correctamente');
         this.router.navigateByUrl('/evaluacion');
       });
     }
     else {
       this.evaluationService.putEvaluation(item).subscribe((res: any) => {
-        alert('Evaluación Modificada Correctamente');
+        this.toastr.success('Evaluación Modificada Correctamente');
         this.router.navigateByUrl('/evaluacion');
       });
     }

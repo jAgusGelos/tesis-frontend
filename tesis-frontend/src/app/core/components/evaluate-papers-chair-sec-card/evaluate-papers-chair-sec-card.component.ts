@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { IEvaluator } from '../../models/iEvaluator';
 import { IntPaper } from '../../models/IntPaper';
 import { ArticulosService } from '../../services/articulos.service';
@@ -24,7 +25,9 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
   edit: Boolean = false;
 
   constructor(private articulosService: ArticulosService,
-              private papersService: PaperService) { }
+              private papersService: PaperService,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit(): void {
       this.getEvaluators();
@@ -46,7 +49,7 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
     let select = <HTMLSelectElement>document.getElementById('selectState');
     let opt = select.options[select.selectedIndex].value;
     if (opt == '') {
-      alert('Seleccione una evaluación para este artículo');
+      this.toastr.warning('Seleccione una evaluación para este artículo')
       return;
     }
     let paperCalification = {
@@ -54,7 +57,7 @@ export class EvaluatePapersChairSecCardComponent implements OnInit {
       calificacion: opt
     };
     this.articulosService.calificarArticulo(paperCalification).subscribe((res: any) => {
-      alert(res.data);
+      this.toastr.info(res.data)
       this.setNewState(opt);
       this.toggleEdit();
     });

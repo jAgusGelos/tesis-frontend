@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
 import { CongressService } from '../../services/congress.service';
 
@@ -21,7 +22,9 @@ export class LoginFormComponent implements OnInit {
   constructor( private formBuilder: FormBuilder,
                private loginService: AuthService,
                private congressService: CongressService,
-               private router: Router) { }
+               private router: Router,
+               private toastr: ToastrService,
+               ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -56,7 +59,7 @@ export class LoginFormComponent implements OnInit {
 
     // return;
     if (this.formLogin.invalid ) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.warning('Por favor complete todos los datos.')
       return;
     }
     const login = {

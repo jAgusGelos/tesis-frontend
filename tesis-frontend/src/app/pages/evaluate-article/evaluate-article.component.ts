@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { EvaluatePaperService } from 'src/app/core/services/evaluate-paper.service';
 import { EvaluationService } from 'src/app/core/services/evaluation.service';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
@@ -24,7 +25,9 @@ export class EvaluateArticleComponent implements OnInit {
 
 
   constructor(private paperEvalService: EvaluatePaperService,
-              private evaluationService: EvaluatorService) { }
+              private evaluationService: EvaluatorService,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit(): void {
     // this.getPapers();
@@ -51,13 +54,13 @@ export class EvaluateArticleComponent implements OnInit {
   acceptEvaluate(paper):void{
     this.paper = paper;
     this.evaluationService.acceptEvaluationPaper(this.paper).subscribe(
-      (res:any) => {alert('La evaluación ha sido aceptada.')}
+      (res:any) => {this.toastr.success('La evaluación ha sido aceptada.')}
     )
   }
   cancelEvaluate(paper):void{
     this.paper = paper;
     this.evaluationService.cancelarEvaluationPaper(this.paper).subscribe(
-      (res: any) =>{alert('La evaluación ha sido rechazada.');
+      (res: any) =>{this.toastr.success('La evaluación ha sido rechazada.');
     })
   }
 
