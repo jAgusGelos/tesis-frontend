@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="contenidos">
       <hr>
-      <h3 class="card-title text-center">Nueva Pregunta</h3>
+      <h3 class="card-title text-center">Nuevo Criterio</h3>
       <hr>
     </div>
 
@@ -10,7 +10,7 @@
       <form [formGroup]='formEvaluation'>
        <!-- pregunta -->
        <div class='form-group row'>
-         <label class='col-form-label col-sm-3 col-sm-offset-2' for='pregunta'>Pregunta: <span
+         <label class='col-form-label col-sm-3 col-sm-offset-2' for='pregunta'>Criterio: <span
            class='text-danger'>*</span></label>
            <div class='col-sm-8'>
              <textarea type='textarea' class='form-control' formControlName='pregunta'
@@ -47,7 +47,7 @@
           <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
           &nbsp;
           <a class="btn btn-primary col-md-4" (click)='submit()'
-            role="button">{{evaluation.id === undefined || ""  ? 'Crear Pregunta' : 'Guardar Cambios'}}</a>
+            role="button">{{evaluation.id === undefined || ""  ? 'Crear Criterio' : 'Guardar Cambios'}}</a>
         </div>
 
       </form>

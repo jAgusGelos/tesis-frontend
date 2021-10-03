@@ -42,7 +42,9 @@ export class EvaluatorListComponent implements OnInit {
         this.showMessage('Error', 'El correo ingresado no pertenece a un usuario registrado.');
         return;
       }
+
       const idUsuarios = [user.id.toString()];
+
       this.evaluatorService.postEvaluator(idUsuarios).subscribe((res: any) => {
         if (res.data != null) {
           this.showMessage('¡Correo enviado!', res.data);

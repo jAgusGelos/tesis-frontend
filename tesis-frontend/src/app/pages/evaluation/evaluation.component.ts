@@ -29,7 +29,7 @@ export class EvaluationComponent implements OnInit {
   }
 
   getEvaluation(): void {
-    this.evaluationService.getEvaluation().subscribe((res: any) => {
+    this.evaluationService.getEvaluation(1).subscribe((res: any) => {
       this.evaluationList = res.data;
     });
   }
@@ -48,6 +48,7 @@ export class EvaluationComponent implements OnInit {
   deleteEvaluation(item: IEvaluation): void {
     this.evaluationService.deleteEvaluation(item).subscribe((res: any) => {
       this.toastr.success('La evaluacion ha sido eliminado correctamente');
+      window.location.reload();
     });
   }
 
