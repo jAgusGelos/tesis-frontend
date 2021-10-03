@@ -11,11 +11,13 @@ export class EvaluationListComponent implements OnInit {
   @Output() editEvaluationEvent = new EventEmitter();
   @Output() newEvaluationEvent = new EventEmitter();
   @Output() deleteEvaluationEvent = new EventEmitter();
+  showList = [];
 
   constructor() { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.showList = this.evaluationList.slice();
   }
 
   toggleEdit(item: any): void {
@@ -30,7 +32,12 @@ export class EvaluationListComponent implements OnInit {
     '\nToda la configuración creada se perderá')) {
       this.deleteEvaluationEvent.emit(item);
     }
-
   }
+
+  search(filterList): void {
+    this.showList = filterList;
+  }
+
+
 
 }

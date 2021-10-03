@@ -13,6 +13,8 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   evaluatorList = [];
   idEval = 0;
   assignedPaperList = [];
+  showAssignedPaperList = [];
+  nombreArticulo = 'nombreArticulo';
 
   constructor(  private evaluatorService: EvaluatorService,
                 private articulosService: ArticulosService,
@@ -37,6 +39,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
           nombreArticulo : x.nombreArticulo
         };
       });
+      this.showAssignedPaperList = this.assignedPaperList.slice();
     });
   }
 
@@ -49,15 +52,26 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   selectOption1(value: any, item: any): void {
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
       if (item.idArticulo === x.idArticulo) {
-        x.idEval1 = +value;
+        if (x.idEval2 !== +value && x.idEval3 !== +value  ) {
+          x.idEval1 = +value;
+        } else {
+          alert('Evaluador ya asignado en este mismo paper');
+          item.idEval1 = null;
+        }
       }
       return x;
     });
   }
+
   selectOption2(value: any, item: any): void {
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
       if (item.idArticulo === x.idArticulo) {
-        x.idEval2 = +value;
+        if (x.idEval1 !== +value && x.idEval3 !== +value  ) {
+          x.idEval2 = +value;
+        } else {
+          alert('Evaluador ya asignado en este mismo paper');
+          item.idEval2 = null;
+        }
       }
       return x;
     });
@@ -66,16 +80,18 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   selectOption3(value: any, item: any): void {
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
       if (item.idArticulo === x.idArticulo) {
-        x.idEval3 = +value;
+        if (x.idEval2 !== +value && x.idEval1 !== +value  ) {
+          x.idEval3 = +value;
+        } else {
+          alert('Evaluador ya asignado en este mismo paper');
+          item.idEval3 = null;
+        }
       }
       return x;
       });
   }
 
   distributeEvaluators(): void {
-    // Distribuye aleatoriamente los evaluadores a los papers cargados.
-    console.log('Paso');
-
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
       if (x.idEval1 === undefined) {
         let eval1 = this.evaluatorList[Math.floor(Math.random() * this.evaluatorList.length)].idEvaluador;
@@ -103,18 +119,23 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   }
 
   post(): void {
-    console.log(this.assignedPaperList);
+
+
+    const list = this.assignedPaperList.filter((item: any) => {
+      if (!(item.idEval1 === undefined || item.idEval2 === undefined || item.idEval3 === undefined)) {
+        return item;
+      }
+    });
     // Carga masiva de Evaluadores. Post confirmación. asignarArticuloEvaluadorMasivo
-    /* {
-      idEvaluadores: [1,2,3],
-      articulo: 1,
-      idCongreso: 1
-    } */
     if (confirm('¿Está seguro que desea asignar las evaluaciones?')) {
-      this.evaluatorService.postEvaluatorMassive(this.assignedPaperList).subscribe((res: any) => {
+      this.evaluatorService.postEvaluatorMassive(list).subscribe((res: any) => {
         alert('Los Evaluadores han sido cargado con éxito. Les llegará un mail de notificación');
       });
     }
+  }
+
+  search(filterList): void {
+    this.showAssignedPaperList = filterList;
   }
 
 }

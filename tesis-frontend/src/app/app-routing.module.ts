@@ -75,6 +75,7 @@ const routes: Routes = [
     .then(m => m.EvaluatorModule),
   },
   {
+    // No esta en uso
     path: 'evaluar',
     loadChildren: () => import('./pages/evaluate/evaluate.module')
     .then(m => m.EvaluateModule),
@@ -86,12 +87,12 @@ const routes: Routes = [
     .then(m => m.AsignarPaperEvaluadorModule),
   },
   {
+    // no esta en uso
     path: 'paperXSimposio',
     loadChildren: () => import('./pages/papers-by-symposium/papers-by-symposium.module')
     .then(m => m.PapersBySymposiumModule),
   },
   {
-
     path: 'verEvaluaciones',
     loadChildren: () => import('./pages/evaluate-article/evaluate-article.module')
     .then(m => m.EvaluateArticleModule),

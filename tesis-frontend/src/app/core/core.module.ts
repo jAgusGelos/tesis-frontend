@@ -33,6 +33,7 @@ import { RecoverPasswordFormComponent } from './components/recover-password-form
 import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-e
     RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent,
-    AsignarPaperEvaluadorListComponent
+    AsignarPaperEvaluadorListComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
@@ -107,7 +109,8 @@ import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-e
     RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent,
-    AsignarPaperEvaluadorListComponent
+    AsignarPaperEvaluadorListComponent,
+    SearchComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
