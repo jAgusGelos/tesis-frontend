@@ -10,12 +10,8 @@
   </div>
 
   <div class="row">
-    <app-search
-      class="col-md-5"
-      [fullList]='paperList'
-      [attribFilter]='"nombre"'
-      (listEvent)='search($event)'
-    ></app-search>
+    <app-search class="col-md-5" [fullList]='paperList' [attribFilter]='"nombre"' (listEvent)='search($event)'>
+    </app-search>
   </div>
   <table class="table text-center table-hover table-bordered" *ngIf="paperList.length > 0">
     <thead class='thead'>
@@ -31,14 +27,22 @@
         <td>{{item.nombre | titlecase}}</td>
         <td>{{item.nombre_estado}}</td>
 
-        <td>
-          <div class="btn-group col-md-3" *ngIf='item.estado != "Subido"'>
-            <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+        <td class='align-items-center display-flex justify-content-center'>
+          <div class="btn-group col-md-3" *ngIf='!item.enviado_corregir'>
+            <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt bigger"></i></a>
+            <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash bigger"></i></a>
           </div>
+
+          <div *ngIf='item.enviado_corregir'>
+            <a
+            ngbPopover="Las acciones solo están disponibles para los artículos no enviados"
+            popoverClass="popover"
+            placement="left"
+            popoverTitle="Información:">
+              <i class="fas fa-info-circle bigger"></i>
+            </a>
+          </div>
+
         </td>
       </tr>
     </tbody>
@@ -48,4 +52,3 @@
 
 
 </div>
-

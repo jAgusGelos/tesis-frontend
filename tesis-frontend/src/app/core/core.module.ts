@@ -34,6 +34,7 @@ import { TarifaListComponent } from './components/tarifa-list/tarifa-list.compon
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { SearchComponent } from './components/search/search.component';
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   exports:  [
     UserRegisterComponent,

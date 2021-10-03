@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { AuthInterceptor } from './core/services/auth.interceptor';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [CookieService,
     {

@@ -58,7 +58,6 @@ export class CallForPapersComponent implements OnInit {
   editPaper(paper: any): void {
     this.edit = !this.edit;
     this.paper = paper;
-
   }
 
   deletePaper(item: IntPaper): void {

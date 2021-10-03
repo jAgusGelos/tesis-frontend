@@ -85,7 +85,7 @@ export class PaperFormComponent implements OnInit {
       }
       this.paperService.checkAutor(autor).subscribe((res: any) => {
         if (res.data){
-          this.paper.autores.push(autor);
+          // this.paper.autores.push(autor);
           this.autoresList.push({mail: autor, status: true});
 
         }
