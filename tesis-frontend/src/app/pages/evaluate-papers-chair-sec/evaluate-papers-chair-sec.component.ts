@@ -11,6 +11,11 @@ import { IntPaper } from 'src/app/core/models/IntPaper';
 export class EvaluatePapersChairSecComponent implements OnInit {
 
 
+  constructor(private paperService: PaperService,
+              private evaluationService: EvaluationService) { }
+
+
+
   edit = false;
   articulos = [];
   vectorArticulos = [];
@@ -30,9 +35,6 @@ export class EvaluatePapersChairSecComponent implements OnInit {
   detEvTres = {id: 0, nombre: 'Evaluador 3'};
   messageHeader = '';
   messageBody = '';
-
-  constructor(private paperService: PaperService,
-              private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.getArticulos();

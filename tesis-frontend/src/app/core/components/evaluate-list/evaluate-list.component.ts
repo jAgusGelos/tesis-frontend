@@ -9,7 +9,7 @@ export class EvaluateListComponent implements OnInit {
 
   @Input() paperList = [
     {id: '123', paper: 'Nombre de mentira 1', estado: 'Evaluado'},
-    {id: '123', paper: 'Nombre de mentira 2',estado: 'Pdte Evaluación'}];
+    {id: '123', paper: 'Nombre de mentira 2', estado: 'Pdte Evaluación'}];
   @Output() evaluationEvent = new EventEmitter();
   @Output() deleteEvaluationEvent = new EventEmitter();
 

@@ -18,6 +18,7 @@ export class EvaluatorListComponent implements OnInit {
   deleteEvName: string;
   messageHeader: string;
   messageBody: string;
+  showList = [];
 
   evaluatorsList = [];
   usersList: IUserComplete[];
@@ -60,6 +61,7 @@ export class EvaluatorListComponent implements OnInit {
   fillEvaluatorsList(): void {
     this.evaluatorService.getEvaluators(0).subscribe((res: any) => {
       this.evaluatorsList = res.data;
+      this.showList = res.data;
     });
   }
 
@@ -80,23 +82,39 @@ export class EvaluatorListComponent implements OnInit {
     return null;
   }
 
-  getUsers(){
+  getUsers(): void{
     this.userService.getAllUsers().subscribe((res: any) => {
       this.usersList = res;
     });
   }
 
-  deleteEvaluator() {
-    this.evaluatorsList.splice(this.index, 1);
+  deleteEvaluator(ev: any): void {
+    if (confirm('Seguro desea eliminar el evaluador: ' + ev.nombre)) {
+      this.evaluatorService.deleteIdEvaluator(ev.idUsuario).subscribe((res: any) => {
+        this.evaluatorsList = this.evaluatorsList.filter((x: any) => {
+          if (x.idUsuario !== ev.idUsuario) {
+            return x;
+          }
+        });
+        this.showList = this.evaluatorsList.slice();
+      });
+
+    }
   }
 
-  setDeleteEvaluator(i: number) {
+  setDeleteEvaluator(i: number): void {
+    console.log(i);
     this.index = i;
     this.deleteEvName = this.evaluatorsList[i].nombre;
   }
 
-  toggleNew() {
+  toggleNew(): void {
     this.submitted = false;
     this.new = !this.new;
   }
+
+  search(filterList): void {
+    this.showList = filterList;
+  }
+
 }

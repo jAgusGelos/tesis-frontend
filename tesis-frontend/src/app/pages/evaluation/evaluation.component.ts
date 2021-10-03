@@ -13,6 +13,7 @@ export class EvaluationComponent implements OnInit {
   evaluationList = [];
   edit = false;
   evaluation = {};
+  ok = false;
 
   constructor(private evaluationService: EvaluationService,
               private router: Router) {
@@ -28,6 +29,7 @@ export class EvaluationComponent implements OnInit {
   getEvaluation(): void {
     this.evaluationService.getEvaluation(1).subscribe((res: any) => {
       this.evaluationList = res.data;
+      this.ok = true;
     });
   }
 

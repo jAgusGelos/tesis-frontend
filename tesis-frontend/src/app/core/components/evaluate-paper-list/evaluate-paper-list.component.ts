@@ -11,12 +11,14 @@ export class EvaluatePaperListComponent implements OnInit {
   @Output() EvaluationEvent = new EventEmitter();
   @Output() EvaluationAcceptEvent = new EventEmitter();
   @Output() EvaluationCancelEvent = new EventEmitter();
-  
+  showList = [];
+
 
   constructor() { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.showList = this.paperList.slice();
   }
 
   toggleEvaluate(item: any): void {
@@ -27,6 +29,10 @@ export class EvaluatePaperListComponent implements OnInit {
   }
   toggleCancel(item: any): void {
     this.EvaluationCancelEvent.emit(item);
+  }
+
+  search(filterList): void {
+    this.showList = filterList;
   }
 }
 

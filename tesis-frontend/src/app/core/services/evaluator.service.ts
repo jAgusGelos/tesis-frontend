@@ -26,7 +26,7 @@ export class EvaluatorService {
   getEvaluators(activos: number): any {
     // return this.httpClient.request('get', this.apiURL + 'articulos/lista-evaluadores/',
     // {body: {is_active: true}});
-    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?activos=' + activos);
+    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
     // 0 todos
     // 1 solo activos
   }
@@ -61,6 +61,10 @@ export class EvaluatorService {
 
   deleteEvaluator(evaluator): any {
     return this.httpClient.delete(this.apiURL + 'evaluador/eliminar-evaluador/' + evaluator.id);
+  }
+
+  deleteIdEvaluator(id: number): any {
+    return this.httpClient.delete(this.apiURL + 'evaluador/eliminar-evaluador/' + id);
   }
 
   calificarEvaluador(evCalification: any): any {

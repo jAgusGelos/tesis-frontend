@@ -41,6 +41,13 @@
       <div class="card">
         <div class="card-body">
           <h5>Chairs asignados</h5>
+          <div class="row">
+            <app-search
+              [fullList]='chairsAssigned'
+              [attribFilter]='"nombreChair"'
+              (listEvent)='search($event)'
+            ></app-search>
+          </div>
           <table class="table text-center table-hover table-bordered">
             <thead class='thead'>
               <tr>
@@ -51,7 +58,7 @@
             </thead>
 
             <tbody>
-              <tr class='align-items-center' *ngFor='let chair of chairsAssigned'>
+              <tr class='align-items-center' *ngFor='let chair of showList'>
                 <td>{{chair.nombreChair}} {{chair.apellidoChair}}</td>
                 <td>{{chair.nombreSimposio}}</td>
                 <td>

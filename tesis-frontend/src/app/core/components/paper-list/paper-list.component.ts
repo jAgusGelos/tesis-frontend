@@ -7,15 +7,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PaperListComponent implements OnInit {
 
-  @Input() paperList = [];
+  @Input() paperList: any[];
   @Output() editPaperEvent = new EventEmitter();
   @Output() deletePaperEvent = new EventEmitter();
   @Output() newPaperEvent = new EventEmitter();
+  showList: any[];
 
   constructor() { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.showList = this.paperList.slice();
   }
 
   toggleEdit(item: any): void {
@@ -31,6 +33,9 @@ export class PaperListComponent implements OnInit {
     '\nToda la configuración creada se perderá')) {
       this.deletePaperEvent.emit(item);
     }
+  }
 
+  search(filterList): void {
+    this.showList = filterList;
   }
 }

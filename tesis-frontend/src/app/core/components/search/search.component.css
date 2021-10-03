@@ -1,0 +1,16 @@
+.card {
+  background-color: #C8E5F1;
+  size: 100%;
+  border: transparent;
+}
+
+.search{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+
+.greyned{
+  color: grey;
+}

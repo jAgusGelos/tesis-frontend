@@ -44,20 +44,20 @@
                   <p class="card-text">{{ev.recomendacion}}</p>
                 </div>
               </div>
-          </div>     
+          </div>
           <div class="card-footer">
             <a class="btn  card-footer-btn" (click)="getArchivo(i)"><i class="fas fa-file-pdf"></i> Ver artículo</a> 
             &nbsp; 
             <a class="btn  card-footer-btn" (click)="verDetalle(i)"><i class="fa fa-search-plus"></i> Ver detalle</a>
             <a *ngIf="!art.edit" class="btn card-footer-btn" id="editar" (click)="toggleEdit(i)"><i class="fa fa-pencil"></i> Evaluar</a>
             <div id="evaluation-select" *ngIf="art.edit">
-              <a class="btn btn-outline-success" *ngIf="art.idEstado !== 6 && art.idEstado !== 8" (click)="evaluar(i, 1)">Aprobar</a> 
+              <a class="btn btn-outline-success" *ngIf="art.idEstado !== 6 && art.idEstado !== 8" (click)="evaluar(i, 1)">Aprobar</a>
               &nbsp;
               <a class="btn btn-outline-danger" *ngIf="art.idEstado !== 7 && art.idEstado !== 9" (click)="evaluar(i, 2)">Rechazar</a>
               &nbsp;
               <a class="btn btn-outline-warning" *ngIf="art.idEstado !== 5" (click)="evaluar(i, 3)">Reentrega</a>
               &nbsp;
-              <a class="btn btn-outline-secondary" title="Cancelar" (click)="toggleEdit(i)"><i class="fas fa-times fa-lg"></i></a> 
+              <a class="btn btn-outline-secondary" title="Cancelar" (click)="toggleEdit(i)"><i class="fas fa-times fa-lg"></i></a>
             </div>
           </div>
         </div>

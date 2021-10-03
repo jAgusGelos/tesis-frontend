@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]='formInput' >
+      <div class="row">
+        <div class="col-md-10">
+          <div class="form-group">
+            <input type="text" class="form-control"
+            name="" id="" placeholder="Buscar"
+            (keyup)='searchTitle()' formControlName='search'>
+          </div>
+        </div>
+        <div class="col-md-2 search">
+          <a><i class="fas fa-search greyned"></i></a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
