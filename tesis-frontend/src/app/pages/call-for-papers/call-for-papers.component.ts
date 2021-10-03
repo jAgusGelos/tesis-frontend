@@ -80,12 +80,13 @@ export class CallForPapersComponent implements OnInit {
 
     if (item.id === '') {
       this.paperService.postPaper(item).subscribe((res: any) => {
-        alert('Paper Creado Correctamente');
+        alert('Paper Creado Correctamente. El paper no ha sido enviado aún');
+        this.router.navigateByUrl('/callForPapers');
       });
     }
     else{
       this.paperService.putPaper(item).subscribe((res: any) => {
-        alert('Paper Modificado Correctamente');
+        alert('Paper Modificado Correctamente. El paper no ha sido enviado aún');
         this.router.navigateByUrl('/callForPapers');
       });
     }

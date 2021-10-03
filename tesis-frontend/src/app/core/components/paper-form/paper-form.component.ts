@@ -29,13 +29,10 @@ export class PaperFormComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-
-    console.log(this.paper);
-
     this.formPaper = this.formBuilder.group({
       nombre: [this.paper.nombre, [Validators.required]],
       simposio: [this.paper.idSimposio, [Validators.required]],
-      archivo: [null, [Validators.required]],
+      archivo: [null],
       autores: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     });
     if (this.paper) {
@@ -130,13 +127,17 @@ export class PaperFormComponent implements OnInit {
    * Guarda provisoriamente los datos del congreso en la BD.
    */
   save(): void {
+    if (!this.paper.id && !this.formPaper.controls.archivo.value) {
+      alert('Por favor suba un archivo');
+      return;
+    }
     const userId = this.auth.getUserId();
     this.paper = {
       archivo: this.fileToUpload,
       autores: this.autoresList.map((item: any) => {
         return item.mail;
       }),
-      id: '',
+      id: this.paper.id || '',
       estado: 'sin subir',
       nombre: this.formPaper.controls.nombre.value,
       responsable: userId,
@@ -151,7 +152,7 @@ export class PaperFormComponent implements OnInit {
 
   submit(): void {
     this.submitted = true;
-    if (this.formPaper.invalid || this.fileToUpload === null || this.formPaper.controls.simposio.value === '' ) {
+    if (this.formPaper.invalid || this.formPaper.controls.simposio.value === '' ) {
       alert('Por favor complete todos los datos.');
       return;
     }
@@ -168,6 +169,23 @@ export class PaperFormComponent implements OnInit {
       simposio: this.formPaper.controls.simposio.value,
     };
     this.sendEmitter.emit(this.paper);
+  }
+
+  getArchivo(): void {
+   this.paperService.getPaperFile(this.paper.id).subscribe((res: any) => {
+      const archivo: ArrayBuffer = res;
+      const blob = new Blob([archivo], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      if (link.download !== undefined) {
+        link.setAttribute('href', url);
+        link.setAttribute('target', '_blank');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
   }
 
 }
