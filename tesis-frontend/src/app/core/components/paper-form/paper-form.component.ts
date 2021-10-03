@@ -15,6 +15,7 @@ export class PaperFormComponent implements OnInit {
   @Input() paper: any;
   @Input() simposios: any[];
   @Output() paperEmitter = new EventEmitter<any>();
+  @Output() sendEmitter = new EventEmitter<any>();
   @Output() cancelPaper = new EventEmitter();
   formPaper: FormGroup;
   submitted = false;
@@ -150,7 +151,7 @@ export class PaperFormComponent implements OnInit {
 
   submit(): void {
     this.submitted = true;
-    if (this.formPaper.invalid || this.fileToUpload === null || this.formPaper.controls.simposio.value.trim() === '' ) {
+    if (this.formPaper.invalid || this.fileToUpload === null || this.formPaper.controls.simposio.value === '' ) {
       alert('Por favor complete todos los datos.');
       return;
     }
@@ -160,13 +161,13 @@ export class PaperFormComponent implements OnInit {
       autores: this.autoresList.map((item: any) => {
         return item.mail;
       }),
-      id: '',
+      id: this.paper.id,
       estado: 'sin subir',
       nombre: this.formPaper.controls.nombre.value,
       responsable: userId,
       simposio: this.formPaper.controls.simposio.value,
     };
-    this.paperEmitter.emit([this.paper]);
+    this.sendEmitter.emit(this.paper);
   }
 
 }

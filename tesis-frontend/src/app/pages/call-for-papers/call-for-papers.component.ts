@@ -49,7 +49,7 @@ export class CallForPapersComponent implements OnInit {
       autores: [],
       responsable: '',
       nombre: '',
-      estado: 'Sin subir',
+      estado: 'sin subir',
       simposio: '',
       archivo: null,
     };
@@ -63,7 +63,7 @@ export class CallForPapersComponent implements OnInit {
   deletePaper(item: IntPaper): void {
     this.paperService.deletePaper(item).subscribe((res: any) => {
       alert('El paper ha sido eliminado correctamente');
-      this.getPaper();
+      this.router.navigateByUrl('/callForPapers');
     });
   }
 
@@ -81,7 +81,6 @@ export class CallForPapersComponent implements OnInit {
     if (item.id === '') {
       this.paperService.postPaper(item).subscribe((res: any) => {
         alert('Paper Creado Correctamente');
-        this.router.navigateByUrl('/callForPapers');
       });
     }
     else{
@@ -90,6 +89,13 @@ export class CallForPapersComponent implements OnInit {
         this.router.navigateByUrl('/callForPapers');
       });
     }
+  }
+
+  sendPaper(item: any): void {
+    this.paperService.sendPaper(item).subscribe((res: any) => {
+      alert('Paper Enviado');
+      this.router.navigateByUrl('/callForPapers');
+    });
   }
 
 }

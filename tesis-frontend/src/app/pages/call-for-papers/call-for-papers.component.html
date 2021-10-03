@@ -2,6 +2,7 @@
   <app-paper-list *ngIf="!edit && okey" (newPaperEvent)='newPaper()' [paperList]='paperList'
   (editPaperEvent)='editPaper($event)' (deletePaperEvent)='deletePaper($event)'></app-paper-list>
   <app-paper-form  *ngIf="edit"
+  (sendEmitter)='sendPaper($event)'
   [simposios] = "simposios"
   [paper]='paper' (paperEmitter)='toggleCreatePaper($event)'
   (cancelPaper)='newPaper()'></app-paper-form>

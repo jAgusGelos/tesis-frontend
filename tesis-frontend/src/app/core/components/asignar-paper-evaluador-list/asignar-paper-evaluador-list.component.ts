@@ -30,19 +30,21 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
     // devuelve la lista de papers asignados.  getArticulosEvaluadoresCompleto
     this.articulosService.getPaperEvaluators().subscribe((res: any) => {
       this.paperList = res.data.filter((x: any) => x.estadoArticuloNombre !== 'Creado');
-      this.assignedPaperList = this.paperList.map((x: any) => {
-        return {
-          idEval1: x.evaluadores[0].id,
-          idEval2: x.evaluadores[1].id,
-          idEval3: x.evaluadores[2].id,
-          idArticulo: x.idArticulo,
-          nombreArticulo : x.nombreArticulo
-        };
+      this.assignedPaperList = this.paperList.filter((x: any) => {
+        console.log(x.evaluadores[0].nombre === undefined);
+
+        if (x.evaluadores[0].nombre === undefined)
+        {
+          return {
+            idEval1: x.evaluadores[0].id,
+            idEval2: x.evaluadores[1].id,
+            idEval3: x.evaluadores[2].id,
+            idArticulo: x.idArticulo,
+            nombreArticulo : x.nombreArticulo
+          };
+        }
       });
-
       this.showAssignedPaperList = this.assignedPaperList.slice();
-      console.log(this.showAssignedPaperList);
-
     });
   }
 
@@ -122,11 +124,11 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   }
 
   post(): void {
-
-
     const list = this.assignedPaperList.filter((item: any) => {
       if (!(item.idEval1 === undefined || item.idEval2 === undefined || item.idEval3 === undefined)) {
         return item;
+      } else if (!(item.idEval1 === undefined && item.idEval2 === undefined && item.idEval3 === undefined)) {
+        alert(`El articulo ${item.nombreArticulo} no contiene los 3 evaluadores. No será cargado hasta que la carga sea completa` );
       }
     });
     // Carga masiva de Evaluadores. Post confirmación. asignarArticuloEvaluadorMasivo

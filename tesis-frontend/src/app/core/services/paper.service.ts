@@ -49,7 +49,13 @@ export class PaperService {
     formData.append('responsable', paper.responsable);
     formData.append('simposio', paper.simposio);
     formData.append('nombre', paper.nombre);
-    return this.httpClient.put<IntPaper>(this.apiURL + 'paper/editarEntrega/', formData);
+    return this.httpClient.put<IntPaper>(this.apiURL + 'articulos/editarEntrega/', formData);
+  }
+
+  sendPaper(paper: any): any {
+    console.log(paper);
+
+    return this.httpClient.post<IntPaper>(this.apiURL + 'articulos/enviarEntrega/', {idArticulo: paper.id});
   }
 
   deletePaper(paper: IntPaper): any {
