@@ -31,8 +31,8 @@ export class PaperListComponent implements OnInit {
   toggleRemoveHandled(item: any): void {
 
     this.toastr
-      .show( 'Esta seguro que desea eliminar el paper ' + item.nombre +
-       '\nToda la configuración creada se perderá', 'Eliminar Paper', {
+      .show( 'Está seguro que desea eliminar el paper ' + item.nombre +
+       '\nToda la configuración creada se perderá', '¿Eliminar Paper?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,

@@ -74,7 +74,7 @@ export class AssignSecChairsFormComponent implements OnInit {
 
   toggleRemoveHandled(item: any): void {
     this.toastr
-      .show( 'Esta seguro que desea eliminar el chair '+ item.nombreChair + ' ' + item.apellidoChair + '?', 'Confirmar borrado?', {
+      .show( '¿Está seguro que desea eliminar el chair '+ item.nombreChair + ' ' + item.apellidoChair + '?', '¿Eliminar chair?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,

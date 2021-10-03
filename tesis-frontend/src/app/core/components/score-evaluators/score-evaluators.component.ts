@@ -35,7 +35,7 @@ export class ScoreEvaluatorsComponent implements OnInit {
     let score = select.options[select.selectedIndex].value;
 
     if (score == null) {
-      this.toastr.show('Seleccione un puntaje para el evaluador.')
+      this.toastr.warning('Seleccione un puntaje para el evaluador.')
       return
     }
     score.toString();
@@ -44,7 +44,7 @@ export class ScoreEvaluatorsComponent implements OnInit {
       score: score
     }
     this.evaluatorService.calificarEvaluador(evCalification).subscribe((res: any) => {
-      this.toastr.show(res.data);
+      this.toastr.info(res.data);
       this.rows[index].evaluator.puntuacion = score;
       this.rows[index].edit = false;
     })

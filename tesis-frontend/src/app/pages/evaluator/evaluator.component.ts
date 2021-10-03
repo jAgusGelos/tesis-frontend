@@ -33,7 +33,7 @@ export class EvaluatorComponent implements OnInit {
 
     this.evaluatorService.getEvaluatorsSimposio().subscribe((res: any) => {
       if (res.data.length === 0) {
-        this.toastr.show('Lo sentimos, actualmente no disponemos de más evaluadores.');
+        this.toastr.info('Lo sentimos, actualmente no disponemos de más evaluadores.');
         return;
       }
       this.evaluatorList = res.data.filter((x: any) => {
@@ -65,7 +65,7 @@ export class EvaluatorComponent implements OnInit {
 
   loadAll(): void {
     this.toastr
-      .show( 'Atención, los evaluadores que está por cagar no pertenecen a su simposio.', '¿Desea hacerlo de todas formas?', {
+      .show( 'Atención, los evaluadores que está por cagar no pertenecen a su simposio. ¿Desea hacerlo de todas formas?', '¿Agregar más evaluadores?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,
@@ -73,7 +73,6 @@ export class EvaluatorComponent implements OnInit {
       })
       .onAction.subscribe(() => {
         // Aca se hace el camino feliz
-        console.log('Camino feliz');
         this.evaluatorService.getEvaluatorsAll().subscribe((res: any) => {
           this.evaluatorList = res.data.filter((x: any) => {
             if (!this.evaluatorSelectedId.includes(x.idEvaluador)) {
@@ -86,8 +85,8 @@ export class EvaluatorComponent implements OnInit {
 
   toggleRemoveHandled(item: any): void {
     this.toastr
-      .show( 'Esta seguro que desea eliminar el evaluador ' + 
-      item.nombreEv + ' ' + item.apellidoEv + '\nToda la configuración creada se perderá', 'Confirmar eliminación?', {
+      .show( 'Está seguro que desea eliminar el evaluador ' + 
+      item.nombreEv + ' ' + item.apellidoEv + '? '+ '\nToda la configuración creada se perderá', '¿Eliminar Evaluador?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,

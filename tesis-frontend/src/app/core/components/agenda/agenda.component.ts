@@ -67,9 +67,9 @@ export class AgendaComponent implements OnInit {
     const info = date.split('/').reverse().join('-');
     return info;
   }
-  toastError(text:string): void {
+  toast(text:string): void {
     // Metodo 1
-    this.toastr.info(text);}
+    this.toastr.warning(text);}
    
   guardar(): void {
     const agenda = {
@@ -83,7 +83,7 @@ export class AgendaComponent implements OnInit {
       fechaFinReEv: this.convertDateFormat(this.formCongress.controls.FechaFinReEv.value) + ' 00:00:00',
     };
     if (new Date(agenda.fechaInCongreso) >= new Date(agenda.fechaFinCongreso)) {
-      this.toastError('La fecha de inicio no puede ser mayor a la fecha de fin')
+      this.toast('La fecha de inicio no puede ser mayor a la fecha de fin')
       return;
     }
     if (new Date(agenda.fechaFinCongreso) < new Date(agenda.fechaFinEvaluacion) ||
@@ -94,24 +94,24 @@ export class AgendaComponent implements OnInit {
       new Date(agenda.fechaFinCongreso) < new Date(agenda.fechaFinEvaluacion) ||
       new Date(agenda.fechaFinCongreso) < new Date(agenda.fechaFinReEv)
     ) {
-      this.toastError('La fecha de Fin no puede ser inferior a las otras fechas')
+      this.toast('La fecha de Fin no puede ser inferior a las otras fechas')
       return;
     }
     if (new Date(agenda.fechaFinInsTardia) < new Date(agenda.fechaFinInsTemprana)) {
-      this.toastError('La fecha de inscripción tardía no puede ser inferior a la fecha de inscripción temprana')
+      this.toast('La fecha de inscripción tardía no puede ser inferior a la fecha de inscripción temprana')
       return;
     }
     if (new Date(agenda.fechaProrrogaPapers) < new Date(agenda.fechaLimPapers)) {
-      this.toastError('La fecha de inscripción tardía no puede ser inferior a la fecha límite de entrega')
+      this.toast('La fecha de inscripción tardía no puede ser inferior a la fecha límite de entrega')
       return;
     }
     if (new Date(agenda.fechaFinReEv) < new Date(agenda.fechaFinEvaluacion)) {
-      this.toastError('La fecha de Reevaluación no puede ser inferior a la fecha de Evaluación')
+      this.toast('La fecha de Reevaluación no puede ser inferior a la fecha de Evaluación')
       return;
     }
     if (new Date(agenda.fechaFinEvaluacion) < new Date(agenda.fechaProrrogaPapers) ||
       new Date(agenda.fechaFinReEv) < new Date(agenda.fechaProrrogaPapers)) {
-      this.toastError('Error en las fechas de fin de evaluación y fin reevaluación ' +
+      this.toast('Error en las fechas de fin de evaluación y fin reevaluación ' +
       'no pueden ser inferiores a las fechas de entrega de papers')
       return;
     }

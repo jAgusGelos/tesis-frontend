@@ -33,7 +33,7 @@ export class RoomFormComponent implements OnInit {
   agregar(): void {
     this.submitted = true;
     if (this.formRooms.controls.nameAula.invalid) {
-      this.toastr.show('Por favor, agregue el nombre del aula.');
+      this.toastr.warning('Por favor, agregue el nombre del aula.');
       return;
     }
     this.room = {

@@ -48,7 +48,7 @@ export class SymposiumSelectComponent implements OnInit {
       }
     });
     if (exist) {
-      this.toastr.show('Ya existe el simposio ingresado');
+      this.toastr.info('Ya existe el simposio ingresado');
       return;
     }
     this.sympoService.postSymposiumCongress({id, nombre, descripcion: desc}).subscribe((res: any) => {

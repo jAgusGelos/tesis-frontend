@@ -123,7 +123,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
       idCongreso: 1
     } */
     this.toastr
-      .show( 'Esta seguro que desea asignar las evaluaciones?', 'Confirmar asignaciones', {
+      .show( '¿Está seguro que desea asignar las evaluaciones?', '¿Confirmar asignaciones?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,

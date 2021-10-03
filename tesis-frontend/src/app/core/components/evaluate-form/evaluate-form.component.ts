@@ -42,7 +42,7 @@ export class EvaluateFormComponent implements OnInit {
 
   cancel(): void {
     this.toastr
-      .show( 'Esta seguro que desea cancelar la evaluación del paper?' + '\nToda los cambios no guardados se perderán.', 'Cancelar evaluación', {
+      .show( '¿Está seguro que desea cancelar la evaluación del paper?' + '\nToda los cambios no guardados se perderán.', '¿Cancelar evaluación?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,

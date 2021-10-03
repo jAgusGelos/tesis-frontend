@@ -30,7 +30,7 @@ export class EvaluationListComponent implements OnInit {
   }
   toggleRemoveHandled(item: any): void {
     this.toastr
-      .show( 'Esta seguro que desea eliminar la pregunta ' + item.pregunta + '\nToda la configuración creada se perderá', 'Eliminar Pregunta', {
+      .show( 'Esta seguro que desea eliminar la pregunta ' + item.pregunta + '\nToda la configuración creada se perderá', '¿Eliminar Pregunta?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,

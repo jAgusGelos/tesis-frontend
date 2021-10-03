@@ -41,7 +41,7 @@ export class SymposiumFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formSymposium.invalid) {
-      this.toastr.show('Por favor complete todos los datos.')
+      this.toastr.warning('Por favor complete todos los datos.')
       return;
     }
     this.symposium = {

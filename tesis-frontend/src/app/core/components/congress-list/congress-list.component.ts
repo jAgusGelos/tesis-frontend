@@ -32,7 +32,7 @@ export class CongressListComponent implements OnInit {
   }
   toggleRemoveHandled(item: any): void {
     this.toastr
-      .show( 'Esta seguro que desea eliminar el congreso ' + item.nombre + '\nToda la configuración se perderá.', 'Confirmar borrado?', {
+      .show( 'Si eliminas el congreso ' + item.nombre + ' toda la configuración se perderá.', '¿Eliminar Congreso?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,

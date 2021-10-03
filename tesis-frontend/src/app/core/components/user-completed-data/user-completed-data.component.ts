@@ -87,7 +87,7 @@ export class UserCompletedDataComponent implements OnInit {
     submit(): void {
       this.submitted = true;
       if (this.formUsuario.invalid) {
-        this.toastr.show('Por Favor complete todos los campos');
+        this.toastr.warning('Por Favor complete todos los campos');
         return;
       }
       const today = this.datePipe.transform(new Date(), 'yyyy-MM-dd');

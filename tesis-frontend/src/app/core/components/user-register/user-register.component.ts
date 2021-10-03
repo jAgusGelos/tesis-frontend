@@ -45,7 +45,7 @@ export class UserRegisterComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formRegister.invalid) {
-      this.toastr.show('Por favor, complete todos los campos.');
+      this.toastr.warning('Por favor, complete todos los campos.');
       return;
     }
     if (this.formRegister.controls.password.value !==  this.formRegister.controls.repPassword.value){

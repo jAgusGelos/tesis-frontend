@@ -31,8 +31,8 @@ export class SymposiumListComponent implements OnInit {
   }
   toggleRemoveHandled(item: any): void {
     this.toastr
-      .show( 'Esta seguro que desea eliminar el simposio ' + item.nombre + 
-      '\nToda la configuración creada se perderá', 'Eliminar Simposio', {
+      .show( 'Está seguro que desea eliminar el simposio ' + item.nombre + 
+      '\nToda la configuración creada se perderá.', '¿Eliminar Simposio?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,
@@ -40,7 +40,6 @@ export class SymposiumListComponent implements OnInit {
       })
       .onAction.subscribe(() => {
         // Aca se hace el camino feliz
-        console.log('Camino feliz');
         this.deleteSymposiumEvent.emit(item);
 
       });

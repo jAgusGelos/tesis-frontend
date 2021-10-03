@@ -36,7 +36,7 @@ export class RoomComponent implements OnInit {
   }
   toggleRemoveHandled(item: any): void {
     this.toastr
-      .show( 'Esta seguro que desea eliminar el aula ' + item.nombre, 'Eliminar Aula', {
+      .show( 'Está seguro que desea eliminar el aula ' + item.nombre + ' ?', '¿Eliminar Aula?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,
@@ -44,7 +44,6 @@ export class RoomComponent implements OnInit {
       })
       .onAction.subscribe(() => {
         // Aca se hace el camino feliz
-        console.log('Camino feliz');
         this.deleteRoomEvent.emit(item);
       });
   }

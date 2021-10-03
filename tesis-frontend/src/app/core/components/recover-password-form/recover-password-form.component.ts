@@ -28,7 +28,7 @@ export class RecoverPasswordFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formRecoverPass.invalid) {
-      this.toastr.show('Por favor complete todos los campos.')
+      this.toastr.warning('Por favor complete todos los campos.')
       return;
     }
     this.userService.recoverPassword(this.formRecoverPass.controls.email.value).subscribe(
