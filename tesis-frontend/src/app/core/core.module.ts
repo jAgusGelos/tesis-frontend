@@ -72,7 +72,7 @@ import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-e
     RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent,
-    CustomToastComponent
+    CustomToastComponent,
     AsignarPaperEvaluadorListComponent
   ],
   imports: [
@@ -112,7 +112,7 @@ import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-e
     RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent,
-    CustomToastComponent
+    CustomToastComponent,
     AsignarPaperEvaluadorListComponent
   ],
 
