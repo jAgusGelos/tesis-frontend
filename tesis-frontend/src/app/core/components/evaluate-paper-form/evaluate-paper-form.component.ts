@@ -67,7 +67,9 @@ export class EvaluatePaperFormComponent implements OnInit {
       alert('Se requiere escribir una observación!');
       return;
     }
-    const ev = this.save(true);
+    if (confirm('Si envía la evaluación, después no podrá editarla. Seguro desea continuar?')) {
+      const ev = this.save(true);
+    }
   }
 
   handleItems(): void {

@@ -19,7 +19,7 @@
     </div>
   <!-- Evaluation Cards List -->
   <div *ngFor="let art of vectorArticulos; index as i">
-      <div *ngIf="art.idEstado > 3" class="card col-md-6 offset-3">
+      <div class="card col-md-6 offset-3">
           <div class="card-body">
             <div class="row ">
               <div class="col-auto me-auto">
@@ -37,10 +37,10 @@
               <h6 class="card-subtitle mb-2 text-muted" id="evaluadores">Evaluadores:</h6>
             </div>
               <div *ngFor="let ev of art.evaluaciones" class="row ev-reco">
-                <div class="col-auto">
+                <div class="col col-md-3">
                   <p id="nombreEvaluador">&nbsp;&nbsp;&nbsp;&nbsp;{{ev.evaluador}}:</p>
                 </div>
-                <div class="col-auto">
+                <div class="col col-md-3">
                   <p class="card-text">{{ev.recomendacion}}</p>
                 </div>
               </div>
@@ -70,18 +70,15 @@
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-          <h5 class="modal-title" id="detallesModalLabel">{{detNombreArticulo}}</h5>
+          <h5 class="modal-title" id="detallesModalLabel">
+            {{detNombreArticulo}} <span class="badge bg-primary" [class.bg-warning]="detEstado.id === 5"
+                                                                 [class.text-dark]="detEstado.id === 5"
+                                                                 [class.bg-success]="detEstado.id === 6 || detEstado.id === 8"
+                                                                 [class.bg-danger]="detEstado.id === 7 || detEstado.id === 9">{{detEstado.nombre}}</span></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalOnClose(index)"></button>
       </div>
       <div class="modal-body">
         <div class="container">
-          <div class="row row-detalle">
-            <h5>Estado:&nbsp;&nbsp;<span class="badge bg-primary" [class.bg-warning]="detIdEstado === 5"
-                                                                  [class.text-dark]="detIdEstado === 5"
-                                                                  [class.bg-success]="detIdEstado === 6 || detIdEstado === 8"
-                                                                  [class.bg-danger]="detIdEstado === 7 || detIdEstado === 9">{{detEstado}}</span>
-            </h5>
-          </div>
             <table class="table table-bordered">
               <thead class="text-center">
                 <tr>
@@ -93,7 +90,7 @@
               </thead>
               <tbody class="text-center">
                 <tr *ngFor="let det of detalles" >
-                  <td>{{det.nombre}}</td> <!-- criterio -->
+                  <td>{{det.aspecto}}</td> <!-- criterio -->
                   <td>{{det.res1}}</td> <!-- ev1 -->
                   <td>{{det.res2}}</td> <!-- ev2 -->
                   <td>{{det.res3}}</td> <!-- ev3 -->
@@ -106,9 +103,9 @@
               <div class="col-auto">
                 <select class="form-select" id="selectStateDetalle">
                   <option disabled selected value=""></option>
-                  <option value="1" *ngIf="detIdEstado !== 6 && detIdEstado !== 8">Aprobar</option>
-                  <option value="2" *ngIf="detIdEstado !== 7 && detIdEstado !== 9">Rechazar</option>
-                  <option value="3" *ngIf="detIdEstado !== 5">Para reentregar</option>
+                  <option value="1" *ngIf="detEstado.id !== 6 && detEstado.id !== 8">Aprobar</option>
+                  <option value="2" *ngIf="detEstado.id !== 7 && detEstado.id !== 9">Rechazar</option>
+                  <option value="3" *ngIf="detEstado.id !== 5">Necesita Reentrega</option>
               </select>
               </div>
               <div class="col-auto">
