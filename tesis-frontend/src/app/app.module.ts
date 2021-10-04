@@ -7,8 +7,6 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 @NgModule({
   declarations: [AppComponent],
