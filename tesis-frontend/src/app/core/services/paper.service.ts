@@ -102,7 +102,7 @@ export class PaperService {
   }
 
   calificarPaper(idArticulo, calificacion) {
-    let paperCalification = {
+    const paperCalification = {
       idArticulo: idArticulo,
       calificacion: calificacion
     }
