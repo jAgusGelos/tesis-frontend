@@ -3,3 +3,8 @@
   border-color: #fff #ddd;
   margin: 0 2rem 2rem;
 }
+
+calendar-scheduler-view >>>
+.cal-scheduler-view {
+  text-transform: capitalize !important;
+}

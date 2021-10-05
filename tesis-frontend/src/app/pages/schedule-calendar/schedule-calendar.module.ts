@@ -7,8 +7,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ScheduleCalendarComponent } from './schedule-calendar.component';
 import { FormsModule } from '@angular/forms';
 import { ScheduleCalendarService } from 'src/app/core/services/schedule-calendar.service';
-import localeIt from '@angular/common/locales/it';
-registerLocaleData(localeIt);
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [ScheduleCalendarComponent],
@@ -20,11 +20,11 @@ registerLocaleData(localeIt);
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-        SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange', logEnabled: true })
+        SchedulerModule.forRoot({ locale: 'es', headerDateFormat: 'daysRange', logEnabled: true })
   ],
   providers: [
     ScheduleCalendarService,
-    { provide: LOCALE_ID, useValue: 'en-US' }
+    { provide: LOCALE_ID, useValue: 'es-AR' }
   ],
 })
 export class ScheduleCalendarModule { }

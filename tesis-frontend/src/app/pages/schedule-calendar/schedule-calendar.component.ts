@@ -10,6 +10,7 @@ import {
   CalendarSchedulerEventAction,
   DAYS_IN_WEEK,
   endOfPeriod,
+  SchedulerDateFormatter,
   SchedulerEventTimesChangedEvent,
   SchedulerViewDay,
   SchedulerViewHour,
@@ -20,10 +21,17 @@ import {
 import { addMonths, endOfDay } from 'date-fns';
 import { Subject } from 'rxjs';
 import { ScheduleCalendarService } from 'src/app/core/services/schedule-calendar.service';
+
 @Component({
   selector: 'app-schedule-calendar',
   templateUrl: './schedule-calendar.component.html',
-  styleUrls: ['./schedule-calendar.component.css']
+  styleUrls: ['./schedule-calendar.component.css'],
+  providers: [
+    {
+      provide: CalendarDateFormatter,
+      useClass: SchedulerDateFormatter,
+    },
+  ],
 })
 export class ScheduleCalendarComponent implements OnInit {
 
@@ -122,19 +130,55 @@ export class ScheduleCalendarComponent implements OnInit {
   }
 
   dateOrViewChanged(): void {
-      if (this.startsWithToday) {
-          this.prevBtnDisabled = !this.isDateValid(subPeriod(this.dateAdapter, CalendarView.Day/*this.view*/, this.viewDate, 1));
-          this.nextBtnDisabled = !this.isDateValid(addPeriod(this.dateAdapter, CalendarView.Day/*this.view*/, this.viewDate, 1));
-      } else {
-          this.prevBtnDisabled = !this.isDateValid(endOfPeriod(this.dateAdapter, CalendarView.Day/*this.view*/, subPeriod(this.dateAdapter, CalendarView.Day/*this.view*/, this.viewDate, 1)));
-          this.nextBtnDisabled = !this.isDateValid(startOfPeriod(this.dateAdapter, CalendarView.Day/*this.view*/, addPeriod(this.dateAdapter, CalendarView.Day/*this.view*/, this.viewDate, 1)));
-      }
+    if (this.startsWithToday) {
+      this.prevBtnDisabled = !this.isDateValid(
+        subPeriod(
+          this.dateAdapter,
+          CalendarView.Day /*this.view*/,
+          this.viewDate,
+          1
+        )
+      );
+      this.nextBtnDisabled = !this.isDateValid(
+        addPeriod(
+          this.dateAdapter,
+          CalendarView.Day /*this.view*/,
+          this.viewDate,
+          1
+        )
+      );
+    } else {
+      this.prevBtnDisabled = !this.isDateValid(
+        endOfPeriod(
+          this.dateAdapter,
+          CalendarView.Day /*this.view*/,
+          subPeriod(
+            this.dateAdapter,
+            CalendarView.Day /*this.view*/,
+            this.viewDate,
+            1
+          )
+        )
+      );
+      this.nextBtnDisabled = !this.isDateValid(
+        startOfPeriod(
+          this.dateAdapter,
+          CalendarView.Day /*this.view*/,
+          addPeriod(
+            this.dateAdapter,
+            CalendarView.Day /*this.view*/,
+            this.viewDate,
+            1
+          )
+        )
+      );
+    }
 
-      if (this.viewDate < this.minDate) {
-          this.changeDate(this.minDate);
-      } else if (this.viewDate > this.maxDate) {
-          this.changeDate(this.maxDate);
-      }
+    if (this.viewDate < this.minDate) {
+      this.changeDate(this.minDate);
+    } else if (this.viewDate > this.maxDate) {
+      this.changeDate(this.maxDate);
+    }
   }
 
   private isDateValid(date: Date): boolean {
