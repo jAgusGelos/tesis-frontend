@@ -22,9 +22,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets/imgs",
-              "assets",
-              "favicon.ico",
-              "404.html"
+              "src/assets",
+              "src/favicon.ico",
+              "src/404.html"
             ],
             "styles": [
               "src/styles.css",
