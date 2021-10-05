@@ -7,19 +7,23 @@
   <br />
   <div class="row">
     <div class="col-md-6">
+      <div class="row">
+        <app-search [fullList]='evaluatorList' [attribFilter]='"nombreEv"'
+          (listEvent)='searchNotSelected($event)'></app-search>
+      </div>
       <table class="table text-center table-hover table-bordered">
         <thead class="thead">
           <tr>
             <th class="col-md-4">Evaluadores Disponibles</th>
-            <!-- <th class="col-md-2">Simposio</th> -->
+            <th class="col-md-2">Sede</th>
             <th class="col-md-2">Acciones</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr class="align-items-center" *ngFor="let item of evaluatorList">
+          <tr class="align-items-center" *ngFor="let item of showListNotSelected">
             <td>{{ item.nombreEv }} {{item.apellidoEv}}</td>
-            <!-- <td>{{ item.simposio }}</td> -->
+            <td>UTN FRC</td>
 
             <td>
               <div class="btn-group col-md-3 text-center">
@@ -29,26 +33,30 @@
           </tr>
         </tbody>
       </table>
-
-
-        <a class="btn btn-primary btn-block col-md-12 alerta " role="button" (click)='loadAll()'>¡Necesito más Evaluadores!</a>
+      <a *ngIf="notLoaded" class="btn btn-primary btn-block col-md-12 alerta " role="button"
+        (click)='loadAll()'>¡Necesito más Evaluadores!</a>
 
 
     </div>
     <div class="col-md-6">
+      <div class="row">
+        <app-search [fullList]='evaluatorSelectedList' [attribFilter]='"nombreEv"'
+          (listEvent)='searchSelected($event)'></app-search>
+      </div>
+
       <table class="table text-center table-hover table-bordered">
         <thead class="thead">
           <tr>
             <th class="col-md-4">Evaluadores Seleccionados</th>
-            <!-- <th class="col-md-2">Simposio</th> -->
+            <th class="col-md-2">Sede</th>
             <th class="col-md-2">Acciones</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr class="align-items-center" *ngFor="let item of evaluatorSelectedList">
+          <tr class="align-items-center" *ngFor="let item of showListSelected">
             <td>{{ item.nombreEv }} {{item.apellidoEv}}</td>
-            <!-- <td>{{ item.simposio }}</td> -->
+            <td>UTN FRC</td>
             <td>
               <div class="btn-group col-md-3 text-center">
                 <a (click)="toggleRemoveHandled(item)" title="Eliminar"><i class="fas fa-trash"></i></a>

@@ -1,96 +1,76 @@
 <div class="container-fluid">
-    <div class="contenidos">
-      <hr>
-      <h3 class='text-center'>Evaluadores Activos</h3>
-      <hr>
-    </div>
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Evaluadores Activos</h3>
+    <hr>
+  </div>
   <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
-    <div *ngIf="!new" class="row justify-content-md-end">
-      <a class="btn btn-primary col-sm-2" role="button" (click)="toggleNew()">Nuevo Evaluador</a>
-    </div>
-    <div *ngIf="new" class="row justify-content-md-end">
-      <form [formGroup]='formEvaluator' class="card col-md-4">
-            <div class="card-body">
-              <h5 class="card-title">Agregar Evaluador</h5>
-              <p class="card-text">Se enviará un correo de invitación al usuario para que sea evaluador.</p>
-                <input class="form-control" list="correos" placeholder="Buscar por nombre o dirección de correo" formControlName="correo"
-                [ngClass]="{'is-invalid': submitted && formEvaluator.controls.correo.errors}">
-                  <datalist id="correos">
-                    <option *ngFor="let user of usersList" value="{{user.email}}">{{user.nombre}} {{user.apellido}}
-                  </datalist>  
-                <br>
-                <a class="btn btn-secondary" role="button" (click)="toggleNew()">Cancelar</a>
-                &nbsp;
-                <a class="btn btn-primary" role="button" (click)="sendMail()">
-                  Enviar correo &nbsp; <i class="fas fa-envelope"></i></a>
-                <button hidden id="modalCorreo" data-bs-toggle="modal" data-bs-target="#modal-correo"></button>
-            </div>
-          </form>
+  <div *ngIf="!new" class="row justify-content-md-end">
+    <a class="btn btn-primary col-sm-2" role="button" (click)="toggleNew()">Nuevo Evaluador</a>
+  </div>
+  <div *ngIf="new" class="row justify-content-md-end">
+    <form [formGroup]='formEvaluator' class="card col-md-4">
+      <div class="card-body">
+        <h5 class="card-title">Agregar Evaluador</h5>
+        <p class="card-text">Se enviará un correo de invitación al usuario para que sea evaluador.</p>
+        <input class="form-control" list="correos" placeholder="Buscar por nombre o dirección de correo"
+          formControlName="correo" [ngClass]="{'is-invalid': submitted && formEvaluator.controls.correo.errors}">
+        <datalist id="correos">
+          <option *ngFor="let user of usersList" value="{{user.email}}">{{user.nombre}} {{user.apellido}}
+        </datalist>
+        <br>
+        <a class="btn btn-secondary" role="button" (click)="toggleNew()">Cancelar</a>
+        &nbsp;
+        <a class="btn btn-primary" role="button" (click)="sendMail()">
+          Enviar correo &nbsp; <i class="fas fa-envelope"></i></a>
+        <button hidden id="modalCorreo" data-bs-toggle="modal" data-bs-target="#modal-correo"></button>
       </div>
-    <br>
-    <div class="row">
-        <table class="table text-center table-hover table-bordered">
-          <thead class='thead'>
-            <tr>
-              <th class="col-md-4">Nombre</th>
-              <th class="col-md-4">E-mail</th>
-              <th class="col-md-2">Estado</th>
-              <th class="col-md-2">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class='align-items-center'*ngFor='let ev of evaluatorsList; let i = index'>
-              <td>{{ev.nombre}}</td>
-              <td>{{ev.email}}</td>
-              <td>
-                <p *ngIf="ev.estado">Activo</p><p *ngIf="!ev.estado">Inactivo</p>
-              </td>
-              <td>
-                <a title='Eliminar' role="button" (click)="setDeleteEvaluator(i)" data-bs-toggle="modal" data-bs-target="#modal-eliminar">
-                  <i class="fas fa-trash fa-lg"></i></a>
-            </td>
-            </tr>
-          </tbody>
-        </table>
+    </form>
+  </div>
+  <br>
+  <div class="row justify-content-md-center">
+    <app-search class="col-md-8" [fullList]='evaluatorsList' [attribFilter]='"nombre"' (listEvent)='search($event)'>
+    </app-search>
+  </div>
+  <div class="row">
+    <table class="table text-center table-hover table-bordered">
+      <thead class='thead'>
+        <tr>
+          <th class="col-md-4">Nombre</th>
+          <th class="col-md-4">E-mail</th>
+          <th class="col-md-2">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='align-items-center' *ngFor='let ev of showList; let i = index'>
+          <td>{{ev.nombre}}</td>
+          <td>{{ev.email}}</td>
+          <td>
+            <a title='Eliminar' role="button" (click)="deleteEvaluator(ev)">
+              <i class="fas fa-trash fa-lg"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div>
 
-<!-- Modal Enviar correo -->
-<div class="modal fade" id="modal-correo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{messageHeader}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        {{messageBody}}
-      </div>
-      <div class="modal-footer">
-        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal Eliminar Evaluador -->
-<div class="modal fade" id="modal-eliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Eliminar Evaluador</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>¿Seguro que desea eliminar a {{deleteEvName}}?</p>
-      </div>
-      <div class="modal-footer">
-        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
-        <a type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteEvaluator()">Aceptar</a>
+    <!-- Modal Enviar correo -->
+    <div class="modal fade" id="modal-correo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{messageHeader}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {{messageBody}}
+          </div>
+          <div class="modal-footer">
+            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-    </div>
-  </div>
-  
-  

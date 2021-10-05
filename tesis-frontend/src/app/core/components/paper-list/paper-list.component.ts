@@ -9,15 +9,17 @@ import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 })
 export class PaperListComponent implements OnInit {
 
-  @Input() paperList = [];
+  @Input() paperList: any[];
   @Output() editPaperEvent = new EventEmitter();
   @Output() deletePaperEvent = new EventEmitter();
   @Output() newPaperEvent = new EventEmitter();
+  showList: any[];
 
   constructor( private toastr: ToastrService ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.showList = this.paperList.slice();
   }
 
   toggleEdit(item: any): void {
@@ -29,7 +31,6 @@ export class PaperListComponent implements OnInit {
   }
 
   toggleRemoveHandled(item: any): void {
-
     this.toastr
       .show( 'Está seguro que desea eliminar el paper ' + item.nombre +
        '\nToda la configuración creada se perderá', '¿Eliminar Paper?', {
@@ -42,6 +43,10 @@ export class PaperListComponent implements OnInit {
         // Aca se hace el camino feliz
         this.deletePaperEvent.emit(item);
       });
+  }
 
+
+  search(filterList): void {
+    this.showList = filterList;
   }
 }

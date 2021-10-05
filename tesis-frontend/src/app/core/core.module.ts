@@ -37,6 +37,7 @@ import { CustomToastComponent } from './components/custom-toast/custom-toast.com
 
 
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,7 @@ import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-e
     TarifaListComponent,
     TarifaFormComponent,
     CustomToastComponent,
-    AsignarPaperEvaluadorListComponent
+    SearchComponent
   ],
   imports: [
     CommonModule,
@@ -113,7 +114,8 @@ import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-e
     TarifaListComponent,
     TarifaFormComponent,
     CustomToastComponent,
-    AsignarPaperEvaluadorListComponent
+    AsignarPaperEvaluadorListComponent,
+    SearchComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

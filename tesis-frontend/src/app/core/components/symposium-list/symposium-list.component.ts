@@ -14,12 +14,14 @@ export class SymposiumListComponent implements OnInit {
   @Output() editSymposiumEvent = new EventEmitter();
   @Output() newSymposiumEvent = new EventEmitter();
   @Output() deleteSymposiumEvent = new EventEmitter();
+  showList = [];
 
   constructor(private toastr: ToastrService,) { }
 
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.showList = this.symposiumList.slice();
   }
 
   toggleEdit(item: any): void {
@@ -30,6 +32,7 @@ export class SymposiumListComponent implements OnInit {
     this.newSymposiumEvent.emit();
   }
   toggleRemoveHandled(item: any): void {
+
     this.toastr
       .show( 'Está seguro que desea eliminar el simposio ' + item.nombre + 
       '\nToda la configuración creada se perderá.', '¿Eliminar Simposio?', {
@@ -43,5 +46,10 @@ export class SymposiumListComponent implements OnInit {
         this.deleteSymposiumEvent.emit(item);
 
       });
+  }
+
+  search(filterList): void {
+    this.showList = filterList;
+
   }
 }

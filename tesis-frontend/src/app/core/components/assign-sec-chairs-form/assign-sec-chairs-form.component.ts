@@ -21,6 +21,7 @@ export class AssignSecChairsFormComponent implements OnInit {
   emptyAssign: IassignSecChairTheme[] = [];
   chairsAssigned = [];
   chairsNotAssigned = [];
+  showList = [];
 
   constructor( private formBuilder: FormBuilder,
                private assignService: AssignSecChairThemeService,
@@ -41,6 +42,7 @@ export class AssignSecChairsFormComponent implements OnInit {
   getChairsAsignados(): void {
     this.assignService.getAssignSecChairTheme().subscribe((res: any) => {
       this.chairsAssigned = res.data;
+      this.showList = res.data;
     });
   }
 
@@ -69,6 +71,8 @@ export class AssignSecChairsFormComponent implements OnInit {
     };
     this.assignService.postAssignSecChairTheme(item).subscribe((res: any) => {
       this.chairsAssigned.push(res.data);
+      this.showList.push(res.data)
+      this.formAssignSecChairs.reset();
     });
   }
 
@@ -87,6 +91,10 @@ export class AssignSecChairsFormComponent implements OnInit {
           this.chairsAssigned.splice(indice, 1);
         });
       });
+  }
+
+  search(filterList): void {
+    this.showList = filterList;
   }
 
 }

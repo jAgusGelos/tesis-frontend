@@ -18,6 +18,7 @@ export class EvaluateArticleComponent implements OnInit {
   paper = [];
   items = [];
   flagEvaluate = false;
+  ok = false;
 
 
   constructor(private paperEvalService: EvaluatePaperService,
@@ -30,8 +31,8 @@ export class EvaluateArticleComponent implements OnInit {
     this.getPapers();
   }
 
-  postEvaluation(evaluation) {
-    this.paperEvalService.postPaperEval(evaluation).subscribe((res: any) =>{
+  postEvaluation(evaluation): void {
+    this.paperEvalService.postPaperEval(evaluation).subscribe((res: any) => {
       alert('Los cambios han sido guardados!');
     });
   }
@@ -39,6 +40,7 @@ export class EvaluateArticleComponent implements OnInit {
   getPapers(): void {
     this.paperEvalService.getPaperEval().subscribe((res: any) => {
       this.paperList = res.data;
+      this.ok = true;
     });
   }
 
@@ -70,24 +72,22 @@ export class EvaluateArticleComponent implements OnInit {
     });
   }
 
-  toggleFlagEvaluate() {
+  toggleFlagEvaluate(): void {
     this.flagEvaluate = !this.flagEvaluate;
   }
 
 
-  acceptEvaluate(paper):void{
+  acceptEvaluate(paper): void {
     this.paper = paper;
     this.evaluationService.acceptEvaluationPaper(this.paper).subscribe(
       (res:any) => {this.toastr.success('La evaluación ha sido aceptada.')}
     )
   }
-  cancelEvaluate(paper):void{
+  cancelEvaluate(paper): void {
     this.paper = paper;
     this.evaluationService.cancelarEvaluationPaper(this.paper).subscribe(
       (res: any) =>{this.toastr.success('La evaluación ha sido rechazada.');
     })
+
   }
-
-  
-
 }

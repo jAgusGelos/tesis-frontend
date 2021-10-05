@@ -19,6 +19,7 @@ export class CongressListComponent implements OnInit {
   constructor(private toastr: ToastrService,
     ) { }
 
+
   ngOnInit(): void {
     window.scrollTo(0, 0);
   }
@@ -45,7 +46,7 @@ export class CongressListComponent implements OnInit {
       });
   }
 
-  toggleScoreEvaluators() {
+  toggleScoreEvaluators(): void {
     this.scoreEvaluatorsEvent.emit();
   }
 }

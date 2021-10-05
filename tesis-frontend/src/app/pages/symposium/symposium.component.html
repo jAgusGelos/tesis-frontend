@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <app-symposium-list *ngIf="!edit" [symposiumList]='symposiumList' (newSymposiumEvent)='newSymposium()'
+  <app-symposium-list *ngIf="!edit && ok" [symposiumList]='symposiumList' (newSymposiumEvent)='newSymposium()'
   (editSymposiumEvent)='editSymposium($event)' (deleteSymposiumEvent)='deleteSymposium($event)'></app-symposium-list>
   <app-symposium-form *ngIf="edit" [symposium]='symposium' (symposiumEmitter)='toggleCreateSymposium($event)'
   (cancelSymposium)='newSymposium()'></app-symposium-form>

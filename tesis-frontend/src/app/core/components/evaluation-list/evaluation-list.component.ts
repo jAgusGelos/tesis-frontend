@@ -13,12 +13,14 @@ export class EvaluationListComponent implements OnInit {
   @Output() editEvaluationEvent = new EventEmitter();
   @Output() newEvaluationEvent = new EventEmitter();
   @Output() deleteEvaluationEvent = new EventEmitter();
+  showList = [];
 
   constructor(private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    this.showList = this.evaluationList.slice();
   }
 
   toggleEdit(item: any): void {
@@ -43,4 +45,7 @@ export class EvaluationListComponent implements OnInit {
       });
   }
 
+  search(filterList): void {
+    this.showList = filterList;
+    }
 }
