@@ -33,6 +33,7 @@ export class EvaluateArticleComponent implements OnInit {
     this.paperEvalService.getPaperEval().subscribe((res: any) => {
       this.paperList = res.data;
       this.ok = true;
+      console.log(this.paperList);
     });
   }
 
