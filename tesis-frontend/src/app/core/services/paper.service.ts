@@ -101,10 +101,11 @@ export class PaperService {
     return this.httpClient.get(this.apiURL + 'articulos/consulta-articulosXChair/');
   }
 
-  calificarPaper(idArticulo, calificacion): any {
+  calificarPaper(idArticulo, calificacion, observacionAutor): any {
     const paperCalification = {
       idArticulo,
-      calificacion
+      calificacion,
+      observacionAutor
     };
     return this.httpClient.put(this.apiURL + 'articulos/calificarArticulo/', paperCalification);
   }

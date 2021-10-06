@@ -10,21 +10,15 @@ import { IntPaper } from 'src/app/core/models/IntPaper';
 })
 export class EvaluatePapersChairSecComponent implements OnInit {
 
-
-  constructor(private paperService: PaperService,
-              private evaluationService: EvaluationService) { }
-
-
-
   edit = false;
   articulos = [];
   vectorArticulos = [];
   detailed = false;
-  articuloSeleccionado: {articulo: IntPaper, evUno, evDos, evTres};
+  defaultSelect = '';
 
   // Detalles
   index = 0;
-  criterios = [];
+  observacionAutor = '';
   detalles = [];
   detNombreArticulo = '';
   detResponsable = '';
@@ -41,8 +35,9 @@ export class EvaluatePapersChairSecComponent implements OnInit {
                   {value: 3, nombre: 'Aceptable'},
                   {value: 4, nombre: 'Bueno'},
                   {value: 5, nombre: 'Muy bueno'}];
-  messageHeader = '';
-  messageBody = '';
+
+  constructor(private paperService: PaperService,
+              private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.getArticulos();
@@ -79,7 +74,8 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     }
     const idArticulo = this.vectorArticulos[index].id;
     const calificacion = estado;
-    this.paperService.calificarPaper(idArticulo, calificacion).subscribe((res: any) => {
+    this.paperService.calificarPaper(idArticulo, calificacion, this.observacionAutor).subscribe((res: any) => {
+      this.defaultSelect = '';
       this.setBadges(index, calificacion);
       this.toggleEdit(index);
     });
@@ -181,6 +177,10 @@ export class EvaluatePapersChairSecComponent implements OnInit {
           res1: this.vectorArticulos[index].evaluaciones[0].recomendacion,
           res2: this.vectorArticulos[index].evaluaciones[1].recomendacion,
           res3: this.vectorArticulos[index].evaluaciones[2].recomendacion});
+        this.detalles.push({aspecto: 'Observaciones',
+          res1: this.vectorArticulos[index].evaluaciones[0].observacion,
+          res2: this.vectorArticulos[index].evaluaciones[1].observacion,
+          res3: this.vectorArticulos[index].evaluaciones[2].observacion});
       });
     });
     const btnDetalle = document.getElementById('activar-modal');
@@ -252,6 +252,11 @@ export class EvaluatePapersChairSecComponent implements OnInit {
         return 0;
       }
     });
+  }
+
+  setObservacionAutor(): void {
+    const obs = document.getElementById('observacion-autor') as HTMLTextAreaElement;
+    this.observacionAutor = obs.value;
   }
 
   modalOnClose(index): void {
