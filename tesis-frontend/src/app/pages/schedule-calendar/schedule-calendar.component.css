@@ -8,3 +8,21 @@ calendar-scheduler-view >>>
 .cal-scheduler-view {
   text-transform: capitalize !important;
 }
+
+calendar-scheduler-view >>>
+.fas {
+  font-size: 1.25rem;
+  color: #00609C;
+}
+
+.login-form{
+  width:100%;
+}
+
+.form-group{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+
+}
+
+

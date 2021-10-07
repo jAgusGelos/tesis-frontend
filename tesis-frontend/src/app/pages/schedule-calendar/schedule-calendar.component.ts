@@ -1,4 +1,5 @@
 import { Component, HostListener, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   CalendarView,
   CalendarDateFormatter,
@@ -19,7 +20,10 @@ import {
   subPeriod
 } from 'angular-calendar-scheduler';
 import { addMonths, endOfDay } from 'date-fns';
+import * as moment from 'moment';
 import { Subject } from 'rxjs';
+import { ArticulosService } from 'src/app/core/services/articulos.service';
+import { PaperService } from 'src/app/core/services/paper.service';
 import { ScheduleCalendarService } from 'src/app/core/services/schedule-calendar.service';
 
 @Component({
@@ -47,9 +51,11 @@ export class ScheduleCalendarComponent implements OnInit {
   startsWithToday = true;
   activeDayIsOpen = true;
   excludeDays: number[] = []; // [0];
-  dayStartHour = 6;
-  dayEndHour = 22;
+  dayStartHour = 8;
+  dayEndHour = 20;
+  submitted = false;
 
+  // Cambiar estos dos por la fecha de inicio y fin del congreso.
   minDate: Date = new Date();
   maxDate: Date = endOfDay(addMonths(new Date(), 1));
   dayModifier: Function;
@@ -58,24 +64,36 @@ export class ScheduleCalendarComponent implements OnInit {
   eventModifier: Function;
   prevBtnDisabled = false;
   nextBtnDisabled = false;
+  formEvento: FormGroup;
+
+  evento = {
+    id: null,
+    date: '',
+    startHour: '',
+    startMinute: '',
+    endHour: '',
+    endMinute: '',
+    title: '',
+    desc: '',
+    idSimposio: null,
+    idPaper: null
+  };
+
+  paperList = [];
+  showList = [];
+  hours = Array.from({length: 15}, (_, i) => i + 8 );
+  minutes = Array.from({length: 12}, (_, i) => i * 5);
+  simposios = [];
 
   actions: CalendarSchedulerEventAction[] = [
       {
           when: 'enabled',
-          label: '<span class="valign-center"><i class="material-icons md-18 md-red-500">cancel</i></span>',
-          title: 'Delete',
+          label: '<span class="valign-center"><i class="fas fa-trash"></i></span>',
+          title: 'Borrar',
           onClick: (event: CalendarSchedulerEvent): void => {
               console.log('Pressed action \'Delete\' on event ' + event.id);
           }
       },
-      {
-          when: 'cancelled',
-          label: '<span class="valign-center"><i class="material-icons md-18 md-red-500">autorenew</i></span>',
-          title: 'Restore',
-          onClick: (event: CalendarSchedulerEvent): void => {
-              console.log('Pressed action \'Restore\' on event ' + event.id);
-          }
-      }
   ];
 
   events: CalendarSchedulerEvent[];
@@ -85,7 +103,12 @@ export class ScheduleCalendarComponent implements OnInit {
       this.adjustViewDays();
   }
 
-  constructor(@Inject(LOCALE_ID) locale: string, private dateAdapter: DateAdapter, private calendarService: ScheduleCalendarService) {
+  constructor(@Inject(LOCALE_ID) locale: string,
+              private dateAdapter: DateAdapter,
+              private calendarService: ScheduleCalendarService,
+              private formBuild: FormBuilder,
+              private paperService: PaperService,
+              private articulosService: ArticulosService) {
       this.locale = locale;
 
       this.segmentModifier = ((segment: SchedulerViewHourSegment): void => {
@@ -101,9 +124,37 @@ export class ScheduleCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.calendarService.getEvents(this.actions)
     .then((events: CalendarSchedulerEvent[]) => (this.events = events));
+    this.getSimposios();
+    this.formEvento = this.formBuild.group(this.values());
+    this.articulosService.getPaperEvaluators().subscribe((res: any) => {
+      // Aca tiene que estar aprobado | entregado
+      this.paperList = res.data.filter((x: any) => x.estadoArticuloNombre === 'En espera');
+      this.showList = this.paperList.slice();
+    });
+
+  }
+
+  getSimposios(): void {
+    this.paperService.getSimposiosActivos().subscribe((res: any) => {
+      this.simposios = res.data;
+    });
+  }
+
+  values(): any {
+    return {
+      id: [this.evento.id],
+      date: [this.evento.date || ''],
+      startHour: [+this.evento.startHour || 0],
+      endHour: [+this.evento.endHour || 0],
+      startMinute: [+this.evento.startMinute || 0],
+      endMinute: [+this.evento.endMinute || 0],
+      title: [this.evento.title, [Validators.required]],
+      desc: [this.evento.desc || '', [Validators.required]],
+      idSimposio: [this.evento.idSimposio || '', [Validators.required]],
+      idPaper: [this.evento.idPaper || '', [Validators.required] ]
+    };
   }
 
   adjustViewDays(): void {
@@ -185,31 +236,76 @@ export class ScheduleCalendarComponent implements OnInit {
       return /*isToday(date) ||*/ date >= this.minDate && date <= this.maxDate;
   }
 
-  dayHeaderClicked(day: SchedulerViewDay): void {
-      console.log('dayHeaderClicked Day', day);
-  }
-
   hourClicked(hour: SchedulerViewHour): void {
       console.log('hourClicked Hour', hour);
   }
 
   segmentClicked(action: string, segment: SchedulerViewHourSegment): void {
+      console.log('Aca viene el segmentooo');
+      console.log(segment.date.toLocaleDateString());
+      console.log(segment.date.toLocaleTimeString());
+      console.log(moment(segment.date).add(20, 'm').toDate().toLocaleTimeString());
+
+      this.evento = {
+        ...this.evento,
+        date: segment.date.toLocaleDateString(),
+        startHour: segment.date.toLocaleTimeString().split(':')[0],
+        startMinute: segment.date.toLocaleTimeString().split(':')[1],
+        endHour: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[0],
+        endMinute: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[1],
+      };
+      console.log(this.evento);
+      this.formEvento = this.formBuild.group(this.values());
+
+      const btnDetalle = document.getElementById('activar-modal');
+      btnDetalle.click();
+      //   this.events.push({
+      //     id: '300',
+      //     start: segment.date,
+      //     end: moment(segment.date).add(20, 'm').toDate(),
+      //     title: 'Segmented 1',
+      //     content: 'IMPORTANT EVENT',
+      //     color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
+      //     isClickable: true,
+      //     isDisabled: false,
+      // } as CalendarSchedulerEvent);
+      // console.log(this.events);
+
       console.log('segmentClicked Action', action);
       console.log('segmentClicked Segment', segment);
   }
 
   eventClicked(action: string, event: CalendarSchedulerEvent): void {
+      console.log('Aca viene el EVENTO');
+      this.evento = {
+        ...this.evento,
+        id: event.id,
+        date: event.start.toLocaleDateString(),
+        startHour: event.start.toLocaleTimeString().split(':')[0],
+        startMinute: event.start.toLocaleTimeString().split(':')[1],
+        endHour: event.end.toLocaleTimeString().split(':')[0],
+        endMinute: event.end.toLocaleTimeString().split(':')[1],
+        title: event.title
+      };
+      this.formEvento = this.formBuild.group(this.values());
+
+      const btnDetalle = document.getElementById('activar-modal');
+      btnDetalle.click();
+
       console.log('eventClicked Action', action);
       console.log('eventClicked Event', event);
   }
 
-  eventTimesChanged({ event, newStart, newEnd, type }: SchedulerEventTimesChangedEvent): void {
-      console.log('eventTimesChanged Type', type);
-      console.log('eventTimesChanged Event', event);
-      console.log('eventTimesChanged New Times', newStart, newEnd);
-      const ev: CalendarSchedulerEvent = this.events.find(e => e.id === event.id);
-      ev.start = newStart;
-      ev.end = newEnd;
-      this.refresh.next();
+  simposioSeleccionado(item: any): void {
+    // Aca tengo que cargar los papers que correspondan a ese simposio;
+    this.showList = this.paperList.filter((elem: any) => +elem.idSimposio === +item);
+  }
+
+  submit(): void {
+    this.submitted = true;
+    if (this.formEvento.invalid) {
+      alert('Por favor complete todos los datos.');
+      return;
+    }
   }
 }
