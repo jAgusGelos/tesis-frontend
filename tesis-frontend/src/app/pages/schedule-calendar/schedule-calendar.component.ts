@@ -1,5 +1,6 @@
 import { Component, HostListener, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   CalendarView,
   CalendarDateFormatter,
@@ -9,6 +10,7 @@ import {
   addPeriod,
   CalendarSchedulerEvent,
   CalendarSchedulerEventAction,
+  CalendarSchedulerEventStatus,
   DAYS_IN_WEEK,
   endOfPeriod,
   SchedulerDateFormatter,
@@ -24,6 +26,7 @@ import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { ArticulosService } from 'src/app/core/services/articulos.service';
 import { PaperService } from 'src/app/core/services/paper.service';
+import { RoomService } from 'src/app/core/services/room.service';
 import { ScheduleCalendarService } from 'src/app/core/services/schedule-calendar.service';
 
 @Component({
@@ -42,7 +45,7 @@ export class ScheduleCalendarComponent implements OnInit {
   CalendarView = CalendarView;
 
   view: CalendarView = CalendarView.Week;
-  viewDate: Date = new Date();
+  viewDate: Date = new Date(); // Igual a minDate!!
   viewDays: number = DAYS_IN_WEEK;
   refresh: Subject<any> = new Subject();
   locale = 'en';
@@ -84,6 +87,9 @@ export class ScheduleCalendarComponent implements OnInit {
   hours = Array.from({length: 15}, (_, i) => i + 8 );
   minutes = Array.from({length: 12}, (_, i) => i * 5);
   simposios = [];
+  roomList = [];
+  loading = false;
+  idAula = '';
 
   actions: CalendarSchedulerEventAction[] = [
       {
@@ -108,7 +114,12 @@ export class ScheduleCalendarComponent implements OnInit {
               private calendarService: ScheduleCalendarService,
               private formBuild: FormBuilder,
               private paperService: PaperService,
-              private articulosService: ArticulosService) {
+              private articulosService: ArticulosService,
+              private router: Router,
+              private roomService: RoomService) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => {
+        return false;
+      };
       this.locale = locale;
 
       this.segmentModifier = ((segment: SchedulerViewHourSegment): void => {
@@ -124,16 +135,43 @@ export class ScheduleCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.calendarService.getEvents(this.actions)
-    .then((events: CalendarSchedulerEvent[]) => (this.events = events));
     this.getSimposios();
+    this.getEvaluators();
+    this.getRooms();
     this.formEvento = this.formBuild.group(this.values());
+  }
+
+
+
+  aulaSelected(idAula: any): void {
+    // llamar a los eventos del aula
+    console.log(idAula);
+    this.idAula = idAula;
+    this.loading = true;
+    this.getEventos();
+  }
+
+  getEventos(): void {
+    // con el idAula Llama a los eventos
+    this.calendarService.getEvents(this.actions)
+    .then((events: CalendarSchedulerEvent[]) => {
+        this.events = events;
+        this.loading = false;
+    });
+  }
+
+  getRooms(): void {
+    this.roomService.getRooms().subscribe((res: any) => {
+      this.roomList = res.data[0];
+     });
+  }
+
+  getEvaluators(): void {
     this.articulosService.getPaperEvaluators().subscribe((res: any) => {
       // Aca tiene que estar aprobado | entregado
       this.paperList = res.data.filter((x: any) => x.estadoArticuloNombre === 'En espera');
       this.showList = this.paperList.slice();
     });
-
   }
 
   getSimposios(): void {
@@ -270,13 +308,9 @@ export class ScheduleCalendarComponent implements OnInit {
       //     isDisabled: false,
       // } as CalendarSchedulerEvent);
       // console.log(this.events);
-
-      console.log('segmentClicked Action', action);
-      console.log('segmentClicked Segment', segment);
   }
 
   eventClicked(action: string, event: CalendarSchedulerEvent): void {
-      console.log('Aca viene el EVENTO');
       this.evento = {
         ...this.evento,
         id: event.id,
@@ -291,9 +325,6 @@ export class ScheduleCalendarComponent implements OnInit {
 
       const btnDetalle = document.getElementById('activar-modal');
       btnDetalle.click();
-
-      console.log('eventClicked Action', action);
-      console.log('eventClicked Event', event);
   }
 
   simposioSeleccionado(item: any): void {
@@ -303,9 +334,58 @@ export class ScheduleCalendarComponent implements OnInit {
 
   submit(): void {
     this.submitted = true;
+    console.log(this.formEvento);
     if (this.formEvento.invalid) {
       alert('Por favor complete todos los datos.');
       return;
     }
+    const form = this.formEvento.controls;
+    const start = new Date(form.date.value + ' '  + form.startHour.value + ':' + form.startMinute.value);
+    const end = new Date(form.date.value + ' ' + form.endHour.value + ':' + form.endMinute.value);
+
+    if (start >= end) {
+      alert('Hora inválida');
+      return;
+    }
+    // Chequeo de dos horarios superpuestos
+    // const overStepped = this.events.find((item: any) => {
+    //   if (start === item.startDate){
+    //     return true;
+    //   }
+    //   if (start < item.startDate && end <= item.startDate) {
+    //     return false;
+    //   }
+    //   if (start < item.startDate && end >= item.startDate) {
+    //     return true;
+    //   }
+    //   if (start > item.startDate && start < item.endDate) {
+    //     return true;
+    //   }
+    //   return false;
+    // });
+
+    // if (overStepped) {
+    //   alert('Horarios Superpuestos. Imposible ')
+    //   return;
+    // }
+
+    // Post a BD y Push a la agenda.
+    this.events.push(
+      {
+        id: '55',
+        start,
+        end,
+        title: form.title.value,
+        content: form.desc.value,
+        color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
+        actions: this.actions,
+        status: 'ok' as CalendarSchedulerEventStatus,
+        isClickable: true,
+        isDisabled: false
+    });
+    const btnDismiss = document.getElementById('dismiss');
+    btnDismiss.click();
+    this.loading = true;
+    this.getEventos();
   }
 }

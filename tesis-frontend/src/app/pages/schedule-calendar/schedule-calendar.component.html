@@ -1,47 +1,83 @@
-<div class="calendar-container" *ngIf="events">
-  <div class="row mt-4">
-    <div class="col-md-4 text-center">
-      <h3 class="mt-0">{{ viewDate | calendarSchedulerDate:(view +
-        'ViewTitle'):locale:weekStartsOn:excludeDays:viewDays:startsWithToday }}</h3>
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Agenda del Evento</h3>
+    <hr>
+  </div>
+  <br>
+  <div class="row py-3">
+    <div class="col-md-4">
+      <label for="">Seleccione un Aula:</label>
     </div>
-    <div class="col-md-4 text-right">
-      <div class="btn-group m-1" role="group">
-        <button type="button" class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-          [daysInWeek]="viewDays" [excludeDays]="excludeDays" [disabled]="prevBtnDisabled"
-          (viewDateChange)="dateOrViewChanged()">
-          <span class="valign-center">
-            <i title="Precedente" class="material-icons md-18">keyboard_arrow_left</i>
-          </span>
-        </button>
-        <button type="button" class="btn btn-light" mwlCalendarToday [(viewDate)]="viewDate"
-          (viewDateChange)="dateOrViewChanged()">
-          <span class="valign-center">
-            <i title="Oggi" class="material-icons md-18">today</i>
-          </span>
-        </button>
-        <button type="button" class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-          [daysInWeek]="viewDays" [excludeDays]="excludeDays" [disabled]="nextBtnDisabled"
-          (viewDateChange)="dateOrViewChanged()">
-          <span class="valign-center">
-            <i title="Successivo" class="material-icons md-18">keyboard_arrow_right</i>
-          </span>
-        </button>
+    <div class="col-md-4">
+      <div class="col-sm-12">
+        <select name="eval" class="form-control" (change)="aulaSelected($event.target.value)">
+          <option selected disabled> -- Seleccione un Aula --</option>
+          <option *ngFor="let room of roomList" value='{{room.idRoom}}'>{{ room.nombre }} </option>
+        </select>
       </div>
     </div>
   </div>
-  <br>
-  <div [ngSwitch]="view">
-    <calendar-scheduler-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [locale]="locale"
-      [viewDays]="viewDays" [weekStartsOn]="weekStartsOn" [excludeDays]="excludeDays"
-      [startsWithToday]="startsWithToday" [hourSegments]="hourSegments" [dayStartHour]="dayStartHour"
-      [dayEndHour]="dayEndHour" [dayModifier]="dayModifier" [hourModifier]="hourModifier"
-      [segmentModifier]="segmentModifier" [eventModifier]="eventModifier" [showEventActions]="true"
-      [showSegmentHour]="true" [zoomEventOnHover]="true" (hourClicked)="hourClicked($event.hour)"
-      (segmentClicked)="segmentClicked('Clicked', $event.segment)"
-      (eventClicked)="eventClicked('Clicked', $event.event)" [refresh]="refresh">
-    </calendar-scheduler-view>
+  <div class="row" id="loading">
+    <div class="row justify-content-center" *ngIf="loading">
+      <div class="spinner-border text-primary" role="status" >
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
   </div>
+  <div class="row" *ngIf="events && !loading">
+    <div class="calendar-container" >
+      <div class="row mt-4">
+        <div class="col-md-4 text-center">
+          <h3 class="mt-0">{{ viewDate | calendarSchedulerDate:(view +
+            'ViewTitle'):locale:weekStartsOn:excludeDays:viewDays:startsWithToday }}</h3>
+        </div>
+        <div class="col-md-4 text-right">
+          <div class="btn-group m-1" role="group">
+            <button type="button" class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+              [daysInWeek]="viewDays" [excludeDays]="excludeDays" [disabled]="prevBtnDisabled"
+              (viewDateChange)="dateOrViewChanged()">
+              <span class="valign-center">
+                <i title="Precedente" class="material-icons md-18">Anterior</i>
+              </span>
+            </button>
+            <button type="button" class="btn btn-light" mwlCalendarToday [(viewDate)]="viewDate"
+              (viewDateChange)="dateOrViewChanged()"
+              disabled
+              >
+              <span class="valign-center">
+                <i title="Hoy" class="material-icons md-18"></i>
+              </span>
+            </button>
+            <button type="button" class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+              [daysInWeek]="viewDays" [excludeDays]="excludeDays" [disabled]="nextBtnDisabled"
+              (viewDateChange)="dateOrViewChanged()">
+              <span class="valign-center">
+                <i title="Siguiente" class="material-icons md-18">Siguiente</i>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div [ngSwitch]="view">
+        <calendar-scheduler-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [locale]="locale"
+          [viewDays]="viewDays" [weekStartsOn]="weekStartsOn" [excludeDays]="excludeDays"
+          [startsWithToday]="startsWithToday" [hourSegments]="hourSegments" [dayStartHour]="dayStartHour"
+          [dayEndHour]="dayEndHour" [dayModifier]="dayModifier" [hourModifier]="hourModifier"
+          [segmentModifier]="segmentModifier" [eventModifier]="eventModifier" [showEventActions]="true"
+          [showSegmentHour]="true" [zoomEventOnHover]="true" (hourClicked)="hourClicked($event.hour)"
+          (segmentClicked)="segmentClicked('Clicked', $event.segment)"
+          (eventClicked)="eventClicked('Clicked', $event.event)" [refresh]="refresh">
+        </calendar-scheduler-view>
+      </div>
+    </div>
+
+  </div>
+
 </div>
+
+
 
 
 <!-- Button trigger modal -->
@@ -169,11 +205,38 @@
             </div>
           </div>
 
+          <!-- title -->
+          <div class='form-group row'>
+            <label class='col-form-label col-sm-2 col-sm-offset-2' for='title'>Titulo: <span
+              class='text-danger'>*</span></label>
+              <div class='col-sm-6'>
+                <input type='text' class='form-control' formControlName='title'
+                [ngClass]="{'is-invalid': (formEvento.controls.title.touched || submitted)
+                  && formEvento.controls.title.errors}" onclick='this.select()'/>
+                <span class='text-danger'
+                *ngIf='(formEvento.controls.title.touched || submitted) && formEvento.controls.title.errors?.required'>
+                  Requerido
+                </span>
+              </div>
+          </div>
 
-
+          <!-- desc -->
+          <div class='form-group row'>
+            <label class='col-form-label col-sm-2 col-sm-offset-2' for='desc'>Descripción: <span
+              class='text-danger'>*</span></label>
+              <div class='col-sm-6'>
+                <input type='text' class='form-control' formControlName='desc'
+                [ngClass]="{'is-invalid': (formEvento.controls.desc.touched || submitted)
+                  && formEvento.controls.desc.errors}" onclick='this.select()'/>
+                <span class='text-danger'
+                *ngIf='(formEvento.controls.desc.touched || submitted) && formEvento.controls.desc.errors?.required'>
+                  Requerido
+                </span>
+              </div>
+          </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">{{evento.id ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismiss'>Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)='submit()'>{{evento.id ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
           </div>
         </form>
       </div>

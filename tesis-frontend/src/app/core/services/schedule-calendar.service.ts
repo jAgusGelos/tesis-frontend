@@ -188,7 +188,7 @@ export class ScheduleCalendarService {
             status: 'ok' as CalendarSchedulerEventStatus,
             isClickable: true,
             isDisabled: false
-        } as CalendarSchedulerEvent
+        } as CalendarSchedulerEvent,
     ];
 
     return new Promise(resolve => setTimeout(() => resolve(events), 3000));
