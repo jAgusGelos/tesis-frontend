@@ -112,6 +112,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tarifas/tarifas.module')
     .then(m => m.TarifasModule),
   },
+  {
+    path: 'preferenciaSimposio',
+    loadChildren: () => import('./pages/symposium-preference/symposium-preference.module')
+    .then(m => m.SymposiumPreferenceModule),
+  },
   // Notification routes
   {
     path: 'deactivateAccount',
