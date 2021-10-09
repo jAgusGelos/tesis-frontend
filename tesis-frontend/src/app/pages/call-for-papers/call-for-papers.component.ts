@@ -15,6 +15,7 @@ export class CallForPapersComponent implements OnInit {
   paper = {};
   simposios = [];
   okey = false;
+  ready = false;
 
   constructor(private paperService: PaperService,
               private router: Router) {
@@ -99,4 +100,29 @@ export class CallForPapersComponent implements OnInit {
     });
   }
 
+
+  finalPaper(item: any): void {
+    // ir a la página para el camera ready
+    console.log('YENDOO');
+    this.ready = true;
+    this.paper = item;
+    console.log(this.paper);
+
+  }
+
+  volverFinalPaper(): void {
+    this.ready = false;
+  }
+
+  revision(item: any): void {
+    // Abrir la revisión
+    console.log(item);
+  }
+
+  entregaFinal(item: any): void {
+    // Se envia el paper ya camera ready listo
+
+  }
+
 }
+

@@ -35,6 +35,7 @@ import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.compon
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TarifaListComponent,
     TarifaFormComponent,
     AsignarPaperEvaluadorListComponent,
-    SearchComponent
+    SearchComponent,
+    PaperReadyComponent
   ],
   imports: [
     CommonModule,
@@ -112,7 +114,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TarifaListComponent,
     TarifaFormComponent,
     AsignarPaperEvaluadorListComponent,
-    SearchComponent
+    SearchComponent,
+    PaperReadyComponent,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

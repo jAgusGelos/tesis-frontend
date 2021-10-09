@@ -11,6 +11,8 @@ export class PaperListComponent implements OnInit {
   @Output() editPaperEvent = new EventEmitter();
   @Output() deletePaperEvent = new EventEmitter();
   @Output() newPaperEvent = new EventEmitter();
+  @Output() finalPaperEvent = new EventEmitter();
+  @Output() revisionEvent = new EventEmitter();
   showList: any[];
 
   constructor() { }
@@ -37,5 +39,13 @@ export class PaperListComponent implements OnInit {
 
   search(filterList): void {
     this.showList = filterList;
+  }
+
+  toggleCameraReady(item: any): void {
+    this.finalPaperEvent.emit(item);
+  }
+
+  toggleRevision(item: any) {
+    this.revisionEvent.emit(item);
   }
 }

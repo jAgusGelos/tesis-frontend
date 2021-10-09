@@ -66,3 +66,7 @@ td {
   padding-top: 1rem;
   margin-bottom: 0;
 }
+
+a:hover {
+  cursor: pointer;
+}
