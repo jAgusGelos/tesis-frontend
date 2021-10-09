@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ITarifa } from 'src/app/core/models/itarifa';
+import { ITarifa } from 'src/app/core/models/ITarifa';
 import { TarifasService } from 'src/app/core/services/tarifas.service';
 
 
