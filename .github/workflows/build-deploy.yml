@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - prod
+      - dev
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -28,4 +28,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: dist/tesis-frontend
+          FOLDER: dist/workshop
