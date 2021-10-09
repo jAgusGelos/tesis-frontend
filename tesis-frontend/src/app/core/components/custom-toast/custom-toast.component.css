@@ -1,0 +1,40 @@
+:host {
+  background-color: #FFF;
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 6px;
+  padding: 10px 10px 10px 10px;
+  width: 300px;
+  border-radius: 3px 3px 3px 3px;
+  color: #000;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.custom-title {
+  color: #111;
+}
+
+.custom-message {
+  color: #333;
+}
+
+a {
+  padding: 5px;
+  margin: 3px;
+}
+
+.btn-primary {
+  background-color: #3CAFE0;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.75rem 0.75rem 0.75rem 0.75rem;
+}
+
+.btn-secondary{
+  background-color: #C4C4C4;
+  border: none;
+  padding: 0.75rem 0.75rem 0.75rem 0.75rem;
+}
+
+

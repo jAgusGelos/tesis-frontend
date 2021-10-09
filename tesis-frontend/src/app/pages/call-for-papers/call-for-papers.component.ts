@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IntPaper } from 'src/app/core/models/IntPaper';
 import { PaperService } from 'src/app/core/services/paper.service';
 
@@ -17,7 +18,9 @@ export class CallForPapersComponent implements OnInit {
   okey = false;
 
   constructor(private paperService: PaperService,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService,
+              ) {
                 this.router.routeReuseStrategy.shouldReuseRoute = () => {
                   return false;
                 }; }
@@ -63,7 +66,7 @@ export class CallForPapersComponent implements OnInit {
 
   deletePaper(item: IntPaper): void {
     this.paperService.deletePaper(item).subscribe((res: any) => {
-      alert('El paper ha sido eliminado correctamente');
+      this.toastr.success('El paper ha sido eliminado correctamente');
       this.getPaper();
     });
   }
@@ -81,13 +84,13 @@ export class CallForPapersComponent implements OnInit {
 
     if (item.id === '') {
       this.paperService.postPaper(item).subscribe((res: any) => {
-        alert('Paper Creado Correctamente');
+        this.toastr.success('Paper Creado Correctamente');
         this.router.navigateByUrl('/callForPapers');
       });
     }
     else{
       this.paperService.putPaper(item).subscribe((res: any) => {
-        alert('Paper Modificado Correctamente');
+        this.toastr.success('Paper Modificado Correctamente');
         this.router.navigateByUrl('/callForPapers');
       });
     }

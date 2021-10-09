@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IassignSecChairTheme } from '../../models/iassign-sec-chair-theme';
 import { AssignSecChairThemeService } from '../../services/assign-sec-chair-theme.service';
 import { CongressService } from '../../services/congress.service';
 import { PaperService } from '../../services/paper.service';
 import { SymposiumService } from '../../services/symposium.service';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-assign-sec-chairs-form',
@@ -23,7 +25,8 @@ export class AssignSecChairsFormComponent implements OnInit {
 
   constructor( private formBuilder: FormBuilder,
                private assignService: AssignSecChairThemeService,
-               private paperService: PaperService) { }
+               private paperService: PaperService,
+               private toastr: ToastrService) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -58,7 +61,7 @@ export class AssignSecChairsFormComponent implements OnInit {
 
   asignarChair(): void {
     if (this.formAssignSecChairs.invalid) {
-      alert('Por Favor seleccione un chair y una tematica');
+      this.toastr.warning('Por favor seleccione un chair y una temática')
       return;
     }
 
@@ -74,12 +77,20 @@ export class AssignSecChairsFormComponent implements OnInit {
   }
 
   toggleRemoveHandled(item: any): void {
-    if (confirm('Esta seguro que desea eliminar el chair: ' + item.nombreChair + ' ' + item.apellidoChair)){
-      this.assignService.deleteAssignSecChairTheme(item).subscribe((res: any) => {
-        const indice = this.chairsAssigned.indexOf(item);
-        this.chairsAssigned.splice(indice, 1);
+    this.toastr
+      .show( '¿Está seguro que desea eliminar el chair '+ item.nombreChair + ' ' + item.apellidoChair + '?', '¿Eliminar chair?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.assignService.deleteAssignSecChairTheme(item).subscribe((res: any) => {
+          const indice = this.chairsAssigned.indexOf(item);
+          this.chairsAssigned.splice(indice, 1);
+        });
       });
-    }
   }
 
   search(filterList): void {

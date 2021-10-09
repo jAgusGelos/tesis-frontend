@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IntPaper } from '../../models/IntPaper';
 import { ISymposium } from '../../models/ISymposium';
 import { AuthService } from '../../services/auth.service';
@@ -24,7 +25,9 @@ export class PaperFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private paperService: PaperService,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -80,7 +83,7 @@ export class PaperFormComponent implements OnInit {
         }
       });
       if (exist) {
-        alert('Ya existe un usuario con ese Email ingresado');
+        this.toastr.info('Ya existe un usuario con el email ingresado.')
         return null;
       }
       this.paperService.checkAutor(autor).subscribe((res: any) => {
@@ -90,7 +93,7 @@ export class PaperFormComponent implements OnInit {
 
         }
       else{
-        alert('El autor ingresado no está registrado en el sistema. \n' +
+        this.toastr.info('El autor ingresado no está registrado en el sistema. \n' +
         'Recuerde que todos los autores deben estar registrados para poder enviar a corrección \n' +
         'Descuida, puedes guardar tus cambios hasta que este usuario cree su perfil\n' +
         'No te preocupes, nosotros le enviaremos un mail a este nuevo autor');
@@ -100,7 +103,7 @@ export class PaperFormComponent implements OnInit {
       this.formPaper.controls.autores.reset();
     }
     else{
-      alert('Ingrese un Email Válido');
+      this.toastr.warning('Ingrese un email válido')
     }
   }
 
@@ -151,7 +154,7 @@ export class PaperFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formPaper.invalid || this.fileToUpload === null || this.formPaper.controls.simposio.value.trim() === '' ) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.warning('Por favor complete todos los datos.')
       return;
     }
     const userId = this.auth.getUserId();

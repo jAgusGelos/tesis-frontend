@@ -1,6 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ICongress } from '../../models/ICongress';
+import { IEvaluator } from '../../models/iEvaluator';
+import { IntPaper } from '../../models/IntPaper';
+import { ISymposium } from '../../models/ISymposium';
+import { IUserComplete } from '../../models/IUserComplete';
 import { ArticulosService } from '../../services/articulos.service';
 import { EvaluatorService } from '../../services/evaluator.service';
+import { SymposiumService } from '../../services/symposium.service';
+import { UserService } from '../../services/user.service';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-asignar-paper-evaluador-list',
@@ -18,7 +29,8 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
 
   constructor(  private evaluatorService: EvaluatorService,
                 private articulosService: ArticulosService,
-
+                private toastr: ToastrService,
+                
                 ) { }
 
   ngOnInit(): void {
@@ -127,11 +139,25 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
       }
     });
     // Carga masiva de Evaluadores. Post confirmación. asignarArticuloEvaluadorMasivo
-    if (confirm('¿Está seguro que desea asignar las evaluaciones?')) {
-      this.evaluatorService.postEvaluatorMassive(list).subscribe((res: any) => {
-        alert('Los Evaluadores han sido cargado con éxito. Les llegará un mail de notificación');
+    /* {
+      idEvaluadores: [1,2,3],
+      articulo: 1,
+      idCongreso: 1
+    } */
+    this.toastr
+      .show( '¿Está seguro que desea asignar las evaluaciones?', '¿Confirmar asignaciones?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.evaluatorService.postEvaluatorMassive(this.assignedPaperList).subscribe((res: any) => {
+          this.toastr.success('Los Evaluadores han sido cargado con éxito. Les llegará un mail de notificación')
+        });
+
       });
-    }
   }
 
   search(filterList): void {

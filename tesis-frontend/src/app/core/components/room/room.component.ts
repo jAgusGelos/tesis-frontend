@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { IRoom } from '../../models/IRoom';
 import { AuthService } from '../../services/auth.service';
 import { RoomService } from '../../services/room.service';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-room',
@@ -18,7 +20,8 @@ export class RoomComponent implements OnInit {
   @Output() deleteRoomEvent = new EventEmitter();
   @Output() goBackEvent = new EventEmitter();
 
-  constructor() { }
+  constructor(private toastr: ToastrService,
+    ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -32,9 +35,17 @@ export class RoomComponent implements OnInit {
     this.newRoomEvent.emit();
   }
   toggleRemoveHandled(item: any): void {
-    if (confirm('Está seguro desea eliminar el aula ' + item.nombre)) {
-      this.deleteRoomEvent.emit(item);
-    }
+    this.toastr
+      .show( 'Está seguro que desea eliminar el aula ' + item.nombre + ' ?', '¿Eliminar Aula?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.deleteRoomEvent.emit(item);
+      });
   }
 
   toggleBack(): void  {
