@@ -48,7 +48,7 @@
               <a (click)='toggleCameraReady(item)' title='Entrega final'><i class="fas fa-arrow-alt-circle-right bigger"></i></a>
             </div>
             <div class="row">
-              <a (click)='toggleRevision(item)'>Ver Revisión</a>
+              <a class='rev' (click)='toggleRevision(item)'>Ver Revisión</a>
             </div>
 
           </div>
@@ -64,7 +64,20 @@
               </a>
             </div>
             <div class="row">
-              <a (click)='toggleRevision(item)'>Ver Revisión</a>
+              <a  class='rev' (click)='toggleRevision(item)'>Ver Revisión</a>
+            </div>
+          </div>
+
+          <div *ngIf='item.enviado_corregir && item.idEstado === 8'>
+            <div class="row">
+              <a
+              ngbPopover="Tu articulo ha sido entregado correctamente.
+              A la brevedad recibirás un mail con la información respecto al día del evento"
+              popoverClass="popover"
+              placement="left"
+              popoverTitle="Felicitaciones:">
+              <i class="fas fa-laugh-beam bigger"></i>
+              </a>
             </div>
           </div>
 

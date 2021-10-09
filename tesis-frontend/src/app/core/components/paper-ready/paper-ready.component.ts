@@ -87,10 +87,7 @@ export class PaperReadyComponent implements OnInit {
         }
       else{
         alert('El autor ingresado no está registrado en el sistema. \n' +
-        'Recuerde que todos los autores deben estar registrados para poder enviar a corrección \n' +
-        'Descuida, puedes guardar tus cambios hasta que este usuario cree su perfil\n' +
-        'No te preocupes, nosotros le enviaremos un mail a este nuevo autor');
-        this.autoresList.push({mail: autor, status: false});
+       'En este punto no se permiten autores no resgistrados. Por favor notifique a su compañero.');
       }
       });
       this.formPaper.controls.autores.reset();
@@ -129,7 +126,7 @@ export class PaperReadyComponent implements OnInit {
       alert('Por favor suba un archivo');
       return;
     }
-    if (confirm('¿Esta seguro que desea enviar el artículo?, luego de esto no existe marcha atras')) {
+    if (confirm('¿Esta seguro que desea enviar el artículo? Una vez enviado no podrá cargar más autores.')) {
       const userId = this.auth.getUserId();
       this.paper = {
         archivo: this.fileToUpload,
