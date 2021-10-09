@@ -116,8 +116,8 @@ export class CallForPapersComponent implements OnInit {
 
   verRevision(item: any): void {
     // Abrir la revisión
+    this.paper = item;
     this.revision = true;
-    console.log(item);
   }
 
   entregaFinal(item: any): void {
