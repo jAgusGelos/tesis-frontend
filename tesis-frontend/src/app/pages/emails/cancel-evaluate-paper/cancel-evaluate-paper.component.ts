@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -11,13 +12,15 @@ export class CancelEvaluatePaperComponent implements OnInit {
   cancel: boolean=false;
   token:string;
   constructor(private route:ActivatedRoute,
-              private service: UserService) { }
+              private service: UserService,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit(): void {
     this.token=this.route.snapshot.params.token;
     this.service.cancelEvaluatePaper('?token=' + this.token).subscribe(
       (res:any)=> this.cancel=true,
-      (err:any) =>{alert('No se pudo cancelar su asignación como evaluador del paper.')}
+      (err:any) =>{this.toastr.error('No se pudo cancelar su asignación como evaluador del paper.')}
     )
   }
 

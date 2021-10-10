@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 
 @Component({
@@ -13,8 +15,10 @@ export class CongressListComponent implements OnInit {
   @Output() newCongressEvent = new EventEmitter();
   @Output() deleteCongressEvent = new EventEmitter();
   @Output() scoreEvaluatorsEvent = new EventEmitter();
+  
+  constructor(private toastr: ToastrService,
+    ) { }
 
-  constructor() { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -28,10 +32,18 @@ export class CongressListComponent implements OnInit {
     this.newCongressEvent.emit();
   }
   toggleRemoveHandled(item: any): void {
-    if (confirm('Esta seguro desea eliminar el congreso: ' + item.nombre +
-    '\nToda la configuración creada se perderá')) {
-      this.deleteCongressEvent.emit(item);
-    }
+    this.toastr
+      .show( 'Si eliminas el congreso ' + item.nombre + ' toda la configuración se perderá.', '¿Eliminar Congreso?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.deleteCongressEvent.emit(item);
+
+      });
   }
 
   toggleScoreEvaluators(): void {

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ICongress } from '../../models/ICongress';
 
 
@@ -28,7 +29,9 @@ export class CongressFormComponent implements OnInit {
   submitted = false;
   @Input() sedes = [];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private toastr: ToastrService,
+    ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -50,7 +53,7 @@ export class CongressFormComponent implements OnInit {
   edit(): void {
     this.submitted = true;
     if (this.formCongress.invalid) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.warning('Por favor complete todos los datos.')
       return;
     }
     this.congress = {
@@ -68,7 +71,7 @@ export class CongressFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formCongress.invalid) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.warning('Por favor complete todos los datos.')
       return;
     }
     this.congress = {

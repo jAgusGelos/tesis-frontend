@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ISymposium } from 'src/app/core/models/ISymposium';
 import { SymposiumService } from 'src/app/core/services/symposium.service';
 
@@ -16,7 +17,9 @@ export class SymposiumComponent implements OnInit {
   symposium = {};
 
   constructor(private symposiumService: SymposiumService,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService,
+              ) {
 
                 this.router.routeReuseStrategy.shouldReuseRoute = () => {
                   return false;
@@ -48,7 +51,7 @@ export class SymposiumComponent implements OnInit {
 
   deleteSymposium(item: ISymposium): void {
     this.symposiumService.deleteSymposium(item).subscribe((res: any) => {
-      alert('El Simposio ha sido eliminado correctamente');
+      this.toastr.success('El Simposio ha sido eliminado correctamente');
       this.router.navigateByUrl('/simposios');
     });
   }
@@ -63,13 +66,13 @@ export class SymposiumComponent implements OnInit {
     console.log(item.id);
     if (item.id === undefined) {
       this.symposiumService.postSymposium(item).subscribe((res: any) => {
-        alert('Simposio Creado Correctamente');
+        this.toastr.success('Simposio Creado Correctamente');
         this.router.navigateByUrl('/simposios');
       });
     }
     else{
       this.symposiumService.putSymposium(item).subscribe((res: any) => {
-        alert('Simposio Modificado Correctamente');
+        this.toastr.success('Simposio Modificado Correctamente');
         this.router.navigateByUrl('/simposios');
       });
     }
