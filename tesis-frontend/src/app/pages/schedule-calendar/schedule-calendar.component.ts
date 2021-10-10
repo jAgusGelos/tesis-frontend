@@ -23,6 +23,7 @@ import {
 } from 'angular-calendar-scheduler';
 import { addMonths, endOfDay } from 'date-fns';
 import * as moment from 'moment';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { ArticulosService } from 'src/app/core/services/articulos.service';
 import { PaperService } from 'src/app/core/services/paper.service';
@@ -117,7 +118,8 @@ export class ScheduleCalendarComponent implements OnInit {
               private paperService: PaperService,
               private articulosService: ArticulosService,
               private router: Router,
-              private roomService: RoomService) {
+              private roomService: RoomService,
+              private toastr: ToastrService) {
       this.router.routeReuseStrategy.shouldReuseRoute = () => {
         return false;
       };
@@ -352,7 +354,7 @@ export class ScheduleCalendarComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formEvento.invalid) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.warning('Por favor, complete todos los datos');
       return;
     }
     const form = this.formEvento.controls;
@@ -360,7 +362,7 @@ export class ScheduleCalendarComponent implements OnInit {
     const end = new Date(form.date.value + ' ' + form.endHour.value + ':' + form.endMinute.value);
 
     if (start >= end) {
-      alert('Hora inválida');
+      this.toastr.warning('Hora inválida');
       return;
     }
     // Chequeo de dos horarios superpuestos

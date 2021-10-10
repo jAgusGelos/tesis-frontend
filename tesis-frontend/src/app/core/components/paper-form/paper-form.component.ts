@@ -81,7 +81,7 @@ export class PaperFormComponent implements OnInit {
         }
       });
       if (exist) {
-        this.toastr.info('Ya existe un usuario con el email ingresado.')
+        this.toastr.info('Ya existe un usuario con el email ingresado.');
         return null;
       }
       this.paperService.checkAutor(autor).subscribe((res: any) => {
@@ -131,7 +131,7 @@ export class PaperFormComponent implements OnInit {
    */
   save(): void {
     if (!this.paper.id && !this.formPaper.controls.archivo.value) {
-      alert('Por favor suba un archivo');
+      this.toastr.warning('Por Favor, suba un archivo');
       return;
     }
     const userId = this.auth.getUserId();

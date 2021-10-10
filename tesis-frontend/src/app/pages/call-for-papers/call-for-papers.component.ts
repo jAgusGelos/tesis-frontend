@@ -97,7 +97,7 @@ export class CallForPapersComponent implements OnInit {
 
   sendPaper(item: any): void {
     this.paperService.sendPaper(item).subscribe((res: any) => {
-      alert('Paper Enviado');
+      this.toastr.success('Camera Ready Enviado');
       this.router.navigateByUrl('/callForPapers');
     });
   }
