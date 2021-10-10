@@ -16,6 +16,7 @@ export class PaperFormComponent implements OnInit {
   @Input() paper: any;
   @Input() simposios: any[];
   @Output() paperEmitter = new EventEmitter<any>();
+  @Output() sendEmitter = new EventEmitter<any>();
   @Output() cancelPaper = new EventEmitter();
   formPaper: FormGroup;
   submitted = false;
@@ -31,13 +32,10 @@ export class PaperFormComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-
-    console.log(this.paper);
-
     this.formPaper = this.formBuilder.group({
       nombre: [this.paper.nombre, [Validators.required]],
       simposio: [this.paper.idSimposio, [Validators.required]],
-      archivo: [null, [Validators.required]],
+      archivo: [null],
       autores: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     });
     if (this.paper) {
@@ -83,12 +81,12 @@ export class PaperFormComponent implements OnInit {
         }
       });
       if (exist) {
-        this.toastr.info('Ya existe un usuario con el email ingresado.')
+        this.toastr.info('Ya existe un usuario con el email ingresado.');
         return null;
       }
       this.paperService.checkAutor(autor).subscribe((res: any) => {
         if (res.data){
-          this.paper.autores.push(autor);
+          // this.paper.autores.push(autor);
           this.autoresList.push({mail: autor, status: true});
 
         }
@@ -132,13 +130,17 @@ export class PaperFormComponent implements OnInit {
    * Guarda provisoriamente los datos del congreso en la BD.
    */
   save(): void {
+    if (!this.paper.id && !this.formPaper.controls.archivo.value) {
+      this.toastr.warning('Por Favor, suba un archivo');
+      return;
+    }
     const userId = this.auth.getUserId();
     this.paper = {
       archivo: this.fileToUpload,
       autores: this.autoresList.map((item: any) => {
         return item.mail;
       }),
-      id: '',
+      id: this.paper.id || '',
       estado: 'sin subir',
       nombre: this.formPaper.controls.nombre.value,
       responsable: userId,
@@ -163,13 +165,30 @@ export class PaperFormComponent implements OnInit {
       autores: this.autoresList.map((item: any) => {
         return item.mail;
       }),
-      id: '',
+      id: this.paper.id,
       estado: 'sin subir',
       nombre: this.formPaper.controls.nombre.value,
       responsable: userId,
       simposio: this.formPaper.controls.simposio.value,
     };
-    this.paperEmitter.emit([this.paper]);
+    this.sendEmitter.emit(this.paper);
+  }
+
+  getArchivo(): void {
+   this.paperService.getPaperFile(this.paper.id).subscribe((res: any) => {
+      const archivo: ArrayBuffer = res;
+      const blob = new Blob([archivo], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      if (link.download !== undefined) {
+        link.setAttribute('href', url);
+        link.setAttribute('target', '_blank');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
   }
 
 }

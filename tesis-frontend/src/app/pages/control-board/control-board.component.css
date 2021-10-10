@@ -32,8 +32,11 @@ i:hover {
 .fas {
   font-size: 1.25rem;
   color: #00609C;
-  padding-right: 1rem;
-  padding-top: 0;
+}
+
+.fa {
+  font-size: 1.25rem;
+  color: #00609C;
 }
 
 hr {
@@ -44,6 +47,7 @@ hr {
   hr {
     margin-left: 25%;
     margin-right: 25%;
+
   }
 
   .container-fluid {
@@ -52,17 +56,19 @@ hr {
 
 }
 
-:host >>> .popover .popover-header {
-  background-color: #3CAFE0;
-
+.redondo{
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
 }
 
-.bigger {
-  font-size: 170%;
-  margin-bottom: 1rem;
+.rojo {
+  background-color: red;
+  border: red;
 }
 
-td {
-  padding-top: 1rem;
-  margin-bottom: 0;
+.verde {
+  background-color: green;
+  border: gren;
 }

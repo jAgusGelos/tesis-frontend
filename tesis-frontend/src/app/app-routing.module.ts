@@ -114,6 +114,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tarifas/tarifas.module')
     .then(m => m.TarifasModule),
   },
+  {
+    path: 'control',
+    loadChildren: () => import('./pages/control-board/control-board.module')
+    .then(m => m.ControlBoardModule),
+  },
+  {
+    path: 'generarAgenda',
+    loadChildren: () => import('./pages/schedule-calendar/schedule-calendar.module')
+    .then(m => m.ScheduleCalendarModule),
+  },
   // Notification routes
   {
     path: 'deactivateAccount',

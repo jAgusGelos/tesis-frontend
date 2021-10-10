@@ -19,7 +19,7 @@ export class PaperListComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    this.showList = this.paperList.slice();
+    this.showList = this.paperList.slice().sort((item: any) => item.enviado_corregir ? 0 : -1);
   }
 
   toggleEdit(item: any): void {
