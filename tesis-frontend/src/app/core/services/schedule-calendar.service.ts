@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CalendarSchedulerEvent, CalendarSchedulerEventAction, CalendarSchedulerEventStatus } from 'angular-calendar-scheduler';
 import { addDays, addHours, addMinutes, setHours, startOfHour, subHours, subMinutes } from 'date-fns';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class ScheduleCalendarService {
 
-  apiUrl = '';
+  apiUrl = environment.apiURL;
   idCongreso = null;
   constructor(private httpClient: HttpClient,
               private auth: AuthService) {
