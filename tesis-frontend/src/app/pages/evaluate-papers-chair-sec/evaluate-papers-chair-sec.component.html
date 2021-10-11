@@ -101,7 +101,7 @@
                 <label for="selectStateDetalle" class="col-form-label"><span id="spanEvaluacion">Evaluación:</span></label>
               </div>
               <div class="col-md-4">
-                <select class="form-select" id="selectStateDetalle" (ngModel)='defaultSelect'>
+                <select class="form-select" id="selectStateDetalle">
                   <option disabled selected value=""></option>
                   <option value="1" *ngIf="detEstado.id !== 6 && detEstado.id !== 8">Aprobar</option>
                   <option value="2" *ngIf="detEstado.id !== 7 && detEstado.id !== 9">Rechazar</option>
@@ -114,7 +114,7 @@
                 <label for="observacion-autor" class="col-form-label"><span id="spanEvaluacion">Observación para el Autor:</span></label>
               </div>
               <div class="col-md-8">
-                <textarea class="form-control" id="observacion-autor" (keyup)="setObservacionAutor()"></textarea>
+                <textarea class="form-control" id="observacion-autor">{{observacionAutor}}</textarea>
               </div>
             </div>
             <div class="row row-detalle">
