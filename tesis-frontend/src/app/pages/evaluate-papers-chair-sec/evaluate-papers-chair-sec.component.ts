@@ -164,7 +164,7 @@ export class EvaluatePapersChairSecComponent implements OnInit {
       this.detEvTres.id = ev[2].idEvaluador;
       this.detEvTres.nombre = ev[2].evaluador;
     }
-    this.evaluationService.getItemsEvaluacion().subscribe((res: any) => {
+    this.evaluationService.getItemsEvaluacion(1).subscribe((res: any) => {
       const items = res.data;
       this.paperService.getEvaluationDetails(art.id).subscribe((res: any) => {
         const evaluaciones = res.data;

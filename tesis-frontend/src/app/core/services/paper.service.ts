@@ -32,7 +32,7 @@ export class PaperService {
     return this.httpClient.get(this.apiURL + 'articulos/consultaArticuloXResponsable/');
   }
 
-  getPaperById(id) {
+  getPaperById(id): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultaArticuloXId/?idArticulo=' + id);
   }
 
@@ -93,11 +93,11 @@ export class PaperService {
     return this.httpClient.get(this.apiURL + 'articulos/getItemsEvaluacion/');
   }
 
-  getEvaluadoresXPaper(id) {
+  getEvaluadoresXPaper(id): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadoresArticulo/?idArticulo=' + id);
   }
 
-  getPapersXSimposio(idSimposio, idEstado) {
+  getPapersXSimposio(idSimposio, idEstado): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosXSimposio/?idSimposio=' + idSimposio + '&idEstado=' + idEstado);
     /*
     0 No filtrar por estado
@@ -113,15 +113,15 @@ export class PaperService {
     */
   }
 
-  getPapersXChair() {
-    return this.httpClient.get(this.apiURL + 'articulos/consulta-articulosXChair/')
+  getPapersXChair(): any {
+    return this.httpClient.get(this.apiURL + 'articulos/consulta-articulosXChair/');
   }
 
-  calificarPaper(idArticulo, calificacion) {
-    let paperCalification = {
-      idArticulo: idArticulo,
-      calificacion: calificacion
-    }
+  calificarPaper(idArticulo, calificacion): any {
+    const paperCalification = {
+      idArticulo,
+      calificacion
+    };
     return this.httpClient.put(this.apiURL + 'articulos/calificarArticulo/', paperCalification);
   }
 }

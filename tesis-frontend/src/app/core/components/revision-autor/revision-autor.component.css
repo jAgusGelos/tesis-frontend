@@ -1,3 +1,7 @@
+a{
+  cursor: pointer;
+}
+
 .autoresSelected{
   border:  1px solid black;
   padding: 0.3rem;
@@ -12,8 +16,14 @@ ul{
   display: flex;
   justify-content: space-between;
 }
+
 .fa{
   justify-content: flex-end;
+}
+
+.table {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .valid{
@@ -66,11 +76,6 @@ ul{
 
 }
 
-
-a{
-  cursor: pointer;
-}
-
 .card-title{
 
   width: 100%;
@@ -88,8 +93,9 @@ hr {
 
 }
 
-
-
+.thead{
+  background-color: #C8E5F1;
+}
 
 input{
   border: none;
@@ -116,6 +122,19 @@ input{
  .option{
    width: auto;
  }
+
+#spanEvaluacion {
+  font-weight: 500;
+}
+
+#file {
+  color: #3CAFE0;
+}
+
+#file:hover {
+  color: #00609C;
+}
+
 
 
 
