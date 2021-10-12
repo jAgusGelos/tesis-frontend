@@ -115,6 +115,11 @@ const routes: Routes = [
     .then(m => m.TarifasModule),
   },
   {
+    path: 'preferenciaSimposio',
+    loadChildren: () => import('./pages/symposium-preference/symposium-preference.module')
+    .then(m => m.SymposiumPreferenceModule),
+  },
+   {
     path: 'control',
     loadChildren: () => import('./pages/control-board/control-board.module')
     .then(m => m.ControlBoardModule),
