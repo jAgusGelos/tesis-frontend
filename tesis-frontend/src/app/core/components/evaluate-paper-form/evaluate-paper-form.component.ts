@@ -64,7 +64,7 @@ export class EvaluatePaperFormComponent implements OnInit {
       return;
     }
     if (this.evaluacion.observacion === '') {
-      alert('Se requiere escribir una observación!');
+      alert('Se requiere escribir una observación para el autor.');
       return;
     }
     if (confirm('Si envía la evaluación, después no podrá editarla. Seguro desea continuar?')) {
@@ -84,9 +84,14 @@ export class EvaluatePaperFormComponent implements OnInit {
     this.evaluacion.itemsEvaluacion = vector;
   }
 
-  setObservacion(): void {
-    const obs = document.getElementById('observacion') as HTMLTextAreaElement;
+  setObservacionAutor(): void {
+    const obs = document.getElementById('observacion-autor') as HTMLTextAreaElement;
     this.evaluacion.observacion = obs.value;
+  }
+
+  setObservacionInterna(): void {
+    /* const obs = document.getElementById('observacion-interna') as HTMLTextAreaElement;
+    this.evaluacion.observacion = obs.value; */
   }
 
   setPuntuacion(value, index): void {
@@ -107,15 +112,15 @@ export class EvaluatePaperFormComponent implements OnInit {
     }
   }
 
-  cancel(): void {
-    this.CancelEvent.emit();
-  }
-
   getItems(id): void {
     this.GetItemsEvent.emit(id);
   }
 
   getFile(id): void {
     this.GetFileEvent.emit(id);
+  }
+
+  cancel(): void {
+    this.CancelEvent.emit();
   }
 }

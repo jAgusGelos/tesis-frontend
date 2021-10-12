@@ -72,11 +72,11 @@ export class EvaluateArticleComponent implements OnInit {
 
   saveEvaluation(ev: any): void {
     this.paperEvalService.editarEvaluacion(ev).subscribe((res: any) => {
-      this.getPapers();
       if (ev.submit) {
         this.submitEvaluation(ev);
         return;
       } else {
+        this.getPapers();
         alert('La evaluación ha sido guardada!');
       }
     });
@@ -86,6 +86,7 @@ export class EvaluateArticleComponent implements OnInit {
     this.paperEvalService.enviarEvaluacion(ev).subscribe((res: any) => {
       alert('La evaluación ha sido enviada!');
       this.toggleFlagEvaluate();
+      this.getPapers();
     });
   }
 
