@@ -33,7 +33,7 @@
             <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash bigger"></i></a>
           </div>
 
-          <div *ngIf='item.enviado_corregir'>
+          <div *ngIf='item.enviado_corregir && 5 > item.idEstado'>
             <a
             ngbPopover="Las acciones solo están disponibles para los artículos no enviados"
             popoverClass="popover"
@@ -41,6 +41,44 @@
             popoverTitle="Información:">
               <i class="fas fa-info-circle bigger"></i>
             </a>
+          </div>
+
+          <div *ngIf='item.enviado_corregir && item.idEstado >= 5'>
+            <div class="row">
+              <a (click)='toggleCameraReady(item)' title='Entrega final'><i class="fas fa-arrow-alt-circle-right bigger"></i></a>
+            </div>
+            <div class="row">
+              <a class='rev' (click)='toggleRevision(item)'>Ver Revisión</a>
+            </div>
+
+          </div>
+
+          <div *ngIf='item.enviado_corregir && item.idEstado === 7'>
+            <div class="row">
+              <a
+              ngbPopover="Lo sentimos, tu artículo no ha sido aprobado."
+              popoverClass="popover"
+              placement="left"
+              popoverTitle="Información:">
+              <i class="fas fa-frown bigger"></i>
+              </a>
+            </div>
+            <div class="row">
+              <a  class='rev' (click)='toggleRevision(item)'>Ver Revisión</a>
+            </div>
+          </div>
+
+          <div *ngIf='item.enviado_corregir && item.idEstado === 8'>
+            <div class="row">
+              <a
+              ngbPopover="Tu articulo ha sido entregado correctamente.
+              A la brevedad recibirás un mail con la información respecto al día del evento"
+              popoverClass="popover"
+              placement="left"
+              popoverTitle="Felicitaciones:">
+              <i class="fas fa-laugh-beam bigger"></i>
+              </a>
+            </div>
           </div>
 
         </td>

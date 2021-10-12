@@ -53,9 +53,19 @@ export class PaperService {
   }
 
   sendPaper(paper: any): any {
-    console.log(paper);
-
     return this.httpClient.post<IntPaper>(this.apiURL + 'articulos/enviarEntrega/', {idArticulo: paper.id});
+  }
+
+  finalPaper(paper: any): any {
+    const formData = new FormData();
+    formData.append('articulo', paper.archivo);
+    formData.append('idArticulo', paper.id);
+    formData.append('idCongreso', this.idCongress.toString());
+    formData.append('autores', paper.autores.toString());
+    formData.append('responsable', paper.responsable);
+    formData.append('simposio', paper.simposio);
+    formData.append('nombre', paper.nombre);
+    return this.httpClient.post<any>(this.apiURL + 'articulos/realizarEntregaFinal/', formData);
   }
 
   deletePaper(paper: IntPaper): any {

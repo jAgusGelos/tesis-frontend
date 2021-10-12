@@ -39,6 +39,8 @@ import { CustomToastComponent } from './components/custom-toast/custom-toast.com
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
+import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent,
+    AsignarPaperEvaluadorListComponent,
+    SearchComponent,
+    PaperReadyComponent,
+    RevisionAutorComponent,
     CustomToastComponent,
     SearchComponent
   ],
@@ -117,7 +123,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TarifaFormComponent,
     CustomToastComponent,
     AsignarPaperEvaluadorListComponent,
-    SearchComponent
+    SearchComponent,
+    PaperReadyComponent,
+    RevisionAutorComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
