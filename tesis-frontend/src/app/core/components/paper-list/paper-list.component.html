@@ -43,7 +43,7 @@
             </a>
           </div>
 
-          <div *ngIf='item.enviado_corregir && item.idEstado >= 5'>
+          <div *ngIf='item.enviado_corregir && item.idEstado == 5 || item.idEstado == 6'>
             <div class="row">
               <a (click)='toggleCameraReady(item)' title='Entrega final'><i class="fas fa-arrow-alt-circle-right bigger"></i></a>
             </div>
