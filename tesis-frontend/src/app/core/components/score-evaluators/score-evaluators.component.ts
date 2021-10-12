@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IEvaluator } from '../../models/IEvaluator';
+import { ToastrService } from 'ngx-toastr';
+import { IEvaluation } from '../../models/IEvaluation';
+import { IEvaluator } from '../../models/iEvaluator';
 import { EvaluatorService } from '../../services/evaluator.service';
 
 @Component({
@@ -19,7 +21,9 @@ export class ScoreEvaluatorsComponent implements OnInit {
 
   scoreList: Number[] = [1, 2, 3, 4, 5, 6, 7 ,8 ,9 ,10];
 
-  constructor( private evaluatorService: EvaluatorService) { }
+  constructor( private evaluatorService: EvaluatorService,
+              private toastr: ToastrService,
+    ) { }
 
   ngOnInit(): void {
     this.fillEvaluatorsList();
@@ -31,7 +35,7 @@ export class ScoreEvaluatorsComponent implements OnInit {
     let score = select.options[select.selectedIndex].value;
 
     if (score == null) {
-      alert('Seleccione un puntaje para el evaluador');
+      this.toastr.warning('Seleccione un puntaje para el evaluador.')
       return
     }
     score.toString();
@@ -40,7 +44,7 @@ export class ScoreEvaluatorsComponent implements OnInit {
       score: score
     }
     this.evaluatorService.calificarEvaluador(evCalification).subscribe((res: any) => {
-      alert(res.data);
+      this.toastr.info(res.data);
       this.rows[index].evaluator.puntuacion = score;
       this.rows[index].edit = false;
     })

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IntPaper } from '../../models/IntPaper';
 import { ISymposium } from '../../models/ISymposium';
 import { AuthService } from '../../services/auth.service';
@@ -15,6 +16,7 @@ export class PaperFormComponent implements OnInit {
   @Input() paper: any;
   @Input() simposios: any[];
   @Output() paperEmitter = new EventEmitter<any>();
+  @Output() sendEmitter = new EventEmitter<any>();
   @Output() cancelPaper = new EventEmitter();
   formPaper: FormGroup;
   submitted = false;
@@ -24,17 +26,16 @@ export class PaperFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private paperService: PaperService,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-
-    console.log(this.paper);
-
     this.formPaper = this.formBuilder.group({
       nombre: [this.paper.nombre, [Validators.required]],
       simposio: [this.paper.idSimposio, [Validators.required]],
-      archivo: [null, [Validators.required]],
+      archivo: [null],
       autores: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     });
     if (this.paper) {
@@ -80,17 +81,17 @@ export class PaperFormComponent implements OnInit {
         }
       });
       if (exist) {
-        alert('Ya existe un usuario con ese Email ingresado');
+        this.toastr.info('Ya existe un usuario con el email ingresado.');
         return null;
       }
       this.paperService.checkAutor(autor).subscribe((res: any) => {
         if (res.data){
-          this.paper.autores.push(autor);
+          // this.paper.autores.push(autor);
           this.autoresList.push({mail: autor, status: true});
 
         }
       else{
-        alert('El autor ingresado no está registrado en el sistema. \n' +
+        this.toastr.info('El autor ingresado no está registrado en el sistema. \n' +
         'Recuerde que todos los autores deben estar registrados para poder enviar a corrección \n' +
         'Descuida, puedes guardar tus cambios hasta que este usuario cree su perfil\n' +
         'No te preocupes, nosotros le enviaremos un mail a este nuevo autor');
@@ -100,7 +101,7 @@ export class PaperFormComponent implements OnInit {
       this.formPaper.controls.autores.reset();
     }
     else{
-      alert('Ingrese un Email Válido');
+      this.toastr.warning('Ingrese un email válido')
     }
   }
 
@@ -129,13 +130,17 @@ export class PaperFormComponent implements OnInit {
    * Guarda provisoriamente los datos del congreso en la BD.
    */
   save(): void {
+    if (!this.paper.id && !this.formPaper.controls.archivo.value) {
+      this.toastr.warning('Por Favor, suba un archivo');
+      return;
+    }
     const userId = this.auth.getUserId();
     this.paper = {
       archivo: this.fileToUpload,
       autores: this.autoresList.map((item: any) => {
         return item.mail;
       }),
-      id: '',
+      id: this.paper.id || '',
       estado: 'sin subir',
       nombre: this.formPaper.controls.nombre.value,
       responsable: userId,
@@ -151,7 +156,7 @@ export class PaperFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formPaper.invalid || this.fileToUpload === null || this.formPaper.controls.simposio.value.trim() === '' ) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.warning('Por favor complete todos los datos.')
       return;
     }
     const userId = this.auth.getUserId();
@@ -160,13 +165,30 @@ export class PaperFormComponent implements OnInit {
       autores: this.autoresList.map((item: any) => {
         return item.mail;
       }),
-      id: '',
+      id: this.paper.id,
       estado: 'sin subir',
       nombre: this.formPaper.controls.nombre.value,
       responsable: userId,
       simposio: this.formPaper.controls.simposio.value,
     };
-    this.paperEmitter.emit([this.paper]);
+    this.sendEmitter.emit(this.paper);
+  }
+
+  getArchivo(): void {
+   this.paperService.getPaperFile(this.paper.id).subscribe((res: any) => {
+      const archivo: ArrayBuffer = res;
+      const blob = new Blob([archivo], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      if (link.download !== undefined) {
+        link.setAttribute('href', url);
+        link.setAttribute('target', '_blank');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
   }
 
 }

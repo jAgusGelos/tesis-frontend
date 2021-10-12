@@ -10,148 +10,131 @@ import { IntPaper } from 'src/app/core/models/IntPaper';
 })
 export class EvaluatePapersChairSecComponent implements OnInit {
 
-
-  constructor(private paperService: PaperService,
-              private evaluationService: EvaluationService) { }
-
-
-
   edit = false;
   articulos = [];
+  vectorArticulos = [];
   detailed = false;
 
   // Detalles
   index = 0;
-  criterios = [];
-  detalles = [{criterio: '', res1: '', res2: '', res3: ''}];
+  observacionAutor = '';
+  detalles = [];
   detNombreArticulo = '';
-  detResponsable = '';
-  detIdEstado = 0;
-  detEstado = '';
+  detEstado = {
+    id: 0,
+    nombre: ''
+  };
   detEvUno = {id: 0, nombre: 'Evaluador 1'};
   detEvDos = {id: 0, nombre: 'Evaluador 2'};
   detEvTres = {id: 0, nombre: 'Evaluador 3'};
-  messageHeader = '';
-  messageBody = '';
+  puntuaciones = [{value: 0, nombre: ''},
+                  {value: 1, nombre: 'Muy Débil'},
+                  {value: 2, nombre: 'Débil'},
+                  {value: 3, nombre: 'Aceptable'},
+                  {value: 4, nombre: 'Bueno'},
+                  {value: 5, nombre: 'Muy bueno'}];
 
-  articuloSeleccionado: {articulo: IntPaper, evUno, evDos, evTres};
+  constructor(private paperService: PaperService,
+              private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.getArticulos();
   }
 
-
-  evaluarDetalle(index) {
-    let select =  document.getElementById('selectStateDetalle') as HTMLSelectElement;
-    let value = select.options[select.selectedIndex].value;
-    if (value == '') {
+  evaluarDetalle(index): void {
+    const select = document.getElementById('selectStateDetalle') as HTMLSelectElement;
+    const opt = select.options[select.selectedIndex].value;
+    if (opt === '') {
       document.getElementById('selectStateDetalle').classList.add('is-invalid');
       return;
     } else {
-      this.evaluar(index, value);
+      const optNumber = parseInt(opt, 10);
+      this.evaluar(index, optNumber);
     }
   }
-  evaluar(index, opt) {
-    let estado = this.articulos[index].idEstado;
+
+  evaluar(index, opt): void {
+    let estado = this.vectorArticulos[index].idEstado;
     let bandera = false;
     if (estado >= 5) {
       bandera = true;
     }
-    if (opt == 1 && bandera) { // Aprobar Reentrega
+    if (opt === 1 && bandera) { // Aprobar Reentrega
       estado = 8;
-    } else if (opt == 2 && bandera) { // Rechazar Reentrega
+    } else if (opt === 2 && bandera) { // Rechazar Reentrega
       estado = 9;
-    } else if (opt == 1) { // Aprobar
+    } else if (opt === 1) { // Aprobar
       estado = 6;
-    } else if (opt == 2) { // Rechazar
+    } else if (opt === 2) { // Rechazar
       estado = 7;
-    } else if (opt == 3) { // Reentregar
+    } else if (opt === 3) { // Reentregar
       estado = 5;
     }
-
-    const idArticulo = this.articulos[index].id;
+    const idArticulo = this.vectorArticulos[index].id;
     const calificacion = estado;
-    this.paperService.calificarPaper(idArticulo, calificacion).subscribe((res: any) => {
-      this.cambiarEstado(index, opt);
+    const obs = document.getElementById('observacion-autor') as HTMLTextAreaElement;
+    this.observacionAutor = obs.value;
+    this.articulos[index].observacion = obs.value;
+    this.vectorArticulos[index].observacion = obs.value;
+    this.paperService.calificarPaper(idArticulo, calificacion, this.observacionAutor).subscribe((res: any) => {
+      const sel = document.getElementById('selectStateDetalle') as HTMLSelectElement;
+      sel.value = '';
+      this.setBadges(index, calificacion);
       this.toggleEdit(index);
     });
   }
 
-  cambiarEstado(index, opt) {
-    let bandera = false;
-    if (this.articulos[index].idEstado >= 5) {
-      bandera = true;
-    }
-    if (opt == 1 && bandera) {
-      this.articulos[index].idEstado = 8; // Aprobado Reentrega
-      this.articulos[index].estado = 'Aprobado Reentrega';
-      this.detIdEstado = 8;
-      this.detEstado = 'Aprobado Reentrega';
+  setBadges(index, estado): any {
+    if (estado === 6) {
+      this.vectorArticulos[index].idEstado = estado;
+      this.vectorArticulos[index].estado = 'Aprobado';
+      this.detEstado.id = 6;
+      this.detEstado.nombre = 'Aprobado';
       return;
     }
-    if (opt == 2 && bandera) {
-      this.articulos[index].idEstado = 9; // Rechazado Reentrega
-      this.articulos[index].estado = 'Rechazado Reentrega';
-      this.detIdEstado = 9;
-      this.detEstado = 'Rechazado Reentrega';
+    if (estado === 7) {
+      this.vectorArticulos[index].idEstado = estado;
+      this.vectorArticulos[index].estado = 'Rechazado';
+      this.detEstado.id = 7;
+      this.detEstado.nombre = 'Rechazado';
       return;
     }
-    if (opt == 1) {
-      this.articulos[index].idEstado = 6; // Aprobado
-      this.articulos[index].estado = 'Aprobado';
-      this.detIdEstado = 6;
-      this.detEstado = 'Aprobado';
+    if (estado === 5) {
+      this.vectorArticulos[index].idEstado = estado;
+      this.vectorArticulos[index].estado = 'Para Reentregar';
+      this.detEstado.id = 5;
+      this.detEstado.nombre = 'Para Reentregar';
       return;
     }
-    if (opt == 2) {
-      this.articulos[index].idEstado = 7; // Rechazado
-      this.articulos[index].estado = 'Rechazado';
-      this.detIdEstado = 7;
-      this.detEstado = 'Rechazado';
+    if (estado === 8) {
+      this.vectorArticulos[index].idEstado = estado;
+      this.vectorArticulos[index].estado = 'Aprobado Reentrega';
+      this.detEstado.id = 8;
+      this.detEstado.nombre = 'Aprobado Reentrega';
       return;
     }
-    if (opt == 3) {
-      this.articulos[index].idEstado = 5; // Reentrega
-      this.articulos[index].estado = 'Para Reentregar';
-      this.detIdEstado = 5;
-      this.detEstado = 'Para Reentregar';
+    if (estado === 9) {
+      this.vectorArticulos[index].idEstado = 9;
+      this.vectorArticulos[index].estado = 'Rechazado Reentrega';
+      this.detEstado.id = 9;
+      this.detEstado.nombre = 'Rechazado Reentrega';
       return;
     }
   }
 
-  getArticulos() {
-    this.articulos = [];
-    this.paperService.getPapersXChair().subscribe((res: any) => {
-      const data = res.data[0].articulos;
-      this.articulos = data;
-      this.articulos = this.articulos.map((x: any) => {
-        return {
-          estado: x.estado,
-          evaluaciones: x.evaluaciones,
-          id: x.id,
-          idCongreso: x.idCongreso,
-          idEstado: x.idEstado,
-          idSimposio: x.idSimposio,
-          nombre: x.nombre,
-          responsable: x.responsable,
-          url: x.url,
-          edit: false
-        };
-      });
-    });
-  }
-
-  verDetalle(index) {
+  verDetalle(index): void {
     this.index = index;
     this.detEvUno.nombre = 'Evaluador 1';
     this.detEvDos.nombre = 'Evaluador 2';
     this.detEvTres.nombre = 'Evaluador 3';
-    const art = this.articulos[index];
+    const art = this.vectorArticulos[index];
     const ev = art.evaluaciones;
     this.detNombreArticulo = art.nombre;
-    this.detResponsable = art.responsable;
-    this.detIdEstado = art.idEstado;
-    this.detEstado = art.estado;
+    const obs = document.getElementById('observacion-autor') as HTMLTextAreaElement;
+    obs.value = art.observacion;
+    this.observacionAutor = art.observacion;
+    this.detEstado.id = art.idEstado;
+    this.detEstado.nombre = art.estado;
     if (ev.length >= 1) {
       this.detEvUno.id = ev[0].idEvaluador;
       this.detEvUno.nombre = ev[0].evaluador;
@@ -164,42 +147,89 @@ export class EvaluatePapersChairSecComponent implements OnInit {
       this.detEvTres.id = ev[2].idEvaluador;
       this.detEvTres.nombre = ev[2].evaluador;
     }
-    this.evaluationService.getItemsEvaluacion().subscribe((res: any) => {
+    this.evaluationService.getItemsEvaluacion(1).subscribe((res: any) => {
       const items = res.data;
-      this.paperService.getEvaluationDetails(art.id).subscribe((res: any) => {
-        const evaluaciones = res.data;
-        let ev1, ev2, ev3;
+      this.paperService.getEvaluationDetails(art.id).subscribe((ans: any) => {
+        const evaluaciones = ans.data;
+        let ev1;
+        let ev2;
+        let ev3;
         evaluaciones.forEach(e => {
-          if (e.idEvaluador == this.detEvUno.id) {ev1 = e;}
-          else if (e.idEvaluador == this.detEvDos.id) {ev2 = e;}
-          else {ev3 = e;}
+          if (e.idEvaluador === this.detEvUno.id) {
+            ev1 = e;
+          }
+          else if (e.idEvaluador === this.detEvDos.id) {
+            ev2 = e;
+          }
+          else {
+            ev3 = e;
+          }
         });
-        let calif1 = null, calif2 = null, calif3 = null;
+        let calif1 = null;
+        let calif2 = null;
+        let calif3 = null;
+        let rec1 = null;
+        let rec2 = null;
+        let rec3 = null;
+        let obs1 = null;
+        let obs2 = null;
+        let obs3 = null;
         for (let i = 0; i < items.length; i++) {
-          if (ev1.itemsEvaluados[i].calificacion !== undefined) { calif1 = ev1.itemsEvaluados[i].calificacion; }
-          if (ev2.itemsEvaluados[i].calificacion !== undefined) { calif2 = ev2.itemsEvaluados[i].calificacion; }
-          if (ev3.itemsEvaluados[i].calificacion !== undefined) { calif3 = ev3.itemsEvaluados[i].calificacion; }
-          this.detalles.push({criterio: items[i].nombre,
-                              res1: calif1,
-                              res2: calif2,
-                              res3: calif3, });
+          if (ev1 !== undefined) {
+            if (ev1.itemsEvaluados[i] !== undefined) { calif1 = ev1.itemsEvaluados[i].calificacion; }
+            else { calif1 = 0; }
+          } else { calif1 = 0; }
+          if (ev2 !== undefined) {
+            if (ev2.itemsEvaluados[i] !== undefined) { calif2 = ev2.itemsEvaluados[i].calificacion; }
+            else { calif2 = 0; }
+          } else { calif2 = 0; }
+          if (ev3 !== undefined) {
+            if (ev3.itemsEvaluados[i] !== undefined) { calif3 = ev3.itemsEvaluados[i].calificacion; }
+            else { calif3 = 0; }
+          } else { calif3 = 0; }
+          this.detalles.push({aspecto: items[i].nombre,
+                              res1: this.puntuaciones[calif1].nombre,
+                              res2: this.puntuaciones[calif2].nombre,
+                              res3: this.puntuaciones[calif3].nombre});
           calif1 = null, calif2 = null, calif3 = null;
         }
-        this.detalles.shift();
-        this.detalles.push({criterio: 'Recomendación',
-          res1: this.articulos[index].evaluaciones[0].recomendacion,
-          res2: this.articulos[index].evaluaciones[1].recomendacion,
-          res3: this.articulos[index].evaluaciones[2].recomendacion, });
+        if (this.vectorArticulos[index].evaluaciones[0] !== undefined) {
+          rec1 = this.vectorArticulos[index].evaluaciones[0].recomendacion;
+          obs1 = this.vectorArticulos[index].evaluaciones[0].observacion;
+        } else {
+          rec1 = null;
+          obs1 = null;
+        }
+        if (this.vectorArticulos[index].evaluaciones[1] !== undefined) {
+          rec2 = this.vectorArticulos[index].evaluaciones[1].recomendacion;
+          obs2 = this.vectorArticulos[index].evaluaciones[1].observacion;
+        } else {
+          rec2 = null;
+          obs2 = null;
+        }
+        if (this.vectorArticulos[index].evaluaciones[2] !== undefined) {
+          rec3 = this.vectorArticulos[index].evaluaciones[2].recomendacion;
+          obs3 = this.vectorArticulos[index].evaluaciones[2].observacion;
+        } else {
+          rec3 = null;
+          obs3 = null;
+        }
+        this.detalles.push({aspecto: 'Recomendación',
+          res1: rec1,
+          res2: rec2,
+          res3: rec3});
+        this.detalles.push({aspecto: 'Observaciones',
+          res1: obs1,
+          res2: obs2,
+          res3: obs3});
       });
     });
-
     const btnDetalle = document.getElementById('activar-modal');
     btnDetalle.click();
   }
 
-  getArchivo(index) {
-    const id = this.articulos[index].id;
-    const fileName = this.articulos[index].url;
+  getArchivo(index): void {
+    const id = this.vectorArticulos[index].id;
     this.paperService.getPaperFile(id).subscribe((res: any) => {
       const archivo: ArrayBuffer = res;
       const blob = new Blob([archivo], { type: 'application/pdf' });
@@ -216,12 +246,67 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     });
   }
 
-  modalOnClose(index) {
-    this.detalles = [];
-    this.articulos[index].edit = false;
+  getArticulos(): void {
+    this.articulos = [];
+    this.paperService.getPapersXChair().subscribe((res: any) => {
+      const data = res.data[0].articulos;
+      this.articulos = data;
+      this.sortByState();
+      this.articulos = this.articulos.map((x: any) => {
+        return {
+          estado: x.estado,
+          evaluaciones: x.evaluaciones,
+          id: x.id,
+          idCongreso: x.idCongreso,
+          idEstado: x.idEstado,
+          idSimposio: x.idSimposio,
+          nombre: x.nombre,
+          responsable: x.responsable,
+          observacion: x.observacion,
+          url: x.url,
+          edit: false
+        };
+      });
+      this.vectorArticulos = this.articulos;
+    });
   }
 
-  toggleEdit(index) {
-    this.articulos[index].edit = !this.articulos[index].edit;
+  filter(estado): void {
+    this.vectorArticulos = [];
+    if (estado === 0) {
+      this.vectorArticulos = this.articulos;
+      return;
+    }
+    for (const art of this.articulos) {
+      if (art.idEstado === estado) {
+        this.vectorArticulos.push(art);
+      }
+    }
+  }
+
+  sortByState(): void {
+    this.articulos.sort((a, b) => {
+      if (a.idEstado > b.idEstado) {
+        return 1;
+      } else if (a.idEstado < b.idEstado) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  modalOnClose(index): void {
+    const sel = document.getElementById('selectStateDetalle') as HTMLSelectElement;
+    sel.value = '';
+    const obs = document.getElementById('observacion-autor') as HTMLTextAreaElement;
+    obs.value = '';
+    this.detalles = [];
+    document.getElementById('selectStateDetalle').classList.remove('is-invalid');
+    this.vectorArticulos[index].edit = false;
+  }
+
+  toggleEdit(index): void {
+    this.vectorArticulos[index].edit = !this.vectorArticulos[index].edit;
   }
 }

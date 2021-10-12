@@ -1,52 +1,82 @@
-.container-fluid{
+.container-fluid {
   background-color: #F4F4F4;
 
 }
 
-.contenidos{
+.contenidos {
   padding-bottom: 3rem;
 }
 
-.thead{
+.thead {
   background-color: #C8E5F1;
 }
 
-.greyned{
+.greyned {
   color: grey;
 }
 
-.btn-primary{
-  background-color: #3CAFE0 ;
+.btn-primary {
+  background-color: #3CAFE0;
   border: none;
 }
 
-i{
+i {
   padding-top: 1.5rem;
   cursor: pointer;
 }
 
-i:hover{
+i:hover {
   color: blue;
 }
 
-.fas{
+.fas {
   font-size: 1.25rem;
   color: #00609C;
+  padding-right: 1rem;
+  padding-top: 0;
 }
 
-hr{
-  border:#00609C solid 1px;
+hr {
+  border: #00609C solid 1px;
 }
 
 @media (min-width: 768px) {
-  hr{
+  hr {
     margin-left: 25%;
     margin-right: 25%;
   }
 
-  .container-fluid{
+  .container-fluid {
     padding: 5rem;
   }
 
- }
+}
 
+:host >>> .popover .popover-header {
+  background-color: #3CAFE0;
+
+}
+
+.bigger {
+  font-size: 170%;
+  margin-bottom: 1rem;
+}
+
+td {
+  padding-top: 1rem;
+  margin-bottom: 0;
+}
+
+a:hover {
+  cursor: pointer;
+  font-size: 110%;
+}
+
+.rev {
+  color: #00609C;
+  text-decoration: none;
+}
+
+.rev:hover {
+  color:#3CAFE0 ;
+}

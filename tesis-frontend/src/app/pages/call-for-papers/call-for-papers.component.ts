@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IntPaper } from 'src/app/core/models/IntPaper';
 import { PaperService } from 'src/app/core/services/paper.service';
 
@@ -15,9 +16,13 @@ export class CallForPapersComponent implements OnInit {
   paper = {};
   simposios = [];
   okey = false;
+  ready = false;
+  revision = false;
 
   constructor(private paperService: PaperService,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService,
+              ) {
                 this.router.routeReuseStrategy.shouldReuseRoute = () => {
                   return false;
                 }; }
@@ -49,7 +54,7 @@ export class CallForPapersComponent implements OnInit {
       autores: [],
       responsable: '',
       nombre: '',
-      estado: 'Sin subir',
+      estado: 'sin subir',
       simposio: '',
       archivo: null,
     };
@@ -58,13 +63,12 @@ export class CallForPapersComponent implements OnInit {
   editPaper(paper: any): void {
     this.edit = !this.edit;
     this.paper = paper;
-
   }
 
   deletePaper(item: IntPaper): void {
     this.paperService.deletePaper(item).subscribe((res: any) => {
-      alert('El paper ha sido eliminado correctamente');
-      this.getPaper();
+      this.toastr.success('El paper ha sido eliminado correctamente');
+      this.router.navigateByUrl('/callForPapers');
     });
   }
 
@@ -81,16 +85,55 @@ export class CallForPapersComponent implements OnInit {
 
     if (item.id === '') {
       this.paperService.postPaper(item).subscribe((res: any) => {
-        alert('Paper Creado Correctamente');
+        this.toastr.success('Paper Creado Correctamente');
         this.router.navigateByUrl('/callForPapers');
       });
     }
     else{
       this.paperService.putPaper(item).subscribe((res: any) => {
-        alert('Paper Modificado Correctamente');
+        this.toastr.success('Paper Modificado Correctamente');
         this.router.navigateByUrl('/callForPapers');
       });
     }
   }
 
+  sendPaper(item: any): void {
+    this.paperService.sendPaper(item).subscribe((res: any) => {
+      this.toastr.success('Camera Ready Enviado');
+      this.router.navigateByUrl('/callForPapers');
+    });
+  }
+
+
+  finalPaper(item: any): void {
+    // ir a la página para el camera ready
+    this.ready = true;
+    this.paper = item;
+    console.log(this.paper);
+
+  }
+
+  volverFinalPaper(): void {
+    this.ready = false;
+  }
+
+  verRevision(item: any): void {
+    // Abrir la revisión
+    this.paper = item;
+    this.revision = true;
+  }
+
+  entregaFinal(item: any): void {
+    // Se envia el paper ya camera ready listo
+    this.paperService.finalPaper(item).subscribe((res: any) => {
+      alert('El camera ready ha sido entregado');
+      this.router.navigateByUrl('/callForPapers');
+    });
+  }
+
+  volverRevision(): void {
+    this.revision = false;
+  }
+
 }
+

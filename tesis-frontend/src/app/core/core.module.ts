@@ -32,8 +32,15 @@ import { ChangePasswordFormComponent } from './components/change-password-form/c
 import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
 import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
+import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
+
+
+
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
+import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 
 @NgModule({
   declarations: [
@@ -70,13 +77,18 @@ import { SearchComponent } from './components/search/search.component';
     TarifaListComponent,
     TarifaFormComponent,
     AsignarPaperEvaluadorListComponent,
+    SearchComponent,
+    PaperReadyComponent,
+    RevisionAutorComponent,
+    CustomToastComponent,
     SearchComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   exports:  [
     UserRegisterComponent,
@@ -109,8 +121,11 @@ import { SearchComponent } from './components/search/search.component';
     RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent,
+    CustomToastComponent,
     AsignarPaperEvaluadorListComponent,
-    SearchComponent
+    SearchComponent,
+    PaperReadyComponent,
+    RevisionAutorComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
