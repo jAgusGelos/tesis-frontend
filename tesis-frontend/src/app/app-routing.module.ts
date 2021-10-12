@@ -181,8 +181,23 @@ const routes: Routes = [
   },
   {
     path: 'cancelacionEvaluacionPaper/:token',
-    loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper-routing.module')
-    .then(m => m.CancelEvaluatePaperRoutingModule)
+    loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper.module')
+    .then(m => m.CancelEvaluatePaperModule)
+  },
+  {
+    path: 'comiteAcademico/:id',
+    loadChildren: () => import('./pages/comite-academico/comite-academico.module')
+    .then(m => m.ComiteAcademicoModule)
+  },
+  {
+    path: 'comiteOrganizador/:id',
+    loadChildren: () => import('./pages/comite-organizador/comite-organizador.module')
+    .then(m => m.ComiteOrganizadorModule)
+  },
+  {
+    path: 'informacionCongreso/:id',
+    loadChildren: () => import('./pages/informacion-publica-congreso/informacion-publica-congreso.module')
+    .then(m => m.InformacionPublicaCongresoModule)
   }
 ];
 

@@ -23,7 +23,9 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="/congreso">Congresos Activos</a></li>
             <li><a class="dropdown-item" href="#">Ejes Temáticos</a></li>
-            <li><a class="dropdown-item" href="#">Comité Organizador</a></li>
+            <li><a class="dropdown-item" href="/comiteOrganizador">Comité Organizador</a></li>
+            <li><a class="dropdown-item" href="/comiteAcademico">Comité Académico</a></li>
+            <li><a class="dropdown-item" href="#">Fechas Importantes</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -92,7 +94,16 @@
     </div>
     <div class="logged  text-right align-items-right d-none d-lg-block">
       <a *ngIf='!user' type="button" class="btn btn-primary" href="/login">Iniciar Sesión</a>
-      <button *ngIf='user' type="button" class="btn btn-primary" (click)="logout()">Cerrar Sesión</button>
+      <div *ngIf='user' class="btn-group">
+        <li class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+{{this.userLogged.nombre}} {{this.userLogged.apellido}}  </li>
+        <ul class="dropdown-menu dropdown-menu-lg-end">
+          <li><a class="dropdown-item" type="button" href="/usuario">Mi Perfil</a></li>
+          <li><a class="dropdown-item" type="button" (click)='logout()'>Cerrar Sesión</a></li>
+        </ul>
+      </div>
+      <!-- <button *ngIf='user' type="button" class="btn btn-primary" (click)="logout()">Cerrar Sesión</button> -->
+      
     </div>
   </div>
 </nav>

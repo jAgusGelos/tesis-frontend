@@ -34,6 +34,10 @@ import { TarifaListComponent } from './components/tarifa-list/tarifa-list.compon
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
+import { ComisionPermanenteOrganizacionComponent } from './components/comision-permanente-organizacion/comision-permanente-organizacion.component';
+import { ComisionEjecutivaOrganizacionComponent } from './components/comision-ejecutiva-organizacion/comision-ejecutiva-organizacion.component';
+import { ComiteOrganizadorLocalComponent } from './components/comite-organizador-local/comite-organizador-local.component';
+import { ComiteAcademicoListComponent } from './components/comite-academico-list/comite-academico-list.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +74,11 @@ import { SearchComponent } from './components/search/search.component';
     TarifaListComponent,
     TarifaFormComponent,
     AsignarPaperEvaluadorListComponent,
-    SearchComponent
+    SearchComponent,
+    ComisionPermanenteOrganizacionComponent,
+    ComisionEjecutivaOrganizacionComponent,
+    ComiteOrganizadorLocalComponent,
+    ComiteAcademicoListComponent
   ],
   imports: [
     CommonModule,
@@ -110,7 +118,11 @@ import { SearchComponent } from './components/search/search.component';
     TarifaListComponent,
     TarifaFormComponent,
     AsignarPaperEvaluadorListComponent,
-    SearchComponent
+    SearchComponent,
+    ComisionPermanenteOrganizacionComponent,
+    ComisionEjecutivaOrganizacionComponent,
+    ComiteOrganizadorLocalComponent,
+    ComiteAcademicoListComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
