@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { EvaluatePaperService } from 'src/app/core/services/evaluate-paper.service';
 import { PaperService } from 'src/app/core/services/paper.service';
 import { EvaluationService } from 'src/app/core/services/evaluation.service';
@@ -22,17 +23,12 @@ export class EvaluateArticleComponent implements OnInit {
 
   constructor(private paperEvalService: EvaluatePaperService,
               private evaluationService: EvaluatorService,
+              private toastr: ToastrService,
               private paperService: PaperService) { }
 
 
   ngOnInit(): void {
     this.getPapers();
-  }
-
-  postEvaluation(evaluation): void {
-    this.paperEvalService.postPaperEval(evaluation).subscribe((res: any) => {
-      alert('Los cambios han sido guardados!');
-    });
   }
 
   getPapers(): void {
@@ -53,10 +49,10 @@ export class EvaluateArticleComponent implements OnInit {
     this.flagEvaluate = !this.flagEvaluate;
   }
 
-  getFile(id) {
+  getFile(id): void {
     this.paperService.getPaperFile(id).subscribe((res: any) => {
-      let archivo: ArrayBuffer = res;
-      let blob = new Blob([archivo], { type: 'application/pdf' });
+      const archivo: ArrayBuffer = res;
+      const blob = new Blob([archivo], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       if (link.download !== undefined) {
@@ -74,18 +70,37 @@ export class EvaluateArticleComponent implements OnInit {
     this.flagEvaluate = !this.flagEvaluate;
   }
 
+  saveEvaluation(ev: any): void {
+    this.paperEvalService.editarEvaluacion(ev).subscribe((res: any) => {
+      this.getPapers();
+      if (ev.submit) {
+        this.submitEvaluation(ev);
+        return;
+      } else {
+        alert('La evaluación ha sido guardada!');
+      }
+    });
+  }
+
+  submitEvaluation(ev): void {
+    this.paperEvalService.enviarEvaluacion(ev).subscribe((res: any) => {
+      alert('La evaluación ha sido enviada!');
+      this.toggleFlagEvaluate();
+    });
+  }
 
   acceptEvaluate(paper): void {
     this.paper = paper;
     this.evaluationService.acceptEvaluationPaper(this.paper).subscribe(
-      (res: any) => { alert('La evaluación ha sido aceptada.') }
-    )
-  }
+      (res:any) => {this.toastr.success('La evaluación ha sido aceptada.')}
+    )    
+   }  
+  
   cancelEvaluate(paper): void {
     this.paper = paper;
     this.evaluationService.cancelarEvaluationPaper(this.paper).subscribe(
-      (res: any) => {
-        alert('La evaluación ha sido rechazada.');
-      });
+      (res: any) =>{this.toastr.success('La evaluación ha sido rechazada.');
+    })
+
   }
 }

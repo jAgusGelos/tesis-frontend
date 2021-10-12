@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IRoom } from '../../models/IRoom';
 import { RoomService } from '../../services/room.service';
 
@@ -17,7 +18,9 @@ export class RoomFormComponent implements OnInit {
   @Output() roomEmitter = new EventEmitter<IRoom>();
   @Output() cancelRoom = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private toastr: ToastrService,
+    ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -30,7 +33,7 @@ export class RoomFormComponent implements OnInit {
   agregar(): void {
     this.submitted = true;
     if (this.formRooms.controls.nameAula.invalid) {
-      alert('Por favor, agregue el nombre del aula.');
+      this.toastr.warning('Por favor, agregue el nombre del aula.');
       return;
     }
     this.room = {

@@ -43,7 +43,8 @@ export class EvaluationService {
     return this.httpClient.delete<IEvaluation>(this.apiURL + 'articulos/eliminarItemEvaluacion/?idItem=' + evaluation.id);
   }
 
-  getItemsEvaluacion(activos: number): any {
+
+  getItemsEvaluacion(activos): any {
     return this.httpClient.get(this.apiURL + 'articulos/getItemsEvaluacion/?activos=' + activos);
   }
 }

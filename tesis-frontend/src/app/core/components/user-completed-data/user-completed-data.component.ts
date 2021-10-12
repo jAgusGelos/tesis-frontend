@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IUserComplete } from '../../models/IUserComplete';
 import { UserService } from '../../services/user.service';
 
@@ -28,7 +29,9 @@ export class UserCompletedDataComponent implements OnInit {
     constructor( private formBuilder: FormBuilder,
                  private datePipe: DatePipe,
                  private userService: UserService,
-                 private router: Router ) { }
+                 private router: Router,
+                 private toastr: ToastrService,
+                 ) { }
 
     ngOnInit(): void {
       window.scrollTo(0, 0);
@@ -84,12 +87,12 @@ export class UserCompletedDataComponent implements OnInit {
     submit(): void {
       this.submitted = true;
       if (this.formUsuario.invalid) {
-        alert('Por Favor complete todos los campos');
+        this.toastr.warning('Por Favor complete todos los campos');
         return;
       }
       const today = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
       if (this.formUsuario.controls.fechaNacimiento.value > today) {
-        alert('Fecha Inválida, por favor ingrese una fecha correcta');
+        this.toastr.warning('Fecha Inválida, por favor ingrese una fecha correcta');
         return;
       }
 
@@ -112,10 +115,10 @@ export class UserCompletedDataComponent implements OnInit {
 
       this.userService.postUserComplete(this.usuario).subscribe( (res: any) => {
         if (res.error) {
-          alert('Ha ocurrido un error. Intente más tarde');
+          this.toastr.error('Ha ocurrido un error. Intente más tarde');
           return;
         }
-        alert('Datos Cargados Correctamente');
+        this.toastr.success('Datos Cargados Correctamente');
         this.router.navigate(['/']);
       });
 

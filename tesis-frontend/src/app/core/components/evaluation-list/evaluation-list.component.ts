@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-evaluation-list',
@@ -13,7 +15,8 @@ export class EvaluationListComponent implements OnInit {
   @Output() deleteEvaluationEvent = new EventEmitter();
   showList = [];
 
-  constructor() { }
+  constructor(private toastr: ToastrService,
+  ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -28,16 +31,21 @@ export class EvaluationListComponent implements OnInit {
     this.newEvaluationEvent.emit();
   }
   toggleRemoveHandled(item: any): void {
-    if (confirm('Esta seguro desea eliminar la pregunta: ' + item.pregunta +
-    '\nToda la configuración creada se perderá')) {
-      this.deleteEvaluationEvent.emit(item);
-    }
+    this.toastr
+      .show( 'Esta seguro que desea eliminar la pregunta ' + item.pregunta + '\nToda la configuración creada se perderá', '¿Eliminar Pregunta?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.deleteEvaluationEvent.emit(item);
+
+      });
   }
 
   search(filterList): void {
     this.showList = filterList;
-  }
-
-
-
+    }
 }

@@ -1,5 +1,5 @@
 import { Component, HostListener, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, SelectMultipleControlValueAccessor, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   CalendarView,
@@ -23,6 +23,7 @@ import {
 } from 'angular-calendar-scheduler';
 import { addMonths, endOfDay } from 'date-fns';
 import * as moment from 'moment';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { ArticulosService } from 'src/app/core/services/articulos.service';
 import { PaperService } from 'src/app/core/services/paper.service';
@@ -90,6 +91,7 @@ export class ScheduleCalendarComponent implements OnInit {
   roomList = [];
   loading = false;
   idAula = '';
+  eventosCompletos = [];
 
   actions: CalendarSchedulerEventAction[] = [
       {
@@ -116,7 +118,8 @@ export class ScheduleCalendarComponent implements OnInit {
               private paperService: PaperService,
               private articulosService: ArticulosService,
               private router: Router,
-              private roomService: RoomService) {
+              private roomService: RoomService,
+              private toastr: ToastrService) {
       this.router.routeReuseStrategy.shouldReuseRoute = () => {
         return false;
       };
@@ -145,7 +148,6 @@ export class ScheduleCalendarComponent implements OnInit {
 
   aulaSelected(idAula: any): void {
     // llamar a los eventos del aula
-    console.log(idAula);
     this.idAula = idAula;
     this.loading = true;
     this.getEventos();
@@ -157,6 +159,24 @@ export class ScheduleCalendarComponent implements OnInit {
     .then((events: CalendarSchedulerEvent[]) => {
         this.events = events;
         this.loading = false;
+    });
+
+    this.calendarService.getRoomEvents(+this.idAula).subscribe((res: any) => {
+      this.eventosCompletos = res.data;
+      this.events = res.data.map((elem: any) => {
+        return {
+          id: elem.idEvento,
+          title: elem.title,
+          content: elem.content,
+          start: elem.start,
+          end: elem.end,
+          color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
+          actions: this.actions,
+          status: 'ok' as CalendarSchedulerEventStatus,
+            isClickable: true,
+            isDisabled: false
+        } as CalendarSchedulerEvent;
+      });
     });
   }
 
@@ -279,11 +299,6 @@ export class ScheduleCalendarComponent implements OnInit {
   }
 
   segmentClicked(action: string, segment: SchedulerViewHourSegment): void {
-      console.log('Aca viene el segmentooo');
-      console.log(segment.date.toLocaleDateString());
-      console.log(segment.date.toLocaleTimeString());
-      console.log(moment(segment.date).add(20, 'm').toDate().toLocaleTimeString());
-
       this.evento = {
         ...this.evento,
         date: segment.date.toLocaleDateString(),
@@ -292,7 +307,6 @@ export class ScheduleCalendarComponent implements OnInit {
         endHour: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[0],
         endMinute: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[1],
       };
-      console.log(this.evento);
       this.formEvento = this.formBuild.group(this.values());
 
       const btnDetalle = document.getElementById('activar-modal');
@@ -311,6 +325,9 @@ export class ScheduleCalendarComponent implements OnInit {
   }
 
   eventClicked(action: string, event: CalendarSchedulerEvent): void {
+      const eventoCompleto = this.eventosCompletos.find((x: any) => {
+        return x.idEvento === event.id;
+      });
       this.evento = {
         ...this.evento,
         id: event.id,
@@ -319,7 +336,9 @@ export class ScheduleCalendarComponent implements OnInit {
         startMinute: event.start.toLocaleTimeString().split(':')[1],
         endHour: event.end.toLocaleTimeString().split(':')[0],
         endMinute: event.end.toLocaleTimeString().split(':')[1],
-        title: event.title
+        title: event.title,
+        idPaper: eventoCompleto.idArticulo,
+        idSimposio: this.evento.idSimposio
       };
       this.formEvento = this.formBuild.group(this.values());
 
@@ -334,9 +353,8 @@ export class ScheduleCalendarComponent implements OnInit {
 
   submit(): void {
     this.submitted = true;
-    console.log(this.formEvento);
     if (this.formEvento.invalid) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.warning('Por favor, complete todos los datos');
       return;
     }
     const form = this.formEvento.controls;
@@ -344,7 +362,7 @@ export class ScheduleCalendarComponent implements OnInit {
     const end = new Date(form.date.value + ' ' + form.endHour.value + ':' + form.endMinute.value);
 
     if (start >= end) {
-      alert('Hora inválida');
+      this.toastr.warning('Hora inválida');
       return;
     }
     // Chequeo de dos horarios superpuestos
@@ -369,23 +387,22 @@ export class ScheduleCalendarComponent implements OnInit {
     //   return;
     // }
 
+    const evento = {
+      title: form.title.value,
+      content: form.desc.value,
+      start,
+      end,
+      idSimposio: form.idSimposio.value,
+      idAula: this.idAula,
+      idArticulo: form.idPaper
+    };
+
     // Post a BD y Push a la agenda.
-    this.events.push(
-      {
-        id: '55',
-        start,
-        end,
-        title: form.title.value,
-        content: form.desc.value,
-        color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-        actions: this.actions,
-        status: 'ok' as CalendarSchedulerEventStatus,
-        isClickable: true,
-        isDisabled: false
+    this.calendarService.postEvento(evento).subscribe((res: any) => {
+      const btnDismiss = document.getElementById('dismiss');
+      btnDismiss.click();
+      this.loading = true;
+      this.getEventos();
     });
-    const btnDismiss = document.getElementById('dismiss');
-    btnDismiss.click();
-    this.loading = true;
-    this.getEventos();
   }
 }

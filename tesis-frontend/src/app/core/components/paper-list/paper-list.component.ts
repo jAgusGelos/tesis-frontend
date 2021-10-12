@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-paper-list',
@@ -15,7 +17,7 @@ export class PaperListComponent implements OnInit {
   @Output() revisionEvent = new EventEmitter();
   showList: any[];
 
-  constructor() { }
+  constructor( private toastr: ToastrService ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -31,11 +33,20 @@ export class PaperListComponent implements OnInit {
   }
 
   toggleRemoveHandled(item: any): void {
-    if (confirm('Esta seguro desea eliminar el paper: ' + item.nombre +
-    '\nToda la configuración creada se perderá')) {
-      this.deletePaperEvent.emit(item);
-    }
+    this.toastr
+      .show( 'Está seguro que desea eliminar el paper ' + item.nombre +
+       '\nToda la configuración creada se perderá', '¿Eliminar Paper?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.deletePaperEvent.emit(item);
+      });
   }
+
 
   search(filterList): void {
     this.showList = filterList;

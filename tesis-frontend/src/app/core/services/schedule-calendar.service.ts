@@ -1,13 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CalendarSchedulerEvent, CalendarSchedulerEventAction, CalendarSchedulerEventStatus } from 'angular-calendar-scheduler';
 import { addDays, addHours, addMinutes, setHours, startOfHour, subHours, subMinutes } from 'date-fns';
+import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScheduleCalendarService {
 
-  constructor() { }
+  apiUrl = environment.apiURL;
+  idCongreso = null;
+  constructor(private httpClient: HttpClient,
+              private auth: AuthService) {
+                this.idCongreso = this.auth.getCongressId();
+
+   }
 
   getEvents(actions: CalendarSchedulerEventAction[]): Promise<CalendarSchedulerEvent[]> {
     const events = [
@@ -44,154 +53,26 @@ export class ScheduleCalendarService {
                 beforeStart: true,
                 afterEnd: true
             }
-        } as CalendarSchedulerEvent,
-         {
-            id: '2',
-            start: addDays(startOfHour(new Date()), 2),
-            end: subMinutes(addDays(addHours(startOfHour(new Date()), 2), 2), 15),
-            title: 'Event 2',
-            content: 'LESS IMPORTANT EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'warning' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '22',
-            start: subHours(addDays(startOfHour(new Date()), 2), 1),
-            end: subHours(addDays(addHours(startOfHour(new Date()), 1), 2), 1),
-            title: 'Event 22',
-            content: 'LESS IMPORTANT EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'warning' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '3',
-            start: addDays(startOfHour(new Date()), 3),
-            end: addDays(addHours(startOfHour(new Date()), 3), 3),
-            title: 'Event 3',
-            content: 'NOT IMPORTANT EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '32',
-            start: subHours(addDays(startOfHour(new Date()), 3), 1),
-            end: subHours(addDays(addHours(startOfHour(new Date()), 1), 3), 1),
-            title: 'Event 32',
-            content: 'NOT IMPORTANT EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '4',
-            start: startOfHour(addHours(new Date(), 2)),
-            end: addHours(startOfHour(addHours(new Date(), 2)), 2),
-            title: 'Event 4',
-            content: 'TODAY EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '5',
-            start: addDays(startOfHour(setHours(new Date(), 6)), 2),
-            end: addHours(addDays(startOfHour(setHours(new Date(), 6)), 2), 1),
-            title: 'Event 5',
-            content: 'EARLY EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '51',
-            start: addDays(startOfHour(setHours(new Date(), 6)), 2),
-            end: addHours(addDays(startOfHour(setHours(new Date(), 6)), 2), 1),
-            title: 'Event 51',
-            content: 'EARLY EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '52',
-            start: addHours(addDays(startOfHour(setHours(new Date(), 6)), 2), 1),
-            end: addHours(addDays(startOfHour(setHours(new Date(), 6)), 2), 2),
-            title: 'Event 52',
-            content: 'EARLY EVENT WITH LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG DESCRIPTION',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '53',
-            start: addHours(addDays(startOfHour(setHours(new Date(), 6)), 2), 2),
-            end: addMinutes(addHours(addDays(startOfHour(setHours(new Date(), 6)), 2), 2), 30),
-            title: 'Event 53',
-            content: 'EARLY EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '6',
-            start: startOfHour(setHours(new Date(), 22)),
-            end: addHours(startOfHour(setHours(new Date(), 22)), 10),
-            title: 'Event 6',
-            content: 'TWO DAYS EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '7',
-            start: addDays(startOfHour(setHours(new Date(), 14)), 4),
-            end: addDays(addDays(startOfHour(setHours(new Date(), 14)), 4), 2),
-            title: 'Event 7',
-            content: 'THREE DAYS EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
-         {
-            id: '8',
-            start: startOfHour(addHours(new Date(), 2)),
-            end: addHours(startOfHour(addHours(new Date(), 2)), 3),
-            title: 'Event 8',
-            content: 'CONCURRENT EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'ok' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false
-        } as CalendarSchedulerEvent,
+        } as CalendarSchedulerEvent
     ];
 
     return new Promise(resolve => setTimeout(() => resolve(events), 3000));
 }
+
+  getRoomEvents(idRoom: number): any {
+    return this.httpClient.get(this.apiUrl + 'eventos/consultar-eventosXAula/?idAula=' + idRoom);
+  }
+
+  deleteEvento(idEvento: number): any {
+    return this.httpClient.delete(this.apiUrl + 'eventos/eliminar-evento/?idEvento=' + idEvento);
+  }
+
+  postEvento(evento: any): any {
+    const event = {
+      ...evento,
+      idCongreso: this.idCongreso
+    };
+    return this.httpClient.post(this.apiUrl + 'eventos/crear-evento/', event);
+  }
 
 }

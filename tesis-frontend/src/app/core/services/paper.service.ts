@@ -85,11 +85,11 @@ export class PaperService {
     return this.httpClient.get(this.apiURL + url + this.idCongress);
   }
 
-  getEvaluationDetails(id: any): any{
+  getEvaluationDetails(id: any): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultaDetalleEvaluacion/?idArticulo=' + id);
   }
 
-  getItemsEv(): any{
+  getItemsEv(): any {
     return this.httpClient.get(this.apiURL + 'articulos/getItemsEvaluacion/');
   }
 
