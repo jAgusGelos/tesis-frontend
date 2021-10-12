@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module')
     .then(m => m.UsuarioModule),
-     canActivate: [AuthGuard]
+    //  canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -30,21 +30,21 @@ const routes: Routes = [
     loadChildren: () => import('./pages/chairs/chairs.module')
     .then(m => m.ChairsModule),
     // Can activate CP CL
-     canActivate: [AuthGuard, ChairRolGuard]
+     // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
     path: 'misCongresos',
     loadChildren: () => import('./pages/congress-agenda/congress-agenda.module')
     .then(m => m.CongressAgendaModule),
     // Can activate CP CL
-     canActivate: [AuthGuard, ChairRolGuard]
+    // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
     path: 'room',
     loadChildren: () => import('./pages/room/room.module')
     .then(m => m.RoomModule),
     // Can activate CP CL
-    canActivate: [AuthGuard, ChairRolGuard]
+    // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
     path: 'congreso',
@@ -58,13 +58,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/call-for-papers/call-for-papers.module')
     .then(m => m.CallForPapersModule),
     // descomentar al correr la bd
-     canActivate: [AuthGuard, AutorRolGuard]
+    // canActivate: [AuthGuard, AutorRolGuard]
   },
   {
     path: 'simposios',
     loadChildren: () => import('./pages/symposium/symposium.module')
     .then(m => m.SymposiumModule),
-     canActivate: [AuthGuard, SuperRolGuard]
+    // canActivate: [AuthGuard, SuperRolGuard]
   },
   {
     path: 'evaluacion',

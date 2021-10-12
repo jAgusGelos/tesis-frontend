@@ -81,7 +81,9 @@ import { RevisionAutorComponent } from './components/revision-autor/revision-aut
     PaperReadyComponent,
     RevisionAutorComponent,
     CustomToastComponent,
-    SearchComponent
+    SearchComponent,
+    AsignarPaperEvaluadorListComponent
+
   ],
   imports: [
     CommonModule,
