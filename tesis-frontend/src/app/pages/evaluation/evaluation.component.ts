@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IEvaluation } from 'src/app/core/models/IEvaluation';
 import { EvaluationService } from 'src/app/core/services/evaluation.service';
 
@@ -12,8 +14,15 @@ export class EvaluationComponent implements OnInit {
   evaluationList = [];
   edit = false;
   evaluation = {};
+  ok = false;
 
-  constructor(private evaluationService: EvaluationService) { }
+  constructor(private evaluationService: EvaluationService,
+              private router: Router,
+              private toastr: ToastrService,
+              ) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => {
+        return false;
+      }; }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -21,8 +30,9 @@ export class EvaluationComponent implements OnInit {
   }
 
   getEvaluation(): void {
-    this.evaluationService.getEvaluation().subscribe((res: any) => {
+    this.evaluationService.getEvaluation(1).subscribe((res: any) => {
       this.evaluationList = res.data;
+      this.ok = true;
     });
   }
 
@@ -39,7 +49,8 @@ export class EvaluationComponent implements OnInit {
 
   deleteEvaluation(item: IEvaluation): void {
     this.evaluationService.deleteEvaluation(item).subscribe((res: any) => {
-      alert('La evaluacion ha sido eliminado correctamente');
+      this.toastr.success('La evaluacion ha sido eliminado correctamente');
+      window.location.reload();
     });
   }
 
@@ -53,14 +64,14 @@ export class EvaluationComponent implements OnInit {
   toggleCreateEvaluation(item: IEvaluation): void {
     if (item.id === (undefined || '')) {
       this.evaluationService.postEvaluation(item).subscribe((res: any) => {
-        alert('Evaluación Creada Correctamente');
-        window.location.reload();
+        this.toastr.success('Evaluación Creada Correctamente');
+        this.router.navigateByUrl('/evaluacion');
       });
     }
     else {
       this.evaluationService.putEvaluation(item).subscribe((res: any) => {
-        alert('Evaluación Modificada Correctamente');
-        window.location.reload();
+        this.toastr.success('Evaluación Modificada Correctamente');
+        this.router.navigateByUrl('/evaluacion');
       });
     }
   }

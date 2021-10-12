@@ -1,24 +1,66 @@
 <div class="card">
   <div class="card-body">
-    <div class="contenidos">
-      <hr>
-      <h3 class="card-title text-center">Evaluando</h3>
-      <hr>
+    <hr>
+    <h3 class="card-title text-center">Evaluando: <b>{{paper.nombreArticulo}}</b> </h3>
+    <hr>
+    <div class="row justify-content-md-center">
+      <a class="btn btn-primary col-md-3" (click)='getFile(paper.idArticulo)' role="button">Ver artículo</a>
     </div>
-
-    <div class="card-text text-center">
-      <form>
-
-
-        <div class="row justify-content-md-center pt-3 btn-row">
-          <!-- <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
-          &nbsp;
-          <a class="btn btn-primary col-md-4" (click)='submit()'
-            role="button">{{congress.id === undefined ? 'Crear Congreso' : 'Guardar Cambios'}}</a> -->
+    <div class="container">
+      <table class="table table-hover table-bordered">
+        <thead class='thead text-center'>
+          <tr>
+            <th class="col-md-2">Aspecto</th>
+            <th class="col-md-4">Descripción</th>
+            <th class="col-md-2">Evaluación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class='align-items-center' *ngFor="let item of items; index as i">
+            <td class="text-center">{{item.nombre}}</td>
+            <td>{{item.descripcion}}</td>
+            <td class="text-center">
+                <select name="eval" class="form-select" (change)="setPuntuacion($event.target.value, i)">
+                  <option [selected]='item.puntuacion===null' disabled></option>
+                  <option *ngFor="let p of puntuaciones" value='{{p.value}}'
+                    [selected]='item.puntuacion===p.value'>{{ p.nombre }}</option>
+                </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      <!-- RECOMENDACION -->
+      <div class="row g-3 align-items-center justify-content-md-center">
+        <div class="col col-md-2">
+          <label for="recomendaciones" class="col-form-label">Recomendación final</label>
         </div>
-
-      </form>
-    </div>
+        <div class="col col-md-4">
+          <select name="recomendaciones" class="form-select" (change)="setRecomendacion($event.target.value)">
+            <option [selected]='paper.recomendacion===null' disabled></option>
+            <option *ngFor="let r of recomendaciones" value='{{r.value}}'
+            [selected]='paper.recomendacion===r.value'>{{ r.nombre }}</option>
+          </select>
+        </div>
+      </div>
+      <!-- OBSERVACIONES -->
+      <div class="row g-3 justify-content-md-center">
+        <div class="col col-md-2">
+          <label for="observacion" class="col-form-label">Observación</label>
+        </div>
+        <div class="col col-md-4">
+          <textarea class="form-control" id="observacion" (keyup)="setObservacion()">{{paper.observaciones}}</textarea>
+        </div>
+      </div>
+      <!-- BOTONES -->
+      <div class="row pt-3 btn-row justify-content-md-center">
+          <a class="col-md-3 btn btn-secondary" (click)='cancel()' role="button">Cancelar</a>
+          &nbsp;
+          <a class="col-md-3 btn btn-primary" (click)="save(false)" role="button">Guardar Cambios</a>
+      </div>
+      <div class="row pt-3 btn-row justify-content-md-center">
+        <a class="col-md-6 btn btn-success" (click)="submit()" role="button">Enviar Evaluación</a>
+      </div>
   </div>
 </div>
 

@@ -1,0 +1,134 @@
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Tablero de Control</h3>
+    <hr>
+  </div>
+  <br>
+  <div class="row">
+    <app-search class="col-md-5" [fullList]='assignedPaperList' [attribFilter]='nombreArticulo'
+      (listEvent)='search($event)'></app-search>
+  </div>
+  <table class="table text-center table-hover table-bordered">
+    <thead class='thead'>
+      <tr>
+        <th class="col-md-3">Artículo</th>
+        <th class="col-md-2">Evaluador 1</th>
+        <th class="col-md-2">Evaluador 2</th>
+        <th class="col-md-2">Evaluador 3</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class='align-items-center' *ngFor='let item of showAssignedPaperList'>
+        <td>{{item.nombreArticulo}}</td>
+        <td *ngIf="item.idEval1">
+          <div class="row px-2">
+            <h6>{{item.nomEval[0].nombre}} {{item.nomEval[0].apellido}}</h6>
+          </div>
+          <div class="row px-2">
+            <div class="col-md-6">
+              Confirmado
+            </div>
+            <div class="col-md-3">
+              <button type="reset" class='redondo' disabled
+                [ngClass]="item.nomEval[0].idEstadoEvaluacion === 1 ? 'rojo' : 'verde' "></button>
+            </div>
+          </div>
+          <div class="row px-2 pt-1">
+            <div class="col-md-6">
+              Evaluado
+            </div>
+            <div class="col-md-3">
+              <button type="reset" class='redondo' disabled
+                [ngClass]='item.nomEval[0].idEstadoEvaluacion === 2 ? "verde" : "rojo"'></button>
+            </div>
+          </div>
+          <div class="row px-2 pt-3" *ngIf="!(item.nomEval[0].idEstadoEvaluacion === 2)">
+            <a (click)='eliminarYAsignar(item, item.nomEval[0])' class="btn btn-secondary ">Eliminar y Reasignar</a>
+          </div>
+        </td>
+        <td *ngIf="!item.idEval1">
+          <div class="col-sm-12">
+            <select name="eval" class="form-control" (change)="selectOption1($event.target.value, item)">
+              <option hidden [selected]='item.idEval1===null'>Evaluador 1</option>
+              <option *ngFor="let eval of evaluatorList" value='{{eval.idEvaluador}}'
+                [selected]='item.idEval1===eval.idEvaluador'>{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
+            </select>
+          </div>
+        </td>
+        <td *ngIf="item.idEval2">
+          <div class="row px-2">
+            <h6>{{item.nomEval[1].nombre}} {{item.nomEval[1].apellido}}</h6>
+          </div>
+          <div class="row px-2">
+            <div class="col-md-6">
+              Confirmado
+            </div>
+            <div class="col-md-3">
+              <button type="reset" class='redondo' disabled
+                [ngClass]="item.nomEval[1].idEstadoEvaluacion === 1 ? 'rojo' : 'verde' "></button>
+            </div>
+          </div>
+          <div class="row px-2 pt-1">
+            <div class="col-md-6">
+              Evaluado
+            </div>
+            <div class="col-md-3">
+              <button type="reset" class='redondo' disabled
+                [ngClass]='item.nomEval[1].idEstadoEvaluacion === 2 ? "verde" : "rojo"'></button>
+            </div>
+          </div>
+          <div class="row px-2 pt-3" *ngIf="!(item.nomEval[1].idEstadoEvaluacion === 2)">
+            <a (click)='eliminarYAsignar(item, item.nomEval[1])' class="btn btn-secondary ">Eliminar y Reasignar</a>
+          </div>
+        </td>
+        <td *ngIf="!item.idEval2">
+          <div class="col-sm-12">
+            <select name="eval" class="form-control" (change)="selectOption2($event.target.value, item)">
+              <option hidden [selected]='item.idEval2===null'>Evaluador 2</option>
+              <option *ngFor="let eval of evaluatorList" value='{{eval.idEvaluador}}'
+                [selected]='item.idEval2===eval.idEvaluador'>{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
+            </select>
+          </div>
+        </td>
+        <td *ngIf="item.idEval3">
+          <div class="row px-2">
+            <h6>{{item.nomEval[2].nombre}} {{item.nomEval[2].apellido}}</h6>
+          </div>
+          <div class="row px-2">
+            <div class="col-md-6">
+              Confirmado
+            </div>
+            <div class="col-md-3">
+              <button type="reset" class='redondo' disabled
+                [ngClass]="item.nomEval[2].idEstadoEvaluacion === 1 ? 'rojo' : 'verde' "></button>
+            </div>
+          </div>
+          <div class="row px-2 pt-1">
+            <div class="col-md-6">
+              Evaluado
+            </div>
+            <div class="col-md-3">
+              <button type="reset" class='redondo' disabled
+                [ngClass]='item.nomEval[2].idEstadoEvaluacion === 2 ? "verde" : "rojo"'></button>
+            </div>
+          </div>
+          <div class="row px-2 pt-3" *ngIf="!(item.nomEval[2].idEstadoEvaluacion === 2)">
+            <a (click)='eliminarYAsignar(item, item.nomEval[2])' class="btn btn-secondary ">Eliminar y Reasignar</a>
+          </div>
+        </td>
+        <td *ngIf="!item.idEval3">
+          <div class="col-sm-12">
+            <select name="eval" class="form-control" (change)="selectOption3($event.target.value, item)">
+              <option hidden [selected]='item.idEval3===null'>Evaluador 3</option>
+              <option *ngFor="let eval of evaluatorList" [value]='eval.idEvaluador'
+                [selected]='item.idEval3===eval.idEvaluador'>{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
+            </select>
+          </div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

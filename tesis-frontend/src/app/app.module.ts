@@ -7,18 +7,25 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
-import { EvaluatorsComponent } from './pages/evaluators/evaluators.component';
-import { CuponComponent } from './pages/cupon/cupon.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  declarations: [AppComponent, EvaluatorsComponent, CuponComponent],
-
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
     HttpClientModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-center',
+      enableHtml: true,
+      preventDuplicates: true,
+      progressBar: true
+    }) // ToastrModule added
   ],
   providers: [CookieService,
     {

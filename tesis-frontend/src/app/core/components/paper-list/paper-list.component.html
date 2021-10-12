@@ -4,6 +4,15 @@
     <h3 class='text-center'>Gestión de Papers</h3>
     <hr>
   </div>
+  <br>
+  <div class="row justify-content-md-end">
+    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo</a>
+  </div>
+
+  <div class="row">
+    <app-search class="col-md-5" [fullList]='paperList' [attribFilter]='"nombre"' (listEvent)='search($event)'>
+    </app-search>
+  </div>
   <table class="table text-center table-hover table-bordered" *ngIf="paperList.length > 0">
     <thead class='thead'>
       <tr>
@@ -14,28 +23,32 @@
     </thead>
 
     <tbody>
-      <tr class='align-items-center' *ngFor='let item of paperList'>
+      <tr class='align-items-center' *ngFor='let item of showList'>
         <td>{{item.nombre | titlecase}}</td>
         <td>{{item.nombre_estado}}</td>
 
-        <td>
-          <div class="btn-group col-md-3" *ngIf='item.estado != "Subido"'>
-            <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+        <td class='align-items-center display-flex justify-content-center'>
+          <div class="btn-group col-md-3" *ngIf='!item.enviado_corregir'>
+            <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt bigger"></i></a>
+            <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash bigger"></i></a>
           </div>
+
+          <div *ngIf='item.enviado_corregir'>
+            <a
+            ngbPopover="Las acciones solo están disponibles para los artículos no enviados"
+            popoverClass="popover"
+            placement="left"
+            popoverTitle="Información:">
+              <i class="fas fa-info-circle bigger"></i>
+            </a>
+          </div>
+
         </td>
       </tr>
     </tbody>
   </table>
 
-  <br>
-  <div class="row justify-content-md-end">
-    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo</a>
-  </div>
+
 
 
 </div>
-

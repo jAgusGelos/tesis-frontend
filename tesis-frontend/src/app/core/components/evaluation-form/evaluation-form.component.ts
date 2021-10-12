@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IEvaluation } from '../../models/IEvaluation';
 import { ISymposium } from '../../models/ISymposium';
 
@@ -18,7 +19,9 @@ export class EvaluationFormComponent implements OnInit {
   formEvaluation: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private toastr: ToastrService,
+    ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -36,7 +39,7 @@ export class EvaluationFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formEvaluation.invalid) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.warning('Por favor complete todos los datos.');
       return;
     }
     this.evaluation = {

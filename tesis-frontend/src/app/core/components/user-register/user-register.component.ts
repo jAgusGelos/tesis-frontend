@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IUser } from '../../models/IUser';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
@@ -18,7 +19,9 @@ export class UserRegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private userService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -42,20 +45,23 @@ export class UserRegisterComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formRegister.invalid) {
-      alert('Por favor, complete todos los campos.');
+      this.toastr.warning('Por favor, complete todos los campos.');
       return;
     }
     if (this.formRegister.controls.password.value !==  this.formRegister.controls.repPassword.value){
-      alert('Las contraseñas deben ser iguales');
+      this.toastr.warning('Las contraseñas deben ser iguales');
       return;
     }
+    const password = this.formRegister.controls.password.value;
+
+    const encode = window.btoa(password);
     const user: IUser = {
       email: this.formRegister.controls.email.value,
-      password: this.formRegister.controls.password.value
+      password: encode
     };
     this.userService.register(user).subscribe((res: any) => {
       if (!res){
-        alert('Ya existe un usuario con ese mail.');
+        this.toastr.error('Ya existe un usuario con ese mail.');
       }
       else {
         this.router.navigate(['/endRegister']);

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { EvaluatePaperService } from 'src/app/core/services/evaluate-paper.service';
+import { PaperService } from 'src/app/core/services/paper.service';
+import { EvaluationService } from 'src/app/core/services/evaluation.service';
+import { EvaluatorService } from 'src/app/core/services/evaluator.service';
+
 
 @Component({
   selector: 'app-evaluate-article',
@@ -9,34 +14,33 @@ import { EvaluatePaperService } from 'src/app/core/services/evaluate-paper.servi
 export class EvaluateArticleComponent implements OnInit {
 
 
-  paperList = [
-    {nombre: 'Paper de prueba', estado: 'Pdte Evaluacion'},
-    {nombre: 'Paper de prueba 2', estado: 'Evaluando'},
-    {nombre: 'Paper de prueba 3', estado: 'Evaluado'}
-  ];
-  paper = {};
-  test = [
-    {idPregunta: '123', pregunta: 'Esta es la pregunta bla bla'}
-  ];
+  paperList = [];
+  paper = [];
+  items = [];
   flagEvaluate = false;
+  ok = false;
 
 
-  constructor(private paperEvalService: EvaluatePaperService) { }
+  constructor(private paperEvalService: EvaluatePaperService,
+              private evaluationService: EvaluatorService,
+              private toastr: ToastrService,
+              private paperService: PaperService) { }
+
 
   ngOnInit(): void {
-    // this.getPapers();
+    this.getPapers();
   }
-
 
   getPapers(): void {
     this.paperEvalService.getPaperEval().subscribe((res: any) => {
       this.paperList = res.data;
+      this.ok = true;
     });
   }
 
-  getTest(): void {
-    this.paperEvalService.getTest().subscribe((res: any) => {
-      this.test = res.data;
+  getItems(idArticulo): void {
+    this.paperEvalService.getTest(idArticulo).subscribe((res: any) => {
+      this.items = res.data;
     });
   }
 
@@ -45,4 +49,58 @@ export class EvaluateArticleComponent implements OnInit {
     this.flagEvaluate = !this.flagEvaluate;
   }
 
+  getFile(id): void {
+    this.paperService.getPaperFile(id).subscribe((res: any) => {
+      const archivo: ArrayBuffer = res;
+      const blob = new Blob([archivo], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      if (link.download !== undefined) {
+        link.setAttribute('href', url);
+        link.setAttribute('target', '_blank');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  }
+
+  toggleFlagEvaluate(): void {
+    this.flagEvaluate = !this.flagEvaluate;
+  }
+
+  saveEvaluation(ev: any): void {
+    this.paperEvalService.editarEvaluacion(ev).subscribe((res: any) => {
+      this.getPapers();
+      if (ev.submit) {
+        this.submitEvaluation(ev);
+        return;
+      } else {
+        alert('La evaluación ha sido guardada!');
+      }
+    });
+  }
+
+  submitEvaluation(ev): void {
+    this.paperEvalService.enviarEvaluacion(ev).subscribe((res: any) => {
+      alert('La evaluación ha sido enviada!');
+      this.toggleFlagEvaluate();
+    });
+  }
+
+  acceptEvaluate(paper): void {
+    this.paper = paper;
+    this.evaluationService.acceptEvaluationPaper(this.paper).subscribe(
+      (res:any) => {this.toastr.success('La evaluación ha sido aceptada.')}
+    )    
+   }  
+  
+  cancelEvaluate(paper): void {
+    this.paper = paper;
+    this.evaluationService.cancelarEvaluationPaper(this.paper).subscribe(
+      (res: any) =>{this.toastr.success('La evaluación ha sido rechazada.');
+    })
+
+  }
 }

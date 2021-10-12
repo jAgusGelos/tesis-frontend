@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <app-evaluation-list *ngIf="!edit" [evaluationList]='evaluationList'
+  <app-evaluation-list *ngIf="!edit && ok" [evaluationList]='evaluationList'
   (newEvaluationEvent)='newEvaluation()'
   (editEvaluationEvent)='editEvaluation($event)' (deleteEvaluationEvent)='deleteEvaluation($event)'>
   </app-evaluation-list>

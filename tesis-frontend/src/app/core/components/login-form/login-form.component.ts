@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
 import { CongressService } from '../../services/congress.service';
+
 
 @Component({
   selector: 'app-login-form',
@@ -20,7 +22,9 @@ export class LoginFormComponent implements OnInit {
   constructor( private formBuilder: FormBuilder,
                private loginService: AuthService,
                private congressService: CongressService,
-               private router: Router) { }
+               private router: Router,
+               private toastr: ToastrService,
+               ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -43,16 +47,25 @@ export class LoginFormComponent implements OnInit {
   }
 
   submit(): void {
-    this.submitted = true;
-    console.log(this.formLogin.controls.idCongress.value);
+    const password = this.formLogin.controls.password.value;
 
+    // const encode = window.btoa(password);
+
+    // console.log('---ENCODED-----', encode);
+
+    // const decode = window.atob(encode)
+    // console.log('---DECODED-----', decode)
+
+
+    // return;
     if (this.formLogin.invalid ) {
-      alert('Por favor complete todos los datos.');
+      this.toastr.warning('Por favor complete todos los datos.')
       return;
     }
     const login = {
       email: this.formLogin.controls.email.value,
-      password: this.formLogin.controls.password.value,
+      // password: encode,
+      password,
       idCongreso: +this.formLogin.controls.idCongress.value
     };
     this.loginService

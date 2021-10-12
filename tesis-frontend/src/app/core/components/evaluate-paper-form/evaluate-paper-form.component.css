@@ -8,6 +8,16 @@
   margin-right: auto;
 }
 
+.row {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.btn-row {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .login-form{
 	width:75%;
 }
@@ -17,10 +27,20 @@
   padding-bottom: 0.75rem;
 }
 
+.thead{
+  background-color: #C8E5F1;
+}
+
+.btn {
+  border: none;
+}
 
 .btn-primary{
   background-color: #3CAFE0 ;
-  border: none;
+}
+
+.btn-primary:hover{
+  background-color: #3994bb ;
 }
 
 .card {
@@ -63,11 +83,7 @@ a{
 
 hr {
   border:#00609C solid 1px;
-
 }
-
-
-
 
 input{
   border: none;
@@ -79,16 +95,14 @@ input{
     max-width: 80%;
   }
 
-
   .card-body{
     padding: auto;
   }
 
   hr{
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
-
  }
 
 

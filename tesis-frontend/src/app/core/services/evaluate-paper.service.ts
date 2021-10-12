@@ -13,15 +13,23 @@ export class EvaluatePaperService {
   constructor(private httpClient: HttpClient,
               ) { }
 
-  postPaperEval(paperEval: IEvalPaper): any {
-    return this.httpClient.post<IEvalPaper>(this.apiURL + 'paperEval/evaluar/', paperEval);
+  enviarEvaluacion(ev): any {
+    return this.httpClient.put<IEvalPaper>(this.apiURL + 'articulos/enviar-evaluacion/', ev);
   }
 
   getPaperEval(): any {
-    return this.httpClient.get(this.apiURL + 'paperEval/lista-paperEval/');
+    return this.httpClient.get(this.apiURL + 'articulos/consulta-evaluaciones/');
   }
 
-  getTest(): any {
-    return this.httpClient.get(this.apiURL + 'paperEval/evaluacion/');
+  editarEvaluacion(ev): any {
+    return this.httpClient.put(this.apiURL + 'articulos/editar-evaluacion/?idArticulo=' + ev.idArticulo, ev.evaluacion);
+  }
+
+  getEvaluaciones(idArticulo): any {
+    return this.httpClient.get(this.apiURL + 'articulos/consultaDetalleEvaluacion/?idArticulo=' + idArticulo);
+  }
+
+  getTest(idArticulo): any {
+    return this.httpClient.get(this.apiURL + 'articulos/consulta-evaluacion/?idArticulo=' + idArticulo);
   }
 }

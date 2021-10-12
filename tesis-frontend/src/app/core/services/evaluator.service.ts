@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IEvaluator } from '../models/IEvaluator';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -24,10 +23,12 @@ export class EvaluatorService {
     return this.httpClient.post(this.apiURL + 'articulos/asignarRolEvaluador/', idUsuarios);
   }
 
-  getEvaluators(activos): any {
+  getEvaluators(activos: number): any {
     // return this.httpClient.request('get', this.apiURL + 'articulos/lista-evaluadores/',
     // {body: {is_active: true}});
-    return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadores/?activos=' + activos);
+    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
+    // 0 todos
+    // 1 solo activos
   }
 
   getEvaluatorsAll(): any {
@@ -54,12 +55,16 @@ export class EvaluatorService {
     return this.httpClient.get(this.apiURL + 'evaluador/consultarEvaluador/' + id);
   }
 
-  putEvaluator(evaluator: IEvaluator): any {
-    return this.httpClient.put<IEvaluator>(this.apiURL + 'articulos/modificar/' + evaluator.id, evaluator);
+  putEvaluator(evaluator): any {
+    return this.httpClient.put(this.apiURL + 'articulos/modificar/' + evaluator.id, evaluator);
   }
 
-  deleteEvaluator(evaluator: IEvaluator): any {
-    return this.httpClient.delete<IEvaluator>(this.apiURL + 'evaluador/eliminar-evaluador/' + evaluator.id);
+  deleteEvaluator(evaluator): any {
+    return this.httpClient.delete(this.apiURL + 'evaluador/eliminar-evaluador/' + evaluator.id);
+  }
+
+  deleteIdEvaluator(id: number): any {
+    return this.httpClient.delete(this.apiURL + 'evaluador/eliminar-evaluador/' + id);
   }
 
   calificarEvaluador(evCalification: any): any {
@@ -74,7 +79,16 @@ export class EvaluatorService {
         idCongreso: this.idCongress
       };
     });
+    console.log(postItem);
+
     return this.httpClient.post(this.apiURL + 'articulos/asignarArticuloEvaluadorMasivo/', postItem);
 
+  }
+/* Ver si está el método... */
+  cancelarEvaluationPaper(item:any): any{
+    return this.httpClient.delete(this.apiURL + 'articulos/rechazar-evaluacion',item);
+  }
+  acceptEvaluationPaper(item:any): any{
+    return this.httpClient.put(this.apiURL + 'articulos/aceptar-evaluacion',item);
   }
 }

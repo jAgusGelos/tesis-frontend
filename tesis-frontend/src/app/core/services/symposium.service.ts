@@ -67,7 +67,11 @@ export class SymposiumService {
     {body: {Simposio: this.postSymposium}});
   }
 
+  getSymposiumsChairs(): any {
+    return this.httpClient.get(this.apiURL + 'congresos/devolverChairsSimposios/')
   //Solicitar esta función al back
+  }
+  
   getSymposiumByChair(chair: any): any {
     return this.httpClient.get(this.apiURL + 'congresos/simposio-por-chair/' + chair.id);
   }

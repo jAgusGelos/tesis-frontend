@@ -11,38 +11,22 @@ export class EvaluateService {
 
   constructor(private httpClient: HttpClient,
               ) { }
-  
 
-  /**
-   * Evalua un paper.
-   * @param evaluation 
-   * @returns 
-   */
+
   postEvaluation(evaluation: any): any {
     return this.httpClient.post<any>(this.apiURL + 'evaluar/evaluacion/', evaluation);
   }
 
-  /**
-   * 
-   * @returns Evaluación modelo.
-   */
+  // Trae la evaluación
   getEvaluation(): any {
     return this.httpClient.get(this.apiURL + 'evaluar/lista-evaluar/');
   }
 
-  /**
-   * 
-   * @returns Papers a evaluar.
-   */
+  // Trae los paper a evaluar
    getPaper(): any {
     return this.httpClient.get(this.apiURL + 'evaluar/lista-evaluar/');
   }
 
-  /**
-   * Cancela una evaluación ya aceptada.
-   * @param evaluation 
-   * @returns 
-   */
   deleteEvaluation(evaluation: any): any {
     return this.httpClient.delete<any>(this.apiURL + 'evaluar/eliminar-evaluacion/' + evaluation.id);
   }
