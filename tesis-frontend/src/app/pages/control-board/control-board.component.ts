@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticulosService } from 'src/app/core/services/articulos.service';
+import { CongressService } from 'src/app/core/services/congress.service';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 
 @Component({
@@ -15,15 +16,40 @@ export class ControlBoardComponent implements OnInit {
   assignedPaperList = [];
   showAssignedPaperList = [];
   nombreArticulo = 'nombreArticulo';
+  fechaFinEv: '';
+  fechaFinProrroga: '';
+  restFechaFinEv = 0;
+  restFechaFinProroga = 0;
 
-  constructor(  private evaluatorService: EvaluatorService,
-                private articulosService: ArticulosService,
 
-                ) { }
+  constructor(private evaluatorService: EvaluatorService,
+              private articulosService: ArticulosService,
+              private congressService: CongressService
+
+  ) { }
 
   ngOnInit(): void {
     this.getPaperList();
     this.getEvaluators();
+    this.getCongress();
+  }
+
+  getCongress(): void {
+    this.congressService.getCongressById().subscribe((res: any) => {
+      this.fechaFinEv = res.data[0].fechaFinEvaluacion.split(' ')[0];
+      this.fechaFinProrroga = res.data[0].fechaFinReEv.split(' ')[0];
+
+      const oneDay = 24 * 60 * 60 * 1000;
+      const today = new Date();
+      const fechaF = res.data[0].fechaFinEvaluacion.split(' ')[0].split('/');
+      const fechaP = res.data[0].fechaFinReEv.split(' ')[0].split('/');
+
+      const fechaFin = new Date(fechaF[2], fechaF[1] - 1, fechaF[0]);
+      const fechaPR = new Date(fechaP[2], fechaP[1] - 1, fechaP[0]);
+
+      this.restFechaFinEv = Math.round(Math.abs((fechaFin.valueOf() - today.valueOf()) / oneDay));
+      this.restFechaFinProroga = Math.round(Math.abs((fechaPR.valueOf() - today.valueOf()) / oneDay));
+    });
   }
 
   getPaperList(): void {
@@ -36,7 +62,7 @@ export class ControlBoardComponent implements OnInit {
           idEval2: x.evaluadores[1].id,
           idEval3: x.evaluadores[2].id,
           idArticulo: x.idArticulo,
-          nombreArticulo : x.nombreArticulo,
+          nombreArticulo: x.nombreArticulo,
           nomEval: x.evaluadores
         };
       });
@@ -53,7 +79,7 @@ export class ControlBoardComponent implements OnInit {
   selectOption1(value: any, item: any): void {
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
       if (item.idArticulo === x.idArticulo) {
-        if (x.idEval2 !== +value && x.idEval3 !== +value  ) {
+        if (x.idEval2 !== +value && x.idEval3 !== +value) {
           x.idEval1 = +value;
         } else {
           alert('Evaluador ya asignado en este mismo paper');
@@ -69,7 +95,7 @@ export class ControlBoardComponent implements OnInit {
   selectOption2(value: any, item: any): void {
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
       if (item.idArticulo === x.idArticulo) {
-        if (x.idEval1 !== +value && x.idEval3 !== +value  ) {
+        if (x.idEval1 !== +value && x.idEval3 !== +value) {
           x.idEval2 = +value;
         } else {
           alert('Evaluador ya asignado en este mismo paper');
@@ -83,7 +109,7 @@ export class ControlBoardComponent implements OnInit {
   selectOption3(value: any, item: any): void {
     this.assignedPaperList = this.assignedPaperList.map((x: any) => {
       if (item.idArticulo === x.idArticulo) {
-        if (x.idEval2 !== +value && x.idEval1 !== +value  ) {
+        if (x.idEval2 !== +value && x.idEval1 !== +value) {
           x.idEval3 = +value;
         } else {
           alert('Evaluador ya asignado en este mismo paper');
@@ -91,7 +117,7 @@ export class ControlBoardComponent implements OnInit {
         }
       }
       return x;
-      });
+    });
   }
 
   search(filterList): void {
@@ -99,7 +125,7 @@ export class ControlBoardComponent implements OnInit {
   }
 
   eliminarYAsignar(art: any, ev: any): void {
-    console.log(art, ev);
+    // Llamar al service para hacer la desvinculación
     this.assignedPaperList = this.assignedPaperList.map((item: any) => {
       if (item.idArticulo === art.idArticulo) {
         if (item.idEval1 === ev.id) {
@@ -113,8 +139,6 @@ export class ControlBoardComponent implements OnInit {
       return item;
     });
     this.showAssignedPaperList = this.assignedPaperList.slice();
-    console.log(this.assignedPaperList);
-
   }
 
 }

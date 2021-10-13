@@ -72,3 +72,7 @@ hr {
   background-color: green;
   border: gren;
 }
+
+:host >>> .popover .popover-header {
+  background-color: #3CAFE0;
+}

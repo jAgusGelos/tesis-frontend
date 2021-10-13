@@ -5,9 +5,27 @@
     <hr>
   </div>
   <br>
-  <div class="row">
+  <div class="row justify-content-between">
     <app-search class="col-md-5" [fullList]='assignedPaperList' [attribFilter]='nombreArticulo'
       (listEvent)='search($event)'></app-search>
+      <div class="col-md-3">
+        <h5><a
+              ngbPopover="Dias restantes: {{restFechaFinEv}} "
+              popoverClass="popover"
+              placement="top"
+              popoverTitle="Tiempo restante de evaluación">
+              <i class="fas fa-clock clock"></i>
+              </a>&nbsp;Fin Evaluación: {{fechaFinEv}}</h5>
+      </div>
+      <div class="col-md-3">
+        <h5><a
+              ngbPopover="Dias restantes: {{restFechaFinProroga}} "
+              popoverClass="popover"
+              placement="top"
+              popoverTitle="Tiempo restante para el fin de prorroga de evaluaciones:">
+              <i class="fas fa-clock clock"></i>
+              </a>&nbsp;Fin Prorroga: {{fechaFinProrroga}}</h5>
+      </div>
   </div>
   <table class="table text-center table-hover table-bordered">
     <thead class='thead'>
