@@ -43,7 +43,7 @@
             </a>
           </div>
 
-          <div *ngIf='item.enviado_corregir && item.idEstado == 5 || item.idEstado == 6'>
+          <div *ngIf='item.enviado_corregir && (item.idEstado == 5 || item.idEstado == 6)  && !item.url_camera_ready'>
             <div class="row">
               <a (click)='toggleCameraReady(item)' title='Entrega final'><i class="fas fa-arrow-alt-circle-right bigger"></i></a>
             </div>
@@ -68,7 +68,7 @@
             </div>
           </div>
 
-          <div *ngIf='item.enviado_corregir && item.idEstado === 8'>
+          <div *ngIf='item.enviado_corregir && item.url_camera_ready'>
             <div class="row">
               <a
               ngbPopover="Tu articulo ha sido entregado correctamente.
