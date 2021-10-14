@@ -5,11 +5,11 @@
     <hr>
   </div>
   <br>
-  <div class="row py-3">
-    <div class="col-md-4">
+  <div class="row py-3 ">
+    <div class="col-md-2">
       <label for="">Seleccione un Aula:</label>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4  mr-auto">
       <div class="col-sm-12">
         <select name="eval" class="form-control" (change)="aulaSelected($event.target.value)">
           <option selected disabled> -- Seleccione un Aula --</option>
@@ -17,16 +17,24 @@
         </select>
       </div>
     </div>
+    <div class="col-md-3 ml-auto">
+      <button type="button " class="btn btn-primary"
+      data-bs-toggle="modal"
+       data-bs-target="#plenariaModal">
+       <i class="fas fa-plus-circle"></i>
+       Agregar charla Plenaria / Break
+      </button>
+    </div>
   </div>
   <div class="row" id="loading">
     <div class="row justify-content-center" *ngIf="loading">
-      <div class="spinner-border text-primary" role="status" >
+      <div class="spinner-border text-primary" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </div>
   </div>
   <div class="row" *ngIf="events && !loading">
-    <div class="calendar-container" >
+    <div class="calendar-container">
       <div class="row mt-4">
         <div class="col-md-4 text-center">
           <h3 class="mt-0">{{ viewDate | calendarSchedulerDate:(view +
@@ -42,9 +50,7 @@
               </span>
             </button>
             <button type="button" class="btn btn-light" mwlCalendarToday [(viewDate)]="viewDate"
-              (viewDateChange)="dateOrViewChanged()"
-              disabled
-              >
+              (viewDateChange)="dateOrViewChanged()" disabled>
               <span class="valign-center">
                 <i title="Hoy" class="material-icons md-18"></i>
               </span>
@@ -61,8 +67,8 @@
       </div>
       <br>
       <div [ngSwitch]="view">
-        <calendar-scheduler-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [locale]="locale"
-          [viewDays]="viewDays" [weekStartsOn]="weekStartsOn" [excludeDays]="excludeDays"
+        <calendar-scheduler-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+          [locale]="locale" [viewDays]="viewDays" [weekStartsOn]="weekStartsOn" [excludeDays]="excludeDays"
           [startsWithToday]="startsWithToday" [hourSegments]="hourSegments" [dayStartHour]="dayStartHour"
           [dayEndHour]="dayEndHour" [dayModifier]="dayModifier" [hourModifier]="hourModifier"
           [segmentModifier]="segmentModifier" [eventModifier]="eventModifier" [showEventActions]="true"
@@ -173,8 +179,7 @@
                 class='text-danger'>*</span></label>
             <div class='col-sm-6'>
               <select class='col-sm-4 form-select' name="idSimposio" formControlName="idSimposio"
-              (change)='simposioSeleccionado($event.target.value)'
-              [ngClass]="{'is-invalid': ((formEvento.controls.idSimposio.touched || submitted) && formEvento.controls.idSimposio.value === '')
+                (change)='simposioSeleccionado($event.target.value)' [ngClass]="{'is-invalid': ((formEvento.controls.idSimposio.touched || submitted) && formEvento.controls.idSimposio.value === '')
           && formEvento.controls.idSimposio.errors}">
                 <option *ngFor="let opt of simposios" value={{opt.id}}>
                   ‌{{ opt.descripcion }}
@@ -208,35 +213,156 @@
           <!-- title -->
           <div class='form-group row'>
             <label class='col-form-label col-sm-2 col-sm-offset-2' for='title'>Titulo: <span
-              class='text-danger'>*</span></label>
-              <div class='col-sm-6'>
-                <input type='text' class='form-control' formControlName='title'
-                [ngClass]="{'is-invalid': (formEvento.controls.title.touched || submitted)
-                  && formEvento.controls.title.errors}" onclick='this.select()'/>
-                <span class='text-danger'
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='text' class='form-control' formControlName='title' [ngClass]="{'is-invalid': (formEvento.controls.title.touched || submitted)
+                  && formEvento.controls.title.errors}" onclick='this.select()' />
+              <span class='text-danger'
                 *ngIf='(formEvento.controls.title.touched || submitted) && formEvento.controls.title.errors?.required'>
-                  Requerido
-                </span>
-              </div>
+                Requerido
+              </span>
+            </div>
           </div>
 
           <!-- desc -->
           <div class='form-group row'>
             <label class='col-form-label col-sm-2 col-sm-offset-2' for='desc'>Descripción: <span
-              class='text-danger'>*</span></label>
-              <div class='col-sm-6'>
-                <input type='text' class='form-control' formControlName='desc'
-                [ngClass]="{'is-invalid': (formEvento.controls.desc.touched || submitted)
-                  && formEvento.controls.desc.errors}" onclick='this.select()'/>
-                <span class='text-danger'
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='text' class='form-control' formControlName='desc' [ngClass]="{'is-invalid': (formEvento.controls.desc.touched || submitted)
+                  && formEvento.controls.desc.errors}" onclick='this.select()' />
+              <span class='text-danger'
                 *ngIf='(formEvento.controls.desc.touched || submitted) && formEvento.controls.desc.errors?.required'>
-                  Requerido
-                </span>
-              </div>
+                Requerido
+              </span>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismiss'>Cancelar</button>
             <button type="button" class="btn btn-primary" (click)='submit()'>{{evento.id ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="plenariaModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true"
+  *ngIf="formPlenaria">
+  <div class="modal-dialog  modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventModalLabel">{{evento.id ? 'Editar Evento' : 'Nuevo Evento'}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]='formPlenaria'>
+          <!-- date -->
+          <div class='form-group row'>
+            <label class='col-form-label col-sm-2 col-sm-offset-2' for='date'>Fecha: </label>
+            <div class='col-sm-6'>
+              <input type='date' min={{min}} max={{max}} value={{min}} class='form-control' formControlName='date' [ngClass]="{'is-invalid': (formPlenaria.controls.date.touched || submitted)
+                  && formPlenaria.controls.date.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formPlenaria.controls.date.touched || submittedPlen) && formPlenaria.controls.date.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class='col-form-label col-sm-2 col-md-offset-2' for='startHour'>Hora de inicio: <span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6 row'>
+              <div class="col-md-3">
+                <select class='col-sm-3 form-select' name="startHour" formControlName="startHour" [ngClass]="{'is-invalid': ((formPlenaria.controls.startHour.touched || submittedPlen) && formPlenaria.controls.startHour.value === '')
+            && formPlenaria.controls.startHour.errors}">
+                  <option *ngFor="let opt of hours" value={{opt}}>
+                    ‌{{ opt }}
+                  </option>
+                </select>
+                <span class='text-danger'
+                  *ngIf='(formPlenaria.controls.startHour.touched || submittedPlen) && formPlenaria.controls.startHour.errors?.required'>
+                  Requerido
+                </span>
+              </div>
+              <div class="col-md-3">
+                <select class='col-sm-3 form-select' name="startMinute" formControlName="startMinute" [ngClass]="{'is-invalid': ((formPlenaria.controls.startMinute.touched || submittedPlen) && formPlenaria.controls.startMinute.value === '')
+                  && formPlenaria.controls.startMinute.errors}">
+                  <option *ngFor="let opt of minutes" value={{opt}}>
+                    ‌{{ opt === 0 ? '00': opt }}
+                  </option>
+                </select>
+                <span class='text-danger'
+                  *ngIf='(formPlenaria.controls.startMinute.touched || submittedPlen) && formPlenaria.controls.startMinute.errors?.required'>
+                  Requerido
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class='col-form-label col-sm-2 col-md-offset-2' for='endHour'>Hora de Fin: <span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6 row'>
+              <div class="col-md-3">
+                <select class='col-sm-3 form-select' name="endHour" formControlName="endHour" [ngClass]="{'is-invalid': ((formPlenaria.controls.endHour.touched || submittedPlen) && formPlenaria.controls.endHour.value === '')
+            && formPlenaria.controls.endHour.errors}">
+                  <option *ngFor="let opt of hours" value={{opt}}>
+                    ‌{{ opt }}
+                  </option>
+                </select>
+                <span class='text-danger'
+                  *ngIf='(formPlenaria.controls.endHour.touched || submittedPlen) && formPlenaria.controls.endHour.errors?.required'>
+                  Requerido
+                </span>
+              </div>
+              <div class="col-md-3">
+                <select class='col-sm-3 form-select' name="endMinute" formControlName="endMinute" [ngClass]="{'is-invalid': ((formPlenaria.controls.endMinute.touched || submittedPlen) && formPlenaria.controls.endMinute.value === '')
+                  && formPlenaria.controls.endMinute.errors}">
+                  <option *ngFor="let opt of minutes" value={{opt}}>
+                    ‌{{ opt === 0 ? '00': opt }}
+                  </option>
+                </select>
+                <span class='text-danger'
+                  *ngIf='(formPlenaria.controls.endMinute.touched || submittedPlen) && formPlenaria.controls.endMinute.errors?.required'>
+                  Requerido
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- title -->
+          <div class='form-group row'>
+            <label class='col-form-label col-sm-2 col-sm-offset-2' for='title'>Titulo: <span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='text' class='form-control' formControlName='title' [ngClass]="{'is-invalid': (formPlenaria.controls.title.touched || submittedPlen)
+                  && formPlenaria.controls.title.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formPlenaria.controls.title.touched || submittedPlen) && formPlenaria.controls.title.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+
+          <!-- desc -->
+          <div class='form-group row'>
+            <label class='col-form-label col-sm-2 col-sm-offset-2' for='desc'>Descripción: <span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='text' class='form-control' formControlName='desc' [ngClass]="{'is-invalid': (formPlenaria.controls.desc.touched || submittedPlen)
+                  && formPlenaria.controls.desc.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formPlenaria.controls.desc.touched || submittedPlen) && formPlenaria.controls.desc.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismissPlenaria'>Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)='submitPlenaria()'>{{evento.id ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
           </div>
         </form>
       </div>
