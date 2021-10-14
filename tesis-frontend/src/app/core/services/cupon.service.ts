@@ -16,7 +16,7 @@ export class CuponService {
     return this.httpClient.get(this.apiURL + 'inscripciones/lista-cuponesDescuento/');
   }
 
-  getCuponByCodigo(codigo): any {
+  getCuponByCodigo(codigo: string): any {
     return this.httpClient.get(this.apiURL + 'inscripciones/devolver-cuponDescuento/?codigoCupon=' + codigo);
   }
 
@@ -25,15 +25,19 @@ export class CuponService {
   }
 
   putCupon(cupon: ICupon): any {
-    return this.httpClient.put(this.apiURL + 'inscripciones/editar-cuponDescuento/', cupon);
+    return this.httpClient.put(this.apiURL + 'inscripciones/editar-cuponDescuento/?codigoCupon=' + cupon.codigo, cupon);
   }
 
-  deleteCupon(codigo): any {
-    return this.httpClient.delete(this.apiURL + 'inscripciones/eliminar-cuponDescuento/?codigoCupon=' + codigo);
+  deleteCupon(cupon: ICupon): any {
+    return this.httpClient.delete(this.apiURL + 'inscripciones/eliminar-cuponDescuento/?codigoCupon=' + cupon.codigo);
   }
 
-  verifyCupon( codigo): any {
+  verifyCupon(codigo: string): any {
     return this.httpClient.get(this.apiURL + 'inscripciones/verificar-cuponDescuento/?cuponDescuento=' + codigo);
+  }
+
+  validateCode(codigo: string): any {
+    return this.httpClient.get(this.apiURL + 'inscripciones/verificar-codigoCupon/?cuponDescuento=' + codigo);
   }
 
 }

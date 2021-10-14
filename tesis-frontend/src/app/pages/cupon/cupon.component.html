@@ -9,13 +9,12 @@
     <div *ngIf="edit">
         <app-cupon-form [new]="new"
                         [cupon]="cupon"
-                        [codeIsValid]="codeIsValid"
                         [tarifaList]="tarifaList"
                         [selectedTarifa]="selectedTarifa"
+                        [codeValidation]="codeValidation"
                         (newCuponEvent)="postCupon($event)" 
                         (editCuponEvent)="putCupon($event)"
-                        (verificarCuponEvent)="verificarCupon($event)"
-                        (obtenerTarifaEvent)="getTarifaById($event)" 
+                        (validarCodigoCuponEvent)="validarCodigoCupon($event)"
                         (cancelEvent)="toggleEdit($event)">
         </app-cupon-form>
     </div>

@@ -14,7 +14,7 @@ export class CuponListComponent implements OnInit {
   @Output() eliminarCuponEvent = new EventEmitter();
   message = {header: '', body: ''};
   selectedItem: ICupon = null;
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,12 +31,4 @@ export class CuponListComponent implements OnInit {
   toggleRemoveHandled(item: any): void {
     this.eliminarCuponEvent.emit(item);
   }
-
-  modalDelete(item) {
-    this.selectedItem = item;
-    this.message.header = 'Aviso';
-    this.message.body = '¿Seguro que desea eliminar el cupón ' + item.codigo + '?';
-    document.getElementById('modal-delete-btn').click();
-  }
-
 }

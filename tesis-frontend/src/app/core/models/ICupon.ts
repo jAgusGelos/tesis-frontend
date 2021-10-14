@@ -1,6 +1,7 @@
 export interface ICupon {
     codigo: string;
-    porcentaje: number;
+    porcentajeDesc: number;
     idTarifa: string;
+    nombreTarifa: string;
     usosRestantes: number;
 }

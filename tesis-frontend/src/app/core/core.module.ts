@@ -35,9 +35,6 @@ import { RecoverPasswordFormComponent } from './components/recover-password-form
 import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
 import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
-
-
-
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -79,7 +76,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TarifaListComponent,
     TarifaFormComponent,
     CustomToastComponent,
-    SearchComponent
+    SearchComponent,
+    AsignarPaperEvaluadorListComponent
   ],
   imports: [
     CommonModule,

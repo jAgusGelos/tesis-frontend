@@ -21,37 +21,17 @@
           </thead>
           <tbody>
             <tr class='align-items-center'*ngFor='let item of cuponList; index as i'>
-              <td>{{item.idTarifa}}</td> <!-- CAMBIAR POR EL NOMBRE DE LA TARIFA -->
+              <td>{{item.nombreTarifa}}</td> <!-- CAMBIAR POR EL NOMBRE DE LA TARIFA -->
               <td>{{item.codigo}}</td>
-              <td>{{item.porcentaje}}%</td>
+              <td>{{item.porcentajeDesc}}%</td>
               <td>{{item.usosRestantes}}</td>
               <td>
                 <a title='Editar' role="button" (click)="toggleEdit(item)"><i class="fas fa-pencil-alt fa-lg"></i></a>
                 &nbsp;&nbsp;&nbsp;
-                <a title='Eliminar' role="button" (click)="modalDelete(item)"><i class="fas fa-trash fa-lg"></i></a>
+                <a title='Eliminar' role="button" (click)="toggleRemoveHandled(item)"><i class="fas fa-trash fa-lg"></i></a>
               </td>
             </tr>
           </tbody>
         </table>
   </div>
   <div>
-<!-- Button trigger modal -->
-<button hidden type="button" id="modal-delete-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal"></button>
-<!-- Modal Eliminar -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">{{message.header}}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            {{message.body}}
-        </div>
-        <div class="modal-footer">
-            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
-            <a type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="toggleRemoveHandled(selectedItem)">Aceptar</a>
-        </div>
-        </div>
-    </div>
-</div>
