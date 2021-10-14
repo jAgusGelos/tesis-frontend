@@ -203,6 +203,7 @@ export class ScheduleCalendarComponent implements OnInit {
           isDisabled: false
         } as CalendarSchedulerEvent;
       });
+      this.loading = false;
     });
   }
 

@@ -6,26 +6,11 @@
   </div>
   <div class="section">
     <h6>Usted está a punto de inscribirse al congreso: {{congress.nombre}}
-      a desarrollarse en {{congress.sede}}. Los días {{congress.fechaInicio}} a {{congress.fechaFin}}.
+      a desarrollarse en la sede {{congress.sede}}. Los días {{congress.fechaInicio}} a {{congress.fechaFin}}.
     </h6>
     <h6>
       Por favor, complete todos los campos:
     </h6>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-md-8 offset-md-2">
-      <div class="wrapper-progressBar ">
-        <ul class="progressBar">
-          <li [ngClass]='tarifaSelected ? "active" : "" '>
-            Selecciona tu entrada
-          </li>
-          <li [ngClass]='datosCompletos ? "active" : "" '>
-            Completa tus datos
-          </li>
-          <li class="">Realiza el pago</li>
-        </ul>
-      </div>
-    </div>
   </div>
 
   <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -38,116 +23,40 @@
       </h2>
       <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
         data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body row">
-          <div class="col-sm-4 text-center" *ngFor="let item of tarifas">
+        <div class="accordion-body row justify-content-center">
+          <div class="col-sm-6 text-center" *ngFor="let item of tarifas">
             <div class="card text-left" [ngClass]='tarifaSelected.id === item.id ? "marked" : "" '>
               <div class="card-body">
                 <h4 class="card-title">{{item.nombre}}</h4>
                 <h6 class="card-text">$ {{item.precio}}</h6>
-                <button type="button" (click)='inscribirme(item)' class="btn btn-primary btn-lg btn-block"
-                  data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                  aria-controls="flush-collapseTwo">
-                  Inscribirme
-                </button>
+
+                <form [formGroup]='formUsuario'>
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-2 col-sm-offset-2" for="cupon">Tengo un cupón: <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" formControlName="cupon" [ngClass]="{'is-invalid': formUsuario.controls.cupon.errors}" onclick="this.select()" />
+                      <span class="text-danger"
+                        *ngIf="formUsuario.controls.cupon.errors">
+                        Cupón inválido.
+                      </span>
+                    </div>
+                  </div>
+
+                  <button type="button" (click)='inscribirme(item)' class="btn btn-primary btn-lg btn-block">
+                    Inscribirme
+                  </button>
+                </form>
+                <button type="button" hidden class="btn btn-primary btn-lg btn-block" id='go-next'
+                data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
+                aria-controls="flush-collapseThree">
+                Inscribirme
+              </button>
+
 
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-          data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-          Datos de Contacto.
-        </button>
-      </h2>
-      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-        data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body">
-          <form [formGroup]='formUsuario'>
-            <div class="row pt-3">
-              <!-- Apellido y nombre -->
-              <div class="col-md-6">
-                <!--Apellido-->
-                <div class="form-group row">
-                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="apellido">Apellido: <span
-                      class="text-danger">*</span></label>
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control" formControlName="apellido" [ngClass]="{'is-invalid': (formUsuario.controls.apellido.touched || submitted)
-                  && formUsuario.controls.apellido.errors}" onclick="this.select()" />
-                    <span class="text-danger"
-                      *ngIf="(formUsuario.controls.apellido.touched || submitted) && formUsuario.controls.apellido.errors?.required">
-                      Requerido.
-                    </span>
-                  </div>
-                </div>
-
-              </div>
-              <div class="col-md-6">
-                <!--Nombre-->
-                <div class="form-group row">
-                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="nombre">Nombre: <span
-                      class="text-danger">*</span></label>
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (formUsuario.controls.nombre.touched || submitted)
-                  && formUsuario.controls.nombre.errors}" onclick="this.select()" />
-                    <span class="text-danger"
-                      *ngIf="(formUsuario.controls.nombre.touched || submitted) && formUsuario.controls.nombre.errors?.required">
-                      Requerido.
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <!-- Email y nombre -->
-              <div class="col-md-6">
-                <!--Email-->
-                <div class="form-group row">
-                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="apellido">Email: <span
-                      class="text-danger">*</span></label>
-                  <div class="col-sm-6">
-                    <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (formUsuario.controls.email.touched || submitted)
-                  && formUsuario.controls.email.errors}" onclick="this.select()" />
-                    <span class="text-danger"
-                      *ngIf="(formUsuario.controls.email.touched || submitted) && formUsuario.controls.email.errors?.required">
-                      Requerido.
-                    </span>
-                  </div>
-                </div>
-
-              </div>
-              <div class="col-md-6">
-                <!--Teléfono-->
-                <div class="form-group row">
-                  <label class="col-form-label col-sm-2 col-sm-offset-2" for="nombre">Teléfono: <span
-                      class="text-danger">*</span></label>
-                  <div class="col-sm-6">
-                    <input type="number" class="form-control" formControlName="telefono" [ngClass]="{'is-invalid': (formUsuario.controls.telefono.touched || submitted)
-                  && formUsuario.controls.telefono.errors}" onclick="this.select()" />
-                    <span class="text-danger"
-                      *ngIf="(formUsuario.controls.telefono.touched || submitted) && formUsuario.controls.telefono.errors?.required">
-                      Requerido.
-                    </span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-
-
-            <div class="row justify-content-md-center">
-              <button class="btn btn-primary col-md-4" type="submit" [disabled]="formUsuario.invalid" (click)='datos()'
-                data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
-                aria-controls="flush-collapseThree">
-                Guardar datos
-              </button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
