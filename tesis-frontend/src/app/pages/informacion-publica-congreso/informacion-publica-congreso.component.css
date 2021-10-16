@@ -1,0 +1,52 @@
+
+.contacto{
+    background-color: #f8f8f8;
+    border-radius: 2rem;
+}
+.contenidos{
+    padding-bottom: 3rem;
+  }
+
+.greyned{
+    color: grey;
+  }
+  
+i{
+    padding-top: 1rem;
+    font: normal;
+  }
+
+  
+  
+hr{
+    border:#00609C solid 1px;
+  }
+  
+  
+@media (min-width: 768px) {
+    hr{
+        margin-left: 40%;
+        margin-right: 40%;
+    
+      }
+    .container-fluid{
+      padding: 2rem;
+    }
+  
+   }
+  
+.col{
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+.map{
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+.info{
+    margin-left: 0rem;
+    margin-right: 0rem;
+}
+.fa{
+  color: #126e82;
+}
