@@ -29,11 +29,6 @@ export class AuthService {
     // .subscribe(res => this.setSession(res));
   }
 
-  register(user: IUser): any {
-    return this.http.post<IUser>(this.apiURLRegister, { email: user.email, password: user.password });
-  }
-
-
   setSession(authResult): void {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
     const date = new Date();
@@ -99,9 +94,9 @@ export class AuthService {
   verifyEmail(item : string):any{
     return this.http.get(environment.apiURL + 'api/email-verify/' + item);
   }
- 
 
-  
+
+
 }
 
 
