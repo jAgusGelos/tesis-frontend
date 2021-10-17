@@ -52,8 +52,6 @@
                 aria-controls="flush-collapseThree">
                 Inscribirme
               </button>
-
-
               </div>
             </div>
           </div>
@@ -78,7 +76,16 @@
                   <p class="card-text">¿Estas seguro que deseas la entrada "<b>{{tarifaSelected.nombre}}</b>"?</p>
                   <p class="card-text">El precio de la entrada es de $<b>{{tarifaSelected.precio}}</b></p>
                   <div class="row justify-items-end">
-                    <button type="button" (click)='pagar()' class="btn btn-primary btn-lg btn-block aling-itmems-end">
+                    <button type="button" class="btn btn-primary btn-lg btn-block"
+                    *ngIf="loading"
+                    >
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                    </button>
+                    <button type="button" (click)='pagar()' class="btn btn-primary btn-lg btn-block aling-items-end"
+                    *ngIf="!loading"
+                    >
                       Continuar al pago
                     </button>
                   </div>

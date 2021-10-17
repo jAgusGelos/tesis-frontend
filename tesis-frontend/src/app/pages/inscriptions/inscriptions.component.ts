@@ -30,6 +30,7 @@ export class InscriptionsComponent implements OnInit {
   ];
   tarifaSelected = false;
   datosCompletos = false;
+  loading = false;
   idInscrip = null;
   formUsuario: FormGroup;
   submitted = false;
@@ -85,6 +86,7 @@ export class InscriptionsComponent implements OnInit {
     // Tirar el post a la BD para conseguir el preference id.
     // post
     this.inscriptionService.generatePreference(this.idInscrip).subscribe((res: any) => {
+      this.loading = true;
       window.location.href = res.init_point;
     });
   }
@@ -99,7 +101,7 @@ export class InscriptionsComponent implements OnInit {
         this.formUsuario.controls.cupon.setErrors({incorrect: true});
         return;
       }
-      this.idInscrip = res.idInscrip;
+      this.idInscrip = res.data.id;
       this.tarifaSelected = {
         ...item,
         precio: res.data.precioFinal

@@ -14,7 +14,7 @@ export class InscriptionsService {
 
   generatePreference(item: any): any {
     const postItem = {
-      idInscripcion: item
+      idInscripcion: +item
     };
     return this.httpClient.post(this.apiURL + 'inscripciones/create-preference/', postItem );
   }
