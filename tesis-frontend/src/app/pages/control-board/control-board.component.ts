@@ -9,6 +9,8 @@ import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 })
 export class ControlBoardComponent implements OnInit {
 
+  // Revisar Eliminación y reasignación de evaluador. No está funcionando
+
   paperList: any[];
   evaluatorList = [];
   idEval = 0;
