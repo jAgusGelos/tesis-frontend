@@ -74,7 +74,7 @@ export class UserRegisterComponent implements OnInit {
         this.provincias = res.data;
       });
       this.userService.getSedes().subscribe((res: any) => {
-        this.sedes = res.data;
+        this.sedes = res;
       });
     }
 

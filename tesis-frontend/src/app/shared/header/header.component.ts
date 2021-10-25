@@ -25,10 +25,10 @@ export class HeaderComponent implements OnInit {
       this.user = true;
     }
     if (this.user) {
-      this.rol = [6];
-      // this.rol = this.authService.getUserRoles();
+      this.rol = this.authService.getUserRoles();
+      console.log(this.rol);
+
     }
-    
   }
 
   toast(): void {
@@ -54,7 +54,6 @@ export class HeaderComponent implements OnInit {
     this.user = !this.user;
     this.authService.logout();
 
-    
     this.router.navigate(['']);
 
   }
