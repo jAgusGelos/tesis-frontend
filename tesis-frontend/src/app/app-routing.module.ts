@@ -200,6 +200,21 @@ const routes: Routes = [
     path: 'cancelacionEvaluacionPaper/:token',
     loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper-routing.module')
     .then(m => m.CancelEvaluatePaperRoutingModule)
+  },
+  {
+    path: 'pagoInscripcionSuccess/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-success/payment-success.module')
+    .then(m => m.PaymentSuccessModule)
+  },
+  {
+    path: 'pagoInscripcionPending/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-pending/payment-pending.module')
+    .then(m => m.PaymentPendingModule)
+  },
+  {
+    path: 'pagoInscripcionFailure/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-failure/payment-failure.module')
+    .then(m => m.PaymentFailureModule)
   }
 ];
 
