@@ -44,7 +44,7 @@ export class EvaluatorListComponent implements OnInit {
         return;
       }
 
-      const idUsuarios = [user.id.toString()];
+      const idUsuarios = user.id.toString();
 
       this.evaluatorService.postEvaluator(idUsuarios).subscribe((res: any) => {
         if (res.data != null) {

@@ -9,19 +9,19 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./accept-evaluator.component.css']
 })
 export class AcceptEvaluatorComponent implements OnInit {
-  accepted:boolean=false;
-  token : string;
-  constructor(private route:ActivatedRoute,
-              private service:UserService,
+  accepted = false;
+  token: string;
+  constructor(private route: ActivatedRoute,
+              private service: UserService,
               private toastr: ToastrService,
               ) { }
 
   ngOnInit(): void {
-    this.token=this.route.snapshot.params.token;
+    this.token = this.route.snapshot.params.token;
     this.service.acceptEvaluator('?token=' + this.token).subscribe(
-      (res:any) => this.accepted=true,
-      (err:any) => {this.toastr.error('No se pudo confirmar su rol como evaluador.')}
-    )
+      (res: any) => this.accepted = true,
+      (err: any) => {this.toastr.error('No se pudo confirmar su rol como evaluador.');}
+    );
   }
 
 }

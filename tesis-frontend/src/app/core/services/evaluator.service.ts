@@ -20,7 +20,7 @@ export class EvaluatorService {
                }
 
   postEvaluator(idUsuarios): any {
-    return this.httpClient.post(this.apiURL + 'articulos/asignarRolEvaluador/', idUsuarios);
+    return this.httpClient.post(this.apiURL + 'articulos/asignarRolEvaluador/', {idUsuarios});
   }
 
   getEvaluators(activos: number): any {

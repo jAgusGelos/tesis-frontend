@@ -55,7 +55,8 @@ export class HeaderComponent implements OnInit {
     this.authService.logout().subscribe((res: any) => {
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
-      this.toastr.success('Adios, lo esperamos pronto!');
+      this.toastr.success('Adios, lo esperamos de vuelta');
+      this.router.navigateByUrl('/');
     });
   }
 }

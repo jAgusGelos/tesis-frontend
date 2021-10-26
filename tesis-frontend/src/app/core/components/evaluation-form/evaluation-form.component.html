@@ -31,7 +31,7 @@
           <div class='col-sm-8'>
             <textarea type='textarea' class='form-control' formControlName='desc'
             [ngClass]="{'is-invalid': (formEvaluation.controls.desc.touched || submitted)
-              && formEvaluation.controls.desc.errors}" onclick='this.select()'></textarea>
+              && formEvaluation.controls.desc.errors}"></textarea>
 
             <span class='text-danger'
             *ngIf='(formEvaluation.controls.desc.touched || submitted) && formEvaluation.controls.desc.errors?.required'>

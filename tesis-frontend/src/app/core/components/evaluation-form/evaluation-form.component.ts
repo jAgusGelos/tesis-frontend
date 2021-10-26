@@ -27,7 +27,7 @@ export class EvaluationFormComponent implements OnInit {
     window.scrollTo(0, 0);
     this.formEvaluation = this.formBuilder.group({
       pregunta: [this.evaluation.nombre, Validators.required],
-      desc: [this.evaluation.desc, Validators.required],
+      desc: [this.evaluation.descripcion, Validators.required],
     });
 
   }

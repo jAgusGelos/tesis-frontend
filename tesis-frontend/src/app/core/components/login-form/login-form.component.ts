@@ -63,7 +63,6 @@ export class LoginFormComponent implements OnInit {
     this.loginService
     .login(login)
     .subscribe((res: any) => {
-      console.log(res);
       if (res.detail) {
         this.toastr.warning('Datos erroneos');
         return;
@@ -71,6 +70,7 @@ export class LoginFormComponent implements OnInit {
       this.loginService.setSession(res);
       this.router.navigate(['']).then(() => {
         window.location.reload();
+        console.log(res);
       });
     });
   }
