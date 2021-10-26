@@ -10,10 +10,10 @@
       <form [formGroup]='formEvaluation'>
        <!-- pregunta -->
        <div class='form-group row'>
-         <label class='col-form-label col-sm-3 col-sm-offset-2' for='pregunta'>Criterio: <span
+         <label class='col-form-label col-sm-3 col-sm-offset-2' for='pregunta'>Aspecto: <span
            class='text-danger'>*</span></label>
            <div class='col-sm-8'>
-             <textarea type='textarea' class='form-control' formControlName='pregunta'
+             <textarea type='text' class='form-control' formControlName='pregunta'
              [ngClass]="{'is-invalid': (formEvaluation.controls.pregunta.touched || submitted)
                && formEvaluation.controls.pregunta.errors}" onclick='this.select()'></textarea>
 
@@ -23,6 +23,22 @@
              </span>
            </div>
        </div>
+
+       <!-- desc -->
+       <div class='form-group row'>
+        <label class='col-form-label col-sm-3 col-sm-offset-2' for='desc'>Descripción del aspecto: <span
+          class='text-danger'>*</span></label>
+          <div class='col-sm-8'>
+            <textarea type='textarea' class='form-control' formControlName='desc'
+            [ngClass]="{'is-invalid': (formEvaluation.controls.desc.touched || submitted)
+              && formEvaluation.controls.desc.errors}" onclick='this.select()'></textarea>
+
+            <span class='text-danger'
+            *ngIf='(formEvaluation.controls.desc.touched || submitted) && formEvaluation.controls.desc.errors?.required'>
+              Requerido
+            </span>
+          </div>
+      </div>
 
         <!-- Simposio -->
         <!-- <div class="form-group row">
