@@ -4,12 +4,14 @@
   overflow: hidden;
   margin: 0 0 6px;
   padding: 10px 10px 10px 10px;
-  width: 300px;
   border-radius: 3px 3px 3px 3px;
   color: #000;
   pointer-events: all;
   cursor: pointer;
+  width: 30% !important;
 }
+
+
 
 .custom-title {
   color: #111;

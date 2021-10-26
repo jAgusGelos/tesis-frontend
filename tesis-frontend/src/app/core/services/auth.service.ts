@@ -37,13 +37,8 @@ export class AuthService {
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
-  logout(): void {
-    this.http.post(this.apiURLLogout, localStorage.getItem('id_token')).subscribe((res: any) => {
-      localStorage.removeItem('id_token');
-      localStorage.removeItem('expires_at');
-    });
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
+  logout(): any {
+    return this.http.post(this.apiURLLogout, localStorage.getItem('id_token'));
   }
 
   getUserId(): number {
@@ -84,14 +79,14 @@ export class AuthService {
     return decodedToken.id.asObservable();
   }
 
-  changePassword(item : any ):any{
+  changePassword(item: any ): any{
     return this.http.post<IUser>(this.apiURLChangePass, item);
   }
 
-  recoverPassword(item : any ):any{
+  recoverPassword(item: any ): any{
     return this.http.post<IUser>(this.apiURLRecoverPass, {email: item});
   }
-  verifyEmail(item : string):any{
+  verifyEmail(item: string): any{
     return this.http.get(environment.apiURL + 'api/email-verify/' + item);
   }
 

@@ -52,9 +52,10 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.user = !this.user;
-    this.authService.logout();
-
-    this.router.navigate(['']);
-
+    this.authService.logout().subscribe((res: any) => {
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
+      this.toastr.success('Adios, lo esperamos pronto!');
+    });
   }
 }
