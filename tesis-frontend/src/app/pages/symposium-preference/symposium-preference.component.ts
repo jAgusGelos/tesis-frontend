@@ -16,14 +16,13 @@ export class SymposiumPreferenceComponent implements OnInit {
   constructor( private symposiumService: SymposiumService) { }
 
   ngOnInit(): void {
-    this.getSimposiosEvaluador();
     this.getSimposios();
   }
 
   getSimposios(): void {
     this.symposiumService.getSymposium().subscribe((res: any) => {
       this.symposiumList = res.data;
-      this.excluirPreferencias();
+      this.getSimposiosEvaluador();
     });
   }
 
@@ -38,6 +37,7 @@ export class SymposiumPreferenceComponent implements OnInit {
           descripcion: x.descripcionSimposio
         };
       });
+      this.excluirPreferencias();
     });
   }
 
