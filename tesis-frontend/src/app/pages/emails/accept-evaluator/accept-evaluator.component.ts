@@ -23,7 +23,4 @@ export class AcceptEvaluatorComponent implements OnInit {
       (err: any) => {this.toastr.error('No se pudo confirmar su rol como evaluador.'); }
     );
   }
-
-
-
 }

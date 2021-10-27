@@ -69,10 +69,10 @@
             </div>
             <div class="col-md-3">
               <button type="reset" class='redondo' disabled
-                [ngClass]='item.nomEval[0].idEstadoEvaluacion === 2 ? "verde" : "rojo"'></button>
+                [ngClass]='item.nomEval[0].idEstadoEvaluacion === 3 ? "verde" : "rojo"'></button>
             </div>
           </div>
-          <div class="row px-2 pt-3" *ngIf="!(item.nomEval[0].idEstadoEvaluacion === 2)">
+          <div class="row px-2 pt-3" *ngIf="!(item.nomEval[0].idEstadoEvaluacion >= 2)">
             <a (click)='eliminarYAsignar(item, item.nomEval[0])' class="btn btn-secondary ">Eliminar y Reasignar</a>
           </div>
         </td>
@@ -104,10 +104,10 @@
             </div>
             <div class="col-md-3">
               <button type="reset" class='redondo' disabled
-                [ngClass]='item.nomEval[1].idEstadoEvaluacion === 2 ? "verde" : "rojo"'></button>
+                [ngClass]='item.nomEval[1].idEstadoEvaluacion === 3 ? "verde" : "rojo"'></button>
             </div>
           </div>
-          <div class="row px-2 pt-3" *ngIf="!(item.nomEval[1].idEstadoEvaluacion === 2)">
+          <div class="row px-2 pt-3" *ngIf="!(item.nomEval[1].idEstadoEvaluacion >= 2)">
             <a (click)='eliminarYAsignar(item, item.nomEval[1])' class="btn btn-secondary ">Eliminar y Reasignar</a>
           </div>
         </td>
@@ -139,10 +139,10 @@
             </div>
             <div class="col-md-3">
               <button type="reset" class='redondo' disabled
-                [ngClass]='item.nomEval[2].idEstadoEvaluacion === 2 ? "verde" : "rojo"'></button>
+                [ngClass]='item.nomEval[2].idEstadoEvaluacion === 3 ? "verde" : "rojo"'></button>
             </div>
           </div>
-          <div class="row px-2 pt-3" *ngIf="!(item.nomEval[2].idEstadoEvaluacion === 2)">
+          <div class="row px-2 pt-3" *ngIf="!(item.nomEval[2].idEstadoEvaluacion >= 2)">
             <a (click)='eliminarYAsignar(item, item.nomEval[2])' class="btn btn-secondary ">Eliminar y Reasignar</a>
           </div>
         </td>
