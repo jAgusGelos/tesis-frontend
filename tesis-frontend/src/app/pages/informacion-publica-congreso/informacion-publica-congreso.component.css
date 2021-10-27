@@ -1,8 +1,16 @@
-
+s
 .contacto{
     background-color: #f8f8f8;
     border-radius: 2rem;
 }
+
+.expositores {
+  font-style: italic;
+}
+.expositores-label {
+  text-decoration: underline;
+}
+
 .contenidos{
     padding-bottom: 3rem;
   }

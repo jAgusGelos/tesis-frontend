@@ -40,8 +40,12 @@
       <h3 class="text-center">Comité Académico</h3>
       <hr id="hr">
       <br>
+      <div class="text-center">
+        <h5>{{chairPrincipal}}</h5>
+        <h6 class="text-muted">Chair Principal</h6>
+      </div>
       <div class="row row-cols-1 row-cols-md-3 g-4 grid"> 
-        <app-comite-academico-list *ngFor="let symposium of symposiumList" [symposium]="symposium"></app-comite-academico-list>
+        <app-comite-academico-list *ngFor="let symposium of chairsList" [symposium]="symposium"></app-comite-academico-list>
       </div>
       </div>
     </div>
@@ -85,9 +89,19 @@
       <div>
         <br>
         <h3 class="text-center">Agenda</h3>
-        
-        <hr>
+        <hr>        
         <br>
+        <div *ngFor="let d of programa; index as i ">
+          <h5>Día {{i+1}} - {{d.dia.fecha}}</h5>
+        <div *ngFor="let p of d.dia.eventos; index as i">
+          <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{p.nombre}}</b><span class="text-muted"> {{p.horario}} - {{p.horarioFin}}</span></h6>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{p.aula}}
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="expositores-label">Expositores:</span>
+          <span class="expositores" *ngFor="let e of p.expositores; index as i"> {{e}}
+            <span *ngIf="i !== p.expositores.length-1">, </span></span>
+          </p>
+        </div>
+      </div>
     </div>
     </div>
   </div>

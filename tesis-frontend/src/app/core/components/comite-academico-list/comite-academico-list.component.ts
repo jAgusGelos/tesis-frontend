@@ -8,16 +8,19 @@ import { IUserComplete } from '../../models/IUserComplete';
 })
 export class ComiteAcademicoListComponent implements OnInit {
   name: string;
-  chair: IUserComplete;
-  cochair: IUserComplete;
+  chair = null;
+  cochair = null;
   @Input() symposium:{
     id: string,
-    nombre: string, 
+    nombreSimposio: string,
+    nombreChair: string,
+    apellidoChair: string
   }
   constructor() { }
 
   ngOnInit(): void {
-    this.name = this.symposium.nombre;
+    this.name = this.symposium.nombreSimposio;
+    this.chair = this.symposium.nombreChair +' ' + this.symposium.apellidoChair;
   }
 
 }
