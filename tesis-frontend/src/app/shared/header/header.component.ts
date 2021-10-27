@@ -26,8 +26,6 @@ export class HeaderComponent implements OnInit {
     }
     if (this.user) {
       this.rol = this.authService.getUserRoles();
-      console.log(this.rol);
-
     }
   }
 
