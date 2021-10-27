@@ -122,8 +122,8 @@ export class EvaluatorComponent implements OnInit {
               return item;
             }
           });
-           this.showListNotSelected.push(item);
-         this.showListSelected = this.evaluatorSelectedList.slice();
+          this.showListNotSelected.push(item);
+          this.showListSelected = this.evaluatorSelectedList.slice();
 
       });
     });
