@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IUserComplete } from '../../models/IUserComplete';
 import { EvaluatorService } from '../../services/evaluator.service';
 import { UserService } from '../../services/user.service';
@@ -25,7 +26,8 @@ export class EvaluatorListComponent implements OnInit {
 
   constructor( private evaluatorService: EvaluatorService,
                private userService: UserService,
-               private formBuilder: FormBuilder) { }
+               private formBuilder: FormBuilder,
+               private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.formEvaluator = this.formBuilder.group({
@@ -46,7 +48,7 @@ export class EvaluatorListComponent implements OnInit {
 
       const idUsuarios = user.id.toString();
 
-      this.evaluatorService.postEvaluator(idUsuarios).subscribe((res: any) => {
+      this.evaluatorService.postEvaluator(idUsuarios.toString()).subscribe((res: any) => {
         if (res.data != null) {
           this.showMessage('¡Correo enviado!', res.data);
           this.submitted = false;
@@ -91,18 +93,22 @@ export class EvaluatorListComponent implements OnInit {
   deleteEvaluator(ev: any): void {
     if (confirm('Seguro desea eliminar el evaluador: ' + ev.nombre)) {
       this.evaluatorService.deleteIdEvaluator(ev.idUsuario).subscribe((res: any) => {
+
         this.evaluatorsList = this.evaluatorsList.filter((x: any) => {
           if (x.idUsuario !== ev.idUsuario) {
             return x;
           }
         });
         this.showList = this.evaluatorsList.slice();
+        this.toast.success('Evaluador Eliminado');
       });
 
     }
   }
 
   setDeleteEvaluator(i: number): void {
+    // Esto esta mal
+    // Tiene que hacer el delete a la BD
     console.log(i);
     this.index = i;
     this.deleteEvName = this.evaluatorsList[i].nombre;

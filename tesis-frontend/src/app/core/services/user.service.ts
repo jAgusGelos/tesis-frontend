@@ -66,7 +66,6 @@ export class UserService {
   cancelEvaluatePaper(item: string): any{
     return this.httpClient.get(this.apiURL + 'articulos/rechazar-evaluacion/' + item);
   }
-
   acceptEvaluator(item: string): any{
     return this.httpClient.put(this.apiURL + 'articulos/aceptar-evaluador/' + item, {});
   }

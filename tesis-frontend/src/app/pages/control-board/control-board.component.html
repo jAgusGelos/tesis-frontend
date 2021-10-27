@@ -81,7 +81,7 @@
             <select name="eval" class="form-control" (change)="selectOption1($event.target.value, item)">
               <option hidden [selected]='item.idEval1===null'>Evaluador 1</option>
               <option *ngFor="let eval of evaluatorList" value='{{eval.idEvaluador}}'
-                [selected]='item.idEval1===eval.idEvaluador'>{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
+                [selected]='item.idEval1 === eval.idEvaluador'>{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
             </select>
           </div>
         </td>

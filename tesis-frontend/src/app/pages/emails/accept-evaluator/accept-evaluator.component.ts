@@ -20,7 +20,7 @@ export class AcceptEvaluatorComponent implements OnInit {
     this.token = this.route.snapshot.params.token;
     this.service.acceptEvaluator('?token=' + this.token).subscribe(
       (res: any) => this.accepted = true,
-      (err: any) => {this.toastr.error('No se pudo confirmar su rol como evaluador.');}
+      (err: any) => {this.toastr.error('No se pudo confirmar su rol como evaluador.'); }
     );
   }
 
