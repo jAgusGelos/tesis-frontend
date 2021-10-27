@@ -146,7 +146,7 @@ const routes: Routes = [
     .then(m => m.CancelEvaluatorModule),
   },
   {
-    path: 'cancelarAutoria',
+    path: 'cancelarAutoria/:token',
     loadChildren: () => import('./pages/cancel-author/cancel-author.module')
     .then(m => m.CancelAuthorModule),
   },
@@ -182,7 +182,7 @@ const routes: Routes = [
     .then(m => m.ConfirmedAccountModule),
   },
   {
-    path: 'reestablecerContraseña/?token=:token',
+    path: 'reestablecerContraseña/:token',
     loadChildren: () => import('./pages/emails/restore-password/restore-password-routing.module')
     .then(m => m.RestorePasswordRoutingModule),
   },
