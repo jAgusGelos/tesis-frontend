@@ -145,6 +145,7 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
       idCongreso: 1
     } */
     this.loading = true;
+    setTimeout(() => { this.loading = false; } , 3000);
     this.toastr
       .show( '¿Está seguro que desea asignar las evaluaciones?', '¿Confirmar asignaciones?', {
         toastComponent: CustomToastComponent,
@@ -154,14 +155,13 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
       })
       .onAction.subscribe(() => {
         // Aca se hace el camino feliz
-        this.loading = true;
         this.evaluatorService.postEvaluatorMassive(this.assignedPaperList).subscribe((res: any) => {
           this.toastr.success('Los Evaluadores han sido cargado con éxito. Les llegará un mail de notificación');
-          this.loading = false;
-          this.router.navigateByUrl('/asignarPaperEvaluador');
+          this.router.navigateByUrl('/control');
         });
       });
-    setTimeout(() => { this.loading = false; } , 3000);
+
+
 
   }
 

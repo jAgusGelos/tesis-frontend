@@ -55,7 +55,7 @@ export class ControlBoardComponent implements OnInit {
   getPaperList(): void {
     // devuelve la lista de papers asignados.  getArticulosEvaluadoresCompleto
     this.articulosService.getPaperEvaluators().subscribe((res: any) => {
-      this.paperList = res.data.filter((x: any) => x.estadoArticuloNombre === 'En espera');
+      this.paperList = res.data.filter((x: any) => x.estadoArticuloNombre === 'Sin Evaluar');
       this.assignedPaperList = this.paperList.map((x: any) => {
         return {
           idEval1: x.evaluadores[0].id,

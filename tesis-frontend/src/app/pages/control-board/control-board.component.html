@@ -1,7 +1,17 @@
 <div class="container-fluid">
   <div class="contenidos">
     <hr>
-    <h3 class='text-center'>Tablero de Control</h3>
+    <div class="row justify-content-center">
+      <h3 class='text-center col-md-3'>Tablero de Control</h3>
+      <a
+      ngbPopover="En esta pantalla podrás observar todos los artículos con su correspondiente estado, además podrás eliminar y reasignar nuevos evaluadores"
+      popoverClass="popover"
+      placement="bottom"
+      class="col-sm-1"
+      popoverTitle="Inforormación de la pantalla:">
+      <i class="fas fa-info-circle bigger"></i>
+      </a>
+    </div>
     <hr>
   </div>
   <br>
@@ -14,7 +24,7 @@
               popoverClass="popover"
               placement="top"
               popoverTitle="Tiempo restante de evaluación">
-              <i class="fas fa-clock clock"></i>
+              <i class="fas fa-clock clock pt-3"></i>
               </a>&nbsp;Fin Evaluación: {{fechaFinEv}}</h5>
       </div>
       <div class="col-md-3">
@@ -23,7 +33,7 @@
               popoverClass="popover"
               placement="top"
               popoverTitle="Tiempo restante para el fin de prorroga de evaluaciones:">
-              <i class="fas fa-clock clock"></i>
+              <i class="fas fa-clock clock pt-3"></i>
               </a>&nbsp;Fin Prorroga: {{fechaFinProrroga}}</h5>
       </div>
   </div>
@@ -50,7 +60,7 @@
             </div>
             <div class="col-md-3">
               <button type="reset" class='redondo' disabled
-                [ngClass]="item.nomEval[0].idEstadoEvaluacion === 1 ? 'rojo' : 'verde' "></button>
+                [ngClass]="item.nomEval[0].is_active ? 'verde' : 'rojo' "></button>
             </div>
           </div>
           <div class="row px-2 pt-1">
@@ -85,7 +95,7 @@
             </div>
             <div class="col-md-3">
               <button type="reset" class='redondo' disabled
-                [ngClass]="item.nomEval[1].idEstadoEvaluacion === 1 ? 'rojo' : 'verde' "></button>
+                [ngClass]="item.nomEval[1].is_active ? 'verde' : 'rojo' "></button>
             </div>
           </div>
           <div class="row px-2 pt-1">
@@ -120,7 +130,7 @@
             </div>
             <div class="col-md-3">
               <button type="reset" class='redondo' disabled
-                [ngClass]="item.nomEval[2].idEstadoEvaluacion === 1 ? 'rojo' : 'verde' "></button>
+                [ngClass]="item.nomEval[2].is_active ? 'verde' : 'rojo' "></button>
             </div>
           </div>
           <div class="row px-2 pt-1">
