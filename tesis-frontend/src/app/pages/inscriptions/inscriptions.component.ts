@@ -21,13 +21,7 @@ export class InscriptionsComponent implements OnInit {
       fechaInicio: '21/08/2022',
       fechaFin: '25/08/2022',
     };
-  tarifas = [
-    {
-      id: 1,
-      nombre: 'General',
-      precio: 750
-    }
-  ];
+  tarifas = [ ];
   tarifaSelected = false;
   datosCompletos = false;
   loading = false;
@@ -61,9 +55,6 @@ export class InscriptionsComponent implements OnInit {
 
     const fechaIn = new Date(fechaI[2], fechaI[1] - 1, fechaI[0]);
     const fechaFin = new Date(fechaF[2], fechaF[1] - 1, fechaF[0]);
-    console.log(fechaIn);
-
-
     this.congress = {
       id: res.data[0].id,
       nombre: res.data[0].nombre,
