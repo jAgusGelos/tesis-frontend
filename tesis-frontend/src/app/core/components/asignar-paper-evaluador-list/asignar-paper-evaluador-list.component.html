@@ -9,7 +9,14 @@
   <div class="row p-2 justify-content-end">
     <a class="btn btn-primary btn-block col-md-2" role="button" (click)='distributeEvaluators()'>Asignación Masiva</a>
     &nbsp;
-    <a class="btn btn-primary btn-block col-md-2" role="button" (click)='post()'>Finalizar Asignación</a>
+    <button type="button" class="btn btn-primary btn-block col-md-2" *ngIf="loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </button>
+
+    <a class="btn btn-primary btn-block col-md-2" role="button" *ngIf="!loading" (click)='post()'>Finalizar
+      Asignación</a>
   </div>
   <div class="row">
     <app-search class="col-md-5" [fullList]='assignedPaperList' [attribFilter]='nombreArticulo'

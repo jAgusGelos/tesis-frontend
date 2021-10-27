@@ -30,7 +30,7 @@ export class LoginFormComponent implements OnInit {
     window.scrollTo(0, 0);
     this.formLogin = this.formBuilder.group({
       email: ['juanagustingelos@gmail.com', [Validators.required]],
-      password: ['123456', [Validators.required]],
+      password: ['asdasd', [Validators.required]],
       idCongress: ['', [Validators.required]]
     });
     this.getCongress();

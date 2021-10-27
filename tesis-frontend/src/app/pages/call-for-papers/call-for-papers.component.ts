@@ -43,7 +43,6 @@ export class CallForPapersComponent implements OnInit {
     this.paperService.getPaper().subscribe((res: any) => {
       this.paperList = res.data;
       this.okey = true;
-
     });
   }
 
