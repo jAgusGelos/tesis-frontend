@@ -21,7 +21,8 @@ export class EvaluationService {
   postEvaluation(evaluation: any): any {
     const postItem = {
       idCongreso: this.idCongreso,
-      nombre: evaluation.pregunta
+      nombre: evaluation.pregunta,
+      descripcion: evaluation.desc
     };
     return this.httpClient.post<IEvaluation>(this.apiURL + 'articulos/altaItemEvaluacion/', postItem);
   }
@@ -34,7 +35,8 @@ export class EvaluationService {
     const postItem = {
       id: evaluation.id,
       idCongreso: this.idCongreso,
-      nombre: evaluation.pregunta
+      nombre: evaluation.pregunta,
+      descripcion: evaluation.desc
     };
     return this.httpClient.put<IEvaluation>(this.apiURL + 'articulos/editarItemEvaluacion/', postItem);
   }

@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
 import { PaperService } from '../../services/paper.service';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-paper-ready',
@@ -20,11 +22,10 @@ export class PaperReadyComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private paperService: PaperService,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    console.log('Werein');
-
     window.scrollTo(0, 0);
 
     this.formPaper = this.formBuilder.group({
@@ -76,7 +77,7 @@ export class PaperReadyComponent implements OnInit {
         }
       });
       if (exist) {
-        alert('Ya existe un usuario con ese Email ingresado');
+        this.toastr.error('Ya existe un usuario con ese Email ingresado');
         return null;
       }
       this.paperService.checkAutor(autor).subscribe((res: any) => {
@@ -86,14 +87,14 @@ export class PaperReadyComponent implements OnInit {
 
         }
       else{
-        alert('El autor ingresado no está registrado en el sistema. \n' +
+        this.toastr.error('El autor ingresado no está registrado en el sistema. \n' +
        'En este punto no se permiten autores no resgistrados. Por favor notifique a su compañero.');
       }
       });
       this.formPaper.controls.autores.reset();
     }
     else{
-      alert('Ingrese un Email Válido');
+      this.toastr.error('Ingrese un Email Válido');
     }
   }
 
@@ -123,24 +124,31 @@ export class PaperReadyComponent implements OnInit {
    */
   save(): void {
     if (!this.formPaper.controls.archivo.value) {
-      alert('Por favor suba un archivo');
+      this.toastr.error('Por favor suba un archivo');
       return;
     }
-    if (confirm('¿Esta seguro que desea enviar el artículo? Una vez enviado no podrá cargar más autores.')) {
-      const userId = this.auth.getUserId();
-      this.paper = {
-        archivo: this.fileToUpload,
-        autores: this.autoresList.map((item: any) => {
-          return item.mail;
-        }),
-        id: this.paper.id,
-        estado: 'cameraReady',
-        nombre: this.formPaper.controls.nombre.value,
-        responsable: userId,
-        simposio: this.formPaper.controls.simposio.value,
-      };
-      this.paperEmitter.emit(this.paper);
-    }
+    this.toastr
+      .show( '¿Esta seguro que desea enviar el artículo? Una vez enviado no podrá cargar más autores.', 'Enviar Camera Ready?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        const userId = this.auth.getUserId();
+        this.paper = {
+          archivo: this.fileToUpload,
+          autores: this.autoresList.map((item: any) => {
+            return item.mail;
+          }),
+          id: this.paper.id,
+          estado: 'cameraReady',
+          nombre: this.formPaper.controls.nombre.value,
+          responsable: userId,
+          simposio: this.formPaper.controls.simposio.value,
+        };
+        this.paperEmitter.emit(this.paper);
+      });
   }
 
   handleFileInput(files: FileList): void {

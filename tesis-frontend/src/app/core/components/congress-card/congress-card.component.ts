@@ -21,13 +21,13 @@ export class CongressCardComponent implements OnInit {
     año: string,
     fechaFinInsTemprana: string,
     fechaFinInsTardia: string,
-    nombreSede: string};
+    nombre_sede: string};
 
   constructor() { }
 
   ngOnInit(): void {
     this.nombre = this.congress.nombre;
-    this.nombreSede = this.congress.nombreSede;
+    this.nombreSede = this.congress.nombre_sede;
     this.fechaUno = this.congress.fechaFinInsTemprana;
     this.fechaDos = this.congress.fechaFinInsTardia;
 

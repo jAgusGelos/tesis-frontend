@@ -41,13 +41,13 @@ export class EvaluationComponent implements OnInit {
     this.evaluation = {};
   }
 
-  editEvaluation(evaluation: IEvaluation): void {
+  editEvaluation(evaluation: any): void {
     this.edit = !this.edit;
     this.evaluation = evaluation;
 
   }
 
-  deleteEvaluation(item: IEvaluation): void {
+  deleteEvaluation(item: any): void {
     this.evaluationService.deleteEvaluation(item).subscribe((res: any) => {
       this.toastr.success('La evaluacion ha sido eliminado correctamente');
       window.location.reload();
@@ -61,7 +61,7 @@ export class EvaluationComponent implements OnInit {
    * Si lo tiene hace un PUT al back. Actualiza una evaluacion creado.
    * Si no lo tiene crea una nueva evaluacion.
    */
-  toggleCreateEvaluation(item: IEvaluation): void {
+  toggleCreateEvaluation(item: any): void {
     if (item.id === (undefined || '')) {
       this.evaluationService.postEvaluation(item).subscribe((res: any) => {
         this.toastr.success('Evaluación Creada Correctamente');

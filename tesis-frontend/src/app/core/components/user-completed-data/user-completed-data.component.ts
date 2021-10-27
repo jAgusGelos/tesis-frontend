@@ -35,7 +35,6 @@ export class UserCompletedDataComponent implements OnInit {
 
     ngOnInit(): void {
       window.scrollTo(0, 0);
-      console.log(this.usuario);
       this.getAllData();
 
       this.formUsuario = this.formBuilder.group({
@@ -56,13 +55,14 @@ export class UserCompletedDataComponent implements OnInit {
 
     getAllData(): void {
       this.userService.getLocalidades().subscribe((res: any) => {
-        this.localidades = res;
+        this.localidades = res.data;
       });
       this.userService.getDni().subscribe((res: any) => {
         this.tipoDni = res;
+
       });
       this.userService.getProvincias().subscribe((res: any) => {
-        this.provincias = res;
+        this.provincias = res.data;
       });
     }
 

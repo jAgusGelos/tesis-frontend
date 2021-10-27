@@ -155,8 +155,8 @@ export class PaperFormComponent implements OnInit {
 
   submit(): void {
     this.submitted = true;
-    if (this.formPaper.invalid || this.fileToUpload === null || this.formPaper.controls.simposio.value.trim() === '' ) {
-      this.toastr.warning('Por favor complete todos los datos.')
+    if (this.formPaper.invalid || this.fileToUpload === null || this.formPaper.controls.simposio.value === '' ) {
+      this.toastr.warning('Por favor complete todos los datos y suba el archivo nuevamente.');
       return;
     }
     const userId = this.auth.getUserId();

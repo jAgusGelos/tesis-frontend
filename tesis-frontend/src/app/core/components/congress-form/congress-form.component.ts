@@ -39,9 +39,9 @@ export class CongressFormComponent implements OnInit {
     this.formCongress = this.formBuilder.group({
       nombre: [this.congress.nombre, Validators.required],
       sede: [this.congress.sede, Validators.required],
-      ano: [this.congress.ano, Validators.required],
-      chairPrincipal: [this.congress.chairPrincipal, Validators.required],
-      coordLocal: [this.congress.coordLocal ],
+      ano: [this.congress.ano, [Validators.required, Validators.pattern('20[0-9][0-9]')]],
+      chairPrincipal: [this.congress.chairPrincipal, [Validators.required, Validators.email]],
+      coordLocal: [this.congress.coordLocal, Validators.email ],
     });
   }
 
@@ -53,7 +53,7 @@ export class CongressFormComponent implements OnInit {
   edit(): void {
     this.submitted = true;
     if (this.formCongress.invalid) {
-      this.toastr.warning('Por favor complete todos los datos.')
+      this.toastr.warning('Por favor complete todos los datos.');
       return;
     }
     this.congress = {
@@ -62,7 +62,7 @@ export class CongressFormComponent implements OnInit {
     sede: this.formCongress.controls.sede.value,
     ano: this.formCongress.controls.ano.value,
     chairPrincipal: this.formCongress.controls.chairPrincipal.value,
-    coordLocal: this.formCongress.controls.coordLocal.value
+    coordLocal: this.formCongress.controls.coordLocal.value || null
     };
     this.editCongress.emit(this.congress);
 
@@ -71,7 +71,7 @@ export class CongressFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formCongress.invalid) {
-      this.toastr.warning('Por favor complete todos los datos.')
+      this.toastr.warning('Por favor complete todos los datos.');
       return;
     }
     this.congress = {
@@ -80,7 +80,7 @@ export class CongressFormComponent implements OnInit {
     sede: this.formCongress.controls.sede.value,
     ano: this.formCongress.controls.ano.value,
     chairPrincipal: this.formCongress.controls.chairPrincipal.value,
-    coordLocal: this.formCongress.controls.coordLocal.value
+    coordLocal: this.formCongress.controls.coordLocal.value || null
     };
     this.congressEmitter.emit(this.congress);
 

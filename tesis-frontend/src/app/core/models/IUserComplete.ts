@@ -1,5 +1,5 @@
 export interface IUserComplete {
-  id: string;
+  id?: string;
   dni: number;
   tipoDni: string;
   apellido: string;
@@ -10,8 +10,9 @@ export interface IUserComplete {
   localidad: string;
   calle: string;
   nroCalle: number;
-  piso: string;
-  dpto: string;
-  celular: number;
+  piso?: string;
+  dpto?: string;
+  celular?: number;
   email: string;
+  password?: string;
 }

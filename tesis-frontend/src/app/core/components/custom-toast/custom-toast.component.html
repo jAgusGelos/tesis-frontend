@@ -11,9 +11,10 @@
       {{ message }}
     </div>
   </div>
-  <div class="logged  text-right align-items-right">
-    <a type="button" class="btn btn-secondary" (click)="remove()">Cancelar</a>
+  <div class="row logged align-items-right">
+    <div class="col-md-3"></div>
+    <a type="button" class="btn btn-secondary col-md-4" (click)="remove()">Cancelar</a>
     &nbsp;
-    <a type="button" class="btn btn-primary" (click)='action($event)'>Estoy Seguro</a>
+    <a type="button" class="btn btn-primary col-md-4" (click)='action($event)'>Estoy Seguro</a>
   </div>
 </div>

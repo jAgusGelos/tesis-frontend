@@ -29,8 +29,8 @@ export class LoginFormComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.formLogin = this.formBuilder.group({
-      email: ['charly2.monastyrski@gmail.com', [Validators.required]],
-      password: ['123456', [Validators.required]],
+      email: ['juanagustingelos@gmail.com', [Validators.required]],
+      password: ['asdasd', [Validators.required]],
       idCongress: ['', [Validators.required]]
     });
     this.getCongress();
@@ -49,31 +49,28 @@ export class LoginFormComponent implements OnInit {
   submit(): void {
     const password = this.formLogin.controls.password.value;
 
-    // const encode = window.btoa(password);
+    const encode = window.btoa(password);
 
-    // console.log('---ENCODED-----', encode);
-
-    // const decode = window.atob(encode)
-    // console.log('---DECODED-----', decode)
-
-
-    // return;
     if (this.formLogin.invalid ) {
-      this.toastr.warning('Por favor complete todos los datos.')
+      this.toastr.warning('Por favor complete todos los datos.');
       return;
     }
     const login = {
       email: this.formLogin.controls.email.value,
-      // password: encode,
-      password,
+      password: encode,
       idCongreso: +this.formLogin.controls.idCongress.value
     };
     this.loginService
     .login(login)
     .subscribe((res: any) => {
+      if (res.detail) {
+        this.toastr.warning('Datos erroneos');
+        return;
+      }
       this.loginService.setSession(res);
       this.router.navigate(['']).then(() => {
         window.location.reload();
+        console.log(res);
       });
     });
   }
