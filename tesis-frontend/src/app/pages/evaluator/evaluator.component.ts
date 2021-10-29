@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { CustomToastComponent } from 'src/app/core/components/custom-toast/custom-toast.component';
+
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 
 @Component({
@@ -18,13 +21,14 @@ export class EvaluatorComponent implements OnInit {
   showListNotSelected = [];
 
   constructor(
-    private evaluatorService: EvaluatorService
+    private evaluatorService: EvaluatorService,
+    private toastr: ToastrService,
+
   ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.getEvaluatorSelected();
-    this.getEvaluators();
   }
 
   /**
@@ -33,7 +37,7 @@ export class EvaluatorComponent implements OnInit {
   getEvaluators(): void {
     this.evaluatorService.getEvaluatorsSimposio().subscribe((res: any) => {
       if (res.data.length === 0) {
-        alert('Lo sentimos, actualmente no disponemos de evaluadores.');
+        this.toastr.info('Lo sentimos, actualmente no disponemos de más evaluadores.');
         return;
       }
       this.evaluatorList = res.data.filter((x: any) => {
@@ -53,6 +57,7 @@ export class EvaluatorComponent implements OnInit {
       this.evaluatorSelectedList = res.data;
       this.evaluatorSelectedId = res.data.map((x: any) => x.idEvaluador);
       this.showListSelected = res.data;
+      this.getEvaluators();
     });
 
   }
@@ -71,7 +76,7 @@ export class EvaluatorComponent implements OnInit {
       });
       this.showListNotSelected = this.evaluatorList.slice();
       this.evaluatorSelectedList.push(item);
-      this.showListSelected.push(item);
+      this.showListSelected = this.evaluatorSelectedList.slice();
     });
   }
 
@@ -79,41 +84,49 @@ export class EvaluatorComponent implements OnInit {
    * Carga todos los evaluadores
    */
   loadAll(): void {
-    if (confirm('Atención, los evaluadores que está por cagar no pertenecen a su simposio. ¿Desea hacerlo de todas formas?')) {
-      this.evaluatorService.getEvaluatorsAll().subscribe((res: any) => {
-        this.notLoaded = false;
-        this.evaluatorList = res.data.filter((x: any) => {
-          if (!this.evaluatorSelectedId.includes(x.idEvaluador)) {
-            return x;
-          }
+    this.toastr
+      .show( 'Atención, los evaluadores que está por cagar no pertenecen a su simposio. ¿Desea hacerlo de todas formas?', '¿Agregar más evaluadores?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.evaluatorService.getEvaluatorsAll().subscribe((res: any) => {
+          this.evaluatorList = res.data.filter((x: any) => {
+            if (!this.evaluatorSelectedId.includes(x.idEvaluador)) {
+              return x;
+            }
+          });
+          this.showListNotSelected = this.evaluatorList.slice();
         });
-        this.showListNotSelected = this.evaluatorList.slice();
       });
-    }
-
   }
 
   toggleRemoveHandled(item: any): void {
-    if (
-      confirm(
-        'Esta seguro desea eliminar el Evaluador: ' +
-        item.nombreEv + ' ' + item.apellidoEv +
-        '\nToda la configuración creada se perderá'
-      )
-    ) {
-      this.evaluatorService.deleteEvaluatorGroup(item.idEvaluador).subscribe((res: any) => {
-        this.evaluatorList.push(item);
+    this.toastr
+      .show( 'Está seguro que desea eliminar el evaluador ' +
+      item.nombreEv + ' ' + item.apellidoEv + '? '+ '\nToda la configuración creada se perderá', '¿Eliminar Evaluador?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.evaluatorService.deleteEvaluatorGroup(item.idEvaluador).subscribe((res: any) => {
+          this.evaluatorList.push(item);
+          this.evaluatorSelectedList = this.evaluatorSelectedList.filter((x: any) => {
+            if (x.idEvaluador !== item.idEvaluador) {
+              return item;
+            }
+          });
+          this.showListNotSelected.push(item);
+          this.showListSelected = this.evaluatorSelectedList.slice();
 
-        this.evaluatorSelectedList = this.evaluatorSelectedList.filter((x: any) => {
-          if (x.idEvaluador !== item.idEvaluador) {
-            return item;
-          }
-        });
-        this.showListNotSelected.push(item);
-        this.showListSelected = this.evaluatorSelectedList.slice();
+      });
     });
-
-    }
   }
 
   searchSelected(filterList): void {

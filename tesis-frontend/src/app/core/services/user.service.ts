@@ -31,6 +31,10 @@ export class UserService {
     return this.httpClient.put<IUser>(this.apiURL + 'api/eliminar/', user);
   }
 
+  getSedes(): any {
+    return this.httpClient.get(this.apiURL + 'congresos/lista-sedes/');
+  }
+
   getLocalidades(): any {
     return this.httpClient.get(this.apiURL + 'congresos/lista-localidades/');
   }
@@ -42,20 +46,28 @@ export class UserService {
   getDni(): any {
     return this.httpClient.get(this.apiURL + 'api/lista-tiposDni/');
   }
-  postNewPassword(password):any{
-    return this.httpClient.post(this.apiURL + 'api/cambiar-contraseña/',password );
+
+  postNewPassword(password): any{
+    return this.httpClient.post(this.apiURL + 'api/cambiar-contraseña/', password );
   }
-  restorePassword(item : string):any{
+
+  restorePassword(item: string): any{
     return this.httpClient.get(environment.apiURL + 'api/restablecer-contrasenia/' + item);
   }
-  acceptEvaluatePaper(item : string):any{
+
+  register(user: IUserComplete): any {
+    return this.httpClient.post<IUser>(this.apiURL + 'api/registrar/', user);
+  }
+
+  acceptEvaluatePaper(item: string): any{
     return this.httpClient.get(this.apiURL + 'articulos/aceptar-evaluacion/' + item);
   }
-  cancelEvaluatePaper(item : string):any{
+
+  cancelEvaluatePaper(item: string): any{
     return this.httpClient.get(this.apiURL + 'articulos/rechazar-evaluacion/' + item);
   }
-  acceptEvaluator(item : string):any{
-    return this.httpClient.get(this.apiURL + 'articulos/aceptar-evaluador/' + item);
+  acceptEvaluator(item: string): any{
+    return this.httpClient.put(this.apiURL + 'articulos/aceptar-evaluador/' + item, {});
   }
- 
+
 }

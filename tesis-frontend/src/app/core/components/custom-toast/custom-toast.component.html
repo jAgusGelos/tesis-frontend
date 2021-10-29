@@ -1,0 +1,20 @@
+<div class="row toastear">
+  <div class="col-9">
+    <div *ngIf="title" [class]="options.titleClass" [attr.aria-label]="title" class="custom-title">
+      {{ title }}
+    </div>
+    <div *ngIf="message && options.enableHtml" role="alert" aria-live="polite" class="custom-message"
+      [class]="options.messageClass" [innerHTML]="message">
+    </div>
+    <div *ngIf="message && !options.enableHtml" role="alert" aria-live="polite" class="custom-message"
+      [class]="options.messageClass" [attr.aria-label]="message">
+      {{ message }}
+    </div>
+  </div>
+  <div class="row logged align-items-right">
+    <div class="col-md-3"></div>
+    <a type="button" class="btn btn-secondary col-md-4" (click)="remove()">Cancelar</a>
+    &nbsp;
+    <a type="button" class="btn btn-primary col-md-4" (click)='action($event)'>Estoy Seguro</a>
+  </div>
+</div>

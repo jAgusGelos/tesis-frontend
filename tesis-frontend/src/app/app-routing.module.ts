@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/services/auth.guard';
+import { AutorRolGuard } from './core/services/guards/autor-rol.guard';
 import { ChairRolGuard } from './core/services/guards/chair-rol.guard';
+import { SuperRolGuard } from './core/services/guards/super-rol.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { RecoverPasswordComponent } from './pages/recover-password/recover-password.component';
 
@@ -16,7 +18,7 @@ const routes: Routes = [
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module')
     .then(m => m.UsuarioModule),
-     // canActivate: [AuthGuard]
+    //  canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -26,9 +28,9 @@ const routes: Routes = [
   {
     path: 'chairs',
     loadChildren: () => import('./pages/chairs/chairs.module')
-    .then(m => m.ChairsModule)
+    .then(m => m.ChairsModule),
     // Can activate CP CL
-    // canActivate: [AuthGuard, ChairRolGuard]
+     // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
     path: 'misCongresos',
@@ -40,7 +42,7 @@ const routes: Routes = [
   {
     path: 'room',
     loadChildren: () => import('./pages/room/room.module')
-    .then(m => m.RoomModule)
+    .then(m => m.RoomModule),
     // Can activate CP CL
     // canActivate: [AuthGuard, ChairRolGuard]
   },
@@ -49,7 +51,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/congress/congress.module')
     .then(m => m.CongressModule),
     // descomentar al correr la bd
-    // canActivate: [AuthGuard, SuperRolGuard]
+     canActivate: [AuthGuard, SuperRolGuard]
   },
   {
     path: 'callForPapers',
@@ -111,6 +113,21 @@ const routes: Routes = [
     path: 'tarifas',
     loadChildren: () => import('./pages/tarifas/tarifas.module')
     .then(m => m.TarifasModule),
+  },
+  {
+    path: 'preferenciaSimposio',
+    loadChildren: () => import('./pages/symposium-preference/symposium-preference.module')
+    .then(m => m.SymposiumPreferenceModule),
+  },
+   {
+    path: 'control',
+    loadChildren: () => import('./pages/control-board/control-board.module')
+    .then(m => m.ControlBoardModule),
+  },
+  {
+    path: 'generarAgenda',
+    loadChildren: () => import('./pages/schedule-calendar/schedule-calendar.module')
+    .then(m => m.ScheduleCalendarModule),
   },
   // Notification routes
   {

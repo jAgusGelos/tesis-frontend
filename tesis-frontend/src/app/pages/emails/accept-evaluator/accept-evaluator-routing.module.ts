@@ -4,7 +4,7 @@ import { AcceptEvaluatorComponent } from './accept-evaluator.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: AcceptEvaluatorComponent
   }
 ];

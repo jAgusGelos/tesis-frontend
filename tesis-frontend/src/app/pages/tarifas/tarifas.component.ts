@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ITarifa } from 'src/app/core/models/itarifa';
 import { TarifasService } from 'src/app/core/services/tarifas.service';
 
@@ -15,20 +16,21 @@ export class TarifasComponent implements OnInit {
   tarifa;
   tarifaList: ITarifa[] = [];
 
-  constructor(private tarifaService: TarifasService) { }
+  constructor(private tarifaService: TarifasService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getTarifas();
   }
 
-  getTarifas() : void{
+  getTarifas(): void{
     this.tarifaList = [];
     this.tarifaService.getTarifas().subscribe((res: any) => {
-      this.tarifaList = res.data[0];
+      this.tarifaList = res.data;
     });
   }
 
-  getTarifasActivas() : void{
+  getTarifasActivas(): void{
     this.tarifaList = [];
     this.tarifaService.getTarifasActivas().subscribe((res: any) => {
       this.tarifaList = res.data;
@@ -37,8 +39,8 @@ export class TarifasComponent implements OnInit {
 
   postTarifa(item): void {
     this.tarifaService.postTarifa(item).subscribe((res: any) => {
-      this.getTarifas();
       this.toggleEdit();
+      this.getTarifas();
     },
     (err: any) => console.log(err));
   }

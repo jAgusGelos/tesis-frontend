@@ -29,11 +29,6 @@ export class AuthService {
     // .subscribe(res => this.setSession(res));
   }
 
-  register(user: IUser): any {
-    return this.http.post<IUser>(this.apiURLRegister, { email: user.email, password: user.password });
-  }
-
-
   setSession(authResult): void {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
     const date = new Date();
@@ -42,13 +37,8 @@ export class AuthService {
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
   }
 
-  logout(): void {
-    this.http.post(this.apiURLLogout, localStorage.getItem('id_token')).subscribe((res: any) => {
-      localStorage.removeItem('id_token');
-      localStorage.removeItem('expires_at');
-    });
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
+  logout(): any {
+    return this.http.post(this.apiURLLogout, localStorage.getItem('id_token'));
   }
 
   getUserId(): number {
@@ -89,19 +79,19 @@ export class AuthService {
     return decodedToken.id.asObservable();
   }
 
-  changePassword(item : any ):any{
+  changePassword(item: any ): any{
     return this.http.post<IUser>(this.apiURLChangePass, item);
   }
 
-  recoverPassword(item : any ):any{
+  recoverPassword(item: any ): any{
     return this.http.post<IUser>(this.apiURLRecoverPass, {email: item});
   }
-  verifyEmail(item : string):any{
+  verifyEmail(item: string): any{
     return this.http.get(environment.apiURL + 'api/email-verify/' + item);
   }
- 
 
-  
+
+
 }
 
 

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ISymposium } from '../../models/ISymposium';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-symposium-list',
@@ -14,7 +16,7 @@ export class SymposiumListComponent implements OnInit {
   @Output() deleteSymposiumEvent = new EventEmitter();
   showList = [];
 
-  constructor() { }
+  constructor(private toastr: ToastrService,) { }
 
 
   ngOnInit(): void {
@@ -30,13 +32,24 @@ export class SymposiumListComponent implements OnInit {
     this.newSymposiumEvent.emit();
   }
   toggleRemoveHandled(item: any): void {
-    if (confirm('Esta seguro desea eliminar el Simposio: ' + item.nombre +
-    '\nToda la configuración creada se perderá')) {
-      this.deleteSymposiumEvent.emit(item);
-    }
+
+    this.toastr
+      .show( 'Está seguro que desea eliminar el simposio ' + item.nombre +
+      '\nToda la configuración creada se perderá.', '¿Eliminar Simposio?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.deleteSymposiumEvent.emit(item);
+
+      });
   }
 
   search(filterList): void {
     this.showList = filterList;
+
   }
 }

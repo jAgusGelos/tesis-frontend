@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ArticulosService } from '../../services/articulos.service';
 import { EvaluatorService } from '../../services/evaluator.service';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-asignar-paper-evaluador-list',
@@ -15,9 +19,12 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   assignedPaperList = [];
   showAssignedPaperList = [];
   nombreArticulo = 'nombreArticulo';
+  loading = false;
 
   constructor(  private evaluatorService: EvaluatorService,
                 private articulosService: ArticulosService,
+                private toastr: ToastrService,
+                private router: Router
 
                 ) { }
 
@@ -29,15 +36,20 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   getPaperList(): void {
     // devuelve la lista de papers asignados.  getArticulosEvaluadoresCompleto
     this.articulosService.getPaperEvaluators().subscribe((res: any) => {
-      this.paperList = res.data.filter((x: any) => x.estadoArticuloNombre === 'Enviado');
-      this.assignedPaperList = this.paperList.map((x: any) => {
-        return {
-          idEval1: x.evaluadores[0].id,
-          idEval2: x.evaluadores[1].id,
-          idEval3: x.evaluadores[2].id,
-          idArticulo: x.idArticulo,
-          nombreArticulo : x.nombreArticulo
-        };
+      this.paperList = res.data.filter((x: any) => x.estadoArticuloNombre !== 'Creado');
+      this.assignedPaperList = this.paperList.filter((x: any) => {
+        console.log(x.evaluadores[0].nombre === undefined);
+
+        if (x.evaluadores[0].nombre === undefined)
+        {
+          return {
+            idEval1: x.evaluadores[0].id,
+            idEval2: x.evaluadores[1].id,
+            idEval3: x.evaluadores[2].id,
+            idArticulo: x.idArticulo,
+            nombreArticulo : x.nombreArticulo
+          };
+        }
       });
       this.showAssignedPaperList = this.assignedPaperList.slice();
     });
@@ -119,19 +131,38 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   }
 
   post(): void {
-
-
     const list = this.assignedPaperList.filter((item: any) => {
       if (!(item.idEval1 === undefined || item.idEval2 === undefined || item.idEval3 === undefined)) {
         return item;
+      } else if (!(item.idEval1 === undefined && item.idEval2 === undefined && item.idEval3 === undefined)) {
+        alert(`El articulo ${item.nombreArticulo} no contiene los 3 evaluadores. No será cargado hasta que la carga sea completa` );
       }
     });
     // Carga masiva de Evaluadores. Post confirmación. asignarArticuloEvaluadorMasivo
-    if (confirm('¿Está seguro que desea asignar las evaluaciones?')) {
-      this.evaluatorService.postEvaluatorMassive(list).subscribe((res: any) => {
-        alert('Los Evaluadores han sido cargado con éxito. Les llegará un mail de notificación');
+    /* {
+      idEvaluadores: [1,2,3],
+      articulo: 1,
+      idCongreso: 1
+    } */
+    this.loading = true;
+    setTimeout(() => { this.loading = false; } , 3000);
+    this.toastr
+      .show( '¿Está seguro que desea asignar las evaluaciones?', '¿Confirmar asignaciones?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.evaluatorService.postEvaluatorMassive(this.assignedPaperList).subscribe((res: any) => {
+          this.toastr.success('Los Evaluadores han sido cargado con éxito. Les llegará un mail de notificación');
+          this.router.navigateByUrl('/control');
+        });
       });
-    }
+
+
+
   }
 
   search(filterList): void {

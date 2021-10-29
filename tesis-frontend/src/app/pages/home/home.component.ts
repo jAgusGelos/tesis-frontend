@@ -19,23 +19,22 @@ export class HomeComponent implements OnInit {
   }
 
 
-  getCongressData(): void {
-    this.congressService.getCongressPublic().subscribe((res: any) => {
-      this.congressList = res.data;
-      this.congressList = this.congressList.map((x: any) => {
-        return {
-          id: x.id,
-          nombre: x.nombre,
-          sede: x.sede,
-          ano: x.año,
-          fechaFinInsTemprana: x.fechaFinInsTemprana,
-          fechaFinInsTardia: x.fechaFinInsTardia,
-          nombre_sede: x.nombre_sede,
-        };
+    getCongressData(): void {
+      this.congressService.getCongress().subscribe((res: any) => {
+        this.congressList = res.data;
+        this.congressList = this.congressList.map((x: any) => {
+          return {
+            id: x.id,
+            nombre: x.nombre,
+            sede: x.sede,
+            ano: x.año,
+            fechaFinInsTemprana: x.fechaFinInsTemprana,
+            fechaFinInsTardia: x.fechaFinInsTardia,
+            nombre_sede: x.nombre_sede,
+          };
+        });
       });
-    console.log(res.data)
-    });
-  }
+    };
 
   verInfoPublica(congress): void {
     const url = '/informacionCongreso/' + congress.id;

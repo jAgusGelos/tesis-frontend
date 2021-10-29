@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CommonModule, DatePipe } from '@angular/common';
-import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
@@ -32,12 +31,20 @@ import { ChangePasswordFormComponent } from './components/change-password-form/c
 import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
 import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
+import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
+
+
+
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { ComisionPermanenteOrganizacionComponent } from './components/comision-permanente-organizacion/comision-permanente-organizacion.component';
 import { ComisionEjecutivaOrganizacionComponent } from './components/comision-ejecutiva-organizacion/comision-ejecutiva-organizacion.component';
 import { ComiteOrganizadorLocalComponent } from './components/comite-organizador-local/comite-organizador-local.component';
 import { ComiteAcademicoListComponent } from './components/comite-academico-list/comite-academico-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
+import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 @NgModule({
   declarations: [
@@ -78,13 +85,20 @@ import { ComiteAcademicoListComponent } from './components/comite-academico-list
     ComisionPermanenteOrganizacionComponent,
     ComisionEjecutivaOrganizacionComponent,
     ComiteOrganizadorLocalComponent,
-    ComiteAcademicoListComponent
+    ComiteAcademicoListComponent,
+    PaperReadyComponent,
+    RevisionAutorComponent,
+    CustomToastComponent,
+    SearchComponent,
+    AsignarPaperEvaluadorListComponent
+
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   exports:  [
     UserRegisterComponent,
@@ -117,12 +131,15 @@ import { ComiteAcademicoListComponent } from './components/comite-academico-list
     RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent,
+    CustomToastComponent,
     AsignarPaperEvaluadorListComponent,
     SearchComponent,
     ComisionPermanenteOrganizacionComponent,
     ComisionEjecutivaOrganizacionComponent,
     ComiteOrganizadorLocalComponent,
-    ComiteAcademicoListComponent
+    ComiteAcademicoListComponent,
+    PaperReadyComponent,
+    RevisionAutorComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

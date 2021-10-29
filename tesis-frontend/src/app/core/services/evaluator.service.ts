@@ -20,7 +20,7 @@ export class EvaluatorService {
                }
 
   postEvaluator(idUsuarios): any {
-    return this.httpClient.post(this.apiURL + 'articulos/asignarRolEvaluador/', idUsuarios);
+    return this.httpClient.post(this.apiURL + 'articulos/asignarRolEvaluador/', {idUsuarios});
   }
 
   getEvaluators(activos: number): any {
@@ -64,7 +64,7 @@ export class EvaluatorService {
   }
 
   deleteIdEvaluator(id: number): any {
-    return this.httpClient.delete(this.apiURL + 'evaluador/eliminar-evaluador/' + id);
+    return this.httpClient.delete(this.apiURL + 'articulos/eliminarEvaluador/' + id);
   }
 
   calificarEvaluador(evCalification: any): any {

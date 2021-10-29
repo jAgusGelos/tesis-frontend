@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CongressService } from 'src/app/core/services/congress.service';
 import { InscriptionsService } from 'src/app/core/services/inscriptions.service';
+import { TarifasService } from 'src/app/core/services/tarifas.service';
 
 @Component({
   selector: 'app-inscriptions',
@@ -18,40 +21,27 @@ export class InscriptionsComponent implements OnInit {
       fechaInicio: '21/08/2022',
       fechaFin: '25/08/2022',
     };
-  tarifas = [
-    {
-      id: 1,
-      nombre: 'Autores',
-      precio: 200
-    },
-    {
-      id: 2,
-      nombre: 'Alumnos',
-      precio: 150
-    },
-    {
-      id: 3,
-      nombre: 'General',
-      precio: 250
-    }
-  ];
+  tarifas = [ ];
   tarifaSelected = false;
   datosCompletos = false;
+  loading = false;
+  idInscrip = null;
   formUsuario: FormGroup;
   submitted = false;
   isLinear = false;
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private inscriptionService: InscriptionsService,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService,
+              private congressService: CongressService,
+              private tarifaService: TarifasService
+              ) { }
 
   ngOnInit(): void {
     // El usuario si o si tiene que estar logueado. Datos mínimos.
     this.formUsuario = this.formBuilder.group({
-      nombre: ['', [Validators.required]],
-      apellido: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required]],
+      cupon: [''],
     });
     this.idCongress = this.route.snapshot.paramMap.get('id');
     this.getCongresos();
@@ -59,35 +49,63 @@ export class InscriptionsComponent implements OnInit {
   }
 
   getCongresos(): void {
-    // Traer datos COMPLETOS del congreso para mostrar.
+   this.congressService.getCongressById().subscribe((res: any) => {
+    const fechaI = res.data[0].fechaInCongreso.split(' ')[0].split('/');
+    const fechaF = res.data[0].fechaFinCongreso.split(' ')[0].split('/');
+
+    const fechaIn = new Date(fechaI[2], fechaI[1] - 1, fechaI[0]);
+    const fechaFin = new Date(fechaF[2], fechaF[1] - 1, fechaF[0]);
+    this.congress = {
+      id: res.data[0].id,
+      nombre: res.data[0].nombre,
+      sede: res.data[0].nombre_sede,
+      fechaInicio: fechaIn.toLocaleDateString(),
+      fechaFin: fechaFin.toLocaleDateString(),
+    };
+   });
   }
 
   getTarifas(): void {
     // Traer datos de tarifa para estudiantes / asistentes/ autores.
-    // URL : inscripciones/devolver-tarifas/?idCongreso=
-  }
-
-  validarDescuento(): void {
-    // Valida si un código de descuento es correcto o no.
+    // URL : inscripciones/devolver-tarifas-activas/
+    this.tarifaService.getTarifasActivas().subscribe((res: any) => {
+      this.tarifas = res.data;
+    });
   }
 
   pagar(): void {
     // Tirar el post a la BD para conseguir el preference id.
     // post
-    console.log(this.tarifaSelected);
-    this.inscriptionService.generatePreference(this.tarifaSelected).subscribe((res: any) => {
+    this.inscriptionService.generatePreference(this.idInscrip).subscribe((res: any) => {
+      this.loading = true;
       window.location.href = res.init_point;
     });
   }
 
   inscribirme(item: any): void {
-    this.tarifaSelected = item;
+    // Post a la BD - URL: inscripciones/crear-inscripcion/ --> idInscripción - PrecioFinal // 400 si cupón inválido
+    const cupon = this.formUsuario.controls.cupon.value;
+    this.formUsuario.controls.cupon.setErrors(null);
+    this.inscriptionService.inscribirme(cupon).subscribe((res: any) => {
+      if (res.error) {
+        this.toastr.warning('Error en la inscripción. Usted ya se encuentra inscripto o el cupón ingresado es inválido.');
+        this.formUsuario.controls.cupon.setErrors({incorrect: true});
+        return;
+      }
+      this.idInscrip = res.data.id;
+      this.tarifaSelected = {
+        ...item,
+        precio: res.data.precioFinal
+      };
+      const btnDetalle = document.getElementById('go-next');
+      btnDetalle.click();
+    });
   }
 
   datos(): void {
     this.datosCompletos = false;
     if (this.formUsuario.invalid) {
-      alert('Por favor complete los datos');
+      this.toastr.warning('Por favor complete los datos');
       return;
     }
     this.datosCompletos = true;
