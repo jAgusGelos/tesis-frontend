@@ -72,5 +72,8 @@ export class UserService {
   cancelAuthor(item: string): any{
     return this.httpClient.delete(this.apiURL + 'articulos/rechazar-autoria/' + item, {});
   }
+  cancelEvaluator(item:string):any{
+    return this.httpClient.delete(this.apiURL + 'articulos/rechazar-evaluador' + item, {})
+  }
 
 }

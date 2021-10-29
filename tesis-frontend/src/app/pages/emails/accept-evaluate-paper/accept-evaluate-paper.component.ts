@@ -20,9 +20,14 @@ export class AcceptEvaluatePaperComponent implements OnInit {
     this.token = this.route.snapshot.params.token;
     console.log(this.token);
     this.service.acceptEvaluatePaper('?token=' + this.token).subscribe(
-      (res:any) => this.accepted=true,
+      (res:any) => this.accept(),
       (err:any) => {this.toastr.error('No se pudo aceptar la evaluación del paper.')}
     )
+  }
+
+  accept():void{
+    this.accepted= true;
+    console.log('SI')
   }
 
 }

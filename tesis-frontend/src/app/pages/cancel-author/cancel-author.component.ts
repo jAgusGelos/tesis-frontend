@@ -21,7 +21,7 @@ export class CancelAuthorComponent implements OnInit {
     console.log(this.token);
     this.service.cancelAuthor('?token=' + this.token).subscribe(
       (res:any)=> this.cancel=true,
-      (err:any) =>this.toastr.error('No se pudo cancelar su asignación como evaluador del paper.')
+      (err:any) =>this.toastr.error('No se pudo cancelar su asignación como autor del paper.')
     )
   }
 
