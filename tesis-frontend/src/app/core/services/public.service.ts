@@ -12,11 +12,15 @@ export class PublicService {
   constructor(private httpClient: HttpClient) 
   { }
 
-  getEvaluators():any{
-    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadores/?is_active=True');
+  getEvaluators(id:string):any{
+    return this.httpClient.get(this.apiURL + 'articulos/lista-evaluadoresCongreso/?idCongreso=' + id);
 
   }
   getChairsSimposiosPublic(id : number): any {
     return this.httpClient.get(this.apiURL + 'congresos/lista-chairs/?idCongreso=' + id);
+  }
+
+  getEventosXDia(id:string):any{
+    return this.httpClient.get(this.apiURL + 'eventos/lista-eventos/?idCongreso=' + id)
   }
 }

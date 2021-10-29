@@ -25,7 +25,8 @@ export class InformacionPublicaCongresoComponent implements OnInit {
             fechaFinInscripTemprana: '',
             fechaFinInscripTardia: '',
             fechaCoerreCongreso: ''};
-  programa = [{dia:{fecha:'26/10/21',
+  programa = [];
+  /* programa = [{dia:{fecha:'26/10/21',
                eventos: [{nombre:'BD', horarioInicio:'10:30', horarioFin: '11:00', aula:'Auditorio', 
                           expositores: ['Ayelen Coronel', 'Juan Ledesma']},
                          {nombre:'IA', horarioInicio:'11:00', horarioFin: '11:30', aula:'Auditorio', 
@@ -41,7 +42,7 @@ export class InformacionPublicaCongresoComponent implements OnInit {
                        {nombre:'PF', horarioInicio:'10:30', horarioFin: '11:00', aula:'Zoom', 
                        expositores: ['Agustín Marinangeli', 'Gabriel Rosales']}
                       ]}}
-            ];
+            ]; */
 
  /*  programa = [{fecha: '24/10', aula: 'Aula Magna', evento: 'Charla Ciberseguridad', horario: '10:30', horarioFin: '11:30',expositores: [{nombreExp:'Ayelén Coronel'}, {nombreExp: 'Juan Ignacio Ledesma'}] },
               {fecha: '25/10', aula: 'Salón de actos', evento: 'Expo Paper Base de Datos', horario: '13:00', horarioFin: '14:00',expositores: [{nombreExp:'Juan Ignacio Ledesma'}, {nombreExp: 'Ayelén Coronel'}] },
@@ -60,6 +61,7 @@ export class InformacionPublicaCongresoComponent implements OnInit {
     this.getSimposios();
     this.getEvaluators();
     this.getFechasImportantes();
+    this.getEventosxDia();
 
   
 
@@ -75,14 +77,26 @@ export class InformacionPublicaCongresoComponent implements OnInit {
   }
 
   getEvaluators():void{
-    this.publicService.getEvaluators().subscribe((res: any) => {
+    this.publicService.getEvaluators(this.id.toString()).subscribe((res: any) => {
       this.evaluatorsList = res.data;
+      console.log(res.data)
     });
   }
 
   getFechasImportantes():any{
     this.agendaService.getAgenda(this.id.toString()).subscribe((res:any)=>{
-      this.agenda= res.data[0]
+      this.agenda= res.data[0];
+      console.log(res.data)
       });
   }
+
+  getEventosxDia():any{
+    this.publicService.getEventosXDia(this.id.toString()).subscribe((res:any)=>{
+      console.log(res.data);
+      this.programa = res.data;
+      
+    })
+  }
+
+
 }
