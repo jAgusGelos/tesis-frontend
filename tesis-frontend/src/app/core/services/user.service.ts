@@ -39,6 +39,10 @@ export class UserService {
     return this.httpClient.get(this.apiURL + 'congresos/lista-localidades/');
   }
 
+  getLocalidadesXProvincia(idProvincia: number): any {
+    return this.httpClient.get(this.apiURL + 'congresos/lista-localidadesProvincia/?idProvincia=' + idProvincia);
+  }
+
   getProvincias(): any {
     return this.httpClient.get(this.apiURL + 'congresos/lista-provincia/');
   }

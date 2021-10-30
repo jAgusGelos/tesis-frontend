@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-body">
+      <div class="contenidos">
+        <hr>
+        <h3 class="card-title text-center">{{new ? 'Crear Sede' : 'Editar Sede'}}</h3>
+        <hr>
+      </div>
+      <form class="container" [formGroup]='formSede'>
+        <!-- Nombre -->
+        <div class="row justify-content-md-center">
+            <div class="col col-md-6">
+                <label for="nombre" class="form-label">Nombre<span class='text-danger'>*</span></label>
+                <input type="text" class="form-control" formControlName="nombre"
+                [ngClass]="{'is-invalid': submitted && formSede.controls.nombre.errors}" onClick="this.select();">
+            </div>
+        </div>
+        <!-- Provincia -->
+        <div class="row justify-content-md-center">
+            <div class="col col-md-6">
+                <label for="provincia" class="form-label">Provincia<span class='text-danger'>*</span></label>
+                <select class="form-select" id="select-provincias" formControlName="provincia" (change)="getLocalidades($event.target.value)"
+                    [ngClass]="{'is-invalid': submitted && formSede.controls.provincia.errors}">
+                    <option selected disabled></option>
+                    <option *ngFor="let prov of provinciaList" value="{{prov.id}}">{{prov.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <!-- Localidad -->
+        <div class="row justify-content-md-center">
+            <div class="col col-md-6">
+                <label for="localidad" class="form-label">Localidad<span class='text-danger'>*</span></label>
+                <select class="form-select" id="select-localidades" formControlName="localidad" (change)="setLocalidad()"
+                    [ngClass]="{'is-invalid': submitted && formSede.controls.localidad.errors}">
+                    <option selected disabled></option>
+                    <option *ngFor="let loc of localidadList" value="{{loc.id}}">{{loc.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <!-- Calle -->
+            <div class="col col-md-4">
+                <label for="calle" class="form-label">Calle<span class='text-danger'>*</span></label>
+                <input type="text" class="form-control" min="0" formControlName="calle"
+                [ngClass]="{'is-invalid': submitted && formSede.controls.calle.errors}" onClick="this.select();">
+                <div class="form-text">Si la dirección no tiene número dejar valor en cero.</div>
+            </div>
+            <!-- Nro. de calle -->
+            <div class="col col-md-2">
+                <label for="nroCalle" class="form-label">Número</label>
+                <input type="number" class="form-control" min="0" formControlName="nroCalle" onClick="this.select();">
+            </div>
+        </div>
+        <div class="row justify-content-md-center pt-3 btn-row">
+        <a class="col-md-3 btn btn-secondary" (click)='cancel()' role="button">Cancelar</a>
+        &nbsp;
+        <a class="col-md-3 btn btn-primary" (click)='submit()' role="button">{{new ? 'Crear Sede' : 'Guardar Cambios'}}</a>
+        </div>
+      </form>
+    </div>
+</div>
+  
+

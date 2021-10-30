@@ -41,6 +41,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { SedeListComponent } from './components/sede-list/sede-list.component';
+import { SedeFormComponent } from './components/sede-form/sede-form.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     RevisionAutorComponent,
     CustomToastComponent,
     SearchComponent,
-    AsignarPaperEvaluadorListComponent
+    AsignarPaperEvaluadorListComponent,
+    SedeListComponent,
+    SedeFormComponent
 
   ],
   imports: [
@@ -127,7 +131,9 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     AsignarPaperEvaluadorListComponent,
     SearchComponent,
     PaperReadyComponent,
-    RevisionAutorComponent
+    RevisionAutorComponent,
+    SedeListComponent,
+    SedeFormComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

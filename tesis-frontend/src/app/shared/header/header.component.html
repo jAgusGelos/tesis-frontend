@@ -14,45 +14,48 @@
         </li>
         <!-- SUPERUSUARIO -->
         <li class="nav-item">
-          <a class="nav-link" href="/congreso" *ngIf="rol.includes(0)  && user">Congreso</a>
+          <a class="nav-link" href="/congreso" *ngIf="superuser && user">Congreso</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/simposios" *ngIf="rol.includes(0)  && user">Simposios</a>
+          <a class="nav-link" href="/simposios" *ngIf="superuser && user">Simposios</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/evaluators" *ngIf="rol.includes(0)  && user">Evaluadores</a>
+          <a class="nav-link" href="/evaluators" *ngIf="superuser && user">Evaluadores</a>
         </li>
         <!-- CHAIR PRINCIPAL -->
         <li class="nav-item">
-          <a class="nav-link" href="/misCongresos" *ngIf="rol.includes(1)  && user">Mi Congreso</a>
+          <a class="nav-link" href="/misCongresos" *ngIf="superuser && user">Mi Congreso</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/chairs" *ngIf="rol.includes(1)  && user">Asignar Chairs</a>
+          <a class="nav-link" href="/chairs" *ngIf="rol.includes(1) && user">Asignar Chairs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/room" *ngIf="rol.includes(1)  && user">Aulas</a>
+          <a class="nav-link" href="/sedes" *ngIf="rol.includes(1) && user">Sedes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/evaluacion" *ngIf="rol.includes(1)  && user">Planilla</a>
+          <a class="nav-link" href="/room" *ngIf="rol.includes(1) && user">Aulas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/tarifas" *ngIf="rol.includes(1)  && user">Tarifas</a>
+          <a class="nav-link" href="/evaluacion" *ngIf="rol.includes(1) && user">Planilla</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/generarAgenda" *ngIf="rol.includes(1)  && user">Agenda</a>
+          <a class="nav-link" href="/tarifas" *ngIf="rol.includes(1) && user">Tarifas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/generarAgenda" *ngIf="rol.includes(1) && user">Agenda</a>
         </li>
         <!-- CHAIR SECUNDARIO -->
         <li class="nav-item">
-          <a class="nav-link" href="/evaluador" *ngIf="rol.includes(2)  && user">Mis Evaluadores</a>
+          <a class="nav-link" href="/evaluador" *ngIf="rol.includes(2) && user">Mis Evaluadores</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/asignarPaperEvaluador" *ngIf="rol.includes(2)  && user">Asignar Artículos</a>
+          <a class="nav-link" href="/asignarPaperEvaluador" *ngIf="rol.includes(2) && user">Asignar Artículos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/evaluatePapersChairSec" *ngIf="rol.includes(2)  && user">Evaluar Artículos</a>
+          <a class="nav-link" href="/evaluatePapersChairSec" *ngIf="rol.includes(2) && user">Evaluar Artículos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/control" *ngIf="rol.includes(2)  && user">Tablero de Control</a>
+          <a class="nav-link" href="/control" *ngIf="rol.includes(2) && user">Tablero de Control</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="/paperXSimposio" *ngIf="rol.includes(2)  && user">Artículos por Simposio</a>
@@ -62,7 +65,7 @@
         </li> -->
         <!-- EVALUADOR -->
         <li class="nav-item">
-          <a class="nav-link" href="/verEvaluaciones" *ngIf="rol.includes(3)  && user">Evaluar</a>
+          <a class="nav-link" href="/verEvaluaciones" *ngIf="rol.includes(3) && user">Evaluar</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/preferenciaSimposio" *ngIf="rol.includes(3) && user">Preferencia de Simposios</a>

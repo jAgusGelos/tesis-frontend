@@ -14,6 +14,7 @@ import { UserService } from 'src/app/core/services/user.service';
 export class HeaderComponent implements OnInit {
 
   user = false;
+  superuser = false;
   rol: number[] = [];
   constructor(private authService: AuthService,
               private toastr: ToastrService,
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
       this.user = true;
     }
     if (this.user) {
+      this.superuser = this.authService.getSuperUser();
       this.rol = this.authService.getUserRoles();
     }
   }
