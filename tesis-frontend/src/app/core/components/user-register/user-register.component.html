@@ -1,61 +1,299 @@
-<div class="container-md card">
+<div class="card">
   <div class="card-body">
     <div class="contenidos">
       <hr>
-      <h3 class="card-title text-center">Registro</h3>
+      <h3 class="card-title text-center"><b>Registro</b></h3>
       <hr>
     </div>
-
+    <h6><b>Por favor, complete sus datos</b></h6>
     <div class="card-text">
-      <form [formGroup]='formRegister'>
-        <!--Email-->
-        <div class="form-group row justify-content-center">
-          <label class="col-form-label col-sm-3 col-md-3 col-md-offset-2" for="email">Email: <span
-              class="text-danger">*</span></label>
-          <div class="col-sm-8">
-            <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (formRegister.controls.email.touched || submitted)
-                  && formRegister.controls.email.errors}" onclick="this.select()" />
-            <span class="text-danger"
-              *ngIf="(formRegister.controls.email.touched || submitted) && formRegister.controls.email.errors?.required">
-              Requerido. Por favor ingrese un mail con el formato correcto: usuario@example.com
-            </span>
+      <form [formGroup]='formUsuario'>
+        <div class="row">
+          <div class="col-md-6">
+            <!--Tipo DNI-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="tipoDni">Tipo:<span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-6">
+                <select name="tipoDni" class="form-select" formControlName="tipoDni" [ngClass]="{'is-invalid': (formUsuario.controls.tipoDni.touched || submitted)
+              && formUsuario.controls.tipoDni.errors}">
+                  <option *ngFor="let opt of tipoDni" value={{opt.id}}>
+                    ‌{{ opt.nombre }}
+                  <option>
+                </select>
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.tipoDni.touched || submitted) && formUsuario.controls.tipoDni.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <!--DNI-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="dni">Numero: <span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="dni" [ngClass]="{'is-invalid': (formUsuario.controls.dni.touched || submitted)
+              && formUsuario.controls.dni.errors}" onclick="this.select()" />
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.dni.touched || submitted) && formUsuario.controls.dni.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-         <!--Pasword-->
-         <div class="form-group row justify-content-center">
-          <label class="col-form-label col-sm-3 col-md-3 col-md-offset-2" for="password">Contraseña: <span
-              class="text-danger">*</span></label>
-          <div class="col-sm-8">
-            <input type="password" class="form-control" formControlName="password" [ngClass]="{'is-invalid': (formRegister.controls.password.touched || submitted)
-                  && formRegister.controls.password.errors}" onclick="this.select()" />
-            <span class="text-danger"
-              *ngIf="(formRegister.controls.password.touched || submitted) && formRegister.controls.password.errors?.required">
-              Requerido
-            </span>
+        <div class="row">
+          <!-- Apellido y nombre -->
+          <div class="col-md-6">
+            <!--Apellido-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="apellido">Apellido: <span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="apellido" [ngClass]="{'is-invalid': (formUsuario.controls.apellido.touched || submitted)
+              && formUsuario.controls.apellido.errors}" onclick="this.select()" />
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.apellido.touched || submitted) && formUsuario.controls.apellido.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <!--Nombre-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="nombre">Nombre: <span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (formUsuario.controls.nombre.touched || submitted)
+              && formUsuario.controls.nombre.errors}" onclick="this.select()" />
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.nombre.touched || submitted) && formUsuario.controls.nombre.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
-        <!--Rep Pasword-->
-        <div class="form-group row justify-content-center">
-          <label class="col-form-label col-sm-3 col-md-3 col-md-offset-2" for="repPassword">Repetir Contraseña: <span
-              class="text-danger">*</span></label>
-          <div class="col-sm-8">
-            <input type="password" class="form-control" formControlName="repPassword" [ngClass]="{'is-invalid': (formRegister.controls.repPassword.touched || submitted)
-                  && formRegister.controls.repPassword.errors}" onclick="this.select()" />
-            <span class="text-danger"
-              *ngIf="(formRegister.controls.repPassword.touched || submitted) && formRegister.controls.repPassword.errors?.required">
-              Requerido
-            </span>
+
+        <div class="row">
+          <!-- FechaNacimiento Pais -->
+          <div class="col-md-6">
+            <!--FechaNacimiento-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-4 col-sm-offset-2" for="fechaNacimiento">Fecha Nacimiento:<span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-5">
+                <input type="date" class="form-control" formControlName="fechaNacimiento" [ngClass]="{'is-invalid': (formUsuario.controls.fechaNacimiento.touched || submitted)
+              && formUsuario.controls.fechaNacimiento.errors}" onclick="this.select()" />
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.fechaNacimiento.touched || submitted) && formUsuario.controls.fechaNacimiento.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
-        <br>
-        <div class="row p-2">
-          <button type="submit" class="btn btn-primary btn-lg btn-block" (click)='submit()'>Registrarme</button>
-          <button type="submit" class="btn btn-secondary btn-lg btn-block" (click)='cancel()'>Cancelar</button>
+
+        <div class="row">
+          <!-- Provincia y localidad -->
+          <div class="col-md-6">
+            <!--Provincia-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="provincia">Provincia:<span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-6">
+                <select name="provincia" class="form-select" formControlName="provincia" [ngClass]="{'is-invalid': (formUsuario.controls.provincia.touched || submitted)
+              && formUsuario.controls.provincia.errors}">
+                  <option *ngFor="let opt of provincias" value={{opt.id}}>
+                    ‌{{ opt.nombre }}
+                  <option>
+                </select>
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.provincia.touched || submitted) && formUsuario.controls.provincia.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-md-6">
+            <!--localidad-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="localidad">Localidad:<span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-6">
+                <select name="localidad" class="form-select" formControlName="localidad" [ngClass]="{'is-invalid': (formUsuario.controls.localidad.touched || submitted)
+              && formUsuario.controls.localidad.errors}">
+                  <option *ngFor="let opt of localidades" value={{opt.id}}>
+                    ‌{{ opt.nombre }}
+                  <option>
+                </select>
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.localidad.touched || submitted) && formUsuario.controls.localidad.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
+
+          </div>
         </div>
+
+        <div class="row">
+          <!-- Calle altura piso y dpto -->
+          <div class="col-md-6">
+            <!--Calle-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="calle">Calle: <span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="calle" [ngClass]="{'is-invalid': (formUsuario.controls.calle.touched || submitted)
+              && formUsuario.controls.calle.errors}" onclick="this.select()" />
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.calle.touched || submitted) && formUsuario.controls.calle.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <!--nroCalle-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-4" for="nroCalle">Nro: <span class="text-danger">*</span></label>
+              <div class="col-sm-6">
+                <input type="number" class="form-control" formControlName="nroCalle" [ngClass]="{'is-invalid': (formUsuario.controls.nroCalle.touched || submitted)
+              && formUsuario.controls.nroCalle.errors}" onclick="this.select()" />
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.nroCalle.touched || submitted) && formUsuario.controls.nroCalle.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-2">
+            <!--Piso-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-4" for="number">Piso:</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="piso" [ngClass]="{'is-invalid': (formUsuario.controls.piso.touched || submitted)
+              && formUsuario.controls.piso.errors}" onclick="this.select()" />
+
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-2">
+            <!--Dpto-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-4" for="dpto">Dpto: </label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="dpto" [ngClass]="{'is-invalid': (formUsuario.controls.dpto.touched || submitted)
+              && formUsuario.controls.dpto.errors}" onclick="this.select()" />
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <!-- Celular -->
+          <div class="col-md-6">
+            <!--Celular-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="celular">Celular: </label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="celular" [ngClass]="{'is-invalid': (formUsuario.controls.celular.touched || submitted)
+              && formUsuario.controls.celular.errors}" onclick="this.select()" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <!--sede-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="sede">sede:<span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-6">
+                <select name="sede" class="form-select" formControlName="sede" [ngClass]="{'is-invalid': (formUsuario.controls.sede.touched || submitted)
+              && formUsuario.controls.sede.errors}">
+                  <option *ngFor="let opt of sedes" value={{opt.id}}>
+                    ‌{{ opt.nombre }}
+                  <option>
+                </select>
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.sede.touched || submitted) && formUsuario.controls.sede.errors?.required">
+                  Requerido.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <!--Email-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="email">Email: <span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-8">
+                <input type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (formUsuario.controls.email.touched || submitted)
+                  && formUsuario.controls.email.errors}" onclick="this.select()" />
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.email.touched || submitted) && formUsuario.controls.email.errors?.required">
+                  Requerido. Por favor ingrese un mail con el formato correcto: usuario@example.com
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <!--Pasword-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="password">Contraseña: <span
+                  class="text-danger">*</span></label>
+              <div class="col-sm-8">
+                <input type="password" class="form-control" formControlName="password" [ngClass]="{'is-invalid': (formUsuario.controls.password.touched || submitted)
+                  && formUsuario.controls.password.errors}" onclick="this.select()" />
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.password.touched || submitted) && formUsuario.controls.password.errors?.required">
+                  Requerido
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <!--Rep Pasword-->
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3" for="repPassword">Repetir Contraseña:
+                <span class="text-danger">*</span></label>
+              <div class="col-sm-8">
+                <input type="password" class="form-control" formControlName="repPassword" [ngClass]="{'is-invalid': (formUsuario.controls.repPassword.touched || submitted)
+                  && formUsuario.controls.repPassword.errors}" onclick="this.select()" />
+                <span class="text-danger"
+                  *ngIf="(formUsuario.controls.repPassword.touched || submitted) && formUsuario.controls.repPassword.errors?.required">
+                  Requerido
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+          <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
+          &nbsp;
+          <a class="btn btn-primary col-md-4" (click)='submit()' role="button">Guardar Cambios</a>
+        </div>
+
 
       </form>
-
-
     </div>
   </div>
 </div>

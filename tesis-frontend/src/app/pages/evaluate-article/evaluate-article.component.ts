@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { EvaluatePaperService } from 'src/app/core/services/evaluate-paper.service';
 import { PaperService } from 'src/app/core/services/paper.service';
-import { EvaluationService } from 'src/app/core/services/evaluation.service';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +24,8 @@ export class EvaluateArticleComponent implements OnInit {
   constructor(private paperEvalService: EvaluatePaperService,
               private evaluationService: EvaluatorService,
               private toastr: ToastrService,
-              private paperService: PaperService) { }
+              private paperService: PaperService,
+              private router: Router) { }
 
 
   ngOnInit(): void {
@@ -77,31 +78,32 @@ export class EvaluateArticleComponent implements OnInit {
         return;
       } else {
         this.getPapers();
-        alert('La evaluación ha sido guardada!');
+        this.toastr.success('La evaluación ha sido guardada!');
+        this.router.navigateByUrl('/verEvaluaciones');
       }
     });
   }
 
   submitEvaluation(ev): void {
     this.paperEvalService.enviarEvaluacion(ev).subscribe((res: any) => {
-      alert('La evaluación ha sido enviada!');
+      this.toastr.success('La evaluación ha sido enviada!');
       this.toggleFlagEvaluate();
       this.getPapers();
+      this.router.navigateByUrl('/verEvaluaciones');
     });
   }
 
   acceptEvaluate(paper): void {
     this.paper = paper;
     this.evaluationService.acceptEvaluationPaper(this.paper).subscribe(
-      (res:any) => {this.toastr.success('La evaluación ha sido aceptada.')}
-    )    
-   }  
-  
+      (res: any) => {this.toastr.success('La evaluación ha sido aceptada.'); }
+    );
+   }
+
   cancelEvaluate(paper): void {
     this.paper = paper;
     this.evaluationService.cancelarEvaluationPaper(this.paper).subscribe(
-      (res: any) =>{this.toastr.success('La evaluación ha sido rechazada.');
-    })
-
+      (res: any) => {this.toastr.success('La evaluación ha sido rechazada.'); }
+      );
   }
 }

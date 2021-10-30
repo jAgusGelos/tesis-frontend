@@ -25,10 +25,8 @@ export class HeaderComponent implements OnInit {
       this.user = true;
     }
     if (this.user) {
-      this.rol = [6];
-      // this.rol = this.authService.getUserRoles();
+      this.rol = this.authService.getUserRoles();
     }
-
   }
 
   toast(): void {
@@ -52,10 +50,11 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.user = !this.user;
-    this.authService.logout();
-
-
-    this.router.navigate(['']);
-
+    this.authService.logout().subscribe((res: any) => {
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
+      this.toastr.success('Adios, lo esperamos de vuelta');
+      this.router.navigateByUrl('/');
+    });
   }
 }

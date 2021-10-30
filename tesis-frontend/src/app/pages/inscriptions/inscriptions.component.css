@@ -118,6 +118,9 @@ a{
   .container-fluid{
     padding: 5rem;
   }
+ }
 
+ .spinner-border{
+   padding: 1rem;
  }
 

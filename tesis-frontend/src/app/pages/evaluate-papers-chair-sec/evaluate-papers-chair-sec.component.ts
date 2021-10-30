@@ -174,6 +174,9 @@ export class EvaluatePapersChairSecComponent implements OnInit {
         let obs1 = null;
         let obs2 = null;
         let obs3 = null;
+        let obsInterna1 = null;
+        let obsInterna2 = null;
+        let obsInterna3 = null;
         for (let i = 0; i < items.length; i++) {
           if (ev1 !== undefined) {
             if (ev1.itemsEvaluados[i] !== undefined) { calif1 = ev1.itemsEvaluados[i].calificacion; }
@@ -196,32 +199,42 @@ export class EvaluatePapersChairSecComponent implements OnInit {
         if (this.vectorArticulos[index].evaluaciones[0] !== undefined) {
           rec1 = this.vectorArticulos[index].evaluaciones[0].recomendacion;
           obs1 = this.vectorArticulos[index].evaluaciones[0].observacion;
+          obsInterna1 = this.vectorArticulos[index].evaluaciones[0].observacionInterna;
         } else {
           rec1 = null;
           obs1 = null;
+          obsInterna1 = null;
         }
         if (this.vectorArticulos[index].evaluaciones[1] !== undefined) {
           rec2 = this.vectorArticulos[index].evaluaciones[1].recomendacion;
           obs2 = this.vectorArticulos[index].evaluaciones[1].observacion;
+          obsInterna2 = this.vectorArticulos[index].evaluaciones[1].observacionInterna;
         } else {
           rec2 = null;
           obs2 = null;
+          obsInterna2 = null;
         }
         if (this.vectorArticulos[index].evaluaciones[2] !== undefined) {
           rec3 = this.vectorArticulos[index].evaluaciones[2].recomendacion;
           obs3 = this.vectorArticulos[index].evaluaciones[2].observacion;
+          obsInterna3 = this.vectorArticulos[index].evaluaciones[2].observacionInterna;
         } else {
           rec3 = null;
           obs3 = null;
+          obsInterna3 = null;
         }
         this.detalles.push({aspecto: 'Recomendación',
           res1: rec1,
           res2: rec2,
           res3: rec3});
-        this.detalles.push({aspecto: 'Observaciones',
+        this.detalles.push({aspecto: 'Observación para el Autor',
           res1: obs1,
           res2: obs2,
           res3: obs3});
+        this.detalles.push({aspecto: 'Observación Interna',
+          res1: obsInterna1,
+          res2: obsInterna2,
+          res3: obsInterna3});
       });
     });
     const btnDetalle = document.getElementById('activar-modal');
@@ -263,6 +276,7 @@ export class EvaluatePapersChairSecComponent implements OnInit {
           nombre: x.nombre,
           responsable: x.responsable,
           observacion: x.observacion,
+          observacionInterna: x.observacionInterna,
           url: x.url,
           edit: false
         };

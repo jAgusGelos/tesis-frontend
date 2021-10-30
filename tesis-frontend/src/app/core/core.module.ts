@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CommonModule, DatePipe } from '@angular/common';
-import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
@@ -28,19 +27,19 @@ import { EvaluatePaperListComponent } from './components/evaluate-paper-list/eva
 import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/evaluate-paper-form.component';
 import { EvaluatorListComponent } from './components/evaluator-list/evaluator-list.component';
 import { CongressCardComponent } from './components/congress-card/congress-card.component';
+import { CuponListComponent } from './components/cupon-list/cupon-list.component';
+import { CuponFormComponent } from './components/cupon-form/cupon-form.component';
 import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
 import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
 import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
 import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
-
-
-
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +71,8 @@ import { RevisionAutorComponent } from './components/revision-autor/revision-aut
     EvaluatePaperFormComponent,
     EvaluatorListComponent,
     CongressCardComponent,
+    CuponListComponent,
+    CuponFormComponent,
     ChangePasswordFormComponent,
     RecoverPasswordFormComponent,
     TarifaListComponent,
@@ -83,7 +84,6 @@ import { RevisionAutorComponent } from './components/revision-autor/revision-aut
     CustomToastComponent,
     SearchComponent,
     AsignarPaperEvaluadorListComponent
-
   ],
   imports: [
     CommonModule,
@@ -119,6 +119,8 @@ import { RevisionAutorComponent } from './components/revision-autor/revision-aut
     EvaluatePaperFormComponent,
     EvaluatorListComponent,
     CongressCardComponent,
+    CuponListComponent,
+    CuponFormComponent,
     ChangePasswordFormComponent,
     RecoverPasswordFormComponent,
     TarifaListComponent,

@@ -13,7 +13,7 @@
 
   <app-paper-ready
   *ngIf="ready"
-  (sendEmitter)='entregaFinal($event)'
+  (paperEmitter)='entregaFinal($event)'
   [paper]='paper'
   (cancelPaper)='volverFinalPaper()'></app-paper-ready>
 

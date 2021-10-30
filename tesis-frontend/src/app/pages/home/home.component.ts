@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
 
     getCongressData(): void {
-      this.congressService.getCongressPublic().subscribe((res: any) => {
+      this.congressService.getCongress().subscribe((res: any) => {
         this.congressList = res.data;
         this.congressList = this.congressList.map((x: any) => {
           return {
