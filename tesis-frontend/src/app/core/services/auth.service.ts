@@ -55,13 +55,6 @@ export class AuthService {
     return decodedToken.rol || null;
   }
 
-  getSuperUser(): boolean {
-    const idToken = localStorage.getItem('id_token');
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.is_superuser || false;
-  }
-
   getCongressId(): number {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
