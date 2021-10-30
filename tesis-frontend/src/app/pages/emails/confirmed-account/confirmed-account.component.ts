@@ -20,11 +20,16 @@ export class ConfirmedAccountComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+  
     this.token = this.route.snapshot.params.token;
     console.log(this.token);
     this.verifyEmailService.verifyEmail('?token='+this.token).subscribe(
-      (res:any) => {this.confirmed=true},
-      (err:any) => {this.toastr.error("No se pudo confirmar la cuenta.")})
+      (res:any) => {this.confirm()},
+      (err:any) => {this.toastr.error("No se pudo confirmar la cuenta.")});
+  }
+
+  confirm():void{
+    this.confirmed=true;
   }
 
 }

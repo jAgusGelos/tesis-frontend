@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ITarifa } from '../models/itarifa';
+import { ITarifa } from '../models/ITarifa';
 import { CongressService } from './congress.service';
 
 @Injectable({
@@ -18,6 +18,10 @@ export class TarifasService {
 
   getTarifas() {
     return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas/?idCongreso= ' + this.idCongreso.toString());
+  }
+
+  getTarifaById(idTarifa) {
+    return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifa/?idCongreso= ' + this.idCongreso.toString() + '&idTarifa=' + idTarifa);
   }
 
   getTarifasActivas() {

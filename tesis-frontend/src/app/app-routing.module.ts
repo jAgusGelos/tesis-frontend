@@ -110,10 +110,13 @@ const routes: Routes = [
     .then(m => m.EvaluatorsModule),
   },
   {
-    path: 'tarifas',
-    loadChildren: () => import('./pages/tarifas/tarifas.module')
-    .then(m => m.TarifasModule),
+    path: 'cupones',
+    loadChildren: () => import('./pages/cupon/cupon.module')
+    .then(m => m.CuponModule)
   },
+  {path: 'tarifas',
+  loadChildren: () => import('./pages/tarifas/tarifas.module')
+  .then(m => m.TarifasModule)},
   {
     path: 'preferenciaSimposio',
     loadChildren: () => import('./pages/symposium-preference/symposium-preference.module')
@@ -136,17 +139,17 @@ const routes: Routes = [
     .then(m => m.DeactivateAccountModule),
   },
   {
-    path: 'cancelacionChairSecundario',
+    path: 'cancelacionChairSecundario/:token',
     loadChildren: () => import('./pages/cancel-sec-chair/cancel-sec-chair.module')
     .then(m => m.CancelSecChairModule),
   },
   {
-    path: 'cancelacionEvaluador',
+    path: 'cancelacionEvaluador/:token',
     loadChildren: () => import('./pages/cancel-evaluator/cancel-evaluator.module')
     .then(m => m.CancelEvaluatorModule),
   },
   {
-    path: 'cancelarAutoria',
+    path: 'cancelarAutoria/:token',
     loadChildren: () => import('./pages/cancel-author/cancel-author.module')
     .then(m => m.CancelAuthorModule),
   },
@@ -182,19 +185,19 @@ const routes: Routes = [
     .then(m => m.ConfirmedAccountModule),
   },
   {
-    path: 'reestablecerContraseña/?token=:token',
-    loadChildren: () => import('./pages/emails/restore-password/restore-password-routing.module')
-    .then(m => m.RestorePasswordRoutingModule),
+    path: 'reestablecerContraseña/:token',
+    loadChildren: () => import('./pages/emails/restore-password/restore-password.module')
+    .then(m => m.RestorePasswordModule),
   },
   {
-    path: 'aceptacionEvaluacionPaper/?token=:token',
-    loadChildren: () => import('./pages/emails/accept-evaluate-paper/accept-evaluate-paper-routing.module')
-    .then(m => m.AcceptEvaluatePaperRoutingModule),
+    path: 'aceptacionEvaluacionPaper/:token',
+    loadChildren: () => import('./pages/emails/accept-evaluate-paper/accept-evaluate-paper.module')
+    .then(m => m.AcceptEvaluatePaperModule),
   },
   {
     path: 'aceptacionRolEvaluador/:token',
-    loadChildren: () => import('./pages/emails/accept-evaluator/accept-evaluator-routing.module')
-    .then(m => m.AcceptEvaluatorRoutingModule),
+    loadChildren: () => import('./pages/emails/accept-evaluator/accept-evaluator.module')
+    .then(m => m.AcceptEvaluatorModule),
   },
   {
     path: 'cancelacionEvaluacionPaper/:token',
@@ -215,6 +218,21 @@ const routes: Routes = [
     path: 'informacionCongreso/:id',
     loadChildren: () => import('./pages/informacion-publica-congreso/informacion-publica-congreso.module')
     .then(m => m.InformacionPublicaCongresoModule)
+  },
+  {
+    path: 'pagoInscripcionSuccess/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-success/payment-success.module')
+    .then(m => m.PaymentSuccessModule)
+  },
+  {
+    path: 'pagoInscripcionPending/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-pending/payment-pending.module')
+    .then(m => m.PaymentPendingModule)
+  },
+  {
+    path: 'pagoInscripcionFailure/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-failure/payment-failure.module')
+    .then(m => m.PaymentFailureModule)
   }
 ];
 
