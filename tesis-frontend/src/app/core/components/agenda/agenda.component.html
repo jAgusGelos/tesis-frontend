@@ -38,6 +38,20 @@
             </div>
           </div>
         </div>
+        <!-- Fecha Cierre Congreso-->
+        <div class='form-group row col-md-6'>
+          <label class='col-form-label col-sm-6' for='FechaCierreCongreso'>Cierre del congreso: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='date' class='form-control' formControlName='FechaCierreCongreso' [ngClass]="{'is-invalid': (formCongress.controls.FechaCierreCongreso.touched || submitted)
+         && formCongress.controls.FechaCierreCongreso.errors}" onclick='this.select()' />
+            <span class='text-danger'
+              *ngIf='(formCongress.controls.FechaCierreCongreso.touched || submitted) && formCongress.controls.FechaCierreCongreso.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
         <hr>
         <h4 class="card-title text-center"><b>Inscripción</b></h4>
         <div class="row">

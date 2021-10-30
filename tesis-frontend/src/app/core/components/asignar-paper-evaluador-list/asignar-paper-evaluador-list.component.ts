@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ArticulosService } from '../../services/articulos.service';
 import { EvaluatorService } from '../../services/evaluator.service';
@@ -18,10 +19,12 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
   assignedPaperList = [];
   showAssignedPaperList = [];
   nombreArticulo = 'nombreArticulo';
+  loading = false;
 
   constructor(  private evaluatorService: EvaluatorService,
                 private articulosService: ArticulosService,
                 private toastr: ToastrService,
+                private router: Router
 
                 ) { }
 
@@ -141,6 +144,8 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
       articulo: 1,
       idCongreso: 1
     } */
+    this.loading = true;
+    setTimeout(() => { this.loading = false; } , 3000);
     this.toastr
       .show( '¿Está seguro que desea asignar las evaluaciones?', '¿Confirmar asignaciones?', {
         toastComponent: CustomToastComponent,
@@ -151,10 +156,13 @@ export class AsignarPaperEvaluadorListComponent implements OnInit {
       .onAction.subscribe(() => {
         // Aca se hace el camino feliz
         this.evaluatorService.postEvaluatorMassive(this.assignedPaperList).subscribe((res: any) => {
-          this.toastr.success('Los Evaluadores han sido cargado con éxito. Les llegará un mail de notificación')
+          this.toastr.success('Los Evaluadores han sido cargado con éxito. Les llegará un mail de notificación');
+          this.router.navigateByUrl('/control');
         });
-
       });
+
+
+
   }
 
   search(filterList): void {

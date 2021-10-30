@@ -9,6 +9,10 @@ calendar-scheduler-view >>>
   text-transform: capitalize !important;
 }
 
+.btn-block{
+  width: 100%;
+}
+
 calendar-scheduler-view >>>
 .fas {
   font-size: 1.25rem;
@@ -54,7 +58,7 @@ calendar-scheduler-view >>>
 }
 
 i {
-  padding-top: 1.5rem;
+  margin-top: 0.2rem;
   cursor: pointer;
 }
 

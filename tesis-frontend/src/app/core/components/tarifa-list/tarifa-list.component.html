@@ -23,8 +23,9 @@
             <tr class='align-items-center'*ngFor='let item of tarifaList; let i = index'>
               <td>{{item.nombre}}</td>
               <td>{{ item.precio | currency}}</td>
-              <td>{{ item.fechaDesde | date:'dd/LL/YYYY'}}</td>
-              <td>{{ item.fechaHasta | date:'dd/LL/YYYY'}}</td>
+              <td>{{ item.fechaDesde.split('T')[0].split('-').reverse().join('/') }}</td>
+              <td>{{ item.fechaHasta.split('T')[0].split('-').reverse().join('/') }}</td>
+
               <td>
                 <a title='Editar' role="button" (click)="toggleEdit(item)"><i class="fas fa-pencil-alt fa-lg"></i></a>
                 &nbsp;&nbsp;&nbsp;

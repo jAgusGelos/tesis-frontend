@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { CommonModule, DatePipe } from '@angular/common';
-import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserCompletedDataComponent } from './components/user-completed-data/user-completed-data.component';
@@ -40,6 +39,7 @@ import { SearchComponent } from './components/search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 @NgModule({
   declarations: [

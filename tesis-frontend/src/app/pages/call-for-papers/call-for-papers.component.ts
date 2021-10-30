@@ -43,7 +43,6 @@ export class CallForPapersComponent implements OnInit {
     this.paperService.getPaper().subscribe((res: any) => {
       this.paperList = res.data;
       this.okey = true;
-
     });
   }
 
@@ -99,7 +98,7 @@ export class CallForPapersComponent implements OnInit {
 
   sendPaper(item: any): void {
     this.paperService.sendPaper(item).subscribe((res: any) => {
-      this.toastr.success('Camera Ready Enviado');
+      this.toastr.success('Paper Enviado');
       this.router.navigateByUrl('/callForPapers');
     });
   }
@@ -109,7 +108,6 @@ export class CallForPapersComponent implements OnInit {
     // ir a la página para el camera ready
     this.ready = true;
     this.paper = item;
-    console.log(this.paper);
 
   }
 
@@ -126,7 +124,7 @@ export class CallForPapersComponent implements OnInit {
   entregaFinal(item: any): void {
     // Se envia el paper ya camera ready listo
     this.paperService.finalPaper(item).subscribe((res: any) => {
-      alert('El camera ready ha sido entregado');
+      this.toastr.success('El camera ready ha sido entregado');
       this.router.navigateByUrl('/callForPapers');
     });
   }

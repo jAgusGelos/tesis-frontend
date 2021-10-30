@@ -49,3 +49,12 @@ hr{
   }
 
  }
+
+:host >>> .popover .popover-header {
+  background-color: #3CAFE0;
+}
+
+.bigger {
+  font-size: 170%;
+  margin-bottom: 1rem;
+}

@@ -71,7 +71,7 @@ export class AssignSecChairsFormComponent implements OnInit {
     };
     this.assignService.postAssignSecChairTheme(item).subscribe((res: any) => {
       this.chairsAssigned.push(res.data);
-      this.showList.push(res.data)
+      this.showList = this.chairsAssigned.slice();
       this.formAssignSecChairs.reset();
     });
   }
@@ -89,6 +89,7 @@ export class AssignSecChairsFormComponent implements OnInit {
         this.assignService.deleteAssignSecChairTheme(item).subscribe((res: any) => {
           const indice = this.chairsAssigned.indexOf(item);
           this.chairsAssigned.splice(indice, 1);
+          this.showList = this.chairsAssigned.slice();
         });
       });
   }

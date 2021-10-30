@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { EvaluatePaperService } from 'src/app/core/services/evaluate-paper.service';
 import { PaperService } from 'src/app/core/services/paper.service';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class EvaluateArticleComponent implements OnInit {
   constructor(private paperEvalService: EvaluatePaperService,
               private evaluationService: EvaluatorService,
               private toastr: ToastrService,
-              private paperService: PaperService) { }
+              private paperService: PaperService,
+              private router: Router) { }
 
 
   ngOnInit(): void {
@@ -77,6 +79,7 @@ export class EvaluateArticleComponent implements OnInit {
       } else {
         this.getPapers();
         this.toastr.success('La evaluación ha sido guardada!');
+        this.router.navigateByUrl('/verEvaluaciones');
       }
     });
   }
@@ -86,6 +89,7 @@ export class EvaluateArticleComponent implements OnInit {
       this.toastr.success('La evaluación ha sido enviada!');
       this.toggleFlagEvaluate();
       this.getPapers();
+      this.router.navigateByUrl('/verEvaluaciones');
     });
   }
 

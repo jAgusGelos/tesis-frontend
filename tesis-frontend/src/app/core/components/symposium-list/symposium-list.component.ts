@@ -34,7 +34,7 @@ export class SymposiumListComponent implements OnInit {
   toggleRemoveHandled(item: any): void {
 
     this.toastr
-      .show( 'Está seguro que desea eliminar el simposio ' + item.nombre + 
+      .show( 'Está seguro que desea eliminar el simposio ' + item.nombre +
       '\nToda la configuración creada se perderá.', '¿Eliminar Simposio?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,

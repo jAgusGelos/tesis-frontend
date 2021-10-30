@@ -29,7 +29,6 @@ export class EvaluatorComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.getEvaluatorSelected();
-    this.getEvaluators();
   }
 
   /**
@@ -58,6 +57,7 @@ export class EvaluatorComponent implements OnInit {
       this.evaluatorSelectedList = res.data;
       this.evaluatorSelectedId = res.data.map((x: any) => x.idEvaluador);
       this.showListSelected = res.data;
+      this.getEvaluators();
     });
 
   }
@@ -76,7 +76,7 @@ export class EvaluatorComponent implements OnInit {
       });
       this.showListNotSelected = this.evaluatorList.slice();
       this.evaluatorSelectedList.push(item);
-      this.showListSelected.push(item);
+      this.showListSelected = this.evaluatorSelectedList.slice();
     });
   }
 
@@ -99,9 +99,8 @@ export class EvaluatorComponent implements OnInit {
               return x;
             }
           });
-
+          this.showListNotSelected = this.evaluatorList.slice();
         });
-        this.showListNotSelected = this.evaluatorList.slice();
       });
   }
 
@@ -123,8 +122,8 @@ export class EvaluatorComponent implements OnInit {
               return item;
             }
           });
-           this.showListNotSelected.push(item);
-         this.showListSelected = this.evaluatorSelectedList.slice();
+          this.showListNotSelected.push(item);
+          this.showListSelected = this.evaluatorSelectedList.slice();
 
       });
     });

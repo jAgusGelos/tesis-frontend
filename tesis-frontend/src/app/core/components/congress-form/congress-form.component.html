@@ -48,8 +48,8 @@
             <input type='text' class='form-control' formControlName='ano' [ngClass]="{'is-invalid': (formCongress.controls.ano.touched || submitted)
     && formCongress.controls.ano.errors}" onclick='this.select()' />
             <span class='text-danger'
-              *ngIf='(formCongress.controls.ano.touched || submitted) && formCongress.controls.ano.errors?.required'>
-              Requerido
+              *ngIf='(formCongress.controls.ano.touched || submitted ) && formCongress.controls.ano.errors?.required || formCongress.controls.ano.errors?.pattern'>
+              Ingrese un año correcto.
             </span>
           </div>
         </div>
@@ -83,9 +83,9 @@
           <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
           &nbsp;
           <a class="btn btn-primary col-md-4" (click)='submit()'
-            role="button" *ngIf="congress.sede === undefined">Crear Congreso</a>
+            role="button" *ngIf="congress.id === undefined">Crear Congreso</a>
             <a class="btn btn-primary col-md-4" (click)='edit()'
-            role="button" *ngIf="congress.sede !== undefined">Guardar Cambios</a>
+            role="button" *ngIf="congress.id !== undefined">Guardar Cambios</a>
         </div>
 
       </form>

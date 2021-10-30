@@ -14,8 +14,15 @@ export class InscriptionsService {
 
   generatePreference(item: any): any {
     const postItem = {
-      idInscripcion: 1
+      idInscripcion: +item
     };
     return this.httpClient.post(this.apiURL + 'inscripciones/create-preference/', postItem );
+  }
+
+  inscribirme(item: any): any {
+    const postItem = {
+      cuponDescuento: item
+    };
+    return this.httpClient.post(this.apiURL + 'inscripciones/crear-inscripcion/', postItem );
   }
 }
