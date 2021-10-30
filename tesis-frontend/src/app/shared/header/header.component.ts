@@ -48,8 +48,6 @@ export class HeaderComponent implements OnInit {
     if (this.user) {
       this.userService.getLoggedUser().subscribe((res:any)=> {
         this.userLogged = res;
-        console.log('Usuario')
-        console.log(res);
         this.rol = this.authService.getUserRoles();
       },
       );
@@ -90,7 +88,6 @@ export class HeaderComponent implements OnInit {
   isEvaluator():any{
     this.userService.isEvaluator().subscribe((res:any)=>{
       this.evaluator=res.data;
-      console.log(res.data)
     })
   }
 
