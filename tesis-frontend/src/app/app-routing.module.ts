@@ -110,10 +110,13 @@ const routes: Routes = [
     .then(m => m.EvaluatorsModule),
   },
   {
-    path: 'tarifas',
-    loadChildren: () => import('./pages/tarifas/tarifas.module')
-    .then(m => m.TarifasModule),
+    path: 'cupones',
+    loadChildren: () => import('./pages/cupon/cupon.module')
+    .then(m => m.CuponModule)
   },
+  {path: 'tarifas',
+  loadChildren: () => import('./pages/tarifas/tarifas.module')
+  .then(m => m.TarifasModule)},
   {
     path: 'preferenciaSimposio',
     loadChildren: () => import('./pages/symposium-preference/symposium-preference.module')
@@ -200,6 +203,21 @@ const routes: Routes = [
     path: 'cancelacionEvaluacionPaper/:token',
     loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper.module')
     .then(m => m.CancelEvaluatePaperModule)
+  },
+  {
+    path: 'pagoInscripcionSuccess/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-success/payment-success.module')
+    .then(m => m.PaymentSuccessModule)
+  },
+  {
+    path: 'pagoInscripcionPending/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-pending/payment-pending.module')
+    .then(m => m.PaymentPendingModule)
+  },
+  {
+    path: 'pagoInscripcionFailure/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-failure/payment-failure.module')
+    .then(m => m.PaymentFailureModule)
   }
 ];
 
