@@ -69,5 +69,8 @@ export class UserService {
   acceptEvaluator(item: string): any{
     return this.httpClient.put(this.apiURL + 'articulos/aceptar-evaluador/' + item, {});
   }
+  isEvaluator():any{
+    return this.httpClient.get(this.apiURL + 'articulos/es-evaluador/')
+  }
 
 }

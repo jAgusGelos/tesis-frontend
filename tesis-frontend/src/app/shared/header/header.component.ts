@@ -14,7 +14,7 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  evaluator = false;
   user = false;
   userLogged : IUserComplete ={ 
                id: '',
@@ -46,11 +46,17 @@ export class HeaderComponent implements OnInit {
       this.user = true;
     }
     if (this.user) {
-      this.rol = this.authService.getUserRoles();
       this.userService.getLoggedUser().subscribe((res:any)=> {
-        this.userLogged = res;})
-      this.rol = this.authService.getUserRoles();
+        this.userLogged = res;
+        console.log('Usuario')
+        console.log(res);
+        this.rol = this.authService.getUserRoles();
+      },
+      );
+      this.isEvaluator();
     }
+
+
   }
 
   toast(): void {
@@ -81,4 +87,11 @@ export class HeaderComponent implements OnInit {
       this.router.navigateByUrl('/');
     });
   }
+  isEvaluator():any{
+    this.userService.isEvaluator().subscribe((res:any)=>{
+      this.evaluator=res.data;
+      console.log(res.data)
+    })
+  }
+
 }
