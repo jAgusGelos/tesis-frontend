@@ -1,0 +1,141 @@
+a{
+  cursor: pointer;
+}
+
+.autoresSelected{
+  border:  1px solid black;
+  padding: 0.3rem;
+  margin-top: 1;
+  color: black;
+  text-decoration: none;
+  background-color: #f27289;
+  margin-right: 0.5rem;
+}
+
+ul{
+  display: flex;
+  justify-content: space-between;
+}
+
+.fa{
+  justify-content: flex-end;
+}
+
+.table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.valid{
+  background-color: #bee895;
+}
+
+
+.card-title{
+  font-weight:300;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-form{
+	width:75%;
+}
+
+.form-group{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+
+.btn-primary{
+  background-color: #3CAFE0 ;
+  border: none;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 3rem;
+  padding-bottom: 2rem;  margin-bottom: 1rem;
+  margin-top: 1rem;
+  background-color: #F4F4F4;
+
+}
+
+
+.login-form{
+  width:100%;
+}
+
+.form-group{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+
+}
+
+.card-title{
+
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight:300;
+
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  max-width: fit-content;
+}
+
+hr {
+  border:#00609C solid 1px;
+
+}
+
+.thead{
+  background-color: #C8E5F1;
+}
+
+input{
+  border: none;
+  border-bottom: 1px solid #8d999e ;
+}
+
+@media (min-width: 768px) {
+  .card{
+    max-width: 75%;
+  }
+
+
+  .card-body{
+    padding: auto;
+  }
+
+  hr{
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+
+ }
+
+ .option{
+   width: auto;
+ }
+
+#spanEvaluacion {
+  font-weight: 500;
+}
+
+#file {
+  color: #3CAFE0;
+}
+
+#file:hover {
+  color: #00609C;
+}
+
+
+
+
+

@@ -1,0 +1,70 @@
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center">Revisión de paper: <b>{{ paper.nombre | titlecase }}</b></h3>
+      <hr>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <p><span id="spanEvaluacion">Simposio:</span></p>
+      </div>
+      <div class="col-md-3">
+        <p>{{paper.nombre_simposio}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <p><span id="spanEvaluacion">Archivo:</span></p>
+      </div>
+      <div class="col-md-3">
+        <a id="file" title="Abrir archivo" (click)="getArchivo()">{{paper.url}}</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <label for="evaluacion" class="col-form-label"><span id="spanEvaluacion">Resultado:</span></label>
+      </div>
+      <div class="col-md-3">
+        <h5 class="modal-title" id="detallesModalLabel">
+          <span class="badge bg-primary" [class.bg-warning]="paper.idEstado === 5"
+                                         [class.text-dark]="paper.idEstado === 5"
+                                         [class.bg-success]="paper.idEstado === 6 || paper.idEstado === 8"
+                                         [class.bg-danger]="paper.idEstado === 7 || paper.idEstado === 9">{{paper.nombre_estado}}</span></h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <label for="observacion-autor" class="col-form-label"><span id="spanEvaluacion">Observación para el Autor:</span></label>
+      </div>
+      <div class="col-md-8">
+        <textarea class="form-control" disabled id="observacion-autor">{{paper.observacion}}</textarea>
+      </div>
+    </div>
+    <div class="card-text text-right">
+      <table class="table table-hover table-bordered">
+        <thead class='thead text-center'>
+          <tr>
+            <th class="col-md-2">Aspecto</th>
+            <th class="col-md-3">Descripción del aspecto</th>
+            <th class="col-md-2">Evaluador 1</th>
+            <th class="col-md-2">Evaluador 2</th>
+            <th class="col-md-2">Evaluador 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class='align-items-center' *ngFor="let item of detalles">
+            <td class="text-center">{{item.aspecto}}</td>
+            <td>{{item.descripcion}}</td>
+            <td class="text-center">{{item.res1}}</td>
+            <td class="text-center">{{item.res2}}</td>
+            <td class="text-center">{{item.res3}}</td>
+          </tr>
+        </tbody>
+      </table>
+        <div class="row justify-content-md-center">
+          <a class="btn btn-secondary col-md-3" (click)='cancel()' role="button">Volver</a>
+        </div>
+    </div>
+  </div>
+</div>

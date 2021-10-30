@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { EvaluatePaperService } from 'src/app/core/services/evaluate-paper.service';
 import { PaperService } from 'src/app/core/services/paper.service';
-import { EvaluationService } from 'src/app/core/services/evaluation.service';
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 
 
@@ -72,35 +71,35 @@ export class EvaluateArticleComponent implements OnInit {
 
   saveEvaluation(ev: any): void {
     this.paperEvalService.editarEvaluacion(ev).subscribe((res: any) => {
-      this.getPapers();
       if (ev.submit) {
         this.submitEvaluation(ev);
         return;
       } else {
-        alert('La evaluación ha sido guardada!');
+        this.getPapers();
+        this.toastr.success('La evaluación ha sido guardada!');
       }
     });
   }
 
   submitEvaluation(ev): void {
     this.paperEvalService.enviarEvaluacion(ev).subscribe((res: any) => {
-      alert('La evaluación ha sido enviada!');
+      this.toastr.success('La evaluación ha sido enviada!');
       this.toggleFlagEvaluate();
+      this.getPapers();
     });
   }
 
   acceptEvaluate(paper): void {
     this.paper = paper;
     this.evaluationService.acceptEvaluationPaper(this.paper).subscribe(
-      (res:any) => {this.toastr.success('La evaluación ha sido aceptada.')}
-    )    
-   }  
-  
+      (res: any) => {this.toastr.success('La evaluación ha sido aceptada.'); }
+    );
+   }
+
   cancelEvaluate(paper): void {
     this.paper = paper;
     this.evaluationService.cancelarEvaluationPaper(this.paper).subscribe(
-      (res: any) =>{this.toastr.success('La evaluación ha sido rechazada.');
-    })
-
+      (res: any) => {this.toastr.success('La evaluación ha sido rechazada.'); }
+      );
   }
 }

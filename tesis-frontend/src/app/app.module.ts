@@ -9,9 +9,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './core/services/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AcceptEvaluatorComponent } from './pages/emails/accept-evaluator/accept-evaluator.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AcceptEvaluatorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

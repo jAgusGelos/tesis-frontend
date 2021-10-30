@@ -10,24 +10,16 @@ import { IntPaper } from 'src/app/core/models/IntPaper';
 })
 export class EvaluatePapersChairSecComponent implements OnInit {
 
-
-  constructor(private paperService: PaperService,
-              private evaluationService: EvaluationService) { }
-
-
-
   edit = false;
   articulos = [];
   vectorArticulos = [];
   detailed = false;
-  articuloSeleccionado: {articulo: IntPaper, evUno, evDos, evTres};
 
   // Detalles
   index = 0;
-  criterios = [];
+  observacionAutor = '';
   detalles = [];
   detNombreArticulo = '';
-  detResponsable = '';
   detEstado = {
     id: 0,
     nombre: ''
@@ -41,8 +33,9 @@ export class EvaluatePapersChairSecComponent implements OnInit {
                   {value: 3, nombre: 'Aceptable'},
                   {value: 4, nombre: 'Bueno'},
                   {value: 5, nombre: 'Muy bueno'}];
-  messageHeader = '';
-  messageBody = '';
+
+  constructor(private paperService: PaperService,
+              private evaluationService: EvaluationService) { }
 
   ngOnInit(): void {
     this.getArticulos();
@@ -79,7 +72,13 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     }
     const idArticulo = this.vectorArticulos[index].id;
     const calificacion = estado;
-    this.paperService.calificarPaper(idArticulo, calificacion).subscribe((res: any) => {
+    const obs = document.getElementById('observacion-autor') as HTMLTextAreaElement;
+    this.observacionAutor = obs.value;
+    this.articulos[index].observacion = obs.value;
+    this.vectorArticulos[index].observacion = obs.value;
+    this.paperService.calificarPaper(idArticulo, calificacion, this.observacionAutor).subscribe((res: any) => {
+      const sel = document.getElementById('selectStateDetalle') as HTMLSelectElement;
+      sel.value = '';
       this.setBadges(index, calificacion);
       this.toggleEdit(index);
     });
@@ -131,7 +130,9 @@ export class EvaluatePapersChairSecComponent implements OnInit {
     const art = this.vectorArticulos[index];
     const ev = art.evaluaciones;
     this.detNombreArticulo = art.nombre;
-    this.detResponsable = art.responsable;
+    const obs = document.getElementById('observacion-autor') as HTMLTextAreaElement;
+    obs.value = art.observacion;
+    this.observacionAutor = art.observacion;
     this.detEstado.id = art.idEstado;
     this.detEstado.nombre = art.estado;
     if (ev.length >= 1) {
@@ -167,20 +168,73 @@ export class EvaluatePapersChairSecComponent implements OnInit {
         let calif1 = null;
         let calif2 = null;
         let calif3 = null;
+        let rec1 = null;
+        let rec2 = null;
+        let rec3 = null;
+        let obs1 = null;
+        let obs2 = null;
+        let obs3 = null;
+        let obsInterna1 = null;
+        let obsInterna2 = null;
+        let obsInterna3 = null;
         for (let i = 0; i < items.length; i++) {
-          if (ev1.itemsEvaluados[i] !== undefined) { calif1 = ev1.itemsEvaluados[i].calificacion; }
-          if (ev2.itemsEvaluados[i] !== undefined) { calif2 = ev2.itemsEvaluados[i].calificacion; }
-          if (ev3.itemsEvaluados[i] !== undefined) { calif3 = ev3.itemsEvaluados[i].calificacion; }
+          if (ev1 !== undefined) {
+            if (ev1.itemsEvaluados[i] !== undefined) { calif1 = ev1.itemsEvaluados[i].calificacion; }
+            else { calif1 = 0; }
+          } else { calif1 = 0; }
+          if (ev2 !== undefined) {
+            if (ev2.itemsEvaluados[i] !== undefined) { calif2 = ev2.itemsEvaluados[i].calificacion; }
+            else { calif2 = 0; }
+          } else { calif2 = 0; }
+          if (ev3 !== undefined) {
+            if (ev3.itemsEvaluados[i] !== undefined) { calif3 = ev3.itemsEvaluados[i].calificacion; }
+            else { calif3 = 0; }
+          } else { calif3 = 0; }
           this.detalles.push({aspecto: items[i].nombre,
                               res1: this.puntuaciones[calif1].nombre,
                               res2: this.puntuaciones[calif2].nombre,
                               res3: this.puntuaciones[calif3].nombre});
           calif1 = null, calif2 = null, calif3 = null;
         }
+        if (this.vectorArticulos[index].evaluaciones[0] !== undefined) {
+          rec1 = this.vectorArticulos[index].evaluaciones[0].recomendacion;
+          obs1 = this.vectorArticulos[index].evaluaciones[0].observacion;
+          obsInterna1 = this.vectorArticulos[index].evaluaciones[0].observacionInterna;
+        } else {
+          rec1 = null;
+          obs1 = null;
+          obsInterna1 = null;
+        }
+        if (this.vectorArticulos[index].evaluaciones[1] !== undefined) {
+          rec2 = this.vectorArticulos[index].evaluaciones[1].recomendacion;
+          obs2 = this.vectorArticulos[index].evaluaciones[1].observacion;
+          obsInterna2 = this.vectorArticulos[index].evaluaciones[1].observacionInterna;
+        } else {
+          rec2 = null;
+          obs2 = null;
+          obsInterna2 = null;
+        }
+        if (this.vectorArticulos[index].evaluaciones[2] !== undefined) {
+          rec3 = this.vectorArticulos[index].evaluaciones[2].recomendacion;
+          obs3 = this.vectorArticulos[index].evaluaciones[2].observacion;
+          obsInterna3 = this.vectorArticulos[index].evaluaciones[2].observacionInterna;
+        } else {
+          rec3 = null;
+          obs3 = null;
+          obsInterna3 = null;
+        }
         this.detalles.push({aspecto: 'Recomendación',
-          res1: this.vectorArticulos[index].evaluaciones[0].recomendacion,
-          res2: this.vectorArticulos[index].evaluaciones[1].recomendacion,
-          res3: this.vectorArticulos[index].evaluaciones[2].recomendacion});
+          res1: rec1,
+          res2: rec2,
+          res3: rec3});
+        this.detalles.push({aspecto: 'Observación para el Autor',
+          res1: obs1,
+          res2: obs2,
+          res3: obs3});
+        this.detalles.push({aspecto: 'Observación Interna',
+          res1: obsInterna1,
+          res2: obsInterna2,
+          res3: obsInterna3});
       });
     });
     const btnDetalle = document.getElementById('activar-modal');
@@ -221,6 +275,8 @@ export class EvaluatePapersChairSecComponent implements OnInit {
           idSimposio: x.idSimposio,
           nombre: x.nombre,
           responsable: x.responsable,
+          observacion: x.observacion,
+          observacionInterna: x.observacionInterna,
           url: x.url,
           edit: false
         };
@@ -255,7 +311,12 @@ export class EvaluatePapersChairSecComponent implements OnInit {
   }
 
   modalOnClose(index): void {
+    const sel = document.getElementById('selectStateDetalle') as HTMLSelectElement;
+    sel.value = '';
+    const obs = document.getElementById('observacion-autor') as HTMLTextAreaElement;
+    obs.value = '';
     this.detalles = [];
+    document.getElementById('selectStateDetalle').classList.remove('is-invalid');
     this.vectorArticulos[index].edit = false;
   }
 

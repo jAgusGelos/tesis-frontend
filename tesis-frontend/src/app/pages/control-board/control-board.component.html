@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-3">
               <button type="reset" class='redondo' disabled
-                [ngClass]="item.nomEval[0].idEstadoEvaluacion === 1 ? 'rojo' : 'verde' "></button>
+                [ngClass]="item.nomEval[0].is_active ? 'rojo' : 'verde' "></button>
             </div>
           </div>
           <div class="row px-2 pt-1">
@@ -53,7 +53,7 @@
             <select name="eval" class="form-control" (change)="selectOption1($event.target.value, item)">
               <option hidden [selected]='item.idEval1===null'>Evaluador 1</option>
               <option *ngFor="let eval of evaluatorList" value='{{eval.idEvaluador}}'
-                [selected]='item.idEval1===eval.idEvaluador'>{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
+                [selected]='item.idEval1 === eval.idEvaluador'>{{ eval.nombreEv }} {{eval.apellidoEv}}</option>
             </select>
           </div>
         </td>
@@ -67,7 +67,7 @@
             </div>
             <div class="col-md-3">
               <button type="reset" class='redondo' disabled
-                [ngClass]="item.nomEval[1].idEstadoEvaluacion === 1 ? 'rojo' : 'verde' "></button>
+                [ngClass]="item.nomEval[1].is_active ? 'rojo' : 'verde' "></button>
             </div>
           </div>
           <div class="row px-2 pt-1">
@@ -102,7 +102,7 @@
             </div>
             <div class="col-md-3">
               <button type="reset" class='redondo' disabled
-                [ngClass]="item.nomEval[2].idEstadoEvaluacion === 1 ? 'rojo' : 'verde' "></button>
+                [ngClass]="item.nomEval[2].is_active ? 'rojo' : 'verde' "></button>
             </div>
           </div>
           <div class="row px-2 pt-1">

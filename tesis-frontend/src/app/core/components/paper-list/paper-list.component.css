@@ -66,3 +66,17 @@ td {
   padding-top: 1rem;
   margin-bottom: 0;
 }
+
+a:hover {
+  cursor: pointer;
+  font-size: 110%;
+}
+
+.rev {
+  color: #00609C;
+  text-decoration: none;
+}
+
+.rev:hover {
+  color:#3CAFE0 ;
+}

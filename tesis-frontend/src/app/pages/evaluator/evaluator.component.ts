@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CustomToastComponent } from 'src/app/core/components/custom-toast/custom-toast.component';
-import { IEvaluator } from 'src/app/core/models/iEvaluator';
+
 import { EvaluatorService } from 'src/app/core/services/evaluator.service';
 
 @Component({
@@ -107,7 +107,7 @@ export class EvaluatorComponent implements OnInit {
 
   toggleRemoveHandled(item: any): void {
     this.toastr
-      .show( 'Está seguro que desea eliminar el evaluador ' + 
+      .show( 'Está seguro que desea eliminar el evaluador ' +
       item.nombreEv + ' ' + item.apellidoEv + '? '+ '\nToda la configuración creada se perderá', '¿Eliminar Evaluador?', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
@@ -125,7 +125,7 @@ export class EvaluatorComponent implements OnInit {
           });
            this.showListNotSelected.push(item);
          this.showListSelected = this.evaluatorSelectedList.slice();
-          
+
       });
     });
   }

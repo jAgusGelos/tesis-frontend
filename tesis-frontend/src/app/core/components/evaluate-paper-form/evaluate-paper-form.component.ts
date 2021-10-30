@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { CongressRoutingModule } from 'src/app/pages/congress/congress-routing.module';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-evaluate-paper-form',
@@ -31,12 +33,13 @@ export class EvaluatePaperFormComponent implements OnInit {
                      {value: 6, nombre: 'Aprobar'},
                      {value: 7, nombre: 'Aprobar Fuertemente'}];
 
-  constructor() { }
+  constructor( private toastr: ToastrService ) { }
 
   ngOnInit(): void {
     this.evaluacion = {itemsEvaluacion: this.items,
       idRecomendacion: this.paper.recomendacion,
-      observacion: this.paper.observaciones};
+      observacion: this.paper.observaciones,
+      observacionInterna: this.paper.observacionInterna};
     window.scrollTo(0, 0);
     this.getItems(this.paper.idArticulo);
   }
@@ -55,21 +58,28 @@ export class EvaluatePaperFormComponent implements OnInit {
   submit(): void {
     for (const item of this.items) {
       if (item.puntuacion == null) {
-        alert('Todos los aspectos requieren evaluación!');
+        this.toastr.warning('Todos los aspectos requieren evaluación!');
         return;
       }
     }
     if (this.evaluacion.idRecomendacion == null) {
-      alert('Se requiere seleccionar una recomendación final!');
+      this.toastr.warning('Se requiere seleccionar una recomendación final!');
       return;
     }
     if (this.evaluacion.observacion === '') {
-      alert('Se requiere escribir una observación!');
+      this.toastr.warning('Se requiere escribir una observación para el autor.');
       return;
     }
-    if (confirm('Si envía la evaluación, después no podrá editarla. Seguro desea continuar?')) {
+    this.toastr
+    .show( 'Si envía la evaluación, después no podrá editarla. Seguro desea continuar?', 'Enviar Evaluación', {
+      toastComponent: CustomToastComponent,
+      disableTimeOut: true,
+      tapToDismiss: false,
+      enableHtml: true
+    })
+    .onAction.subscribe(() => {
       const ev = this.save(true);
-    }
+    });
   }
 
   handleItems(): void {
@@ -84,9 +94,14 @@ export class EvaluatePaperFormComponent implements OnInit {
     this.evaluacion.itemsEvaluacion = vector;
   }
 
-  setObservacion(): void {
-    const obs = document.getElementById('observacion') as HTMLTextAreaElement;
+  setObservacionAutor(): void {
+    const obs = document.getElementById('observacion-autor') as HTMLTextAreaElement;
     this.evaluacion.observacion = obs.value;
+  }
+
+  setObservacionInterna(): void {
+    const obs = document.getElementById('observacion-interna') as HTMLTextAreaElement;
+    this.evaluacion.observacionInterna = obs.value;
   }
 
   setPuntuacion(value, index): void {
@@ -107,8 +122,18 @@ export class EvaluatePaperFormComponent implements OnInit {
     }
   }
 
-  cancel(): void {
-    this.CancelEvent.emit();
+  toast(): void {
+    this.toastr
+    .show( 'Esta seguro que desea borrar', 'Confirmar borrado?', {
+      toastComponent: CustomToastComponent,
+      disableTimeOut: true,
+      tapToDismiss: false,
+      enableHtml: true
+    })
+    .onAction.subscribe(() => {
+      // Aca se hace el camino feliz
+      console.log('Camino feliz');
+    });
   }
 
   getItems(id): void {
@@ -117,5 +142,9 @@ export class EvaluatePaperFormComponent implements OnInit {
 
   getFile(id): void {
     this.GetFileEvent.emit(id);
+  }
+
+  cancel(): void {
+    this.CancelEvent.emit();
   }
 }

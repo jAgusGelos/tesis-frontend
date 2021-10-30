@@ -9,7 +9,7 @@
       <div class="col-auto col-form-label"><label for="btn-group-filtros">Filtros</label></div>
       <div class="btn-group col-auto" id="btn-group-filtros" role="group">
         <button type="button" class="btn btn-outline-primary" (click)="filter(0)">Todos</button>
-        <button type="button" class="btn btn-outline-primary" (click)="filter(4)">Corregidos</button>
+        <button type="button" class="btn btn-outline-primary" (click)="filter(4)">Pendiente</button>
         <button type="button" class="btn btn-outline-primary" (click)="filter(6)">Aprobados</button>
         <button type="button" class="btn btn-outline-primary" (click)="filter(7)">Rechazados</button>
         <button type="button" class="btn btn-outline-primary" (click)="filter(5)">Reentrega</button>
@@ -67,7 +67,7 @@
 <button hidden id="activar-modal" data-bs-toggle="modal" data-bs-target="#detallesModal"></button>
 <!-- Modal Detalles -->
 <div class="modal fade" id="detallesModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
           <h5 class="modal-title" id="detallesModalLabel">
@@ -79,7 +79,7 @@
       </div>
       <div class="modal-body">
         <div class="container">
-            <table class="table table-bordered">
+            <table class="table table-hover table-bordered">
               <thead class="text-center">
                 <tr>
                   <th>Aspecto</th>
@@ -97,10 +97,10 @@
               </tbody>
             </table>
             <div class="row row-detalle align-items-center">
-              <div class="col-auto">
+              <div class="col-md-3">
                 <label for="selectStateDetalle" class="col-form-label"><span id="spanEvaluacion">Evaluación:</span></label>
               </div>
-              <div class="col-auto">
+              <div class="col-md-4">
                 <select class="form-select" id="selectStateDetalle">
                   <option disabled selected value=""></option>
                   <option value="1" *ngIf="detEstado.id !== 6 && detEstado.id !== 8">Aprobar</option>
@@ -108,8 +108,19 @@
                   <option value="3" *ngIf="detEstado.id !== 5">Necesita Reentrega</option>
               </select>
               </div>
+            </div>
+            <div class="row row-detalle">
+              <div class="col-md-3">
+                <label for="observacion-autor" class="col-form-label"><span id="spanEvaluacion">Observación para el Autor:</span></label>
+              </div>
+              <div class="col-md-8">
+                <textarea class="form-control" id="observacion-autor">{{observacionAutor}}</textarea>
+              </div>
+            </div>
+            <div class="row row-detalle">
+              <div class="col-md-3"></div>
               <div class="col-auto">
-                <a class="btn btn-outline-success" id="btnGuardar" (click)="evaluarDetalle(index)">Guardar <i class="fa fa-save fa-lg"></i></a>
+                <a class="btn btn-outline-success" id="btnGuardar" (click)="evaluarDetalle(index)">Guardar Evaluación <i class="fa fa-save fa-lg"></i></a>
               </div>
             </div>
         </div>
@@ -121,26 +132,6 @@
         <div class="col-auto">
           <button type="button" class="btn btn-secondary btn-border" data-bs-dismiss="modal" (click)="modalOnClose(index)">Cerrar</button>
         </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-<!-- Button trigger modal -->
-<button hidden id="modal-mensaje" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
-<!-- Modal Mensaje -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{messageHeader}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        {{messageBody}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

@@ -15,7 +15,6 @@ import { CoreModule } from 'src/app/core/core.module';
     CallForPapersRoutingModule,
     CoreModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [CallForPapersComponent]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CallForPapersModule { }

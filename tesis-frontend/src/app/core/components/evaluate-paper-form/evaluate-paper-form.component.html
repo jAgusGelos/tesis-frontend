@@ -46,10 +46,18 @@
       <!-- OBSERVACIONES -->
       <div class="row g-3 justify-content-md-center">
         <div class="col col-md-2">
-          <label for="observacion" class="col-form-label">Observación</label>
+          <label for="observacion-autor" class="col-form-label">Observación para el Autor</label>
         </div>
         <div class="col col-md-4">
-          <textarea class="form-control" id="observacion" (keyup)="setObservacion()">{{paper.observaciones}}</textarea>
+          <textarea class="form-control" id="observacion-autor" (keyup)="setObservacionAutor()">{{paper.observaciones}}</textarea>
+        </div>
+      </div>
+      <div class="row g-3 justify-content-md-center">
+        <div class="col col-md-2">
+          <label for="observacion-interna" class="col-form-label">Observación Interna</label>
+        </div>
+        <div class="col col-md-4">
+          <textarea class="form-control" id="observacion-interna" (keyup)="setObservacionInterna()">{{paper.observacionInterna}}</textarea>
         </div>
       </div>
       <!-- BOTONES -->

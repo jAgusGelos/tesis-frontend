@@ -33,6 +33,18 @@ export class SymposiumService {
     return this.httpClient.get(this.apiURL + 'congresos/lista-simposios/');
   }
 
+  getEvaluatorSymposium(): any {
+    return this.httpClient.get(this.apiURL + 'articulos/consultar-simposiosEvaluador/');
+  }
+
+  deleteEvaluatorSymposium(simposio): any {
+    return this.httpClient.delete(this.apiURL + 'articulos/eliminar-simposioEvaluador/?idSimposio=' + simposio.id, simposio);
+  }
+
+  postEvaluatorSymposium(data): any {
+    return this.httpClient.post(this.apiURL + 'articulos/asignarSimposioEvaluador/', data);
+  }
+
   putSymposium(symposium: ISymposium): any {
     const puttSymp = {
       idSimposio: symposium.id,
@@ -68,10 +80,10 @@ export class SymposiumService {
   }
 
   getSymposiumsChairs(): any {
-    return this.httpClient.get(this.apiURL + 'congresos/devolverChairsSimposios/')
-  //Solicitar esta función al back
+    return this.httpClient.get(this.apiURL + 'congresos/devolverChairsSimposios/');
+  // Solicitar esta función al back
   }
-  
+
   getSymposiumByChair(chair: any): any {
     return this.httpClient.get(this.apiURL + 'congresos/simposio-por-chair/' + chair.id);
   }
