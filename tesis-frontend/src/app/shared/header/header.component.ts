@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IUser } from 'src/app/core/models/IUser';
+import { IUserComplete } from 'src/app/core/models/IUserComplete';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { CustomToastComponent, IToastButton } from 'src/app/core/components/custom-toast/custom-toast.component';
@@ -12,12 +14,31 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  evaluator = false;
   user = false;
+  userLogged : IUserComplete ={ 
+               id: '',
+               dni: 0,
+               tipoDni: '',
+               apellido: '',
+               nombre: '',
+               fechaNacimiento: '',
+               nacionalidad: '',
+               provincia: '',
+               localidad: '',
+               calle: '',
+               nroCalle: 1,
+               piso: '',
+               dpto: '',
+               celular: 0,
+               email: '',
+};
+
   rol: number[] = [];
   constructor(private authService: AuthService,
               private toastr: ToastrService,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     const idToken = localStorage.getItem('id_token');
@@ -25,8 +46,15 @@ export class HeaderComponent implements OnInit {
       this.user = true;
     }
     if (this.user) {
-      this.rol = this.authService.getUserRoles();
+      this.userService.getLoggedUser().subscribe((res:any)=> {
+        this.userLogged = res;
+        this.rol = this.authService.getUserRoles();
+      },
+      );
+      this.isEvaluator();
     }
+
+
   }
 
   toast(): void {
@@ -57,4 +85,10 @@ export class HeaderComponent implements OnInit {
       this.router.navigateByUrl('/');
     });
   }
+  isEvaluator():any{
+    this.userService.isEvaluator().subscribe((res:any)=>{
+      this.evaluator=res.data;
+    })
+  }
+
 }

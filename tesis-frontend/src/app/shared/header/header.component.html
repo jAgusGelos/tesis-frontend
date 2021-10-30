@@ -70,6 +70,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/preferenciaSimposio" *ngIf="rol.includes(3) && user">Preferencia de Simposios</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/preferenciaSimposio" *ngIf="evaluator">Preferencia de Simposios</a>
+        </li>
         <!-- AUTOR -->
         <li class="nav-item">
           <a class="nav-link" href="/usuario" *ngIf="rol.includes(4) && user">Inscripcion</a>
@@ -91,7 +94,16 @@
     </div>
     <div class="logged  text-right align-items-right d-none d-lg-block">
       <a *ngIf='!user' type="button" class="btn btn-primary" href="/login">Iniciar Sesión</a>
-      <button *ngIf='user' type="button" class="btn btn-primary" (click)="logout()">Cerrar Sesión</button>
+      <div *ngIf='user' class="btn-group">
+        <li class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+{{this.userLogged.nombre}} {{this.userLogged.apellido}}  </li>
+        <ul class="dropdown-menu dropdown-menu-lg-end">
+          <li><a class="dropdown-item" type="button" href="/usuario">Mi Perfil</a></li>
+          <li><a class="dropdown-item" type="button" (click)='logout()'>Cerrar Sesión</a></li>
+        </ul>
+      </div>
+      <!-- <button *ngIf='user' type="button" class="btn btn-primary" (click)="logout()">Cerrar Sesión</button> -->
+      
     </div>
   </div>
 </nav>

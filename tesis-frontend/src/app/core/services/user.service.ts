@@ -69,11 +69,14 @@ export class UserService {
   acceptEvaluator(item: string): any{
     return this.httpClient.put(this.apiURL + 'articulos/aceptar-evaluador/' + item, {});
   }
+  isEvaluator(): any{
+    return this.httpClient.get(this.apiURL + 'articulos/es-evaluador/');
+  }
   cancelAuthor(item: string): any{
     return this.httpClient.delete(this.apiURL + 'articulos/rechazar-autoria/' + item, {});
   }
-  cancelEvaluator(item:string):any{
-    return this.httpClient.delete(this.apiURL + 'articulos/rechazar-evaluador' + item, {})
+  cancelEvaluator(item: string): any{
+    return this.httpClient.delete(this.apiURL + 'articulos/rechazar-evaluador' + item, {});
   }
 
 }

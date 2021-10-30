@@ -34,6 +34,16 @@ export class HomeComponent implements OnInit {
           };
         });
       });
-    }
+    };
+
+  verInfoPublica(congress): void {
+    const url = '/informacionCongreso/' + congress.id;
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }
 

@@ -36,6 +36,10 @@ import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.compon
 import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
+import { ComisionPermanenteOrganizacionComponent } from './components/comision-permanente-organizacion/comision-permanente-organizacion.component';
+import { ComisionEjecutivaOrganizacionComponent } from './components/comision-ejecutiva-organizacion/comision-ejecutiva-organizacion.component';
+import { ComiteOrganizadorLocalComponent } from './components/comite-organizador-local/comite-organizador-local.component';
+import { ComiteAcademicoListComponent } from './components/comite-academico-list/comite-academico-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
@@ -79,6 +83,10 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     TarifaFormComponent,
     AsignarPaperEvaluadorListComponent,
     SearchComponent,
+    ComisionPermanenteOrganizacionComponent,
+    ComisionEjecutivaOrganizacionComponent,
+    ComiteOrganizadorLocalComponent,
+    ComiteAcademicoListComponent,
     PaperReadyComponent,
     RevisionAutorComponent,
     CustomToastComponent,
@@ -128,6 +136,10 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     CustomToastComponent,
     AsignarPaperEvaluadorListComponent,
     SearchComponent,
+    ComisionPermanenteOrganizacionComponent,
+    ComisionEjecutivaOrganizacionComponent,
+    ComiteOrganizadorLocalComponent,
+    ComiteAcademicoListComponent,
     PaperReadyComponent,
     RevisionAutorComponent
   ],

@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <br>
+  <h2 class="text-center">Información General</h2>
+  <br>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="comiteOrganizador-tab" data-bs-toggle="tab" data-bs-target="#comiteOrganizador" type="button" role="tab" aria-controls="comiteOrganizador" aria-selected="true">Comité Organizador</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Comité Académico</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" >Evaluadores</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="fechas-tab" data-bs-toggle="tab" data-bs-target="#fechas" type="button" role="tab" aria-controls="fechas" aria-selected="false" >Fechas Importantes</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="agenda-tab" data-bs-toggle="tab" data-bs-target="#agenda" type="button" role="tab" aria-controls="agenda" aria-selected="false">Agenda</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <!-- Comité Organizador -->
+    <div class="tab-pane fade show active" id="comiteOrganizador" role="tabpanel" aria-labelledby="comiteOrganizador-tab">
+      <div class="=container-fluid">
+        <hr>
+        <h2 class="text-center">Comité Organizador</h2>
+        <hr>
+        <div class="row row-cols-1 row-cols-md-3 g-4 grid"> 
+            <app-comision-permanente-organizacion></app-comision-permanente-organizacion>  
+            <app-comision-ejecutiva-organizacion></app-comision-ejecutiva-organizacion>
+            <app-comite-organizador-local></app-comite-organizador-local>
+        </div>
+      </div>
+    </div>
+    <!-- Comité Académico -->
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div id="Simposios">
+        <br>
+      <h3 class="text-center">Comité Académico</h3>
+      <hr id="hr">
+      <br>
+      <div class="text-center">
+        <h5>{{chairPrincipal}}</h5>
+        <h6 class="text-muted">Chair Principal</h6>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3 g-4 grid"> 
+        <app-comite-academico-list *ngFor="let symposium of chairsList" [symposium]="symposium"></app-comite-academico-list>
+      </div>
+      </div>
+    </div>
+    <!-- Evaluadores -->
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+      <div *ngIf='evaluatorsList.length!==0'>
+        <br>
+        <h3 class="text-center">Evaluadores</h3>
+        <hr>
+        <br>
+        <div class="row">
+            <table class="table text-center">
+              <tbody>
+                <tr class='align-items-center' *ngFor='let ev of evaluatorsList; let i = index'>
+                  <td>{{ev.nombre}} - {{ev.sede}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+    <div *ngIf='evaluatorsList.length==0' class="text-center"><h3>Próximamente</h3></div>
+    </div>
+    <!-- Fechas Importantes -->
+    <div class="tab-pane fade" id="fechas" role="tabpanel" aria-labelledby="fechas-tab">
+      <div *ngIf='agenda.fechaInCongreso!==null'>
+        <br>
+        <h3 class="text-center" >Fechas Importantes</h3>
+        <hr>
+        <br>
+        <p *ngIf='agenda.fechaInCongreso!==null'>Inicio del Congreso: {{agenda.fechaInCongreso}}</p>
+        <p *ngIf='agenda.fechaLimPapers!==null'> Cierre de Recepción de Papers: {{agenda.fechaLimPapers}}</p>
+        <p *ngIf='agenda.fechaProrrogaPapers!==null'>Prórroga de Cierre de Recepción: {{agenda.fechaProrrogaPapers}}</p>
+        <p *ngIf='agenda.fechaFinEvaluacion!==null'>Fecha de Fin de Evaluación: {{agenda.fechaFinEvaluacion}}</p>
+        <!-- <p *ngIf='!agenda.fechaInCongreso!==null'>Fecha límite versión Final: </p>   -->
+        <p *ngIf='agenda.fechaFinInscripTemprana!==null'> Cierre de Inscripción Temprana: {{agenda.fechaFinInsTemprana}}</p>
+        <p *ngIf='agenda.fechaFinInscripTardia!==null'> Cierre de Inscripción Tardía: {{agenda.fechaFinInsTardia}}</p>
+        <br>
+    </div>
+    <div *ngIf='agenda.fechaInCongreso==null' class="text-center"><h3>Próximamente</h3></div>
+    </div>
+    <!-- Agenda -->
+    <div class="tab-pane fade" id="agenda" role="tabpanel" aria-labelledby="agenda-tab">
+      <div *ngIf='programa.length!==0'> 
+        <br>
+        <h3 class="text-center">Agenda</h3>
+        <hr>        
+        <br>
+        <div *ngFor="let d of programa; index as i ">
+          <h5>Día {{i+1}} - {{d.fecha}}</h5>
+        <div *ngFor="let p of d.eventos; index as i">
+          <h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{p.nombre}}</b><span class="text-muted"> {{p.horario}} - {{p.horarioFin}}</span></h6>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{p.aula}}
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="expositores-label">Expositores:</span>
+          <span class="expositores" *ngFor="let e of p.expositores; index as i"> {{e}}
+            <span *ngIf="i !== p.expositores.length-1">, </span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf='programa.length==0' class="text-center" ><h3>Próximamente</h3></div>
+    </div>
+  </div>
+</div>
+
+
