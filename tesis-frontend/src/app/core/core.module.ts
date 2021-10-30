@@ -27,14 +27,13 @@ import { EvaluatePaperListComponent } from './components/evaluate-paper-list/eva
 import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/evaluate-paper-form.component';
 import { EvaluatorListComponent } from './components/evaluator-list/evaluator-list.component';
 import { CongressCardComponent } from './components/congress-card/congress-card.component';
+import { CuponListComponent } from './components/cupon-list/cupon-list.component';
+import { CuponFormComponent } from './components/cupon-form/cupon-form.component';
 import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
 import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
 import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
 import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
-
-
-
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -72,6 +71,8 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     EvaluatePaperFormComponent,
     EvaluatorListComponent,
     CongressCardComponent,
+    CuponListComponent,
+    CuponFormComponent,
     ChangePasswordFormComponent,
     RecoverPasswordFormComponent,
     TarifaListComponent,
@@ -83,7 +84,6 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     CustomToastComponent,
     SearchComponent,
     AsignarPaperEvaluadorListComponent
-
   ],
   imports: [
     CommonModule,
@@ -119,6 +119,8 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     EvaluatePaperFormComponent,
     EvaluatorListComponent,
     CongressCardComponent,
+    CuponListComponent,
+    CuponFormComponent,
     ChangePasswordFormComponent,
     RecoverPasswordFormComponent,
     TarifaListComponent,

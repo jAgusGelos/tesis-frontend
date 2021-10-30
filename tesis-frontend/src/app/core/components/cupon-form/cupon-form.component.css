@@ -9,6 +9,24 @@
   max-width: fit-content;
 }
 
+hr {
+  border:#00609C solid 1px;
+
+}
+
+input{
+  border: none;
+  border-bottom: 1px solid #8d999e ;
+}
+
+a{
+  cursor: pointer;
+}
+
+.label-subtitle {
+  margin-bottom: 10px;
+}
+
 .col{
   margin-bottom: 20px;
 }
@@ -45,25 +63,22 @@
 
 }
 
-a{
-  cursor: pointer;
-}
+.card-title{
 
-hr {
-  border:#00609C solid 1px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight:300;
 
-}
-
-input{
-  border: none;
-  border-bottom: 1px solid #8d999e ;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  max-width: fit-content;
 }
 
 @media (min-width: 768px) {
   .card{
     max-width: 60%;
   }
-
 
   .card-body{
     padding: auto;
@@ -73,8 +88,7 @@ input{
     margin-left: 25%;
     margin-right: 25%;
   }
-
-  }
+}
   
   
   

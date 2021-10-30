@@ -110,10 +110,13 @@ const routes: Routes = [
     .then(m => m.EvaluatorsModule),
   },
   {
-    path: 'tarifas',
-    loadChildren: () => import('./pages/tarifas/tarifas.module')
-    .then(m => m.TarifasModule),
+    path: 'cupones',
+    loadChildren: () => import('./pages/cupon/cupon.module')
+    .then(m => m.CuponModule)
   },
+  {path: 'tarifas',
+  loadChildren: () => import('./pages/tarifas/tarifas.module')
+  .then(m => m.TarifasModule)},
   {
     path: 'preferenciaSimposio',
     loadChildren: () => import('./pages/symposium-preference/symposium-preference.module')

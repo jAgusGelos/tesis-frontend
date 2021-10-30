@@ -64,8 +64,8 @@ export class TarifasComponent implements OnInit {
     idCongreso: this.tarifaService.idCongreso.toString(),
     nombre: '',
     precio: 0,
-    fechaDesde: new Date(),
-    fechaHasta: new Date()};
+    fechaDesde: '',
+    fechaHasta: ''};
     this.new = true;
     this.toggleEdit();
   }

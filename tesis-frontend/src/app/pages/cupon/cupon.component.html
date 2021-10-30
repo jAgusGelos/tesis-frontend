@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div *ngIf="!edit">
+        <app-cupon-list [cuponList]="cuponList"
+        (crearCuponEvent)="newCupon($event)" 
+        (editarCuponEvent)="editCupon($event)" 
+        (eliminarCuponEvent)="deleteCupon($event)">
+        </app-cupon-list>
+    </div>
+    <div *ngIf="edit">
+        <app-cupon-form [new]="new"
+                        [cupon]="cupon"
+                        [tarifaList]="tarifaList"
+                        [selectedTarifa]="selectedTarifa"
+                        [codeValidation]="codeValidation"
+                        (newCuponEvent)="postCupon($event)" 
+                        (editCuponEvent)="putCupon($event)"
+                        (validarCodigoCuponEvent)="validarCodigoCupon($event)"
+                        (cancelEvent)="toggleEdit($event)">
+        </app-cupon-form>
+    </div>
+</div>
