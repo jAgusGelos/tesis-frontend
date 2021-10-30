@@ -139,17 +139,17 @@ const routes: Routes = [
     .then(m => m.DeactivateAccountModule),
   },
   {
-    path: 'cancelacionChairSecundario',
+    path: 'cancelacionChairSecundario/:token',
     loadChildren: () => import('./pages/cancel-sec-chair/cancel-sec-chair.module')
     .then(m => m.CancelSecChairModule),
   },
   {
-    path: 'cancelacionEvaluador',
+    path: 'cancelacionEvaluador/:token',
     loadChildren: () => import('./pages/cancel-evaluator/cancel-evaluator.module')
     .then(m => m.CancelEvaluatorModule),
   },
   {
-    path: 'cancelarAutoria',
+    path: 'cancelarAutoria/:token',
     loadChildren: () => import('./pages/cancel-author/cancel-author.module')
     .then(m => m.CancelAuthorModule),
   },
@@ -185,24 +185,24 @@ const routes: Routes = [
     .then(m => m.ConfirmedAccountModule),
   },
   {
-    path: 'reestablecerContraseña/?token=:token',
-    loadChildren: () => import('./pages/emails/restore-password/restore-password-routing.module')
-    .then(m => m.RestorePasswordRoutingModule),
+    path: 'reestablecerContraseña/:token',
+    loadChildren: () => import('./pages/emails/restore-password/restore-password.module')
+    .then(m => m.RestorePasswordModule),
   },
   {
-    path: 'aceptacionEvaluacionPaper/?token=:token',
-    loadChildren: () => import('./pages/emails/accept-evaluate-paper/accept-evaluate-paper-routing.module')
-    .then(m => m.AcceptEvaluatePaperRoutingModule),
+    path: 'aceptacionEvaluacionPaper/:token',
+    loadChildren: () => import('./pages/emails/accept-evaluate-paper/accept-evaluate-paper.module')
+    .then(m => m.AcceptEvaluatePaperModule),
   },
   {
     path: 'aceptacionRolEvaluador/:token',
-    loadChildren: () => import('./pages/emails/accept-evaluator/accept-evaluator-routing.module')
-    .then(m => m.AcceptEvaluatorRoutingModule),
+    loadChildren: () => import('./pages/emails/accept-evaluator/accept-evaluator.module')
+    .then(m => m.AcceptEvaluatorModule),
   },
   {
     path: 'cancelacionEvaluacionPaper/:token',
-    loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper-routing.module')
-    .then(m => m.CancelEvaluatePaperRoutingModule)
+    loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper.module')
+    .then(m => m.CancelEvaluatePaperModule)
   },
   {
     path: 'pagoInscripcionSuccess/:token',

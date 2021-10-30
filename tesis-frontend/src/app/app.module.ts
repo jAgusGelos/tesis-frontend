@@ -13,7 +13,7 @@ import { ErrorHandlerInterceptor } from './core/services/interceptors/error-hand
 import { AcceptEvaluatorComponent } from './pages/emails/accept-evaluator/accept-evaluator.component';
 
 @NgModule({
-  declarations: [AppComponent, AcceptEvaluatorComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
