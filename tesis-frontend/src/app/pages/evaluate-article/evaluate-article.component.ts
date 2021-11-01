@@ -79,7 +79,7 @@ export class EvaluateArticleComponent implements OnInit {
       } else {
         this.getPapers();
         this.toastr.success('La evaluación ha sido guardada!');
-        this.router.navigateByUrl('/verEvaluaciones');
+        setTimeout(() => {window.location.reload(); }, 200);
       }
     });
   }
@@ -89,7 +89,7 @@ export class EvaluateArticleComponent implements OnInit {
       this.toastr.success('La evaluación ha sido enviada!');
       this.toggleFlagEvaluate();
       this.getPapers();
-      this.router.navigateByUrl('/verEvaluaciones');
+      setTimeout(() => {window.location.reload(); }, 200);
     });
   }
 
