@@ -16,7 +16,7 @@ import { UserService } from 'src/app/core/services/user.service';
 export class HeaderComponent implements OnInit {
   evaluator = false;
   user = false;
-  userLogged : IUserComplete ={ 
+  userLogged : IUserComplete ={
                id: '',
                dni: 0,
                tipoDni: '',
@@ -49,9 +49,9 @@ export class HeaderComponent implements OnInit {
       this.userService.getLoggedUser().subscribe((res:any)=> {
         this.userLogged = res;
         this.rol = this.authService.getUserRoles();
+        this.isEvaluator();
       },
       );
-      this.isEvaluator();
     }
 
 
@@ -85,10 +85,10 @@ export class HeaderComponent implements OnInit {
       this.router.navigateByUrl('/');
     });
   }
-  isEvaluator():any{
-    this.userService.isEvaluator().subscribe((res:any)=>{
-      this.evaluator=res.data;
-    })
+  isEvaluator(): any{
+    this.userService.isEvaluator().subscribe((res: any)=>{
+      this.evaluator = res.data;
+    });
   }
 
 }

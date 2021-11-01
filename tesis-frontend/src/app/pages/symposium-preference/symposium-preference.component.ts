@@ -62,7 +62,7 @@ export class SymposiumPreferenceComponent implements OnInit {
     const aux = [];
     for (const sy of this.symposiumList) {
       for (const my of this.mySymposiums) {
-        if (!(sy.id === my.id)) {
+        if (sy.id !== my.id) {
           aux.push(sy);
         }
       }
