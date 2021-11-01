@@ -13,7 +13,7 @@
         <!-- Todos los Simposios -->
         <div class="col col-md-6">
             <h4 class="text-center">Todos los Simposios</h4>
-            <table class="table text-center table-hover table-bordered">
+            <table class="table text-center table-hover table-bordered" *ngIf="ready">
                 <thead class='thead'>
                   <tr>
                     <th class="col-md-2">Nombre</th>
@@ -21,7 +21,7 @@
                     <th class="col-md-1">Agregar</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody >
                   <tr class='align-items-center' *ngFor='let s of symposiumList; let i = index'>
                     <td>{{s.nombre}}</td>
                     <td>{{s.descripcion}}</td>
