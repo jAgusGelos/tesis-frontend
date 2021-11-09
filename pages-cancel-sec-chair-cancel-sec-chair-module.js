@@ -11,13 +11,29 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CancelSecChairComponent", function() { return CancelSecChairComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var src_app_core_services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/core/services/user.service */ "f4AX");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "5eHb");
+
+
+
 
 class CancelSecChairComponent {
-    constructor() { }
+    constructor(route, service, toastr) {
+        this.route = route;
+        this.service = service;
+        this.toastr = toastr;
+        this.cancel = false;
+    }
     ngOnInit() {
+        this.token = this.route.snapshot.params.token;
+        /* this.service.cancelChairSec('?token' + this.token).subscribe(
+          (res:any) => this.cancel =  true,
+          (err:any) => this.toastr.error('No se pudo cancelar su rol como Chair Secundario.')
+        ) */
     }
 }
-CancelSecChairComponent.ɵfac = function CancelSecChairComponent_Factory(t) { return new (t || CancelSecChairComponent)(); };
+CancelSecChairComponent.ɵfac = function CancelSecChairComponent_Factory(t) { return new (t || CancelSecChairComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"])); };
 CancelSecChairComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CancelSecChairComponent, selectors: [["app-cancel-sec-chair"]], decls: 8, vars: 0, consts: [[1, "container-md", "card"], [1, "card-body"], [1, "contenidos"], [1, "card-title", "text-center"], [1, "card-text", "text-center"]], template: function CancelSecChairComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);

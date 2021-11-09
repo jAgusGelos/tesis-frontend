@@ -88,9 +88,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var src_app_core_services_congress_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/core/services/congress.service */ "VRfU");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _core_components_congress_list_congress_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/components/congress-list/congress-list.component */ "8nnJ");
-/* harmony import */ var _core_components_congress_form_congress_form_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/congress-form/congress-form.component */ "RCgH");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "5eHb");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _core_components_congress_list_congress_list_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/congress-list/congress-list.component */ "8nnJ");
+/* harmony import */ var _core_components_congress_form_congress_form_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/components/congress-form/congress-form.component */ "RCgH");
+
 
 
 
@@ -116,9 +118,10 @@ function CongressComponent_app_congress_form_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("congress", ctx_r1.congress)("sedes", ctx_r1.sedes);
 } }
 class CongressComponent {
-    constructor(congressService, router) {
+    constructor(congressService, router, toastr) {
         this.congressService = congressService;
         this.router = router;
+        this.toastr = toastr;
         this.congressList = [];
         this.edit = false;
         this.congress = {};
@@ -135,7 +138,7 @@ class CongressComponent {
     }
     getSedes() {
         this.congressService.getSedes().subscribe((res) => {
-            this.sedes = res;
+            this.sedes = res.data;
         });
     }
     getCongress() {
@@ -164,7 +167,7 @@ class CongressComponent {
     }
     deleteCongress(item) {
         this.congressService.deleteCongress(item).subscribe((res) => {
-            alert('El congreso ha sido eliminado correctamente');
+            this.toastr.success('El congreso ha sido eliminado correctamente');
             this.router.navigateByUrl('/congreso');
         });
     }
@@ -177,18 +180,19 @@ class CongressComponent {
      */
     toggleCreateCongress(item) {
         this.congressService.postCongress(item).subscribe((res) => {
-            alert('Congreso Creado Correctamente');
+            console.log('Estamos aCAAA');
+            this.toastr.success('Congreso Creado Correctamente');
             this.router.navigateByUrl('/congreso');
         });
     }
     toggleEditCongress(item) {
         this.congressService.putCongress(item).subscribe((res) => {
-            alert('Congreso Modificado Correctamente');
+            this.toastr.success('Congreso Modificado Correctamente');
             this.router.navigateByUrl('/congreso');
         });
     }
 }
-CongressComponent.ɵfac = function CongressComponent_Factory(t) { return new (t || CongressComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_congress_service__WEBPACK_IMPORTED_MODULE_1__["CongressService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+CongressComponent.ɵfac = function CongressComponent_Factory(t) { return new (t || CongressComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_congress_service__WEBPACK_IMPORTED_MODULE_1__["CongressService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"])); };
 CongressComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CongressComponent, selectors: [["app-congress"]], decls: 3, vars: 2, consts: [[1, "container-fluid"], [3, "congressList", "newCongressEvent", "editCongressEvent", "deleteCongressEvent", 4, "ngIf"], [3, "congress", "sedes", "congressEmitter", "cancelCongress", "editCongress", 4, "ngIf"], [3, "congressList", "newCongressEvent", "editCongressEvent", "deleteCongressEvent"], [3, "congress", "sedes", "congressEmitter", "cancelCongress", "editCongress"]], template: function CongressComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, CongressComponent_app_congress_list_1_Template, 1, 1, "app-congress-list", 1);
@@ -199,7 +203,7 @@ CongressComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.edit);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.edit);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _core_components_congress_list_congress_list_component__WEBPACK_IMPORTED_MODULE_4__["CongressListComponent"], _core_components_congress_form_congress_form_component__WEBPACK_IMPORTED_MODULE_5__["CongressFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjb25ncmVzcy5jb21wb25lbnQuY3NzIn0= */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _core_components_congress_list_congress_list_component__WEBPACK_IMPORTED_MODULE_5__["CongressListComponent"], _core_components_congress_form_congress_form_component__WEBPACK_IMPORTED_MODULE_6__["CongressFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjb25ncmVzcy5jb21wb25lbnQuY3NzIn0= */"] });
 
 
 /***/ })

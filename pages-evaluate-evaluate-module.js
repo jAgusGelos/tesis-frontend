@@ -44,9 +44,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var src_app_core_services_evaluate_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/core/services/evaluate.service */ "D8Q9");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _core_components_evaluate_list_evaluate_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/components/evaluate-list/evaluate-list.component */ "bCzJ");
-/* harmony import */ var _core_components_evaluate_form_evaluate_form_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/evaluate-form/evaluate-form.component */ "a2vy");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "5eHb");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _core_components_evaluate_list_evaluate_list_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/evaluate-list/evaluate-list.component */ "bCzJ");
+/* harmony import */ var _core_components_evaluate_form_evaluate_form_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/components/evaluate-form/evaluate-form.component */ "a2vy");
+
 
 
 
@@ -72,9 +74,10 @@ function EvaluateComponent_app_evaluate_form_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("selectedPaper", ctx_r1.selectedPaper)("evaluation", ctx_r1.evaluation);
 } }
 class EvaluateComponent {
-    constructor(evaluationService, router) {
+    constructor(evaluationService, router, toastr) {
         this.evaluationService = evaluationService;
         this.router = router;
+        this.toastr = toastr;
         this.evaluating = false;
         this.selectedPaper = {};
         this.evaluation = {};
@@ -84,6 +87,8 @@ class EvaluateComponent {
         };
     }
     ngOnInit() {
+        this.getEvaluation();
+        this.getPapers();
     }
     getEvaluation() {
         this.evaluationService.getEvaluation().subscribe((res) => {
@@ -101,13 +106,13 @@ class EvaluateComponent {
     }
     deleteEvaluation(item) {
         this.evaluationService.deleteEvaluation(item).subscribe((res) => {
-            alert('La evaluación ha sido rechazada');
+            this.toastr.success('La evaluación ha sido rechazada');
             this.router.navigateByUrl('/evaluar');
         });
     }
     toggleCreateEvaluation(item) {
         this.evaluationService.postEvaluation(item).subscribe((res) => {
-            alert('Evaluación correctamente cargada');
+            this.toastr.success('Evaluación correctamente cargada');
             this.router.navigateByUrl('/evaluar');
         });
     }
@@ -115,7 +120,7 @@ class EvaluateComponent {
         this.evaluating = !this.evaluating;
     }
 }
-EvaluateComponent.ɵfac = function EvaluateComponent_Factory(t) { return new (t || EvaluateComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_evaluate_service__WEBPACK_IMPORTED_MODULE_1__["EvaluateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+EvaluateComponent.ɵfac = function EvaluateComponent_Factory(t) { return new (t || EvaluateComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_evaluate_service__WEBPACK_IMPORTED_MODULE_1__["EvaluateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"])); };
 EvaluateComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EvaluateComponent, selectors: [["app-evaluate"]], decls: 3, vars: 2, consts: [[1, "container-fluid"], [3, "paperList", "evaluationEvent", "deleteEvaluationEvent", 4, "ngIf"], [3, "selectedPaper", "evaluation", "evaluationEmitter", "cancelEvaluation", 4, "ngIf"], [3, "paperList", "evaluationEvent", "deleteEvaluationEvent"], [3, "selectedPaper", "evaluation", "evaluationEmitter", "cancelEvaluation"]], template: function EvaluateComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, EvaluateComponent_app_evaluate_list_1_Template, 1, 1, "app-evaluate-list", 1);
@@ -126,7 +131,7 @@ EvaluateComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.evaluating);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.evaluating);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _core_components_evaluate_list_evaluate_list_component__WEBPACK_IMPORTED_MODULE_4__["EvaluateListComponent"], _core_components_evaluate_form_evaluate_form_component__WEBPACK_IMPORTED_MODULE_5__["EvaluateFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJldmFsdWF0ZS5jb21wb25lbnQuY3NzIn0= */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _core_components_evaluate_list_evaluate_list_component__WEBPACK_IMPORTED_MODULE_5__["EvaluateListComponent"], _core_components_evaluate_form_evaluate_form_component__WEBPACK_IMPORTED_MODULE_6__["EvaluateFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJldmFsdWF0ZS5jb21wb25lbnQuY3NzIn0= */"] });
 
 
 /***/ }),
@@ -152,33 +157,17 @@ class EvaluateService {
         this.httpClient = httpClient;
         this.apiURL = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].apiURL;
     }
-    /**
-     * Evalua un paper.
-     * @param evaluation
-     * @returns
-     */
     postEvaluation(evaluation) {
         return this.httpClient.post(this.apiURL + 'evaluar/evaluacion/', evaluation);
     }
-    /**
-     *
-     * @returns Evaluación modelo.
-     */
+    // Trae la evaluación
     getEvaluation() {
         return this.httpClient.get(this.apiURL + 'evaluar/lista-evaluar/');
     }
-    /**
-     *
-     * @returns Papers a evaluar.
-     */
+    // Trae los paper a evaluar
     getPaper() {
         return this.httpClient.get(this.apiURL + 'evaluar/lista-evaluar/');
     }
-    /**
-     * Cancela una evaluación ya aceptada.
-     * @param evaluation
-     * @returns
-     */
     deleteEvaluation(evaluation) {
         return this.httpClient.delete(this.apiURL + 'evaluar/eliminar-evaluacion/' + evaluation.id);
     }

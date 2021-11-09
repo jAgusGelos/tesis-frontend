@@ -114,6 +114,7 @@ class CongressAgendaComponent {
             Id: 0,
             fechaInCongreso: new Date(),
             fechaFinCongreso: new Date(),
+            fechaCierreCongreso: new Date(),
             fechaInInscrip: new Date(),
             fechaFinInscripTemprana: new Date(),
             fechaFinInscripTardia: new Date(),
@@ -126,7 +127,6 @@ class CongressAgendaComponent {
             modalidad: ''
         };
     }
-    ;
     ngOnInit() {
         window.scrollTo(0, 0);
         this.getSimposios();
@@ -145,6 +145,7 @@ class CongressAgendaComponent {
                     coordLocal: x.coordLocal,
                     fechaInCongreso: x.fechaInCongreso,
                     fechaFinCongreso: x.fechaFinCongreso,
+                    fechaCierreCongreso: x.fechaCierreCongreso,
                     fechaLimPapers: x.fechaLimPapers,
                     fechaProrrogaPapers: x.fechaProrrogaPapers,
                     fechaFinEvaluacion: x.fechaFinEvaluacion,

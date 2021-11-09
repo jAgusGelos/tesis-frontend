@@ -13,9 +13,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var src_app_core_services_room_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/core/services/room.service */ "PHhj");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _core_components_room_room_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/components/room/room.component */ "Spu+");
-/* harmony import */ var _core_components_room_form_room_form_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/room-form/room-form.component */ "srPL");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "5eHb");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _core_components_room_room_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/room/room.component */ "Spu+");
+/* harmony import */ var _core_components_room_form_room_form_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/components/room-form/room-form.component */ "srPL");
+
 
 
 
@@ -41,9 +43,10 @@ function RoomComponent_app_room_form_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("room", ctx_r1.room);
 } }
 class RoomComponent {
-    constructor(roomService, router) {
+    constructor(roomService, router, toastr) {
         this.roomService = roomService;
         this.router = router;
+        this.toastr = toastr;
         this.roomList = [];
         this.edit = false;
         this.room = {};
@@ -67,7 +70,7 @@ class RoomComponent {
     }
     deleteRoom(item) {
         this.roomService.deteleRoom(item).subscribe((res) => {
-            alert('El aula ha sido eliminada');
+            this.toastr.success('El aula ha sido eliminada');
             this.router.navigateByUrl('/room');
         });
     }
@@ -78,13 +81,13 @@ class RoomComponent {
     toggleCreateRoom(item) {
         if (item.id === null) {
             this.roomService.postRoom(item).subscribe((res) => {
-                alert('Aula Creada');
+                this.toastr.success('Aula Creada');
                 this.router.navigateByUrl('/room');
             });
         }
         else {
             this.roomService.putRoom(item).subscribe((res) => {
-                alert('Aula Modificada');
+                this.toastr.success('Aula Modificada');
                 this.router.navigateByUrl('/room');
             });
         }
@@ -94,7 +97,7 @@ class RoomComponent {
         this.router.navigate(['/misCongresos']);
     }
 }
-RoomComponent.ɵfac = function RoomComponent_Factory(t) { return new (t || RoomComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_room_service__WEBPACK_IMPORTED_MODULE_1__["RoomService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+RoomComponent.ɵfac = function RoomComponent_Factory(t) { return new (t || RoomComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_room_service__WEBPACK_IMPORTED_MODULE_1__["RoomService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"])); };
 RoomComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: RoomComponent, selectors: [["app-room-page"]], decls: 2, vars: 2, consts: [[3, "roomList", "newRoomEvent", "editRoomEvent", "deleteRoomEvent", "goBackEvent", 4, "ngIf"], [3, "room", "roomEmitter", "cancelRoom", 4, "ngIf"], [3, "roomList", "newRoomEvent", "editRoomEvent", "deleteRoomEvent", "goBackEvent"], [3, "room", "roomEmitter", "cancelRoom"]], template: function RoomComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, RoomComponent_app_room_0_Template, 1, 1, "app-room", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, RoomComponent_app_room_form_1_Template, 1, 1, "app-room-form", 1);
@@ -102,7 +105,7 @@ RoomComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.edit);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.edit);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _core_components_room_room_component__WEBPACK_IMPORTED_MODULE_4__["RoomComponent"], _core_components_room_form_room_form_component__WEBPACK_IMPORTED_MODULE_5__["RoomFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyb29tLmNvbXBvbmVudC5jc3MifQ== */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _core_components_room_room_component__WEBPACK_IMPORTED_MODULE_5__["RoomComponent"], _core_components_room_form_room_form_component__WEBPACK_IMPORTED_MODULE_6__["RoomFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJyb29tLmNvbXBvbmVudC5jc3MifQ== */"] });
 
 
 /***/ }),
@@ -134,65 +137,6 @@ RoomRoutingModule.ɵfac = function RoomRoutingModule_Factory(t) { return new (t 
 RoomRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineNgModule"]({ type: RoomRoutingModule });
 RoomRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵsetNgModuleScope"](RoomRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
-
-
-/***/ }),
-
-/***/ "PHhj":
-/*!***********************************************!*\
-  !*** ./src/app/core/services/room.service.ts ***!
-  \***********************************************/
-/*! exports provided: RoomService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RoomService", function() { return RoomService; });
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ "AytR");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth.service */ "7dP1");
-
-
-
-
-class RoomService {
-    constructor(httpClient, auth) {
-        this.httpClient = httpClient;
-        this.auth = auth;
-        this.apiURL = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].apiURL;
-        this.sede = this.auth.getSedeId();
-    }
-    postRoom(room) {
-        const postRoom = {
-            nombre: room.nombre,
-            descripcion: room.descripcion,
-            capacidad: room.capacidad,
-            sede: this.sede
-        };
-        return this.httpClient.post(this.apiURL + 'congresos/crear-aula/', postRoom);
-    }
-    putRoom(room) {
-        console.log(room);
-        const postRoom = {
-            id: room.id,
-            nombre: room.nombre,
-            descripcion: room.descripcion,
-            capacidad: room.capacidad,
-            sede: this.sede
-        };
-        return this.httpClient.put(this.apiURL + 'congresos/editar-aula/', postRoom);
-    }
-    getRooms() {
-        return this.httpClient.get(this.apiURL + 'congresos/lista-aulas/?idSede=' + this.sede);
-    }
-    deteleRoom(room) {
-        // return this.httpClient.delete<IRoom>(this.apiURL);
-        return this.httpClient.request('delete', this.apiURL + 'congresos/eliminar-aula/', { body: { id: room.id, sede: this.sede } });
-    }
-}
-RoomService.ɵfac = function RoomService_Factory(t) { return new (t || RoomService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"])); };
-RoomService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: RoomService, factory: RoomService.ɵfac, providedIn: 'root' });
 
 
 /***/ }),

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["pages-emails-restore-password-restore-password-routing-module"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["pages-emails-restore-password-restore-password-module"],{
 
 /***/ "0qDx":
 /*!**********************************************************************************!*\
@@ -27,6 +27,38 @@ RestorePasswordRoutingModule.ɵfac = function RestorePasswordRoutingModule_Facto
 RestorePasswordRoutingModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineNgModule"]({ type: RestorePasswordRoutingModule });
 RestorePasswordRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes)], _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵsetNgModuleScope"](RestorePasswordRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]] }); })();
+
+
+/***/ }),
+
+/***/ "BeaJ":
+/*!**************************************************************************!*\
+  !*** ./src/app/pages/emails/restore-password/restore-password.module.ts ***!
+  \**************************************************************************/
+/*! exports provided: RestorePasswordModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RestorePasswordModule", function() { return RestorePasswordModule; });
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _restore_password_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./restore-password-routing.module */ "0qDx");
+/* harmony import */ var _restore_password_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./restore-password.component */ "sSU+");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+
+
+class RestorePasswordModule {
+}
+RestorePasswordModule.ɵfac = function RestorePasswordModule_Factory(t) { return new (t || RestorePasswordModule)(); };
+RestorePasswordModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({ type: RestorePasswordModule });
+RestorePasswordModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({ imports: [[
+            _angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
+            _restore_password_routing_module__WEBPACK_IMPORTED_MODULE_1__["RestorePasswordRoutingModule"]
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsetNgModuleScope"](RestorePasswordModule, { declarations: [_restore_password_component__WEBPACK_IMPORTED_MODULE_2__["RestorePasswordComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
+        _restore_password_routing_module__WEBPACK_IMPORTED_MODULE_1__["RestorePasswordRoutingModule"]] }); })();
 
 
 /***/ }),
@@ -83,4 +115,4 @@ RestorePasswordComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ�
 /***/ })
 
 }]);
-//# sourceMappingURL=pages-emails-restore-password-restore-password-routing-module.js.map
+//# sourceMappingURL=pages-emails-restore-password-restore-password-module.js.map

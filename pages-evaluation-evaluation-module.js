@@ -13,9 +13,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var src_app_core_services_evaluation_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/core/services/evaluation.service */ "5zbU");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _core_components_evaluation_list_evaluation_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/components/evaluation-list/evaluation-list.component */ "MwCf");
-/* harmony import */ var _core_components_evaluation_form_evaluation_form_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/evaluation-form/evaluation-form.component */ "dJDf");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "5eHb");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _core_components_evaluation_list_evaluation_list_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/evaluation-list/evaluation-list.component */ "MwCf");
+/* harmony import */ var _core_components_evaluation_form_evaluation_form_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/components/evaluation-form/evaluation-form.component */ "dJDf");
+
 
 
 
@@ -41,12 +43,14 @@ function EvaluationComponent_app_evaluation_form_2_Template(rf, ctx) { if (rf & 
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("evaluation", ctx_r1.evaluation);
 } }
 class EvaluationComponent {
-    constructor(evaluationService, router) {
+    constructor(evaluationService, router, toastr) {
         this.evaluationService = evaluationService;
         this.router = router;
+        this.toastr = toastr;
         this.evaluationList = [];
         this.edit = false;
         this.evaluation = {};
+        this.ok = false;
         this.router.routeReuseStrategy.shouldReuseRoute = () => {
             return false;
         };
@@ -58,6 +62,7 @@ class EvaluationComponent {
     getEvaluation() {
         this.evaluationService.getEvaluation(1).subscribe((res) => {
             this.evaluationList = res.data;
+            this.ok = true;
         });
     }
     newEvaluation() {
@@ -70,7 +75,7 @@ class EvaluationComponent {
     }
     deleteEvaluation(item) {
         this.evaluationService.deleteEvaluation(item).subscribe((res) => {
-            alert('La evaluacion ha sido eliminada correctamente');
+            this.toastr.success('La evaluacion ha sido eliminado correctamente');
             window.location.reload();
         });
     }
@@ -84,19 +89,19 @@ class EvaluationComponent {
     toggleCreateEvaluation(item) {
         if (item.id === (undefined || '')) {
             this.evaluationService.postEvaluation(item).subscribe((res) => {
-                alert('Evaluación Creada Correctamente');
+                this.toastr.success('Evaluación Creada Correctamente');
                 this.router.navigateByUrl('/evaluacion');
             });
         }
         else {
             this.evaluationService.putEvaluation(item).subscribe((res) => {
-                alert('Evaluación Modificada Correctamente');
+                this.toastr.success('Evaluación Modificada Correctamente');
                 this.router.navigateByUrl('/evaluacion');
             });
         }
     }
 }
-EvaluationComponent.ɵfac = function EvaluationComponent_Factory(t) { return new (t || EvaluationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_evaluation_service__WEBPACK_IMPORTED_MODULE_1__["EvaluationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+EvaluationComponent.ɵfac = function EvaluationComponent_Factory(t) { return new (t || EvaluationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_evaluation_service__WEBPACK_IMPORTED_MODULE_1__["EvaluationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"])); };
 EvaluationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EvaluationComponent, selectors: [["app-evaluation"]], decls: 3, vars: 2, consts: [[1, "container-fluid"], [3, "evaluationList", "newEvaluationEvent", "editEvaluationEvent", "deleteEvaluationEvent", 4, "ngIf"], [3, "evaluation", "evaluationEmitter", "cancelEvaluation", 4, "ngIf"], [3, "evaluationList", "newEvaluationEvent", "editEvaluationEvent", "deleteEvaluationEvent"], [3, "evaluation", "evaluationEmitter", "cancelEvaluation"]], template: function EvaluationComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, EvaluationComponent_app_evaluation_list_1_Template, 1, 1, "app-evaluation-list", 1);
@@ -104,10 +109,10 @@ EvaluationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.edit);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.edit && ctx.ok);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.edit);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _core_components_evaluation_list_evaluation_list_component__WEBPACK_IMPORTED_MODULE_4__["EvaluationListComponent"], _core_components_evaluation_form_evaluation_form_component__WEBPACK_IMPORTED_MODULE_5__["EvaluationFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJldmFsdWF0aW9uLmNvbXBvbmVudC5jc3MifQ== */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _core_components_evaluation_list_evaluation_list_component__WEBPACK_IMPORTED_MODULE_5__["EvaluationListComponent"], _core_components_evaluation_form_evaluation_form_component__WEBPACK_IMPORTED_MODULE_6__["EvaluationFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJldmFsdWF0aW9uLmNvbXBvbmVudC5jc3MifQ== */"] });
 
 
 /***/ }),

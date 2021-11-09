@@ -67,53 +67,6 @@ TarifasRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdef
 
 /***/ }),
 
-/***/ "WPk3":
-/*!**************************************************!*\
-  !*** ./src/app/core/services/tarifas.service.ts ***!
-  \**************************************************/
-/*! exports provided: TarifasService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TarifasService", function() { return TarifasService; });
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ "AytR");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-/* harmony import */ var _congress_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./congress.service */ "VRfU");
-
-
-
-
-class TarifasService {
-    constructor(httpClient, congressService) {
-        this.httpClient = httpClient;
-        this.congressService = congressService;
-        this.apiURL = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].apiURL;
-        this.idCongreso = this.congressService.idCongreso;
-    }
-    getTarifas() {
-        return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas/?idCongreso= ' + this.idCongreso.toString());
-    }
-    getTarifasActivas() {
-        return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas-activas/?idCongreso= ' + this.idCongreso.toString());
-    }
-    postTarifa(tarifa) {
-        return this.httpClient.post(this.apiURL + 'inscripciones/crear-tarifa/', tarifa);
-    }
-    putTarifa(tarifa) {
-        return this.httpClient.put(this.apiURL + 'inscripciones/editar-tarifa/?id=' + tarifa.id, tarifa);
-    }
-    deleteTarifa(id) {
-        return this.httpClient.delete(this.apiURL + 'inscripciones/eliminar-tarifa/?id=' + id);
-    }
-}
-TarifasService.ɵfac = function TarifasService_Factory(t) { return new (t || TarifasService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_congress_service__WEBPACK_IMPORTED_MODULE_3__["CongressService"])); };
-TarifasService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: TarifasService, factory: TarifasService.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
 /***/ "s0OW":
 /*!****************************************************!*\
   !*** ./src/app/pages/tarifas/tarifas.component.ts ***!
@@ -126,9 +79,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TarifasComponent", function() { return TarifasComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var src_app_core_services_tarifas_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/core/services/tarifas.service */ "WPk3");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _core_components_tarifa_list_tarifa_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../core/components/tarifa-list/tarifa-list.component */ "XOkH");
-/* harmony import */ var _core_components_tarifa_form_tarifa_form_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/components/tarifa-form/tarifa-form.component */ "27Bq");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _core_components_tarifa_list_tarifa_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/components/tarifa-list/tarifa-list.component */ "XOkH");
+/* harmony import */ var _core_components_tarifa_form_tarifa_form_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/tarifa-form/tarifa-form.component */ "27Bq");
+
 
 
 
@@ -159,8 +114,9 @@ function TarifasComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("tarifa", ctx_r1.tarifa)("new", ctx_r1.new);
 } }
 class TarifasComponent {
-    constructor(tarifaService) {
+    constructor(tarifaService, router) {
         this.tarifaService = tarifaService;
+        this.router = router;
         this.edit = false;
         this.new = false;
         this.tarifaList = [];
@@ -171,7 +127,7 @@ class TarifasComponent {
     getTarifas() {
         this.tarifaList = [];
         this.tarifaService.getTarifas().subscribe((res) => {
-            this.tarifaList = res.data[0];
+            this.tarifaList = res.data;
         });
     }
     getTarifasActivas() {
@@ -182,8 +138,8 @@ class TarifasComponent {
     }
     postTarifa(item) {
         this.tarifaService.postTarifa(item).subscribe((res) => {
-            this.getTarifas();
             this.toggleEdit();
+            this.getTarifas();
         }, (err) => console.log(err));
     }
     putTarifa(item) {
@@ -203,8 +159,8 @@ class TarifasComponent {
             idCongreso: this.tarifaService.idCongreso.toString(),
             nombre: '',
             precio: 0,
-            fechaDesde: new Date(),
-            fechaHasta: new Date()
+            fechaDesde: '',
+            fechaHasta: ''
         };
         this.new = true;
         this.toggleEdit();
@@ -218,7 +174,7 @@ class TarifasComponent {
         this.edit = !this.edit;
     }
 }
-TarifasComponent.ɵfac = function TarifasComponent_Factory(t) { return new (t || TarifasComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_tarifas_service__WEBPACK_IMPORTED_MODULE_1__["TarifasService"])); };
+TarifasComponent.ɵfac = function TarifasComponent_Factory(t) { return new (t || TarifasComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_tarifas_service__WEBPACK_IMPORTED_MODULE_1__["TarifasService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
 TarifasComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TarifasComponent, selectors: [["app-tarifas"]], decls: 3, vars: 2, consts: [[1, "container-fluid"], [4, "ngIf"], [3, "tarifaList", "crearTarifaEvent", "editarTarifaEvent", "eliminarTarifaEvent"], [3, "tarifa", "new", "newTarifaEvent", "editTarifaEvent", "cancelEvent"]], template: function TarifasComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, TarifasComponent_div_1_Template, 2, 1, "div", 1);
@@ -229,7 +185,7 @@ TarifasComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.edit);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.edit);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"], _core_components_tarifa_list_tarifa_list_component__WEBPACK_IMPORTED_MODULE_3__["TarifaListComponent"], _core_components_tarifa_form_tarifa_form_component__WEBPACK_IMPORTED_MODULE_4__["TarifaFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0YXJpZmFzLmNvbXBvbmVudC5jc3MifQ== */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _core_components_tarifa_list_tarifa_list_component__WEBPACK_IMPORTED_MODULE_4__["TarifaListComponent"], _core_components_tarifa_form_tarifa_form_component__WEBPACK_IMPORTED_MODULE_5__["TarifaFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0YXJpZmFzLmNvbXBvbmVudC5jc3MifQ== */"] });
 
 
 /***/ })

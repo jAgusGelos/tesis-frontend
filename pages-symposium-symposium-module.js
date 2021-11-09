@@ -46,9 +46,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var src_app_core_services_symposium_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/core/services/symposium.service */ "xFu8");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _core_components_symposium_list_symposium_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../core/components/symposium-list/symposium-list.component */ "9hzb");
-/* harmony import */ var _core_components_symposium_form_symposium_form_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/symposium-form/symposium-form.component */ "1Ivb");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "5eHb");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _core_components_symposium_list_symposium_list_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../core/components/symposium-list/symposium-list.component */ "9hzb");
+/* harmony import */ var _core_components_symposium_form_symposium_form_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../core/components/symposium-form/symposium-form.component */ "1Ivb");
+
 
 
 
@@ -74,9 +76,10 @@ function SymposiumComponent_app_symposium_form_2_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("symposium", ctx_r1.symposium);
 } }
 class SymposiumComponent {
-    constructor(symposiumService, router) {
+    constructor(symposiumService, router, toastr) {
         this.symposiumService = symposiumService;
         this.router = router;
+        this.toastr = toastr;
         this.edit = false;
         this.ok = false;
         this.symposium = {};
@@ -104,7 +107,7 @@ class SymposiumComponent {
     }
     deleteSymposium(item) {
         this.symposiumService.deleteSymposium(item).subscribe((res) => {
-            alert('El Simposio ha sido eliminado correctamente');
+            this.toastr.success('El Simposio ha sido eliminado correctamente');
             this.router.navigateByUrl('/simposios');
         });
     }
@@ -118,20 +121,20 @@ class SymposiumComponent {
         console.log(item.id);
         if (item.id === undefined) {
             this.symposiumService.postSymposium(item).subscribe((res) => {
-                alert('Simposio Creado Correctamente');
+                this.toastr.success('Simposio Creado Correctamente');
                 this.router.navigateByUrl('/simposios');
             });
         }
         else {
             this.symposiumService.putSymposium(item).subscribe((res) => {
-                alert('Simposio Modificado Correctamente');
+                this.toastr.success('Simposio Modificado Correctamente');
                 this.router.navigateByUrl('/simposios');
             });
         }
         this.getSymposium();
     }
 }
-SymposiumComponent.ɵfac = function SymposiumComponent_Factory(t) { return new (t || SymposiumComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_symposium_service__WEBPACK_IMPORTED_MODULE_1__["SymposiumService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+SymposiumComponent.ɵfac = function SymposiumComponent_Factory(t) { return new (t || SymposiumComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_core_services_symposium_service__WEBPACK_IMPORTED_MODULE_1__["SymposiumService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"])); };
 SymposiumComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: SymposiumComponent, selectors: [["app-symposium"]], decls: 3, vars: 2, consts: [[1, "container-fluid"], [3, "symposiumList", "newSymposiumEvent", "editSymposiumEvent", "deleteSymposiumEvent", 4, "ngIf"], [3, "symposium", "symposiumEmitter", "cancelSymposium", 4, "ngIf"], [3, "symposiumList", "newSymposiumEvent", "editSymposiumEvent", "deleteSymposiumEvent"], [3, "symposium", "symposiumEmitter", "cancelSymposium"]], template: function SymposiumComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, SymposiumComponent_app_symposium_list_1_Template, 1, 1, "app-symposium-list", 1);
@@ -139,10 +142,10 @@ SymposiumComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.edit);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.edit && ctx.ok);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.edit);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _core_components_symposium_list_symposium_list_component__WEBPACK_IMPORTED_MODULE_4__["SymposiumListComponent"], _core_components_symposium_form_symposium_form_component__WEBPACK_IMPORTED_MODULE_5__["SymposiumFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzeW1wb3NpdW0uY29tcG9uZW50LmNzcyJ9 */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _core_components_symposium_list_symposium_list_component__WEBPACK_IMPORTED_MODULE_5__["SymposiumListComponent"], _core_components_symposium_form_symposium_form_component__WEBPACK_IMPORTED_MODULE_6__["SymposiumFormComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzeW1wb3NpdW0uY29tcG9uZW50LmNzcyJ9 */"] });
 
 
 /***/ }),
