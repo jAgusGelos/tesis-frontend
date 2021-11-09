@@ -10,7 +10,7 @@ import { DefineAgendaService } from '../../services/define-agenda.service';
 })
 export class CongressCardComponent implements OnInit {
 
-  @Output() verInfoPublicaEvent = new EventEmitter(); 
+  @Output() verInfoPublicaEvent = new EventEmitter();
   nombre: string;
   nombreSede: string;
   fechaUno: string;
@@ -31,12 +31,9 @@ export class CongressCardComponent implements OnInit {
     this.nombreSede = this.congress.nombre_sede;
     this.fechaUno = this.congress.fechaFinInsTemprana;
     this.fechaDos = this.congress.fechaFinInsTardia;
-    console.log('card')
-    console.log(this.congress);
   }
 
-  verInfoPublica():void{
-    
+  verInfoPublica(): void{
     this.verInfoPublicaEvent.emit(this.congress);
   }
 }
