@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -11,15 +12,22 @@ export class AcceptEvaluatePaperComponent implements OnInit {
   token: string;
   accepted: boolean = false;
   constructor(private route: ActivatedRoute,
-              private service:UserService) { }
+              private service:UserService,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit(): void {
     this.token = this.route.snapshot.params.token;
     console.log(this.token);
     this.service.acceptEvaluatePaper('?token=' + this.token).subscribe(
-      (res:any) => this.accepted=true,
-      (err:any) => {alert('No se pudo aceptar la evaluación del paper.')}
+      (res:any) => this.accept(),
+      (err:any) => {this.toastr.error('No se pudo aceptar la evaluación del paper.')}
     )
+  }
+
+  accept():void{
+    this.accepted= true;
+    console.log('SI')
   }
 
 }

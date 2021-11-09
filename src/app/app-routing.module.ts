@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/services/auth.guard';
+import { AutorRolGuard } from './core/services/guards/autor-rol.guard';
 import { ChairRolGuard } from './core/services/guards/chair-rol.guard';
+import { SuperRolGuard } from './core/services/guards/super-rol.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { RecoverPasswordComponent } from './pages/recover-password/recover-password.component';
 
@@ -16,7 +18,7 @@ const routes: Routes = [
     path: 'usuario',
     loadChildren: () => import('./pages/usuario/usuario.module')
     .then(m => m.UsuarioModule),
-     // canActivate: [AuthGuard]
+    //  canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -26,9 +28,9 @@ const routes: Routes = [
   {
     path: 'chairs',
     loadChildren: () => import('./pages/chairs/chairs.module')
-    .then(m => m.ChairsModule)
+    .then(m => m.ChairsModule),
     // Can activate CP CL
-    // canActivate: [AuthGuard, ChairRolGuard]
+     // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
     path: 'misCongresos',
@@ -40,7 +42,7 @@ const routes: Routes = [
   {
     path: 'room',
     loadChildren: () => import('./pages/room/room.module')
-    .then(m => m.RoomModule)
+    .then(m => m.RoomModule),
     // Can activate CP CL
     // canActivate: [AuthGuard, ChairRolGuard]
   },
@@ -49,7 +51,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/congress/congress.module')
     .then(m => m.CongressModule),
     // descomentar al correr la bd
-    // canActivate: [AuthGuard, SuperRolGuard]
+     canActivate: [AuthGuard, SuperRolGuard]
   },
   {
     path: 'callForPapers',
@@ -75,6 +77,7 @@ const routes: Routes = [
     .then(m => m.EvaluatorModule),
   },
   {
+    // No esta en uso
     path: 'evaluar',
     loadChildren: () => import('./pages/evaluate/evaluate.module')
     .then(m => m.EvaluateModule),
@@ -86,12 +89,12 @@ const routes: Routes = [
     .then(m => m.AsignarPaperEvaluadorModule),
   },
   {
+    // no esta en uso
     path: 'paperXSimposio',
     loadChildren: () => import('./pages/papers-by-symposium/papers-by-symposium.module')
     .then(m => m.PapersBySymposiumModule),
   },
   {
-
     path: 'verEvaluaciones',
     loadChildren: () => import('./pages/evaluate-article/evaluate-article.module')
     .then(m => m.EvaluateArticleModule),
@@ -107,9 +110,27 @@ const routes: Routes = [
     .then(m => m.EvaluatorsModule),
   },
   {
-    path: 'tarifas',
-    loadChildren: () => import('./pages/tarifas/tarifas.module')
-    .then(m => m.TarifasModule),
+    path: 'cupones',
+    loadChildren: () => import('./pages/cupon/cupon.module')
+    .then(m => m.CuponModule)
+  },
+  {path: 'tarifas',
+  loadChildren: () => import('./pages/tarifas/tarifas.module')
+  .then(m => m.TarifasModule)},
+  {
+    path: 'preferenciaSimposio',
+    loadChildren: () => import('./pages/symposium-preference/symposium-preference.module')
+    .then(m => m.SymposiumPreferenceModule),
+  },
+   {
+    path: 'control',
+    loadChildren: () => import('./pages/control-board/control-board.module')
+    .then(m => m.ControlBoardModule),
+  },
+  {
+    path: 'generarAgenda',
+    loadChildren: () => import('./pages/schedule-calendar/schedule-calendar.module')
+    .then(m => m.ScheduleCalendarModule),
   },
   // Notification routes
   {
@@ -118,17 +139,17 @@ const routes: Routes = [
     .then(m => m.DeactivateAccountModule),
   },
   {
-    path: 'cancelacionChairSecundario',
+    path: 'cancelacionChairSecundario/:token',
     loadChildren: () => import('./pages/cancel-sec-chair/cancel-sec-chair.module')
     .then(m => m.CancelSecChairModule),
   },
   {
-    path: 'cancelacionEvaluador',
+    path: 'cancelacionEvaluador/:token',
     loadChildren: () => import('./pages/cancel-evaluator/cancel-evaluator.module')
     .then(m => m.CancelEvaluatorModule),
   },
   {
-    path: 'cancelarAutoria',
+    path: 'cancelarAutoria/:token',
     loadChildren: () => import('./pages/cancel-author/cancel-author.module')
     .then(m => m.CancelAuthorModule),
   },
@@ -164,24 +185,54 @@ const routes: Routes = [
     .then(m => m.ConfirmedAccountModule),
   },
   {
-    path: 'reestablecerContraseña/?token=:token',
-    loadChildren: () => import('./pages/emails/restore-password/restore-password-routing.module')
-    .then(m => m.RestorePasswordRoutingModule),
+    path: 'reestablecerContraseña/:token',
+    loadChildren: () => import('./pages/emails/restore-password/restore-password.module')
+    .then(m => m.RestorePasswordModule),
   },
   {
-    path: 'aceptacionEvaluacionPaper/?token=:token',
-    loadChildren: () => import('./pages/emails/accept-evaluate-paper/accept-evaluate-paper-routing.module')
-    .then(m => m.AcceptEvaluatePaperRoutingModule),
+    path: 'aceptacionEvaluacionPaper/:token',
+    loadChildren: () => import('./pages/emails/accept-evaluate-paper/accept-evaluate-paper.module')
+    .then(m => m.AcceptEvaluatePaperModule),
   },
   {
     path: 'aceptacionRolEvaluador/:token',
-    loadChildren: () => import('./pages/emails/accept-evaluator/accept-evaluator-routing.module')
-    .then(m => m.AcceptEvaluatorRoutingModule),
+    loadChildren: () => import('./pages/emails/accept-evaluator/accept-evaluator.module')
+    .then(m => m.AcceptEvaluatorModule),
   },
   {
     path: 'cancelacionEvaluacionPaper/:token',
-    loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper-routing.module')
-    .then(m => m.CancelEvaluatePaperRoutingModule)
+    loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper.module')
+    .then(m => m.CancelEvaluatePaperModule)
+  },
+/*   {
+    path: 'comiteAcademico/:id',
+    loadChildren: () => import('./pages/comite-academico/comite-academico.module')
+    .then(m => m.ComiteAcademicoModule)
+  },
+  {
+    path: 'comiteOrganizador/:id',
+    loadChildren: () => import('./pages/comite-organizador/comite-organizador.module')
+    .then(m => m.ComiteOrganizadorModule)
+  }, */
+  {
+    path: 'informacionCongreso/:id',
+    loadChildren: () => import('./pages/informacion-publica-congreso/informacion-publica-congreso.module')
+    .then(m => m.InformacionPublicaCongresoModule)
+  },
+  {
+    path: 'pagoInscripcionSuccess/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-success/payment-success.module')
+    .then(m => m.PaymentSuccessModule)
+  },
+  {
+    path: 'pagoInscripcionPending/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-pending/payment-pending.module')
+    .then(m => m.PaymentPendingModule)
+  },
+  {
+    path: 'pagoInscripcionFailure/:token',
+    loadChildren: () => import('./pages/payment-windows/payment-failure/payment-failure.module')
+    .then(m => m.PaymentFailureModule)
   }
 ];
 

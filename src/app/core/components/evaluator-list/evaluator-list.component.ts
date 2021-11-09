@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IUserComplete } from '../../models/IUserComplete';
 import { EvaluatorService } from '../../services/evaluator.service';
 import { UserService } from '../../services/user.service';
@@ -18,13 +19,15 @@ export class EvaluatorListComponent implements OnInit {
   deleteEvName: string;
   messageHeader: string;
   messageBody: string;
+  showList = [];
 
   evaluatorsList = [];
   usersList: IUserComplete[];
 
   constructor( private evaluatorService: EvaluatorService,
                private userService: UserService,
-               private formBuilder: FormBuilder) { }
+               private formBuilder: FormBuilder,
+               private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.formEvaluator = this.formBuilder.group({
@@ -43,9 +46,9 @@ export class EvaluatorListComponent implements OnInit {
         return;
       }
 
-      const idUsuarios = [user.id.toString()];
+      const idUsuarios = user.id.toString();
 
-      this.evaluatorService.postEvaluator(idUsuarios).subscribe((res: any) => {
+      this.evaluatorService.postEvaluator(idUsuarios.toString()).subscribe((res: any) => {
         if (res.data != null) {
           this.showMessage('¡Correo enviado!', res.data);
           this.submitted = false;
@@ -60,6 +63,7 @@ export class EvaluatorListComponent implements OnInit {
   fillEvaluatorsList(): void {
     this.evaluatorService.getEvaluators(0).subscribe((res: any) => {
       this.evaluatorsList = res.data;
+      this.showList = res.data;
     });
   }
 
@@ -80,23 +84,43 @@ export class EvaluatorListComponent implements OnInit {
     return null;
   }
 
-  getUsers(){
+  getUsers(): void{
     this.userService.getAllUsers().subscribe((res: any) => {
       this.usersList = res;
     });
   }
 
-  deleteEvaluator() {
-    this.evaluatorsList.splice(this.index, 1);
+  deleteEvaluator(ev: any): void {
+    if (confirm('Seguro desea eliminar el evaluador: ' + ev.nombre)) {
+      this.evaluatorService.deleteIdEvaluator(ev.idUsuario).subscribe((res: any) => {
+
+        this.evaluatorsList = this.evaluatorsList.filter((x: any) => {
+          if (x.idUsuario !== ev.idUsuario) {
+            return x;
+          }
+        });
+        this.showList = this.evaluatorsList.slice();
+        this.toast.success('Evaluador Eliminado');
+      });
+
+    }
   }
 
-  setDeleteEvaluator(i: number) {
+  setDeleteEvaluator(i: number): void {
+    // Esto esta mal
+    // Tiene que hacer el delete a la BD
+    console.log(i);
     this.index = i;
     this.deleteEvName = this.evaluatorsList[i].nombre;
   }
 
-  toggleNew() {
+  toggleNew(): void {
     this.submitted = false;
     this.new = !this.new;
   }
+
+  search(filterList): void {
+    this.showList = filterList;
+  }
+
 }

@@ -1,0 +1,11 @@
+<div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">{{name}}</h5>
+      <hr>
+      <h6 class="card-subtitle mb-2 text-muted">Chair</h6>
+        <p>{{chair}}</p>
+      <h6 class="card-subtitle mb-2 text-muted" *ngIf='cochair !== null'>Co-chair</h6>
+        <p *ngIf='cochair !== null'>{{cochair}}</p>
+ 
+    </div>
+  </div>

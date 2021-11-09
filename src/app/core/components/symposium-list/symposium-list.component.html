@@ -4,6 +4,19 @@
     <h3 class='text-center'>Simposios Activos</h3>
     <hr>
   </div>
+  <br>
+  <div class="row justify-content-md-end">
+    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo Simposio</a>
+  </div>
+
+  <div class="row">
+    <app-search
+      class="col-md-5"
+      [fullList]='symposiumList'
+      [attribFilter]='"descripcion"'
+      (listEvent)='search($event)'
+    ></app-search>
+  </div>
   <table class="table text-center table-hover table-bordered">
     <thead class='thead'>
       <tr>
@@ -14,7 +27,7 @@
     </thead>
 
     <tbody>
-      <tr class='align-items-center'*ngFor='let item of symposiumList'>
+      <tr class='align-items-center'*ngFor='let item of showList'>
         <td>{{item.nombre}}</td>
         <td>{{item.descripcion}}</td>
         <td>
@@ -30,10 +43,7 @@
     </tbody>
   </table>
 
-  <br>
-  <div class="row justify-content-md-end">
-    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo Simposio</a>
-  </div>
+
 
 
 </div>

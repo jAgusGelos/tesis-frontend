@@ -21,17 +21,16 @@
   }
   
   i{
-    padding-top: 1.5rem;
     cursor: pointer;
   }
   
-  i:hover{
-    color: blue;
+  .fas{
+    color: #3CAFE0;
   }
   
-  .fas{
-    font-size: 1.25rem;
-    color: #00609C;
+  .fas:hover{
+    color: #3994bb;
+    cursor: pointer;
   }
   
   hr{

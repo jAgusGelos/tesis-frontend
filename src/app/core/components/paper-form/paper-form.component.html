@@ -5,8 +5,16 @@
       <h3 class="card-title text-center">Nuevo Paper</h3>
       <hr>
     </div>
+    <div>
+      <h6>Por Favor recuerde:</h6>
+      <p>Antes de subir el paper por favor Guarde los cambios.</p>
+      <p>Una vez subido el paper este no podrá ser modificado hasta que reciba la evaluación</p>
+      <p>El formato del archivo debe ser sin los autores.</p>
+      <p>Todos los nombres de los autores o referencias a una institución resultarán en un rechazo inmediato.</p>
 
-    <div class="card-text text-right" >
+    </div>
+
+    <div class="card-text text-right">
       <form [formGroup]='formPaper'>
         <!-- Nombre -->
         <div class='form-group row'>
@@ -26,9 +34,9 @@
           <label class="col-form-label col-sm-3 col-sm-offset-2" for="simposio">Simposio:<span
               class="text-danger">*</span></label>
           <div class="col-sm-6">
-            <select  class='col-sm-4 form-select' name="simposio" formControlName="simposio" [ngClass]="{'is-invalid': ((formPaper.controls.simposio.touched || submitted) && formPaper.controls.simposio.value === '')
+            <select class='col-sm-4 form-select' name="simposio" formControlName="simposio" [ngClass]="{'is-invalid': ((formPaper.controls.simposio.touched || submitted) && formPaper.controls.simposio.value === '')
           && formPaper.controls.simposio.errors}">
-              <option  *ngFor="let opt of simposios" value={{opt.id}}>
+              <option *ngFor="let opt of simposios" value={{opt.id}}>
                 ‌{{ opt.descripcion }}
               </option>
             </select>
@@ -55,9 +63,8 @@
         <div class='form-group row' *ngIf="autoresList.length !== 0">
           <label class='col-form-label col-sm-3 col-sm-offset-2' for='autores'>Autores Seleccionados:</label>
           <div class='col-sm-6'>
-            <ul *ngFor="let item of autoresList" class='autoresSelected'
-              [ngClass]="{'valid': item.status === true}">{{item.mail}}<i class="fa fa-window-close" aria-hidden="true"
-                (click)='delAutor(item)'></i></ul>
+            <ul *ngFor="let item of autoresList" class='autoresSelected' [ngClass]="{'valid': item.status === true}">
+              {{item.mail}}<i class="fa fa-window-close" aria-hidden="true" (click)='delAutor(item)'></i></ul>
 
 
           </div>
@@ -70,8 +77,7 @@
             <input type='file' accept=".pdf" (change)="handleFileInput($event.target.files)" class='form-control'
               formControlName='archivo' [ngClass]="{'is-invalid': (formPaper.controls.archivo.touched || submitted)
                 && formPaper.controls.archivo.errors}" onclick='this.select()' />
-            <span class='text-danger'
-              *ngIf='(submitted) && formPaper.controls.archivo.errors?.required'>
+            <span class='text-danger' *ngIf='(submitted) && formPaper.controls.archivo.errors?.required'>
               Requerido
             </span>
           </div>
@@ -79,7 +85,7 @@
 
         <div class="form-group row" *ngIf="paper.nombre">
           <label class='col-form-label col-sm-3 col-sm-offset-2' for='archivo'>Archivo ya subido:</label>
-          <label class='col-form-label col-sm-3' for='archivo'>{{paper.nombre | titlecase}}.pdf</label>
+          <a (click)='getArchivo()' class='col-form-label col-sm-3' for='archivo'>{{paper.nombre | titlecase}}.pdf</a>
         </div>
 
 
@@ -88,15 +94,12 @@
         <div class="row justify-content-md-center btn-row">
           <a class="btn btn-secondary col-md-3" (click)='cancel()' role="button">Cancelar</a>
           &nbsp;
-          <a class="btn btn-primary col-md-3" (click)='save()' role="button">Guardar Cambios</a>
+          <a class="btn btn-primary col-md-3" (click)='save()' role="button">{{paper.id ? 'Guardar Cambios' : 'Nuevo Paper'}}</a>
         </div>
         <br>
         <div class="row justify-content-md-center btn-row">
           <a class="btn btn-danger col-md-7" (click)='submit()' role="button">Subir Paper</a>
         </div>
-
-
-
       </form>
     </div>
   </div>

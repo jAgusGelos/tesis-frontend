@@ -20,6 +20,10 @@ export class TarifasService {
     return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas/?idCongreso= ' + this.idCongreso.toString());
   }
 
+  getTarifaById(idTarifa) {
+    return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifa/?idCongreso= ' + this.idCongreso.toString() + '&idTarifa=' + idTarifa);
+  }
+
   getTarifasActivas() {
     return this.httpClient.get(this.apiURL + 'inscripciones/devolver-tarifas-activas/?idCongreso= ' + this.idCongreso.toString());
   }

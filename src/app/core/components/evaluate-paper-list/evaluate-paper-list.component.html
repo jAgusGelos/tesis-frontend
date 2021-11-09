@@ -5,6 +5,16 @@
     <hr>
   </div>
   <br>
+
+  <div class="row">
+    <app-search
+      class="col-md-5"
+      [fullList]='paperList'
+      [attribFilter]='"nombreArticulo"'
+      (listEvent)='search($event)'
+    ></app-search>
+  </div>
+
   <table class="table text-center table-hover table-bordered">
     <thead class='thead'>
       <tr>
@@ -16,24 +26,29 @@
     </thead>
 
     <tbody>
-      <tr class='align-items-center'*ngFor='let item of paperList; let i = index'>
+      <tr class='align-items-center'*ngFor='let item of showList; let i = index'>
         <td>{{i + 1}}</td>
         <td>{{item.nombreArticulo}}</td>
-        <td>{{item.estado}}</td>
-        <td>
-          <div class="btn-group col-md-3">
-          <a (click)='toggleEvaluate(item)' title='Evaluar' *ngIf="item.estado !== 'Evaluado'"><i class="fas fa-pencil-alt"></i></a>
-          &nbsp;
-          &nbsp;
-            <a data-bs-toggle="dropdown" title="Más Opciones" *ngIf="item.estado == 'Pdte Evaluacion'"><i class="fas fa-ellipsis-h"></i></a>
+        <td>{{item.nombreEstado}}</td>
+        <td *ngIf='item.estado < 3'>
+          <a (click)='toggleEvaluate(item)' title='Evaluar'><i class="fas fa-pencil-alt fa-lg"></i></a>
+          &nbsp;&nbsp;
+          <a data-bs-toggle="dropdown" title="Más Opciones"><i class="fas fa-ellipsis-h"></i></a>
             <ul class="dropdown-menu">
-              <li><a (click)='toggleCancel(item)'class="dropdown-item" href="#">Rechazar Evaluación</a></li>
+              <li><a (click)='toggleCancel(item)'class="dropdown-item" routerLink="/">Rechazar Evaluación</a></li>
             </ul>
-          
-          
-        </div>
-      </td>
+        </td>
+        <td *ngIf='item.estado >= 3'>
 
+            <a
+            ngbPopover="Las acciones solo están disponibles para los artículos no evaluados"
+            popoverClass="popover"
+            placement="left"
+            popoverTitle="Información:">
+              <i class="fas fa-info-circle bigger"></i>
+            </a>
+
+        </td>
       </tr>
     </tbody>
   </table>

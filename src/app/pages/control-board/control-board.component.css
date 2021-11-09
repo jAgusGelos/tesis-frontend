@@ -1,0 +1,82 @@
+.container-fluid {
+  background-color: #F4F4F4;
+
+}
+
+.contenidos {
+  padding-bottom: 3rem;
+}
+
+.thead {
+  background-color: #C8E5F1;
+}
+
+.greyned {
+  color: grey;
+}
+
+.btn-primary {
+  background-color: #3CAFE0;
+  border: none;
+}
+
+i {
+  cursor: pointer;
+}
+
+i:hover {
+  color: blue;
+}
+
+.fas {
+  font-size: 1.25rem;
+  color: #00609C;
+}
+
+.fa {
+  font-size: 1.25rem;
+  color: #00609C;
+}
+
+hr {
+  border: #00609C solid 1px;
+}
+
+@media (min-width: 768px) {
+  hr {
+    margin-left: 25%;
+    margin-right: 25%;
+
+  }
+
+  .container-fluid {
+    padding: 5rem;
+  }
+
+}
+
+.redondo{
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.rojo {
+  background-color: rgb(250, 79, 79);
+  border: rgb(214, 51, 51);
+}
+
+.verde {
+  background-color: rgb(109, 236, 109);
+  border: rgb(109, 236, 109);
+}
+
+:host >>> .popover .popover-header {
+  background-color: #3CAFE0;
+}
+
+.bigger {
+  font-size: 170%;
+  margin-bottom: 1rem;
+}

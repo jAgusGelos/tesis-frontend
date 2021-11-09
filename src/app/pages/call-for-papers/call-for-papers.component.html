@@ -1,9 +1,27 @@
 <div class="container-fluid">
-  <app-paper-list *ngIf="!edit" (newPaperEvent)='newPaper()' [paperList]='paperList'
+  <app-paper-list *ngIf="!edit && okey && !ready && !revision" (newPaperEvent)='newPaper()'
+  [paperList]='paperList'
+  (finalPaperEvent)='finalPaper($event)'
+  (revisionEvent)='verRevision($event)'
   (editPaperEvent)='editPaper($event)' (deletePaperEvent)='deletePaper($event)'></app-paper-list>
+
   <app-paper-form  *ngIf="edit"
+  (sendEmitter)='sendPaper($event)'
   [simposios] = "simposios"
   [paper]='paper' (paperEmitter)='toggleCreatePaper($event)'
   (cancelPaper)='newPaper()'></app-paper-form>
+
+  <app-paper-ready
+  *ngIf="ready"
+  (paperEmitter)='entregaFinal($event)'
+  [paper]='paper'
+  (cancelPaper)='volverFinalPaper()'></app-paper-ready>
+
+  <app-revision-autor
+  *ngIf="revision"
+  [paper]='paper'
+  (cancelRevision)='volverRevision()'
+  ></app-revision-autor>
+
 
 </div>

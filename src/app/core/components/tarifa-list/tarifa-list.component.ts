@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ITarifa } from '../../models/ITarifa';
+import { ITarifa } from '../../models/itarifa';
 
 @Component({
   selector: 'app-tarifa-list',
@@ -32,7 +32,7 @@ export class TarifaListComponent implements OnInit {
     this.eliminarTarifaEvent.emit(item.id);
   }
 
-  modalDelete(item) {
+  modalDelete(item): void {
     this.selectedItem = item;
     this.message.header = 'Aviso';
     this.message.body = '¿Seguro que desea eliminar la tarifa ' + item.nombre + '?';

@@ -36,4 +36,7 @@ a:hover{
 .dropdown-menu{
   background-color: #00609C;
 }
+.dropdown-item{
+  color: white;
+}
 

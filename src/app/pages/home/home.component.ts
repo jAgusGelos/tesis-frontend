@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
 
     getCongressData(): void {
-      this.congressService.getCongressPublic().subscribe((res: any) => {
+      this.congressService.getCongress().subscribe((res: any) => {
         this.congressList = res.data;
         this.congressList = this.congressList.map((x: any) => {
           return {
@@ -34,6 +34,16 @@ export class HomeComponent implements OnInit {
           };
         });
       });
-    }
+    };
+
+  verInfoPublica(congress): void {
+    const url = '/informacionCongreso/' + congress.id;
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }
 

@@ -56,23 +56,35 @@ hr{
 .btn-primary {
     background-color: #00609C;
     color: white;
-}
-
-.btn-border {
-    border: none;
+    border-color: transparent;
 }
 
 .btn-primary:hover {
     background-color: #0080cf;
 }
 
+.btn-border {
+    border: none;
+}
+
 .btn-outline-primary {
+    border-color: #00609C;
+    color: #00609C;
+}
+
+.btn-outline-primary:hover {
+    background-color: #00609C;
+    border-color: #00609C;
+    color: white;
+}
+
+.card-footer-btn {
     color: #00609C;
     background: transparent;
     border: transparent;
 }
 
-.btn-outline-primary:hover {
+.card-footer-btn:hover {
     color: #3cafe0;
 }
 
@@ -84,10 +96,8 @@ hr{
     float: right;
 }
 
-
 #evaluadores {
     font-style: italic;
-    color: rgb(56, 56, 56);
 }
 
 #nombreEvaluador {

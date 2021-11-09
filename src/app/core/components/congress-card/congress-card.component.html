@@ -4,9 +4,11 @@
     <div class="card-body">
       <h5 class="card-title text-center">{{nombre}}</h5>
       <p class="card-text">Sede: {{nombreSede}}</p>
-      <p class="card-text"><u>Fecha de Límite de Inscripción Temprana</u>: {{fechaUno.split(' ')[0]}}</p>
-      <p class="card-text"><u>Fecha de Límite de Inscripción Tardía</u>: {{fechaDos.split(' ')[0]}}</p>
-      <a href="/inscribirme/{{congress.id}}" class="btn btn-primary">Inscribirme</a>
+      <p class="card-text" *ngIf="fechaUno!==null"><u>Fecha de Límite de Inscripción Temprana</u>: {{fechaUno.split(' ')[0]}}</p>
+      <p class="card-text" *ngIf="fechaDos!==null"><u>Fecha de Límite de Inscripción Tardía</u>: {{fechaDos.split(' ')[0]}}</p>
+      <a [routerLink]="['/inscribirme/' + congress.id]" class="btn btn-primary">Inscribirme</a>
+      &nbsp;&nbsp;
+      <a class="btn btn-primary" (click)="verInfoPublica()">Más Información</a>
     </div>
   </div>
 </div>
