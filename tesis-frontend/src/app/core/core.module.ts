@@ -44,6 +44,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    RouterModule
   ],
   exports:  [
     UserRegisterComponent,

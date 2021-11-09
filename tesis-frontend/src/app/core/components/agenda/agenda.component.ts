@@ -38,7 +38,7 @@ export class AgendaComponent implements OnInit {
          [Validators.required]],
       FechaFinCongreso: [this.schedule.fechaFinCongreso ? this.invertConvertDateFormat(this.schedule.fechaFinCongreso) : null,
          [Validators.required]],
-         FechaCierreCongreso: [this.schedule.fechaCierreCongreso ? this.invertConvertDateFormat(this.schedule.fechaCierreCongreso) : null,
+      FechaCierreCongreso: [this.schedule.fechaCierreCongreso ? this.invertConvertDateFormat(this.schedule.fechaCierreCongreso) : null,
           [Validators.required]],
       FechaFinInscripTemprana: [this.schedule.fechaFinInscripTemprana ?
             this.invertConvertDateFormat(this.schedule.fechaFinInscripTemprana) :
@@ -69,11 +69,13 @@ export class AgendaComponent implements OnInit {
     const info = date.split('/').reverse().join('-');
     return info;
   }
-  toast(text:string): void {
+  toast(text: string): void {
     // Metodo 1
-    this.toastr.warning(text);}
+    this.toastr.warning(text);
+  }
 
   guardar(): void {
+    this.submitted = true;
     const agenda = {
       fechaInCongreso: this.convertDateFormat(this.formCongress.controls.FechaInCongreso.value) + ' 00:00:00',
       fechaFinCongreso: this.convertDateFormat(this.formCongress.controls.FechaFinCongreso.value) + ' 00:00:00',

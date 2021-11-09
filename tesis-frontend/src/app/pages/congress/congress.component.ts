@@ -36,7 +36,7 @@ export class CongressComponent implements OnInit {
 
   getSedes(): void {
     this.congressService.getSedes().subscribe((res: any) => {
-      this.sedes = res;
+      this.sedes = res.data;
     });
   }
 

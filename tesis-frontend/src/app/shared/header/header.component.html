@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" routerLink="#">
       <img id="logo-img" src="../../assets/imgs/logo_navbar.png" alt="Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -10,95 +10,95 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="/">Inicio</a>
+          <a class="nav-link active" routerLink="/">Inicio</a>
         </li>
         <!-- SUPERUSUARIO -->
         <li class="nav-item">
-          <a class="nav-link" href="/congreso" *ngIf="rol.includes(0)  && user">Congreso</a>
+          <a class="nav-link" routerLink="/congreso" *ngIf="rol.includes(0)  && user">Congreso</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/simposios" *ngIf="rol.includes(0)  && user">Simposios</a>
+          <a class="nav-link" routerLink="/simposios" *ngIf="rol.includes(0)  && user">Simposios</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/evaluators" *ngIf="rol.includes(0)  && user">Evaluadores</a>
+          <a class="nav-link" routerLink="/evaluators" *ngIf="rol.includes(0)  && user">Evaluadores</a>
         </li>
         <!-- CHAIR PRINCIPAL -->
         <li class="nav-item">
-          <a class="nav-link" href="/cupones" *ngIf="rol.includes(0)  && user">Cupones</a>
+          <a class="nav-link" routerLink="/cupones" *ngIf="rol.includes(0)  && user">Cupones</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/misCongresos" *ngIf="rol.includes(1)  && user">Mi Congreso</a>
+          <a class="nav-link" routerLink="/misCongresos" *ngIf="rol.includes(1)  && user">Mi Congreso</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/chairs" *ngIf="rol.includes(1)  && user">Asignar Chairs</a>
+          <a class="nav-link" routerLink="/chairs" *ngIf="rol.includes(1)  && user">Asignar Chairs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/room" *ngIf="rol.includes(1)  && user">Aulas</a>
+          <a class="nav-link" routerLink="/room" *ngIf="rol.includes(1)  && user">Aulas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/evaluacion" *ngIf="rol.includes(1)  && user">Planilla</a>
+          <a class="nav-link" routerLink="/evaluacion" *ngIf="rol.includes(1)  && user">Planilla</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/tarifas" *ngIf="rol.includes(1)  && user">Tarifas</a>
+          <a class="nav-link" routerLink="/tarifas" *ngIf="rol.includes(1)  && user">Tarifas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/generarAgenda" *ngIf="rol.includes(1)  && user">Agenda</a>
+          <a class="nav-link" routerLink="/generarAgenda" *ngIf="rol.includes(1)  && user">Agenda</a>
         </li>
         <!-- CHAIR SECUNDARIO -->
         <li class="nav-item">
-          <a class="nav-link" href="/evaluador" *ngIf="rol.includes(2)  && user">Mis Evaluadores</a>
+          <a class="nav-link" routerLink="/evaluador" *ngIf="rol.includes(2)  && user">Mis Evaluadores</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/asignarPaperEvaluador" *ngIf="rol.includes(2)  && user">Asignar Artículos</a>
+          <a class="nav-link" routerLink="/asignarPaperEvaluador" *ngIf="rol.includes(2)  && user">Asignar Artículos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/evaluatePapersChairSec" *ngIf="rol.includes(2)  && user">Evaluar Artículos</a>
+          <a class="nav-link" routerLink="/evaluatePapersChairSec" *ngIf="rol.includes(2)  && user">Evaluar Artículos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/control" *ngIf="rol.includes(2)  && user">Tablero de Control</a>
+          <a class="nav-link" routerLink="/control" *ngIf="rol.includes(2)  && user">Tablero de Control</a>
         </li>
         <!-- <li class="nav-item">
-          <a class="nav-link" href="/paperXSimposio" *ngIf="rol.includes(2)  && user">Artículos por Simposio</a>
+          <a class="nav-link" routerLink="/paperXSimposio" *ngIf="rol.includes(2)  && user">Artículos por Simposio</a>
         </li> -->
         <!-- <li class="nav-item">
-          <a class="nav-link" href="/evaluar" *ngIf="rol.includes(2)  && user">Evaluar Papers</a>
+          <a class="nav-link" routerLink="/evaluar" *ngIf="rol.includes(2)  && user">Evaluar Papers</a>
         </li> -->
         <!-- EVALUADOR -->
         <li class="nav-item">
-          <a class="nav-link" href="/verEvaluaciones" *ngIf="rol.includes(3)  && user">Evaluar</a>
+          <a class="nav-link" routerLink="/verEvaluaciones" *ngIf="rol.includes(3)  && user">Evaluar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/preferenciaSimposio" *ngIf="rol.includes(3) && user">Preferencia de Simposios</a>
+          <a class="nav-link" routerLink="/preferenciaSimposio" *ngIf="rol.includes(3) && user">Preferencia de Simposios</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/preferenciaSimposio" *ngIf="evaluator && user && !rol.includes(3)">Preferencia de Simposios</a>
+          <a class="nav-link" routerLink="/preferenciaSimposio" *ngIf="evaluator && user && !rol.includes(3)">Preferencia de Simposios</a>
         </li>
         <!-- AUTOR -->
         <li class="nav-item">
-          <a class="nav-link" href="/usuario" *ngIf="rol.includes(4) && user">Inscripcion</a>
+          <a class="nav-link" routerLink="/usuario" *ngIf="rol.includes(4) && user">Inscripcion</a>
         </li>
         <li class="nav-item">
-         <!--  <a class="nav-link" href="/missing" *ngIf="rol.includes(3)  && user">Seleccionar Simposios</a> -->
+         <!--  <a class="nav-link" routerLink="/missing" *ngIf="rol.includes(3)  && user">Seleccionar Simposios</a> -->
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/callForPapers" *ngIf="user && (!rol.includes(0) && !rol.includes(1) && !rol.includes(2)) && !rol.includes(3)">Call for Papers</a>
+          <a class="nav-link" routerLink="/callForPapers" *ngIf="user && (!rol.includes(0) && !rol.includes(1) && !rol.includes(2)) && !rol.includes(3)">Call for Papers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contacto">Contacto</a>
+          <a class="nav-link" routerLink="/contacto">Contacto</a>
         </li>
         <li class="nav-item  d-lg-none">
-          <a *ngIf='!user' class="nav-link" href="/login">Iniciar Sesion</a>
+          <a *ngIf='!user' class="nav-link" routerLink="/login">Iniciar Sesion</a>
           <button *ngIf='user' type="button" class="btn btn-primary" (click)="logout()">Cerrar Sesión</button>
         </li>
       </ul>
     </div>
     <div class="logged  text-right align-items-right d-none d-lg-block">
-      <a *ngIf='!user' type="button" class="btn btn-primary" href="/login">Iniciar Sesión</a>
+      <a *ngIf='!user' type="button" class="btn btn-primary" routerLink="/login">Iniciar Sesión</a>
       <div *ngIf='user' class="btn-group">
         <li class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
 {{this.userLogged.nombre}} {{this.userLogged.apellido}}  </li>
         <ul class="dropdown-menu dropdown-menu-lg-end">
-          <li><a class="dropdown-item" type="button" href="/usuario">Mi Perfil</a></li>
+          <li><a class="dropdown-item" type="button" routerLink="/usuario">Mi Perfil</a></li>
           <li><a class="dropdown-item" type="button" (click)='logout()'>Cerrar Sesión</a></li>
         </ul>
       </div>
