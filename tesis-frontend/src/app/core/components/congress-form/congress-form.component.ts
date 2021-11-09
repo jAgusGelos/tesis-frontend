@@ -35,7 +35,6 @@ export class CongressFormComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    console.log(this.sedes);
     this.formCongress = this.formBuilder.group({
       nombre: [this.congress.nombre, Validators.required],
       sede: [this.congress.sede, Validators.required],

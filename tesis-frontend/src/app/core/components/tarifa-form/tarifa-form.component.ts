@@ -14,8 +14,8 @@ export class TarifaFormComponent implements OnInit {
     idCongreso: '0',
     nombre: '',
     precio: 0,
-    fechaDesde: new Date,
-    fechaHasta: new Date
+    fechaDesde: '',
+    fechaHasta: ''
   };
   @Output() cancelEvent = new EventEmitter();
   @Output() newTarifaEvent = new EventEmitter();
@@ -36,7 +36,7 @@ export class TarifaFormComponent implements OnInit {
     });
   }
 
-  submit() {
+  submit(): void {
     this.submitted = true;
     if (this.formTarifa.controls.fechaDesde.value > this.formTarifa.controls.fechaHasta.value) {
       this.datesValid = false;
@@ -68,12 +68,11 @@ export class TarifaFormComponent implements OnInit {
   }
 
   invertConvertDateFormat(date: string): any {
-    date = date.split(' ')[0];
-    const info = date.split('/').reverse().join('-');
-    return info;
+    date = date.split('T')[0];
+    return date;
   }
 
-  cancel() {
+  cancel(): void {
     this.cancelEvent.emit();
   }
 }

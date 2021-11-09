@@ -39,6 +39,7 @@ export class InscriptionsComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     // El usuario si o si tiene que estar logueado. Datos mínimos.
     this.formUsuario = this.formBuilder.group({
       cupon: [''],

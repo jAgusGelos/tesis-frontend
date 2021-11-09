@@ -1,0 +1,21 @@
+@media (min-width: 768px) {
+    .container-fluid{
+      background-color: #F4F4F4;
+      padding: 5rem;
+    }
+  }
+  
+.card {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+.card-title {
+    margin-bottom: 20px;
+}
+
+.fa-info-circle {
+    color:#00609C;
+    margin-bottom: 20px;
+}

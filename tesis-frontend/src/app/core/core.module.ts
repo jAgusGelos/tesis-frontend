@@ -27,22 +27,26 @@ import { EvaluatePaperListComponent } from './components/evaluate-paper-list/eva
 import { EvaluatePaperFormComponent } from './components/evaluate-paper-form/evaluate-paper-form.component';
 import { EvaluatorListComponent } from './components/evaluator-list/evaluator-list.component';
 import { CongressCardComponent } from './components/congress-card/congress-card.component';
+import { CuponListComponent } from './components/cupon-list/cupon-list.component';
+import { CuponFormComponent } from './components/cupon-form/cupon-form.component';
 import { ChangePasswordFormComponent } from './components/change-password-form/change-password-form.component';
 import { RecoverPasswordFormComponent } from './components/recover-password-form/recover-password-form.component';
 import { TarifaListComponent } from './components/tarifa-list/tarifa-list.component';
 import { TarifaFormComponent } from './components/tarifa-form/tarifa-form.component';
 import { CustomToastComponent } from './components/custom-toast/custom-toast.component';
-
-
-
 import { AsignarPaperEvaluadorListComponent } from './components/asignar-paper-evaluador-list/asignar-paper-evaluador-list.component';
 import { SearchComponent } from './components/search/search.component';
+import { ComisionPermanenteOrganizacionComponent } from './components/comision-permanente-organizacion/comision-permanente-organizacion.component';
+import { ComisionEjecutivaOrganizacionComponent } from './components/comision-ejecutiva-organizacion/comision-ejecutiva-organizacion.component';
+import { ComiteOrganizadorLocalComponent } from './components/comite-organizador-local/comite-organizador-local.component';
+import { ComiteAcademicoListComponent } from './components/comite-academico-list/comite-academico-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { SedeListComponent } from './components/sede-list/sede-list.component';
 import { SedeFormComponent } from './components/sede-form/sede-form.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -74,27 +78,34 @@ import { SedeFormComponent } from './components/sede-form/sede-form.component';
     EvaluatePaperFormComponent,
     EvaluatorListComponent,
     CongressCardComponent,
+    CuponListComponent,
+    CuponFormComponent,
     ChangePasswordFormComponent,
     RecoverPasswordFormComponent,
     TarifaListComponent,
     TarifaFormComponent,
     AsignarPaperEvaluadorListComponent,
     SearchComponent,
+    ComisionPermanenteOrganizacionComponent,
+    ComisionEjecutivaOrganizacionComponent,
+    ComiteOrganizadorLocalComponent,
+    ComiteAcademicoListComponent,
     PaperReadyComponent,
     RevisionAutorComponent,
     CustomToastComponent,
     SearchComponent,
     AsignarPaperEvaluadorListComponent,
     SedeListComponent,
-    SedeFormComponent
-
+    SedeFormComponent,
+    AsignarPaperEvaluadorListComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    RouterModule
   ],
   exports:  [
     UserRegisterComponent,
@@ -123,6 +134,8 @@ import { SedeFormComponent } from './components/sede-form/sede-form.component';
     EvaluatePaperFormComponent,
     EvaluatorListComponent,
     CongressCardComponent,
+    CuponListComponent,
+    CuponFormComponent,
     ChangePasswordFormComponent,
     RecoverPasswordFormComponent,
     TarifaListComponent,
@@ -130,6 +143,10 @@ import { SedeFormComponent } from './components/sede-form/sede-form.component';
     CustomToastComponent,
     AsignarPaperEvaluadorListComponent,
     SearchComponent,
+    ComisionPermanenteOrganizacionComponent,
+    ComisionEjecutivaOrganizacionComponent,
+    ComiteOrganizadorLocalComponent,
+    ComiteAcademicoListComponent,
     PaperReadyComponent,
     RevisionAutorComponent,
     SedeListComponent,

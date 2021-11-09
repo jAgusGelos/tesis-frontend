@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ISymposium } from 'src/app/core/models/ISymposium';
 import { SymposiumService } from 'src/app/core/services/symposium.service';
 
@@ -12,8 +13,10 @@ export class SymposiumPreferenceComponent implements OnInit {
   description = 'Aquí puede elegir los simposios de su preferencia. Estos serán tenidos en cuenta al momento de que se le asigne artículos para evaluar.';
   symposiumList: ISymposium[] = [];
   mySymposiums: ISymposium[] = [];
+  ready = false;
 
-  constructor( private symposiumService: SymposiumService) { }
+  constructor( private symposiumService: SymposiumService,
+               private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getSimposios();
@@ -46,7 +49,7 @@ export class SymposiumPreferenceComponent implements OnInit {
     this.symposiumService.postEvaluatorSymposium(data).subscribe((res: any) => {
       this.mySymposiums.push(simposio);
       this.symposiumList.splice(index, 1);
-      alert('Simposio agregado!');
+      this.toastr.success('Simposio agregado!');
     });
   }
 
@@ -54,19 +57,21 @@ export class SymposiumPreferenceComponent implements OnInit {
     this.symposiumService.deleteEvaluatorSymposium(simposio).subscribe((res: any) => {
       this.mySymposiums.splice(index, 1);
       this.symposiumList.push(simposio);
-      alert('Simposio eliminado!');
+      this.toastr.success('Simposio Eliminado!');
     });
   }
 
   excluirPreferencias(): void {
     const aux = [];
-    for (const sy of this.symposiumList) {
-      for (const my of this.mySymposiums) {
-        if (!(sy.id === my.id)) {
-          aux.push(sy);
-        }
+    console.log(this.symposiumList);
+    console.log(this.mySymposiums);
+    const ids = this.mySymposiums.map((x) => x.id);
+    this.symposiumList = this.symposiumList.filter((x: any) => {
+      if (!ids.includes(x.id)) {
+        return x;
       }
-    }
-    this.symposiumList = aux;
+    });
+    console.log(this.symposiumList);
+    this.ready = true;
   }
 }

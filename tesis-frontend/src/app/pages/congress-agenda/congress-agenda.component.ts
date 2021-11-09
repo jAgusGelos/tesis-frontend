@@ -26,10 +26,11 @@ export class CongressAgendaComponent implements OnInit {
   list = true;
   sympo = false;
   dates = false;
-  schedule: ISchedule = {
+  schedule: any = {
     Id: 0,
     fechaInCongreso: new Date(),
     fechaFinCongreso: new Date(),
+    fechaCierreCongreso: new Date(),
     fechaInInscrip: new Date(),
     fechaFinInscripTemprana: new Date(),
     fechaFinInscripTardia: new Date(),
@@ -40,7 +41,7 @@ export class CongressAgendaComponent implements OnInit {
     simposios: [],
     aulas: [],
     modalidad: ''
-  };;
+  };
 
 
   constructor(private sympoService: SymposiumService,
@@ -67,7 +68,8 @@ export class CongressAgendaComponent implements OnInit {
           chairPrincipal: x.chairPrincipal,
           coordLocal: x.coordLocal,
           fechaInCongreso: x.fechaInCongreso,
-          fechaFinCongreso: x.fechaFinCongreso ,
+          fechaFinCongreso: x.fechaFinCongreso,
+          fechaCierreCongreso: x.fechaCierreCongreso,
           fechaLimPapers: x.fechaLimPapers,
           fechaProrrogaPapers: x.fechaProrrogaPapers,
           fechaFinEvaluacion: x.fechaFinEvaluacion,

@@ -35,7 +35,7 @@
           &nbsp;&nbsp;
           <a data-bs-toggle="dropdown" title="Más Opciones"><i class="fas fa-ellipsis-h"></i></a>
             <ul class="dropdown-menu">
-              <li><a (click)='toggleCancel(item)'class="dropdown-item" href="#">Rechazar Evaluación</a></li>
+              <li><a (click)='toggleCancel(item)'class="dropdown-item" routerLink="/">Rechazar Evaluación</a></li>
             </ul>
         </td>
         <td *ngIf='item.estado >= 3'>

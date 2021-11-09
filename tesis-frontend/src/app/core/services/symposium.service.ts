@@ -76,7 +76,9 @@ export class SymposiumService {
       idChair: this.idUser
     };
     return this.httpClient.request('delete', this.apiURL + 'congresos/eliminar-simposioxcongreso/',
-    {body: {Simposio: this.postSymposium}});
+    {body: {idSimposio: symposium.id,
+      idCongreso: this.idCongress,
+      idChair: this.idUser}});
   }
 
   getSymposiumsChairs(): any {
