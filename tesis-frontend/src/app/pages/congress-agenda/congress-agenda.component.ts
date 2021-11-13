@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
 import { ICongress } from 'src/app/core/models/ICongress';
 import { ISchedule } from 'src/app/core/models/ISchedule';
 import { ISymposium } from 'src/app/core/models/ISymposium';

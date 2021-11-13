@@ -26,6 +26,10 @@ export class ArticulosService {
     return this.httpClient.put(this.apiURL + 'calificarArticulo/', paperCalification);
   }
 
+  getCameraReady() {
+    return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosCameraReady/');
+  }
+
   post(asignation: any): any {
     return this.httpClient.post(this.apiURL + 'asignarArticuloEvaluador/', asignation);
   }

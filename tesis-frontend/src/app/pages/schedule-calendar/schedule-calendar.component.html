@@ -13,7 +13,7 @@
       <div class="col-sm-12">
         <select name="eval" class="form-control" (change)="aulaSelected($event.target.value)">
           <option selected disabled> -- Seleccione un Aula --</option>
-          <option *ngFor="let room of roomList" value='{{room.idRoom}}'>{{ room.nombre }} </option>
+          <option *ngFor="let room of roomList" value='{{room.id}}'>{{ room.nombre }} </option>
         </select>
       </div>
     </div>
