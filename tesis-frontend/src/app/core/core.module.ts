@@ -45,6 +45,7 @@ import { PaperReadyComponent } from './components/paper-ready/paper-ready.compon
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { RouterModule } from '@angular/router';
+import { AssistantListComponent } from './components/assistant-list/assistant-list.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { RouterModule } from '@angular/router';
     RevisionAutorComponent,
     CustomToastComponent,
     SearchComponent,
-    AsignarPaperEvaluadorListComponent
+    AsignarPaperEvaluadorListComponent,
+    AssistantListComponent,
   ],
   imports: [
     CommonModule,
@@ -143,7 +145,8 @@ import { RouterModule } from '@angular/router';
     ComiteOrganizadorLocalComponent,
     ComiteAcademicoListComponent,
     PaperReadyComponent,
-    RevisionAutorComponent
+    RevisionAutorComponent,
+    AssistantListComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

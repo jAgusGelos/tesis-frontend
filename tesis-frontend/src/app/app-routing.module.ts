@@ -110,6 +110,11 @@ const routes: Routes = [
     .then(m => m.EvaluatorsModule),
   },
   {
+    path: 'assistants',
+    loadChildren: () => import('./pages/assistant/Assistant.module')
+    .then(m => m.AssistantModule),
+  },
+  {
     path: 'cupones',
     loadChildren: () => import('./pages/cupon/cupon.module')
     .then(m => m.CuponModule)
@@ -198,6 +203,11 @@ const routes: Routes = [
     path: 'aceptacionRolEvaluador/:token',
     loadChildren: () => import('./pages/emails/accept-evaluator/accept-evaluator.module')
     .then(m => m.AcceptEvaluatorModule),
+  },
+  {
+    path: 'aceptacionRolAyudante/:token',
+    loadChildren: () => import('./pages/emails/accept-assistant/accept-assistant.module')
+    .then(m => m.AcceptAssistantModule),
   },
   {
     path: 'cancelacionEvaluacionPaper/:token',
