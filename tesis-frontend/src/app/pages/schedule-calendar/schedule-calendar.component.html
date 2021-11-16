@@ -199,6 +199,7 @@
             <div class='col-sm-6'>
               <select class='col-sm-4 form-select' name="idPaper" formControlName="idPaper" [ngClass]="{'is-invalid': ((formEvento.controls.idPaper.touched || submitted) && formEvento.controls.idPaper.value === '')
           && formEvento.controls.idPaper.errors}">
+                <option selected hidden>-- Seleccione un Paper --</option>
                 <option *ngFor="let opt of showList" value={{opt.idArticulo}}>
                   ‌{{ opt.nombreArticulo }}
                 </option>

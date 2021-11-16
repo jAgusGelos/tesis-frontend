@@ -25,6 +25,7 @@ import { addMonths, endOfDay, parseISO } from 'date-fns';
 import * as moment from 'moment';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { CustomToastComponent } from 'src/app/core/components/custom-toast/custom-toast.component';
 import { ArticulosService } from 'src/app/core/services/articulos.service';
 import { CongressService } from 'src/app/core/services/congress.service';
 import { PaperService } from 'src/app/core/services/paper.service';
@@ -74,16 +75,16 @@ export class ScheduleCalendarComponent implements OnInit {
   submittedPlen = false;
 
   evento = {
-    id: null,
+    idEvento: null,
     date: '',
     startHour: '',
     startMinute: '',
     endHour: '',
     endMinute: '',
     title: '',
-    desc: '',
+    content: '',
     idSimposio: null,
-    idPaper: null
+    idArticulo: null
   };
 
   paperList = [];
@@ -105,7 +106,21 @@ export class ScheduleCalendarComponent implements OnInit {
       label: '<span class="valign-center"><i class="fas fa-trash"></i></span>',
       title: 'Borrar',
       onClick: (event: CalendarSchedulerEvent): void => {
-        console.log('Pressed action \'Delete\' on event ' + event.id);
+
+        this.toastr
+      .show( '¿Está seguro que desea eliminar el evento?' + '\nToda los cambios se perderán.', '¿Borrar evento?', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        // Aca se hace el camino feliz
+        this.calendarService.deleteEvento(+event.id).subscribe((res: any) => {
+          this.toastr.success('Evento "' + event.title + '" eliminado con éxito');
+          this.getEventos();
+        });
+      });
       }
     },
   ];
@@ -163,7 +178,7 @@ export class ScheduleCalendarComponent implements OnInit {
       const fechaFin = new Date(fechaF[2], fechaF[1] - 1, fechaF[0]);
       this.viewDate = fechaIn;
       this.minDate = fechaIn;
-      this.maxDate.setDate(fechaFin.getDate()); ;
+      this.maxDate.setDate(fechaFin.getDate());
       this.min = `${fechaI[2]}-${fechaI[1]}-${fechaI[0]}`;
       this.max = `${fechaF[2]}-${fechaF[1]}-${fechaF[0]}`;
     });
@@ -194,6 +209,8 @@ export class ScheduleCalendarComponent implements OnInit {
           id: elem.idEvento,
           title: elem.title,
           content: elem.content,
+          idSimposio: elem.idSimposio,
+          idArticulo: elem.idARticulo,
           start: new Date(startDays[2], startDays[1] - 1 , startDays[0], startHour[0], startHour[1], 0),
           end: new Date(endDays[2], endDays[1] - 1 , endDays[0], endHour[0], endHour[1], 0),
           color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
@@ -241,16 +258,16 @@ export class ScheduleCalendarComponent implements OnInit {
 
   values(): any {
     return {
-      id: [this.evento.id || null],
+      idEvento: [this.evento.idEvento || null],
       date: [this.evento.date || ''],
       startHour: [+this.evento.startHour || 0],
       endHour: [+this.evento.endHour || 0],
       startMinute: [+this.evento.startMinute || 0],
       endMinute: [+this.evento.endMinute || 0],
       title: [this.evento.title, [Validators.required]],
-      desc: [this.evento.desc || '', [Validators.required]],
+      desc: [this.evento.content || '', [Validators.required]],
       idSimposio: [this.evento.idSimposio || '', [Validators.required]],
-      idPaper: [this.evento.idPaper || '', [Validators.required]]
+      idPaper: [this.evento.idArticulo || '', [Validators.required]]
     };
   }
 
@@ -339,8 +356,17 @@ export class ScheduleCalendarComponent implements OnInit {
 
 
   segmentClicked(action: string, segment: SchedulerViewHourSegment): void {
+    this.submitted = false;
+    this.submittedPlen = false;
+    this.formEvento.reset();
+    this.formEvento.setErrors({});
+    this.formEvento.clearValidators();
     this.evento = {
-      ...this.evento,
+      idEvento: null,
+      title: '',
+      content: '',
+      idSimposio: null,
+      idArticulo: null,
       date: segment.date.toLocaleDateString(),
       startHour: segment.date.toLocaleTimeString().split(':')[0],
       startMinute: segment.date.toLocaleTimeString().split(':')[1],
@@ -359,17 +385,20 @@ export class ScheduleCalendarComponent implements OnInit {
     });
     this.evento = {
       ...this.evento,
-      id: event.id || '',
+      idEvento: event.id || '',
       date: event.start.toLocaleDateString(),
       startHour: event.start.toLocaleTimeString().split(':')[0],
       startMinute: event.start.toLocaleTimeString().split(':')[1],
       endHour: event.end.toLocaleTimeString().split(':')[0],
       endMinute: event.end.toLocaleTimeString().split(':')[1],
       title: event.title,
-      idPaper: eventoCompleto.idArticulo,
-      idSimposio: this.evento.idSimposio
+      content: eventoCompleto.content,
+      idArticulo: eventoCompleto.idArticulo,
+      idSimposio: eventoCompleto.idSimposio
     };
     this.formEvento = this.formBuild.group(this.values());
+    console.log(this.formEvento);
+
 
     const btnDetalle = document.getElementById('activar-modal');
     btnDetalle.click();
@@ -377,7 +406,18 @@ export class ScheduleCalendarComponent implements OnInit {
 
   simposioSeleccionado(item: any): void {
     // Aca tengo que cargar los papers que correspondan a ese simposio;
-    this.showList = this.paperList.filter((elem: any) => +elem.idSimposio === +item);
+    this.showList = this.paperList.filter((elem: any) => {
+      if (+elem.idSimposio === +item) {
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < this.eventosCompletos.length; i++) {
+          const element = this.eventosCompletos[i];
+          if (element.idArticulo === elem.idArticulo && this.evento.idArticulo !== elem.idArticulo) {
+            return false;
+          }
+        }
+        return true;
+      }
+    });
   }
 
   submit(): void {
@@ -420,6 +460,7 @@ export class ScheduleCalendarComponent implements OnInit {
     // }
 
     const evento = {
+      idEvento: form.idEvento.value,
       title: form.title.value,
       desc: form.desc.value,
       start,
@@ -428,13 +469,24 @@ export class ScheduleCalendarComponent implements OnInit {
       idAula: this.idAula,
       idArticulo: form.idPaper.value
     };
+    console.log(evento.idEvento);
 
-    this.calendarService.postEvento(evento).subscribe((res: any) => {
-      const btnDismiss = document.getElementById('dismiss');
-      btnDismiss.click();
-      this.loading = true;
-      this.getEventos();
-    });
+    if (evento.idEvento !== null) {
+      this.calendarService.putEvento(evento).subscribe((res: any) => {
+        const btnDismiss = document.getElementById('dismiss');
+        btnDismiss.click();
+        this.loading = true;
+        this.getEventos();
+      });
+
+    } else {
+      this.calendarService.postEvento(evento).subscribe((res: any) => {
+        const btnDismiss = document.getElementById('dismiss');
+        btnDismiss.click();
+        this.loading = true;
+        this.getEventos();
+      });
+    }
   }
 
   submitPlenaria(): void {
