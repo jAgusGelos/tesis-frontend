@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="col-md-3 ml-auto">
-      <button type="button " class="btn btn-primary"
+      <button type="button " class="btn btn-primary" id='btnPLenaria'
       data-bs-toggle="modal"
        data-bs-target="#plenariaModal">
        <i class="fas fa-plus-circle"></i>
@@ -240,7 +240,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismiss'>Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)='submit()'>{{evento.id ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
+            <button type="button" class="btn btn-primary" (click)='submit()'>{{evento.idEvento ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
           </div>
         </form>
       </div>
@@ -363,7 +363,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismissPlenaria'>Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)='submitPlenaria()'>{{evento.id ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
+            <button type="button" class="btn btn-primary" (click)='submitPlenaria()'>{{evento.idEvento ? 'Actualizar Plenaria' : 'Nueva Plenaria'}}</button>
           </div>
         </form>
       </div>

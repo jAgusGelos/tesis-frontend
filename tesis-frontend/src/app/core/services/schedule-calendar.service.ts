@@ -32,7 +32,15 @@ export class ScheduleCalendarService {
   }
 
   putEvento(evento: any): any {
-    return this.httpClient.post(this.apiUrl + 'eventos/modificar-evento/', evento);
+    return this.httpClient.put(this.apiUrl + 'eventos/modificar-evento/?idEvento=' + evento.idEvento, evento);
+  }
+
+  postPlenaria(plenaria: any): any {
+    return this.httpClient.post(this.apiUrl + 'eventos/crear-breakCharla/', plenaria);
+  }
+
+  putPlenaria(plenaria: any): any {
+    return this.httpClient.put(this.apiUrl + 'eventos/modificar-breakCharla/?idEvento=' + plenaria.idEvento, plenaria);
   }
 
 }

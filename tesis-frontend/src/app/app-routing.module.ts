@@ -128,6 +128,11 @@ const routes: Routes = [
     .then(m => m.ControlBoardModule),
   },
   {
+    path: 'generarAgenda',
+    loadChildren: () => import('./pages/schedule-calendar/schedule-calendar.module')
+    .then(m => m.ScheduleCalendarModule),
+  },
+  {
     path: 'estadisticas',
     loadChildren: () => import('./pages/graphs/graphs.module')
     .then(m => m.GraphsModule),
