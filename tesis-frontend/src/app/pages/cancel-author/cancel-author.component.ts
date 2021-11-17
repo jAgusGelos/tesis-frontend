@@ -9,20 +9,20 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./cancel-author.component.css']
 })
 export class CancelAuthorComponent implements OnInit {
-  cancel: boolean = false;
-  token:string;
-  constructor(private route:ActivatedRoute,
-    private service: UserService,
-    private toastr: ToastrService) { }
+  cancel = false;
+  token: string;
+  constructor(private route: ActivatedRoute,
+              private service: UserService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.token=this.route.snapshot.params.token;
+    this.token = this.route.snapshot.params.token;
     console.log('TOKEN:');
     console.log(this.token);
     this.service.cancelAuthor('?token=' + this.token).subscribe(
-      (res:any)=> this.cancel=true,
-      (err:any) =>this.toastr.error('No se pudo cancelar su asignación como autor del paper.')
-    )
+      (res: any) => this.cancel = true,
+      (err: any) => this.toastr.error('No se pudo cancelar su asignación como autor del paper.')
+    );
   }
 
 }

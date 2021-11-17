@@ -137,6 +137,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/graphs/graphs.module')
     .then(m => m.GraphsModule),
   },
+  {
+    path: 'verAgenda',
+    loadChildren: () => import('./pages/ver-schedule/ver-schedule.module')
+    .then(m => m.VerScheduleModule),
+  },
+
+
+
   // Notification routes
   {
     path: 'deactivateAccount',
