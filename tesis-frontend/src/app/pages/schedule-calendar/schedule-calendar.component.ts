@@ -234,7 +234,6 @@ export class ScheduleCalendarComponent implements OnInit {
   getArticles(): void {
     this.articulosService.getCameraReady().subscribe((res: any) => {
       this.paperList = res.data;
-      this.showList = this.paperList.slice();
     });
   }
 
@@ -397,9 +396,8 @@ export class ScheduleCalendarComponent implements OnInit {
       idArticulo: eventoCompleto.idArticulo,
       idSimposio: eventoCompleto.idSimposio
     };
-
-    console.log(this.evento);
     if (this.evento.idSimposio !== null) {
+      this.simposioSeleccionado(this.evento.idSimposio);
       this.formEvento = this.formBuild.group(this.values());
       const btnDetalle = document.getElementById('activar-modal');
       btnDetalle.click();
@@ -416,6 +414,7 @@ export class ScheduleCalendarComponent implements OnInit {
 
   simposioSeleccionado(item: any): void {
     // Aca tengo que cargar los papers que correspondan a ese simposio;
+    const paper = this.paperList.filter((elem: any) => elem.idArticulo === this.evento.idArticulo);
     this.showList = this.paperList.filter((elem: any) => {
       if (+elem.idSimposio === +item) {
         // tslint:disable-next-line: prefer-for-of
@@ -428,6 +427,7 @@ export class ScheduleCalendarComponent implements OnInit {
         return true;
       }
     });
+    this.showList.push(paper);
   }
 
   submit(): void {
@@ -524,7 +524,6 @@ export class ScheduleCalendarComponent implements OnInit {
     const auxEnd = new Date(auxDate + ' ' + form.endHour.value + ':' + form.endMinute.value);
 
     const fDate = form.date.value.split('-');
-    console.log(fDate);
     const date = `${fDate[2]}/${fDate[1]}/${fDate[0]}`;
     // const startHourFinal = (form.startHour.value.length > 1 ? form.startHour.value : '0' + form.startHour.value)
     const start = date + ' ' + form.startHour.value + ':' + form.startMinute.value + ':00';
