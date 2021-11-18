@@ -45,6 +45,9 @@ import { PaperReadyComponent } from './components/paper-ready/paper-ready.compon
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { RouterModule } from '@angular/router';
+import { CertificateTemplateListComponent } from './components/certificate-template-list/certificate-template-list.component';
+import { CertificateTemplateFormComponent } from './components/certificate-template-form/certificate-template-form.component';
+import { CertificateDetailFormComponent } from './components/certificate-detail-form/certificate-detail-form.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +95,10 @@ import { RouterModule } from '@angular/router';
     RevisionAutorComponent,
     CustomToastComponent,
     SearchComponent,
-    AsignarPaperEvaluadorListComponent
+    AsignarPaperEvaluadorListComponent,
+    CertificateTemplateListComponent,
+    CertificateTemplateFormComponent,
+    CertificateDetailFormComponent
   ],
   imports: [
     CommonModule,
