@@ -138,7 +138,7 @@ const routes: Routes = [
     .then(m => m.GraphsModule),
   },
   {
-    path: 'verAgenda',
+    path: 'verAgenda/:id',
     loadChildren: () => import('./pages/ver-schedule/ver-schedule.module')
     .then(m => m.VerScheduleModule),
   },

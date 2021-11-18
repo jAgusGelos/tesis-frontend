@@ -1,6 +1,6 @@
 import { Component, HostListener, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, SelectMultipleControlValueAccessor, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CalendarView,
   CalendarDateFormatter,
@@ -74,6 +74,7 @@ export class VerScheduleComponent implements OnInit {
   formEvento: FormGroup;
   plenaria = false;
   submittedPlen = false;
+  congress: any;
 
   evento = {
     idEvento: null,
@@ -100,6 +101,7 @@ export class VerScheduleComponent implements OnInit {
   max = '';
   eventosCompletos = [];
   formPlenaria: FormGroup;
+  idCongress = '';
 
   actions: CalendarSchedulerEventAction[] = [
     {
@@ -142,7 +144,8 @@ export class VerScheduleComponent implements OnInit {
               private articulosService: ArticulosService,
               private router: Router,
               private roomService: RoomService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private route: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
@@ -165,13 +168,15 @@ export class VerScheduleComponent implements OnInit {
     this.getArticles();
     this.getRooms();
     this.getCongres();
+    this.idCongress = this.route.snapshot.paramMap.get('id');
     this.formEvento = this.formBuild.group(this.values());
     this.formPlenaria = this.formBuild.group(this.plenariaValues());
   }
 
 
   getCongres(): void {
-    this.congresService.getCongressById().subscribe((res: any) => {
+    this.congresService.getCongressById(this.idCongress).subscribe((res: any) => {
+      this.congress = res.data[0];
       const fechaI = res.data[0].fechaInicioExposiciones.split(' ')[0].split('/');
       const fechaF = res.data[0].fechaFinExposiciones.split(' ')[0].split('/');
 
@@ -195,7 +200,7 @@ export class VerScheduleComponent implements OnInit {
 
   getEventos(): void {
     // con el idAula Llama a los eventos
-    this.calendarService.getRoomEvents(+this.idAula).subscribe((res: any) => {
+    this.calendarService.getRoomEvents(+this.idAula, +this.idCongress).subscribe((res: any) => {
       this.eventosCompletos = res.data;
       this.events = res.data.map((elem: any) => {
         let aux = elem.start.split(' ');
@@ -352,35 +357,6 @@ export class VerScheduleComponent implements OnInit {
     return /*isToday(date) ||*/ date >= this.minDate && date <= this.maxDate;
   }
 
-  hourClicked(hour: SchedulerViewHour): void {
-    console.log('hourClicked Hour', hour);
-  }
-
-
-  segmentClicked(action: string, segment: SchedulerViewHourSegment): void {
-    this.submitted = false;
-    this.submittedPlen = false;
-    this.formEvento.reset();
-    this.formEvento.setErrors({});
-    this.formEvento.clearValidators();
-    this.evento = {
-      idEvento: null,
-      title: '',
-      content: '',
-      idSimposio: null,
-      idArticulo: null,
-      date: segment.date.toLocaleDateString(),
-      startHour: segment.date.toLocaleTimeString().split(':')[0],
-      startMinute: segment.date.toLocaleTimeString().split(':')[1],
-      endHour: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[0],
-      endMinute: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[1],
-    };
-    this.formEvento = this.formBuild.group(this.values());
-
-    const btnDetalle = document.getElementById('activar-modal');
-    btnDetalle.click();
-  }
-
   eventClicked(action: string, event: CalendarSchedulerEvent): void {
     const eventoCompleto = this.eventosCompletos.find((x: any) => {
       return x.idEvento === event.id;
@@ -399,7 +375,6 @@ export class VerScheduleComponent implements OnInit {
       idSimposio: eventoCompleto.idSimposio
     };
 
-    console.log(this.evento);
     if (this.evento.idSimposio !== null) {
       this.formEvento = this.formBuild.group(this.values());
       const btnDetalle = document.getElementById('activar-modal');
@@ -429,162 +404,5 @@ export class VerScheduleComponent implements OnInit {
         return true;
       }
     });
-  }
-
-  submit(): void {
-    this.submitted = true;
-
-    if (this.formEvento.invalid) {
-      this.toastr.warning('Por favor, complete todos los datos');
-      return;
-    }
-    const form = this.formEvento.controls;
-
-    const finDate = form.date.value.split('-');
-    const auxDate = `${finDate[1]}/${finDate[2]}/${finDate[0]}`;
-    const auxStart = new Date(auxDate + ' ' + form.startHour.value + ':' + form.startMinute.value);
-    const auxEnd = new Date(auxDate + ' ' + form.endHour.value + ':' + form.endMinute.value);
-
-    const fDate = form.date.value.split('/');
-    const date = `${fDate[0]}/${fDate[1]}/${fDate[2]}`;
-    // const startHourFinal = (form.startHour.value.length > 1 ? form.startHour.value : '0' + form.startHour.value)
-    const start = date + ' ' + form.startHour.value + ':' + form.startMinute.value + ':00';
-    const end = date + ' ' + form.endHour.value + ':' + form.endMinute.value + ':00';
-
-    if (auxStart >= auxEnd) {
-      this.toastr.warning('Hora inválida');
-      return;
-    }
-    // Chequeo de dos horarios superpuestos
-    // const overStepped = this.events.find((item: any) => {
-    //   if (start === item.startDate){
-    //     return true;
-    //   }
-    //   if (start < item.startDate && end <= item.startDate) {
-    //     return false;
-    //   }
-    //   if (start < item.startDate && end >= item.startDate) {
-    //     return true;
-    //   }
-    //   if (start > item.startDate && start < item.endDate) {
-    //     return true;
-    //   }
-    //   return false;
-    // });
-
-    // if (overStepped) {
-    //   alert('Horarios Superpuestos. Imposible ')
-    //   return;
-    // }
-
-    const evento = {
-      idEvento: form.idEvento.value,
-      title: form.title.value,
-      desc: form.desc.value,
-      start,
-      end,
-      idSimposio: form.idSimposio.value,
-      idAula: this.idAula,
-      idArticulo: form.idPaper.value
-    };
-    console.log(evento.idEvento);
-
-    if (evento.idEvento !== null) {
-      this.calendarService.putEvento(evento).subscribe((res: any) => {
-        const btnDismiss = document.getElementById('dismiss');
-        btnDismiss.click();
-        this.loading = true;
-        this.getEventos();
-      });
-
-    } else {
-      this.calendarService.postEvento(evento).subscribe((res: any) => {
-        const btnDismiss = document.getElementById('dismiss');
-        btnDismiss.click();
-        this.loading = true;
-        this.getEventos();
-      });
-    }
-  }
-
-  submitPlenaria(): void {
-    this.submittedPlen = true;
-    if (this.formPlenaria.invalid) {
-      this.toastr.warning('Por favor, complete todos los datos');
-      return;
-    }
-
-    const form = this.formPlenaria.controls;
-    if (form.date.value === '') {
-      form.date.setValue(this.min);
-    }
-
-    const finDate = form.date.value.split('-');
-    const auxDate = `${finDate[1]}/${finDate[2]}/${finDate[0]}`;
-    const auxStart = new Date(auxDate + ' ' + form.startHour.value + ':' + form.startMinute.value);
-    const auxEnd = new Date(auxDate + ' ' + form.endHour.value + ':' + form.endMinute.value);
-
-    const fDate = form.date.value.split('-');
-    console.log(fDate);
-    const date = `${fDate[2]}/${fDate[1]}/${fDate[0]}`;
-    // const startHourFinal = (form.startHour.value.length > 1 ? form.startHour.value : '0' + form.startHour.value)
-    const start = date + ' ' + form.startHour.value + ':' + form.startMinute.value + ':00';
-    const end = date + ' ' + form.endHour.value + ':' + form.endMinute.value + ':00';
-
-    if (auxStart >= auxEnd) {
-      this.toastr.warning('Hora inválida');
-      return;
-    }
-    // Chequeo de dos horarios superpuestos
-    // const overStepped = this.events.find((item: any) => {
-    //   if (start === item.startDate){
-    //     return true;
-    //   }
-    //   if (start < item.startDate && end <= item.startDate) {
-    //     return false;
-    //   }
-    //   if (start < item.startDate && end >= item.startDate) {
-    //     return true;
-    //   }
-    //   if (start > item.startDate && start < item.endDate) {
-    //     return true;
-    //   }
-    //   return false;
-    // });
-
-    // if (overStepped) {
-    //   alert('Horarios Superpuestos. Imposible ')
-    //   return;
-    // }
-
-    const evento = {
-      idEvento: form.idEvento.value,
-      title: form.title.value,
-      desc: form.desc.value,
-      start,
-      end
-    };
-
-    if (evento.idEvento !== null) {
-      this.calendarService.putPlenaria(evento).subscribe((res: any) => {
-        const btnDismiss = document.getElementById('dismissPlenaria');
-        btnDismiss.click();
-        this.loading = true;
-        if (this.idAula) {
-          this.getEventos();
-        }
-
-      });
-
-    } else {
-      this.calendarService.postPlenaria(evento).subscribe((res: any) => {
-        const btnDismiss = document.getElementById('dismissPlenaria');
-        btnDismiss.click();
-        this.loading = true;
-        if (this.idAula) {
-          this.getEventos();
-        }
-      });
-    }
   }
 }
