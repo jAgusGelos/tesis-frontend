@@ -142,6 +142,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/ver-schedule/ver-schedule.module')
     .then(m => m.VerScheduleModule),
   },
+  {
+    path: 'certificados',
+    loadChildren: () => import('./pages/certificate/certificate.module')
+    .then(m => m.CertificateModule),
+  },
 
 
 

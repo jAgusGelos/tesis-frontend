@@ -373,6 +373,7 @@ export class ScheduleCalendarComponent implements OnInit {
       endHour: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[0],
       endMinute: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[1],
     };
+    this.showList = [];
     this.formEvento = this.formBuild.group(this.values());
 
     const btnDetalle = document.getElementById('activar-modal');
@@ -396,6 +397,7 @@ export class ScheduleCalendarComponent implements OnInit {
       idArticulo: eventoCompleto.idArticulo,
       idSimposio: eventoCompleto.idSimposio
     };
+    this.showList = [];
     if (this.evento.idSimposio !== null) {
       this.simposioSeleccionado(this.evento.idSimposio);
       this.formEvento = this.formBuild.group(this.values());
@@ -415,19 +417,11 @@ export class ScheduleCalendarComponent implements OnInit {
   simposioSeleccionado(item: any): void {
     // Aca tengo que cargar los papers que correspondan a ese simposio;
     const paper = this.paperList.filter((elem: any) => elem.idArticulo === this.evento.idArticulo);
-    this.showList = this.paperList.filter((elem: any) => {
-      if (+elem.idSimposio === +item) {
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < this.eventosCompletos.length; i++) {
-          const element = this.eventosCompletos[i];
-          if (element.idArticulo === elem.idArticulo && this.evento.idArticulo !== elem.idArticulo) {
-            return false;
-          }
-        }
-        return true;
-      }
+    // llamar al nuevo método del agus
+    this.articulosService.getNotAssigned(item).subscribe((res: any) => {
+      this.showList = res.data;
+      this.showList.push(paper);
     });
-    this.showList.push(paper);
   }
 
   submit(): void {

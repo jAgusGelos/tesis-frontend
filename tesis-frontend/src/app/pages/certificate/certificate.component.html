@@ -1,1 +1,13 @@
-<p>certificate works!</p>
+<app-certificate-template-list
+(newCertEvent)="newCert()"
+(deleteCertEvent)="deleteCertificate($event)"
+(editCertEvent)="editCert($event)"
+[certList]="certList"
+></app-certificate-template-list>
+<app-certificate-template-form
+  [cert]="cert"
+  (cancelCert)="toggleEdit()"
+  (certEmitter)="submit($event)"
+></app-certificate-template-form>
+<app-certificate-detail-form></app-certificate-detail-form>
+

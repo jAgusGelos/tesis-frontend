@@ -149,7 +149,10 @@ import { CertificateDetailFormComponent } from './components/certificate-detail-
     ComiteOrganizadorLocalComponent,
     ComiteAcademicoListComponent,
     PaperReadyComponent,
-    RevisionAutorComponent
+    RevisionAutorComponent,
+    CertificateTemplateListComponent,
+    CertificateTemplateFormComponent,
+    CertificateDetailFormComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
