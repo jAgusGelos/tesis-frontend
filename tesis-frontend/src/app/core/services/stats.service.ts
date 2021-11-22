@@ -21,14 +21,14 @@ export class StatsService {
   }
 
   getTopSimposioXCongreso(): any {
-    return this.httpClient.get(this.apiURL + 'estadisticas/devolverTopSimposiosXCongreso/?cantidad=10');
+    return this.httpClient.get(this.apiURL + 'estadisticas/devolverTopSimposiosXCongreso/?idCongreso=' + this.idCongress + '&cantidad=10');
   }
 
   getTopSimpoGeneral(): any {
     return this.httpClient.get(this.apiURL + 'estadisticas/devolverTopSimposiosGeneral/?cantidad=10');
   }
   getTopSimpoXEval(): any {
-    return this.httpClient.get(this.apiURL + 'estadisticas/devolverTopSimposiosXEvaluadores/?cantidad=10');
+    return this.httpClient.get(this.apiURL + 'estadisticas/devolverTopSimposiosXEvaluadores/?idCongreso=' + this.idCongress + '&cantidad=10');
   }
   getEdadesXCongress(): any {
     return this.httpClient.get(this.apiURL + 'estadisticas/devolverEdadesXCongreso/?idCongreso=' + this.idCongress);
@@ -46,11 +46,11 @@ export class StatsService {
     return this.httpClient.get(this.apiURL + 'estadisticas/devolverEstadosArticulos/?idCongreso=' + this.idCongress);
   }
   getTopEventos(): any {
-    return this.httpClient.get(this.apiURL + 'estadisticas/devolverTopEventos/?idCongreso=' + this.idCongress + '&?cantidad=10');
+    return this.httpClient.get(this.apiURL + 'estadisticas/devolverTopEventos/?idCongreso=' + this.idCongress + '&cantidad=10');
   }
   getTopEvalCongress(): any {
     return this.httpClient.get(this.apiURL +
-       'estadisticas/devolverTopEvaluadoresCongreso/?idCongreso=' + this.idCongress + '&?cantidad=10');
+       'estadisticas/devolverTopEvaluadoresCongreso/?idCongreso=' + this.idCongress + '&cantidad=10');
   }
   getSimpoXCalif(): any {
     return this.httpClient.get(this.apiURL + 'estadisticas/devolverSimposiosCalificaciones/?idCongreso=' + this.idCongress);

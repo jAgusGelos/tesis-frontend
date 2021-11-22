@@ -11,6 +11,7 @@
     <div class="form-group col-sm-6">
       <label>Seleccione el gráfico a visualizar</label>
       <select class="form-control" (change)="selectStats($event.target.value)">
+        <option value="-1" hidden selected>--Seleccione una fuente de datos--</option>
         <option value="topEval">Top Evaluadores</option>
         <option value="topSimpo">Top simposios por Congreso</option>
         <option value="topSimpoCongre">Top simposios General</option>
@@ -34,7 +35,7 @@
     <div class="form-group col-sm-6">
       <label>Seleccione el tipo de gráfico</label>
       <select class="form-control" (change)="selectGraph($event.target.value)">
-        <option value="-1" hidden selected>--Seleccione un Gráfico--</option>
+        <option value="-1" hidden [selected]='!selectedOption'>--Seleccione un Gráfico--</option>
         <option value="pie">Torta</option>
         <option value="bar">Barras</option>
 

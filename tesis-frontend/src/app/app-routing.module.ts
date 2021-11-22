@@ -147,6 +147,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/certificate/certificate.module')
     .then(m => m.CertificateModule),
   },
+  {
+    path: 'reportes',
+    loadChildren: () => import('./pages/reports/reports.module')
+    .then(m => m.ReportsModule),
+  },
 
 
 

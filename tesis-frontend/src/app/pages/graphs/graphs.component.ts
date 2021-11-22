@@ -12,8 +12,8 @@ import { StatsService } from 'src/app/core/services/stats.service';
 export class GraphsComponent implements OnInit {
 
   chartOption: EChartsOption;
-  dataLabel = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  data = [120, 200, 150, 80, 70, 110, 130];
+  data = [];
+  selectedOption = false;
 
   constructor(private statsService: StatsService) { }
 
@@ -22,63 +22,72 @@ export class GraphsComponent implements OnInit {
   }
 
   selectStats(value: string): void {
+    this.selectedOption = false;
     switch (value) {
       case 'topEval':
         this.statsService.getTopEval().subscribe((res: any) => {
           this.data = res.data;
         });
         break;
-        case 'topSimpo':
-          this.statsService.getTopSimposioXCongreso().subscribe((res: any) => {
+      case 'topSimpo':
+        this.statsService.getTopSimposioXCongreso().subscribe((res: any) => {
+          this.data = res.data;
+        });
+        break;
+      case 'topSimpoCongre':
+        this.statsService.getTopSimpoGeneral().subscribe((res: any) => {
+          this.data = res.data;
+        });
+        break;
+      case 'topSimpoXEval':
+        this.statsService.getTopSimpoXEval().subscribe((res: any) => {
+          this.data = res.data;
+        });
+        break;
+      case 'gEtario':
+          this.statsService.getEdadesXCongress().subscribe((res: any) => {
+          this.data = [
+            {name: 'Menores 18', value: res.data[0]['menor-18']},
+            {name: 'Entre 18-24', value: res.data[0]['entre-18-24']},
+            {name: 'Entre 25-40', value: res.data[0]['entre-25-40']},
+            {name: 'Mayores de 40', value: res.data[0]['mayor-40']}
+        ];
+        });
+          break;
+        case 'participSede':
+          this.statsService.getPartXSede().subscribe((res: any) => {
             this.data = res.data;
           });
           break;
-        case 'topSimpoCongre':
-          this.statsService.getTopSimpoGeneral().subscribe((res: any) => {
+        case 'califSimposios':
+          this.statsService.getSimpoXCalif().subscribe((res: any) => {
             this.data = res.data;
           });
           break;
-        case 'topSimpoXEval':
-          this.statsService.getTopSimpoXEval().subscribe((res: any) => {
+        case 'topEventos':
+          this.statsService.getTopEventos().subscribe((res: any) => {
             this.data = res.data;
           });
           break;
-          case 'gEtario':
-              this.statsService.getEdadesXCongress().subscribe((res: any) => {
-              // trabajar esto:
-              console.log(res.data);
+          case 'cancelaciones':
+            this.statsService.getEvalXCancelXCongreso().subscribe((res: any) => {
+              this.data = res.data;
             });
-              break;
-            case 'participSede':
-              this.statsService.getPartXSede().subscribe((res: any) => {
-                this.data = res.data;
-              });
-              break;
-            case 'califSimposios':
-              this.statsService.getSimpoXCalif().subscribe((res: any) => {
-                this.data = res.data;
-              });
-              break;
-            case 'topEventos':
-              this.statsService.getTopEventos().subscribe((res: any) => {
-                this.data = res.data;
-              });
-              break;
-              case 'cancelaciones':
-                this.statsService.getEvalXCancelXCongreso().subscribe((res: any) => {
-                  this.data = res.data;
-                });
-                break;
-              case 'cancelCongre':
-                this.statsService.getEvalXCancel().subscribe((res: any) => {
-                  this.data = res.data;
-                });
-                break;
-              case 'estadoArt':
-                this.statsService.getEstadoArticulos().subscribe((res: any) => {
-                  this.data = res.data;
-                });
-                break;
+            break;
+          case 'cancelCongre':
+            this.statsService.getEvalXCancel().subscribe((res: any) => {
+              this.data = res.data;
+            });
+            break;
+          case 'estadoArt':
+            this.statsService.getEstadoArticulos().subscribe((res: any) => {
+              this.data = [
+                {name: "Aprobados", value: res.data.aprobados},
+                {name: "Reentregados", value: res.data.reentrega},
+                {name: "Rechazados", value: res.data.rechazados}
+              ];
+            });
+            break;
       default:
         break;
     }
@@ -88,11 +97,13 @@ export class GraphsComponent implements OnInit {
   // "line" | "bar" | "scatter" | "pie" | "radar" | "map" | "tree" | "treemap" | "graph" | "gauge"
   // | "funnel" | "parallel" | "sankey" | "boxplot" | "candlestick" | "effectScatter" |"custom"
   selectGraph(value: any): void {
-    const pieData = [];
+    const datos = [];
+    const labels = [];
+    this.selectedOption = true;
     for (let i = 0; i < this.data.length; i++) {
       const element = this.data[i];
-      const label = this.dataLabel[i];
-      pieData.push({ name: label, value: element });
+      datos.push(element.value);
+      labels.push(element.name);
     }
     switch (value) {
       case 'bar':
@@ -104,14 +115,14 @@ export class GraphsComponent implements OnInit {
           },
           xAxis: {
             type: 'category',
-            data: this.dataLabel,
+            data: labels,
           },
           yAxis: {
             type: 'value'
           },
           series: [
             {
-              data: this.data,
+              data: datos,
               type: 'bar',
               showBackground: true,
               backgroundStyle: {
@@ -136,7 +147,7 @@ export class GraphsComponent implements OnInit {
             type: 'pie',
             radius: '75%',
             center: ['50%', '50%'],
-            data: pieData,
+            data: this.data,
             label: {
               position: 'outer',
               alignTo: 'labelLine',
