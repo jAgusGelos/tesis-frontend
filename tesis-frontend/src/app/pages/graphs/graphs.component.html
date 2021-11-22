@@ -7,7 +7,41 @@
     <hr>
   </div>
   <br>
-  <div class="row justify-content-between">
+  <div class="row justify-content-center">
+    <div class="form-group col-sm-6">
+      <label>Seleccione el gráfico a visualizar</label>
+      <select class="form-control" (change)="selectStats($event.target.value)">
+        <option value="topEval">Top Evaluadores</option>
+        <option value="topSimpo">Top simposios por Congreso</option>
+        <option value="topSimpoCongre">Top simposios General</option>
+        <option value="topSimpoXEval">Top simposios por Evaluadores</option>
+        <option value="gEtario">Grupo Etario por congreso</option>
+        <option value="participSede">Participantes por sede</option>
+        <option value="califSimposios">Calificaciones por Simposios</option>
+        <option value="topEventos">Top Eventos</option>
+        <option value="cancelaciones">Cancelaciones por evaluador general</option>
+        <option value="cancelCongre">Cancelaciones por evaluador por congreso</option>
+
+        <option value="estadoArt">Estado artículos</option>
+
+
+
+      </select>
+    </div>
+  </div>
+
+  <div class="row justify-content-center pt-2">
+    <div class="form-group col-sm-6">
+      <label>Seleccione el tipo de gráfico</label>
+      <select class="form-control" (change)="selectGraph($event.target.value)">
+        <option value="-1" hidden selected>--Seleccione un Gráfico--</option>
+        <option value="pie">Torta</option>
+        <option value="bar">Barras</option>
+
+      </select>
+    </div>
+  </div>
+  <div class="row justify-content-between pt-3">
     <div echarts [options]="chartOption" class="demo-chart"></div>
   </div>
 

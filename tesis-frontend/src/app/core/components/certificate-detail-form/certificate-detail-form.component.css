@@ -79,3 +79,11 @@ a:hover {
 .rev:hover {
   color:#3CAFE0 ;
 }
+
+.form-group{
+  padding-top: 0.5rem;
+}
+
+.verticalLine {
+  border-left: thick solid #3CAFE0;
+}

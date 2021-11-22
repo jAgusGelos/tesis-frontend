@@ -19,7 +19,7 @@ export class CertificateTemplateListComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    this.showList = this.certList.slice().sort((item: any) => item.enviado_corregir ? 0 : -1);
+    this.showList = this.certList.slice();
   }
 
   toggleEdit(item: any): void {
