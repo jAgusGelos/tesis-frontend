@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="contenidos">
       <hr>
-      <h3 class="card-title text-center">{{cert.idCertificado ? 'Editar Certificado': 'Nuevo Certificado' }}</h3>
+      <h3 class="card-title text-center">{{cert.id ? 'Editar Certificado': 'Nuevo Certificado' }}</h3>
       <hr>
     </div>
     <div>
@@ -47,7 +47,7 @@
         <label class='col-form-label col-sm-3 col-sm-offset-2' for='archivo'>Archivo: <span
             class='text-danger'>*</span></label>
         <div class='col-sm-6'>
-          <input type='file' accept="image/png, image/gif, image/jpeg" (change)="handleFileInput($event.target.files)" class='form-control'
+          <input type='file' accept="image/jpg, image/jpeg" (change)="handleFileInput($event.target.files)" class='form-control'
             formControlName='archivo' [ngClass]="{'is-invalid': (formCertificate.controls.archivo.touched || submitted)
               && formCertificate.controls.archivo.errors}" onclick='this.select()' />
           <span class='text-danger' *ngIf='(submitted) && formCertificate.controls.archivo.errors?.required'>
@@ -58,13 +58,13 @@
 
       <div class="form-group row" *ngIf="cert.nombre">
         <label class='col-form-label col-sm-3 col-sm-offset-2' for='archivo'>Archivo ya subido:</label>
-        <a (click)='getArchivo()' class='col-form-label col-sm-3' for='archivo'>{{cert.nombre | titlecase}}.pdf</a>
+        <a (click)='getArchivo()' class='col-form-label col-sm-3' for='archivo'>{{cert.nombre | titlecase}}.jpg</a>
       </div>
 
       <div class="row justify-content-md-center btn-row">
         <a class="btn btn-secondary col-md-3" (click)='cancel()' role="button">Cancelar</a>
         &nbsp;
-        <a class="btn btn-primary col-md-3" (click)='submit()' role="button">{{cert.idCertificado ? 'Guardar Cambios' : 'Nuevo Certificado'}}</a>
+        <a class="btn btn-primary col-md-3" (click)='submit()' role="button">{{cert.id ? 'Guardar Cambios' : 'Nuevo Certificado'}}</a>
       </div>
       <br>
     </form>

@@ -12,6 +12,8 @@ export class CertificateTemplateListComponent implements OnInit {
   @Input() certList: any[];
   @Output() editCertEvent = new EventEmitter();
   @Output() deleteCertEvent = new EventEmitter();
+  @Output() gameCertEvent = new EventEmitter();
+
   @Output() newCertEvent = new EventEmitter();
   showList: any[];
 
@@ -43,6 +45,10 @@ export class CertificateTemplateListComponent implements OnInit {
         // Aca se hace el camino feliz
         this.deleteCertEvent.emit(item);
       });
+  }
+
+  toggleGameHandled(item: any): void {
+    this.gameCertEvent.emit(item);
   }
 
   search(filterList): void {

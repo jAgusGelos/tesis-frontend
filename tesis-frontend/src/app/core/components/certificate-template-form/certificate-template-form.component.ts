@@ -28,7 +28,7 @@ export class CertificateTemplateFormComponent implements OnInit {
     window.scrollTo(0, 0);
     this.formCertificate = this.formBuilder.group({
       nombre: [this.cert.nombre, [Validators.required]],
-      desc: [this.cert.desc, [Validators.required]],
+      desc: [this.cert.descripcion, [Validators.required]],
       archivo: [null],
     });
 
@@ -55,7 +55,7 @@ export class CertificateTemplateFormComponent implements OnInit {
     }
     this.cert = {
       archivo: this.fileToUpload,
-      idCertificado: this.cert.idCertificado,
+      idCertificado: this.cert.id,
       nombre: this.formCertificate.controls.nombre.value,
       desc: this.formCertificate.controls.desc.value
     };
@@ -65,7 +65,7 @@ export class CertificateTemplateFormComponent implements OnInit {
   getArchivo(): void {
    this.certService.getPictureFile(this.cert.id).subscribe((res: any) => {
       const archivo: ArrayBuffer = res;
-      const blob = new Blob([archivo], { type: 'application/pdf' });
+      const blob = new Blob([archivo], { type: 'image/png'});
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       if (link.download !== undefined) {

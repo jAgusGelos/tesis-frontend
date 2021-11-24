@@ -23,10 +23,9 @@ export class CertificateService {
 
   postCertificate(certificate: any): any {
     const formData = new FormData();
-    formData.append('archivo', certificate.picture);
+    formData.append('archivo', certificate.archivo);
     formData.append('nombre', certificate.nombre);
-    formData.append('desc', certificate.desc);
-
+    formData.append('descripcion', certificate.desc);
     return this.httpClient.post<any>(this.apiURL + 'certificados/altaCertificado/', formData);
   }
 
@@ -36,15 +35,27 @@ export class CertificateService {
 
   putCertificate(certificate: any): any {
     const formData = new FormData();
-    formData.append('archivo', certificate.picture);
+    formData.append('template', certificate.picture);
     formData.append('nombre', certificate.nombre);
-    formData.append('desc', certificate.desc);
-    formData.append('idCertificado', certificate.idCertificado);
+    formData.append('descripcion', certificate.desc);
+    formData.append('id', certificate.idCertificado);
     return this.httpClient.put<any>(this.apiURL + 'certificados/modifCertificado/?idCertificado=' + certificate.idCertificado, formData);
   }
 
-  deleteCertificate(id: string): any {
-    return this.httpClient.get(this.apiURL + 'certificados/bajaCertificado/?idCertificado=' + id);
+  deleteCertificate(item: any): any {
+    return this.httpClient.delete(this.apiURL + 'certificados/bajaCertificado/?idCertificado=' + item.id);
+  }
+
+  postplayCert(certificate: any): any {
+    // id certificado
+    // datos: {llave, valor}
+    return this.httpClient.post<any>(this.apiURL + 'certificados/pruebaCertificadoParametrizado/', certificate);
+  }
+
+  postFinalCert(certificate: any): any {
+    // para cada detalle dar el alta de detalle
+    return this.httpClient.post<any>(this.apiURL + 'certificados/altaDetalleCertificado/', certificate);
+
   }
 
 }

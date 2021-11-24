@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="contenidos">
     <hr>
-    <h3 class='text-center'>Nuevo certificado</h3>
+    <h3 class='text-center'>Modificar Certificado</h3>
     <hr>
   </div>
   <br>
@@ -128,15 +128,41 @@
         <br>
         <hr>
 
-        <div class="row pt-2 justify-content-center">
-          <button class="btn btn-secondary col-sm-4" (click)="cancelar()">Cancelar</button>
-          &nbsp;
-          <button type="submit" class="btn btn-primary col-sm-4" (click)="verGrafico($event)">Probar Gráfico</button>
+        <!-- fontSize -->
+        <div class="form-group row">
+          <label for="fontSize" class="col-form-label col-sm-4 col-sm-offset-2">Tamaño de Fuente:</label>
+          <div class="col-sm-6">
+            <select class="form-select" id="select-fontSize" formControlName="fontSize"
+              [ngClass]="{'is-invalid': submitted && formCert.controls.fontSize.errors}">
+              <option *ngFor="let font of fontsSize" value="{{font}}">{{font}} </option>
+            </select>
+          </div>
         </div>
-        <div class="row pt-2  justify-content-center">
-          <button type="submit" class="btn btn-danger col-sm-8" (click)="guardarCambios($event)">Guardar
-            Cambios</button>
-        </div>
+
+          <!-- Tipo de Fuente: -->
+          <div class="form-group row">
+            <label for="fontFamily" class="col-form-label col-sm-4 col-sm-offset-2">Tipo de Fuente:</label>
+            <div class="col-sm-6">
+              <select class="form-select" id="select-fontFamily" formControlName="fontFamily"
+                [ngClass]="{'is-invalid': submitted && formCert.controls.fontFamily.errors}">
+                <option *ngFor="let font of fonts" value="{{font.value}}">{{font.name}} </option>
+              </select>
+            </div>
+          </div>
+
+          <br>
+          <hr>
+
+          <div class="row pt-2 justify-content-center">
+            <button class="btn btn-secondary col-sm-4" (click)="cancelar()">Cancelar</button>
+            &nbsp;
+            <button type="submit" class="btn btn-primary col-sm-4" (click)="verGrafico()">Probar Gráfico</button>
+          </div>
+          <div class="row pt-2  justify-content-center">
+            <button type="submit" class="btn btn-danger col-sm-8" (click)="guardarCambios()">Guardar
+              Cambios
+            </button>
+          </div>
 
       </form>
 
@@ -145,7 +171,14 @@
 
 
     <div class="col-md-5 col-sm-12 verticalLine">
-      <img src="{{imagen}}" alt="Template del certificado" style="height: 110%; width: 130%;">
+      <img src="data:image/png;base64,{{imagen}}" alt="Template del certificado" style="height: 110%; width: 130%;"
+        *ngIf="!loading">
+      <div class="row justify-content-center" *ngIf="loading">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
 
     </div>
 

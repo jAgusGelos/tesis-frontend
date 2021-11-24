@@ -25,12 +25,13 @@
     <tbody>
       <tr class='align-items-center' *ngFor='let item of showList'>
         <td>{{item.nombre | titlecase}}</td>
-        <td>{{item.desc}}</td>
+        <td>{{item.descripcion}}</td>
 
         <td class='align-items-center display-flex justify-content-center'>
           <div class="btn-group col-md-3" *ngIf='!item.enviado_corregir'>
             <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt bigger"></i></a>
             <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash bigger"></i></a>
+            <a (click)='toggleGameHandled(item)' title='Playground'><i class="fas fa-quidditch"></i></a>
           </div>
         </td>
       </tr>
