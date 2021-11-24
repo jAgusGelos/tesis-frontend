@@ -132,6 +132,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/schedule-calendar/schedule-calendar.module')
     .then(m => m.ScheduleCalendarModule),
   },
+  {
+    path: 'inscripcionFisica',
+    loadChildren: () => import('./pages/inscripcion-fisica/inscripcion-fisica.module')
+    .then(m => m.InscripcionFisicaModule),
+  },
   // Notification routes
   {
     path: 'deactivateAccount',
