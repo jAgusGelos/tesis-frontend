@@ -55,9 +55,21 @@ export class CertificateDetailFormComponent implements OnInit {
       fontSize: ['60'],
       fontFamily: ['arial.ttf']
     });
-    this.certService.postplayCert({idCertificado: this.cert.id, datos: []}).subscribe((res: any) => {
-      this.imagen = res.data[0];
-      this.loading = false;
+    // aca llamar primero a todos los gets y despues searle todos los valores
+    this.certService.getDetails(this.cert.id).subscribe((res: any) => {
+      const datos = res.data[0].map((elem: any) => {
+        return {
+          tipoLetra: elem.tipoLetra,
+          tamañoLetra: elem.tamañoLetra,
+          posX: elem.posX,
+          posY: elem.posY,
+          valor: elem.nombre.toString().toUpperCase()
+        };
+      });
+      this.certService.postplayCert({idCertificado: this.cert.id, datos}).subscribe((res: any) => {
+        this.imagen = res.data[0];
+        this.loading = false;
+      });
     });
   }
 
@@ -115,7 +127,48 @@ export class CertificateDetailFormComponent implements OnInit {
 
   guardarCambios(): void {
     if (this.checkForm()) {
-      this.guardarGrafoEvent.emit(this.formCert);
+      const form = this.formCert.controls;
+      const detalles = [
+        {
+          nombre: 'nombre',
+          idCerificado: this.cert.id,
+          atributo_usuario: 'nombre',
+          tipoLetra: form.fontFamily.value,
+          tamañoLetra: +form.fontSize.value,
+          posX: +form.nombreX.value,
+          posY: +form.nombreY.value
+        },
+        {
+          nombre: 'apellido',
+          idCerificado: this.cert.id,
+          atributo_usuario: 'apellido',
+          tipoLetra: form.fontFamily.value,
+          tamañoLetra: +form.fontSize.value,
+          posX: +form.apellidoX.value,
+          posY: +form.apellidoY.value
+        },
+        {
+          nombre: 'dni',
+          idCerificado: this.cert.id,
+          atributo_usuario: 'dni',
+          tipoLetra: form.fontFamily.value,
+          tamañoLetra: +form.fontSize.value,
+          posX: +form.dniX.value,
+          posY: +form.dniY.value
+        }
+      ];
+      this.certService.postFinalCert(detalles[0]).subscribe(() => {
+        this.toastr.success('Nombre Cargado Correctamente');
+        this.certService.postFinalCert(detalles[1]).subscribe(() => {
+          this.toastr.success('Apellido Cargado Correctamente');
+          if (form.dni.value) {
+            this.certService.postFinalCert(detalles[2]).subscribe(() => {
+              this.toastr.success('DNI Cargado Correctamente');
+              this.cancelCertEvent.emit();
+            });
+          }
+        });
+      });
     }
   }
 

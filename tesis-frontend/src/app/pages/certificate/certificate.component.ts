@@ -79,8 +79,6 @@ export class CertificateComponent implements OnInit {
   }
 
   playCertEvent(item: any): void {
-    this.certService.postplayCert({idCertificado: item.id, datos: []}).subscribe((res: any) => {
-    });
     this.cert = {
       ...item,
     };

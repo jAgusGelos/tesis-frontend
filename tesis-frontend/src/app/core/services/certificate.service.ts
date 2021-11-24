@@ -33,6 +33,10 @@ export class CertificateService {
     return this.httpClient.get(this.apiURL + 'certificados/getCertificados/');
   }
 
+  getDetails(id: any): any {
+    return this.httpClient.get(this.apiURL + 'certificados/devolverDetallesCertificados/?idCertificado=' + id);
+  }
+
   putCertificate(certificate: any): any {
     const formData = new FormData();
     formData.append('template', certificate.picture);
