@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsService } from 'src/app/core/services/stats.service';
-declare var require: any;
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-reports',
@@ -12,12 +14,13 @@ export class ReportsComponent implements OnInit {
 
   constructor(private statsService: StatsService) { }
 
+
   reportList = [
-    {name: 'Reporte de Eventos', value: '1'},
-    {name: 'Reporte de Evaluadores', value: '2'},
-    {name: 'Reporte de Articulos', value: '3'},
-    {name: 'Reporte de Asistentes', value: '4'},
-    {name: 'Reporte de Expositores', value: '5'}
+    { name: 'Reporte de Eventos', value: '1' },
+    { name: 'Reporte de Evaluadores', value: '2' },
+    { name: 'Reporte de Articulos', value: '3' },
+    { name: 'Reporte de Asistentes', value: '4' },
+    { name: 'Reporte de Expositores', value: '5' }
   ];
   colName = [];
   attrName = [];
@@ -27,7 +30,7 @@ export class ReportsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  reporteSelected(id: string): void {
+  reporteSelected(id: any): void {
     switch (id) {
       case '1':
         this.statsService.getRepEvent().subscribe((res: any) => {
@@ -37,25 +40,25 @@ export class ReportsComponent implements OnInit {
           this.selectedValue = 1;
         });
         break;
-        case '2':
-          this.statsService.getRepEval().subscribe((res: any) => {
-            this.colName = ['Nombre', 'Apellido', 'DNI', 'Sede', 'Evaluaciones Realizadas', 'Evaluaciones Rechazadas'];
-            this.attrName = ['nombre', 'apellido', 'dni', 'sede', 'evaluacionesRealizadas', 'evaluacionesRechazadas'];
-            this.itemList = res.data;
-            this.selectedValue = 2;
+      case '2':
+        this.statsService.getRepEval().subscribe((res: any) => {
+          this.colName = ['Nombre', 'Apellido', 'DNI', 'Sede', 'Evaluaciones Realizadas', 'Evaluaciones Rechazadas'];
+          this.attrName = ['nombre', 'apellido', 'dni', 'sede', 'evaluacionesRealizadas', 'evaluacionesRechazadas'];
+          this.itemList = res.data;
+          this.selectedValue = 2;
 
-          });
-          break;
-          case '3':
-            this.statsService.getRepArtic().subscribe((res: any) => {
-              this.colName = ['Nombre Artículo', 'Simposio', 'Estado', 'Responsable', 'Cantidad de Autores'];
-              this.attrName = ['nombreArticulo', 'simposio', 'estado', 'responsable', 'cantidadAutores'];
-              this.itemList = res.data;
-              this.selectedValue = 3;
+        });
+        break;
+      case '3':
+        this.statsService.getRepArtic().subscribe((res: any) => {
+          this.colName = ['Nombre Artículo', 'Simposio', 'Estado', 'Responsable', 'Cantidad de Autores'];
+          this.attrName = ['nombreArticulo', 'simposio', 'estado', 'responsable', 'cantidadAutores'];
+          this.itemList = res.data;
+          this.selectedValue = 3;
 
-            });
-            break;
-            case '4':
+        });
+        break;
+      case '4':
         this.statsService.getRepAsist().subscribe((res: any) => {
           this.colName = ['Nombre', 'Apellido', 'DNI', 'Tarifa', 'Precio Final', 'Fecha Inscripción', 'Fecha Pago'];
           this.attrName = ['nombre', 'apellido', 'dni', 'tarifa', 'precioFinal', 'fechaInscripción', 'fechaPago'];
@@ -64,7 +67,7 @@ export class ReportsComponent implements OnInit {
 
         });
         break;
-        case '5':
+      case '5':
         this.statsService.getRepExpos().subscribe((res: any) => {
           this.colName = ['Nombre', 'Apellido', 'DNI', 'Sede'];
           this.attrName = ['nombre', 'apellido', 'dni', 'sede'];
@@ -81,29 +84,39 @@ export class ReportsComponent implements OnInit {
 
   }
 
+
+
   print(): void {
 
-    const body = [];
+    const _body = [this.colName];
+    console.log(this.itemList);
+    console.log(this.attrName);
     this.itemList.forEach(item => {
       const list = [];
       this.attrName.forEach(name => {
-        list.push(item.name);
+        list.push(item[name] || '');
       });
-      body.push(list);
+      _body.push(list);
     });
+    console.log(_body);
 
-    var doc = require('jspdf');
-    require('jspdf-autotable');
-    let easd = new doc();
-// Or use javascript directly:
-    easd.autoTable({
-      head: [this.colName],
-      body: [
-        body
-      ],
-    });
+    const title = this.reportList.find((item: any) => item.value = this.selectedValue);
+    // tslint:disable-next-line: one-variable-per-declaration
+    const documentDefinition = {
+      content: [
+        { text: title.name, style: 'header', fontSize: 30, alignment: 'center'},
+        {
+          table: {
+            headerRows: 1,
+            body: _body
+          }
+        }
+      ]
+    };
+    console.log(documentDefinition);
 
-    easd.save('table.pdf');
+
+    pdfMake.createPdf(documentDefinition).download();
 
   }
 
