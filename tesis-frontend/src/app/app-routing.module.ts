@@ -233,6 +233,11 @@ const routes: Routes = [
     path: 'pagoInscripcionFailure/:token',
     loadChildren: () => import('./pages/payment-windows/payment-failure/payment-failure.module')
     .then(m => m.PaymentFailureModule)
+  },
+  {
+    path:'preguntasFrecuentes',
+    loadChildren: () =>import('./pages/faqs/faqs.module')
+    .then(m => m.FaqsModule)
   }
 ];
 
