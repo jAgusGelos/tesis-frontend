@@ -14,13 +14,7 @@ import { TarifasService } from 'src/app/core/services/tarifas.service';
 export class InscriptionsComponent implements OnInit {
 
   idCongress = '';
-  congress = {
-      id: 1,
-      nombre: 'Prueba',
-      sede: 'FRC',
-      fechaInicio: '21/08/2022',
-      fechaFin: '25/08/2022',
-    };
+  congress: any;
   tarifas = [ ];
   tarifaSelected = false;
   datosCompletos = false;
@@ -40,11 +34,11 @@ export class InscriptionsComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0,0);
+    this.idCongress = this.route.snapshot.paramMap.get('id');
     // El usuario si o si tiene que estar logueado. Datos mínimos.
     this.formUsuario = this.formBuilder.group({
       cupon: [''],
     });
-    this.idCongress = this.route.snapshot.paramMap.get('id');
     this.getCongresos();
     this.getTarifas();
   }
