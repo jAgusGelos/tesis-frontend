@@ -33,6 +33,11 @@ const routes: Routes = [
      // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
+    path: 'sedes',
+    loadChildren: () => import('./pages/sedes/sedes.module')
+    .then(m => m.SedesModule),
+  },
+  {
     path: 'misCongresos',
     loadChildren: () => import('./pages/congress-agenda/congress-agenda.module')
     .then(m => m.CongressAgendaModule),

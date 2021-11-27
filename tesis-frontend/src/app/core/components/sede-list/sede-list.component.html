@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="contenidos">
+      <hr>
+      <h3 class='text-center'>Sedes</h3>
+      <hr>
+    </div>
+    <div class="row justify-content-md-end">
+      <a class="btn btn-primary col-sm-2" role="button" (click)="toggleNew()">Nueva Sede</a>
+    </div>
+    <br>
+    <div class="row">
+        <app-search
+        class="col-md-5"
+        [fullList]='sedeList'
+        [attribFilter]='"nombre"'
+        (listEvent)='search($event)'>
+        </app-search>
+    </div>
+    <table class="table text-center table-hover table-bordered">
+        <thead class='thead'>
+        <tr>
+            <th class="col-md-4">Nombre</th>
+            <th class="col-md-3">Dirección</th>
+            <th class="col-md-3">Localidad</th>
+            <th class="col-md-1">Acción</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class='align-items-center'*ngFor='let item of sedeList; let i = index'>
+            <td>{{item.nombre}}</td>
+            <td>{{item.direccion}} {{item.numero == 0 ? '' : item.numero}}</td>
+            <td>{{item.nombreLocalidad}}</td>
+            <td>
+              <a title='Editar' role="button" (click)="toggleEdit(item)"><i class="fas fa-pencil-alt fa-lg"></i></a>
+              &nbsp;&nbsp;&nbsp;
+              <a title='Eliminar' role="button" (click)="toggleRemoveHandled(item)"><i class="fas fa-trash fa-lg"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    
+</div>
+

@@ -44,6 +44,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { SedeListComponent } from './components/sede-list/sede-list.component';
+import { SedeFormComponent } from './components/sede-form/sede-form.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -92,6 +94,9 @@ import { RouterModule } from '@angular/router';
     RevisionAutorComponent,
     CustomToastComponent,
     SearchComponent,
+    AsignarPaperEvaluadorListComponent,
+    SedeListComponent,
+    SedeFormComponent,
     AsignarPaperEvaluadorListComponent
   ],
   imports: [
@@ -143,7 +148,9 @@ import { RouterModule } from '@angular/router';
     ComiteOrganizadorLocalComponent,
     ComiteAcademicoListComponent,
     PaperReadyComponent,
-    RevisionAutorComponent
+    RevisionAutorComponent,
+    SedeListComponent,
+    SedeFormComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
