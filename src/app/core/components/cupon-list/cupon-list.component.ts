@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ICupon } from '../../models/icupon';
+import { ICupon } from '../../models/Icupon';
 
 @Component({
   selector: 'app-cupon-list',

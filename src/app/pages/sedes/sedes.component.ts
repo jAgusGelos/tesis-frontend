@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ISede } from 'src/app/core/models/isede';
+import { ISede } from 'src/app/core/models/ISede';
 import { SedesService } from 'src/app/core/services/sedes.service';
 import { UserService } from 'src/app/core/services/user.service';
 

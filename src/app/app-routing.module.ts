@@ -116,7 +116,7 @@ const routes: Routes = [
   },
   {
     path: 'assistants',
-    loadChildren: () => import('./pages/assistant/Assistant.module')
+    loadChildren: () => import('./pages/assistant/assistant.module')
     .then(m => m.AssistantModule),
   },
   {

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ISede } from '../../models/isede';
+import { ISede } from '../../models/ISede';
 import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
