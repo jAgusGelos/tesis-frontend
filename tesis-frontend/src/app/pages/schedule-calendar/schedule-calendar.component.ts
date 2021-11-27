@@ -579,4 +579,10 @@ export class ScheduleCalendarComponent implements OnInit {
       });
     }
   }
+  generarQR(): void {
+    console.log('llego');
+    this.calendarService.generarQR().subscribe((res: any) => {
+      this.toastr.success('Se ha enviado un mail con los QR para cada una de las Aulas');
+    });
+  }
 }

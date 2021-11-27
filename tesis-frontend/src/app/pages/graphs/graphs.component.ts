@@ -45,49 +45,49 @@ export class GraphsComponent implements OnInit {
         });
         break;
       case 'gEtario':
-          this.statsService.getEdadesXCongress().subscribe((res: any) => {
+        this.statsService.getEdadesXCongress().subscribe((res: any) => {
           this.data = [
-            {name: 'Menores 18', value: res.data[0]['menor-18']},
-            {name: 'Entre 18-24', value: res.data[0]['entre-18-24']},
-            {name: 'Entre 25-40', value: res.data[0]['entre-25-40']},
-            {name: 'Mayores de 40', value: res.data[0]['mayor-40']}
-        ];
+            { name: 'Menores 18', value: res.data[0]['menor-18'] },
+            { name: 'Entre 18-24', value: res.data[0]['entre-18-24'] },
+            { name: 'Entre 25-40', value: res.data[0]['entre-25-40'] },
+            { name: 'Mayores de 40', value: res.data[0]['mayor-40'] }
+          ];
         });
-          break;
-        case 'participSede':
-          this.statsService.getPartXSede().subscribe((res: any) => {
-            this.data = res.data;
-          });
-          break;
-        case 'califSimposios':
-          this.statsService.getSimpoXCalif().subscribe((res: any) => {
-            this.data = res.data;
-          });
-          break;
-        case 'topEventos':
-          this.statsService.getTopEventos().subscribe((res: any) => {
-            this.data = res.data;
-          });
-          break;
-          case 'cancelaciones':
-            this.statsService.getEvalXCancelXCongreso().subscribe((res: any) => {
-              this.data = res.data;
-            });
-            break;
-          case 'cancelCongre':
-            this.statsService.getEvalXCancel().subscribe((res: any) => {
-              this.data = res.data;
-            });
-            break;
-          case 'estadoArt':
-            this.statsService.getEstadoArticulos().subscribe((res: any) => {
-              this.data = [
-                {name: "Aprobados", value: res.data.aprobados},
-                {name: "Reentregados", value: res.data.reentrega},
-                {name: "Rechazados", value: res.data.rechazados}
-              ];
-            });
-            break;
+        break;
+      case 'participSede':
+        this.statsService.getPartXSede().subscribe((res: any) => {
+          this.data = res.data;
+        });
+        break;
+      case 'califSimposios':
+        this.statsService.getSimpoXCalif().subscribe((res: any) => {
+          this.data = res.data;
+        });
+        break;
+      case 'topEventos':
+        this.statsService.getTopEventos().subscribe((res: any) => {
+          this.data = res.data;
+        });
+        break;
+      case 'cancelaciones':
+        this.statsService.getEvalXCancelXCongreso().subscribe((res: any) => {
+          this.data = res.data;
+        });
+        break;
+      case 'cancelCongre':
+        this.statsService.getEvalXCancel().subscribe((res: any) => {
+          this.data = res.data;
+        });
+        break;
+      case 'estadoArt':
+        this.statsService.getEstadoArticulos().subscribe((res: any) => {
+          this.data = [
+            { name: 'Aprobados', value: res.data.aprobados },
+            { name: 'Reentregados', value: res.data.reentrega },
+            { name: 'Rechazados', value: res.data.rechazados }
+          ];
+        });
+        break;
       default:
         break;
     }
@@ -103,11 +103,15 @@ export class GraphsComponent implements OnInit {
     for (let i = 0; i < this.data.length; i++) {
       const element = this.data[i];
       datos.push(element.value);
-      labels.push(element.name);
+      labels.push(element.name.substring(0, 26));
     }
+    console.log(labels);
     switch (value) {
       case 'bar':
         this.chartOption = {
+          tooltip: {
+            show: true
+          },
           toolbox: {
             feature: {
               saveAsImage: {}
@@ -116,6 +120,7 @@ export class GraphsComponent implements OnInit {
           xAxis: {
             type: 'category',
             data: labels,
+
           },
           yAxis: {
             type: 'value'
@@ -127,13 +132,21 @@ export class GraphsComponent implements OnInit {
               showBackground: true,
               backgroundStyle: {
                 color: 'rgba(180, 180, 180, 0.2)'
-              }
+              },
+              label: {
+                show: true,
+                color: 'white',
+                fontSize: 12,
+              },
             }
           ]
         };
         break;
       case 'pie':
         this.chartOption = {
+          tooltip: {
+            show: true
+          },
           toolbox: {
             feature: {
               saveAsImage: {}

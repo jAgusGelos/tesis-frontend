@@ -18,14 +18,6 @@
         </select>
       </div>
     </div>
-    <div class="col-md-3 ml-auto">
-      <button type="button " class="btn btn-primary" id='btnPLenaria'
-      data-bs-toggle="modal"
-       data-bs-target="#plenariaModal">
-       <i class="fas fa-plus-circle"></i>
-       Agregar charla Plenaria / Break
-      </button>
-    </div>
   </div>
   <div class="row" id="loading">
     <div class="row justify-content-center" *ngIf="loading">
@@ -73,8 +65,8 @@
           [startsWithToday]="startsWithToday" [hourSegments]="hourSegments" [dayStartHour]="dayStartHour"
           [dayEndHour]="dayEndHour" [dayModifier]="dayModifier" [hourModifier]="hourModifier"
           [segmentModifier]="segmentModifier" [eventModifier]="eventModifier" [showEventActions]="true"
-          [showSegmentHour]="true" [zoomEventOnHover]="true"
-          (eventClicked)="eventClicked('Clicked', $event.event)" [refresh]="refresh">
+          [showSegmentHour]="true" [zoomEventOnHover]="true" (eventClicked)="eventClicked('Clicked', $event.event)"
+          [refresh]="refresh">
         </calendar-scheduler-view>
       </div>
     </div>
@@ -88,6 +80,11 @@
 <button type="button" hidden class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal"
   id='activar-modal'>
   Launch demo modal
+</button>
+
+<!-- Button trigger modal caluif-->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calificationModal"  hidden id="activarModalCalif">
+Boton oculto
 </button>
 
 <!-- Modal -->
@@ -126,7 +123,8 @@
                 </span>
               </div>
               <div class="col-md-3">
-                <select class='col-sm-3 form-select'  disabled name="startMinute" formControlName="startMinute" [ngClass]="{'is-invalid': ((formEvento.controls.startMinute.touched || submitted) && formEvento.controls.startMinute.value === '')
+                <select class='col-sm-3 form-select' disabled name="startMinute" formControlName="startMinute"
+                  [ngClass]="{'is-invalid': ((formEvento.controls.startMinute.touched || submitted) && formEvento.controls.startMinute.value === '')
                   && formEvento.controls.startMinute.errors}">
                   <option *ngFor="let opt of minutes" value={{opt}}>
                     ‌{{ opt === 0 ? '00': opt }}
@@ -238,6 +236,10 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismiss'>Aceptar</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id='dismiss' (click)="activarModalCalif()"
+              id='activar-modal'>
+              Dejar una calificación
+            </button>
           </div>
         </form>
       </div>
@@ -260,7 +262,8 @@
           <div class='form-group row'>
             <label class='col-form-label col-sm-2 col-sm-offset-2' for='date'>Fecha: </label>
             <div class='col-sm-6'>
-              <input type='date' min={{min}} max={{max}} value={{min}} disabled class='form-control' formControlName='date' [ngClass]="{'is-invalid': (formPlenaria.controls.date.touched || submitted)
+              <input type='date' min={{min}} max={{max}} value={{min}} disabled class='form-control'
+                formControlName='date' [ngClass]="{'is-invalid': (formPlenaria.controls.date.touched || submitted)
                   && formPlenaria.controls.date.errors}" onclick='this.select()' />
               <span class='text-danger'
                 *ngIf='(formPlenaria.controls.date.touched || submittedPlen) && formPlenaria.controls.date.errors?.required'>
@@ -286,7 +289,8 @@
                 </span>
               </div>
               <div class="col-md-3">
-                <select class='col-sm-3 form-select' name="startMinute" disabled formControlName="startMinute" [ngClass]="{'is-invalid': ((formPlenaria.controls.startMinute.touched || submittedPlen) && formPlenaria.controls.startMinute.value === '')
+                <select class='col-sm-3 form-select' name="startMinute" disabled formControlName="startMinute"
+                  [ngClass]="{'is-invalid': ((formPlenaria.controls.startMinute.touched || submittedPlen) && formPlenaria.controls.startMinute.value === '')
                   && formPlenaria.controls.startMinute.errors}">
                   <option *ngFor="let opt of minutes" value={{opt}}>
                     ‌{{ opt === 0 ? '00': opt }}
@@ -359,7 +363,55 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismissPlenaria'>Aceptar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+              id='dismissPlenaria'>Aceptar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id='dismiss' (click)="activarModalCalif()"
+              id='activar-modal'>
+              Dejar una calificación
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="calificationModal" tabindex="-1" aria-labelledby="calificationModalLabel" aria-hidden="true"
+  *ngIf="formEvento">
+  <div class="modal-dialog  modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="calificationModalLabel">Valoración del evento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]='formCalif'>
+          <!-- puntuacion -->
+          <div class='form-group row'>
+            <label class='col-form-label col-sm-2 col-sm-offset-2' for='puntuacion'>Puntuación:</label>
+            <div class='col-sm-6'>
+              <select class='col-sm-4 form-select' name="puntuacion" formControlName="puntuacion">
+                <option selected hidden>-- Seleccione --</option>
+                <option *ngFor="let opt of scores" value={{opt}}>
+                  ‌{{ opt }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <!-- calificacion -->
+          <div class='form-group row'>
+            <label class='col-form-label col-sm-2 col-sm-offset-2' for='calificacion'>Comentario:</label>
+            <div class='col-sm-6'>
+              <textarea type='text' maxlength="512" rows="3" class='form-control' formControlName='calificacion'></textarea>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismiss'>Cancelar</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id='dismiss'
+              (click)="calificar()">Aceptar</button>
           </div>
         </form>
       </div>

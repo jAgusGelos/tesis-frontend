@@ -101,32 +101,11 @@ export class VerScheduleComponent implements OnInit {
   max = '';
   eventosCompletos = [];
   formPlenaria: FormGroup;
+  formCalif: FormGroup;
   idCongress = '';
+  scores = Array.from({ length: 10 }, (_, i) => i + 1);
 
-  actions: CalendarSchedulerEventAction[] = [
-    {
-      when: 'enabled',
-      label: '<span class="valign-center"><i class="fas fa-trash"></i></span>',
-      title: 'Borrar',
-      onClick: (event: CalendarSchedulerEvent): void => {
-
-        this.toastr
-          .show('¿Está seguro que desea eliminar el evento?' + '\nToda los cambios se perderán.', '¿Borrar evento?', {
-            toastComponent: CustomToastComponent,
-            disableTimeOut: true,
-            tapToDismiss: false,
-            enableHtml: true
-          })
-          .onAction.subscribe(() => {
-            // Aca se hace el camino feliz
-            this.calendarService.deleteEvento(+event.id).subscribe((res: any) => {
-              this.toastr.success('Evento "' + event.title + '" eliminado con éxito');
-              this.getEventos();
-            });
-          });
-      }
-    },
-  ];
+  actions: CalendarSchedulerEventAction[] = [];
 
   events: CalendarSchedulerEvent[];
 
@@ -171,6 +150,11 @@ export class VerScheduleComponent implements OnInit {
     this.idCongress = this.route.snapshot.paramMap.get('id');
     this.formEvento = this.formBuild.group(this.values());
     this.formPlenaria = this.formBuild.group(this.plenariaValues());
+    this.formCalif = this.formBuild.group({
+      calificacion: [''],
+      puntuacion: [1],
+      idEvento: ['']
+    });
   }
 
 
@@ -374,7 +358,11 @@ export class VerScheduleComponent implements OnInit {
       idArticulo: eventoCompleto.idArticulo,
       idSimposio: eventoCompleto.idSimposio
     };
-
+    this.formCalif = this.formBuild.group({
+      calificacion: [''],
+      puntuacion: [1],
+      idEvento: [this.evento.idEvento]
+    });
     if (this.evento.idSimposio !== null) {
       this.formEvento = this.formBuild.group(this.values());
       const btnDetalle = document.getElementById('activar-modal');
@@ -387,6 +375,19 @@ export class VerScheduleComponent implements OnInit {
       const btnDetalle = document.getElementById('btnPLenaria');
       btnDetalle.click();
     }
+
+  }
+
+  calificar(): void {
+    const form = this.formCalif.controls;
+    const op = {
+      idEvento: form.idEvento.value,
+      puntuacion: form.puntuacion.value,
+      calificacion: form.calificacion.value
+    };
+    this.calendarService.calificar(op).subscribe((res: any) => {
+      this.toastr.success('Gracias por calificar.');
+    });
 
   }
 
@@ -405,4 +406,10 @@ export class VerScheduleComponent implements OnInit {
       }
     });
   }
+
+  activarModalCalif(): void {
+    const btnDetalle = document.getElementById('activarModalCalif');
+    btnDetalle.click();
+  }
 }
+

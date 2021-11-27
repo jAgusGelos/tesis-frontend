@@ -43,4 +43,12 @@ export class ScheduleCalendarService {
     return this.httpClient.put(this.apiUrl + 'eventos/modificar-breakCharla/?idEvento=' + plenaria.idEvento, plenaria);
   }
 
+  generarQR(): any {
+    return this.httpClient.get(this.apiUrl + 'eventos/getQrAulas/?idCongreso=' + this.idCongreso);
+  }
+
+  calificar(calificacion: any): any {
+    return this.httpClient.post(this.apiUrl + 'eventos/registarCalificacionEvento/', calificacion);
+  }
+
 }
