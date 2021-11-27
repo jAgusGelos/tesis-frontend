@@ -18,49 +18,9 @@ export class ScheduleCalendarService {
 
    }
 
-  getEvents(actions: CalendarSchedulerEventAction[]): Promise<CalendarSchedulerEvent[]> {
-    const events = [
-         {
-            id: '1',
-            start: addDays(startOfHour(new Date()), 1),
-            end: addDays(addHours(startOfHour(new Date()), 1), 1),
-            title: 'Event 1',
-            content: 'IMPORTANT EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'danger' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false,
-            draggable: true,
-            resizable: {
-                beforeStart: true,
-                afterEnd: true
-            }
-        } as CalendarSchedulerEvent,
-         {
-            id: '12',
-            start: subHours(addDays(startOfHour(new Date()), 1), 1),
-            end: subHours(addDays(addHours(startOfHour(new Date()), 1), 1), 1),
-            title: 'Event 12',
-            content: 'IMPORTANT EVENT',
-            color: { primary: '#E0E0E0', secondary: '#EEEEEE' },
-            actions,
-            status: 'danger' as CalendarSchedulerEventStatus,
-            isClickable: true,
-            isDisabled: false,
-            draggable: true,
-            resizable: {
-                beforeStart: true,
-                afterEnd: true
-            }
-        } as CalendarSchedulerEvent
-    ];
-
-    return new Promise(resolve => setTimeout(() => resolve(events), 3000));
-}
-
-  getRoomEvents(idRoom: number): any {
-    return this.httpClient.get(this.apiUrl + 'eventos/consultar-eventosXAula/?idAula=' + idRoom);
+  getRoomEvents(idRoom: number, idCongreso?: number): any {
+    return this.httpClient.get(this.apiUrl + 'eventos/consultar-eventosXAula/?idAula=' +
+    idRoom + '&idCongreso=' + (idCongreso || this.idCongreso ));
   }
 
   deleteEvento(idEvento: number): any {
@@ -68,11 +28,27 @@ export class ScheduleCalendarService {
   }
 
   postEvento(evento: any): any {
-    const event = {
-      ...evento,
-      idCongreso: this.idCongreso
-    };
-    return this.httpClient.post(this.apiUrl + 'eventos/crear-evento/', event);
+    return this.httpClient.post(this.apiUrl + 'eventos/crear-evento/', evento);
+  }
+
+  putEvento(evento: any): any {
+    return this.httpClient.put(this.apiUrl + 'eventos/modificar-evento/?idEvento=' + evento.idEvento, evento);
+  }
+
+  postPlenaria(plenaria: any): any {
+    return this.httpClient.post(this.apiUrl + 'eventos/crear-breakCharla/', plenaria);
+  }
+
+  putPlenaria(plenaria: any): any {
+    return this.httpClient.put(this.apiUrl + 'eventos/modificar-breakCharla/?idEvento=' + plenaria.idEvento, plenaria);
+  }
+
+  generarQR(): any {
+    return this.httpClient.get(this.apiUrl + 'eventos/getQrAulas/?idCongreso=' + this.idCongreso);
+  }
+
+  calificar(calificacion: any): any {
+    return this.httpClient.post(this.apiUrl + 'eventos/registarCalificacionEvento/', calificacion);
   }
 
 }

@@ -3,7 +3,7 @@ import { ITarifa } from 'src/app/core/models/ITarifa';
 import { CuponService } from 'src/app/core/services/cupon.service';
 import { TarifasService } from 'src/app/core/services/tarifas.service';
 import { ToastrService } from 'ngx-toastr';
-import { ICupon } from 'src/app/core/models/ICupon';
+import { ICupon } from 'src/app/core/models/icupon';
 import { CustomToastComponent } from 'src/app/core/components/custom-toast/custom-toast.component';
 
 @Component({

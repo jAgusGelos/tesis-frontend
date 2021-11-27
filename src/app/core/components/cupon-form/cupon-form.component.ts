@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ICupon } from '../../models/ICupon';
+import { ICupon } from '../../models/icupon';
 import { ITarifa } from '../../models/ITarifa';
 
 @Component({

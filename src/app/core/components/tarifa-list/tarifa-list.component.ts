@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ITarifa } from '../../models/ITarifa';
+import { ITarifa } from '../../models/itarifa';
 
 @Component({
   selector: 'app-tarifa-list',

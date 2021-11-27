@@ -33,6 +33,11 @@ const routes: Routes = [
      // canActivate: [AuthGuard, ChairRolGuard]
   },
   {
+    path: 'sedes',
+    loadChildren: () => import('./pages/sedes/sedes.module')
+    .then(m => m.SedesModule),
+  },
+  {
     path: 'misCongresos',
     loadChildren: () => import('./pages/congress-agenda/congress-agenda.module')
     .then(m => m.CongressAgendaModule),
@@ -110,6 +115,11 @@ const routes: Routes = [
     .then(m => m.EvaluatorsModule),
   },
   {
+    path: 'assistants',
+    loadChildren: () => import('./pages/assistant/Assistant.module')
+    .then(m => m.AssistantModule),
+  },
+  {
     path: 'cupones',
     loadChildren: () => import('./pages/cupon/cupon.module')
     .then(m => m.CuponModule)
@@ -131,6 +141,31 @@ const routes: Routes = [
     path: 'generarAgenda',
     loadChildren: () => import('./pages/schedule-calendar/schedule-calendar.module')
     .then(m => m.ScheduleCalendarModule),
+  },
+  {
+    path: 'estadisticas',
+    loadChildren: () => import('./pages/graphs/graphs.module')
+    .then(m => m.GraphsModule),
+  },
+  {
+    path: 'verAgenda/:id',
+    loadChildren: () => import('./pages/ver-schedule/ver-schedule.module')
+    .then(m => m.VerScheduleModule),
+  },
+  {
+    path: 'certificados',
+    loadChildren: () => import('./pages/certificate/certificate.module')
+    .then(m => m.CertificateModule),
+  },
+  {
+    path: 'reportes',
+    loadChildren: () => import('./pages/reports/reports.module')
+    .then(m => m.ReportsModule),
+  },
+  {
+    path: 'inscripcionFisica',
+    loadChildren: () => import('./pages/inscripcion-fisica/inscripcion-fisica.module')
+    .then(m => m.InscripcionFisicaModule),
   },
   // Notification routes
   {
@@ -198,6 +233,11 @@ const routes: Routes = [
     path: 'aceptacionRolEvaluador/:token',
     loadChildren: () => import('./pages/emails/accept-evaluator/accept-evaluator.module')
     .then(m => m.AcceptEvaluatorModule),
+  },
+  {
+    path: 'aceptacionRolAyudante/:token',
+    loadChildren: () => import('./pages/emails/accept-assistant/accept-assistant.module')
+    .then(m => m.AcceptAssistantModule),
   },
   {
     path: 'cancelacionEvaluacionPaper/:token',

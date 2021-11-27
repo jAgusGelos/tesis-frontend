@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit {
             ano: x.año,
             fechaFinInsTemprana: x.fechaFinInsTemprana,
             fechaFinInsTardia: x.fechaFinInsTardia,
+            fechaInicioExposiciones: x.fechaInicioExposiciones,
+            fechaFinExposiciones: x.fechaFinExposiciones,
             nombre_sede: x.nombre_sede,
           };
         });

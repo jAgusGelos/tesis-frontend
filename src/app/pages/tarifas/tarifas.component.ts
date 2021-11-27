@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ITarifa } from 'src/app/core/models/ITarifa';
+import { ITarifa } from 'src/app/core/models/itarifa';
 import { TarifasService } from 'src/app/core/services/tarifas.service';
 
 
