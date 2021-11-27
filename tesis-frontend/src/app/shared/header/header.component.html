@@ -39,6 +39,9 @@
           <a class="nav-link" routerLink="/evaluacion" *ngIf="rol.includes(1)  && user">Planilla</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLink="/assistants" *ngIf="rol.includes(1)  && user">Ayudantes</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="/tarifas" *ngIf="rol.includes(1)  && user">Tarifas</a>
         </li>
             <li class="nav-item">

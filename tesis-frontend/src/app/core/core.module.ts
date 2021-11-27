@@ -47,6 +47,7 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { SedeListComponent } from './components/sede-list/sede-list.component';
 import { SedeFormComponent } from './components/sede-form/sede-form.component';
 import { RouterModule } from '@angular/router';
+import { AssistantListComponent } from './components/assistant-list/assistant-list.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { RouterModule } from '@angular/router';
     CustomToastComponent,
     SearchComponent,
     AsignarPaperEvaluadorListComponent,
+    AssistantListComponent,
     SedeListComponent,
     SedeFormComponent,
     AsignarPaperEvaluadorListComponent
@@ -149,6 +151,7 @@ import { RouterModule } from '@angular/router';
     ComiteAcademicoListComponent,
     PaperReadyComponent,
     RevisionAutorComponent,
+    AssistantListComponent,
     SedeListComponent,
     SedeFormComponent
   ],
