@@ -1,0 +1,50 @@
+@media (min-width: 768px) {
+    hr{
+        margin-left: 25%;
+        margin-right: 25%;
+        border:#00609C solid 1px;
+    }
+  
+    .container-fluid{
+        padding: 5rem;
+        background-color: #F4F4F4;
+    }
+}
+
+.card{
+    border-radius: 10px;
+}
+
+.card:hover {
+    border-color: #3CAFE0;
+}
+
+.contenidos{
+    padding-bottom: 10px;
+}
+
+.datos-personales{
+    margin-bottom: 15px;
+}
+
+.btn{
+    border: none;
+}
+  
+.btn-primary{
+    background-color: #3CAFE0 ;
+}
+  
+.btn-primary:hover{
+    background-color: #3994bb ;
+}
+
+i{
+    padding-top: 0.5rem;
+    cursor: pointer;
+}
+
+.fas{
+    font-size: 1.25rem;
+    color: #00609C;
+}

@@ -44,10 +44,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { SedeListComponent } from './components/sede-list/sede-list.component';
+import { SedeFormComponent } from './components/sede-form/sede-form.component';
 import { RouterModule } from '@angular/router';
 import { CertificateTemplateListComponent } from './components/certificate-template-list/certificate-template-list.component';
 import { CertificateTemplateFormComponent } from './components/certificate-template-form/certificate-template-form.component';
 import { CertificateDetailFormComponent } from './components/certificate-detail-form/certificate-detail-form.component';
+import { AssistantListComponent } from './components/assistant-list/assistant-list.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +101,11 @@ import { CertificateDetailFormComponent } from './components/certificate-detail-
     AsignarPaperEvaluadorListComponent,
     CertificateTemplateListComponent,
     CertificateTemplateFormComponent,
-    CertificateDetailFormComponent
+    CertificateDetailFormComponent,
+    AssistantListComponent,
+    SedeListComponent,
+    SedeFormComponent,
+    AsignarPaperEvaluadorListComponent
   ],
   imports: [
     CommonModule,
@@ -152,7 +159,10 @@ import { CertificateDetailFormComponent } from './components/certificate-detail-
     RevisionAutorComponent,
     CertificateTemplateListComponent,
     CertificateTemplateFormComponent,
-    CertificateDetailFormComponent
+    CertificateDetailFormComponent,
+    AssistantListComponent,
+    SedeListComponent,
+    SedeFormComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -39,7 +39,13 @@
           <a class="nav-link" routerLink="/evaluacion" *ngIf="rol.includes(1)  && user">Planilla</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLink="/assistants" *ngIf="rol.includes(1)  && user">Ayudantes</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="/tarifas" *ngIf="rol.includes(1)  && user">Tarifas</a>
+        </li>
+            <li class="nav-item">
+          <a class="nav-link" routerLink="/sedes" *ngIf="rol.includes(1) && user">Sedes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/generarAgenda" *ngIf="rol.includes(1)  && user">Agenda</a>
@@ -81,6 +87,10 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/preferenciaSimposio" *ngIf="evaluator && user && !rol.includes(3)">Preferencia de Simposios</a>
+        </li>
+        <!-- AYUDANTE -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/inscripcionFisica" *ngIf="rol.includes(5)  && user">Inscripción Física</a>
         </li>
         <!-- AUTOR -->
         <li class="nav-item">

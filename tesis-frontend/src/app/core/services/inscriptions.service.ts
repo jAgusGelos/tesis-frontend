@@ -27,4 +27,15 @@ export class InscriptionsService {
     };
     return this.httpClient.post(this.apiURL + 'inscripciones/crear-inscripcion/', postItem );
   }
+
+  inscripcionFisicaConUsuario(email: string): any {
+    const postItem = {
+      email
+    };
+    return this.httpClient.post(this.apiURL + 'inscripciones/crear-inscripcion-fisica/', postItem );
+  }
+
+  inscripcionFisicaSinUsuario(data: any): any {
+    return this.httpClient.post(this.apiURL + 'inscripciones/crear-inscripcion-sin-usuario/', data );
+  }
 }
