@@ -1,6 +1,6 @@
 import { Component, HostListener, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, SelectMultipleControlValueAccessor, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   CalendarView,
   CalendarDateFormatter,
@@ -32,10 +32,11 @@ import { PaperService } from 'src/app/core/services/paper.service';
 import { RoomService } from 'src/app/core/services/room.service';
 import { ScheduleCalendarService } from 'src/app/core/services/schedule-calendar.service';
 
+
 @Component({
-  selector: 'app-schedule-calendar',
-  templateUrl: './schedule-calendar.component.html',
-  styleUrls: ['./schedule-calendar.component.css'],
+  selector: 'app-ver-schedule',
+  templateUrl: './ver-schedule.component.html',
+  styleUrls: ['./ver-schedule.component.css'],
   providers: [
     {
       provide: CalendarDateFormatter,
@@ -43,7 +44,7 @@ import { ScheduleCalendarService } from 'src/app/core/services/schedule-calendar
     },
   ],
 })
-export class ScheduleCalendarComponent implements OnInit {
+export class VerScheduleComponent implements OnInit {
 
   CalendarView = CalendarView;
 
@@ -73,6 +74,7 @@ export class ScheduleCalendarComponent implements OnInit {
   formEvento: FormGroup;
   plenaria = false;
   submittedPlen = false;
+  congress: any;
 
   evento = {
     idEvento: null,
@@ -99,31 +101,11 @@ export class ScheduleCalendarComponent implements OnInit {
   max = '';
   eventosCompletos = [];
   formPlenaria: FormGroup;
+  formCalif: FormGroup;
+  idCongress = '';
+  scores = Array.from({ length: 10 }, (_, i) => i + 1);
 
-  actions: CalendarSchedulerEventAction[] = [
-    {
-      when: 'enabled',
-      label: '<span class="valign-center"><i class="fas fa-trash"></i></span>',
-      title: 'Borrar',
-      onClick: (event: CalendarSchedulerEvent): void => {
-
-        this.toastr
-          .show('¿Está seguro que desea eliminar el evento?' + '\nToda los cambios se perderán.', '¿Borrar evento?', {
-            toastComponent: CustomToastComponent,
-            disableTimeOut: true,
-            tapToDismiss: false,
-            enableHtml: true
-          })
-          .onAction.subscribe(() => {
-            // Aca se hace el camino feliz
-            this.calendarService.deleteEvento(+event.id).subscribe((res: any) => {
-              this.toastr.success('Evento "' + event.title + '" eliminado con éxito');
-              this.getEventos();
-            });
-          });
-      }
-    },
-  ];
+  actions: CalendarSchedulerEventAction[] = [];
 
   events: CalendarSchedulerEvent[];
 
@@ -141,7 +123,8 @@ export class ScheduleCalendarComponent implements OnInit {
               private articulosService: ArticulosService,
               private router: Router,
               private roomService: RoomService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private route: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
@@ -164,13 +147,20 @@ export class ScheduleCalendarComponent implements OnInit {
     this.getArticles();
     this.getRooms();
     this.getCongres();
+    this.idCongress = this.route.snapshot.paramMap.get('id');
     this.formEvento = this.formBuild.group(this.values());
     this.formPlenaria = this.formBuild.group(this.plenariaValues());
+    this.formCalif = this.formBuild.group({
+      calificacion: [''],
+      puntuacion: [1],
+      idEvento: ['']
+    });
   }
 
 
   getCongres(): void {
-    this.congresService.getCongressById().subscribe((res: any) => {
+    this.congresService.getCongressById(this.idCongress).subscribe((res: any) => {
+      this.congress = res.data[0];
       const fechaI = res.data[0].fechaInicioExposiciones.split(' ')[0].split('/');
       const fechaF = res.data[0].fechaFinExposiciones.split(' ')[0].split('/');
 
@@ -194,7 +184,7 @@ export class ScheduleCalendarComponent implements OnInit {
 
   getEventos(): void {
     // con el idAula Llama a los eventos
-    this.calendarService.getRoomEvents(+this.idAula).subscribe((res: any) => {
+    this.calendarService.getRoomEvents(+this.idAula, +this.idCongress).subscribe((res: any) => {
       this.eventosCompletos = res.data;
       this.events = res.data.map((elem: any) => {
         let aux = elem.start.split(' ');
@@ -234,6 +224,7 @@ export class ScheduleCalendarComponent implements OnInit {
   getArticles(): void {
     this.articulosService.getCameraReady().subscribe((res: any) => {
       this.paperList = res.data;
+      this.showList = this.paperList.slice();
     });
   }
 
@@ -350,36 +341,6 @@ export class ScheduleCalendarComponent implements OnInit {
     return /*isToday(date) ||*/ date >= this.minDate && date <= this.maxDate;
   }
 
-  hourClicked(hour: SchedulerViewHour): void {
-    console.log('hourClicked Hour', hour);
-  }
-
-
-  segmentClicked(action: string, segment: SchedulerViewHourSegment): void {
-    this.submitted = false;
-    this.submittedPlen = false;
-    this.formEvento.reset();
-    this.formEvento.setErrors({});
-    this.formEvento.clearValidators();
-    this.evento = {
-      idEvento: null,
-      title: '',
-      content: '',
-      idSimposio: null,
-      idArticulo: null,
-      date: segment.date.toLocaleDateString(),
-      startHour: segment.date.toLocaleTimeString().split(':')[0],
-      startMinute: segment.date.toLocaleTimeString().split(':')[1],
-      endHour: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[0],
-      endMinute: moment(segment.date).add(20, 'm').toDate().toLocaleTimeString().split(':')[1],
-    };
-    this.showList = [];
-    this.formEvento = this.formBuild.group(this.values());
-
-    const btnDetalle = document.getElementById('activar-modal');
-    btnDetalle.click();
-  }
-
   eventClicked(action: string, event: CalendarSchedulerEvent): void {
     const eventoCompleto = this.eventosCompletos.find((x: any) => {
       return x.idEvento === event.id;
@@ -397,9 +358,12 @@ export class ScheduleCalendarComponent implements OnInit {
       idArticulo: eventoCompleto.idArticulo,
       idSimposio: eventoCompleto.idSimposio
     };
-    this.showList = [];
+    this.formCalif = this.formBuild.group({
+      calificacion: [''],
+      puntuacion: [1],
+      idEvento: [this.evento.idEvento]
+    });
     if (this.evento.idSimposio !== null) {
-      this.simposioSeleccionado(this.evento.idSimposio);
       this.formEvento = this.formBuild.group(this.values());
       const btnDetalle = document.getElementById('activar-modal');
       btnDetalle.click();
@@ -414,175 +378,38 @@ export class ScheduleCalendarComponent implements OnInit {
 
   }
 
+  calificar(): void {
+    const form = this.formCalif.controls;
+    const op = {
+      idEvento: form.idEvento.value,
+      puntuacion: form.puntuacion.value,
+      calificacion: form.calificacion.value
+    };
+    this.calendarService.calificar(op).subscribe((res: any) => {
+      this.toastr.success('Gracias por calificar.');
+    });
+
+  }
+
   simposioSeleccionado(item: any): void {
     // Aca tengo que cargar los papers que correspondan a ese simposio;
-    const paper = this.paperList.filter((elem: any) => elem.idArticulo === this.evento.idArticulo);
-    // llamar al nuevo método del agus
-    this.articulosService.getNotAssigned(item).subscribe((res: any) => {
-      this.showList = res.data;
-      this.showList.push(paper);
+    this.showList = this.paperList.filter((elem: any) => {
+      if (+elem.idSimposio === +item) {
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < this.eventosCompletos.length; i++) {
+          const element = this.eventosCompletos[i];
+          if (element.idArticulo === elem.idArticulo && this.evento.idArticulo !== elem.idArticulo) {
+            return false;
+          }
+        }
+        return true;
+      }
     });
   }
 
-  submit(): void {
-    this.submitted = true;
-
-    if (this.formEvento.invalid) {
-      this.toastr.warning('Por favor, complete todos los datos');
-      return;
-    }
-    const form = this.formEvento.controls;
-
-    const finDate = form.date.value.split('-');
-    const auxDate = `${finDate[1]}/${finDate[2]}/${finDate[0]}`;
-    const auxStart = new Date(auxDate + ' ' + form.startHour.value + ':' + form.startMinute.value);
-    const auxEnd = new Date(auxDate + ' ' + form.endHour.value + ':' + form.endMinute.value);
-
-    const fDate = form.date.value.split('/');
-    const date = `${fDate[0]}/${fDate[1]}/${fDate[2]}`;
-    // const startHourFinal = (form.startHour.value.length > 1 ? form.startHour.value : '0' + form.startHour.value)
-    const start = date + ' ' + form.startHour.value + ':' + form.startMinute.value + ':00';
-    const end = date + ' ' + form.endHour.value + ':' + form.endMinute.value + ':00';
-
-    if (auxStart >= auxEnd) {
-      this.toastr.warning('Hora inválida');
-      return;
-    }
-    // Chequeo de dos horarios superpuestos
-    // const overStepped = this.events.find((item: any) => {
-    //   if (start === item.startDate){
-    //     return true;
-    //   }
-    //   if (start < item.startDate && end <= item.startDate) {
-    //     return false;
-    //   }
-    //   if (start < item.startDate && end >= item.startDate) {
-    //     return true;
-    //   }
-    //   if (start > item.startDate && start < item.endDate) {
-    //     return true;
-    //   }
-    //   return false;
-    // });
-
-    // if (overStepped) {
-    //   alert('Horarios Superpuestos. Imposible ')
-    //   return;
-    // }
-
-    const evento = {
-      idEvento: form.idEvento.value,
-      title: form.title.value,
-      desc: form.desc.value,
-      start,
-      end,
-      idSimposio: form.idSimposio.value,
-      idAula: this.idAula,
-      idArticulo: form.idPaper.value
-    };
-    console.log(evento.idEvento);
-
-    if (evento.idEvento !== null) {
-      this.calendarService.putEvento(evento).subscribe((res: any) => {
-        const btnDismiss = document.getElementById('dismiss');
-        btnDismiss.click();
-        this.loading = true;
-        this.getEventos();
-      });
-
-    } else {
-      this.calendarService.postEvento(evento).subscribe((res: any) => {
-        const btnDismiss = document.getElementById('dismiss');
-        btnDismiss.click();
-        this.loading = true;
-        this.getEventos();
-      });
-    }
-  }
-
-  submitPlenaria(): void {
-    this.submittedPlen = true;
-    if (this.formPlenaria.invalid) {
-      this.toastr.warning('Por favor, complete todos los datos');
-      return;
-    }
-
-    const form = this.formPlenaria.controls;
-    if (form.date.value === '') {
-      form.date.setValue(this.min);
-    }
-
-    const finDate = form.date.value.split('-');
-    const auxDate = `${finDate[1]}/${finDate[2]}/${finDate[0]}`;
-    const auxStart = new Date(auxDate + ' ' + form.startHour.value + ':' + form.startMinute.value);
-    const auxEnd = new Date(auxDate + ' ' + form.endHour.value + ':' + form.endMinute.value);
-
-    const fDate = form.date.value.split('-');
-    const date = `${fDate[2]}/${fDate[1]}/${fDate[0]}`;
-    // const startHourFinal = (form.startHour.value.length > 1 ? form.startHour.value : '0' + form.startHour.value)
-    const start = date + ' ' + form.startHour.value + ':' + form.startMinute.value + ':00';
-    const end = date + ' ' + form.endHour.value + ':' + form.endMinute.value + ':00';
-
-    if (auxStart >= auxEnd) {
-      this.toastr.warning('Hora inválida');
-      return;
-    }
-    // Chequeo de dos horarios superpuestos
-    // const overStepped = this.events.find((item: any) => {
-    //   if (start === item.startDate){
-    //     return true;
-    //   }
-    //   if (start < item.startDate && end <= item.startDate) {
-    //     return false;
-    //   }
-    //   if (start < item.startDate && end >= item.startDate) {
-    //     return true;
-    //   }
-    //   if (start > item.startDate && start < item.endDate) {
-    //     return true;
-    //   }
-    //   return false;
-    // });
-
-    // if (overStepped) {
-    //   alert('Horarios Superpuestos. Imposible ')
-    //   return;
-    // }
-
-    const evento = {
-      idEvento: form.idEvento.value,
-      title: form.title.value,
-      desc: form.desc.value,
-      start,
-      end
-    };
-
-    if (evento.idEvento !== null) {
-      this.calendarService.putPlenaria(evento).subscribe((res: any) => {
-        const btnDismiss = document.getElementById('dismissPlenaria');
-        btnDismiss.click();
-        this.loading = true;
-        if (this.idAula) {
-          this.getEventos();
-        }
-
-      });
-
-    } else {
-      this.calendarService.postPlenaria(evento).subscribe((res: any) => {
-        const btnDismiss = document.getElementById('dismissPlenaria');
-        btnDismiss.click();
-        this.loading = true;
-        if (this.idAula) {
-          this.getEventos();
-        }
-      });
-    }
-  }
-  generarQR(): void {
-    console.log('llego');
-    this.calendarService.generarQR().subscribe((res: any) => {
-      this.toastr.success('Se ha enviado un mail con los QR para cada una de las Aulas');
-    });
+  activarModalCalif(): void {
+    const btnDetalle = document.getElementById('activarModalCalif');
+    btnDetalle.click();
   }
 }
+

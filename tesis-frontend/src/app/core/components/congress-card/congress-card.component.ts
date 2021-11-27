@@ -15,6 +15,8 @@ export class CongressCardComponent implements OnInit {
   nombreSede: string;
   fechaUno: string;
   fechaDos: string;
+  fechaInicio: string;
+  fechaFin: string;
   @Input() congress: {
     id: string,
     nombre: string,
@@ -22,7 +24,10 @@ export class CongressCardComponent implements OnInit {
     año: string,
     fechaFinInsTemprana: string,
     fechaFinInsTardia: string,
-    nombre_sede: string};
+    nombre_sede: string,
+    fechaInicioExposiciones: string;
+    fechaFinExposiciones: string;
+  };
 
   constructor() { }
 
@@ -31,6 +36,8 @@ export class CongressCardComponent implements OnInit {
     this.nombreSede = this.congress.nombre_sede;
     this.fechaUno = this.congress.fechaFinInsTemprana;
     this.fechaDos = this.congress.fechaFinInsTardia;
+    this.fechaInicio = this.congress.fechaInicioExposiciones;
+    this.fechaFin = this.congress.fechaFinExposiciones;
   }
 
   verInfoPublica(): void{

@@ -47,6 +47,9 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { SedeListComponent } from './components/sede-list/sede-list.component';
 import { SedeFormComponent } from './components/sede-form/sede-form.component';
 import { RouterModule } from '@angular/router';
+import { CertificateTemplateListComponent } from './components/certificate-template-list/certificate-template-list.component';
+import { CertificateTemplateFormComponent } from './components/certificate-template-form/certificate-template-form.component';
+import { CertificateDetailFormComponent } from './components/certificate-detail-form/certificate-detail-form.component';
 import { AssistantListComponent } from './components/assistant-list/assistant-list.component';
 
 @NgModule({
@@ -96,6 +99,9 @@ import { AssistantListComponent } from './components/assistant-list/assistant-li
     CustomToastComponent,
     SearchComponent,
     AsignarPaperEvaluadorListComponent,
+    CertificateTemplateListComponent,
+    CertificateTemplateFormComponent,
+    CertificateDetailFormComponent,
     AssistantListComponent,
     SedeListComponent,
     SedeFormComponent,
@@ -151,6 +157,9 @@ import { AssistantListComponent } from './components/assistant-list/assistant-li
     ComiteAcademicoListComponent,
     PaperReadyComponent,
     RevisionAutorComponent,
+    CertificateTemplateListComponent,
+    CertificateTemplateFormComponent,
+    CertificateDetailFormComponent,
     AssistantListComponent,
     SedeListComponent,
     SedeFormComponent

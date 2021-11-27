@@ -143,6 +143,26 @@ const routes: Routes = [
     .then(m => m.ScheduleCalendarModule),
   },
   {
+    path: 'estadisticas',
+    loadChildren: () => import('./pages/graphs/graphs.module')
+    .then(m => m.GraphsModule),
+  },
+  {
+    path: 'verAgenda/:id',
+    loadChildren: () => import('./pages/ver-schedule/ver-schedule.module')
+    .then(m => m.VerScheduleModule),
+  },
+  {
+    path: 'certificados',
+    loadChildren: () => import('./pages/certificate/certificate.module')
+    .then(m => m.CertificateModule),
+  },
+  {
+    path: 'reportes',
+    loadChildren: () => import('./pages/reports/reports.module')
+    .then(m => m.ReportsModule),
+  },
+  {
     path: 'inscripcionFisica',
     loadChildren: () => import('./pages/inscripcion-fisica/inscripcion-fisica.module')
     .then(m => m.InscripcionFisicaModule),
