@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ITarifa } from '../../models/itarifa';
+
 
 @Component({
   selector: 'app-tarifa-list',
@@ -8,12 +8,12 @@ import { ITarifa } from '../../models/itarifa';
 })
 export class TarifaListComponent implements OnInit {
 
-  @Input() tarifaList: ITarifa[];
+  @Input() tarifaList = [];
   @Output() crearTarifaEvent = new EventEmitter();
   @Output() editarTarifaEvent = new EventEmitter();
   @Output() eliminarTarifaEvent = new EventEmitter();
   message = {header: '', body: ''};
-  selectedItem: ITarifa = null;
+  selectedItem = null;
 
   constructor() { }
 

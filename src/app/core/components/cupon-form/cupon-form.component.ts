@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ICupon } from '../../models/Icupon';
-import { ITarifa } from '../../models/ITarifa';
 
 @Component({
   selector: 'app-cupon-form',
@@ -11,14 +9,14 @@ import { ITarifa } from '../../models/ITarifa';
 export class CuponFormComponent implements OnInit {
 
   @Input() new = false;
-  @Input() cupon: ICupon = {
+  @Input() cupon = {
     codigo: '',
     porcentajeDesc: 0,
     idTarifa: '',
     nombreTarifa: '',
     usosRestantes: 0
   };
-  @Input() tarifaList: ITarifa[];
+  @Input() tarifaList = [];
   @Input() codeValidation = '';
   @Output() cancelEvent = new EventEmitter();
   @Output() newCuponEvent = new EventEmitter();

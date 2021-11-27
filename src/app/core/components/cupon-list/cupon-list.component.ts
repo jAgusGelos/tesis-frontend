@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ICupon } from '../../models/Icupon';
+
 
 @Component({
   selector: 'app-cupon-list',
@@ -8,12 +8,12 @@ import { ICupon } from '../../models/Icupon';
 })
 export class CuponListComponent implements OnInit {
 
-  @Input() cuponList: ICupon[];
+  @Input() cuponList = [];
   @Output() crearCuponEvent = new EventEmitter();
   @Output() editarCuponEvent = new EventEmitter();
   @Output() eliminarCuponEvent = new EventEmitter();
   message = {header: '', body: ''};
-  selectedItem: ICupon = null;
+  selectedItem = null;
 
   constructor() { }
 
