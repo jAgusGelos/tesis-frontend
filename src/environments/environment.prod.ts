@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL : 'https://congressity-app.herokuapp.com/api/'
+  apiURL : 'https://congressity-app.herokuapp.com/'
 };
