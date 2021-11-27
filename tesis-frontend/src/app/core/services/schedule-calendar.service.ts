@@ -19,7 +19,8 @@ export class ScheduleCalendarService {
    }
 
   getRoomEvents(idRoom: number, idCongreso?: number): any {
-    return this.httpClient.get(this.apiUrl + 'eventos/consultar-eventosXAula/?idAula=' + idRoom + '&idCongreso=' + (idCongreso || this.idCongreso ));
+    return this.httpClient.get(this.apiUrl + 'eventos/consultar-eventosXAula/?idAula=' +
+    idRoom + '&idCongreso=' + (idCongreso || this.idCongreso ));
   }
 
   deleteEvento(idEvento: number): any {
@@ -27,8 +28,11 @@ export class ScheduleCalendarService {
   }
 
   postEvento(evento: any): any {
-    console.log(evento)
     return this.httpClient.post(this.apiUrl + 'eventos/crear-evento/', evento);
+  }
+
+  putEvento(evento: any): any {
+    return this.httpClient.post(this.apiUrl + 'eventos/modificar-evento/', evento);
   }
 
 }

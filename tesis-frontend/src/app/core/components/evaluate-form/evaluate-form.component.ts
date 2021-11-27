@@ -25,7 +25,7 @@ export class EvaluateFormComponent implements OnInit {
   ];
   @Input() selectedPaper = { pdf: 'Link de descarga del pdf' };
 
-  
+
   @Output() evaluationEmitter = new EventEmitter();
   @Output() cancelEvaluation = new EventEmitter();
 
@@ -51,7 +51,7 @@ export class EvaluateFormComponent implements OnInit {
       .onAction.subscribe(() => {
         // Aca se hace el camino feliz
         this.cancelEvaluation.emit();
-      });   
+      });
   }
 
   submit(): void {

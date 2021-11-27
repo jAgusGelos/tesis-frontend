@@ -44,6 +44,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaperReadyComponent } from './components/paper-ready/paper-ready.component';
 import { RevisionAutorComponent } from './components/revision-autor/revision-autor.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { SedeListComponent } from './components/sede-list/sede-list.component';
+import { SedeFormComponent } from './components/sede-form/sede-form.component';
 import { RouterModule } from '@angular/router';
 import { AssistantListComponent } from './components/assistant-list/assistant-list.component';
 
@@ -95,6 +97,9 @@ import { AssistantListComponent } from './components/assistant-list/assistant-li
     SearchComponent,
     AsignarPaperEvaluadorListComponent,
     AssistantListComponent,
+    SedeListComponent,
+    SedeFormComponent,
+    AsignarPaperEvaluadorListComponent
   ],
   imports: [
     CommonModule,
@@ -146,7 +151,9 @@ import { AssistantListComponent } from './components/assistant-list/assistant-li
     ComiteAcademicoListComponent,
     PaperReadyComponent,
     RevisionAutorComponent,
-    AssistantListComponent
+    AssistantListComponent,
+    SedeListComponent,
+    SedeFormComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

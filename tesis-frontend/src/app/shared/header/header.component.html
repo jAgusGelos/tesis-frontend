@@ -44,6 +44,9 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/tarifas" *ngIf="rol.includes(1)  && user">Tarifas</a>
         </li>
+            <li class="nav-item">
+          <a class="nav-link" routerLink="/sedes" *ngIf="rol.includes(1) && user">Sedes</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/generarAgenda" *ngIf="rol.includes(1)  && user">Agenda</a>
         </li>
