@@ -10,7 +10,7 @@
       <p class="card-text" *ngIf="fechaDos!==null"><u>Fecha Fin Exposiciones</u>: {{fechaFin.split(' ')[0]}}</p>
       <a routerLink="/inscribirme/{{congress.id}}" class="btn btn-primary">Inscribirme</a>
       &nbsp;&nbsp;
-      <a class="btn btn-primary" (click)="verInfoPublica()">Más Información</a>
+      <a class="btn btn-primary" routerLink="/informacionCongreso/{{congress.id}}">Más Información</a>
       &nbsp;&nbsp;
       <a routerLink="/verAgenda/{{congress.id}}" class="btn btn-primary">Ver agenda</a>
     </div>
