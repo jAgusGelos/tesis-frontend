@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[38],{"99Un":function(c,t,o){"use strict";o.r(t),o.d(t,"HomeModule",function(){return b});var e=o("mrSG"),s=o("fXoL"),n=o("ofXK"),a=o("tyNb"),r=o("1LmZ");const p=[{path:"",component:r.a}];let i=class{};i=Object(e.c)([Object(s.N)({imports:[a.c.forChild(p)],exports:[a.c]})],i);var m=o("pKmL");let b=class{};b=Object(e.c)([Object(s.N)({declarations:[r.a],imports:[n.c,i,m.a],schemas:[s.j]})],b)}}]);
+//# sourceMappingURL=38.js.map
