@@ -143,8 +143,9 @@ export class VerScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let Id = this.route.snapshot.params.id
     this.route.queryParams.subscribe(params => {
-      this.idCongress = params.id;
+      this.idCongress = params.id || Id;
       this.getSimposios();
       this.getArticles();
       this.getRooms();
