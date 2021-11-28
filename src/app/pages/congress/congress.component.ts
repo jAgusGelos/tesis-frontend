@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ICongress } from 'src/app/core/models/ICongress';
 import { CongressService } from 'src/app/core/services/congress.service';
 
 @Component({
@@ -62,12 +61,12 @@ export class CongressComponent implements OnInit {
     this.congress = {};
   }
 
-  editCongress(congress: ICongress): void {
+  editCongress(congress: any): void {
     this.edit = !this.edit;
     this.congress = congress;
   }
 
-  deleteCongress(item: ICongress): void {
+  deleteCongress(item: any): void {
     this.congressService.deleteCongress(item).subscribe((res: any) => {
       this.toastr.success('El congreso ha sido eliminado correctamente');
       this.router.navigateByUrl('/congreso');
@@ -81,7 +80,7 @@ export class CongressComponent implements OnInit {
    * Si lo tiene hace un PUT al back. Actualiza un congreso creado.
    * Si no lo tiene crea un nuevo congreso.
    */
-   toggleCreateCongress(item: ICongress): void {
+   toggleCreateCongress(item: any): void {
     this.congressService.postCongress(item).subscribe((res: any) => {
       console.log('Estamos aCAAA');
 
@@ -91,7 +90,7 @@ export class CongressComponent implements OnInit {
 
   }
 
-  toggleEditCongress(item: ICongress): void {
+  toggleEditCongress(item: any): void {
     this.congressService.putCongress(item).subscribe((res: any) => {
       this.toastr.success('Congreso Modificado Correctamente');
       this.router.navigateByUrl('/congreso');

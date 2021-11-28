@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { ICongress } from 'src/app/core/models/ICongress';
 import { ISchedule } from 'src/app/core/models/ISchedule';
 import { CongressService } from 'src/app/core/services/congress.service';
 

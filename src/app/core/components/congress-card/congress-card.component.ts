@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ICongress } from '../../models/ICongress';
 import { ISchedule } from '../../models/ISchedule';
 import { AuthService } from '../../services/auth.service';
 import { DefineAgendaService } from '../../services/define-agenda.service';

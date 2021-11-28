@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ICongress } from 'src/app/core/models/ICongress';
 import { ISchedule } from 'src/app/core/models/ISchedule';
 import { ISymposium } from 'src/app/core/models/ISymposium';
 import { CongressService } from 'src/app/core/services/congress.service';
@@ -16,7 +15,7 @@ import { SymposiumService } from 'src/app/core/services/symposium.service';
 export class CongressAgendaComponent implements OnInit {
 
 
-  congressList: ICongress[] = [];
+  congressList: any[] = [];
 
   simposios: ISymposium[] = [];
   simposiosList: ISymposium[] =  [];

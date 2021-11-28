@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-
-import { ICongress } from '../models/ICongress';
 import { AuthService } from './auth.service';
 
 
@@ -20,7 +18,7 @@ export class CongressService {
                 this.idCongreso = auth.getCongressId();
               }
 
-  postCongress(congress: ICongress): any {
+  postCongress(congress: any): any {
     const postCongress = {
       sede: congress.sede,
       año: congress.ano,
@@ -28,7 +26,7 @@ export class CongressService {
       chairPrincipal: congress.chairPrincipal,
       coordLocal: congress.coordLocal
     };
-    return this.httpClient.post<ICongress>(this.apiURL + 'congresos/crear-congreso/', postCongress);
+    return this.httpClient.post<any>(this.apiURL + 'congresos/crear-congreso/', postCongress);
   }
 
   getCongress(): any {
@@ -50,7 +48,7 @@ export class CongressService {
     return this.httpClient.get(this.apiURL + 'congresos/lista-sedes/');
   }
 
-  putCongress(congress: ICongress): any {
+  putCongress(congress: any): any {
     const putCongress = {
       nombre: congress.nombre,
       sede: congress.sede,
@@ -58,11 +56,11 @@ export class CongressService {
       coordLocal: congress.coordLocal,
       año: congress.ano,
     };
-    return this.httpClient.post<ICongress>(this.apiURL + 'congresos/editar-congreso/', putCongress);
+    return this.httpClient.post<any>(this.apiURL + 'congresos/editar-congreso/', putCongress);
   }
 
-  deleteCongress(congress: ICongress): any {
-    return this.httpClient.delete<ICongress>(this.apiURL + 'congresos/eliminar-congreso/?id=' + congress.id);
+  deleteCongress(congress: any): any {
+    return this.httpClient.delete<any>(this.apiURL + 'congresos/eliminar-congreso/?id=' + congress.id);
     // return this.httpClient.request('delete', this.apiURL + 'congresos/eliminar-congreso/',
     // {body: {id: congress.id}});
   }

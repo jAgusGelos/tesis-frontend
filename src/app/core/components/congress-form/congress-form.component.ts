@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ICongress } from '../../models/ICongress';
 
 
 @Component({
@@ -13,7 +12,7 @@ export class CongressFormComponent implements OnInit {
 
 
   // Tiene que dar Nombre - Sede - Año - Email CP CL -
-  @Input() congress: ICongress = {
+  @Input() congress = {
     id: '',
     nombre: '',
     sede: '',
@@ -21,7 +20,7 @@ export class CongressFormComponent implements OnInit {
     chairPrincipal: '',
     coordLocal: ''
   };
-  @Output() congressEmitter = new EventEmitter<ICongress>();
+  @Output() congressEmitter = new EventEmitter();
   @Output() cancelCongress = new EventEmitter();
   @Output() editCongress = new EventEmitter();
 
