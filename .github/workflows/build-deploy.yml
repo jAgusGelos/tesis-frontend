@@ -1,3 +1,4 @@
+# "deploy": "ng build --prod --base-href=/tesis-frontend/ --aot=false --output-hashing=media --sourceMap=true --extract-css=false --buildOptimizer=false"
 name: Build and Deploy
 
 on:
