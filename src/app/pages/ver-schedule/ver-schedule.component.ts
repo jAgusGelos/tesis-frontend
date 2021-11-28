@@ -143,12 +143,12 @@ export class VerScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSimposios();
-    this.getArticles();
-    this.getRooms();
-    this.getCongres();
     this.route.queryParams.subscribe(params => {
       this.idCongress = params.id;
+      this.getSimposios();
+      this.getArticles();
+      this.getRooms();
+      this.getCongres();
       this.formEvento = this.formBuild.group(this.values());
       this.formPlenaria = this.formBuild.group(this.plenariaValues());
       this.formCalif = this.formBuild.group({
