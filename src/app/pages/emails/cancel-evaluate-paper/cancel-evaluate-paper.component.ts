@@ -9,21 +9,22 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./cancel-evaluate-paper.component.css']
 })
 export class CancelEvaluatePaperComponent implements OnInit {
-  cancel: boolean=false;
-  token:string;
-  constructor(private route:ActivatedRoute,
-              private service: UserService,
-              private toastr: ToastrService,
-              ) { }
+  cancel: boolean = false;
+  token: string;
+  constructor(private route: ActivatedRoute,
+    private service: UserService,
+    private toastr: ToastrService,
+  ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
-      this.service.cancelEvaluatePaper('?token=' + this.token).subscribe(
-        (res:any)=> this.cancel=true,
-        (err:any) =>{this.toastr.error('No se pudo cancelar su asignación como evaluador del paper.')}
-      )
-    });
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
+    this.service.cancelEvaluatePaper('?token=' + this.token).subscribe(
+      (res: any) => this.cancel = true,
+      (err: any) => { this.toastr.error('No se pudo cancelar su asignación como evaluador del paper.') }
+    )
+
   }
 
 }

@@ -21,12 +21,12 @@ export class ConfirmedAccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
       this.verifyEmailService.verifyEmail('?token='+this.token).subscribe(
         (res:any) => {this.confirm()},
         (err:any) => {this.toastr.error("No se pudo confirmar la cuenta.")});
-      });
     }
 
 

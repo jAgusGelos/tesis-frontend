@@ -14,21 +14,22 @@ export class PaymentSuccessComponent implements OnInit {
   nombreCongreso = 'DEFAULTNAME';
 
   constructor(private route: ActivatedRoute,
-              private inscriptionService: InscriptionsService) { }
+    private inscriptionService: InscriptionsService) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
-      this.inscriptionSuccess(this.token);
-      this.getCongressName();
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
+    this.inscriptionSuccess(this.token);
+    this.getCongressName();
 
-    });
+
   }
 
   inscriptionSuccess(token): void {
     this.inscriptionService.paymentSuccess(token).subscribe(
-      (res: any) => {console.log(res.email); },
-      (err: any) => {alert(err.error.error); }
+      (res: any) => { console.log(res.email); },
+      (err: any) => { alert(err.error.error); }
     );
   }
 

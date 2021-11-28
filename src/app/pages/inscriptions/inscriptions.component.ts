@@ -16,7 +16,7 @@ export class InscriptionsComponent implements OnInit {
 
   idCongress = '';
   congress: any;
-  tarifas = [ ];
+  tarifas = [];
   tarifaSelected = false;
   datosCompletos = false;
   loading = false;
@@ -25,41 +25,41 @@ export class InscriptionsComponent implements OnInit {
   submitted = false;
   isLinear = false;
   constructor(private route: ActivatedRoute,
-              private formBuilder: FormBuilder,
-              private inscriptionService: InscriptionsService,
-              private router: Router,
-              private toastr: ToastrService,
-              private congressService: CongressService,
-              private tarifaService: TarifasService
-              ) { }
+    private formBuilder: FormBuilder,
+    private inscriptionService: InscriptionsService,
+    private router: Router,
+    private toastr: ToastrService,
+    private congressService: CongressService,
+    private tarifaService: TarifasService
+  ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.idCongress = params.id;
-      // El usuario si o si tiene que estar logueado. Datos mínimos.
-      this.formUsuario = this.formBuilder.group({
-        cupon: [''],
-      });
-      this.getCongresos();
-      this.getTarifas();
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.idCongress = url_array[url_array.length - 1];
+    // El usuario si o si tiene que estar logueado. Datos mínimos.
+    this.formUsuario = this.formBuilder.group({
+      cupon: [''],
     });
+    this.getCongresos();
+    this.getTarifas();
   }
 
   getCongresos(): void {
-   this.congressService.getCongressById().subscribe((res: any) => {
-    const fechaI = res.data[0].fechaInCongreso.split(' ')[0].split('/');
-    const fechaF = res.data[0].fechaFinCongreso.split(' ')[0].split('/');
+    this.congressService.getCongressById().subscribe((res: any) => {
+      const fechaI = res.data[0].fechaInCongreso.split(' ')[0].split('/');
+      const fechaF = res.data[0].fechaFinCongreso.split(' ')[0].split('/');
 
-    const fechaIn = new Date(fechaI[2], fechaI[1] - 1, fechaI[0]);
-    const fechaFin = new Date(fechaF[2], fechaF[1] - 1, fechaF[0]);
-    this.congress = {
-      id: res.data[0].id,
-      nombre: res.data[0].nombre,
-      sede: res.data[0].nombre_sede,
-      fechaInicio: fechaIn.toLocaleDateString(),
-      fechaFin: fechaFin.toLocaleDateString(),
-    };
-   });
+      const fechaIn = new Date(fechaI[2], fechaI[1] - 1, fechaI[0]);
+      const fechaFin = new Date(fechaF[2], fechaF[1] - 1, fechaF[0]);
+      this.congress = {
+        id: res.data[0].id,
+        nombre: res.data[0].nombre,
+        sede: res.data[0].nombre_sede,
+        fechaInicio: fechaIn.toLocaleDateString(),
+        fechaFin: fechaFin.toLocaleDateString(),
+      };
+    });
   }
 
   getTarifas(): void {
@@ -86,7 +86,7 @@ export class InscriptionsComponent implements OnInit {
     this.inscriptionService.inscribirme(cupon).subscribe((res: any) => {
       if (res.error) {
         this.toastr.warning('Error en la inscripción. Usted ya se encuentra inscripto o el cupón ingresado es inválido.');
-        this.formUsuario.controls.cupon.setErrors({incorrect: true});
+        this.formUsuario.controls.cupon.setErrors({ incorrect: true });
         return;
       }
       this.idInscrip = res.data.id;

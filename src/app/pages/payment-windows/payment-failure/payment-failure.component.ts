@@ -15,10 +15,11 @@ export class PaymentFailureComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
-      this.getCongressName();
-    });
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
+    this.getCongressName();
+
   }
 
   getCongressName(): void {

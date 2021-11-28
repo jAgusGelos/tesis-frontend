@@ -17,12 +17,12 @@ export class AcceptEvaluatorComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
       this.service.acceptEvaluator('?token=' + this.token).subscribe(
         (res: any) => this.accepted = true,
         (err: any) => {this.toastr.error('No se pudo confirmar su rol como evaluador.'); }
       );
-    });
   }
 }

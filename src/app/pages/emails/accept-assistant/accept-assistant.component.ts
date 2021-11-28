@@ -14,16 +14,16 @@ export class AcceptAssistantComponent implements OnInit {
   token: string;
 
   constructor(private route: ActivatedRoute,
-              private assistantAervice: AssistantService,
-              private toastr: ToastrService) { }
+    private assistantAervice: AssistantService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
-      this.assistantAervice.acceptAssistant('?token=' + this.token).subscribe(
-        (res: any) => this.accepted = true,
-        (err: any) => {this.toastr.error('No se pudo confirmar su rol como ayudante.'); }
-      );
-    });
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
+    this.assistantAervice.acceptAssistant('?token=' + this.token).subscribe(
+      (res: any) => this.accepted = true,
+      (err: any) => { this.toastr.error('No se pudo confirmar su rol como ayudante.'); }
+    );
   }
 }

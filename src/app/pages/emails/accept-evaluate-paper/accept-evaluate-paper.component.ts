@@ -12,22 +12,23 @@ export class AcceptEvaluatePaperComponent implements OnInit {
   token: string;
   accepted: boolean = false;
   constructor(private route: ActivatedRoute,
-              private service:UserService,
-              private toastr: ToastrService,
-              ) { }
+    private service: UserService,
+    private toastr: ToastrService,
+  ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
-      this.service.acceptEvaluatePaper('?token=' + this.token).subscribe(
-        (res:any) => this.accept(),
-        (err:any) => {this.toastr.error('No se pudo aceptar la evaluación del paper.')}
-      )
-    });
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
+    this.service.acceptEvaluatePaper('?token=' + this.token).subscribe(
+      (res: any) => this.accept(),
+      (err: any) => { this.toastr.error('No se pudo aceptar la evaluación del paper.') }
+    );
+
   }
 
-  accept():void{
-    this.accepted= true;
+  accept(): void {
+    this.accepted = true;
     console.log('SI')
   }
 

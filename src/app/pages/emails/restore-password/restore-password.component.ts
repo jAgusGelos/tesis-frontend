@@ -13,12 +13,12 @@ export class RestorePasswordComponent implements OnInit {
               private service: UserService) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
       this.service.restorePassword('?token='+this.token).subscribe(
         (res: any)=>{console.log('OK')},
         (err:any) => {console.log(err.status)})
-    });
   }
 
 }

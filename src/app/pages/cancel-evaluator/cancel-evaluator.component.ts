@@ -12,17 +12,17 @@ export class CancelEvaluatorComponent implements OnInit {
   cancel = false;
   token: string;
   constructor(private route: ActivatedRoute,
-              private service: UserService,
-              private toastr: ToastrService) { }
+    private service: UserService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
-      this.service.cancelEvaluator('?token=' + this.token).subscribe(
-        (res: any) => this.cancel = true,
-        (err: any) => {this.toastr.error('No se pudo cancelar su rol como evaluador.'); }
-      );
-    });
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
+    this.service.cancelEvaluator('?token=' + this.token).subscribe(
+      (res: any) => this.cancel = true,
+      (err: any) => { this.toastr.error('No se pudo cancelar su rol como evaluador.'); }
+    );
 
   }
 

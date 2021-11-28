@@ -16,13 +16,13 @@ export class CancelAuthorComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params.token;
-      this.service.cancelAuthor('?token=' + this.token).subscribe(
-        (res: any) => this.cancel = true,
-        (err: any) => this.toastr.error('No se pudo cancelar su asignación como autor del paper.')
-      );
-    });
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.token = url_array[url_array.length - 1];
+    this.service.cancelAuthor('?token=' + this.token).subscribe(
+      (res: any) => this.cancel = true,
+      (err: any) => this.toastr.error('No se pudo cancelar su asignación como autor del paper.')
+    );
   }
 
 }
