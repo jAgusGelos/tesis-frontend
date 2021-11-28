@@ -143,9 +143,7 @@ export class VerScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let Id = this.route.snapshot.params.id
-    this.route.queryParams.subscribe(params => {
-      this.idCongress = params.id || Id;
+      this.idCongress =  this.route.snapshot.params.id;
       this.getSimposios();
       this.getArticles();
       this.getRooms();
@@ -157,7 +155,7 @@ export class VerScheduleComponent implements OnInit {
         puntuacion: [1],
         idEvento: ['']
       });
-    });
+
   }
 
 
