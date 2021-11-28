@@ -125,6 +125,7 @@ export class VerScheduleComponent implements OnInit {
               private roomService: RoomService,
               private toastr: ToastrService,
               private route: ActivatedRoute) {
+    this.idCongress =  this.route.snapshot.params.id;
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
@@ -143,7 +144,6 @@ export class VerScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.idCongress =  this.route.snapshot.params.id;
       this.getSimposios();
       this.getArticles();
       this.getRooms();
