@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CongressService } from 'src/app/core/services/congress.service';
-import { InscriptionsService } from 'src/app/core/services/inscriptions.service';
-import { TarifasService } from 'src/app/core/services/tarifas.service';
+import { CongressService } from '../../core/services/congress.service';
+import { InscriptionsService } from '../../core/services/inscriptions.service';
+import { TarifasService } from '../../core/services/tarifas.service';
+
 
 @Component({
   selector: 'app-inscriptions',
