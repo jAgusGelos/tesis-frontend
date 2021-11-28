@@ -115,17 +115,19 @@ export class VerScheduleComponent implements OnInit {
   }
 
   constructor(@Inject(LOCALE_ID) locale: string,
-              private dateAdapter: DateAdapter,
-              private calendarService: ScheduleCalendarService,
-              private formBuild: FormBuilder,
-              private paperService: PaperService,
-              private congresService: CongressService,
-              private articulosService: ArticulosService,
-              private router: Router,
-              private roomService: RoomService,
-              private toastr: ToastrService,
-              private route: ActivatedRoute) {
-    this.idCongress =  this.route.snapshot.params.id;
+    private dateAdapter: DateAdapter,
+    private calendarService: ScheduleCalendarService,
+    private formBuild: FormBuilder,
+    private paperService: PaperService,
+    private congresService: CongressService,
+    private articulosService: ArticulosService,
+    private router: Router,
+    private roomService: RoomService,
+    private toastr: ToastrService,
+    private route: ActivatedRoute) {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.idCongress = params.get('id');
+    });
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
@@ -145,9 +147,7 @@ export class VerScheduleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const url = window.location.href;
-    const url_array = url.split('/');
-    this.idCongress = +url_array[url_array.length - 1]
+
     this.getSimposios();
     this.getArticles();
     this.getRooms();
