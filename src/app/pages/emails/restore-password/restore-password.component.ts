@@ -13,11 +13,12 @@ export class RestorePasswordComponent implements OnInit {
               private service: UserService) { }
 
   ngOnInit(): void {
-    this.token =  this.route.snapshot.params.token;
-    console.log(this.token);
-    this.service.restorePassword('?token='+this.token).subscribe(
-      (res: any)=>{console.log('OK')},
-      (err:any) => {console.log(err.status)})
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+      this.service.restorePassword('?token='+this.token).subscribe(
+        (res: any)=>{console.log('OK')},
+        (err:any) => {console.log(err.status)})
+    });
   }
 
 }

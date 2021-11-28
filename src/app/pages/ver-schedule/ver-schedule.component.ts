@@ -147,13 +147,15 @@ export class VerScheduleComponent implements OnInit {
     this.getArticles();
     this.getRooms();
     this.getCongres();
-    this.idCongress = this.route.snapshot.paramMap.get('id');
-    this.formEvento = this.formBuild.group(this.values());
-    this.formPlenaria = this.formBuild.group(this.plenariaValues());
-    this.formCalif = this.formBuild.group({
-      calificacion: [''],
-      puntuacion: [1],
-      idEvento: ['']
+    this.route.queryParams.subscribe(params => {
+      this.idCongress = params.id;
+      this.formEvento = this.formBuild.group(this.values());
+      this.formPlenaria = this.formBuild.group(this.plenariaValues());
+      this.formCalif = this.formBuild.group({
+        calificacion: [''],
+        puntuacion: [1],
+        idEvento: ['']
+      });
     });
   }
 

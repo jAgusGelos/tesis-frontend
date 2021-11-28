@@ -15,8 +15,11 @@ export class PaymentPendingComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.token = this.route.snapshot.params.token;
-    this.getCongressName();
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+      this.getCongressName();
+    });
+
   }
 
   getCongressName(): void {

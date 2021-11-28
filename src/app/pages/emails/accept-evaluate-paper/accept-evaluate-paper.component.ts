@@ -17,12 +17,13 @@ export class AcceptEvaluatePaperComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-    this.token = this.route.snapshot.params.token;
-    console.log(this.token);
-    this.service.acceptEvaluatePaper('?token=' + this.token).subscribe(
-      (res:any) => this.accept(),
-      (err:any) => {this.toastr.error('No se pudo aceptar la evaluación del paper.')}
-    )
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+      this.service.acceptEvaluatePaper('?token=' + this.token).subscribe(
+        (res:any) => this.accept(),
+        (err:any) => {this.toastr.error('No se pudo aceptar la evaluación del paper.')}
+      )
+    });
   }
 
   accept():void{

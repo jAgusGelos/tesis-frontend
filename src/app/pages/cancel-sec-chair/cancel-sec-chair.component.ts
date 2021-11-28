@@ -16,7 +16,9 @@ export class CancelSecChairComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.token = this.route.snapshot.params.token;
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+    });
     /* this.service.cancelChairSec('?token' + this.token).subscribe(
       (res:any) => this.cancel =  true,
       (err:any) => this.toastr.error('No se pudo cancelar su rol como Chair Secundario.')

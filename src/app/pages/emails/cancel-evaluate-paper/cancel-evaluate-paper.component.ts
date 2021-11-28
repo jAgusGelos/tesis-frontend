@@ -17,11 +17,13 @@ export class CancelEvaluatePaperComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-    this.token=this.route.snapshot.params.token;
-    this.service.cancelEvaluatePaper('?token=' + this.token).subscribe(
-      (res:any)=> this.cancel=true,
-      (err:any) =>{this.toastr.error('No se pudo cancelar su asignación como evaluador del paper.')}
-    )
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+      this.service.cancelEvaluatePaper('?token=' + this.token).subscribe(
+        (res:any)=> this.cancel=true,
+        (err:any) =>{this.toastr.error('No se pudo cancelar su asignación como evaluador del paper.')}
+      )
+    });
   }
 
 }

@@ -33,14 +33,16 @@ export class InscriptionsComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-    window.scrollTo(0,0);
-    this.idCongress = this.route.snapshot.paramMap.get('id');
-    // El usuario si o si tiene que estar logueado. Datos mínimos.
-    this.formUsuario = this.formBuilder.group({
-      cupon: [''],
+    window.scrollTo(0, 0);
+    this.route.queryParams.subscribe(params => {
+      this.idCongress = params.id;
+      // El usuario si o si tiene que estar logueado. Datos mínimos.
+      this.formUsuario = this.formBuilder.group({
+        cupon: [''],
+      });
+      this.getCongresos();
+      this.getTarifas();
     });
-    this.getCongresos();
-    this.getTarifas();
   }
 
   getCongresos(): void {

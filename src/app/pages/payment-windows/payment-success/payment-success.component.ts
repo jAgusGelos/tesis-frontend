@@ -17,9 +17,12 @@ export class PaymentSuccessComponent implements OnInit {
               private inscriptionService: InscriptionsService) { }
 
   ngOnInit(): void {
-    this.token = this.route.snapshot.params.token;
-    this.inscriptionSuccess(this.token);
-    this.getCongressName();
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+      this.inscriptionSuccess(this.token);
+      this.getCongressName();
+
+    });
   }
 
   inscriptionSuccess(token): void {

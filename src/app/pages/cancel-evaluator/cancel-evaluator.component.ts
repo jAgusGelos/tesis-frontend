@@ -16,11 +16,13 @@ export class CancelEvaluatorComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.token = this.route.snapshot.params.token;
-    this.service.cancelEvaluator('?token=' + this.token).subscribe(
-      (res: any) => this.cancel = true,
-      (err: any) => {this.toastr.error('No se pudo cancelar su rol como evaluador.'); }
-    );
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+      this.service.cancelEvaluator('?token=' + this.token).subscribe(
+        (res: any) => this.cancel = true,
+        (err: any) => {this.toastr.error('No se pudo cancelar su rol como evaluador.'); }
+      );
+    });
 
   }
 

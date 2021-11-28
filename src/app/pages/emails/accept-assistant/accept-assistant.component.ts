@@ -18,10 +18,12 @@ export class AcceptAssistantComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.token = this.route.snapshot.params.token;
-    this.assistantAervice.acceptAssistant('?token=' + this.token).subscribe(
-      (res: any) => this.accepted = true,
-      (err: any) => {this.toastr.error('No se pudo confirmar su rol como ayudante.'); }
-    );
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+      this.assistantAervice.acceptAssistant('?token=' + this.token).subscribe(
+        (res: any) => this.accepted = true,
+        (err: any) => {this.toastr.error('No se pudo confirmar su rol como ayudante.'); }
+      );
+    });
   }
 }
