@@ -102,7 +102,7 @@ export class VerScheduleComponent implements OnInit {
   eventosCompletos = [];
   formPlenaria: FormGroup;
   formCalif: FormGroup;
-  idCongress = '';
+  idCongress;
   scores = Array.from({ length: 10 }, (_, i) => i + 1);
 
   actions: CalendarSchedulerEventAction[] = [];
@@ -144,21 +144,22 @@ export class VerScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
-      (params: ParamMap) => {
-        this.idCongress = params.get('id');
-        this.getSimposios();
-        this.getArticles();
-        this.getRooms();
-        this.getCongres();
-        this.formEvento = this.formBuild.group(this.values());
-        this.formPlenaria = this.formBuild.group(this.plenariaValues());
-        this.formCalif = this.formBuild.group({
-          calificacion: [''],
-          puntuacion: [1],
-          idEvento: ['']
-        });
-      });
+
+    const url = window.location.href;
+    const url_array = url.split('/');
+    this.idCongress = +url_array[url_array.length - 1]
+    this.getSimposios();
+    this.getArticles();
+    this.getRooms();
+    this.getCongres();
+    this.formEvento = this.formBuild.group(this.values());
+    this.formPlenaria = this.formBuild.group(this.plenariaValues());
+    this.formCalif = this.formBuild.group({
+      calificacion: [''],
+      puntuacion: [1],
+      idEvento: ['']
+    });
+
 
   }
 
