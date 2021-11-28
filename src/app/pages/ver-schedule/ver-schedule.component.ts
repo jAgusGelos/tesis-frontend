@@ -1,6 +1,6 @@
 import { Component, HostListener, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, SelectMultipleControlValueAccessor, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   CalendarView,
   CalendarDateFormatter,
@@ -144,16 +144,20 @@ export class VerScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.getSimposios();
-      this.getArticles();
-      this.getRooms();
-      this.getCongres();
-      this.formEvento = this.formBuild.group(this.values());
-      this.formPlenaria = this.formBuild.group(this.plenariaValues());
-      this.formCalif = this.formBuild.group({
-        calificacion: [''],
-        puntuacion: [1],
-        idEvento: ['']
+    this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        this.idCongress = params.get('id');
+        this.getSimposios();
+        this.getArticles();
+        this.getRooms();
+        this.getCongres();
+        this.formEvento = this.formBuild.group(this.values());
+        this.formPlenaria = this.formBuild.group(this.plenariaValues());
+        this.formCalif = this.formBuild.group({
+          calificacion: [''],
+          puntuacion: [1],
+          idEvento: ['']
+        });
       });
 
   }
