@@ -4,7 +4,7 @@
     <h3 class='text-center'>Inscripciones</h3>
     <hr>
   </div>
-  <div class="section">
+  <div class="section" *ngIf="idCongress">
     <h6>Usted está a punto de inscribirse al congreso: {{congress.nombre}}
       a desarrollarse en la sede {{congress.sede}}. Los días {{congress.fechaInicio}} a {{congress.fechaFin}}.
     </h6>
