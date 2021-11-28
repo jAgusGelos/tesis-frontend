@@ -7,9 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    loadChildren: () => import('./pages/home/home.module')
-    .then(m => m.HomeModule),
+    component: HomeComponent
   },
   {
     path: 'usuario',
@@ -123,7 +121,8 @@ const routes: Routes = [
   },
   {path: 'tarifas',
   loadChildren: () => import('./pages/tarifas/tarifas.module')
-  .then(m => m.TarifasModule)},
+  .then(m => m.TarifasModule)
+},
   {
     path: 'preferenciaSimposio',
     loadChildren: () => import('./pages/symposium-preference/symposium-preference.module')
@@ -274,7 +273,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload', relativeLinkResolution: 'legacy'})],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload', useHash: true})],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
