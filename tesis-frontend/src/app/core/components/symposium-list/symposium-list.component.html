@@ -5,18 +5,20 @@
     <hr>
   </div>
   <br>
-  <div class="row justify-content-md-end">
-    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo Simposio</a>
-  </div>
+  <div class="row justify-content-md-between">
+    
+  <!-- </div> -->
 
-  <div class="row">
+  <!-- <div class="row"> -->
     <app-search
-      class="col-md-5"
+      class="col-md-5 justify-content-md-start"
       [fullList]='symposiumList'
       [attribFilter]='"descripcion"'
       (listEvent)='search($event)'
     ></app-search>
+    <a class="btn btn-primary col-md-3" (click)='toggleNew()' role="button">Nuevo Simposio</a>
   </div>
+ 
   <table class="table text-center table-hover table-bordered">
     <thead class='thead'>
       <tr>

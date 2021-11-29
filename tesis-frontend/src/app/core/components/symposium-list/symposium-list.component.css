@@ -18,6 +18,8 @@
 .btn-primary{
   background-color: #3CAFE0 ;
   border: none;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 i{
