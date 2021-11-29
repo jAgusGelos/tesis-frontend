@@ -2,7 +2,7 @@
   <div class="contenidos">
     <hr>
     <h3 class='text-center'>Agenda del Congreso</h3>
-    <h6 class='text-center'>{{congress.nombre}}</h6>
+    <h6 class='text-center'>{{congress?.nombre}}</h6>
     <hr>
   </div>
   <br>
@@ -14,7 +14,7 @@
       <div class="col-sm-12">
         <select name="eval" class="form-control" (change)="aulaSelected($event.target.value)">
           <option selected disabled> -- Seleccione un Aula --</option>
-          <option *ngFor="let room of roomList" value='{{room.id}}'>{{ room.nombre }} </option>
+          <option *ngFor="let room of roomList" value='{{room.id}}'>{{ room?.nombre }} </option>
         </select>
       </div>
     </div>

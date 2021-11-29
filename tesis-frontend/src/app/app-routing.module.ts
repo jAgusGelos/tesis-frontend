@@ -116,7 +116,7 @@ const routes: Routes = [
   },
   {
     path: 'assistants',
-    loadChildren: () => import('./pages/assistant/Assistant.module')
+    loadChildren: () => import('./pages/assistant/assistant.module')
     .then(m => m.AssistantModule),
   },
   {
@@ -148,7 +148,7 @@ const routes: Routes = [
     .then(m => m.GraphsModule),
   },
   {
-    path: 'verAgenda/:id',
+    path: 'verAgenda',
     loadChildren: () => import('./pages/ver-schedule/ver-schedule.module')
     .then(m => m.VerScheduleModule),
   },

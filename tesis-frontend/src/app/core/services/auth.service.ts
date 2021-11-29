@@ -69,7 +69,7 @@ export class AuthService {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.sede || null;
+    return decodedToken?.sede || null;
   }
 
   getUserObs(): any {

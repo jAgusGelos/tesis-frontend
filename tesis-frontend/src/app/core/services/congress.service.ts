@@ -42,12 +42,15 @@ export class CongressService {
   }
 
   getCongressById(idCongress?: string): any {
-    return this.httpClient.get(this.apiURL + 'congresos/consultaCongreso/?id=' + (idCongress || this.idCongreso));
+    debugger
+    idCongress = idCongress || this.idCongreso?.toString();
+    return this.httpClient.get(`${this.apiURL}congresos/consultaCongreso/`, { params: {id: idCongress}});
   }
 
 
   getSedes(): any {
     return this.httpClient.get(this.apiURL + 'congresos/lista-sedes/');
+
   }
 
   putCongress(congress: ICongress): any {

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ISede } from '../../models/isede';
+import { ISede } from '../../models/ISede';
 
 @Component({
   selector: 'app-sede-form',
