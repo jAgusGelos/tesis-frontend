@@ -43,7 +43,7 @@ export class RoomService {
   }
 
   getRoomsId(idCongreso: any): any{
-    return this.httpClient.get(this.apiURL + 'congresos/lista-aulas/?idCongreso=' + idCongreso);
+    return this.httpClient.get(this.apiURL + 'congresos/lista-aulasxcongreso/?idCongreso=' + idCongreso);
   }
 
   deteleRoom(room: IRoom): any{

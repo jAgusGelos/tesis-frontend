@@ -68,7 +68,6 @@
               </span>
             </div>
           </div>
-          <div class='form-group row col-md-6'></div>
           <!-- Fecha Fin Inscripción Tardía -->
           <div class='form-group row col-md-6'>
             <label class='col-form-label col-sm-6 ' for='FechaFinInscripTardia'>Fin de inscripción tardía:<span
@@ -116,6 +115,41 @@
           </div>
         </div>
 
+        <hr>
+<!-- ----------------------------------------------------------------- -->
+<h4 class="card-title text-center"><b>Fecha de Exposición</b></h4>
+
+        <div class="row">
+          <!-- Inicio Expo -->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6' for='FechaInicioExposiciones'>Inicio Exposiciones:
+              <span class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaInicioExposiciones' [ngClass]="{'is-invalid': (formCongress.controls.FechaInicioExposiciones.touched || submitted)
+        && formCongress.controls.FechaInicioExposiciones.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaInicioExposiciones.touched || submitted) && formCongress.controls.FechaInicioExposiciones.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+          <br>
+          <!-- Fecha Prórroga Papers -->
+          <div class='form-group row col-md-6'>
+            <label class='col-form-label col-sm-6' for='FechaFinExposiciones'>Fin Exposiciones:<span
+                class='text-danger'>*</span></label>
+            <div class='col-sm-6'>
+              <input type='date' class='form-control' formControlName='FechaFinExposiciones' [ngClass]="{'is-invalid': (formCongress.controls.FechaFinExposiciones.touched || submitted)
+        && formCongress.controls.FechaFinExposiciones.errors}" onclick='this.select()' />
+              <span class='text-danger'
+                *ngIf='(formCongress.controls.FechaFinExposiciones.touched || submitted) && formCongress.controls.FechaFinExposiciones.errors?.required'>
+                Requerido
+              </span>
+            </div>
+          </div>
+        </div>
+
+<!-- ----------------------------------------------------------------- -->
         <hr>
         <h4 class="card-title text-center"><b>Evaluación de artículos</b></h4>
         <div class="row justify-content-md-center">

@@ -54,7 +54,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/congress/congress.module')
     .then(m => m.CongressModule),
     // descomentar al correr la bd
-     canActivate: [AuthGuard, SuperRolGuard]
+    // canActivate: [AuthGuard, SuperRolGuard]
   },
   {
     path: 'callForPapers',
