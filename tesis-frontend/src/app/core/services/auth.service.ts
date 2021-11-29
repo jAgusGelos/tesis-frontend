@@ -45,14 +45,14 @@ export class AuthService {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.id || null;
+    return decodedToken?.id || null;
   }
 
   getUserRoles(): number[] {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.rol || null;
+    return decodedToken?.rol || null;
   }
 
   getCongressId(): number {
@@ -60,7 +60,7 @@ export class AuthService {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
     if (decodedToken){
-      return decodedToken.idCongreso;
+      return decodedToken?.idCongreso;
     }
     return null;
   }
@@ -76,7 +76,7 @@ export class AuthService {
     const idToken = localStorage.getItem('id_token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(idToken);
-    return decodedToken.id.asObservable();
+    return decodedToken?.id.asObservable();
   }
 
   changePassword(item: any ): any{

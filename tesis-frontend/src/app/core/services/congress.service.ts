@@ -42,7 +42,6 @@ export class CongressService {
   }
 
   getCongressById(idCongress?: string): any {
-    debugger
     idCongress = idCongress || this.idCongreso?.toString();
     return this.httpClient.get(`${this.apiURL}congresos/consultaCongreso/`, { params: {id: idCongress}});
   }

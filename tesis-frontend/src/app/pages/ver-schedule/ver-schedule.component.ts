@@ -143,7 +143,6 @@ export class VerScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
     this.idCongress = this.route.snapshot.paramMap.get('id');
     this.formEvento = this.formBuild.group(this.values());
     this.formPlenaria = this.formBuild.group(this.plenariaValues());
@@ -161,7 +160,6 @@ export class VerScheduleComponent implements OnInit {
 
 
   getCongres(): void {
-    debugger
     this.congresService.getCongressById(this.idCongress).subscribe((res: any) => {
       this.congress = res.data[0];
       const fechaI = res.data[0].fechaInicioExposiciones.split(' ')[0].split('/');
@@ -219,7 +217,7 @@ export class VerScheduleComponent implements OnInit {
   }
 
   getRooms(): void {
-    this.roomService.getRooms().subscribe((res: any) => {
+    this.roomService.getRoomsId(this.idCongress).subscribe((res: any) => {
       this.roomList = res.data[0];
     });
   }
@@ -232,7 +230,7 @@ export class VerScheduleComponent implements OnInit {
   }
 
   getSimposios(): void {
-    this.paperService.getSimposiosActivos().subscribe((res: any) => {
+    this.paperService.getSimposiosActivosId(this.idCongress).subscribe((res: any) => {
       this.simposios = res.data;
     });
   }
