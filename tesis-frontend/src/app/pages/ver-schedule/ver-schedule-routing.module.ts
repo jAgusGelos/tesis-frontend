@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VerScheduleComponent } from './ver-schedule.component';
 
 const routes: Routes = [{
-  path: '',
+  path: ':id',
   component: VerScheduleComponent
 }];
 
