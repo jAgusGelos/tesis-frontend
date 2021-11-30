@@ -223,7 +223,7 @@ export class VerScheduleComponent implements OnInit {
   }
 
   getArticles(): void {
-    this.articulosService.getCameraReady().subscribe((res: any) => {
+    this.articulosService.getCameraReadyId(this.idCongress).subscribe((res: any) => {
       this.paperList = res.data;
       this.showList = this.paperList.slice();
     });
