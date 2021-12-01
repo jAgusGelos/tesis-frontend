@@ -1,0 +1,187 @@
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Modificar Certificado</h3>
+    <hr>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-5 col-sm-12">
+      <form [formGroup]="formCert">
+        <h6>Atributos y posiciones</h6>
+
+        <!-- nombre -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-4 col-sm-offset-2' for='nombre'>Nombre: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='nombre' [ngClass]="{'is-invalid': (formCert.controls.nombre.touched || submitted)
+                && formCert.controls.nombre.errors}" onclick='this.select()' />
+            <span class='text-danger'
+              *ngIf='(formCert.controls.nombre.touched || submitted) && formCert.controls.nombre.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+        <!-- nombreX -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-4 col-sm-offset-2' for='nombreX'>Posición horizontal: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='nombreX' [ngClass]="{'is-invalid': (formCert.controls.nombreX.touched || submitted)
+                && formCert.controls.nombreX.errors}" onclick='this.select()' />
+            <span class='text-danger'
+              *ngIf='(formCert.controls.nombreX.touched || submitted) && formCert.controls.nombreX.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
+        <!-- nombreY -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-4 col-sm-offset-2' for='nombreY'>Posicion Vertical: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='nombreY' [ngClass]="{'is-invalid': (formCert.controls.nombreY.touched || submitted)
+                && formCert.controls.nombreY.errors}" onclick='this.select()' />
+            <span class='text-danger'
+              *ngIf='(formCert.controls.nombreY.touched || submitted) && formCert.controls.nombreY.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+        <br>
+        <hr>
+
+        <!-- apellido -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-4 col-sm-offset-2' for='apellido'>Apellido: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='apellido' [ngClass]="{'is-invalid': (formCert.controls.apellido.touched || submitted)
+        && formCert.controls.apellido.errors}" onclick='this.select()' />
+            <span class='text-danger'
+              *ngIf='(formCert.controls.apellido.touched || submitted) && formCert.controls.apellido.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+        <!-- apellidoX -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-4 col-sm-offset-2' for='apellidoX'>Posición horizontal: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='apellidoX' [ngClass]="{'is-invalid': (formCert.controls.apellidoX.touched || submitted)
+        && formCert.controls.apellidoX.errors}" onclick='this.select()' />
+            <span class='text-danger'
+              *ngIf='(formCert.controls.apellidoX.touched || submitted) && formCert.controls.apellidoX.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
+        <!-- apellidoY -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-4 col-sm-offset-2' for='apellidoY'>Posicion Vertical: <span
+              class='text-danger'>*</span></label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='apellidoY' [ngClass]="{'is-invalid': (formCert.controls.apellidoY.touched || submitted)
+        && formCert.controls.apellidoY.errors}" onclick='this.select()' />
+            <span class='text-danger'
+              *ngIf='(formCert.controls.apellidoY.touched || submitted) && formCert.controls.apellidoY.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
+        <br>
+        <hr>
+
+        <!-- dni -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-4 col-sm-offset-2' for='dni'>DNI: </label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='dni' [ngClass]="{'is-invalid': (formCert.controls.dni.touched || submitted)
+        && formCert.controls.dni.errors}" onclick='this.select()' />
+
+          </div>
+        </div>
+        <!-- dniX -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-4 col-sm-offset-2' for='dniX'>Posición horizontal: </label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='dniX' [ngClass]="{'is-invalid': (formCert.controls.dniX.touched || submitted)
+        && formCert.controls.dniX.errors}" onclick='this.select()' />
+
+          </div>
+        </div>
+
+        <!-- dniY -->
+        <div class='form-group row'>
+          <label class='col-form-label col-sm-4 col-sm-offset-2' for='dniY'>Posicion Vertical: </label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' formControlName='dniY' [ngClass]="{'is-invalid': (formCert.controls.dniY.touched || submitted)
+        && formCert.controls.dniY.errors}" onclick='this.select()' />
+          </div>
+        </div>
+
+        <br>
+        <hr>
+
+        <!-- fontSize -->
+        <div class="form-group row">
+          <label for="fontSize" class="col-form-label col-sm-4 col-sm-offset-2">Tamaño de Fuente:</label>
+          <div class="col-sm-6">
+            <select class="form-select" id="select-fontSize" formControlName="fontSize"
+              [ngClass]="{'is-invalid': submitted && formCert.controls.fontSize.errors}">
+              <option *ngFor="let font of fontsSize" value="{{font}}">{{font}} </option>
+            </select>
+          </div>
+        </div>
+
+          <!-- Tipo de Fuente: -->
+          <div class="form-group row">
+            <label for="fontFamily" class="col-form-label col-sm-4 col-sm-offset-2">Tipo de Fuente:</label>
+            <div class="col-sm-6">
+              <select class="form-select" id="select-fontFamily" formControlName="fontFamily"
+                [ngClass]="{'is-invalid': submitted && formCert.controls.fontFamily.errors}">
+                <option *ngFor="let font of fonts" value="{{font.value}}">{{font.name}} </option>
+              </select>
+            </div>
+          </div>
+
+          <br>
+          <hr>
+
+          <div class="row pt-2 justify-content-center">
+            <button class="btn btn-secondary col-sm-4" (click)="cancelar()">Cancelar</button>
+            &nbsp;
+            <button type="submit" class="btn btn-primary col-sm-4" (click)="verGrafico()">Probar Gráfico</button>
+          </div>
+          <div class="row pt-2  justify-content-center">
+            <button type="submit" class="btn btn-danger col-sm-8" (click)="guardarCambios()">Guardar
+              Cambios
+            </button>
+          </div>
+
+      </form>
+
+
+    </div>
+
+
+    <div class="col-md-5 col-sm-12 verticalLine">
+      <img src="data:image/png;base64,{{imagen}}" alt="Template del certificado" style="height: 110%; width: 130%;"
+        *ngIf="!loading">
+      <div class="row justify-content-center" *ngIf="loading">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>

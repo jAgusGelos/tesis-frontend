@@ -14,7 +14,7 @@ export class ArticulosService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getEvaluatorsByPaper(paper: IntPaper) {
+  getEvaluatorsByPaper(paper: IntPaper): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultarEvaluadoresArticulo/?idArticulo=' + paper.id);
   }
 
@@ -26,8 +26,12 @@ export class ArticulosService {
     return this.httpClient.put(this.apiURL + 'calificarArticulo/', paperCalification);
   }
 
-  getCameraReady() {
+  getCameraReady(): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosCameraReady/');
+  }
+
+  getNotAssigned(idSimposio: string): any {
+    return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosParaEventos/?idSimposio=' + idSimposio);
   }
 
   post(asignation: any): any {

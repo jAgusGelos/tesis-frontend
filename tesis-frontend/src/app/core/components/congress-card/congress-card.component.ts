@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICongress } from '../../models/ICongress';
 import { ISchedule } from '../../models/ISchedule';
+import { AuthService } from '../../services/auth.service';
 import { DefineAgendaService } from '../../services/define-agenda.service';
 
 @Component({
@@ -15,6 +16,8 @@ export class CongressCardComponent implements OnInit {
   nombreSede: string;
   fechaUno: string;
   fechaDos: string;
+  fechaInicio: string;
+  fechaFin: string;
   @Input() congress: {
     id: string,
     nombre: string,
@@ -22,15 +25,22 @@ export class CongressCardComponent implements OnInit {
     año: string,
     fechaFinInsTemprana: string,
     fechaFinInsTardia: string,
-    nombre_sede: string};
+    nombre_sede: string,
+    fechaInicioExposiciones: string;
+    fechaFinExposiciones: string;
+  };
+  user;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.user = this.auth.getUserId();
     this.nombre = this.congress.nombre;
     this.nombreSede = this.congress.nombre_sede;
     this.fechaUno = this.congress.fechaFinInsTemprana;
     this.fechaDos = this.congress.fechaFinInsTardia;
+    this.fechaInicio = this.congress.fechaInicioExposiciones;
+    this.fechaFin = this.congress.fechaFinExposiciones;
   }
 
   verInfoPublica(): void{

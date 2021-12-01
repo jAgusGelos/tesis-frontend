@@ -18,11 +18,15 @@
       </div>
     </div>
     <div class="col-md-3 ml-auto">
-      <button type="button " class="btn btn-primary"
-      data-bs-toggle="modal"
-       data-bs-target="#plenariaModal">
+      <button type="button " class="btn btn-primary">
+        <i class="fas fa-plus-circle"></i>
+        Agregar charla Plenaria / Break
+      </button>
+    </div>
+    <div class="col-md-2 ml-auto">
+      <button type="button " class="btn btn-primary" (click)="generarQR()">
        <i class="fas fa-plus-circle"></i>
-       Agregar charla Plenaria / Break
+       Generar QR
       </button>
     </div>
   </div>
@@ -193,7 +197,7 @@
           </div>
 
           <!-- idPaper -->
-          <div class='form-group row' *ngIf="paperList">
+          <div class='form-group row' *ngIf="showList">
             <label class='col-form-label col-sm-2 col-sm-offset-2' for='idPaper'>Paper: <span
                 class='text-danger'>*</span></label>
             <div class='col-sm-6'>
@@ -240,7 +244,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismiss'>Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)='submit()'>{{evento.id ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
+            <button type="button" class="btn btn-primary" (click)='submit()'>{{evento.idEvento ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
           </div>
         </form>
       </div>
@@ -363,7 +367,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='dismissPlenaria'>Cancelar</button>
-            <button type="button" class="btn btn-primary" (click)='submitPlenaria()'>{{evento.id ? 'Actualizar Evento' : 'Nuevo Evento'}}</button>
+            <button type="button" class="btn btn-primary" (click)='submitPlenaria()'>{{evento.idEvento ? 'Actualizar Plenaria' : 'Nueva Plenaria'}}</button>
           </div>
         </form>
       </div>

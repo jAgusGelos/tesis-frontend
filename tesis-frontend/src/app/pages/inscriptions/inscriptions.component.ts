@@ -14,13 +14,7 @@ import { TarifasService } from 'src/app/core/services/tarifas.service';
 export class InscriptionsComponent implements OnInit {
 
   idCongress = '';
-  congress = {
-      id: 1,
-      nombre: 'Prueba',
-      sede: 'FRC',
-      fechaInicio: '21/08/2022',
-      fechaFin: '25/08/2022',
-    };
+  congress: any;
   tarifas = [ ];
   tarifaSelected = false;
   datosCompletos = false;

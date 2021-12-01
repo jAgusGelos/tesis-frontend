@@ -16,7 +16,7 @@
       <div class="card-body">
         <h5 class="card-title">Agregar Evaluador</h5>
         <p class="card-text">Se enviará un correo de invitación al usuario para que sea evaluador.</p>
-        <input class="form-control" list="correos" placeholder="Buscar por nombre o dirección de correo"
+        <input class="form-control" type="email" list="correos" placeholder="Buscar por nombre o dirección de correo"
           formControlName="correo" [ngClass]="{'is-invalid': submitted && formEvaluator.controls.correo.errors}">
         <datalist id="correos">
           <option *ngFor="let user of usersList" value="{{user.email}}">{{user.nombre}} {{user.apellido}}
@@ -24,9 +24,7 @@
         <br>
         <a class="btn btn-secondary" role="button" (click)="toggleNew()">Cancelar</a>
         &nbsp;
-        <a class="btn btn-primary" role="button" (click)="sendMail()">
-          Enviar correo &nbsp; <i class="fas fa-envelope"></i></a>
-        <button hidden id="modalCorreo" data-bs-toggle="modal" data-bs-target="#modal-correo"></button>
+        <a class="btn btn-primary" role="button" (click)="sendMail()">Enviar correo &nbsp; <i class="fas fa-envelope"></i></a>
       </div>
     </form>
 </div>
@@ -37,7 +35,7 @@
         <tr>
           <th class="col-md-4">Nombre</th>
           <th class="col-md-4">E-mail</th>
-          <th class="col-md-2">Acciones</th>
+          <th class="col-md-1">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -51,25 +49,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
-  <div>
-
-    <!-- Modal Enviar correo -->
-    <div class="modal fade" id="modal-correo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">{{messageHeader}}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            {{messageBody}}
-          </div>
-          <div class="modal-footer">
-            <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</a>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

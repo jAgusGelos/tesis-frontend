@@ -39,6 +39,10 @@ export class UserService {
     return this.httpClient.get(this.apiURL + 'congresos/lista-localidades/');
   }
 
+  getLocalidadesXProvincia(idProvincia: number): any {
+    return this.httpClient.get(this.apiURL + 'congresos/lista-localidadesProvincia/?idProvincia=' + idProvincia);
+  }
+
   getProvincias(): any {
     return this.httpClient.get(this.apiURL + 'congresos/lista-provincia/');
   }
@@ -77,6 +81,10 @@ export class UserService {
   }
   cancelEvaluator(item: string): any{
     return this.httpClient.delete(this.apiURL + 'articulos/rechazar-evaluador' + item, {});
+  }
+
+  checkUser(email: string): any {
+    return this.httpClient.get(this.apiURL + 'inscripciones/verificar-usuario/?email=' + email);
   }
 
 }

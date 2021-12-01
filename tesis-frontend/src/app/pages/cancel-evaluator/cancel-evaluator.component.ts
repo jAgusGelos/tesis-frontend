@@ -9,11 +9,11 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./cancel-evaluator.component.css']
 })
 export class CancelEvaluatorComponent implements OnInit {
-  cancel :boolean = false;
-  token :string;
+  cancel = false;
+  token: string;
   constructor(private route: ActivatedRoute,
-    private service: UserService,
-    private toastr: ToastrService) { }
+              private service: UserService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.token = this.route.snapshot.params.token;
@@ -21,7 +21,7 @@ export class CancelEvaluatorComponent implements OnInit {
       (res: any) => this.cancel = true,
       (err: any) => {this.toastr.error('No se pudo cancelar su rol como evaluador.'); }
     );
-    
+
   }
 
 }

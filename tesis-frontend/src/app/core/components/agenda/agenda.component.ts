@@ -55,7 +55,11 @@ export class AgendaComponent implements OnInit {
       FechaFinEvaluacion: [this.schedule.fechaFinEvaluacion ? this.invertConvertDateFormat(this.schedule.fechaFinEvaluacion) : null,
          [Validators.required]],
       FechaFinReEv: [this.schedule.fechaFinReEv ? this.invertConvertDateFormat(this.schedule.fechaFinReEv) : null,
-         [Validators.required]]
+         [Validators.required]],
+      FechaInicioExposiciones: [this.schedule.FechaInicioExposiciones ? this.invertConvertDateFormat(this.schedule.FechaInicioExposiciones) : null,
+          [Validators.required]],
+      FechaFinExposiciones: [this.schedule.FechaFinExposiciones ? this.invertConvertDateFormat(this.schedule.FechaFinExposiciones) : null,
+          [Validators.required]]
     });
   }
 
@@ -86,6 +90,8 @@ export class AgendaComponent implements OnInit {
       fechaProrrogaPapers: this.convertDateFormat(this.formCongress.controls.FechaProrrogaPapers.value) + ' 00:00:00',
       fechaFinEvaluacion: this.convertDateFormat(this.formCongress.controls.FechaFinEvaluacion.value) + ' 00:00:00',
       fechaFinReEv: this.convertDateFormat(this.formCongress.controls.FechaFinReEv.value) + ' 00:00:00',
+      fechaInicioExposiciones: this.convertDateFormat(this.formCongress.controls.FechaInicioExposiciones.value) + ' 00:00:00',
+      fechaFinExposiciones: this.convertDateFormat(this.formCongress.controls.FechaFinExposiciones.value) + ' 00:00:00',
     };
     if (new Date(agenda.fechaCierreCongreso) < new Date(agenda.fechaFinCongreso)) {
       this.toast('La fecha de Cierre debe ser mayor a la fecha de fin');

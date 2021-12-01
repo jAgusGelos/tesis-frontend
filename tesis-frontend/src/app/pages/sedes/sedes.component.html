@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div *ngIf="!edit">
+        <app-sede-list 
+        [sedeList]="sedeList"
+        (crearSedeEvent)="newSede($event)"
+        (editarSedeEvent)="editSede($event)" 
+        (eliminarSedeEvent)="deleteSede($event)"></app-sede-list>
+    </div>
+    <div *ngIf="edit">
+        <app-sede-form 
+        [sede]="sede" 
+        [new]="new"
+        [provinciaList]="provincias"
+        [localidadList]="localidades"
+        (getLocalidadesEvent)="getLocalidadesXProvincia($event)" 
+        (newSedeEvent)="postSede($event)" 
+        (editSedeEvent)="putSede($event)" 
+        (cancelEvent)="toggleEdit($event)"></app-sede-form>
+    </div>
+</div>

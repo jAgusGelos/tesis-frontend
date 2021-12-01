@@ -6,9 +6,14 @@
       <p class="card-text">Sede: {{nombreSede}}</p>
       <p class="card-text" *ngIf="fechaUno!==null"><u>Fecha de Límite de Inscripción Temprana</u>: {{fechaUno.split(' ')[0]}}</p>
       <p class="card-text" *ngIf="fechaDos!==null"><u>Fecha de Límite de Inscripción Tardía</u>: {{fechaDos.split(' ')[0]}}</p>
-      <a [routerLink]="['/inscribirme/' + congress.id]" class="btn btn-primary">Inscribirme</a>
+      <p class="card-text" *ngIf="fechaDos!==null"><u>Fecha Inicio Exposiciones</u>: {{fechaInicio.split(' ')[0]}}</p>
+      <p class="card-text" *ngIf="fechaDos!==null"><u>Fecha Fin Exposiciones</u>: {{fechaFin.split(' ')[0]}}</p>
+      <a *ngIf="user" routerLink="/inscribirme/{{congress.id}}" class="btn btn-primary">Inscribirme</a>
       &nbsp;&nbsp;
       <a class="btn btn-primary" (click)="verInfoPublica()">Más Información</a>
+      &nbsp;&nbsp;
+      <a routerLink="/verAgenda/{{congress.id}}" class="btn btn-primary">Ver agenda</a>
+
     </div>
   </div>
 </div>
