@@ -26,7 +26,7 @@
         <div class='form-group row'>
           <label class='col-form-label col-sm-3 col-sm-offset-2' for='sede'>Sede: <span
               class='text-danger'>*</span></label>
-          <div class='col-sm-6'>
+          <div class='col-sm-6'  *ngIf="!congress.ano">
             <select  class='form-select col-sm-4' name="simposio" formControlName="sede" [ngClass]="{'is-invalid': (formCongress.controls.sede.touched || submitted || formCongress.controls.sede.value === '')
           && formCongress.controls.sede.errors}">
               <option  *ngFor="let opt of sedes" value={{opt.id}}>
@@ -38,13 +38,21 @@
               Requerido
             </span>
           </div>
+
+          <div class='col-sm-6' *ngIf="congress.ano">
+            <select disabled  class='form-select col-sm-4' name="simposio" formControlName="sede" >
+              <option  *ngFor="let opt of sedes" value={{opt.id}}>
+                ‌{{ opt.nombre }}
+              </option>
+            </select>
+          </div>
         </div>
 
         <!-- ano -->
         <div class='form-group row'>
           <label class='col-form-label col-sm-3 col-sm-offset-2' for='ano'>Año: <span
               class='text-danger'>*</span></label>
-          <div class='col-sm-6'>
+          <div class='col-sm-6'  *ngIf="!congress.ano">
             <input type='text' class='form-control' formControlName='ano' [ngClass]="{'is-invalid': (formCongress.controls.ano.touched || submitted)
     && formCongress.controls.ano.errors}" onclick='this.select()' />
             <span class='text-danger'
@@ -52,6 +60,10 @@
               Ingrese un año correcto.
             </span>
           </div>
+          <div class='col-sm-6' *ngIf="congress.ano">
+            <input type='text' class='form-control' formControlName='ano' disabled onclick='this.select()' />
+          </div>
+
         </div>
 
 
