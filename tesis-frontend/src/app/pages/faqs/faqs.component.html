@@ -15,7 +15,7 @@
               </h2>
               <div id="collapseRegistro" class="accordion-collapse collapse show" aria-labelledby="registro" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  Para registrarte en Congressity se te solicitará Tipo de Dcoumento, Número de Documento, Apellido, Nombre, Fecha de Nacimiento, Dirección, Celular, Sede de Referencia, Email y Contraseña.
+                  Para registrarte en Congressity se te solicitará Tipo de Documento, Número de Documento, Apellido, Nombre, Fecha de Nacimiento, Dirección, Celular, Sede de Referencia, Email y Contraseña.
                 </div>
               </div>
             </div>
@@ -138,7 +138,18 @@ Para finalizar el proceso de inscripcion presionamos en el botón “Inscribirme
                     Allí se te mostrarán los congresos en los cuales sos Chair Principal. <br>
                     Hacé click en <i class="fas fa-calendar-alt"></i> <br>
                     Se te solicitará:
-                  
+
+                    <li>Fecha de inicio</li>
+                    <li>Fecha de fin</li>
+                    <li>Fecha de cierre</li>
+                    <li>Fecha de fin de Inscripción Temprana</li>
+                    <li>Fecha de fin de Inscripción Tardía</li>
+                    <li>Fecha límite de entrega de artículos</li>
+                    <li>Fecha de prórroga de entrega de artículos</li>
+                    <li>Fecha de inicio de exposiciones</li>
+                    <li>Fecha de fin de Exposiciones</li>
+                    <li>Fecha de fin de Evaluación de artículos</li>
+                    <li>Fecha de fin de Reevaluación de artículos</li>
                   </p>
                 </div>
                 </div>
@@ -454,11 +465,11 @@ calle y número)
                 </h2>
                 <div id="collapseEstadosPaperAutor" class="accordion-collapse collapse" aria-labelledby="headingEstadosPaperAutor" data-bs-parent="#accordionExample">
                   <div class="accordion-body">
-                    <li>Creado:</li>
-                    <li>Enviado:</li>
-                    <li>Asignado:</li>
-                    <li>Aprobado:</li>
-                    <li>Rechazado:</li>
+                    <li>Creado: Aún no se envió el artículo para ser corregido.</li>
+                    <li>Enviado: Se envió el artículo para ser corregido.</li>
+                    <li>Asignado: El artículo tiene asignado tres evaluadores que aceptaron evaluarlo.</li>
+                    <li>Aprobado: El paper fue aprobado en el congreso.</li>
+                    <li>Rechazado:El paper fue rechazado. </li>
                 </div>
                 </div>
               </div>
@@ -480,6 +491,28 @@ calle y número)
                 </div>
               </div>
               
+              <!-- Inscripción Física - Ayudante -->
+              <div class="accordion-item" *ngIf="rol.includes(5)">
+                <h2 class="accordion-header" id="headingInscripcionFisica">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInscripcionFisica" aria-expanded="false" aria-controls="collapseInscripcionFisica">
+                    ¿Cómo registro una inscripción física?
+                  </button>
+                </h2>
+                <div id="collapseInscripcionFisica" class="accordion-collapse collapse" aria-labelledby="headingInscripcionFisica" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Inscripción Física. <br>
+                    Primero debe ingresar la dirección de email de la persona a inscribir. <br>
+                    Al hacer click en “Verificar Usuario”, el sistema verificará si la persona está registrada en Congressity. De ser así, se mostrarán los datos del usuario. De lo contrario, se deberá completar los datos antes de realizar la inscripción.
+
+                    Allí, podrá agregar autores que no se hayan mencionado anteriormente, y subir el archivo de la versión final del paper. Para enviarlo definitivamente, deberá hacer click en Enviar Camera Ready. <br>
+                    Una vez verificados que los datos sean correctos, haga click en “Continuar”. <br>
+                    Finalmente se muestra la tarifa vigente. Haga click en el botón “Inscribir” para registrar la inscripción.
+
+                  </p>
+                </div>
+                </div>
+              </div>
 
           </div>
     </div>
