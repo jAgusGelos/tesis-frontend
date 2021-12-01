@@ -34,7 +34,7 @@ export class CuponFormComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.formCupon = this.formBuilder.group({
-      codigo: [this.cupon.codigo, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]],
+      codigo: [{value: this.cupon.codigo, disabled: !this.new}, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]],
       tarifa: [this.cupon.idTarifa, Validators.required],
       porcentajeDescuento: [this.cupon.porcentajeDesc, [Validators.required, Validators.min(0), Validators.max(100)]],
       usosRestantes: [this.cupon.usosRestantes, [Validators.required, Validators.min(0)]],

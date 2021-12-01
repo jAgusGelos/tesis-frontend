@@ -60,8 +60,9 @@ export class AssignSecChairsFormComponent implements OnInit {
   }
 
   asignarChair(): void {
+    this.submitted = true;
     if (this.formAssignSecChairs.invalid) {
-      this.toastr.warning('Por favor seleccione un chair y una temática')
+      this.toastr.warning('Por favor, seleccione un chair y una temática');
       return;
     }
 
@@ -73,12 +74,13 @@ export class AssignSecChairsFormComponent implements OnInit {
       this.chairsAssigned.push(res.data);
       this.showList = this.chairsAssigned.slice();
       this.formAssignSecChairs.reset();
+      this.submitted = false;
     });
   }
 
   toggleRemoveHandled(item: any): void {
     this.toastr
-      .show( '¿Está seguro que desea eliminar el chair '+ item.nombreChair + ' ' + item.apellidoChair + '?', '¿Eliminar chair?', {
+      .show( '¿Seguro que desea eliminar el chair ' + item.nombreChair + ' ' + item.apellidoChair + '?', 'Eliminar Chair', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,

@@ -30,6 +30,10 @@ export class ArticulosService {
     return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosCameraReady/');
   }
 
+  getCameraReadyId(idCongress: any): any {
+    return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosCameraReadyPublico/?idCongreso=' + idCongress);
+  }
+
   getNotAssigned(idSimposio: string): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultarArticulosParaEventos/?idSimposio=' + idSimposio);
   }

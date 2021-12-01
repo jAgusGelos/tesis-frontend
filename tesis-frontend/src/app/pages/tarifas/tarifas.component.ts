@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { ITarifa } from 'src/app/core/models/ITarifa';
 import { TarifasService } from 'src/app/core/services/tarifas.service';
 
@@ -17,7 +18,8 @@ export class TarifasComponent implements OnInit {
   tarifaList: ITarifa[] = [];
 
   constructor(private tarifaService: TarifasService,
-              private router: Router) { }
+              private router: Router,
+              private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.getTarifas();
@@ -41,6 +43,7 @@ export class TarifasComponent implements OnInit {
     this.tarifaService.postTarifa(item).subscribe((res: any) => {
       this.toggleEdit();
       this.getTarifas();
+      this.toast.success('¡Tarifa creada!');
     },
     (err: any) => console.log(err));
   }
@@ -49,6 +52,7 @@ export class TarifasComponent implements OnInit {
     this.tarifaService.putTarifa(item).subscribe((res: any) => {
       this.getTarifas();
       this.toggleEdit();
+      this.toast.success('¡Cambios guardados!');
     });
   }
 
