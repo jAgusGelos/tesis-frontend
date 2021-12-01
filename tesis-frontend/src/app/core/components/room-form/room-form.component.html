@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="contenidos">
       <hr>
-      <h3 class="card-title text-center">Nueva Aula</h3>
+      <h3 class="card-title text-center">{{room.id ?'Nueva ' : 'Editar '}} Aula</h3>
       <hr>
     </div>
     <div class="card-text text-center">
@@ -42,7 +42,7 @@
           <a class="btn btn-secondary col-md-5" role="button" (click)="cancel()">Cancelar</a>
           &nbsp;
           &nbsp;
-          <a class="btn btn-primary col-md-5" role="button" (click)="agregar()">Agregar Aula</a>
+          <a class="btn btn-primary col-md-5" role="button" (click)="agregar()">{{room.id ?'Agregar ' : 'Editar '}} Aula</a>
         </div>
       </form>
     </div>
