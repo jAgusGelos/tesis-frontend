@@ -18,6 +18,8 @@
 .btn-primary{
   background-color: #3CAFE0 ;
   border: none;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 i{
@@ -29,6 +31,10 @@ i:hover{
 }
 
 .fas{
+  font-size: 1.25rem;
+  color: #3CAFE0
+}
+.fa{
   font-size: 1.25rem;
   color: #00609C;
 }

@@ -29,7 +29,7 @@
     </form>
 </div>
   
-  <div class="row">
+  
     <table class="table text-center table-hover table-bordered">
       <thead class='thead'>
         <tr>
@@ -39,7 +39,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class='align-items-center' *ngFor='let ev of showList; let i = index'>
+        <tr class='align-items-center align-middle' *ngFor='let ev of showList; let i = index'>
           <td>{{ev.nombre}}</td>
           <td>{{ev.email}}</td>
           <td>
@@ -49,5 +49,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
+ 
 </div>

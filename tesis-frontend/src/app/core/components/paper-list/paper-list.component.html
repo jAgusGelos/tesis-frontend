@@ -5,14 +5,13 @@
     <hr>
   </div>
   <br>
-  <div class="row justify-content-md-end">
-    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo</a>
+  <div class="row justify-content-md-between">
+    <app-search class="col-md-5 justify-content-md-start" [fullList]='paperList' [attribFilter]='"nombre"' (listEvent)='search($event)'>
+    </app-search>
+    <a class="btn btn-primary col-sm-4 justify-content-md-end" (click)='toggleNew()' role="button">Nuevo</a>
   </div>
 
-  <div class="row">
-    <app-search class="col-md-5" [fullList]='paperList' [attribFilter]='"nombre"' (listEvent)='search($event)'>
-    </app-search>
-  </div>
+
   <table class="table text-center table-hover table-bordered" *ngIf="paperList.length > 0">
     <thead class='thead'>
       <tr>
@@ -23,7 +22,7 @@
     </thead>
 
     <tbody>
-      <tr class='align-items-center' *ngFor='let item of showList'>
+      <tr class='align-items-center align-middle' *ngFor='let item of showList'>
         <td>{{item.nombre | titlecase}}</td>
         <td>{{item.nombre_estado}}</td>
 

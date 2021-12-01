@@ -13,7 +13,7 @@
             <label class="col-form-label col-sm-2 col-sm-offset-2" for="nameAula">Nombre: <span
                 class="text-danger">*</span></label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" formControlName="nameAula" [ngClass]="{'is-invalid': (formRooms.controls.nameAula.touched || submitted)
+              <input type="text" class="form-control justify-content-center" formControlName="nameAula" [ngClass]="{'is-invalid': (formRooms.controls.nameAula.touched || submitted)
                           && formRooms.controls.nameAula.errors}" onclick="this.select()" />
               <span class="text-danger"
                 *ngIf="(formRooms.controls.nameAula.touched || submitted) && formRooms.controls.nameAula.errors?.required">

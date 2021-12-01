@@ -1,12 +1,23 @@
+.container-fluid{
+  background-color: #F4F4F4;
 
+}
+
+.contenidos{
+  padding-bottom: 3rem;
+}
+
+.thead{
+  background-color: #C8E5F1;
+}
+
+.greyned{
+  color: grey;
+}
 .card-title{
   font-weight:300;
 }
 
-.card {
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .login-form{
 	width:75%;
@@ -21,6 +32,8 @@
 .btn-primary{
   background-color: #3CAFE0 ;
   border: none;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .card {
@@ -29,9 +42,7 @@
   border-radius: 3rem;
   padding-bottom: 2rem;  margin-bottom: 1rem;
   margin-top: 1rem;
-  background-color: #F4F4F4;
-
-  padding-bottom: 2rem;
+  background-color: #FFFFFF;
 
 }
 
@@ -45,7 +56,14 @@
   padding-bottom: 0.75rem;
 
 }
-
+.fas{
+  font-size: 1.25rem;
+  color: #3CAFE0;
+}
+.fa{
+  font-size: 1.25rem;
+  color: #00609C;
+}
 
 a{
   cursor: pointer;
@@ -72,13 +90,13 @@ hr {
 
 
 input{
-  border: none;
   border-bottom: 1px solid #8d999e ;
 }
 
 @media (min-width: 768px) {
   .card{
     max-width: 60%;
+    background-color: #F4F4F4;
   }
 
 

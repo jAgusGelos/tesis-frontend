@@ -36,8 +36,11 @@
 }
 
 .fa-trash{
-  color: #00609C;
+  color: #3CAFE0;
   cursor: pointer;
+}
+i:hover{
+  color: blue;
 }
 
 hr{

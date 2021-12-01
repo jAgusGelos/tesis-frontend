@@ -16,7 +16,7 @@
       [attribFilter]='"descripcion"'
       (listEvent)='search($event)'
     ></app-search>
-    <a class="btn btn-primary col-md-3" (click)='toggleNew()' role="button">Nuevo Simposio</a>
+    <a class="btn btn-primary col-md-3 justify-content-md-end" (click)='toggleNew()' role="button">Nuevo Simposio</a>
   </div>
  
   <table class="table text-center table-hover table-bordered">
@@ -29,16 +29,18 @@
     </thead>
 
     <tbody>
-      <tr class='align-items-center'*ngFor='let item of showList'>
+      <tr class='align-items-center align-middle'*ngFor='let item of showList'>
         <td>{{item.nombre}}</td>
         <td>{{item.descripcion}}</td>
         <td>
-          <div class="btn-group col-md-3">
+          <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group" role="group" aria-label="Editar">
           <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
-          &nbsp;
-          &nbsp;
-          &nbsp;
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="btn-group" role="group" aria-label="Eliminar">
           <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+          </div>
         </div>
       </td>
       </tr>
