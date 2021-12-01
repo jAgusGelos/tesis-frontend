@@ -165,6 +165,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/inscripcion-fisica/inscripcion-fisica.module')
     .then(m => m.InscripcionFisicaModule),
   },
+  {
+    path: 'proximoEvento/:idCongreso/:idAula',
+    loadChildren: () => import('./pages/proximo-evento/proximo-evento.module')
+    .then(m => m.ProximoEventoModule),
+  },
   // Notification routes
   {
     path: 'deactivateAccount',
