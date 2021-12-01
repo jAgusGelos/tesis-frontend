@@ -404,11 +404,12 @@ export class ScheduleCalendarComponent implements OnInit {
       const btnDetalle = document.getElementById('activar-modal');
       btnDetalle.click();
     } else {
+      console.log('No hay simposio');
       const strDate = this.evento.date;
       const auxDate = strDate.split('/');
       this.evento.date = auxDate[2] + '-' + auxDate[1] + '-' + auxDate[0];
       this.formPlenaria = this.formBuild.group(this.plenariaValues());
-      const btnDetalle = document.getElementById('btnPLenaria');
+      const btnDetalle = document.getElementById('btnPlenaria');
       btnDetalle.click();
     }
 
@@ -448,28 +449,6 @@ export class ScheduleCalendarComponent implements OnInit {
       this.toastr.warning('Hora inválida');
       return;
     }
-    // Chequeo de dos horarios superpuestos
-    // const overStepped = this.events.find((item: any) => {
-    //   if (start === item.startDate){
-    //     return true;
-    //   }
-    //   if (start < item.startDate && end <= item.startDate) {
-    //     return false;
-    //   }
-    //   if (start < item.startDate && end >= item.startDate) {
-    //     return true;
-    //   }
-    //   if (start > item.startDate && start < item.endDate) {
-    //     return true;
-    //   }
-    //   return false;
-    // });
-
-    // if (overStepped) {
-    //   alert('Horarios Superpuestos. Imposible ')
-    //   return;
-    // }
-
     const evento = {
       idEvento: form.idEvento.value,
       title: form.title.value,

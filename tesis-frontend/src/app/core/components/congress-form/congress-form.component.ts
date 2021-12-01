@@ -13,14 +13,7 @@ export class CongressFormComponent implements OnInit {
 
 
   // Tiene que dar Nombre - Sede - Año - Email CP CL -
-  @Input() congress: ICongress = {
-    id: '',
-    nombre: '',
-    sede: '',
-    ano: 2021,
-    chairPrincipal: '',
-    coordLocal: ''
-  };
+  @Input() congress;
   @Output() congressEmitter = new EventEmitter<ICongress>();
   @Output() cancelCongress = new EventEmitter();
   @Output() editCongress = new EventEmitter();

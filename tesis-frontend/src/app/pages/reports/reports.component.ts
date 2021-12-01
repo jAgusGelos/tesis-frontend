@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatsService } from 'src/app/core/services/stats.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { ToastrService } from 'ngx-toastr';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -12,7 +13,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class ReportsComponent implements OnInit {
 
 
-  constructor(private statsService: StatsService) { }
+  constructor(private statsService: StatsService,
+              private toastr: ToastrService) { }
 
 
   reportList = [
@@ -87,10 +89,14 @@ export class ReportsComponent implements OnInit {
 
 
   print(): void {
+    if(this.itemList.length == 0){
+      this.toastr.error('No hay datos para imprimir');
+      return;
+     }
 
-    const _body = [this.colName];
-    console.log(this.itemList);
-    console.log(this.attrName);
+     const auxNames = this.colName;
+    const _body = [auxNames];
+
     this.itemList.forEach(item => {
       const list = [];
       this.attrName.forEach(name => {
@@ -98,7 +104,6 @@ export class ReportsComponent implements OnInit {
       });
       _body.push(list);
     });
-    console.log(_body);
 
     const title = this.reportList.find((item: any) => item.value = this.selectedValue);
     // tslint:disable-next-line: one-variable-per-declaration
@@ -113,11 +118,12 @@ export class ReportsComponent implements OnInit {
         }
       ]
     };
-    console.log(documentDefinition);
-
-
-    pdfMake.createPdf(documentDefinition).download();
-
+    const pdf = pdfMake.createPdf(documentDefinition);
+    pdf.download(title.name + '.pdf');
+    this.colName = auxNames;
+    this.colName = auxNames.map((item: any) => {
+      return item;
+    });
   }
 
 }

@@ -18,7 +18,6 @@
   <table class="table text-center table-hover table-bordered">
     <thead class='thead'>
       <tr>
-        <th class="col-md-2">Id</th>
         <th class="col-md-4">Nombre</th>
         <th class="col-md-4">Estado</th>
         <th class="col-md-2">Acciones</th>
@@ -27,7 +26,6 @@
 
     <tbody>
       <tr class='align-items-center'*ngFor='let item of showList; let i = index'>
-        <td>{{i + 1}}</td>
         <td>{{item.nombreArticulo}}</td>
         <td>{{item.nombreEstado}}</td>
         <td *ngIf='item.estado < 3'>
