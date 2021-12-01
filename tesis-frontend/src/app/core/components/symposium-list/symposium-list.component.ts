@@ -16,8 +16,7 @@ export class SymposiumListComponent implements OnInit {
   @Output() deleteSymposiumEvent = new EventEmitter();
   showList = [];
 
-  constructor(private toastr: ToastrService,) { }
-
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -31,11 +30,11 @@ export class SymposiumListComponent implements OnInit {
   toggleNew(): void {
     this.newSymposiumEvent.emit();
   }
+
   toggleRemoveHandled(item: any): void {
 
     this.toastr
-      .show( 'Está seguro que desea eliminar el simposio ' + item.nombre +
-      '\nToda la configuración creada se perderá.', '¿Eliminar Simposio?', {
+      .show('¿Seguro que desea borrar el simposio ' + item.nombre + '?', 'Borrar Simposio', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,
@@ -44,12 +43,10 @@ export class SymposiumListComponent implements OnInit {
       .onAction.subscribe(() => {
         // Aca se hace el camino feliz
         this.deleteSymposiumEvent.emit(item);
-
       });
   }
 
   search(filterList): void {
     this.showList = filterList;
-
   }
 }

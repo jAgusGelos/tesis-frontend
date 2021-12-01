@@ -16,7 +16,8 @@
   }
   
   .btn-primary{
-    background-color: #3CAFE0 ;
+    background-color: #3CAFE0;
+    border: none;
   }
 
   .btn-primary:hover{
@@ -26,6 +27,7 @@
   .fas{
     color: #3CAFE0;
   }
+  
   .fas:hover{
     color: #3994bb;
     cursor: pointer;
