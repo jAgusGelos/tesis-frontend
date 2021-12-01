@@ -1,0 +1,22 @@
+<app-certificate-template-list
+  *ngIf="list"
+  (newCertEvent)="newCert()"
+  (deleteCertEvent)="deleteCertificate($event)"
+  (editCertEvent)="editCert($event)"
+  (gameCertEvent)="playCertEvent($event)"
+  [certList]="certList"
+></app-certificate-template-list>
+<app-certificate-template-form
+  *ngIf="form"
+  [cert]="cert"
+  (cancelCert)="toggleEdit()"
+  (certEmitter)="submit($event)"
+></app-certificate-template-form>
+<app-certificate-detail-form
+  *ngIf="game"
+  [cert]="cert"
+  (cancelCertEvent)="toggleEdit()"
+  (guardarGrafoEvent)="guardarGrafo($event)"
+  (verGrafoEvent)="verGrafo($event)"
+></app-certificate-detail-form>
+

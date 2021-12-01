@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <div class="contenidos">
+      <hr>
+      <h3 class='text-center'>Ayudantes del Congreso</h3>
+      <hr>
+    </div>
+    <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
+    <div *ngIf="!new" class="row justify-content-md-end">
+      <a class="btn btn-primary col-sm-2" role="button" (click)="toggleNew()">Nuevo Ayudante</a>
+    </div>
+    <div *ngIf="new" class="row justify-content-md-end">
+      <form [formGroup]='formAssistant' class="card col-md-4">
+        <div class="card-body">
+          <h5 class="card-title">Agregar Ayudante</h5>
+          <p class="card-text">Se enviará un correo de invitación al usuario para que sea ayudante en el congreso.</p>
+          <input class="form-control" list="correos" type="email" placeholder="Buscar por nombre o dirección de correo"
+            formControlName="correo" [ngClass]="{'is-invalid': submitted && formAssistant.controls.correo.errors}">
+          <datalist id="correos">
+            <option *ngFor="let user of usersList" value="{{user.email}}">{{user.nombre}} {{user.apellido}}
+          </datalist>
+          <br>
+          <a class="btn btn-secondary" role="button" (click)="toggleNew()">Cancelar</a>
+          &nbsp;
+          <a class="btn btn-primary" role="button" (click)="sendMail()">
+            Enviar correo &nbsp; <i class="fas fa-envelope"></i></a>
+        </div>
+      </form>
+    </div>
+    <br>
+    <div class="row justify-content-md-center">
+      <app-search class="col-md-8" [fullList]='assistantList' [attribFilter]='"nombre"' (listEvent)='search($event)'>
+      </app-search>
+    </div>
+    <div class="row">
+      <table class="table text-center table-hover table-bordered">
+        <thead class='thead'>
+          <tr>
+            <th class="col-md-4">Nombre</th>
+            <th class="col-md-4">E-mail</th>
+            <th class="col-md-1">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class='align-items-center' *ngFor='let a of showList; let i = index'>
+            <td>{{a.nombre}}</td>
+            <td>{{a.email}}</td>
+            <td>
+              <a title='Eliminar' role="button" (click)="deleteAssistant(a, i)"><i class="fas fa-trash fa-lg"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+

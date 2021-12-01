@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="contenidos">
+    <hr>
+    <h3 class='text-center'>Reportería</h3>
+    <hr>
+  </div>
+
+  <div class="row py-3 ">
+    <div class="col-md-2">
+      <label for="">Seleccione un Reporte:</label>
+    </div>
+    <div class="col-md-4  mr-auto">
+      <div class="col-sm-12">
+        <select name="eval" class="form-control" (change)="reporteSelected($event.target.value)">
+          <option selected disabled> -- Seleccione un Reporte --</option>
+          <option *ngFor="let report of reportList" value='{{report.value}}'>{{ report.name }} </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <table class="table text-center table-hover table-bordered">
+    <thead class='thead'>
+      <tr>
+        <th *ngFor="let item of colName">
+          {{item}}
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class='align-items-center' *ngFor="let item of itemList">
+        <td *ngFor="let atr of attrName">{{item[atr]}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <div class="row justify-content-md-end">
+    <a class="btn btn-primary col-sm-4"  role="button" (click)="print()">Imprimir</a>
+  </div>
+
+
+</div>

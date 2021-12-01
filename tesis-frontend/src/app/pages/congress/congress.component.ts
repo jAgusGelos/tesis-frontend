@@ -83,8 +83,6 @@ export class CongressComponent implements OnInit {
    */
    toggleCreateCongress(item: ICongress): void {
     this.congressService.postCongress(item).subscribe((res: any) => {
-      console.log('Estamos aCAAA');
-
       this.toastr.success('Congreso Creado Correctamente');
       this.router.navigateByUrl('/congreso');
     });

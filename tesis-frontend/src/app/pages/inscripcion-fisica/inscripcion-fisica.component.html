@@ -1,0 +1,115 @@
+<div class="container-fluid">
+    <div class="contenidos">
+      <hr>
+      <h3 class="text-center">Inscripción Física</h3>
+      <hr>
+    </div>
+    <div class="container">
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" id="verificacion-usuario" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Verificación de Usuario
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <form [formGroup]="formCorreo">
+                <div class="row justify-content-md-center">
+                    <div class="col-auto col-form-label">
+                        <label for="correo" class="form-label">Correo</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="email"  class="form-control" id="correo" onClick="this.select();"
+                        formControlName="correo" [ngClass]="{'is-invalid': submitted && formCorreo.controls.correo.errors}">
+                    </div>
+                    <div class="col-auto">
+                        <a class="btn btn-primary" role="button" (click)="checkUser()">Verificar Usuario</a>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" id="datos-personales" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Datos Personales
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="container-md">
+                <form [formGroup]="formInscripcion">
+                    <div class="row datos-personales">
+                        <div class="col-md-4">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text"  class="form-control" id="nombre" onClick="this.select();"
+                            formControlName="nombre" [ngClass]="{'is-invalid': submitted && formInscripcion.controls.nombre.errors}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text"  class="form-control" id="apellido" onClick="this.select();"
+                            formControlName="apellido" [ngClass]="{'is-invalid': submitted && formInscripcion.controls.apellido.errors}">
+                        </div>
+                    </div>
+                    <div class="row datos-personales">
+                        <div class="col-md-4">
+                            <label for="email" class="form-label">Correo</label>
+                            <input type="email"  class="form-control" id="email" onClick="this.select();"
+                            formControlName="email" [ngClass]="{'is-invalid': submitted && formInscripcion.controls.email.errors}">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                            <input type="date"  class="form-control" id="fechaNacimiento" onClick="this.select();"
+                            formControlName="fechaNacimiento" [ngClass]="{'is-invalid': submitted && formInscripcion.controls.fechaNacimiento.errors}">
+                        </div>
+                    </div>
+                    <div class="row datos-personales">
+                        <div class="col-md-4">
+                            <label for="tipoDni" class="form-label">Tipo de Documento</label>
+                            <select class="form-select" id="tipoDni" formControlName="tipoDni" [ngClass]="{'is-invalid': submitted && formInscripcion.controls.tipoDni.errors}">
+                                <option *ngFor="let item of tipoDniList" value="{{item.id}}" [selected]='item.nombre===datos.tipoDni' >{{item.nombre}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="dni" class="form-label">Número de Documento</label>
+                            <input type="number"  class="form-control" id="dni" onClick="this.select();" min="0"
+                            formControlName="dni" [ngClass]="{'is-invalid': submitted && formInscripcion.controls.dni.errors}">
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <a class="btn btn-primary" role="button" (click)="goToInscription()">Continuar</a>
+                      </div>
+                  </div>
+                </form>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" id="inscripcion" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Inscripción
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="row justify-content-md-center">
+                <div class="col-md-2" *ngFor="let tar of tarifaList">
+                  <div class="card">
+                      <div class="card-body text-center">
+                        <h5 class="card-title">{{tar.nombre}}</h5>
+                        <h5 class="card-title">{{tar.precio | currency:ARS}}</h5>
+                        <a class="btn btn-primary stretched-link" (click)="inscribir()">Inscribir</a>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+  

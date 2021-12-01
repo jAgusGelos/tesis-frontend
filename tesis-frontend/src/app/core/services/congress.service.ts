@@ -41,12 +41,15 @@ export class CongressService {
     return this.httpClient.get(this.apiURL + 'congresos/listaCongresosActivos/');
   }
 
-  getCongressById(): any {
-    return this.httpClient.get(this.apiURL + 'congresos/consultaCongreso/?id=' + this.idCongreso);
+  getCongressById(idCongress?: string): any {
+    idCongress = idCongress || this.idCongreso?.toString();
+    return this.httpClient.get(`${this.apiURL}congresos/consultaCongreso/`, { params: {id: idCongress}});
   }
+
 
   getSedes(): any {
     return this.httpClient.get(this.apiURL + 'congresos/lista-sedes/');
+
   }
 
   putCongress(congress: ICongress): any {

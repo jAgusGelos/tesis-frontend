@@ -85,6 +85,11 @@ export class PaperService {
     return this.httpClient.get(this.apiURL + url + this.idCongress);
   }
 
+  getSimposiosActivosId(idCongress: any): any {
+    const url = 'congresos/lista-simposiosxcongreso/?idCongreso=';
+    return this.httpClient.get(this.apiURL + url + idCongress);
+  }
+
   getEvaluationDetails(id: any): any {
     return this.httpClient.get(this.apiURL + 'articulos/consultaDetalleEvaluacion/?idArticulo=' + id);
   }
