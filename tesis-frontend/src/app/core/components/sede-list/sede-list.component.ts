@@ -33,7 +33,7 @@ export class SedeListComponent implements OnInit {
 
   toggleRemoveHandled(item: any): void {
     this.toastr
-      .show( '¿Seguro que desea borrar la sede ' + item.nombre + '?', 'Borrar Sede', {
+      .show('¿Seguro que desea borrar la sede ' + item.nombre + '?', 'Borrar Sede', {
         toastComponent: CustomToastComponent,
         disableTimeOut: true,
         tapToDismiss: false,

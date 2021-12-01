@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tarifa-form',
@@ -24,7 +25,8 @@ export class TarifaFormComponent implements OnInit {
   submitted = false;
   datesValid = true;
 
-  constructor( private formBuilder: FormBuilder ) { }
+  constructor(private formBuilder: FormBuilder,
+              private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.formTarifa = this.formBuilder.group({
@@ -38,6 +40,7 @@ export class TarifaFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formTarifa.controls.fechaDesde.value > this.formTarifa.controls.fechaHasta.value) {
+      this.toast.warning('Fecha inválida');
       this.datesValid = false;
       return;
     }
@@ -51,6 +54,7 @@ export class TarifaFormComponent implements OnInit {
         fechaDesde: this.convertDateFormat(this.formTarifa.controls.fechaDesde.value),
         fechaHasta: this.convertDateFormat(this.formTarifa.controls.fechaHasta.value)
         };
+      this.submitted = false;
       if (this.new) {
         this.newTarifaEvent.emit(this.tarifa);
       } else {
