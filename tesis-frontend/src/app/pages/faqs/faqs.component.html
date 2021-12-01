@@ -40,12 +40,30 @@
             <div class="accordion-item">
               <h2 class="accordion-header" id="inscripcion">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInscripcion" aria-expanded="false" aria-controls="collapseInscripcion">
-                  ¿Cómo me inscribo a un congreso?
+                  ¿Cómo me inscribo a un congreso con pago virtual?
                 </button>
               </h2>
               <div id="collapseInscripcion" class="accordion-collapse collapse" aria-labelledby="inscripcion" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  Para inscribirte a un congreso, deberás tener iniciada tu sesión en Congressity.
+                  <p>
+                  Luego de iniciar sesión, en la parte inferior de la pantalla principal del sistema, podremos ver los
+                  congresos activos del sistema en este momento. </p>
+                  <p>
+                  Cada “carta” muestra información importante y simplificada del congreso (fechas), y entre las
+                  opciones que tenemos, podemos presionar el botón “Inscribirse” para dar inicio al proceso de
+                  inscripción.
+                </p>
+                  <p>
+                    Una vez iniciado el proceso de inscripción, nos redirige a la pantalla de inscripción. Allí se muestra el
+precio de la tarifa actual. <br>
+Además, brinda la posibilidad de ingresar un código alfanumérico, para obtener un cupon de
+descuento sobre la entrada. <br>
+Para finalizar el proceso de inscripcion presionamos en el botón “Inscribirme”
+                  </p>
+                  <p>En el siguiente paso, usted ya se encuentra inscripto al congreso, y se brinda la posibilidad de pagar
+                    la entrada de manera virtual, utilizando el servicio de MercadoPago. <br>
+                    Al presionar “Continuar al pago”, será redirigido hacia la aplicación web de mercadopago en donde
+                    podrá realizar el pago de su inscripción.</p>
                 </div>
               </div>
             </div>
@@ -110,7 +128,7 @@
               <div class="accordion-item" *ngIf="rol.includes(1)">
                 <h2 class="accordion-header" id="agenda">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAgenda" aria-expanded="false" aria-controls="collapseAgenda">
-                    ¿Cómo defino la agenda de mi congreso?
+                    ¿Cómo defino las fechas importantes de mi congreso?
                   </button>
                 </h2>
                 <div id="collapseAgenda" class="accordion-collapse collapse" aria-labelledby="agenda" data-bs-parent="#accordionExample">
@@ -217,6 +235,115 @@
                 </div>
                 </div>
               </div>
+              <!-- Definición de Sedes - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="sede">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSede" aria-expanded="false" aria-controls="collapseSede">
+                    ¿Cómo defino las sedes de un congreso?
+                  </button>
+                </h2>
+                <div id="collapseSede" class="accordion-collapse collapse" aria-labelledby="sede" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Sedes. <br>
+                    Allí se te mostrarán las sedes con su nombre, dirección y localidad. <br>
+                    Para crear una nueva sede, debe presionar en el botón “Nueva sede”. Se abrirá un formulario solicitando el nombre de la sede, la provincia, la localidad, y su dirección (
+calle y número)
+                  
+                  </p>
+                </div>
+                </div>
+              </div>
+              <!-- Definición de Agenda - Cronograma del Congreso - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="definicionAgendaEvento">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDefinicionAgendaEvento" aria-expanded="false" aria-controls="collapseDefinicionAgendaEvento">
+                    ¿Cómo defino la agenda o cronograma del evento?
+                  </button>
+                </h2>
+                <div id="collapseDefinicionAgendaEvento" class="accordion-collapse collapse" aria-labelledby="definicionAgendaEvento" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Agenda. <br>
+                    Se visualizará en la pantalla con un combo para seleccionar Aulas. <br>
+                    <img src="../../../assets/imgs/FAQ - agendaEvento.jpg" class="img-fluid rounded">
+                    Luego de seleccionar un aula, podrá visualizar un calendario. Allí podrá presionar cualquier horario en el que desee ubicar un determinado evento para crearlo.
+                    <img src="../../../assets/imgs/FAQ - calendario.jpg" class="img-fluid rounded">
+                    Luego de presionar en el horario donde desee ubicar su evento (exposición de artículo) se abrirá un formulario como el siguiente:
+                    <img src="../../../assets/imgs/FAQ - nuevoEventoAgenda.jpg" class="img-fluid rounded">
+
+
+                  </p> 
+                </div>
+                </div>
+              </div>
+              <!-- Estadísticas  -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="estadisticas">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEstadisticas" aria-expanded="false" aria-controls="collapseEstadisticas">
+                    ¿Qué estadísticas puedo consultar?
+                  </button>
+                </h2>
+                <div id="collapseEstadisticas" class="accordion-collapse collapse" aria-labelledby="estadisticas" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Para consultar las diferentes estadísticas, ingresá a la sección Estadísticas.
+                    Allí podrás consultar:
+                    <li>Top Evaluadores</li>
+                    <li>Top Simposios por Congreso</li>
+                    <li>Top Simposios General</li>
+                    <li>Top Simposios por Evaluadores</li>
+                    <li>Grupo Etario por Congreso</li>
+                    <li>Participantes por sede</li>
+                    <li>Calificaciones por simposio</li>
+                    <li>Top Eventos</li>
+                    <li>Cancelaciones por evaluadores general</li>
+                    <li>Cancelaciones por evaluador por congreso</li>
+                    <li>Estado Artículos</li>
+                  </p> 
+                </div>
+                </div>
+              </div>
+              <!-- Reportes -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="reportes">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReportes" aria-expanded="false" aria-controls="collapseReportes">
+                    ¿Qué reportes se pueden generar?
+                  </button>
+                </h2>
+                <div id="collapseReportes" class="accordion-collapse collapse" aria-labelledby="reportes" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Para generar los diferentes reportes, ingresá a la sección Reportes.
+                    Allí podrás consultar:
+                    <li>Reporte de Eventos</li>
+                    <li>Reporte de Evaluadores</li>
+                    <li>Reporte de Articulos</li>
+                    <li>Reporte de Asistentes</li>
+                    <li>Reporte de Expositores</li>
+                  </p> 
+                </div>
+                </div>
+              </div>
+               <!-- Certificados -->
+               <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="certificados">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCertificados" aria-expanded="false" aria-controls="collapseCertificados">
+                    ¿Cómo genero un nuevo certificado?
+                  </button>
+                </h2>
+                <div id="collapseCertificados" class="accordion-collapse collapse" aria-labelledby="certificados" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Certificados. <br>
+                    Allí se mostrará un listado de los certificados, incluyendo nombre y descripción. <br>
+                    Para generar un nuevo certificado, hacé click en Nuevo. <br>
+                    Se te mostrará un formulario solicitando nombre, descripción y un archivo.
+                  </p> 
+                </div>
+                </div>
+              </div>
+
 
 
               <!-- CHAIR SECUNDARIO -->
