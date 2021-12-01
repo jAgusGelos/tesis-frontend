@@ -12,8 +12,8 @@
                 <label for="codigo" class="form-label">Código <span id="code-valid" class="form-text"></span></label>
                 <input type="text" id="code" class="form-control" formControlName="codigo"
                 [ngClass]="{'is-invalid': submitted && formCupon.controls.codigo.errors}" onClick="this.select();">
-                <div class="form-text label-subtitle">Solo letras y números sin espacios.</div>
-                <div><a class="btn btn-primary" (click)='validarCodigo()' role="button">Verificar código</a></div>
+                <div *ngIf="new" class="form-text label-subtitle">Solo letras y números sin espacios.</div>
+                <div *ngIf="new"><a class="btn btn-primary" (click)='validarCodigo()' role="button">Verificar código</a></div>
             </div>
         </div>
         <!-- Tarifa -->
