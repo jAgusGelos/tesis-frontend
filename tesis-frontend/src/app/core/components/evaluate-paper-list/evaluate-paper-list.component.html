@@ -31,10 +31,7 @@
         <td *ngIf='item.estado < 3'>
           <a (click)='toggleEvaluate(item)' title='Evaluar'><i class="fas fa-pencil-alt fa-lg"></i></a>
           &nbsp;&nbsp;
-          <a data-bs-toggle="dropdown" title="Más Opciones"><i class="fas fa-ellipsis-h"></i></a>
-            <ul class="dropdown-menu">
-              <li><a (click)='toggleCancel(item)'class="dropdown-item" routerLink="/">Rechazar Evaluación</a></li>
-            </ul>
+          <a (click)='toggleCancel(item)' title='Evaluar'><i class="fas fa-trash-alt fa-lg"></i></a>
         </td>
         <td *ngIf='item.estado >= 3'>
 

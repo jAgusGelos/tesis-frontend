@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-evaluate-paper-list',
@@ -14,7 +16,7 @@ export class EvaluatePaperListComponent implements OnInit {
   showList = [];
 
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -28,7 +30,18 @@ export class EvaluatePaperListComponent implements OnInit {
     this.EvaluationAcceptEvent.emit(item);
   }
   toggleCancel(item: any): void {
-    this.EvaluationCancelEvent.emit(item);
+    this.toastr
+    .show( 'Esta seguro que desea rechazar la evaluación de ' + item.nombreArticulo + '\nEsto repercutirá en su calificación como evaluador', 'Rechazar evaluación', {
+      toastComponent: CustomToastComponent,
+      disableTimeOut: true,
+      tapToDismiss: false,
+      enableHtml: true
+    })
+    .onAction.subscribe(() => {
+      // Aca se hace el camino feliz
+      this.EvaluationCancelEvent.emit(item);
+
+    });
   }
 
   search(filterList): void {
