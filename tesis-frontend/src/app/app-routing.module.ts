@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/services/auth.guard';
+import { AyudanteGuard } from './core/services/guards/ayudante.guard';
 import { SuperRolGuard } from './core/services/guards/super-rol.guard';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -246,6 +247,13 @@ const routes: Routes = [
     path: 'cancelacionEvaluacionPaper/:token',
     loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper.module')
     .then(m => m.CancelEvaluatePaperModule)
+  },
+  {
+    path: 'verificarEntrada/:token',
+    loadChildren: () => import('./pages/emails/ok-inscription/ok-inscription.module')
+    .then(m => m.OkInscriptionModule),
+    canActivate: [AyudanteGuard]
+
   },
 /*   {
     path: 'comiteAcademico/:id',
