@@ -32,6 +32,7 @@ export class AgendaComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    console.log(this.schedule);
     this.formCongress = this.formBuilder.group({
       congreso: ['', [Validators.required]],
       FechaInCongreso: [this.schedule.fechaInCongreso ? this.invertConvertDateFormat(this.schedule.fechaInCongreso) : null,
@@ -56,9 +57,9 @@ export class AgendaComponent implements OnInit {
          [Validators.required]],
       FechaFinReEv: [this.schedule.fechaFinReEv ? this.invertConvertDateFormat(this.schedule.fechaFinReEv) : null,
          [Validators.required]],
-      FechaInicioExposiciones: [this.schedule.fechaInicioExposiciones ? this.invertConvertDateFormat(this.schedule.FechaInicioExposiciones) : null,
+      FechaInicioExposiciones: [this.schedule.fechaInicioExposiciones ? this.invertConvertDateFormat(this.schedule.fechaInicioExposiciones) : null,
           [Validators.required]],
-      FechaFinExposiciones: [this.schedule.fechaFinExposiciones ? this.invertConvertDateFormat(this.schedule.FechaFinExposiciones) : null,
+      FechaFinExposiciones: [this.schedule.fechaFinExposiciones ? this.invertConvertDateFormat(this.schedule.fechaFinExposiciones) : null,
           [Validators.required]]
     });
   }
