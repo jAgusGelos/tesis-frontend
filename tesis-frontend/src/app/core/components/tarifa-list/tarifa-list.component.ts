@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ITarifa } from '../../models/ITarifa';
+import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
   selector: 'app-tarifa-list',
@@ -15,7 +17,7 @@ export class TarifaListComponent implements OnInit {
   message = {header: '', body: ''};
   selectedItem: ITarifa = null;
 
-  constructor() { }
+  constructor(private toast: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -29,13 +31,15 @@ export class TarifaListComponent implements OnInit {
   }
 
   toggleRemoveHandled(item: any): void {
-    this.eliminarTarifaEvent.emit(item.id);
-  }
-
-  modalDelete(item): void {
-    this.selectedItem = item;
-    this.message.header = 'Aviso';
-    this.message.body = '¿Seguro que desea eliminar la tarifa ' + item.nombre + '?';
-    document.getElementById('modal-delete-btn').click();
+    this.toast
+      .show( '¿Seguro que desea eliminar la tarifa ' + item.nombre + '?', 'Eliminar Tarifa', {
+        toastComponent: CustomToastComponent,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        enableHtml: true
+      })
+      .onAction.subscribe(() => {
+        this.eliminarTarifaEvent.emit(item.id);
+      });
   }
 }

@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
   <div class="contenidos">
     <hr>
@@ -10,28 +9,27 @@
       <form [formGroup]='formAssignSecChairs'>
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Asignar chair a simposio</h5>
-                <br>
-                <label for="selectChair">Usuario: </label>
-                <div>
+                <div class="mb-3">
+                  <h5 class="card-title">Asignar chair a simposio</h5>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="selectChair">Usuario</label>
                   <select name="chair" class="form-select" formControlName="selectChair"
-                    [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectChair.touched || submitted) && formAssignSecChairs.controls.selectChair.errors}">
+                    [ngClass]="{'is-invalid': submitted && formAssignSecChairs.controls.selectChair.errors}">
                     <option hidden selected>Seleccione un chair a asignar</option>
                     <option *ngFor="let chair of chairsNotAssigned" value={{chair.id}}>{{ chair.nombre }} {{chair.apellido}} - {{ chair.email }}</option>
                   </select>
                 </div>
-                <br>
-                <label for="selectTematica">Simposio: </label>
-                <div>
+                <div class="mb-3">
+                  <label class="form-label" for="selectTematica">Simposio</label>
                   <select name="chair" class="form-select" formControlName="selectTematica"
-                    [ngClass]="{'is-invalid': (formAssignSecChairs.controls.selectTematica.touched || submitted) && formAssignSecChairs.controls.selectTematica.errors}">
+                    [ngClass]="{'is-invalid': submitted && formAssignSecChairs.controls.selectTematica.errors}">
                     <option hidden selected>Seleccione una simposio</option>
                     <option *ngFor="let theme of tematicas" value={{theme.id}}>{{ theme.descripcion }}</option>
                   </select>
                 </div>
-                <br>
-                <div class="row justify-content-md-end">
-                  <a type="button" class="btn btn-primary col-sm-3" (click)="asignarChair() ">Asignar <i class="fas fa-plus"></i></a>
+                <div class="text-end">
+                  <a type="button" class="btn btn-primary col-md-3" (click)="asignarChair()">Asignar <i class="fas fa-plus"></i></a>
                 </div>
               </div>
             </div>
@@ -62,9 +60,7 @@
                 <td>{{chair.nombreChair}} {{chair.apellidoChair}}</td>
                 <td>{{chair.nombreSimposio}}</td>
                 <td>
-                  <div class="btn-group col-md-3">
-                    <a (click)='toggleRemoveHandled(chair)' title='Eliminar'><i class="fas fa-trash"></i></a>
-                  </div>
+                  <a (click)='toggleRemoveHandled(chair)' title='Eliminar'><i class="fas fa-trash fa-lg"></i></a>
                 </td>
               </tr>
             </tbody>
