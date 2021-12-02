@@ -56,9 +56,9 @@ export class AgendaComponent implements OnInit {
          [Validators.required]],
       FechaFinReEv: [this.schedule.fechaFinReEv ? this.invertConvertDateFormat(this.schedule.fechaFinReEv) : null,
          [Validators.required]],
-      FechaInicioExposiciones: [this.schedule.FechaInicioExposiciones ? this.invertConvertDateFormat(this.schedule.FechaInicioExposiciones) : null,
+      FechaInicioExposiciones: [this.schedule.fechaInicioExposiciones ? this.invertConvertDateFormat(this.schedule.FechaInicioExposiciones) : null,
           [Validators.required]],
-      FechaFinExposiciones: [this.schedule.FechaFinExposiciones ? this.invertConvertDateFormat(this.schedule.FechaFinExposiciones) : null,
+      FechaFinExposiciones: [this.schedule.fechaFinExposiciones ? this.invertConvertDateFormat(this.schedule.FechaFinExposiciones) : null,
           [Validators.required]]
     });
   }
