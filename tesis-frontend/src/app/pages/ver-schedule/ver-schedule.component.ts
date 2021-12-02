@@ -218,7 +218,7 @@ export class VerScheduleComponent implements OnInit {
 
   getRooms(): void {
     this.roomService.getRoomsId(this.idCongress).subscribe((res: any) => {
-      this.roomList = res.data[0];
+      this.roomList = res.data;
     });
   }
 
