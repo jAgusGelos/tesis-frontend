@@ -4,6 +4,10 @@
     <h3 class='text-center'>Congresos Activos</h3>
     <hr>
   </div>
+  <div class="row justify-content-md-end">
+    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo Congreso</a>
+  </div>
+  <br>
   <table class="table text-center table-hover table-bordered">
     <thead class='thead'>
       <tr>
@@ -15,17 +19,19 @@
     </thead>
 
     <tbody>
-      <tr class='align-items-center'*ngFor='let item of congressList'>
+      <tr class='align-items-center align-middle'*ngFor='let item of congressList'>
         <td>{{item.nombre_sede}}</td>
         <td>{{item.nombre}}</td>
         <td>{{item.ano}}</td>
         <td>
-          <div class="btn-group col-md-3">
-          <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
-          &nbsp;
-          &nbsp;
-          &nbsp;
+          <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group" role="group" aria-label="Editar">
+            <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="btn-group" role="group" aria-label="Eliminar">
           <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
+          </div>
         </div>
       </td>
       </tr>
@@ -33,9 +39,7 @@
   </table>
 
   <br>
-  <div class="row justify-content-md-end">
-    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo Congreso</a>
-  </div>
+
 
 
 </div>

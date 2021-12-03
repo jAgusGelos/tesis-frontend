@@ -22,7 +22,6 @@
 }
 
 i{
-  padding-top: 0.5rem;
   cursor: pointer;
 }
 
@@ -32,7 +31,7 @@ i:hover{
 
 .fas{
   font-size: 1.25rem;
-  color: #00609C;
+  color: #3CAFE0;
 }
 
 hr{

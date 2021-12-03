@@ -1,4 +1,5 @@
 
+
 .card-title{
   font-weight:300;
 }
@@ -26,7 +27,7 @@
 .card {
   margin-left: auto;
   margin-right: auto;
-  border-radius: 3rem;
+  border-radius: 1.5rem;
   padding-bottom: 2rem;  margin-bottom: 1rem;
   margin-top: 1rem;
   background-color: #F4F4F4;
@@ -36,6 +37,7 @@
 
 .login-form{
   width:100%;
+
 }
 
 .form-group{
@@ -63,13 +65,13 @@ a{
 
 hr {
   border:#00609C solid 1px;
-
 }
+
 
 input{
-  border: none;
   border-bottom: 1px solid #f4f4f4 ;
 }
+
 
 @media (min-width: 768px) {
   .card{
@@ -87,6 +89,10 @@ input{
   }
 
  }
-
+#registro{
+  margin-left: 15%;
+  margin-right: 15%;
+  border:#00609C 0.1px ;
+}
 
 
