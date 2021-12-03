@@ -6,7 +6,9 @@
   </div>
   <br>
   <div class="row justify-content-md-end">
-    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo</a>
+    <a class="btn btn-primary col-sm-2" (click)='toggleNew()' role="button">Nuevo</a>
+    &nbsp;
+    <a class="btn btn-primary col-sm-2" (click)='sendAll()' role="button">Enviar Certificados</a>
   </div>
 
   <div class="row">
@@ -16,14 +18,18 @@
   <table class="table text-center table-hover table-bordered" *ngIf="certList.length > 0">
     <thead class='thead'>
       <tr>
-        <th class="col-md-5">Nombre</th>
-        <th class="col-md-5">Descripción</th>
+        <th class="col-md-2">Seleccione Rol</th>
+        <th class="col-md-4">Nombre</th>
+        <th class="col-md-4">Descripción</th>
         <th class="col-md-2">Acciones</th>
       </tr>
     </thead>
 
     <tbody>
       <tr class='align-items-center' *ngFor='let item of showList'>
+        <td>
+
+        </td>
         <td>{{item.nombre | titlecase}}</td>
         <td>{{item.descripcion}}</td>
 

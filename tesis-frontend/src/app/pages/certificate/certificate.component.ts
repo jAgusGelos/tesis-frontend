@@ -24,6 +24,7 @@ export class CertificateComponent implements OnInit {
   list = false;
   form = false;
   game = false;
+  send = false;
 
   ngOnInit(): void {
     this.getCertificates();
@@ -91,6 +92,16 @@ export class CertificateComponent implements OnInit {
     this.list = true;
     this.form = false;
     this.game = false;
+  }
+
+  sendAllCertEvent(): void {
+    this.list = false;
+    this.send = true;
+  }
+
+  cancelCertsSend(): void {
+    this.send = false;
+    this.list = true;
   }
 
   guardarGrafo(item: any): void {

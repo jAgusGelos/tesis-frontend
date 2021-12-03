@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { CertificateService } from '../../services/certificate.service';
 import { CustomToastComponent } from '../custom-toast/custom-toast.component';
 
 @Component({
@@ -13,9 +14,10 @@ export class CertificateTemplateListComponent implements OnInit {
   @Output() editCertEvent = new EventEmitter();
   @Output() deleteCertEvent = new EventEmitter();
   @Output() gameCertEvent = new EventEmitter();
-
   @Output() newCertEvent = new EventEmitter();
+  @Output() sendAllCertEvent = new EventEmitter();
   showList: any[];
+
 
   constructor( private toastr: ToastrService ) { }
 
@@ -31,6 +33,7 @@ export class CertificateTemplateListComponent implements OnInit {
   toggleNew(): void {
     this.newCertEvent.emit();
   }
+
 
   toggleRemoveHandled(item: any): void {
     this.toastr
@@ -54,4 +57,10 @@ export class CertificateTemplateListComponent implements OnInit {
   search(filterList): void {
     this.showList = filterList;
   }
+
+
+  sendAll(): void {
+    this.sendAllCertEvent.emit();
+  }
+
 }

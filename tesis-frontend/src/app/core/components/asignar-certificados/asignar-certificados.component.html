@@ -1,0 +1,137 @@
+<div class="card">
+  <div class="card-body">
+    <div class="contenidos">
+      <hr>
+      <h3 class="card-title text-center"><b>Seleccione Certificado para cada Rol</b></h3>
+      <hr>
+    </div>
+    <div class="card-text text-center">
+      <form [formGroup]='formCert'>
+         <!-- Certificado Evaluadores -->
+         <div class='form-group row justify-content-center'>
+          <label class='col-form-label col-md-3 col-md-3 col-sm-offset-2' for='idCertificadoEvaluadores'>Certificado Evaluadores: <span
+              class='text-danger'>*</span></label>
+          <div class='col-md-6  col-sm-12'>
+            <select class='form-select col-sm-4' name="simposio" formControlName="idCertificadoEvaluadores" [ngClass]="{'is-invalid': submitted && formCert.controls.idCertificadoEvaluadores.value === ''
+        && formCert.controls.idCertificadoEvaluadores.errors}">
+              <option selected disabled></option>
+              <option *ngFor="let opt of certList" value={{opt.id}}>
+                ‌{{ opt.nombre }}
+              </option>
+            </select>
+            <span class='text-danger'
+              *ngIf='submitted && formCert.controls.idCertificadoEvaluadores.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
+                 <!-- Certificado Asistentes -->
+                 <div class='form-group row justify-content-center'>
+                  <label class='col-form-label col-md-3 col-md-3 col-sm-offset-2' for='idCertificadoAsistentes'>Certificado Asistentes: <span
+                      class='text-danger'>*</span></label>
+                  <div class='col-md-6  col-sm-12'>
+                    <select class='form-select col-sm-4' name="simposio" formControlName="idCertificadoAsistentes" [ngClass]="{'is-invalid': submitted && formCert.controls.idCertificadoAsistentes.value === ''
+                && formCert.controls.idCertificadoAsistentes.errors}">
+                      <option selected disabled></option>
+                      <option *ngFor="let opt of certList" value={{opt.id}}>
+                        ‌{{ opt.nombre }}
+                      </option>
+                    </select>
+                    <span class='text-danger'
+                      *ngIf='submitted && formCert.controls.idCertificadoAsistentes.errors?.required'>
+                      Requerido
+                    </span>
+                  </div>
+                </div>
+
+                         <!-- Certificado Autores -->
+         <div class='form-group row justify-content-center'>
+          <label class='col-form-label col-md-3 col-md-3 col-sm-offset-2' for='idCertificadoAutores'>Certificado Autores: <span
+              class='text-danger'>*</span></label>
+          <div class='col-md-6  col-sm-12'>
+            <select class='form-select col-sm-4' name="simposio" formControlName="idCertificadoAutores" [ngClass]="{'is-invalid': submitted && formCert.controls.idCertificadoAutores.value === ''
+        && formCert.controls.idCertificadoAutores.errors}">
+              <option selected disabled></option>
+              <option *ngFor="let opt of certList" value={{opt.id}}>
+                ‌{{ opt.nombre }}
+              </option>
+            </select>
+            <span class='text-danger'
+              *ngIf='submitted && formCert.controls.idCertificadoAutores.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
+                 <!-- Certificado ChairPpal -->
+                 <div class='form-group row justify-content-center'>
+                  <label class='col-form-label col-md-3 col-md-3 col-sm-offset-2' for='idCertificadoChairPpal'>Certificado ChairPpal: <span
+                      class='text-danger'>*</span></label>
+                  <div class='col-md-6  col-sm-12'>
+                    <select class='form-select col-sm-4' name="simposio" formControlName="idCertificadoChairPpal" [ngClass]="{'is-invalid': submitted && formCert.controls.idCertificadoChairPpal.value === ''
+                && formCert.controls.idCertificadoChairPpal.errors}">
+                      <option selected disabled></option>
+                      <option *ngFor="let opt of certList" value={{opt.id}}>
+                        ‌{{ opt.nombre }}
+                      </option>
+                    </select>
+                    <span class='text-danger'
+                      *ngIf='submitted && formCert.controls.idCertificadoChairPpal.errors?.required'>
+                      Requerido
+                    </span>
+                  </div>
+                </div>
+
+                         <!-- Certificado CharSec -->
+         <div class='form-group row justify-content-center'>
+          <label class='col-form-label col-md-3 col-md-3 col-sm-offset-2' for='idCertificadoCharSec'>Certificado CharSec: <span
+              class='text-danger'>*</span></label>
+          <div class='col-md-6  col-sm-12'>
+            <select class='form-select col-sm-4' name="simposio" formControlName="idCertificadoCharSec" [ngClass]="{'is-invalid': submitted && formCert.controls.idCertificadoCharSec.value === ''
+        && formCert.controls.idCertificadoCharSec.errors}">
+              <option selected disabled></option>
+              <option *ngFor="let opt of certList" value={{opt.id}}>
+                ‌{{ opt.nombre }}
+              </option>
+            </select>
+            <span class='text-danger'
+              *ngIf='submitted && formCert.controls.idCertificadoCharSec.errors?.required'>
+              Requerido
+            </span>
+          </div>
+        </div>
+
+                 <!-- Certificado Expositores -->
+                 <div class='form-group row justify-content-center'>
+                  <label class='col-form-label col-md-3 col-md-3 col-sm-offset-2' for='idCertificadoExpositores'>Certificado Expositores: <span
+                      class='text-danger'>*</span></label>
+                  <div class='col-md-6  col-sm-12'>
+                    <select class='form-select col-sm-4' name="simposio" formControlName="idCertificadoExpositores" [ngClass]="{'is-invalid': submitted && formCert.controls.idCertificadoExpositores.value === ''
+                && formCert.controls.idCertificadoExpositores.errors}">
+                      <option selected disabled></option>
+                      <option *ngFor="let opt of certList" value={{opt.id}}>
+                        ‌{{ opt.nombre }}
+                      </option>
+                    </select>
+                    <span class='text-danger'
+                      *ngIf='submitted && formCert.controls.idCertificadoExpositores.errors?.required'>
+                      Requerido
+                    </span>
+                  </div>
+                </div>
+
+
+        <div class="row justify-content-md-center btn-row">
+          <a class="btn btn-secondary col-md-4" (click)='cancel()' role="button">Cancelar</a>
+          &nbsp;
+          <a class="btn btn-primary col-md-4" role="button" (click)="submit()">Enviar Certificados</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

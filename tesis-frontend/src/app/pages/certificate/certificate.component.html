@@ -4,7 +4,9 @@
   (deleteCertEvent)="deleteCertificate($event)"
   (editCertEvent)="editCert($event)"
   (gameCertEvent)="playCertEvent($event)"
+  (sendAllCertEvent)="sendAllCertEvent()"
   [certList]="certList"
+
 ></app-certificate-template-list>
 <app-certificate-template-form
   *ngIf="form"
@@ -19,4 +21,10 @@
   (guardarGrafoEvent)="guardarGrafo($event)"
   (verGrafoEvent)="verGrafo($event)"
 ></app-certificate-detail-form>
+
+<app-asignar-certificados
+*ngIf="send"
+ (cancelCertEmitter)="cancelCertsSend()"
+ [certList]="certList"
+></app-asignar-certificados>
 
