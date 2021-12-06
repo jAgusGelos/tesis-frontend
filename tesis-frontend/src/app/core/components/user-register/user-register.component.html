@@ -3,11 +3,11 @@
   <h3 class="card-title text-center"><b>Registro</b></h3>
   <hr>
 </div>
-<div class="container">
+<form class="container" [formGroup]='formUsuario'>
   <div class="row mb-3">
     <div class="card col-md-6 offset-3">
-      <h3 class="card-title"><b>Cuenta</b></h3>
       <div class="card-body">
+        <h3 class="card-title"><b>Cuenta</b></h3>
         <div class="row mb-3">
           <label class="form-label" for="email">Email<span class="text-danger">*</span></label>
           <div class="col-sm-12">
@@ -32,12 +32,10 @@
       </div>
     </div>
   </div>  
-</div>
-<div class="container">
   <div class="row mb-3">
     <div class="card col-md-6 offset-3">
-      <h3 class="card-title"><b>Datos Personales</b></h3>
       <div class="card-body">
+        <h3 class="card-title"><b>Datos Personales</b></h3>
         <div class="row mb-3">
           <label class="form-label" for="nombre">Nombre<span class="text-danger">*</span></label>
           <div class="col-sm-12">
@@ -83,7 +81,7 @@
         <div class="row mb-3">
           <div class="col-sm-6">
             <label class="form-label" for="provincia">Provincia<span class="text-danger">*</span></label>
-            <select name="provincia" class="form-select" formControlName="provincia" 
+            <select name="provincia" class="form-select" formControlName="provincia" (change)="getLocalidades($event.target.value)"
             [ngClass]="{'is-invalid': submitted && formUsuario.controls.provincia.errors}">
               <option *ngFor="let opt of provincias" value={{opt.id}}>
                 ‌{{ opt.nombre }}
@@ -123,7 +121,7 @@
           </div>
         </div>
         <div class="row mb-3">
-          <label class="col-form-label col-sm-3" for="sede">Sede<span class="text-danger">*</span></label>
+          <label class="form-label" for="sede">Sede<span class="text-danger">*</span></label>
           <div class="col-sm-12">
             <select name="sede" class="form-select" formControlName="sede" 
             [ngClass]="{'is-invalid': submitted && formUsuario.controls.sede.errors}">
@@ -141,4 +139,4 @@
     &nbsp;&nbsp;
     <a class="btn btn-primary col-md-3" (click)='submit()' role="button">Registrarse</a>
   </div>
-</div>
+</form>

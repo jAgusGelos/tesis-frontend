@@ -1,27 +1,27 @@
-@media (min-width: 768px) {
-  hr{
-    margin-left: 25%;
-    margin-right: 25%;
-    border:#00609C solid 1px;
-  }
+.card{
+  background-color: #FFFF;
+  border-radius: 1rem;
 }
 
-.contenidos{
-  background-color: #F4F4F4;
+hr{
+  border-top: 1px solid #00609C;
+  border-bottom:  1px solid #00609C;
 }
 
-.form-group{
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+.card-title{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 300;
+  max-width: fit-content;
 }
 
-.input{
+.btn{
   border: none;
 }
 
 .btn-primary{
   background-color: #3CAFE0;
-  border: none;
 }
 
 .btn-primary:hover{
