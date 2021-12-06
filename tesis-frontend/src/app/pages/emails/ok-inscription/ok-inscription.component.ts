@@ -20,7 +20,7 @@ export class OkInscriptionComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.route.snapshot.params.token;
-    this.service.acceptInscription('?token=' + this.token).subscribe(
+    this.service.acceptInscription(this.token).subscribe(
       (res: any) => this.accepted = true,
       (err: any) => {
         this.rejected = true;

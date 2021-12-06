@@ -232,8 +232,8 @@ Boton oculto
             <label class='col-form-label col-sm-2 col-sm-offset-2' for='desc'>Descripción: <span
                 class='text-danger'>*</span></label>
             <div class='col-sm-6'>
-              <input type='text' class='form-control' formControlName='desc' disabled [ngClass]="{'is-invalid': (formEvento.controls.desc.touched || submitted)
-                  && formEvento.controls.desc.errors}" onclick='this.select()' />
+              <textarea rows="8" type='text' class='form-control' formControlName='desc' disabled [ngClass]="{'is-invalid': (formEvento.controls.desc.touched || submitted)
+                  && formEvento.controls.desc.errors}" onclick='this.select()' > </textarea>
               <span class='text-danger'
                 *ngIf='(formEvento.controls.desc.touched || submitted) && formEvento.controls.desc.errors?.required'>
                 Requerido
@@ -360,8 +360,8 @@ Boton oculto
             <label class='col-form-label col-sm-2 col-sm-offset-2' for='desc'>Descripción: <span
                 class='text-danger'>*</span></label>
             <div class='col-sm-6'>
-              <input type='text' class='form-control' formControlName='desc' disabled [ngClass]="{'is-invalid': (formPlenaria.controls.desc.touched || submittedPlen)
-                  && formPlenaria.controls.desc.errors}" onclick='this.select()' />
+              <textarea rows="8" type='text' class='form-control' formControlName='desc' disabled [ngClass]="{'is-invalid': (formPlenaria.controls.desc.touched || submittedPlen)
+                  && formPlenaria.controls.desc.errors}" onclick='this.select()' > </textarea>
               <span class='text-danger'
                 *ngIf='(formPlenaria.controls.desc.touched || submittedPlen) && formPlenaria.controls.desc.errors?.required'>
                 Requerido

@@ -75,14 +75,14 @@ export class AsignarCertificadosComponent implements OnInit {
       return;
     }
 
-    const rolesXCertificados = [{
+    const rolesXCertificados = {
       idCertificadoEvaluadores: this.formCert.controls.idCertificadoEvaluadores.value,
       idCertificadoAsistentes: this.formCert.controls.idCertificadoAsistentes.value,
       idCertificadoAutores: this.formCert.controls.idCertificadoAutores.value,
       idCertificadoChairPpal: this.formCert.controls.idCertificadoChairPpal.value,
       idCertificadoCharSec: this.formCert.controls.idCertificadoCharSec.value,
       idCertificadoExpositores: this.formCert.controls.idCertificadoExpositores.value
-    }];
+    };
 
     this.certService.sendAllCertificates(rolesXCertificados).subscribe(
       (data) => {

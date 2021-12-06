@@ -88,7 +88,7 @@ export class UserService {
   }
 
   acceptInscription(item: string): any{
-    return this.httpClient.get(this.apiURL + 'inscripciones/registrar-asistencia/?token=' + item, {});
+    return this.httpClient.get(this.apiURL + 'inscripciones/registrar-asistencia/?token=' + item);
   }
 
 }
