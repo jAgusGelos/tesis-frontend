@@ -1,5 +1,5 @@
 .container-fluid{
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
 
 }
 
@@ -21,7 +21,6 @@
 }
 
 i{
-  padding-top: 1.5rem;
   cursor: pointer;
 }
 
@@ -31,7 +30,8 @@ i:hover{
 
 .fas{
   font-size: 1.25rem;
-  color: #00609C;
+  color: #3CAFE0;
+  
 }
 
 .fa{

@@ -5,11 +5,14 @@
     <hr>
   </div>
   <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
-  <div *ngIf="!new" class="row justify-content-md-end">
-    <a class="btn btn-primary col-sm-2" role="button" (click)="toggleNew()">Nuevo Evaluador</a>
-  </div>
-  <div *ngIf="new" class="row justify-content-md-end">
-    <form [formGroup]='formEvaluator' class="card col-md-4">
+  <div class="row justify-content-md-between">
+    <app-search class="col-md-5 justify-content-md-start" [fullList]='evaluatorsList' [attribFilter]='"nombre"' (listEvent)='search($event)'>
+    </app-search>
+ 
+  
+    <a *ngIf="!new" class="btn btn-primary col-md-3 justify-content-md-end" role="button" (click)="toggleNew()">Nuevo Evaluador</a>
+
+    <form *ngIf="new" [formGroup]='formEvaluator' class="card col-md-5 justify-content-md-end">
       <div class="card-body">
         <h5 class="card-title">Agregar Evaluador</h5>
         <p class="card-text">Se enviará un correo de invitación al usuario para que sea evaluador.</p>
@@ -24,13 +27,9 @@
         <a class="btn btn-primary" role="button" (click)="sendMail()">Enviar correo &nbsp; <i class="fas fa-envelope"></i></a>
       </div>
     </form>
-  </div>
-  <br>
-  <div class="row justify-content-md-center">
-    <app-search class="col-md-8" [fullList]='evaluatorsList' [attribFilter]='"nombre"' (listEvent)='search($event)'>
-    </app-search>
-  </div>
-  <div class="row">
+</div>
+  
+  
     <table class="table text-center table-hover table-bordered">
       <thead class='thead'>
         <tr>
@@ -40,7 +39,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class='align-items-center' *ngFor='let ev of showList; let i = index'>
+        <tr class='align-items-center align-middle' *ngFor='let ev of showList; let i = index'>
           <td>{{ev.nombre}}</td>
           <td>{{ev.email}}</td>
           <td>
@@ -50,5 +49,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
+ 
 </div>

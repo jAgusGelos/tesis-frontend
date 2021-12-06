@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/services/auth.guard';
+import { AyudanteGuard } from './core/services/guards/ayudante.guard';
 import { SuperRolGuard } from './core/services/guards/super-rol.guard';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -247,6 +248,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/emails/cancel-evaluate-paper/cancel-evaluate-paper.module')
     .then(m => m.CancelEvaluatePaperModule)
   },
+  {
+    path: 'verificarEntrada/:token',
+    loadChildren: () => import('./pages/emails/ok-inscription/ok-inscription.module')
+    .then(m => m.OkInscriptionModule),
+    canActivate: [AyudanteGuard]
+
+  },
 /*   {
     path: 'comiteAcademico/:id',
     loadChildren: () => import('./pages/comite-academico/comite-academico.module')
@@ -276,6 +284,11 @@ const routes: Routes = [
     path: 'pagoInscripcionFailure/:token',
     loadChildren: () => import('./pages/payment-windows/payment-failure/payment-failure.module')
     .then(m => m.PaymentFailureModule)
+  },
+  {
+    path:'preguntasFrecuentes',
+    loadChildren: () =>import('./pages/faqs/faqs.module')
+    .then(m => m.FaqsModule)
   }
 ];
 

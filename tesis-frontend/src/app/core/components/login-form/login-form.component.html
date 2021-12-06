@@ -6,10 +6,10 @@
       <h3 class="card-title text-center">Inicio de Sesión</h3>
       <hr>
     </div>
-    <div class="card-text text-center">
+    <div class="card-text">
       <form [formGroup]='formLogin'>
         <!--Email-->
-        <div class="form-group row justify-content-center">
+      <!--   <div class="form-group row justify-content-center">
           <label class="col-form-label col-sm-3 col-md-3 col-md-offset-2" for="email">Email: <span
               class="text-danger">*</span></label>
           <div class="col-sm-6">
@@ -20,10 +20,19 @@
               Requerido
             </span>
           </div>
+        </div> -->
+        <div class="form-floating mb-3 row mx-5">
+          <input type="email" class="form-control " id="floatingInput"  formControlName="email" placeholder="name@example.com"
+          [ngClass]="{'is-invalid': submitted && formLogin.controls.email.errors}" onclick="this.select()">
+          <span class="text-danger"
+              *ngIf="(submitted||formLogin.controls.email.touched )&& formLogin.controls.email.errors?.required">
+              Requerido
+            </span>
+          <label for="floatingInput">Email <span class="text-danger">*</span></label>
         </div>
 
         <!--Contraseña-->
-        <div class="form-group row justify-content-center">
+        <!-- <div class="form-group row justify-content-center">
           <label class="col-form-label col-sm-3  col-md-3 col-md-offset-2" for="password">Contraseña: <span
               class="text-danger">*</span></label>
           <div class="col-sm-6">
@@ -34,10 +43,18 @@
               Required
             </span>
           </div>
+        </div> -->
+        <div class="form-floating mb-3 row mx-5">
+          <input type="password" class="form-control" id="Password" formControlName="password" placeholder="Password"
+          [ngClass]="{'is-invalid': submitted && formLogin.controls.password.errors}" onclick="this.select()">
+          <span class="text-danger" *ngIf="(submitted||formLogin.controls.password.touched) && formLogin.controls.password.errors?.required">
+              Requerido
+            </span>
+          <label for="Password">Contraseña <span class="text-danger">*</span></label>
         </div>
 
         <!-- Congreso -->
-        <div class='form-group row justify-content-center'>
+    <!--     <div class='form-group row justify-content-center'>
           <label class='col-form-label col-md-3 col-md-3 col-sm-offset-2' for='idCongress'>Congreso: <span
               class='text-danger'>*</span></label>
           <div class='col-md-6  col-sm-12'>
@@ -53,16 +70,33 @@
               Requerido
             </span>
           </div>
-        </div>
+        </div> -->
 
+        <div class="form-floating row mx-5">
+          <select name="simposio" id="floatingSelect" class="form-select" aria-label="Floating label" formControlName="idCongress" [ngClass]="{'is-invalid': submitted && formLogin.controls.idCongress.value === ''
+          && formLogin.controls.idCongress.errors}">
+            <option selected disabled></option>
+            <option *ngFor="let opt of congressList" value={{opt.id}}>
+              ‌{{ opt.nombre }}
+            </option>
+          </select>
+          <span class='text-danger'
+              *ngIf='submitted && formLogin.controls.idCongress.errors?.required'>
+              Requerido
+            </span>
+          <label for="floatingSelect">Congreso <span class='text-danger'>*</span></label>
+
+        </div>
+  
         <div class="row justify-content-md-center pt-3">
-          <a class="btn btn-primary btn-block col-md-8" role="button" (click)='submit()'>Iniciar Sesión</a>
+          <a class="btn btn-primary btn-block col-md-6" role="button" (click)='submit()'>Iniciar Sesión</a>
           <br>
           <a class="text-center pb-3" href="/recuperarContraseña">¿Olvidaste tu contraseña?</a>
         </div>
+        <hr id="registro">
         <div class="row justify-content-md-center pt-3 spaced">
-          <hr>
-          <a class="btn btn-primary btn-block col-md-8" role="button" (click)="register()">Registrarse</a>
+          
+          <a class="btn btn-primary btn-block col-md-6" role="button" (click)="register()">Registrarse</a>
         </div>
 
       </form>

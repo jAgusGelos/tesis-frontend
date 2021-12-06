@@ -5,6 +5,15 @@
       border:#00609C solid 1px;
   }
 
+  .btn{
+    border: none;
+  }
+  
+  .btn-primary{
+    background-color: #3CAFE0 ;
+    margin-top: auto;
+    margin-bottom: auto;}
+    
   .container-fluid{
       padding: 5rem;
       background-color: #F4F4F4;

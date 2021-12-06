@@ -4,18 +4,17 @@
     <h3 class='text-center'>Plantilla de Evaluación</h3>
     <hr>
   </div>
-  <div class="row justify-content-md-end">
-    <a class="btn btn-primary col-sm-4" (click)='toggleNew()' role="button">Nuevo Criterio</a>
-  </div>
-  <br>
-  <div class="row">
+  <div class="row justify-content-md-between">
     <app-search
       class="col-md-5"
       [fullList]='evaluationList'
       [attribFilter]='"nombre"'
       (listEvent)='search($event)'
     ></app-search>
+
+    <a class="btn btn-primary col-sm-3" (click)='toggleNew()' role="button">Nuevo Criterio</a>
   </div>
+  
   <table class="table text-center table-hover table-bordered">
     <thead class='thead'>
       <tr>
@@ -26,17 +25,21 @@
     </thead>
 
     <tbody>
-      <tr class='align-items-center'*ngFor='let item of showList'>
+      <tr class='align-items-center align-middle'*ngFor='let item of showList'>
         <td>{{item.nombre}}</td>
         <td>{{item.descripcion}}</td>
         <td>
-          <div class="btn-group col-md-3">
+          <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group" role="group" aria-label="Editar">
           <a (click)='toggleEdit(item)' title='Editar'><i class="fas fa-pencil-alt"></i></a>
+        </div>
           &nbsp;
           &nbsp;
           &nbsp;
+          <div class="btn-group" role="group" aria-label="Eliminar">
           <a (click)='toggleRemoveHandled(item)' title='Eliminar'><i class="fas fa-trash"></i></a>
         </div>
+      </div>
       </td>
       </tr>
     </tbody>

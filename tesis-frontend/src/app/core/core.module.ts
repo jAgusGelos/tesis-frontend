@@ -51,6 +51,7 @@ import { CertificateTemplateListComponent } from './components/certificate-templ
 import { CertificateTemplateFormComponent } from './components/certificate-template-form/certificate-template-form.component';
 import { CertificateDetailFormComponent } from './components/certificate-detail-form/certificate-detail-form.component';
 import { AssistantListComponent } from './components/assistant-list/assistant-list.component';
+import { AsignarCertificadosComponent } from './components/asignar-certificados/asignar-certificados.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { AssistantListComponent } from './components/assistant-list/assistant-li
     AssistantListComponent,
     SedeListComponent,
     SedeFormComponent,
-    AsignarPaperEvaluadorListComponent
+    AsignarPaperEvaluadorListComponent,
+    AsignarCertificadosComponent
   ],
   imports: [
     CommonModule,
@@ -162,7 +164,8 @@ import { AssistantListComponent } from './components/assistant-list/assistant-li
     CertificateDetailFormComponent,
     AssistantListComponent,
     SedeListComponent,
-    SedeFormComponent
+    SedeFormComponent,
+    AsignarCertificadosComponent
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,0 +1,128 @@
+.container-fluid{
+    background-color: #F4F4F4;
+  
+  }
+  
+  .contenidos{
+    padding-bottom: 3rem;
+  }
+  
+  
+  .btn-primary{
+    background-color: #3CAFE0 ;
+    border: none;
+  }
+  .img {
+      height: 70%;
+      max-width: 70%;
+  }
+  .form-group{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  
+  i{
+    padding-top: 1.5rem;
+    cursor: pointer;
+  }
+  
+  i:hover{
+    color: blue;
+  }
+  
+  .fas{
+    font-size: 1.25rem;
+    color: #00609C;
+  }
+  
+  .fa{
+    font-size: 1.25rem;
+    color: #00609C;
+  }
+  
+  hr{
+    border:#00609C solid 1px;
+  }
+  
+  .wrapper-progressBar {
+    width: 100%;
+  }
+  
+  
+  .progressBar li {
+    list-style-type: none;
+    float: left;
+    width: 33%;
+    position: relative;
+    text-align: center;
+  }
+  
+  .progressBar li:before {
+    content: "";
+    line-height: 30px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px;
+    background-color: white;
+  }
+  
+  .progressBar li:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #ddd;
+    top: 15px;
+    left: -50%;
+    z-index: -1;
+  }
+  
+  .progressBar li:first-child:after {
+    content: none;
+  }
+  
+  .progressBar li.active {
+    color: #3CAFE0;
+  }
+  
+  .progressBar li.active:before {
+    border-color: #3CAFE0;
+    background-color: #3CAFE0
+  }
+  
+  .progressBar .active:after {
+    background-color: #3CAFE0;
+  }
+  
+  .marked {
+    border-color: #00609C;
+    border-width: 0.5rem;
+  }
+  
+  a{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+  }
+  
+  @media (min-width: 768px) {
+    hr{
+      margin-left: 25%;
+      margin-right: 25%;
+  
+    }
+  
+    .container-fluid{
+      padding: 5rem;
+    }
+   }
+  
+   .spinner-border{
+     padding: 1rem;
+   }
+  
+  

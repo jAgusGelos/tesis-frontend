@@ -4,18 +4,16 @@
       <h3 class='text-center'>Sedes</h3>
       <hr>
     </div>
-    <div class="text-end">
-      <a class="btn btn-primary col-sm-2" role="button" (click)="toggleNew()">Nueva Sede</a>
-    </div>
-    <br>
-    <div class="row">
-        <app-search
-        class="col-md-5"
+    <div class="row justify-content-md-between">
+      <app-search
+        class="col-md-5 justify-content-md-start"
         [fullList]='sedeList'
         [attribFilter]='"nombre"'
         (listEvent)='search($event)'>
         </app-search>
+      <a class="btn btn-primary col-md-2 justify-content-md-end" role="button" (click)="toggleNew()">Nueva Sede</a>
     </div>
+    
     <table class="table text-center table-hover table-bordered">
         <thead class='thead'>
         <tr>
@@ -26,13 +24,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr class='align-items-center'*ngFor='let item of showList'>
+        <tr class='align-items-center align-middle'*ngFor='let item of showList'>
             <td>{{item.nombre}}</td>
             <td>{{item.direccion}} {{item.numero == 0 ? '' : item.numero}}</td>
             <td>{{item.nombreLocalidad}}</td>
             <td>
               <a title='Editar' role="button" (click)="toggleEdit(item)"><i class="fas fa-pencil-alt fa-lg"></i></a>
-              &nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;
               <a title='Eliminar' role="button" (click)="toggleRemoveHandled(item)"><i class="fas fa-trash fa-lg"></i></a>
             </td>
         </tr>

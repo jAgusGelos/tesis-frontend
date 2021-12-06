@@ -87,4 +87,8 @@ export class UserService {
     return this.httpClient.get(this.apiURL + 'inscripciones/verificar-usuario/?email=' + email);
   }
 
+  acceptInscription(item: string): any{
+    return this.httpClient.get(this.apiURL + 'inscripciones/registrar-asistencia/?token=' + item, {});
+  }
+
 }

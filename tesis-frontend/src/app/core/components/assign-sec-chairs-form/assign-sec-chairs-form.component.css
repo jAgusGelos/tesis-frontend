@@ -40,6 +40,9 @@
   color: #3CAFE0;
   cursor: pointer;
 }
+i:hover{
+  color: blue;
+}
 
 .fa-trash:hover{
   color: #3994bb;

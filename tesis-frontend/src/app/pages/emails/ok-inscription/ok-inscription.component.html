@@ -1,0 +1,25 @@
+<div *ngIf='accepted' class="container-md card">
+  <div class="card-body" style="background-color: #7FBF3F;">
+    <div class="contenidos">
+      <h3 class="card-title text-center" >Entrada Correcta!</h3>
+    </div>
+
+    <div class="card-text">
+      <p>Disfrute del congreso.</p>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf='rejected' class="container-md card">
+  <div class="card-body" style="background-color: #F27289;">
+    <div class="contenidos">
+      <h3 class="card-title text-center">Esta entrada ya ha sido cargada.</h3>
+    </div>
+    <div class="card-text">
+      <p>En caso contrario, por favor pruebe de nuevo en unos minutos.</p>
+    </div>
+
+  </div>
+</div>
+

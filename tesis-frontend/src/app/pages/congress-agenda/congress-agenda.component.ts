@@ -37,6 +37,8 @@ export class CongressAgendaComponent implements OnInit {
     fechaProrrogaPapers: new Date(),
     fechaFinEvaluacion: new Date(),
     fechaFinReEv: new Date(),
+    fechaInicioExposiciones: new Date(),
+    fechaFinExposiciones: new Date(),
     simposios: [],
     aulas: [],
     modalidad: ''
@@ -75,6 +77,8 @@ export class CongressAgendaComponent implements OnInit {
           fechaFinReEv: x.fechaFinReEv,
           fechaFinInscripTemprana: x.fechaFinInsTemprana,
           fechaFinInscripTardia: x.fechaFinInsTardia,
+          fechaInicioExposiciones: x.fechaInicioExposiciones,
+          fechaFinExposiciones: x.fechaFinExposiciones,
           modalidad: x.modalidad
         };
       });

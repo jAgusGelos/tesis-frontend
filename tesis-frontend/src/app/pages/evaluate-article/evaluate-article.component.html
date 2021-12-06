@@ -3,7 +3,7 @@
    [paperList]='paperList'
    (EvaluationEvent)='evaluate($event)'
    (EvaluationAcceptEvent)='evaluate($event)'
-   (EvaluationCancelEvent)='evaluate($event)'>
+   (EvaluationCancelEvent)='cancelEvaluate($event)'>
 </app-evaluate-paper-list>
   <app-evaluate-paper-form *ngIf="flagEvaluate"
   [paper]='paper'

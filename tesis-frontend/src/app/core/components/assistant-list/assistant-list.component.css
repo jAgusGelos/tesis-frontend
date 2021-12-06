@@ -9,6 +9,15 @@
         padding: 5rem;
         background-color: #F4F4F4;
     }
+    .btn-primary{
+        background-color: #3CAFE0 ;
+        margin-bottom: auto;
+        margin-top: auto;
+    }
+    .btn{
+        border: none;
+    }
+
 }
   
 .contenidos{
@@ -25,6 +34,8 @@
 
 .btn-primary{
     background-color: #3CAFE0 ;
+    margin-bottom: auto;
+    margin-top: auto;
 }
 
 .btn-primary:hover{

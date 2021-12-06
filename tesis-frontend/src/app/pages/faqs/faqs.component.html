@@ -1,0 +1,519 @@
+<div class="container-fluid">
+    <div>
+        <hr>
+        <h4 class="text-center">Preguntas Frecuentes</h4>
+        <hr>
+    </div>
+    <div>
+        <div class="accordion" id="accordionExample">
+            <!-- Registro -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="registro">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRegistro" aria-expanded="true" aria-controls="collapseRegistro">
+                  ¿Cómo me registro?
+                </button>
+              </h2>
+              <div id="collapseRegistro" class="accordion-collapse collapse show" aria-labelledby="registro" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  Para registrarte en Congressity se te solicitará Tipo de Documento, Número de Documento, Apellido, Nombre, Fecha de Nacimiento, Dirección, Celular, Sede de Referencia, Email y Contraseña.
+                </div>
+              </div>
+            </div>
+            <!-- Recupero de contraseña -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="recupero">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRecupero" aria-expanded="false" aria-controls="collapseRecupero">
+                  ¿Cómo recupero mi contraseña?
+                </button>
+              </h2>
+              <div id="collapseRecupero" class="accordion-collapse collapse" aria-labelledby="recupero" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <p>
+                  Deberás hacer click en ¿Olvidaste tu contraseña?. Luego te pediremos tu email. Te llegará un correo para que verifiques la solicitud de cambio de clave. 
+                  <br>
+                  El sistema enviará un correo a la dirección ingresada solicitando un cambio de contraseña. Haciendo clic en el botón “Restablecer Contraseña”, el sistema asignará una nueva contraseña a la cuenta del usuario y enviará otro correo con la misma. Por último, se redireccionará a una página indicando que el cambio se realizó exitosamente.
+                </p>
+                </div>
+              </div>
+            </div>
+            <!-- Inscripción a congreso -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="inscripcion">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInscripcion" aria-expanded="false" aria-controls="collapseInscripcion">
+                  ¿Cómo me inscribo a un congreso con pago virtual?
+                </button>
+              </h2>
+              <div id="collapseInscripcion" class="accordion-collapse collapse" aria-labelledby="inscripcion" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <p>
+                  Luego de iniciar sesión, en la parte inferior de la pantalla principal del sistema, podremos ver los
+                  congresos activos del sistema en este momento. </p>
+                  <p>
+                  Cada “carta” muestra información importante y simplificada del congreso (fechas), y entre las
+                  opciones que tenemos, podemos presionar el botón “Inscribirse” para dar inicio al proceso de
+                  inscripción.
+                </p>
+                  <p>
+                    Una vez iniciado el proceso de inscripción, nos redirige a la pantalla de inscripción. Allí se muestra el
+precio de la tarifa actual. <br>
+Además, brinda la posibilidad de ingresar un código alfanumérico, para obtener un cupon de
+descuento sobre la entrada. <br>
+Para finalizar el proceso de inscripcion presionamos en el botón “Inscribirme”
+                  </p>
+                  <p>En el siguiente paso, usted ya se encuentra inscripto al congreso, y se brinda la posibilidad de pagar
+                    la entrada de manera virtual, utilizando el servicio de MercadoPago. <br>
+                    Al presionar “Continuar al pago”, será redirigido hacia la aplicación web de mercadopago en donde
+                    podrá realizar el pago de su inscripción.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUPER USUARIO -->
+            <!-- Nuevo congreso - Super Usuario -->
+            <div class="accordion-item" *ngIf="rol.includes(0)">
+              <h2 class="accordion-header" id="nuevoCongreso">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNuevoCongreso" aria-expanded="false" aria-controls="collapseNuevoCongreso">
+                  ¿Cómo genero un nuevo congreso?
+                </button>
+              </h2>
+              <div id="collapseNuevoCongreso" class="accordion-collapse collapse" aria-labelledby="nuevoCongreso" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <p>
+                    Ingresá a la sección Congresos. <br>
+                    Hacé click en Nuevo Congreso. <br>
+                    Se te solicitarán los datos básicos como: Nombre, Sede, Año, Email del chair Principal y de Coordinador Local.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Nuevo Simposio - Super Usuario  -->
+            <div class="accordion-item" *ngIf="rol.includes(0)">
+                <h2 class="accordion-header" id="nuevoSimposio">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNuevoSimposio" aria-expanded="false" aria-controls="collapseNuevoSimposio">
+                    ¿Cómo genero un nuevo simposio?
+                  </button>
+                </h2>
+                <div id="collapseNuevoSimposio" class="accordion-collapse collapse" aria-labelledby="nuevoSimposio" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Simposios. <br>
+                    Hace click en Nuevo Simposio. <br>
+                    Se te solicitará el nombre y una breve descripción del mismo. <br>
+                    Para finalizar, hacé click en Crear Simposio.
+                  </p>
+                </div>
+                </div>
+              </div>
+              <!-- Nuevo Cupón - SU -->
+              <div class="accordion-item" *ngIf="rol.includes(0)">
+                <h2 class="accordion-header" id="nuevoCupon">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNuevoCupon" aria-expanded="false" aria-controls="collapseNuevoCupon">
+                    ¿Cómo genero un nuevo cupón?
+                  </button>
+                </h2>
+                <div id="collapseNuevoCupon" class="accordion-collapse collapse" aria-labelledby="nuevoCupon" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Cupones. <br>
+                    Hacé click en Nuevo Cupón.  <br>
+                    Se te solicitará un código alfanumérico que deberás verificar, una tarifa al cual aplique, un porcentaje de descuento, y cantidad de usos. <br>
+                    Para finalizar, hacé click en Crear Cupón.
+                  </p>
+                </div>
+                </div>
+              </div>
+
+              <!-- CHAIR PRINCIPAL -->
+              <!-- Definición de fechas del congreso / agenda - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="agenda">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAgenda" aria-expanded="false" aria-controls="collapseAgenda">
+                    ¿Cómo defino las fechas importantes de mi congreso?
+                  </button>
+                </h2>
+                <div id="collapseAgenda" class="accordion-collapse collapse" aria-labelledby="agenda" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Mi Congreso. <br>
+                    Allí se te mostrarán los congresos en los cuales sos Chair Principal. <br>
+                    Hacé click en <i class="fas fa-calendar-alt"></i> <br>
+                    Se te solicitará:
+
+                    <li>Fecha de inicio</li>
+                    <li>Fecha de fin</li>
+                    <li>Fecha de cierre</li>
+                    <li>Fecha de fin de Inscripción Temprana</li>
+                    <li>Fecha de fin de Inscripción Tardía</li>
+                    <li>Fecha límite de entrega de artículos</li>
+                    <li>Fecha de prórroga de entrega de artículos</li>
+                    <li>Fecha de inicio de exposiciones</li>
+                    <li>Fecha de fin de Exposiciones</li>
+                    <li>Fecha de fin de Evaluación de artículos</li>
+                    <li>Fecha de fin de Reevaluación de artículos</li>
+                  </p>
+                </div>
+                </div>
+              </div>
+              <!-- Definición de simposios - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="simposiosCongreso">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSimposiosCongreso" aria-expanded="false" aria-controls="collapseSimposiosCongreso">
+                    ¿Cómo defino los simposios de mi congreso?
+                  </button>
+                </h2>
+                <div id="collapseSimposiosCongreso" class="accordion-collapse collapse" aria-labelledby="simposiosCongreso" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Mi Congreso. <br>
+                    Allí se te mostrarán los congresos en los cuales sos Chair Principal. <br>
+                    Hacé click en <i class="fas fa-paint-brush"></i> <br>
+                    Allí podrás seleccionar de la lista de simposios disponibles aquellos que formarán parte del congreso.
+                  </p>
+                </div>
+                </div>
+              </div>
+              <!-- Definición de Aulas - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="aulasCongreso">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAulasCongreso" aria-expanded="false" aria-controls="collapseAulasCongreso">
+                    ¿Cómo defino las aulas de un congreso?
+                  </button>
+                </h2>
+                <div id="collapseAulasCongreso" class="accordion-collapse collapse" aria-labelledby="aulasCongreso" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Mi Congreso. <br>
+                    Allí se te mostrarán los congresos en los cuales sos Chair Principal. <br>
+                    Hacé click en <i class="fas fa-archway"></i> <br>
+                    Se te solicitará:
+                    <li>Nombre</li>
+                    <li>Descripción</li>
+                    <li>Capacidad</li>
+                  </p>
+                </div>
+                </div>
+              </div>
+              <!-- Criterios de Evaluación - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="criterio">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCriterio" aria-expanded="false" aria-controls="collapseCriterio">
+                    ¿Cómo genero un nuevo criterio para evaluar papers?
+                  </button>
+                </h2>
+                <div id="collapseCriterio" class="accordion-collapse collapse" aria-labelledby="criterio" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Planilla. <br>
+                    Hacé click en Nuevo Criterio. <br>
+                    Se te solicitará el nombre del aspecto a evaluar y una breve descripción del mismo.
+                  </p>
+
+                </div>
+                </div>
+              </div>
+              <!-- Nueva Tarifa - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="tarifa">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTarifa" aria-expanded="false" aria-controls="collapseTarifa">
+                    ¿Cómo genero una nueva tarifa?
+                  </button>
+                </h2>
+                <div id="collapseTarifa" class="accordion-collapse collapse" aria-labelledby="tarifa" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Tarifas. <br>
+                    Hacé click en Nueva Tarifa. <br>
+                    Se te solicitará Nombre, Precio y fechas durante el cual es válido. <br>
+                    Para finalizar, hacé click en Crear Tarifa. 
+                  </p>
+                </div>
+                </div>
+              </div>
+              <!-- Asignación de chairs secundarios - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="asignarChairSec">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAsignarChairSec" aria-expanded="false" aria-controls="collapseAsignarChairSec">
+                    ¿Cómo asigno chairs secundarios a cada simposio?
+                  </button>
+                </h2>
+                <div id="collapseAsignarChairSec" class="accordion-collapse collapse" aria-labelledby="asignarChairSec" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Asignar Chairs. <br>
+                    En la parte izquierda, se te solicitará seleccionar el usuario que será asignado como chair, y el simposio del cual será responsable. <br>
+                    Para finalizar, hacé click en Asignar.
+                  </p> 
+                </div>
+                </div>
+              </div>
+              <!-- Definición de Sedes - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="sede">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSede" aria-expanded="false" aria-controls="collapseSede">
+                    ¿Cómo defino las sedes de un congreso?
+                  </button>
+                </h2>
+                <div id="collapseSede" class="accordion-collapse collapse" aria-labelledby="sede" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Sedes. <br>
+                    Allí se te mostrarán las sedes con su nombre, dirección y localidad. <br>
+                    Para crear una nueva sede, debe presionar en el botón “Nueva sede”. Se abrirá un formulario solicitando el nombre de la sede, la provincia, la localidad, y su dirección (
+calle y número)
+                  
+                  </p>
+                </div>
+                </div>
+              </div>
+              <!-- Definición de Agenda - Cronograma del Congreso - CP -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="definicionAgendaEvento">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDefinicionAgendaEvento" aria-expanded="false" aria-controls="collapseDefinicionAgendaEvento">
+                    ¿Cómo defino la agenda o cronograma del evento?
+                  </button>
+                </h2>
+                <div id="collapseDefinicionAgendaEvento" class="accordion-collapse collapse" aria-labelledby="definicionAgendaEvento" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Agenda. <br>
+                    Se visualizará en la pantalla con un combo para seleccionar Aulas. <br>
+                    <img src="../../../assets/imgs/FAQ - agendaEvento.jpg" class="img-fluid rounded">
+                    Luego de seleccionar un aula, podrá visualizar un calendario. Allí podrá presionar cualquier horario en el que desee ubicar un determinado evento para crearlo.
+                    <img src="../../../assets/imgs/FAQ - calendario.jpg" class="img-fluid rounded">
+                    Luego de presionar en el horario donde desee ubicar su evento (exposición de artículo) se abrirá un formulario como el siguiente:
+                    <img src="../../../assets/imgs/FAQ - nuevoEventoAgenda.jpg" class="img-fluid rounded">
+
+
+                  </p> 
+                </div>
+                </div>
+              </div>
+              <!-- Estadísticas  -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="estadisticas">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEstadisticas" aria-expanded="false" aria-controls="collapseEstadisticas">
+                    ¿Qué estadísticas puedo consultar?
+                  </button>
+                </h2>
+                <div id="collapseEstadisticas" class="accordion-collapse collapse" aria-labelledby="estadisticas" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Para consultar las diferentes estadísticas, ingresá a la sección Estadísticas.
+                    Allí podrás consultar:
+                    <li>Top Evaluadores</li>
+                    <li>Top Simposios por Congreso</li>
+                    <li>Top Simposios General</li>
+                    <li>Top Simposios por Evaluadores</li>
+                    <li>Grupo Etario por Congreso</li>
+                    <li>Participantes por sede</li>
+                    <li>Calificaciones por simposio</li>
+                    <li>Top Eventos</li>
+                    <li>Cancelaciones por evaluadores general</li>
+                    <li>Cancelaciones por evaluador por congreso</li>
+                    <li>Estado Artículos</li>
+                  </p> 
+                </div>
+                </div>
+              </div>
+              <!-- Reportes -->
+              <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="reportes">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReportes" aria-expanded="false" aria-controls="collapseReportes">
+                    ¿Qué reportes se pueden generar?
+                  </button>
+                </h2>
+                <div id="collapseReportes" class="accordion-collapse collapse" aria-labelledby="reportes" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Para generar los diferentes reportes, ingresá a la sección Reportes.
+                    Allí podrás consultar:
+                    <li>Reporte de Eventos</li>
+                    <li>Reporte de Evaluadores</li>
+                    <li>Reporte de Articulos</li>
+                    <li>Reporte de Asistentes</li>
+                    <li>Reporte de Expositores</li>
+                  </p> 
+                </div>
+                </div>
+              </div>
+               <!-- Certificados -->
+               <div class="accordion-item" *ngIf="rol.includes(1)">
+                <h2 class="accordion-header" id="certificados">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCertificados" aria-expanded="false" aria-controls="collapseCertificados">
+                    ¿Cómo genero un nuevo certificado?
+                  </button>
+                </h2>
+                <div id="collapseCertificados" class="accordion-collapse collapse" aria-labelledby="certificados" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Certificados. <br>
+                    Allí se mostrará un listado de los certificados, incluyendo nombre y descripción. <br>
+                    Para generar un nuevo certificado, hacé click en Nuevo. <br>
+                    Se te mostrará un formulario solicitando nombre, descripción y un archivo.
+                  </p> 
+                </div>
+                </div>
+              </div>
+
+
+
+              <!-- CHAIR SECUNDARIO -->
+              <!-- Asignación de articulos - CS -->
+              <div class="accordion-item" *ngIf="rol.includes(2)">
+                <h2 class="accordion-header" id="headingAsignacionArticulos">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAsignacionArticulos" aria-expanded="false" aria-controls="collapseAsignacionArticulos">
+                    ¿Cómo asigno los articulos de mi simposio?
+                  </button>
+                </h2>
+                <div id="collapseAsignacionArticulos" class="accordion-collapse collapse" aria-labelledby="headingAsignacionArticulos" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Asignar Articulos. <br>
+                    Se te mostrarán todos los articulos presentados en el simposio.  <br>
+                    Podés hacer click en Asignación Masiva, lo cual distribuirá uniformemente los evaluadores asignandolos a los diferentes papers. <br>
+                    Otra opción, es hacerlo manualmente. En este caso, para cada articulo deberás seleccionar los evaluadores. <br>
+                    En ambas opciones, para terminar con la asignación, deberás hacer click en Finalizar Asignación.
+                  </p>
+                </div>
+                </div>
+              </div>
+              <!-- Evaluar Articulo - CS -->
+              <div class="accordion-item" *ngIf="rol.includes(2)">
+                <h2 class="accordion-header" id="headingEvaluarArticuloChairSec">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEvaluarArticuloChairSec" aria-expanded="false" aria-controls="collapseEvaluarArticuloChairSec">
+                    ¿Cómo evalúo un artículo?
+                  </button>
+                </h2>
+                <div id="collapseEvaluarArticuloChairSec" class="accordion-collapse collapse" aria-labelledby="headingEvaluarArticuloChairSec" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p> Ingresá a la sección Evaluar Artículos.
+                    <br> Se te mostrarán los articulos del simposio. 
+                    <br> Haciendo click en Evaluar, se te mostrarán las diferentes opciones. 
+                    <br> Así mismo, podés visualizar los detalles de evaluación haciendo click en Ver Detalles.
+                    </p>
+                </div>
+                </div>
+              </div>
+
+              <!-- EVALUADOR -->
+              <!-- Evaluar Articulo - Evaluador -->
+              <div class="accordion-item" *ngIf="rol.includes(3)">
+                <h2 class="accordion-header" id="headingEvaluarArticuloEvaluador">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEvaluarArticuloEvaluador" aria-expanded="false" aria-controls="collapseEvaluarArticuloEvaluador">
+                    ¿Cómo evalúo un artículo que se me asignó?
+                  </button>
+                </h2>
+                <div id="collapseEvaluarArticuloEvaluador" class="accordion-collapse collapse" aria-labelledby="headingEvaluarArticuloEvaluador" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p> Ingresá a la sección Evaluar. 
+                    <br>  Se te mostrarán los diferentes articulos que te han asignado. 
+                    <br> Haciendo click en el lápiz, podrás evaluar un artículo. 
+                    <br> Luego se te mostrará una pantalla similar a la siguiente.
+                        <img src="../../../assets/imgs/FAQ - Evaluar articulo.svg" class="img-fluid">
+                    </p>
+                </div>
+                </div>
+              </div>
+              <!-- Simposios de preferencia - Evaluador -->
+              <div class="accordion-item" *ngIf="rol.includes(3)">
+                <h2 class="accordion-header" id="headingPreferenciaSimposios">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePreferenciaSimposios" aria-expanded="false" aria-controls="collapsePreferenciaSimposios">
+                    ¿Cómo elijo los simposios de mi preferencia?
+                  </button>
+                </h2>
+                <div id="collapsePreferenciaSimposios" class="accordion-collapse collapse" aria-labelledby="headingPreferenciaSimposios" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                  <p> 
+                    Ingresá a la sección Preferencia de Simposios. <br>
+                    Para agregar un simposio a tus preferencias, simplemente hacé click en el símbolo +. 
+                  </p>
+                </div>
+                </div>
+              </div>
+
+              <!-- AUTOR -->
+              <!-- Subir Paper - Autor -->
+              <div class="accordion-item" *ngIf="rol.includes(4)">
+                <h2 class="accordion-header" id="headingSubirPaper">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSubirPaper" aria-expanded="false" aria-controls="collapseSubirPaper">
+                    ¿Cómo subo un paper?
+                  </button>
+                </h2>
+                <div id="collapseSubirPaper" class="accordion-collapse collapse" aria-labelledby="headingSubirPaper" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Call for Papers. <br>
+                    Para cargar un nuevo paper, el autor debe hacer click en el botón Nuevo. Se le mostrará el siguiente formulario, solicitando el nombre del paper, el simposio al cual se va a presentar, los autores y el
+                    archivo en formato pdf. <br>
+                    Para agregar autores del paper se debe ingresar el mail de los mismos. En caso de que el dicho mail se encuentre registrado en el sistema, se mostrará en verde. En caso contrario, se mostrará en
+                    rojo <br>
+                    En ambos casos, se le enviará un mail a los diferentes autores para que sean notificados. <br>
+                    Para enviar el paper definitivamente: <br>
+                    1) Hacer click en Nuevo Paper. <br>
+                    2) Cargar nuevamente el archivo pdf. <br>
+                    3) Hacer click en Subir Paper. <br>
+                  </p>
+                </div>
+                </div>
+              </div>
+              <!-- Estados del paper - Autor -->
+              <div class="accordion-item" *ngIf="rol.includes(4)">
+                <h2 class="accordion-header" id="headingEstadosPaperAutor">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEstadosPaperAutor" aria-expanded="false" aria-controls="collapseEstadosPaperAutor">
+                    ¿Qué significa que mi paper esté ....?
+                  </button>
+                </h2>
+                <div id="collapseEstadosPaperAutor" class="accordion-collapse collapse" aria-labelledby="headingEstadosPaperAutor" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <li>Creado: Aún no se envió el artículo para ser corregido.</li>
+                    <li>Enviado: Se envió el artículo para ser corregido.</li>
+                    <li>Asignado: El artículo tiene asignado tres evaluadores que aceptaron evaluarlo.</li>
+                    <li>Aprobado: El paper fue aprobado en el congreso.</li>
+                    <li>Rechazado:El paper fue rechazado. </li>
+                </div>
+                </div>
+              </div>
+              <!-- Camera Ready - Autor -->
+              <div class="accordion-item" *ngIf="rol.includes(4)">
+                <h2 class="accordion-header" id="headingCameraReady">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCameraReady" aria-expanded="false" aria-controls="collapseCameraReady">
+                    ¿Cómo envío la versión final de mi paper?
+                  </button>
+                </h2>
+                <div id="collapseCameraReady" class="accordion-collapse collapse" aria-labelledby="headingCameraReady" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Call for Papers. <br>
+                    En aquellos articulos que estén <strong>Aprobados</strong> o <strong>Para Reentrega</strong>, podrás hacer click en el ícono <i class="fas fa-arrow-circle-right"></i>. <br>
+                    Allí, podrá agregar autores que no se hayan mencionado anteriormente, y subir el archivo de la versión final del paper. Para enviarlo definitivamente, deberá hacer click en Enviar Camera Ready. 
+                  </p>
+                </div>
+                </div>
+              </div>
+              
+              <!-- Inscripción Física - Ayudante -->
+              <div class="accordion-item" *ngIf="rol.includes(5)">
+                <h2 class="accordion-header" id="headingInscripcionFisica">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInscripcionFisica" aria-expanded="false" aria-controls="collapseInscripcionFisica">
+                    ¿Cómo registro una inscripción física?
+                  </button>
+                </h2>
+                <div id="collapseInscripcionFisica" class="accordion-collapse collapse" aria-labelledby="headingInscripcionFisica" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <p>
+                    Ingresá a la sección Inscripción Física. <br>
+                    Primero debe ingresar la dirección de email de la persona a inscribir. <br>
+                    Al hacer click en “Verificar Usuario”, el sistema verificará si la persona está registrada en Congressity. De ser así, se mostrarán los datos del usuario. De lo contrario, se deberá completar los datos antes de realizar la inscripción.
+
+                    Allí, podrá agregar autores que no se hayan mencionado anteriormente, y subir el archivo de la versión final del paper. Para enviarlo definitivamente, deberá hacer click en Enviar Camera Ready. <br>
+                    Una vez verificados que los datos sean correctos, haga click en “Continuar”. <br>
+                    Finalmente se muestra la tarifa vigente. Haga click en el botón “Inscribir” para registrar la inscripción.
+
+                  </p>
+                </div>
+                </div>
+              </div>
+
+          </div>
+    </div>
+</div>

@@ -62,4 +62,9 @@ export class CertificateService {
 
   }
 
+  sendAllCertificates(postBody: any): any {
+    console.log(postBody);
+    return this.httpClient.post(this.apiURL + 'certificados/crearCertificadoMasivo/', {postBody, idCongreso: this.idCongress});
+  }
+
 }
