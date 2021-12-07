@@ -105,7 +105,13 @@ export class ReportsComponent implements OnInit {
       _body.push(list);
     });
 
-    const title = this.reportList.find((item: any) => item.value = this.selectedValue);
+    const title = this.reportList.find((item: any) => {
+      if (+item.value === +this.selectedValue) {
+        console.log('llego')
+        return item;
+      }
+    });
+    console.log(title);
     // tslint:disable-next-line: one-variable-per-declaration
     const documentDefinition = {
       content: [
