@@ -29,8 +29,8 @@ export class LoginFormComponent implements OnInit {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.formLogin = this.formBuilder.group({
-      email: ['juanagustingelos@gmail.com', [Validators.required]],
-      password: ['asdasd', [Validators.required]],
+      email: ['juanignacioledesma97@gmail.com', [Validators.required]],
+      password: ['123456', [Validators.required]],
       idCongress: ['', [Validators.required]]
     });
     this.getCongress();
