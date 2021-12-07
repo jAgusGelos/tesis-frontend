@@ -117,12 +117,13 @@
       </ul>
     </div>
     <div class="logged  text-right align-items-right d-none d-lg-block">
-      <a *ngIf='!user' type="button" class="btn btn-primary" routerLink="/login">Iniciar Sesión</a>
+      <a *ngIf='!user' class="btn btn-outline-primary" routerLink="/login">Iniciar Sesión</a>
       <div *ngIf='user' class="btn-group">
-        <li class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+        <li class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
           {{this.userLogged.nombre}} {{this.userLogged.apellido}} </li>
         <ul class="dropdown-menu dropdown-menu-lg-end">
           <li><a class="dropdown-item" type="button" routerLink="/usuario">Mi Perfil</a></li>
+          <li><a class="dropdown-item" type="button" routerLink="/cambiarcontraseña">Cambiar Contraseña</a></li>
           <li><a class="dropdown-item" type="button" (click)='logout()'>Cerrar Sesión</a></li>
         </ul>
       </div>

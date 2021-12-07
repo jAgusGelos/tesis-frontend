@@ -1,17 +1,9 @@
-.navbar {
+.navbar{
   background-color: #00609C;
 }
 
-a {
-  color: white;
-}
-
-a:hover{
-  color:#c7c7c7;
-}
-
 .navbar-collapse{
-    justify-content: center;
+  justify-content: center;
 }
 
 .navbar-toggler{
@@ -19,9 +11,23 @@ a:hover{
   color: white;
 }
 
-.btn{
-  background-color:#3CAFE0;
-  border: none;
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover{
+  color:#c7c7c7;
+}
+
+.btn-outline-primary{
+  border-color: white;
+  color: white;
+}
+
+.btn-outline-primary:hover{
+  background-color: white;
+  border-color: white;
+  color: #00609C;
 }
 
 .dropdown-toggle{
@@ -30,7 +36,7 @@ a:hover{
 
 .dropdown-item:hover{
   background-color:white;
-  color: black;
+  color: #00609C;
 }
 
 .dropdown-menu{

@@ -10,12 +10,12 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./recover-password-form.component.css']
 })
 export class RecoverPasswordFormComponent implements OnInit {
-  formRecoverPass : FormGroup;
+
+  formRecoverPass: FormGroup;
   submitted = false;
-  @Output() cancelRecover = new EventEmitter<any>();
-  
-  constructor(private formBuilder:FormBuilder,
-              private userService:AuthService,
+
+  constructor(private formBuilder: FormBuilder,
+              private userService: AuthService,
               private toastr: ToastrService,
               ) { }
 
@@ -28,20 +28,17 @@ export class RecoverPasswordFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.formRecoverPass.invalid) {
-      this.toastr.warning('Por favor complete todos los campos.')
+      this.toastr.warning('Por favor complete todos los campos.');
       return;
     }
     this.userService.recoverPassword(this.formRecoverPass.controls.email.value).subscribe(
       (res: any) => this.toastr.success('Se envió el mail para recuperar la'),
-      (err: any) => {if (err.status == 400) this.toastr.warning('No existe un usuario con el mail ingresado.')
-                    else this.toastr.error('Error del Servidor')}
+      (err: any) => {
+        if (err.status == 400) {
+        this.toastr.warning('No existe un usuario con el mail ingresado.')
+      } else {
+        this.toastr.error('Error del Servidor')}
+      }
     );
   }
-
-  cancel(): void {
-      this.cancelRecover.emit();
-    }
-
-  
-
 }

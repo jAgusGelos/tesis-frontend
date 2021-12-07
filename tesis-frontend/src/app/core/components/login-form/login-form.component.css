@@ -1,98 +1,61 @@
+@media (min-width: 768px) {
+  .card {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    padding-bottom: 2rem;  margin-bottom: 1rem;
+  }
 
+  .card-body {
+    padding: auto;
+  }
 
-.card-title{
-  font-weight:300;
+  hr {
+    border:#00609C solid 1px;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
 }
 
-.card {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.login-form{
-	width:75%;
-}
-
-.form-group{
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
-
-.btn-primary{
-  background-color: #3CAFE0 ;
-  border: none;
-}
-
-.card {
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 1.5rem;
-  padding-bottom: 2rem;  margin-bottom: 1rem;
-  margin-top: 1rem;
-  background-color: #F4F4F4;
-
-}
-
-
-.login-form{
-  width:100%;
-
-}
-
-.form-group{
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-
-}
-
-
-a{
-  cursor: pointer;
-}
-
-.card-title{
-
+.card-title {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   font-weight:300;
-
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   max-width: fit-content;
 }
 
-hr {
-  border:#00609C solid 1px;
+#linkRetrievePassword {
+  text-decoration: none;
+  color: gray;
 }
 
-
-input{
-  border-bottom: 1px solid #f4f4f4 ;
+#linkRetrievePassword:hover {
+  color: #00609C;
 }
 
-
-@media (min-width: 768px) {
-  .card{
-    max-width: 60%;
-  }
-
-
-  .card-body{
-    padding: auto;
-  }
-
-  hr{
-    margin-left: 25%;
-    margin-right: 25%;
-  }
-
- }
-#registro{
-  margin-left: 15%;
-  margin-right: 15%;
-  border:#00609C 0.1px ;
+#linkSignIn {
+  text-decoration: none;
+  color: gray;
 }
 
+#linkSignIn:hover {
+  color: #00609C;
+}
 
+.btn-primary {
+  background-color: #3CAFE0 ;
+  border-color: transparent;
+}
+
+.btn-primary:hover {
+  background-color: #3994bb ;
+}
+
+a {
+  cursor: pointer;
+}

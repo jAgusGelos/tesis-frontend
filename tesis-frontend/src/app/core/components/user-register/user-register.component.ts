@@ -17,10 +17,10 @@ export class UserRegisterComponent implements OnInit {
   titulo = 'Formulario de Registro';
   formUsuario: FormGroup;
   submitted = false;
-  tipoDni = [{id: 1, nombre: 'DNI'}];
-  provincias = [{id: 1, nombre: 'Cordoba'}];
-  localidades = [{id: 1, nombre: 'Capital'}];
-  sedes = [{id: 1, nombre: 'Utn Frc'}]
+  tipoDni = [];
+  provincias = [];
+  localidades = [];
+  sedes = [];
   /**
    * Usuario que se recibe o no cuando se inicia el componente.
    * Si no se recibe es un nuevo usuario
@@ -63,18 +63,20 @@ export class UserRegisterComponent implements OnInit {
     }
 
     getAllData(): void {
-      this.userService.getLocalidades().subscribe((res: any) => {
-        this.localidades = res.data;
-      });
       this.userService.getDni().subscribe((res: any) => {
         this.tipoDni = res;
-
       });
       this.userService.getProvincias().subscribe((res: any) => {
         this.provincias = res.data;
       });
       this.userService.getSedes().subscribe((res: any) => {
         this.sedes = res.data;
+      });
+    }
+
+    getLocalidades(idProvincia: number): void {
+      this.userService.getLocalidadesXProvincia(idProvincia).subscribe((res: any) => {
+        this.localidades = res.data;
       });
     }
 

@@ -16,6 +16,7 @@ export class UserCompletedDataComponent implements OnInit {
   titulo = 'Formulario de Registro';
   formUsuario: FormGroup;
   submitted = false;
+  sedes = [];
   tipoDni = [{id: 1, nombre: 'DNI'}];
   provincias = [{id: 1, nombre: 'Cordoba'}];
   localidades = [{id: 1, nombre: 'Capital'}];
@@ -54,9 +55,6 @@ export class UserCompletedDataComponent implements OnInit {
     }
 
     getAllData(): void {
-      this.userService.getLocalidades().subscribe((res: any) => {
-        this.localidades = res.data;
-      });
       this.userService.getDni().subscribe((res: any) => {
         this.tipoDni = res;
 
@@ -121,8 +119,12 @@ export class UserCompletedDataComponent implements OnInit {
         this.toastr.success('Datos Cargados Correctamente');
         this.router.navigate(['/']);
       });
+    }
 
-
+    getLocalidades(idProvincia: number): void {
+      this.userService.getLocalidadesXProvincia(idProvincia).subscribe((res: any) => {
+        this.localidades = res.data;
+      });
     }
 
     /**

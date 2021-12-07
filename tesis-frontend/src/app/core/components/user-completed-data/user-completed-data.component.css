@@ -1,10 +1,6 @@
-.form-group{
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
 .card{
-  background-color: #f8f7f7;
+  background-color: #FFFF;
+  border-radius: 1rem;
 }
 
 hr{
@@ -16,17 +12,18 @@ hr{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  font-weight:300;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  font-weight: 300;
   max-width: fit-content;
 }
 
-.btn-primary{
-  background-color: #005F9C;
+.btn{
+  border: none;
 }
 
-.btn-secondary{
-  background-color: #C4C4C4;
-  border: #C4C4C4;
+.btn-primary{
+  background-color: #3CAFE0;
+}
+
+.btn-primary:hover{
+  background-color: #3994bb ;
 }
