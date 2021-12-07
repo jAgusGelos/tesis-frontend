@@ -214,7 +214,7 @@ const routes: Routes = [
     .then(m => m.RecoverPasswordModule),
   },
   {
-    path: 'cambiarContraseña',
+    path: 'changePassword',
     loadChildren: () => import('./pages/change-password/change-password.module')
     .then(m => m.ChangePasswordModule),
   },

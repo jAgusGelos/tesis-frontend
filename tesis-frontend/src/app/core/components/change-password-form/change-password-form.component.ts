@@ -18,42 +18,46 @@ export class ChangePasswordFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private userService: AuthService,
-              private toastr: ToastrService,
-              ) { }
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     this.form = this.formBuilder.group({
-      actual: ['',[Validators.required]],
-      new: ['',[Validators.required]],
-      repPass: ['',[Validators.required]]
-
-      
-    })
+      actual: ['', [Validators.required]],
+      new: ['', [Validators.required]],
+      repPass: ['', [Validators.required]]
+    });
   }
 
-  submit():void{
+  submit(): void{
     this.submitted = true;
-    if(this.form.invalid){
-      this.toastr.warning('Por favor complete todos los campos.')
+    if (this.form.invalid){
+      this.toastr.warning('Por favor complete todos los campos.');
       return;
-    }
-    if (this.form.controls.new.value !== this.form.controls.repPass.value){
-      this.toastr.warning('Las contraseñas deben ser iguales')
+    } else if (this.form.controls.new.value === this.form.controls.actual.value){
+      this.toastr.warning('Las contraseña nueva no puede ser igual a la antigua.');
+      return;
+    } else if (this.form.controls.new.value !== this.form.controls.repPass.value){
+      this.toastr.warning('Las contraseña repetida no coincide con la nueva.');
       return;
     }
     const change = {pass_antigua: window.btoa(this.form.controls.actual.value),
-                    pass_nueva: window.btoa(this.form.controls.new.value)}; 
-    const passwords = {passwords:change};
+                    pass_nueva: window.btoa(this.form.controls.new.value)};
+    const passwords = {passwords: change};
     this.userService.changePassword(passwords).subscribe(
       (res: any) => this.toastr.success('Contraseña actualizada'),
-      (err: any) => {if (err.status == 400) this.toastr.error('La contraseña antigua no es correcta.')
-                     else this.toastr.error('Error del servidor.')}
+      (err: any) => {
+        if (err.status === 400) {
+          this.toastr.warning('La contraseña antigua no es correcta.');
+        } else {
+          this.toastr.error('Error del servidor.');
+        }
+      },
+      () => {this.submitted = false; }
   );
   }
 
   cancel(): void{
     this.cancelChange.emit();
   }
-
 }
