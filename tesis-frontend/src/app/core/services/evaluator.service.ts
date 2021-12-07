@@ -79,10 +79,7 @@ export class EvaluatorService {
         idCongreso: this.idCongress
       };
     });
-    console.log(postItem);
-
     return this.httpClient.post(this.apiURL + 'articulos/asignarArticuloEvaluadorMasivo/', postItem);
-
   }
 /* Ver si está el método... */
   cancelarEvaluationPaper(item:any): any{

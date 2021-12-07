@@ -50,7 +50,8 @@ export class UserCompletedDataComponent implements OnInit {
         nroCalle: [this.usuario.numeroCalle, [Validators.required]],
         piso: [this.usuario.piso, []],
         dpto: [this.usuario.dpto, []],
-        celular: [this.usuario.celular, []]
+        celular: [this.usuario.celular, []],
+        sede: [this.usuario.sede, [Validators.required]],
       });
     }
 
@@ -62,6 +63,10 @@ export class UserCompletedDataComponent implements OnInit {
       this.userService.getProvincias().subscribe((res: any) => {
         this.provincias = res.data;
       });
+      this.userService.getSedes().subscribe((res: any) => {
+        this.sedes = res.data;
+      });
+
     }
 
     convertDateFormat(date: string): any {
@@ -88,11 +93,15 @@ export class UserCompletedDataComponent implements OnInit {
         this.toastr.warning('Por Favor complete todos los campos');
         return;
       }
-      const today = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-      if (this.formUsuario.controls.fechaNacimiento.value > today) {
-        this.toastr.warning('Fecha Inválida, por favor ingrese una fecha correcta');
+      // comparar que la fecha de nacimiento sea mayor a hoy
+      const fechaNacimiento = this.formUsuario.value.fechaNacimiento;
+      const fechaActual = new Date();
+      const fechaNacimientoDate = new Date(fechaNacimiento);
+      if (fechaNacimientoDate > fechaActual) {
+        this.toastr.warning('La fecha de nacimiento no puede ser mayor a la fecha actual');
         return;
       }
+      console.log(this.formUsuario.value.fechaNacimiento);
 
       this.usuario = {
         id: this.usuario.id,
@@ -105,10 +114,11 @@ export class UserCompletedDataComponent implements OnInit {
         numeroCalle: this.formUsuario.controls.nroCalle.value,
         piso: this.formUsuario.controls.piso.value,
         dpto: this.formUsuario.controls.dpto.value,
-        fechaNacimiento:  this.convertDateFormat(this.formUsuario.controls.fechaNacimiento.value) + ' 00:00:00',
+        fechaNacimiento: this.formUsuario.controls.fechaNacimiento.value,
         localidad: this.formUsuario.controls.localidad.value,
         provincia: this.formUsuario.controls.provincia.value,
-        email : this.usuario.email
+        email : this.usuario.email,
+        sede: this.usuario.sede,
       };
 
       this.userService.postUserComplete(this.usuario).subscribe( (res: any) => {

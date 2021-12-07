@@ -18,14 +18,14 @@
             <div class="row mb-3">
               <label class="form-label" for="apellido">Apellido<span class="text-danger">*</span></label>
               <div class="col-sm-12">
-                <input type="text" class="form-control" formControlName="apellido" 
+                <input type="text" class="form-control" formControlName="apellido"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.apellido.errors}" onclick="this.select()"/>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-sm-4">
                 <label class="form-label" for="tipoDni">Tipo de Documento<span class="text-danger">*</span></label>
-                <select name="tipoDni" class="form-select" formControlName="tipoDni" 
+                <select name="tipoDni" class="form-select" formControlName="tipoDni"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.tipoDni.errors}">
                   <option *ngFor="let opt of tipoDni" value={{opt.id}}>
                     ‌{{opt.nombre}}
@@ -34,19 +34,19 @@
               </div>
               <div class="col-sm-8">
                 <label class="form-label" for="dni">Número<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" formControlName="dni" 
+                <input type="text" class="form-control" formControlName="dni"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.dni.errors}" onclick="this.select()"/>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-sm-6">
                 <label class="form-label" for="fechaNacimiento">Fecha de Nacimiento<span class="text-danger">*</span></label>
-                <input type="date" class="form-control" formControlName="fechaNacimiento" 
+                <input type="date" class="form-control" formControlName="fechaNacimiento"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.fechaNacimiento.errors}" onclick="this.select()"/>
               </div>
               <div class="col-sm-6">
                 <label class="form-label" for="celular">Celular</label>
-                <input type="text" class="form-control" formControlName="celular" 
+                <input type="text" class="form-control" formControlName="celular"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.celular.errors}" onclick="this.select()"/>
               </div>
             </div>
@@ -64,7 +64,7 @@
               </div>
               <div class="col-sm-6">
                 <label class="form-label" for="localidad">Localidad<span class="text-danger">*</span></label>
-                <select name="localidad" class="form-select" formControlName="localidad" 
+                <select name="localidad" class="form-select" formControlName="localidad"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.localidad.errors}">
                   <option *ngFor="let opt of localidades" value={{opt.id}}>
                     ‌{{ opt.nombre }}
@@ -75,7 +75,7 @@
             <div class="row mb-3">
               <div class="col-sm-4">
                 <label class="form-label" for="calle">Calle<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" formControlName="calle" 
+                <input type="text" class="form-control" formControlName="calle"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.calle.errors}" onclick="this.select()"/>
               </div>
               <div class="col-sm-4">
@@ -85,21 +85,21 @@
               </div>
               <div class="col-sm-2">
                 <label class="form-label" for="number">Piso</label>
-                <input type="text" class="form-control" formControlName="piso" 
+                <input type="text" class="form-control" formControlName="piso"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.piso.errors}" onclick="this.select()"/>
               </div>
               <div class="col-sm-2">
                 <label class="form-label" for="dpto">Dpto.</label>
-                <input type="text" class="form-control" formControlName="dpto" 
+                <input type="text" class="form-control" formControlName="dpto"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.dpto.errors}" onclick="this.select()"/>
               </div>
             </div>
             <div class="row mb-3">
               <label class="form-label" for="sede">Sede<span class="text-danger">*</span></label>
               <div class="col-sm-12">
-                <select name="sede" class="form-select" formControlName="sede" 
+                <select name="sede" class="form-select" formControlName="sede"
                 [ngClass]="{'is-invalid': submitted && formUsuario.controls.sede.errors}">
-                  <option *ngFor="let opt of sedes" value={{opt.id}}>
+                  <option *ngFor="let opt of sedes" value={{opt.id}} [selected]='opt.id===usuario.sede'>
                     ‌{{ opt.nombre }}
                   <option>
                 </select>
