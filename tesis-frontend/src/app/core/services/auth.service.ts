@@ -19,7 +19,7 @@ export class AuthService {
   private apiURLRegister = environment.apiURL  + 'api/registrar/';
   private apiURLLogin = environment.apiURL  + 'api/login/';
   private apiURLLogout = environment.apiURL + 'api/logout/';
-  private apiURLChangePass = environment.apiURL + 'api/cambiarContrasenia/';
+  private apiURLChangePass = environment.apiURL + 'api/cambiar-contrasenia/';
   private apiURLRecoverPass = environment.apiURL + 'api/enviarMailRestablecerContrasenia/';
 
 
