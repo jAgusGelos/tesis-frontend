@@ -372,7 +372,7 @@ Boton oculto
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
               id='dismissPlenaria'>Aceptar</button>
               <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id='dismiss' (click)="activarModalCalif()"
-              id='activar-modal'>
+              id='activar-modal' *ngIf="today > formPlenaria.controls.date.value">
               Dejar una calificación
             </button>
           </div>

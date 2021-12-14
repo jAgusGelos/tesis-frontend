@@ -7,6 +7,7 @@ import { take } from 'rxjs/operators';
 import { CustomToastComponent, IToastButton } from 'src/app/core/components/custom-toast/custom-toast.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { CongressService } from 'src/app/core/services/congress.service';
 
 @Component({
   selector: 'app-header',
@@ -33,12 +34,14 @@ export class HeaderComponent implements OnInit {
                celular: 0,
                email: '',
 };
+congreso = {};
 
   rol: number[] = [];
   constructor(private authService: AuthService,
               private toastr: ToastrService,
               private router: Router,
-              private userService: UserService) { }
+              private userService: UserService,
+              private congressService: CongressService) { }
 
   ngOnInit(): void {
     const idToken = localStorage.getItem('id_token');
@@ -50,6 +53,10 @@ export class HeaderComponent implements OnInit {
         this.userLogged = res;
         this.rol = this.authService.getUserRoles();
         this.isEvaluator();
+        this.congressService.getCongressById().subscribe((res: any) => {
+          console.log(res.data);
+          this.congreso = res.data[0];
+        });
       },
       );
     }

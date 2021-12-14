@@ -36,8 +36,8 @@ export class ReportsComponent implements OnInit {
     switch (id) {
       case '1':
         this.statsService.getRepEvent().subscribe((res: any) => {
-          this.colName = ['Evento', 'Descripción', 'Calificación Promedio', 'Inicio', 'Fin', 'Articulo', 'Aula', 'Simposio'];
-          this.attrName = ['evento', 'descripcionEvento', 'calificacionPromedio', 'inicio', 'fin', 'articulo', 'aula', 'simposio'];
+          this.colName = ['Evento', 'Descripción', 'Calificación Promedio', 'Fecha',  'Articulo', 'Aula', 'Simposio'];
+          this.attrName = ['evento', 'descripcionEvento', 'calificacionPromedio', 'inicio',  'articulo', 'aula', 'simposio'];
           this.itemList = res.data;
           this.selectedValue = 1;
         });

@@ -120,7 +120,13 @@
       <a *ngIf='!user' class="btn btn-outline-primary" routerLink="/login">Iniciar Sesión</a>
       <div *ngIf='user' class="btn-group">
         <li class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-          {{this.userLogged.nombre}} {{this.userLogged.apellido}} </li>
+          {{this.userLogged.nombre}} {{this.userLogged.apellido}}
+          <br>
+          {{this.congreso.nombre}}
+
+        </li>
+
+
         <ul class="dropdown-menu dropdown-menu-lg-end">
           <li><a class="dropdown-item" type="button" routerLink="/usuario">Mi Perfil</a></li>
           <li><a class="dropdown-item" type="button" routerLink="/changePassword">Cambiar Contraseña</a></li>

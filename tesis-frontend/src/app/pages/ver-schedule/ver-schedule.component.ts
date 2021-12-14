@@ -106,6 +106,7 @@ export class VerScheduleComponent implements OnInit {
   scores = Array.from({ length: 10 }, (_, i) => i + 1);
 
   actions: CalendarSchedulerEventAction[] = [];
+  today = new Date();
 
   events: CalendarSchedulerEvent[];
 
