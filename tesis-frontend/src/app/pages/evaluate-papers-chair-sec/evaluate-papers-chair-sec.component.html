@@ -13,13 +13,11 @@
         <button type="button" class="btn btn-outline-primary" (click)="filter(6)">Aprobados</button>
         <button type="button" class="btn btn-outline-primary" (click)="filter(7)">Rechazados</button>
         <button type="button" class="btn btn-outline-primary" (click)="filter(5)">Reentrega</button>
-        <button type="button" class="btn btn-outline-primary" (click)="filter(8)">Aprobado Reentrega</button>
-        <button type="button" class="btn btn-outline-primary" (click)="filter(9)">Rechazado Reentrega</button>
       </div>
     </div>
   <!-- Evaluation Cards List -->
   <div *ngFor="let art of vectorArticulos; index as i">
-      <div class="card col-md-6 offset-3">
+      <div class="card col-md-8 offset-2">
           <div class="card-body">
             <div class="row ">
               <div class="col-auto me-auto">
@@ -37,10 +35,10 @@
               <h6 class="card-subtitle mb-2 text-muted" id="evaluadores">Evaluadores:</h6>
             </div>
               <div *ngFor="let ev of art.evaluaciones" class="row ev-reco">
-                <div class="col col-md-3">
+                <div class="col-auto me-auto">
                   <p id="nombreEvaluador">&nbsp;&nbsp;&nbsp;&nbsp;{{ev.evaluador}}:</p>
                 </div>
-                <div class="col col-md-3">
+                <div class="col-auto">
                   <p class="card-text">{{ev.recomendacion}}</p>
                 </div>
               </div>
