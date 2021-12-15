@@ -54,7 +54,6 @@ congreso = {};
         this.rol = this.authService.getUserRoles();
         this.isEvaluator();
         this.congressService.getCongressById().subscribe((res: any) => {
-          console.log(res.data);
           this.congreso = res.data[0];
         });
       },

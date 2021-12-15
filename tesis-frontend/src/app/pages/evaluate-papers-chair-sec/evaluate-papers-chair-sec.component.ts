@@ -55,15 +55,7 @@ export class EvaluatePapersChairSecComponent implements OnInit {
 
   evaluar(index, opt): void {
     let estado = this.vectorArticulos[index].idEstado;
-    let bandera = false;
-    if (estado >= 5) {
-      bandera = true;
-    }
-    if (opt === 1 && bandera) { // Aprobar Reentrega
-      estado = 8;
-    } else if (opt === 2 && bandera) { // Rechazar Reentrega
-      estado = 9;
-    } else if (opt === 1) { // Aprobar
+    if (opt === 1) { // Aprobar
       estado = 6;
     } else if (opt === 2) { // Rechazar
       estado = 7;
@@ -85,6 +77,13 @@ export class EvaluatePapersChairSecComponent implements OnInit {
   }
 
   setBadges(index, estado): any {
+    if (estado === 5) {
+      this.vectorArticulos[index].idEstado = estado;
+      this.vectorArticulos[index].estado = 'Reentrega';
+      this.detEstado.id = 5;
+      this.detEstado.nombre = 'Reentrega';
+      return;
+    }
     if (estado === 6) {
       this.vectorArticulos[index].idEstado = estado;
       this.vectorArticulos[index].estado = 'Aprobado';
@@ -99,25 +98,18 @@ export class EvaluatePapersChairSecComponent implements OnInit {
       this.detEstado.nombre = 'Rechazado';
       return;
     }
-    if (estado === 5) {
-      this.vectorArticulos[index].idEstado = estado;
-      this.vectorArticulos[index].estado = 'Para Reentregar';
-      this.detEstado.id = 5;
-      this.detEstado.nombre = 'Para Reentregar';
-      return;
-    }
     if (estado === 8) {
       this.vectorArticulos[index].idEstado = estado;
-      this.vectorArticulos[index].estado = 'Aprobado Reentrega';
+      this.vectorArticulos[index].estado = 'Aprobado';
       this.detEstado.id = 8;
-      this.detEstado.nombre = 'Aprobado Reentrega';
+      this.detEstado.nombre = 'Aprobado';
       return;
     }
     if (estado === 9) {
       this.vectorArticulos[index].idEstado = 9;
-      this.vectorArticulos[index].estado = 'Rechazado Reentrega';
+      this.vectorArticulos[index].estado = 'Rechazado';
       this.detEstado.id = 9;
-      this.detEstado.nombre = 'Rechazado Reentrega';
+      this.detEstado.nombre = 'Rechazado';
       return;
     }
   }
@@ -282,6 +274,9 @@ export class EvaluatePapersChairSecComponent implements OnInit {
         };
       });
       this.vectorArticulos = this.articulos;
+      for (let index = 0; index < this.vectorArticulos.length; index++) {
+        this.setBadges(index, this.vectorArticulos[index].idEstado);
+      }
     });
   }
 
